@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.activity_sync.App;
 import com.activity_sync.R;
 import com.activity_sync.presentation.presenters.DummyPresenter;
 import com.activity_sync.presentation.presenters.IPresenter;
@@ -40,7 +41,9 @@ public class DummyScreen extends Screen implements IDummyView
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
+        App.component(this).inject(this);
         super.onCreate(savedInstanceState);
 
         setTitle(getString(R.string.title_dummy_screen));
