@@ -3,8 +3,6 @@ package com.activity_sync.services;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
-import com.activity_sync.presentation.models.Event;
 import com.activity_sync.presentation.services.INavigator;
 import com.activity_sync.screens.*;
 
