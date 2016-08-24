@@ -1,6 +1,5 @@
 package com.activity_sync;
 
-import com.activity_sync.di.DiComponent;
 import timber.log.Timber;
 
 public class App extends AppBase
