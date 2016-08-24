@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Activity Sync</string>
+
+    <!-- DummyScreen strings -->
+    <string name="btn_open_dummy_screen">Open Dummy Screen</string>
+    <string name="btn_display_test_message">Display test message</string>
+    <string name="txt_hello_message">Hi stranger! This app will be awesome!</string>
+    <string name="title_dummy_screen">Dummy Screen</string>
+
+</resources>
