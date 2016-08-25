@@ -1,6 +1,6 @@
 general:
     artifacts:
-        - /home/ubuntu/android-app-test/app/build/outputs/apk/
+        - /home/ubuntu/Android-ActivitySync/app/build/outputs/apk/
 
 machine:
     java:
