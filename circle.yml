@@ -26,3 +26,5 @@ test:
         - (chmod +x gradlew)
         - (./gradlew assemble):
             timeout: 360
+        - (./gradlew test):
+            timeout: 360

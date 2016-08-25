@@ -11,7 +11,7 @@ public class AppBase extends Application
     public void onCreate()
     {
         super.onCreate();
-        Timber.d("Activity Sync Debug");
+        Timber.d("Activity Sync");
     }
 
     @Override

@@ -1,7 +1,6 @@
 package com.activity_sync.tests;
 
 import com.activity_sync.presentation.presenters.DummyPresenter;
-import com.activity_sync.presentation.presenters.WelcomePresenter;
 import com.activity_sync.presentation.services.INavigator;
 import com.activity_sync.presentation.views.IDummyView;
 
