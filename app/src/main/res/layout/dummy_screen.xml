@@ -20,16 +20,14 @@
             android:orientation="vertical">
 
             <Button
+                style="@style/DefaultButton"
                 android:id="@+id/dummy_open_screen_btn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/screen_margin_big"
                 android:text="@string/btn_open_dummy_screen" />
 
             <Button
+                style="@style/DefaultButton"
                 android:id="@+id/dummy_message_btn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:text="@string/btn_display_test_message" />
 
         </LinearLayout>

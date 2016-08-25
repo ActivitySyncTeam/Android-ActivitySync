@@ -26,9 +26,8 @@
     <item name="backgroundColor" type="color">@color/gray_very_light</item>
 
     <!-- MainScreen Colors-->
-    <item name="main_screen_bg_color" type="color">@color/colorAccent</item>
-    <item name="main_screen_button_bg_color" type="color">@color/colorPrimary</item>
-    <item name="main_screen_button_pressed_bg_color" type="color">#576483</item>
+    <item name="main_screen_button_pressed_bg_color" type="color">#293d6b</item>
+    <item name="main_screen_button_bg_color" type="color">#3a4c76</item>
     <item name="main_screen_button_text_color" type="color">@color/white</item>
 
 </resources>
