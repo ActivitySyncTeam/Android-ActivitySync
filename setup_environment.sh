@@ -39,7 +39,9 @@ sudo chmod a+x /usr/bin/javaws
 
 echo "[IMPORTANT] Pick jdk1.8.0 option!"
 sudo update-alternatives --config java
+echo "[IMPORTANT] Pick jdk1.8.0 option!"
 sudo update-alternatives --config javac
+echo "[IMPORTANT] Pick jdk1.8.0 option!"
 sudo update-alternatives --config javaws
 
 
