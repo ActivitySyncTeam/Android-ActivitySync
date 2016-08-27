@@ -1,0 +1,25 @@
+<resources>
+    <style name="AppTheme" parent="AppTheme.Base"></style>
+
+    <style name="AppTheme.Base" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+
+        <item name="android:textColorPrimary">@color/white</item>
+        <item name="android:textColorHint">@color/white</item>
+        <item name="android:windowBackground">@color/backgroundColor</item>
+        <item name="colorControlNormal">@color/white</item>
+    </style>
+
+    <style name="DefaultButton">
+        <item name="android:background">@drawable/selector_default</item>
+        <item name="android:textColor">@color/main_screen_button_text_color</item>
+        <item name="android:layout_height">@dimen/default_button_height</item>
+        <item name="android:layout_width">@dimen/default_button_width</item>
+        <item name="android:paddingLeft">@dimen/screen_margin</item>
+        <item name="android:paddingRight">@dimen/screen_margin</item>
+        <item name="android:textAllCaps">true</item>
+    </style>
+
+</resources>
