@@ -2,7 +2,7 @@
     <string name="app_name">Activity Sync</string>
 
     <!-- DummyScreen strings -->
-    <string name="btn_open_dummy_screen">Otwórz testowy ekran</string>
+    <string name="btn_open_intro_screen">Otwórz testowe intro</string>
     <string name="btn_display_test_message">Wyświetl testową wiadomość</string>
     <string name="txt_hello_message">Witaj w Activity Sync! Ta aplikacja będzie świetna!</string>
     <string name="title_dummy_screen">Dummy Screen</string>
