@@ -4,8 +4,8 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/intro_welcome_bg"
-    android:id="@+id/intro_welcome_linear_layout">
+    android:background="@color/intro_happy_bg"
+    android:id="@+id/intro_happy_linear_layout">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -18,7 +18,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="@dimen/text_biggest_size"
-            android:text="@string/txt_intro_welcome"
+            android:text="@string/txt_intro_happy"
             android:gravity="center"
             android:lines="2"
             android:textColor="@color/white"
@@ -28,7 +28,7 @@
         <com.mikhaellopez.circularimageview.CircularImageView
             android:layout_width="@dimen/intro_circle_image_width"
             android:layout_height="@dimen/intro_circle_image_height"
-            android:src="@drawable/sport"
+            android:src="@drawable/smile"
             app:civ_border_color="@color/white"
             app:civ_border_width="@dimen/intro_circle_image_border"
             app:civ_shadow="true"
@@ -37,6 +37,6 @@
             android:layout_marginTop="@dimen/screen_margin_twice"
             android:layout_marginBottom="@dimen/screen_margin_biggest"/>
 
-    </LinearLayout>
+        </LinearLayout>
 
 </LinearLayout>

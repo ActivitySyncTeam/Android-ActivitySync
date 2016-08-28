@@ -7,4 +7,8 @@
     <string name="txt_hello_message">Hi stranger! This app will be awesome!</string>
     <string name="title_dummy_screen">Dummy Screen</string>
 
+    <!-- IntroScreen strings -->
+    <string name="txt_intro_welcome">Welcome to\nACTIVITY SYNC</string>
+    <string name="txt_intro_happy">We are very happy \n that you are here!</string>
+
 </resources>
