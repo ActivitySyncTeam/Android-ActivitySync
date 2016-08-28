@@ -1,6 +1,6 @@
 package com.activity_sync.presentation.views;
 
-public interface IIntroWelcomeView
+public interface IIntroEasyOrganizingView
 {
 
 }

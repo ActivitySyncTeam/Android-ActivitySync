@@ -18,8 +18,11 @@ import rx.android.view.ViewObservable;
 
 public class IntroSimpleScreen extends FragmentScreen implements IIntroSimpleView, ISlideBackgroundColorHolder
 {
-    @Bind(R.id.intro_simple_linear_layout)
-    LinearLayout introWelcomeMainLayout;
+    @Bind(R.id.intro_simple_main_linear_layout)
+    LinearLayout introSimpleMainLayout;
+
+    @Bind(R.id.intro_simple_upper_linear_layout)
+    LinearLayout introSimpleUpperLayout;
 
     @Bind(R.id.test_button)
     Button testButton;
@@ -44,7 +47,8 @@ public class IntroSimpleScreen extends FragmentScreen implements IIntroSimpleVie
     @Override
     public void setBackgroundColor(@ColorInt int backgroundColor)
     {
-        introWelcomeMainLayout.setBackgroundColor(backgroundColor);
+        introSimpleMainLayout.setBackgroundColor(backgroundColor);
+        introSimpleUpperLayout.setBackgroundColor(backgroundColor);
     }
 
     @Override

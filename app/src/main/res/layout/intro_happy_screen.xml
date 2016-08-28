@@ -54,16 +54,13 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <com.mikhaellopez.circularimageview.CircularImageView
+            <de.hdodenhof.circleimageview.CircleImageView
                 android:layout_width="@dimen/intro_circle_image_width"
                 android:layout_height="@dimen/intro_circle_image_height"
-                android:layout_gravity="center"
                 android:src="@drawable/smile"
-                app:civ_border_color="@color/white"
+                android:layout_gravity="center"
                 app:civ_border_width="@dimen/intro_circle_image_border"
-                app:civ_shadow="true"
-                app:civ_shadow_color="@color/intro_happy_shadow"
-                app:civ_shadow_radius="1" />
+                app:civ_border_color="@color/intro_happy_image_border"/>
 
             <TextView
                 android:layout_width="match_parent"

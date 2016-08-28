@@ -20,8 +20,8 @@ public class IntroScreen extends AppIntro2
 
         navigator = new Navigator(this);
 
-        addSlide(new IntroWelcomeScreen());
         addSlide(new IntroHappyScreen());
+        addSlide(new IntroEasyOrganizingScreen());
         addSlide(new IntroSimpleScreen());
         addSlide(new IntroSimpleScreen());
 

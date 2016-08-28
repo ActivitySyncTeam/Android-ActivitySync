@@ -6,11 +6,11 @@
     android:orientation="vertical">
 
     <LinearLayout
-        android:id="@+id/intro_welcome_main_linear_layout"
+        android:id="@+id/intro_easy_organizing_main_linear_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:background="@color/intro_welcome_bg"
+        android:background="@color/intro_easy_organizing_bg"
         android:orientation="vertical">
 
         <LinearLayout
@@ -24,11 +24,11 @@
             android:orientation="horizontal">
 
             <LinearLayout
-                android:id="@+id/intro_welcome_upper_linear_layout"
+                android:id="@+id/intro_easy_organizing_upper_linear_layout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="@dimen/screen_margin_half"
-                android:background="@color/intro_welcome_bg"
+                android:background="@color/intro_easy_organizing_bg"
                 android:orientation="vertical"/>
 
         </LinearLayout>
@@ -54,16 +54,13 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <com.mikhaellopez.circularimageview.CircularImageView
+            <de.hdodenhof.circleimageview.CircleImageView
                 android:layout_width="@dimen/intro_circle_image_width"
                 android:layout_height="@dimen/intro_circle_image_height"
-                android:layout_gravity="center"
                 android:src="@drawable/sport"
-                app:civ_border_color="@color/white"
+                android:layout_gravity="center"
                 app:civ_border_width="@dimen/intro_circle_image_border"
-                app:civ_shadow="true"
-                app:civ_shadow_color="@color/intro_welcome_shadow"
-                app:civ_shadow_radius="1" />
+                app:civ_border_color="@color/intro_easy_organizing_image_border"/>
 
             <TextView
                 android:layout_width="match_parent"
@@ -72,7 +69,7 @@
                 android:layout_marginTop="@dimen/screen_margin_big"
                 android:gravity="center_horizontal"
                 android:lines="2"
-                android:text="@string/txt_intro_welcome"
+                android:text="@string/txt_intro_easy_organizing"
                 android:textColor="@color/black"
                 android:textSize="@dimen/text_big_size_20" />
 

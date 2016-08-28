@@ -25,7 +25,7 @@ public class DummyPresenter extends Presenter<IDummyView>
         subscriptions.add(view.openDummyScreenClick()
                 .observeOn(uiThread)
                 .subscribe(o -> {
-                    navigator.openDummyScreen();
+                    navigator.openIntroScreen();
                 })
         );
 
