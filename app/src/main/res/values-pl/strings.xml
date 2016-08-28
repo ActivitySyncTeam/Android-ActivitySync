@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Activity Sync</string>
+
+    <!-- DummyScreen strings -->
+    <string name="btn_open_dummy_screen">Otwórz testowy ekran</string>
+    <string name="btn_display_test_message">Wyświetl testową wiadomość</string>
+    <string name="txt_hello_message">Witaj w Activity Sync! Ta aplikacja będzie świetna!</string>
+    <string name="title_dummy_screen">Dummy Screen</string>
+
+    <!-- IntroScreen strings -->
+    <string name="txt_intro_easy_organizing">Organizacja sportowych wydarzeń\nnigdy nie była łatwiejsza!</string>
+    <string name="txt_intro_happy">Dziękujemy za instalację aplikacji\nMiło nam Cię poznać!</string>
+
+</resources>
