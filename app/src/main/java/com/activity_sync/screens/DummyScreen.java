@@ -56,7 +56,7 @@ public class DummyScreen extends Screen implements IDummyView
     }
 
     @Override
-    public Observable openDummyScreenClick()
+    public Observable openIntroScreenClick()
     {
         return ViewObservable.clicks(openIntroBtn);
     }

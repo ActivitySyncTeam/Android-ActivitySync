@@ -22,7 +22,7 @@ public class DummyPresenter extends Presenter<IDummyView>
     {
         super.start();
 
-        subscriptions.add(view.openDummyScreenClick()
+        subscriptions.add(view.openIntroScreenClick()
                 .observeOn(uiThread)
                 .subscribe(o -> {
                     navigator.openIntroScreen();

@@ -23,13 +23,13 @@ public class DummyPresenterTests
     @Mock
     IDummyView view;
 
-    PublishSubject openDummyScreenEvent = PublishSubject.create();
+    PublishSubject openIntroScreenEvent = PublishSubject.create();
     PublishSubject displayMessageEvent = PublishSubject.create();
 
     @Before
     public void setup()
     {
-        Mockito.when(view.openDummyScreenClick()).thenReturn(openDummyScreenEvent);
+        Mockito.when(view.openIntroScreenClick()).thenReturn(openIntroScreenEvent);
         Mockito.when(view.displayMessageClick()).thenReturn(displayMessageEvent);
     }
 
@@ -39,8 +39,8 @@ public class DummyPresenterTests
         DummyPresenter dummyPresenter = createPresenter();
         dummyPresenter.start();
 
-        openDummyScreenEvent.onNext(this);
-        Mockito.verify(navigator).openDummyScreen();
+        openIntroScreenEvent.onNext(this);
+        Mockito.verify(navigator).openIntroScreen();
     }
 
     @Test
