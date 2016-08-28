@@ -15,8 +15,11 @@ import butterknife.Bind;
 
 public class IntroWelcomeScreen extends FragmentScreen implements IIntroWelcomeView, ISlideBackgroundColorHolder
 {
-    @Bind(R.id.intro_welcome_linear_layout)
+    @Bind(R.id.intro_welcome_main_linear_layout)
     LinearLayout introWelcomeMainLayout;
+
+    @Bind(R.id.intro_welcome_upper_linear_layout)
+    LinearLayout introWelcomeUpperLayout;
 
     public IntroWelcomeScreen()
     {
@@ -39,5 +42,6 @@ public class IntroWelcomeScreen extends FragmentScreen implements IIntroWelcomeV
     public void setBackgroundColor(@ColorInt int backgroundColor)
     {
         introWelcomeMainLayout.setBackgroundColor(backgroundColor);
+        introWelcomeUpperLayout.setBackgroundColor(backgroundColor);
     }
 }

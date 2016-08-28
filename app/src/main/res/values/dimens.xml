@@ -19,6 +19,7 @@
     <dimen name="text_default_size">14sp</dimen>
     <dimen name="text_size">@dimen/text_default_size</dimen>
     <dimen name="text_big_size">16sp</dimen>
+    <dimen name="text_big_size_20">20sp</dimen>
     <dimen name="text_bigger_size">24sp</dimen>
     <dimen name="text_biggest_size">28sp</dimen>
     <dimen name="text_biggest_commissions">36sp</dimen>
@@ -31,7 +32,7 @@
 
     <!-- IntroScreen dimens-->
     <dimen name="intro_circle_image_border">8dp</dimen>
-    <dimen name="intro_circle_image_height">275dp</dimen>
+    <dimen name="intro_circle_image_height">300dp</dimen>
     <dimen name="intro_circle_image_width">@dimen/intro_circle_image_height</dimen>
 
 </resources>

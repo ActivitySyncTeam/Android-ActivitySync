@@ -8,7 +8,7 @@
     <string name="title_dummy_screen">Dummy Screen</string>
 
     <!-- IntroScreen strings -->
-    <string name="txt_intro_welcome">Welcome to\nACTIVITY SYNC</string>
-    <string name="txt_intro_happy">We are very happy \n that you are here!</string>
+    <string name="txt_intro_welcome">Welcome to ActivitySync\n App for organizing sport events</string>
+    <string name="txt_intro_happy">Thank you for installing ActivitySync\nWe are happy to meet you!</string>
 
 </resources>

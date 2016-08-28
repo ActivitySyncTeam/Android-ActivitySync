@@ -1,42 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/intro_happy_bg"
-    android:id="@+id/intro_happy_linear_layout">
+    android:orientation="vertical">
 
     <LinearLayout
+        android:id="@+id/intro_happy_main_linear_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:layout_gravity="center"
-        android:gravity="center">
+        android:layout_weight="1"
+        android:background="@color/intro_happy_bg"
+        android:orientation="vertical">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/text_biggest_size"
-            android:text="@string/txt_intro_happy"
-            android:gravity="center"
-            android:lines="2"
-            android:textColor="@color/white"
-            android:layout_marginTop="@dimen/screen_margin_twice"
-            android:layout_gravity="center"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/screen_margin_half"
+            android:layout_marginRight="@dimen/screen_margin_half"
+            android:layout_marginTop="@dimen/screen_margin_half"
+            android:layout_weight="1"
+            android:background="@color/white"
+            android:orientation="horizontal">
 
-        <com.mikhaellopez.circularimageview.CircularImageView
-            android:layout_width="@dimen/intro_circle_image_width"
-            android:layout_height="@dimen/intro_circle_image_height"
-            android:src="@drawable/smile"
-            app:civ_border_color="@color/white"
-            app:civ_border_width="@dimen/intro_circle_image_border"
-            app:civ_shadow="true"
-            app:civ_shadow_radius="1"
-            app:civ_shadow_color="@color/intro_welcome_shadow"
-            android:layout_marginTop="@dimen/screen_margin_twice"
-            android:layout_marginBottom="@dimen/screen_margin_biggest"/>
+            <LinearLayout
+                android:id="@+id/intro_happy_upper_linear_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="@dimen/screen_margin_half"
+                android:background="@color/intro_happy_bg"
+                android:orientation="vertical"/>
 
         </LinearLayout>
 
-</LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="@dimen/screen_margin_half"
+            android:layout_marginLeft="@dimen/screen_margin_half"
+            android:layout_marginRight="@dimen/screen_margin_half"
+            android:layout_weight="1"
+            android:background="@color/white" />
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <com.mikhaellopez.circularimageview.CircularImageView
+                android:layout_width="@dimen/intro_circle_image_width"
+                android:layout_height="@dimen/intro_circle_image_height"
+                android:layout_gravity="center"
+                android:src="@drawable/smile"
+                app:civ_border_color="@color/white"
+                app:civ_border_width="@dimen/intro_circle_image_border"
+                app:civ_shadow="true"
+                app:civ_shadow_color="@color/intro_happy_shadow"
+                app:civ_shadow_radius="1" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="@dimen/screen_margin_big"
+                android:layout_marginTop="@dimen/screen_margin_big"
+                android:gravity="center_horizontal"
+                android:lines="2"
+                android:text="@string/txt_intro_happy"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_big_size_20" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</FrameLayout>

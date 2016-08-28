@@ -31,6 +31,9 @@
     <item name="main_screen_button_text_color" type="color">@color/white</item>
 
     <!-- IntroScreen colors-->
+    <item name="intro_indicator_selected" type="color">#6c7c86</item>
+    <item name="intro_indicator_unselected" type="color">#8a979f</item>
+
     <item name="intro_welcome_bg" type="color">#7ca6c1</item>
     <item name="intro_welcome_image_border" type="color">@color/white</item>
     <item name="intro_welcome_shadow" type="color">#6a6a73</item>
@@ -39,5 +42,5 @@
     <item name="intro_happy_image_border" type="color">@color/white</item>
     <item name="intro_happy_shadow" type="color">#6a6a73</item>
 
-    <item name="intro_simple_bg" type="color">#cfe651</item>
+    <item name="intro_simple_bg" type="color">#fcdb05</item>
 </resources>
