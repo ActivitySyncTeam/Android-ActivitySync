@@ -11,6 +11,8 @@ public class IntroScreen extends AppIntro2
 
         addSlide(new IntroWelcomeScreen());
         addSlide(new IntroHappyScreen());
+        addSlide(new IntroSimpleScreen());
+        addSlide(new IntroSimpleScreen());
 
         setColorTransitionsEnabled(true);
     }
