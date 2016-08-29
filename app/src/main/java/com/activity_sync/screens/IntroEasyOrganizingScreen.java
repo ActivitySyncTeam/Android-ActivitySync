@@ -3,7 +3,6 @@ package com.activity_sync.screens;
 import android.support.annotation.ColorInt;
 import android.support.v4.content.ContextCompat;
 import android.widget.LinearLayout;
-
 import com.activity_sync.R;
 import com.github.paolorotolo.appintro.ISlideBackgroundColorHolder;
 

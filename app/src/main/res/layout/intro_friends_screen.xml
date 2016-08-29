@@ -53,6 +53,13 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+            <TextView
+                style="@style/DefaultIntroTextView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/txt_intro_friends"
+                android:textColor="@color/white"/>
+
             <de.hdodenhof.circleimageview.CircleImageView
                 android:layout_width="@dimen/intro_circle_image_width"
                 android:layout_height="@dimen/intro_circle_image_height"
@@ -60,17 +67,6 @@
                 android:layout_gravity="center"
                 app:civ_border_width="@dimen/intro_circle_image_border"
                 app:civ_border_color="@color/intro_friends_image_border"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginBottom="@dimen/screen_margin_big"
-                android:layout_marginTop="@dimen/screen_margin_big"
-                android:gravity="center_horizontal"
-                android:lines="2"
-                android:text="@string/txt_intro_friends"
-                android:textColor="@color/black"
-                android:textSize="@dimen/text_big_size_20" />
 
         </LinearLayout>
 

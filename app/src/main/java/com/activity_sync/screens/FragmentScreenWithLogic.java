@@ -13,11 +13,6 @@ public abstract class FragmentScreenWithLogic extends FragmentScreen
     protected IPresenter presenter;
     protected final CompositeSubscription subscriptions = new CompositeSubscription();
 
-    public IPresenter presenter()
-    {
-        return this.presenter;
-    }
-
     protected FragmentScreenWithLogic(int layoutResId)
     {
         super(layoutResId);
