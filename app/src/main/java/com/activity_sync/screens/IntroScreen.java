@@ -22,8 +22,8 @@ public class IntroScreen extends AppIntro2
 
         addSlide(new IntroHappyScreen());
         addSlide(new IntroEasyOrganizingScreen());
-        addSlide(new IntroSimpleScreen());
-        addSlide(new IntroSimpleScreen());
+        addSlide(new IntroFriendsScreen());
+        addSlide(new IntroFriendsScreen());
 
         setColorTransitionsEnabled(true);
         setIndicatorColor(ContextCompat.getColor(this, R.color.intro_indicator_selected),

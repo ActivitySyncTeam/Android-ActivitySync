@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
     <LinearLayout
-        android:id="@+id/intro_simple_main_linear_layout"
+        android:id="@+id/intro_friends_main_linear_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:background="@color/intro_simple_bg"
+        android:background="@color/intro_friends_bg"
         android:orientation="vertical">
 
         <LinearLayout
@@ -24,11 +23,11 @@
             android:orientation="horizontal">
 
             <LinearLayout
-                android:id="@+id/intro_simple_upper_linear_layout"
+                android:id="@+id/intro_friends_upper_linear_layout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="@dimen/screen_margin_half"
-                android:background="@color/intro_simple_bg"
+                android:background="@color/intro_friends_bg"
                 android:orientation="vertical"/>
 
         </LinearLayout>
@@ -40,7 +39,7 @@
             android:layout_marginLeft="@dimen/screen_margin_half"
             android:layout_marginRight="@dimen/screen_margin_half"
             android:layout_weight="1"
-            android:background="@color/white" />
+            android:background="@color/white"/>
 
     </LinearLayout>
 
@@ -54,14 +53,24 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <Button
-                android:id="@+id/test_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="test button"
-                android:textAllCaps="true"
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_width="@dimen/intro_circle_image_width"
+                android:layout_height="@dimen/intro_circle_image_height"
+                android:src="@drawable/friends"
                 android:layout_gravity="center"
-                style="@style/DefaultButton"/>
+                app:civ_border_width="@dimen/intro_circle_image_border"
+                app:civ_border_color="@color/intro_friends_image_border"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="@dimen/screen_margin_big"
+                android:layout_marginTop="@dimen/screen_margin_big"
+                android:gravity="center_horizontal"
+                android:lines="2"
+                android:text="@string/txt_intro_friends"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_big_size_20" />
 
         </LinearLayout>
 

@@ -1,19 +1,15 @@
 package com.activity_sync.screens;
 
-import android.os.Bundle;
 import android.support.annotation.ColorInt;
 import android.support.v4.content.ContextCompat;
 import android.widget.LinearLayout;
 
 import com.activity_sync.R;
-import com.activity_sync.presentation.presenters.IPresenter;
-import com.activity_sync.presentation.presenters.IntroEasyOrganizingPresenter;
-import com.activity_sync.presentation.views.IIntroEasyOrganizingView;
 import com.github.paolorotolo.appintro.ISlideBackgroundColorHolder;
 
 import butterknife.Bind;
 
-public class IntroEasyOrganizingScreen extends FragmentScreen implements IIntroEasyOrganizingView, ISlideBackgroundColorHolder
+public class IntroEasyOrganizingScreen extends FragmentScreen implements ISlideBackgroundColorHolder
 {
     @Bind(R.id.intro_easy_organizing_main_linear_layout)
     LinearLayout introEasyOrganizingMainLayout;
@@ -24,12 +20,6 @@ public class IntroEasyOrganizingScreen extends FragmentScreen implements IIntroE
     public IntroEasyOrganizingScreen()
     {
         super(R.layout.intro_easy_organizing_screen);
-    }
-
-    @Override
-    protected IPresenter createPresenter(FragmentScreen fragmentScreen, Bundle savedInstanceState)
-    {
-        return new IntroEasyOrganizingPresenter(this);
     }
 
     @Override

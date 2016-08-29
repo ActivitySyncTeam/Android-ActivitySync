@@ -1,18 +1,15 @@
 package com.activity_sync.screens;
 
-import android.os.Bundle;
 import android.support.annotation.ColorInt;
 import android.support.v4.content.ContextCompat;
 import android.widget.LinearLayout;
+
 import com.activity_sync.R;
-import com.activity_sync.presentation.presenters.IPresenter;
-import com.activity_sync.presentation.presenters.IntroHappyPresenter;
-import com.activity_sync.presentation.views.IIntroHappyView;
 import com.github.paolorotolo.appintro.ISlideBackgroundColorHolder;
 
 import butterknife.Bind;
 
-public class IntroHappyScreen extends FragmentScreen implements IIntroHappyView, ISlideBackgroundColorHolder
+public class IntroHappyScreen extends FragmentScreen implements ISlideBackgroundColorHolder
 {
     @Bind(R.id.intro_happy_main_linear_layout)
     LinearLayout introHappyMainLayout;
@@ -22,11 +19,6 @@ public class IntroHappyScreen extends FragmentScreen implements IIntroHappyView,
 
     public IntroHappyScreen() {
         super(R.layout.intro_happy_screen);
-    }
-
-    @Override
-    protected IPresenter createPresenter(FragmentScreen fragmentScreen, Bundle savedInstanceState) {
-        return new IntroHappyPresenter(this);
     }
 
     @Override
