@@ -2,10 +2,11 @@ package com.activity_sync.di;
 
 import com.activity_sync.App;
 import com.activity_sync.screens.DummyScreen;
-
-import dagger.Component;
+import com.activity_sync.screens.IntroScreen;
 
 import javax.inject.Singleton;
+
+import dagger.Component;
 
 @Singleton
 @Component(modules = {UtilsModule.class })
@@ -28,4 +29,6 @@ public interface DiComponent
     void inject(App app);
 
     void inject(DummyScreen dummyScreen);
+
+    void inject(IntroScreen introScreen);
 }
