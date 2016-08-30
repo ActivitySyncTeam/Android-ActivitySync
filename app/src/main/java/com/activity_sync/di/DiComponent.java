@@ -2,6 +2,7 @@ package com.activity_sync.di;
 
 import com.activity_sync.App;
 import com.activity_sync.screens.DummyScreen;
+import com.activity_sync.screens.IntroLastScreen;
 import com.activity_sync.screens.IntroScreen;
 
 import javax.inject.Singleton;
@@ -31,4 +32,6 @@ public interface DiComponent
     void inject(DummyScreen dummyScreen);
 
     void inject(IntroScreen introScreen);
+
+    void inject(IntroLastScreen introLastScreen);
 }

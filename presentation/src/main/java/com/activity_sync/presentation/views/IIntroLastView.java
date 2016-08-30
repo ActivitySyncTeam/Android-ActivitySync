@@ -5,6 +5,4 @@ import rx.Observable;
 public interface IIntroLastView
 {
     Observable checkImageClick();
-
-    void endFlow();
 }

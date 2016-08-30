@@ -16,8 +16,8 @@
         </activity>
 
         <activity
-            android:name=".screens.IntroScreen">
-
+            android:name=".screens.IntroScreen"
+            android:screenOrientation="portrait">
         </activity>
 
     </application>

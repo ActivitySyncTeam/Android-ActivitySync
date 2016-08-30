@@ -56,8 +56,8 @@ public class IntroLocationScreen extends FragmentScreenWithLogic implements ISli
     }
 
     @Override
-    public void permissionFlow()
+    public void openPermissionDialog()
     {
-        Toast.makeText(getContext(), "not implemented yet", Toast.LENGTH_LONG).show();
+        Toast.makeText(getContext(), "It will be implemented in different task", Toast.LENGTH_LONG).show();
     }
 }

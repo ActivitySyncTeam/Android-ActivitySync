@@ -35,6 +35,5 @@ public class DummyPresenter extends Presenter<IDummyView>
                     view.displayMessage();
                 })
         );
-
     }
 }

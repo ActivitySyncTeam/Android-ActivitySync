@@ -5,12 +5,13 @@ import android.support.annotation.ColorInt;
 import android.support.v4.content.ContextCompat;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
 import com.activity_sync.R;
 import com.activity_sync.presentation.presenters.IPresenter;
 import com.activity_sync.presentation.presenters.IntroLastPresenter;
+import com.activity_sync.presentation.services.INavigator;
 import com.activity_sync.presentation.views.IIntroLastView;
 import com.github.paolorotolo.appintro.ISlideBackgroundColorHolder;
+import javax.inject.Inject;
 import butterknife.Bind;
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
@@ -18,6 +19,9 @@ import rx.android.view.ViewObservable;
 
 public class IntroLastScreen extends FragmentScreenWithLogic implements ISlideBackgroundColorHolder, IIntroLastView
 {
+    @Inject
+    INavigator navigator;
+
     @Bind(R.id.intro_last_screen_relative_layout)
     RelativeLayout introLastScreenLayout;
 
@@ -43,18 +47,12 @@ public class IntroLastScreen extends FragmentScreenWithLogic implements ISlideBa
     @Override
     protected IPresenter createPresenter(FragmentScreen fragmentScreen, Bundle savedInstanceState)
     {
-        return new IntroLastPresenter(AndroidSchedulers.mainThread(), this);
+        return new IntroLastPresenter(AndroidSchedulers.mainThread(), this, navigator);
     }
 
     @Override
     public Observable checkImageClick()
     {
         return ViewObservable.clicks(checkImageView);
-    }
-
-    @Override
-    public void endFlow()
-    {
-        Toast.makeText(getContext(), "not implemented yet", Toast.LENGTH_LONG).show();
     }
 }
