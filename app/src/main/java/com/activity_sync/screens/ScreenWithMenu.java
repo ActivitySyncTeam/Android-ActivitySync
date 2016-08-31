@@ -2,12 +2,21 @@ package com.activity_sync.screens;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.IdRes;
 import android.support.annotation.StringRes;
 import android.support.design.widget.NavigationView;
+import android.support.v4.media.session.PlaybackStateCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.view.MenuItem;
+
 import com.activity_sync.R;
+import com.activity_sync.presentation.services.INavigator;
+import com.activity_sync.services.Navigator;
+
+import java.util.HashMap;
+import java.util.Map;
+
 import butterknife.Bind;
 
 public abstract class ScreenWithMenu extends Screen
@@ -18,10 +27,10 @@ public abstract class ScreenWithMenu extends Screen
     @Bind(R.id.navigation_drawer_layout)
     DrawerLayout drawerLayout;
 
-    protected ScreenWithMenu()
-    {
-        super(R.layout.screen_with_menu);
-    }
+    @PlaybackStateCompat.State
+    int selectedItem;
+
+    private MenuNavigator menuNavigator;
 
     protected ScreenWithMenu(int layoutResId)
     {
@@ -32,6 +41,8 @@ public abstract class ScreenWithMenu extends Screen
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+
+        initMenu();
 
         if (getSupportActionBar() != null)
         {
@@ -71,6 +82,31 @@ public abstract class ScreenWithMenu extends Screen
         return super.onOptionsItemSelected(item);
     }
 
+    private void initMenu()
+    {
+        clearAndInflateMenu();
+
+        menuNavigator = new MenuNavigator(new Navigator(this), () -> this.drawerLayout.closeDrawers());
+        menuNavigator.addAction(R.id.menu_dummy, INavigator::openDummyScreen);
+        menuNavigator.addAction(R.id.menu_dummy_2, INavigator::openDummyScreen);
+
+        navigationView.setNavigationItemSelectedListener(menuItem -> {
+            if (menuItem.getItemId() == selectedItem)
+            {
+                drawerLayout.closeDrawers();
+                return true;
+            }
+            menuNavigator.runAction(menuItem.getItemId());
+            return true;
+        });
+    }
+
+    private void clearAndInflateMenu()
+    {
+        navigationView.getMenu().clear();
+        navigationView.inflateMenu(getMenuType());
+    }
+
     private int getMenuType()
     {
         return R.menu.navigation_menu;
@@ -83,13 +119,51 @@ public abstract class ScreenWithMenu extends Screen
         super.startActivity(intent);
     }
 
+    private static class MenuNavigator
+    {
+        private final INavigator navigator;
+        private final OnBeforeAction onBeforeAction;
+        private final Map<Integer, NavigatorAction> actions = new HashMap<>();
+
+        public MenuNavigator(INavigator navigator, OnBeforeAction onBeforeAction)
+        {
+            this.navigator = navigator;
+            this.onBeforeAction = onBeforeAction;
+        }
+
+        public void addAction(@IdRes int id, NavigatorAction action)
+        {
+            actions.put(id, action);
+        }
+
+        public void runAction(@IdRes int id)
+        {
+            if (actions.get(id) == null)
+            {
+                return;
+            }
+
+            onBeforeAction.execute();
+            actions.get(id).execute(navigator);
+        }
+
+        public interface NavigatorAction
+        {
+            void execute(INavigator navigator);
+        }
+
+        public interface OnBeforeAction
+        {
+            void execute();
+        }
+    }
+
     @Override
     public void onBackPressed()
     {
         if (drawerLayout.isDrawerOpen(GravityCompat.START) || drawerLayout.isDrawerOpen(GravityCompat.END))
         {
             drawerLayout.closeDrawers();
-            return;
         }
         else
         {
