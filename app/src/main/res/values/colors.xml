@@ -30,4 +30,8 @@
     <item name="main_screen_button_bg_color" type="color">#3a4c76</item>
     <item name="main_screen_button_text_color" type="color">@color/white</item>
 
+    <!--Navigation Colors-->
+    <item name="navigation_menu_bg" type="color">@color/white</item>
+    <item name="navigation_menu_item" type="color">@color/colorPrimary</item>
+
 </resources>
