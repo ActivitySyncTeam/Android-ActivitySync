@@ -6,5 +6,7 @@ test:
     override:
         - (chmod +x setup_environment.sh)
         - (docker pull ubuntu:14.04)
-        - (docker cp setup_environment.sh `docker images --digests -q ubuntu:14.04`:/setup_environment.sh)
+        - (docker images --no-trunc --quiet ubuntu:14.04)
+        - (docker images -q ubuntu:14.04 | grep `docker images --no-trunc --quiet ubuntu:14.04`)
+        - (docker cp setup_environment.sh `docker images --no-trunc -q ubuntu:14.04`:/setup_environment.sh)
         - (docker run -t -i `docker images --digests -q ubuntu:14.04` /bin/bash /setup_environment.sh)
