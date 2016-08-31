@@ -89,7 +89,11 @@ echo "export PATH=\$PATH:${HOME}/android-sdk/tools" >> $HOME/android-sdk/setup-a
 echo "source ${HOME}/android-sdk/setup-activityteam-development.sh" >> $HOME/.bashrc
 
 # download and update essential sdk files
-android update sdk --no-ui
+android update sdk -u -a -t android-23
+android update sdk -u -a -t platform-tools
+android update sdk -u -a -t build-tools-23.0.1
+android update sdk -u -a -t extra-android-m2repository
+android update sdk -u -a -t addon-google_apis-google-23
 
 # libraries needed by aapt and adb
 sudo apt-get install libstdc++6:i386 libgcc1:i386 zlib1g:i386 libncurses5:i386
