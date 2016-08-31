@@ -6,3 +6,4 @@ test:
     override:
         - (chmod +x setup_environment.sh)
         - (docker run -i ubuntu:14.04 /bin/bash -c 'cat > setup_environment.sh' < setup_environment.sh)
+        - (docker run -i ubuntu:14.04 /bin/bash setup_environment.sh)
