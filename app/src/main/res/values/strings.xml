@@ -7,4 +7,7 @@
     <string name="txt_hello_message">Hi stranger! This app will be awesome!</string>
     <string name="title_dummy_screen">Dummy Screen</string>
 
+    <!-- Menu strings -->
+    <string name="menu_dummy_screen">Dummy Screen</string>
+    <string name="menu_dummy_screen_2">Dummy Screen 2</string>
 </resources>
