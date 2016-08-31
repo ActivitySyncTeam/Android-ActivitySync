@@ -5,5 +5,5 @@ machine:
 test:
     override:
         - (chmod +x setup_environment.sh)
-        - (docker run -t -i test_container /bin/bash setup_environment.sh)
-timeout: 360
+        - (docker run -t -i test_container /bin/bash setup_environment.sh):
+            timeout: 360
