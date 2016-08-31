@@ -9,4 +9,4 @@ test:
         - (docker ps -a -q)
         - (docker cp setup_environment.sh `docker ps -a -q`:/setup_environment.sh)
         - (docker ps -a)
-        - (docker run `docker ps -a -q` /bin/bash /setup_environment.sh)
+        - (docker run ubuntu:14.04 /bin/bash /setup_environment.sh)
