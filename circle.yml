@@ -7,5 +7,6 @@ test:
         - (chmod +x setup_environment.sh)
         - (docker run ubuntu:14.04 grep -v '^#' /etc/apt/sources.list)
         - (docker ps)
+        - (docker images)
         - (docker cp setup_environment.sh ubuntu:14.04:/setup_environment.sh)
         - (docker run -t -i ubuntu:14.04 /bin/bash /setup_environment.sh)
