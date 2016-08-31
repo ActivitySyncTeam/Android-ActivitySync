@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="gray" type="color">#AAAAAAAA</item>
+    <item name="blue" type="color">#FF33B5E5</item>
+    <item name="purple" type="color">#FFAA66CC</item>
+    <item name="green" type="color">#FF99CC00</item>
+    <item name="orange" type="color">#FF9800</item>
+    <item name="red" type="color">#FFFF4444</item>
+    <item name="yellow" type="color">#FFEB3B</item>
+    <item name="darkblue" type="color">#FF0099CC</item>
+    <item name="darkpurple" type="color">#FF9933CC</item>
+    <item name="darkgreen" type="color">#FF669900</item>
+    <item name="darkorange" type="color">#EF6C00</item>
+    <item name="darkred" type="color">#FFCC0000</item>
+    <item name="darkgray" type="color">#757575</item>
+    <item name="white" type="color">#ffffff</item>
+    <item name="black" type="color">#000000</item>
+    <item name="gray_light" type="color">#aadbdbdb</item>
+    <item name="gray_very_light" type="color">#aaf4f0f0</item>
+    <item name="transparent" type="color">#00000000</item>
+
+    <!-- MainScreen Colors-->
+    <item name="colorPrimary" type="color">#283042</item>
+    <item name="colorPrimaryDark" type="color">#FF212121</item>
+    <item name="colorAccent" type="color">#141820</item>
+    <item name="backgroundColor" type="color">@color/gray_very_light</item>
+
+    <!-- MainScreen Colors-->
+    <item name="main_screen_button_pressed_bg_color" type="color">#293d6b</item>
+    <item name="main_screen_button_bg_color" type="color">#3a4c76</item>
+    <item name="main_screen_button_text_color" type="color">@color/white</item>
+
+    <!--Navigation Colors-->
+    <item name="navigation_menu_bg" type="color">@color/white</item>
+    <item name="navigation_menu_item" type="color">@color/colorPrimary</item>
+
+</resources>

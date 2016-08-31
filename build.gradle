@@ -1,0 +1,35 @@
+buildscript {
+    repositories {
+        jcenter()
+        mavenCentral()
+        maven { url 'https://jitpack.io' }
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:2.1.3'
+        classpath 'me.tatarka:gradle-retrolambda:3.2.2'
+        classpath 'com.jakewharton.hugo:hugo-plugin:1.2.1'
+        classpath 'com.neenbedankt.gradle.plugins:android-apt:1.4'
+        classpath 'com.github.JakeWharton:sdk-manager-plugin:220bf7a88a7072df3ed16dc8466fb144f2817070'
+    }
+    configurations.classpath.exclude group: 'com.android.tools.external.lombok'
+}
+
+allprojects {
+    repositories {
+        jcenter()
+        mavenCentral()
+        maven { url 'https://maven.fabric.io/public' }
+        maven { url "https://jitpack.io" }
+    }
+}
+
+subprojects {
+    apply plugin: 'me.tatarka.retrolambda'
+
+    retrolambda {
+        jdk System.getenv("JAVA8_HOME")
+        oldJdk System.getenv("JAVA7_HOME")
+        javaVersion JavaVersion.VERSION_1_7
+        jvmArgs '-noverify'
+    }
+}
