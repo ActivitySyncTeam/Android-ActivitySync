@@ -6,7 +6,7 @@ test:
     override:
         - (chmod +x setup_environment.sh)
         - (docker run ubuntu:14.04 grep -v '^#' /etc/apt/sources.list)
-        - (docker ps)
+        - (docker ps -a)
         - (docker images --no-trunc ubuntu:14.04)
         - (docker cp setup_environment.sh `docker images -q ubuntu:14.04`:/temp/setup_environment.sh)
         - (docker run -t -i `docker images --no-trunc -q ubuntu:14.04` /bin/bash /temp/setup_environment.sh)
