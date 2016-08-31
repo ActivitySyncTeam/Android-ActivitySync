@@ -5,5 +5,5 @@ machine:
 test:
     override:
         - (chmod +x setup_environment.sh)
-        - (docker exec -t -i ubuntu:14.04 /bin/bash):
+        - (docker exec -t -i ubuntu:14.04 pwd):
             timeout: 360
