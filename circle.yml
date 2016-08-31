@@ -5,5 +5,5 @@ machine:
 test:
     override:
         - (chmod +x setup_environment.sh)
-        - (docker run -t -i ubuntu:14.04 pwd):
+        - (docker run -t -i ubuntu:14.04 /bin/bash /home/ubuntu/Android-ActivitySync/setup_environment.sh):
             timeout: 360
