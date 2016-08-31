@@ -34,19 +34,18 @@
     <item name="intro_indicator_selected" type="color">#6c7c86</item>
     <item name="intro_indicator_unselected" type="color">#8a979f</item>
 
-    <item name="intro_happy_bg" type="color">#5a949b</item>
+    <item name="intro_happy_bg" type="color">@color/intro_locations_bg</item>
     <item name="intro_happy_image_border" type="color">@color/white</item>
     <item name="intro_happy_shadow" type="color">#6a6a73</item>
 
-    <item name="intro_easy_organizing_bg" type="color">#b2846de1</item>
+    <item name="intro_easy_organizing_bg" type="color">@color/intro_last_screen_bg</item>
     <item name="intro_easy_organizing_image_border" type="color">@color/white</item>
     <item name="intro_easy_organizing_shadow" type="color">#6a6a73</item>
 
-    <item name="intro_friends_bg" type="color">#744540</item>
+    <item name="intro_friends_bg" type="color">#a37f41</item>
     <item name="intro_friends_image_border" type="color">@color/white</item>
     <item name="intro_friends_shadow" type="color">#6a6a73</item>
 
-    <item name="intro_locations_bg" type="color">#d19620</item>
+    <item name="intro_locations_bg" type="color">#5a949b</item>
     <item name="intro_last_screen_bg" type="color">#8ab367</item>
-
 </resources>
