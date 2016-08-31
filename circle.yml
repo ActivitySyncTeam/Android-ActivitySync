@@ -7,5 +7,5 @@ test:
         - (chmod +x setup_environment.sh)
         - (docker pull ubuntu:14.04)
         - (docker images --no-trunc ubuntu:14.04)
-        - (docker cp setup_environment.sh ubuntu:/setup_environment.sh)
+        - (docker cp setup_environment.sh `docker images --no-trunc ubuntu:14.04`:setup_environment.sh)
         - (docker run -t -i `docker images --no-trunc -q ubuntu:14.04` /bin/bash /setup_environment.sh)
