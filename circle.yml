@@ -6,6 +6,6 @@ test:
     override:
         - (chmod +x setup_environment.sh)
         - (docker pull ubuntu:14.04)
-        - (docker images ubuntu -q)
+        - (docker images -q ubuntu:14.04)
         - (docker cp setup_environment.sh ubuntu:14.04:/setup_environment.sh)
         - (docker run -t -i ubuntu:14.04 /bin/bash /setup_environment.sh)
