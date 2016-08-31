@@ -5,5 +5,5 @@ machine:
 test:
     override:
         - (chmod +x setup_environment.sh)
-        - (docker run -t -i ubuntu:14.04 /bin/bash setup_environment.sh):
+        - (docker exec -t -i ubuntu:14.04 /bin/bash):
             timeout: 360
