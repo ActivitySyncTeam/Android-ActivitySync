@@ -3,12 +3,7 @@ machine:
     - docker
 
 test:
-    pre:
+    override:
         - (chmod +x setup_environment.sh)
         - (docker run -t -i test_container /bin/bash setup_environment.sh)
-    override:
-        - (chmod +x gradlew)
-        - (./gradlew assemble):
-            timeout: 360
-        - (./gradlew test):
 timeout: 360
