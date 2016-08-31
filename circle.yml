@@ -8,5 +8,5 @@ test:
         - (docker run ubuntu:14.04 grep -v '^#' /etc/apt/sources.list)
         - (docker ps -a -q)
         - (docker cp setup_environment.sh `docker ps -a -q`:/setup_environment.sh)
-        - (docker ps -a -q)
+        - (docker ps -a)
         - (docker run `docker ps -a -q` /bin/bash /setup_environment.sh)
