@@ -22,7 +22,7 @@
             <Button
                 style="@style/DefaultButton"
                 android:id="@+id/dummy_open_screen_btn"
-                android:layout_marginBottom="@dimen/screen_margin_big"
+                android:layout_marginBottom="@dimen/screen_margin_bigger"
                 android:text="@string/btn_open_dummy_screen" />
 
             <Button

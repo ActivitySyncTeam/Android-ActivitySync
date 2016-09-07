@@ -1,6 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/welcome"
+    android:orientation="vertical">
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_centerInParent="true"
+            android:src="@drawable/logo"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:background="@color/white"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:padding="@dimen/screen_margin_half">
+
+            <Button
+                android:id="@+id/login_btn"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/default_button_height"
+                android:layout_marginRight="@dimen/screen_margin_half"
+                android:layout_weight="1"
+                android:background="@color/custom_booking_state_normal"
+                android:text="Login"
+                android:textAllCaps="true"
+                android:textColor="@color/custom_button_text" />
+
+            <Button
+                android:id="@+id/register_btn"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/default_button_height"
+                android:layout_weight="1"
+                android:background="@color/custom_booking_state_normal"
+                android:text="Register"
+                android:textAllCaps="true"
+                android:textColor="@color/custom_button_text" />
+
+        </LinearLayout>
+    </RelativeLayout>
 </LinearLayout>

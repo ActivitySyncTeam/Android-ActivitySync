@@ -6,8 +6,9 @@
     <dimen name="screen_margin">16dp</dimen>
     <dimen name="screen_margin_twice">32dp</dimen>
     <dimen name="screen_margin_half">8dp</dimen>
-    <dimen name="screen_margin_bigger">24dp</dimen>
-    <dimen name="screen_margin_big">40dp</dimen>
+    <dimen name="screen_margin_big">24dp</dimen>
+    <dimen name="screen_margin_bigger">40dp</dimen>
+    <dimen name="screen_margin_biggest">64dp</dimen>
     <dimen name="screen_marginTop_nav_view">16dp</dimen>
     <dimen name="screen_margin_small">4dp</dimen>
     <dimen name="screen_margin_very_small">2dp</dimen>
@@ -16,10 +17,10 @@
     <dimen name="text_smallest_size">8sp</dimen>
     <dimen name="text_smaller_size">12sp</dimen>
     <dimen name="text_default_size">14sp</dimen>
-    <dimen name="text_size">@dimen/text_default_size</dimen>
     <dimen name="text_bigger_size">16sp</dimen>
     <dimen name="text_bigger_size_20">20sp</dimen>
     <dimen name="text_biggest_size">24sp</dimen>
+    <dimen name="text_big_welcome_title">32sp</dimen>
     <dimen name="text_biggest_commissions">36sp</dimen>
     <dimen name="text_huge_size">48sp</dimen>
 
