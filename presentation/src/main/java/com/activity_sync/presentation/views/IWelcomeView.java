@@ -1,4 +1,10 @@
 package com.activity_sync.presentation.views;
 
-public interface IWelcomeView {
+import rx.Observable;
+
+public interface IWelcomeView
+{
+    Observable loginBtnClick();
+
+    Observable registerBtnClick();
 }
