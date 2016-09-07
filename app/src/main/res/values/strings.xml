@@ -6,5 +6,7 @@
     <string name="btn_display_test_message">Display test message</string>
     <string name="txt_hello_message">Hi stranger! This app will be awesome!</string>
     <string name="title_dummy_screen">Dummy Screen</string>
+    <string name="btn_login">Login</string>
+    <string name="btn_register">Register</string>
 
 </resources>

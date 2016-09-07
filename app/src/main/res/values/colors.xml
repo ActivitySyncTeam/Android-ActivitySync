@@ -19,20 +19,20 @@
     <item name="gray_very_light" type="color">#aaf4f0f0</item>
     <item name="transparent" type="color">#00000000</item>
 
-    <!-- MainScreen Colors-->
+    <!-- MainScreen colors-->
     <item name="colorPrimary" type="color">#283042</item>
     <item name="colorPrimaryDark" type="color">#FF212121</item>
     <item name="colorAccent" type="color">#141820</item>
     <item name="backgroundColor" type="color">@color/gray_very_light</item>
 
-    <!-- MainScreen Colors-->
-    <item name="main_screen_button_pressed_bg_color" type="color">#293d6b</item>
-    <item name="main_screen_button_bg_color" type="color">#3a4c76</item>
-    <item name="main_screen_button_text_color" type="color">@color/white</item>
+    <!--Custom Button colors-->
+    <item name="default_button_text" type="color">@color/white</item>
+    <item name="default_button_state_normal" type="color">#ca3521</item>
+    <item name="default_button_state_pressed" type="color">#a71906</item>
 
-    <!--Custom Button-->
-    <item name="custom_button_text" type="color">@color/white</item>
-    <item name="custom_booking_state_normal" type="color">#ca3521</item>
-    <item name="custom_booking_state_pressed" type="color">#ea8f07</item>
-
+    <!--Welcome Screen colors-->
+    <item name="welcome_logo_border" type="color">@color/white</item>
+    <item name="welcome_logo_bg" type="color">@color/white</item>
+    <item name="welcome_logo_back_line" type="color">@color/white</item>
+    <item name="welcome_bottom_layout_bg" type="color">@color/white</item>
 </resources>
