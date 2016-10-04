@@ -6,7 +6,7 @@ public interface IDummyView
 {
     Observable displayMessageClick();
 
-    Observable openDummyScreenClick();
+    Observable openIntroScreenClick();
 
     void displayMessage();
 }
