@@ -15,4 +15,7 @@
     <string name="txt_intro_locations">In order to use ActivitySync\nwith no limit we would like to\nuse your current location.</string>
     <string name="btn_allow_location">Allow location permission</string>
 
+    <!-- Menu strings -->
+    <string name="menu_dummy_screen">Dummy Screen</string>
+    <string name="menu_dummy_screen_2">Dummy Screen 2</string>
 </resources>

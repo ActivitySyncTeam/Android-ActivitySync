@@ -18,7 +18,7 @@ import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.android.view.ViewObservable;
 
-public class DummyScreen extends Screen implements IDummyView
+public class DummyScreen extends ScreenWithMenu implements IDummyView
 {
     @Inject
     INavigator navigator;

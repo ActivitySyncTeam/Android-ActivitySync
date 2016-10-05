@@ -48,4 +48,8 @@
 
     <item name="intro_locations_bg" type="color">#5a949b</item>
     <item name="intro_last_screen_bg" type="color">#8ab367</item>
+    <!--Navigation Colors-->
+    <item name="navigation_menu_bg" type="color">@color/white</item>
+    <item name="navigation_menu_item" type="color">@color/colorPrimary</item>
+
 </resources>
