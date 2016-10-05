@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/intro_last_screen_relative_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:background="@color/intro_last_screen_bg">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/image_check"
+                android:layout_width="@dimen/intro_circle_image_width"
+                android:layout_height="@dimen/intro_circle_image_height"
+                android:src="@drawable/check_sign"
+                android:layout_gravity="center" />
+
+            <TextView
+                style="@style/DefaultIntroTextView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/txt_intro_last_screen"
+                android:textColor="@color/white" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</FrameLayout>

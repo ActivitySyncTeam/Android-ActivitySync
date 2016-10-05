@@ -18,7 +18,7 @@ import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.android.view.ViewObservable;
 
-public class DummyScreen extends Screen implements IDummyView
+public class DummyScreen extends ScreenWithMenu implements IDummyView
 {
     @Inject
     INavigator navigator;
@@ -26,8 +26,8 @@ public class DummyScreen extends Screen implements IDummyView
     @Bind(R.id.dummy_message_btn)
     Button displayMessageBtn;
 
-    @Bind(R.id.dummy_open_screen_btn)
-    Button openDummyBtn;
+    @Bind(R.id.dummy_open_intro_screen_btn)
+    Button openIntroBtn;
 
     public DummyScreen()
     {
@@ -56,9 +56,9 @@ public class DummyScreen extends Screen implements IDummyView
     }
 
     @Override
-    public Observable openDummyScreenClick()
+    public Observable openIntroScreenClick()
     {
-        return ViewObservable.clicks(openDummyBtn);
+        return ViewObservable.clicks(openIntroBtn);
     }
 
     @Override

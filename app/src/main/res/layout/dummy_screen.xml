@@ -1,35 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout
+<android.support.v4.widget.DrawerLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/navigation_drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/transparent">
+    android:fitsSystemWindows="true">
 
-    <LinearLayout
+    <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/backgroundColor"
-        android:orientation="vertical">
-
-        <include layout="@layout/toolbar" />
+        android:background="@android:color/transparent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center"
+            android:background="@color/backgroundColor"
             android:orientation="vertical">
 
-            <Button
-                style="@style/DefaultButton"
-                android:id="@+id/dummy_open_screen_btn"
-                android:layout_marginBottom="@dimen/screen_margin_bigger"
-                android:text="@string/btn_open_dummy_screen" />
+            <include layout="@layout/toolbar" />
 
-            <Button
-                style="@style/DefaultButton"
-                android:id="@+id/dummy_message_btn"
-                android:text="@string/btn_display_test_message" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical">
 
+                <Button
+                    android:id="@+id/dummy_open_intro_screen_btn"
+                    style="@style/DefaultButton"
+                    android:layout_marginBottom="@dimen/screen_margin_big"
+                    android:text="@string/btn_open_intro_screen" />
+
+                <Button
+                    android:id="@+id/dummy_message_btn"
+                    style="@style/DefaultButton"
+                    android:text="@string/btn_display_test_message" />
+
+            </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
-</android.support.design.widget.CoordinatorLayout>
+    </android.support.design.widget.CoordinatorLayout>
+
+    <include layout="@layout/navigation_view" />
+
+</android.support.v4.widget.DrawerLayout>

@@ -1,17 +1,16 @@
 package com.activity_sync.presentation.presenters;
 
 import com.activity_sync.presentation.services.INavigator;
-import com.activity_sync.presentation.views.IDummyView;
+import com.activity_sync.presentation.views.IIntroBaseView;
 
 import rx.Scheduler;
 
-public class DummyPresenter extends Presenter<IDummyView>
+public class IntroBasePresenter extends Presenter<IIntroBaseView>
 {
     private final Scheduler uiThread;
     private final INavigator navigator;
 
-    public DummyPresenter(Scheduler uiThread, IDummyView view, INavigator navigator)
-    {
+    public IntroBasePresenter(Scheduler uiThread, IIntroBaseView view, INavigator navigator) {
         super(view);
         this.uiThread = uiThread;
         this.navigator = navigator;
@@ -22,17 +21,17 @@ public class DummyPresenter extends Presenter<IDummyView>
     {
         super.start();
 
-        subscriptions.add(view.openIntroScreenClick()
+        subscriptions.add(view.skipButtonClicked()
                 .observeOn(uiThread)
                 .subscribe(o -> {
-                    navigator.openIntroScreen();
+                    navigator.openDummyScreen();
                 })
         );
 
-        subscriptions.add(view.displayMessageClick()
+        subscriptions.add(view.doneButtonClicked()
                 .observeOn(uiThread)
                 .subscribe(o -> {
-                    view.displayMessage();
+                    navigator.openDummyScreen();
                 })
         );
     }
