@@ -22,4 +22,14 @@
         <item name="android:textAllCaps">true</item>
     </style>
 
+    <style name="DefaultIntroTextView">
+        <item name="android:fontFamily">sans-serif-light</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">@dimen/text_big_size_20</item>
+        <item name="android:lines">4</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:layout_marginTop">@dimen/screen_margin_big</item>
+        <item name="android:layout_marginBottom">@dimen/screen_margin</item>
+    </style>
+
 </resources>

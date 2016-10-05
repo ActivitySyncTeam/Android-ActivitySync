@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/intro_easy_organizing_main_linear_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@color/intro_easy_organizing_bg"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/screen_margin_half"
+            android:layout_marginRight="@dimen/screen_margin_half"
+            android:layout_marginTop="@dimen/screen_margin_half"
+            android:layout_weight="1"
+            android:background="@color/white"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:id="@+id/intro_easy_organizing_upper_linear_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="@dimen/screen_margin_half"
+                android:background="@color/intro_easy_organizing_bg"
+                android:orientation="vertical"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="@dimen/screen_margin_half"
+            android:layout_marginLeft="@dimen/screen_margin_half"
+            android:layout_marginRight="@dimen/screen_margin_half"
+            android:layout_weight="1"
+            android:background="@color/white"/>
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/DefaultIntroTextView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/txt_intro_easy_organizing"
+                android:textColor="@color/white"/>
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_width="@dimen/intro_circle_image_width"
+                android:layout_height="@dimen/intro_circle_image_height"
+                android:src="@drawable/sport"
+                android:layout_gravity="center"
+                app:civ_border_width="@dimen/intro_circle_image_border"
+                app:civ_border_color="@color/intro_easy_organizing_image_border"/>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</FrameLayout>
