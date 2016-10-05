@@ -26,10 +26,10 @@
                 android:orientation="vertical">
 
                 <Button
-                    android:id="@+id/dummy_open_screen_btn"
+                    android:id="@+id/dummy_open_intro_screen_btn"
                     style="@style/DefaultButton"
                     android:layout_marginBottom="@dimen/screen_margin_big"
-                    android:text="@string/btn_open_dummy_screen" />
+                    android:text="@string/btn_open_intro_screen" />
 
                 <Button
                     android:id="@+id/dummy_message_btn"
