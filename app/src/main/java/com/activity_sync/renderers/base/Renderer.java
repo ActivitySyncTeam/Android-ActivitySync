@@ -20,6 +20,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import butterknife.ButterKnife;
 import timber.log.Timber;
 
 /**
@@ -40,6 +41,12 @@ public abstract class Renderer<T> implements Cloneable {
 
     private View rootView;
     private T content;
+    private int layoutRes;
+
+    public Renderer(int layoutRes)
+    {
+        this.layoutRes = layoutRes;
+    }
 
     /**
      * Method called when the renderer is going to be created. This method has the responsibility of
@@ -112,7 +119,12 @@ public abstract class Renderer<T> implements Cloneable {
      * @param inflater LayoutInflater service to inflate.
      * @return View with the inflated layout.
      */
-    protected abstract View inflate(LayoutInflater inflater, ViewGroup parent);
+    protected View inflate(LayoutInflater inflater, ViewGroup parent)
+    {
+        View inflatedView = inflater.inflate(layoutRes, parent, false);
+        ButterKnife.bind(this, inflatedView);
+        return inflatedView;
+    };
 
     /**
      * Method where the presentation logic algorithm have to be declared or implemented.

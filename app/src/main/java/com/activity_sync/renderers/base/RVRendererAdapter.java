@@ -19,11 +19,13 @@ package com.activity_sync.renderers.base;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.ArrayList;
 import java.util.Collection;
 
+import rx.Observable;
 import rx.subjects.PublishSubject;
 
 /**
@@ -40,7 +42,7 @@ import rx.subjects.PublishSubject;
  * @author Pedro Vicente Gómez Sánchez.
  */
 
-public class RVRendererAdapter<T> extends RecyclerView.Adapter<RendererViewHolder>
+public class RVRendererAdapter<T> extends RecyclerView.Adapter<RendererViewHolder> implements View.OnClickListener
 {
 
     private final LayoutInflater layoutInflater;
@@ -114,6 +116,7 @@ public class RVRendererAdapter<T> extends RecyclerView.Adapter<RendererViewHolde
         {
             throw new RuntimeException("RendererBuilder have to return a not null viewHolder");
         }
+        viewHolder.itemView.setOnClickListener(this);
         return viewHolder;
     }
 
@@ -211,5 +214,17 @@ public class RVRendererAdapter<T> extends RecyclerView.Adapter<RendererViewHolde
     protected void updateRendererExtraValues(T content, Renderer<T> renderer, int position)
     {
 
+    }
+
+    @Override
+    public void onClick(View v)
+    {
+        T model = (T) v.getTag();
+        this.itemSelected.onNext(model);
+    }
+
+    public Observable<T> itemSelected()
+    {
+        return itemSelected;
     }
 }
