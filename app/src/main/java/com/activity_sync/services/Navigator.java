@@ -27,6 +27,12 @@ public class Navigator implements INavigator
         this.startActivity(getIntent(IntroScreen.class));
     }
 
+    @Override
+    public void openWelcomeScreen()
+    {
+        this.startActivity(getIntent(WelcomeScreen.class));
+    }
+
     private void startActivity(Intent intent)
     {
         if (context instanceof Activity == false)

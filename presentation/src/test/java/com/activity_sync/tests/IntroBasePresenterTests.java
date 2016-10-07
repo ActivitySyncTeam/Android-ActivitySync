@@ -40,7 +40,7 @@ public class IntroBasePresenterTests
         introBasePresenter.start();
 
         skipButtonClickEvent.onNext(this);
-        Mockito.verify(navigator).openDummyScreen();
+        Mockito.verify(navigator).openWelcomeScreen();
     }
 
     @Test
@@ -50,7 +50,7 @@ public class IntroBasePresenterTests
         introBasePresenter.start();
 
         doneButtonClickEvent.onNext(this);
-        Mockito.verify(navigator).openDummyScreen();
+        Mockito.verify(navigator).openWelcomeScreen();
     }
 
     private IntroBasePresenter createPresenter()

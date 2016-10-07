@@ -5,4 +5,6 @@ public interface INavigator
     void openDummyScreen();
 
     void openIntroScreen();
+
+    void openWelcomeScreen();
 }

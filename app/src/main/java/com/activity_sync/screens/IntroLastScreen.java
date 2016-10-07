@@ -5,6 +5,8 @@ import android.support.annotation.ColorInt;
 import android.support.v4.content.ContextCompat;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+
+import com.activity_sync.App;
 import com.activity_sync.R;
 import com.activity_sync.presentation.presenters.IPresenter;
 import com.activity_sync.presentation.presenters.IntroLastPresenter;
@@ -47,6 +49,7 @@ public class IntroLastScreen extends FragmentScreenWithLogic implements ISlideBa
     @Override
     protected IPresenter createPresenter(FragmentScreen fragmentScreen, Bundle savedInstanceState)
     {
+        App.component(getContext()).inject(this);
         return new IntroLastPresenter(AndroidSchedulers.mainThread(), this, navigator);
     }
 
