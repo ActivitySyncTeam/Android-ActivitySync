@@ -3,9 +3,6 @@ package com.activity_sync.presentation.models;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 public class Event implements Serializable
 {
@@ -19,9 +16,9 @@ public class Event implements Serializable
     private String description;
 
     @SerializedName("date")
-    private Date date;
+    private String date;
 
-    public Event(int id, User organizer, String description, Date date)
+    public Event(int id, User organizer, String description, String date)
     {
         this.id = id;
         this.organizer = organizer;
@@ -64,26 +61,13 @@ public class Event implements Serializable
         this.description = description;
     }
 
-    public Date getDate()
+    public String getDate()
     {
         return date;
     }
 
-    public void setDate(Date date)
+    public void setDate(String date)
     {
         this.date = date;
-    }
-
-    public String getReadableDate()
-    {
-        if (date != null)
-        {
-            DateFormat df = new SimpleDateFormat("MM/dd HH:mm");
-            return df.format(date);
-        }
-        else
-        {
-            return "";
-        }
     }
 }
