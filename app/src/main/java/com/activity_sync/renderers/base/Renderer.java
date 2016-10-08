@@ -65,8 +65,6 @@ public abstract class Renderer<T> implements Cloneable {
             Timber.d("error");
         }
         this.rootView.setTag(this);
-        setUpView(rootView);
-        hookListeners(rootView);
     }
 
     /**
@@ -101,16 +99,6 @@ public abstract class Renderer<T> implements Cloneable {
     protected void setContent(T content) {
         this.content = content;
     }
-
-    /**
-     * Map all the widgets from the rootView to Renderer members.
-     */
-    protected abstract void setUpView(View rootView);
-
-    /**
-     * Set all the listeners to members mapped in setUpView method.
-     */
-    protected abstract void hookListeners(View rootView);
 
     /**
      * Inflate renderer layout. The view inflated can't be null. If this method returns a null view a

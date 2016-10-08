@@ -2,6 +2,7 @@ package com.activity_sync.di;
 
 import com.activity_sync.App;
 import com.activity_sync.screens.DummyScreen;
+import com.activity_sync.screens.EventsScreen;
 import com.activity_sync.screens.WelcomeScreen;
 import com.activity_sync.screens.IntroLastScreen;
 import com.activity_sync.screens.IntroScreen;
@@ -37,4 +38,6 @@ public interface DiComponent
     void inject(IntroLastScreen introLastScreen);
 
     void inject(WelcomeScreen welcomeScreen);
+
+    void inject(EventsScreen eventsScreen);
 }

@@ -20,4 +20,8 @@
     <!-- Menu strings -->
     <string name="menu_dummy_screen">Dummy Screen</string>
     <string name="menu_dummy_screen_2">Dummy Screen 2</string>
+
+    <!-- EventsScreen strings -->
+    <string name="repository_events_error">Error! Cannot load events… Check your internet connection and try again</string>
+    <string name="title_events">Available events</string>
 </resources>
