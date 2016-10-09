@@ -7,10 +7,8 @@ import rx.Observable;
 public interface IEventsView
 {
     Observable<Event> selectedEvent();
-
-    void addEvent(Event event);
+    Observable refreshEvents();
     void addEventsList(Collection<Event> events);
-    void showError();
-
     void eventSelected(Event event);
+    void refreshingVisible(boolean isRefreshing);
 }

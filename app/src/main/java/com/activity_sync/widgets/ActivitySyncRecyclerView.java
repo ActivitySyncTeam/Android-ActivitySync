@@ -4,9 +4,11 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.view.View;
+
 import com.activity_sync.R;
 
 public class ActivitySyncRecyclerView extends RecyclerView
@@ -67,6 +69,11 @@ public class ActivitySyncRecyclerView extends RecyclerView
         {
             adapter.registerAdapterDataObserver(observer);
         }
+    }
+
+    public void bindSwipeToRefreshLayout(SwipeRefreshLayout swipeRefreshLayout)
+    {
+        addOnScrollListener(new SwipeRefreshLayoutScrollListener(swipeRefreshLayout));
     }
 
     public void setEmptyView(@Nullable View emptyView)

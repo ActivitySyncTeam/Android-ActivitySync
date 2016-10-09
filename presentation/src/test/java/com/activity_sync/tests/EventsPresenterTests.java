@@ -24,6 +24,7 @@ public class EventsPresenterTests
     IEventsView view;
 
     PublishSubject eventSelectedEvent = PublishSubject.create();
+    PublishSubject refreshEventsEvent = PublishSubject.create();
 
     Event testedEvent;
 
@@ -37,16 +38,29 @@ public class EventsPresenterTests
                 .createEvent();
 
         Mockito.when(view.selectedEvent()).thenReturn(eventSelectedEvent);
+        Mockito.when(view.refreshEvents()).thenReturn(refreshEventsEvent);
     }
 
     @Test
-    public void eventsPresenter_selectEvent_eventSelected()
+    public void eventsPresenter_selectEvent_openEventDetails()
     {
         EventsPresenter presenter = createPresenter();
         presenter.start();
 
         eventSelectedEvent.onNext(testedEvent);
+        //Mockito.verify(navigator).openEventDetailsScreen();
         Mockito.verify(view).eventSelected(testedEvent);
+    }
+
+    @Test
+    public void eventsPresenter_refreshEvent_loadEvents()
+    {
+        EventsPresenter presenter = createPresenter();
+        presenter.start();
+
+        refreshEventsEvent.onNext(this);
+        //Mockito.verify(view).apiCallWhickWillBeHere();
+        Mockito.verify(view).refreshingVisible(false);
     }
 
     private EventsPresenter createPresenter()

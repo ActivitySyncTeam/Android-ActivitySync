@@ -16,23 +16,29 @@ public class EventsPresenter extends Presenter<IEventsView>
     public static final String EVENT_CHOSEN = "EVENT_CHOSEN";
 
     private final INavigator navigator;
-    private Scheduler scheduler;
+    private Scheduler uiThread;
 
-    public EventsPresenter(IEventsView view, INavigator navigator, Scheduler scheduler)
+    public EventsPresenter(IEventsView view, INavigator navigator, Scheduler uiThread)
     {
         super(view);
         this.navigator = navigator;
-        this.scheduler = scheduler;
+        this.uiThread = uiThread;
     }
 
     @Override
     public void start()
     {
         super.start();
+        loadEvents();
 
-        this.loadEvents();
+        subscriptions.add(view.refreshEvents()
+                .subscribe(event -> {
+                    loadEvents();
+                    view.refreshingVisible(false);
+                })
+        );
 
-        this.subscriptions.add(this.view.selectedEvent()
+        subscriptions.add(view.selectedEvent()
                 .subscribe(event -> {
                     view.eventSelected(event);
                 })
@@ -41,6 +47,8 @@ public class EventsPresenter extends Presenter<IEventsView>
 
     private void loadEvents()
     {
+        //API CALL WILL BE HERE
+
         List<Event> events = new ArrayList<>();
 
         events.add(new EventBuilder()
