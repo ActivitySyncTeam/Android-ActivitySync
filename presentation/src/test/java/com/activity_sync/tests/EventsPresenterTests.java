@@ -59,7 +59,7 @@ public class EventsPresenterTests
         presenter.start();
 
         refreshEventsEvent.onNext(this);
-        //Mockito.verify(view).apiCallWhickWillBeHere();
+        //Mockito.verify(view).apiCallWhichWillBeHere();
         Mockito.verify(view).refreshingVisible(false);
     }
 

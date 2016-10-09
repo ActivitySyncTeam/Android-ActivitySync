@@ -71,6 +71,36 @@ public class EventsPresenter extends Presenter<IEventsView>
                 .setId(1233)
                 .createEvent());
 
+        events.add(new EventBuilder()
+                .setUser(new UserBuilder()
+                        .setId(16)
+                        .setName("Lebron")
+                        .createUser())
+                .setDate("10.10.2016")
+                .setDescription("Basketball 4 life")
+                .setId(1646)
+                .createEvent());
+
+        events.add(new EventBuilder()
+                .setUser(new UserBuilder()
+                        .setId(18)
+                        .setName("Dwayne")
+                        .createUser())
+                .setDate("11.10.2016")
+                .setDescription("This is how we roll")
+                .setId(12343)
+                .createEvent());
+
+        events.add(new EventBuilder()
+                .setUser(new UserBuilder()
+                        .setId(18)
+                        .setName("Robert")
+                        .createUser())
+                .setDate("11.10.2016")
+                .setDescription("Football lovers")
+                .setId(12343)
+                .createEvent());
+
         view.addEventsList(events);
     }
 }
