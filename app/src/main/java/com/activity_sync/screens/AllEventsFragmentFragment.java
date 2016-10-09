@@ -1,0 +1,15 @@
+package com.activity_sync.screens;
+
+import android.os.Bundle;
+import com.activity_sync.presentation.presenters.EventsFragmentBasePresenter;
+import com.activity_sync.presentation.presenters.IPresenter;
+import com.activity_sync.presentation.views.IEventsFragmentView;
+import rx.android.schedulers.AndroidSchedulers;
+
+public class AllEventsFragmentFragment extends EventsFragmentFragmentBase implements IEventsFragmentView
+{
+    @Override
+    protected IPresenter createPresenter(FragmentScreen screen, Bundle savedInstanceState) {
+        return new EventsFragmentBasePresenter(this, navigator, AndroidSchedulers.mainThread());
+    }
+}

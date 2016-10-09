@@ -11,7 +11,7 @@ import com.activity_sync.App;
 import com.activity_sync.R;
 import com.activity_sync.presentation.models.Event;
 import com.activity_sync.presentation.services.INavigator;
-import com.activity_sync.presentation.views.IEventsView;
+import com.activity_sync.presentation.views.IEventsFragmentView;
 import com.activity_sync.renderers.EventsRenderer;
 import com.activity_sync.renderers.base.DividerItemDecoration;
 import com.activity_sync.renderers.base.RVRendererAdapter;
@@ -26,7 +26,7 @@ import butterknife.Bind;
 import rx.Observable;
 import rx.subjects.PublishSubject;
 
-abstract public class EventsFragmentBase extends FragmentScreen implements IEventsView
+abstract public class EventsFragmentFragmentBase extends FragmentScreen implements IEventsFragmentView
 {
     @Inject
     INavigator navigator;
@@ -41,7 +41,7 @@ abstract public class EventsFragmentBase extends FragmentScreen implements IEven
     private RVRendererAdapter<Event> adapter;
     private List<Event> events = new ArrayList<>();
 
-    public EventsFragmentBase()
+    public EventsFragmentFragmentBase()
     {
         super(R.layout.events_fragment);
     }
