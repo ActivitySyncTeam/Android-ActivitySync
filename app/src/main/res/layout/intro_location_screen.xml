@@ -29,7 +29,7 @@
                 android:layout_height="match_parent"
                 android:text="@string/txt_intro_locations"
                 android:gravity="center"
-                android:layout_marginTop="@dimen/screen_margin_small" />
+                android:layout_marginTop="@dimen/screen_margin_quarter" />
 
             <Button
                 style="@style/DefaultButton"

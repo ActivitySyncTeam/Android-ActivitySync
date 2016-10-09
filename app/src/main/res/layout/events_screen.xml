@@ -23,7 +23,9 @@
                 android:id="@+id/events_list"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/backgroundColor" />
+                android:paddingTop="@dimen/screen_margin_half"
+                android:clipToPadding="false"
+                android:background="@color/backgroundColor"/>
 
         </android.support.v4.widget.SwipeRefreshLayout>
 
