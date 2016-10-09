@@ -2,9 +2,10 @@ package com.activity_sync.tests;
 
 import com.activity_sync.presentation.models.Event;
 import com.activity_sync.presentation.models.builders.EventBuilder;
-import com.activity_sync.presentation.presenters.EventsPresenter;
+import com.activity_sync.presentation.presenters.EventsFragmentBasePresenter;
 import com.activity_sync.presentation.services.INavigator;
-import com.activity_sync.presentation.views.IEventsView;
+import com.activity_sync.presentation.views.IEventsFragmentView;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -21,7 +22,7 @@ public class EventsPresenterTests
     INavigator navigator;
 
     @Mock
-    IEventsView view;
+    IEventsFragmentView view;
 
     PublishSubject eventSelectedEvent = PublishSubject.create();
     PublishSubject refreshEventsEvent = PublishSubject.create();
@@ -44,7 +45,7 @@ public class EventsPresenterTests
     @Test
     public void eventsPresenter_selectEvent_openEventDetails()
     {
-        EventsPresenter presenter = createPresenter();
+        EventsFragmentBasePresenter presenter = createPresenter();
         presenter.start();
 
         eventSelectedEvent.onNext(testedEvent);
@@ -55,7 +56,7 @@ public class EventsPresenterTests
     @Test
     public void eventsPresenter_refreshEvent_loadEvents()
     {
-        EventsPresenter presenter = createPresenter();
+        EventsFragmentBasePresenter presenter = createPresenter();
         presenter.start();
 
         refreshEventsEvent.onNext(this);
@@ -63,8 +64,8 @@ public class EventsPresenterTests
         Mockito.verify(view).refreshingVisible(false);
     }
 
-    private EventsPresenter createPresenter()
+    private EventsFragmentBasePresenter createPresenter()
     {
-        return new EventsPresenter(view, navigator, Schedulers.immediate());
+        return new EventsFragmentBasePresenter(view, navigator, Schedulers.immediate());
     }
 }

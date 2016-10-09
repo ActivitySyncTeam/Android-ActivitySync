@@ -20,6 +20,20 @@
             android:layout_height="match_parent"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/add_new_event_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right|bottom"
+            android:layout_marginBottom="@dimen/screen_margin"
+            android:layout_marginRight="@dimen/screen_margin"
+            android:src="@drawable/ic_plus"
+            app:elevation="@dimen/cardview_default_elevation"
+            app:backgroundTint="@color/darkorange"
+            app:layout_anchor="@id/view_pager"
+            app:layout_anchorGravity="bottom|right|end"
+            app:layout_behavior="com.activity_sync.behaviours.ScrollAwareFABBehavior"/>
+
     </android.support.design.widget.CoordinatorLayout>
 
     <include layout="@layout/navigation_view" />
