@@ -28,4 +28,5 @@
 
     <!-- EventDetailsScreen strings -->
     <string name="btn_join_event">Join this event</string>
+    <string name="title_event_details">Event details</string>
 </resources>

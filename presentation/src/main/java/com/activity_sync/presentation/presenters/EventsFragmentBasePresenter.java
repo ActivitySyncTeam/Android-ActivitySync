@@ -34,7 +34,7 @@ abstract public class EventsFragmentBasePresenter extends Presenter<IEventsFragm
 
         subscriptions.add(view.selectedEvent()
                 .subscribe(event -> {
-                    view.eventSelected(event);
+                    navigator.openEventDetailsScreen(event.getId());
                 })
         );
     }

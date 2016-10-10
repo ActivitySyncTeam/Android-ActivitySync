@@ -49,6 +49,8 @@ public class EventDetailsScreen extends ScreenWithMenu implements IEventDetailsV
     {
         App.component(this).inject(this);
         super.onCreate(savedInstanceState);
+
+        setTitle(R.string.title_event_details);
     }
 
     @Override
@@ -60,13 +62,13 @@ public class EventDetailsScreen extends ScreenWithMenu implements IEventDetailsV
     @Override
     public Observable joinEventClick()
     {
-        return ViewObservable.clicks(eventOrganizer);
+        return ViewObservable.clicks(joinEventButton);
     }
 
     @Override
     public Observable organizerDetailsClick()
     {
-        return ViewObservable.clicks(joinEventButton);
+        return ViewObservable.clicks(eventOrganizer);
     }
 
     @Override

@@ -14,14 +14,16 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="@dimen/screen_margin_half"
             android:orientation="vertical">
+
+            <include layout="@layout/toolbar" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:layout_margin="@dimen/screen_margin_half">
 
 
                 <LinearLayout
@@ -132,10 +134,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
-                android:text="@string/btn_join_event" />
+                android:text="@string/btn_join_event"
+                android:layout_margin="@dimen/screen_margin_half" />
 
         </LinearLayout>
 
     </android.support.design.widget.CoordinatorLayout>
+
+    <include layout="@layout/navigation_view" />
 
 </android.support.v4.widget.DrawerLayout>
