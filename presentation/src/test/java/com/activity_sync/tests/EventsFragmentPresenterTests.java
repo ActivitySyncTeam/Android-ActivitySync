@@ -70,8 +70,7 @@ public class EventsFragmentPresenterTests
         presenter.start();
 
         eventSelectedEvent.onNext(testedEvent);
-        //Mockito.verify(navigator).openEventDetailsScreen();
-        Mockito.verify(view).eventSelected(testedEvent);
+        Mockito.verify(navigator).openEventDetailsScreen(testedEvent.getId());
     }
 
     @Test
