@@ -25,14 +25,14 @@ public class WelcomePresenter extends Presenter<IWelcomeView>
         subscriptions.add(view.loginBtnClick()
                 .observeOn(uiThread)
                 .subscribe(o -> {
-                    navigator.openDummyScreen();
+                    navigator.openEventsScreen();
                 })
         );
 
         subscriptions.add(view.registerBtnClick()
                 .observeOn(uiThread)
                 .subscribe(o -> {
-                    navigator.openDummyScreen();
+                    navigator.openEventsScreen();
                 })
         );
     }

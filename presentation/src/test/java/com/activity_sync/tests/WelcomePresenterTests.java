@@ -34,23 +34,23 @@ public class WelcomePresenterTests
     }
 
     @Test
-    public void welcomePresenter_clickLoginBtn_openDummyScreen()
+    public void welcomePresenter_clickLoginBtn_openEventsScreen()
     {
         WelcomePresenter welcomePresenter = createPresenter();
         welcomePresenter.start();
 
         loginBtnClickEvent.onNext(this);
-        Mockito.verify(navigator).openDummyScreen();
+        Mockito.verify(navigator).openEventsScreen();
     }
 
     @Test
-    public void welcomePresenter_clickRegisterBtn_openDummyScreen()
+    public void welcomePresenter_clickRegisterBtn_openEventsScreen()
     {
         WelcomePresenter welcomePresenter = createPresenter();
         welcomePresenter.start();
 
         registerBtnClickEvent.onNext(this);
-        Mockito.verify(navigator).openDummyScreen();
+        Mockito.verify(navigator).openEventsScreen();
     }
 
     private WelcomePresenter createPresenter()
