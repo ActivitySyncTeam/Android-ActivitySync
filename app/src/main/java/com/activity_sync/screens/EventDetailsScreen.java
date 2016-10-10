@@ -1,7 +1,9 @@
 package com.activity_sync.screens;
 
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.activity_sync.App;
 import com.activity_sync.R;
@@ -34,6 +36,9 @@ public class EventDetailsScreen extends ScreenWithMenu implements IEventDetailsV
     @Bind(R.id.event_places)
     TextView eventPlaces;
 
+    @Bind(R.id.join_event_btn)
+    Button joinEventButton;
+
     public EventDetailsScreen()
     {
         super(R.layout.event_details_screen);
@@ -61,6 +66,12 @@ public class EventDetailsScreen extends ScreenWithMenu implements IEventDetailsV
     @Override
     public Observable organizerDetailsClick()
     {
-        return null;
+        return ViewObservable.clicks(joinEventButton);
+    }
+
+    @Override
+    public void organizerSelected()
+    {
+        Toast.makeText(this, "Organizer field has been clicked", Toast.LENGTH_LONG).show();
     }
 }

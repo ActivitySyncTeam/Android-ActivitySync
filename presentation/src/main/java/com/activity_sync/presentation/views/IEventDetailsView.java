@@ -7,4 +7,6 @@ public interface IEventDetailsView
     Observable joinEventClick();
 
     Observable organizerDetailsClick();
+
+    void organizerSelected();
 }

@@ -16,4 +16,25 @@ public class EventDetailsPresenter extends Presenter<IEventDetailsView>
         this.uiThread = uiThread;
         this.navigator = navigator;
     }
+
+    @Override
+    public void start()
+    {
+        super.start();
+
+        subscriptions.add(view.joinEventClick()
+                .observeOn(uiThread)
+                .subscribe(o -> {
+                    navigator.openEventsScreen();
+                })
+        );
+
+        subscriptions.add(view.organizerDetailsClick()
+                .observeOn(uiThread)
+                .subscribe(o -> {
+                    //navigator.userProfileScreen(event.getOrganizer().getId());
+                    view.organizerSelected();
+                })
+        );
+    }
 }
