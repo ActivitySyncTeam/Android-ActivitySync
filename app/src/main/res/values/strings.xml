@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Activity Sync</string>
+    <string name="app_name" translatable="false">Activity Sync</string>
 
     <!-- DummyScreen strings -->
     <string name="btn_open_intro_screen">Open Future Intro</string>
