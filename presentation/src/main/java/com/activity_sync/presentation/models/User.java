@@ -9,13 +9,17 @@ public class User implements Serializable
     @SerializedName("id")
     private int id;
 
-    @SerializedName("name")
-    private String name;
+    @SerializedName("user")
+    private UserDetails userDetails;
 
-    public User(int id, String name)
+    @SerializedName("creditability")
+    private String creditability;
+
+    public User(int id, UserDetails userDetails, String creditability)
     {
         this.id = id;
-        this.name = name;
+        this.userDetails = userDetails;
+        this.creditability = creditability;
     }
 
     public User()
@@ -33,13 +37,23 @@ public class User implements Serializable
         this.id = id;
     }
 
-    public String getName()
+    public UserDetails getUserDetails()
     {
-        return name;
+        return userDetails;
     }
 
-    public void setName(String name)
+    public void setUserDetails(UserDetails userDetails)
     {
-        this.name = name;
+        this.userDetails = userDetails;
+    }
+
+    public String getCreditability()
+    {
+        return creditability;
+    }
+
+    public void setCreditability(String creditability)
+    {
+        this.creditability = creditability;
     }
 }
