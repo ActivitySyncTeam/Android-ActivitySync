@@ -18,10 +18,111 @@
         android:layout_marginLeft="@dimen/screen_margin_half">
 
         <LinearLayout
+            android:layout_margin="@dimen/screen_margin_half"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:layout_margin="@dimen/screen_margin">
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_organizer"
+                    android:tint="@color/black"
+                    android:layout_margin="@dimen/screen_margin_half"
+                    android:layout_gravity="center"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/event_organizer"
+                    android:textSize="@dimen/text_big_size_20"
+                    android:layout_gravity="center_vertical"
+                    android:singleLine="false"
+                    tools:text="Marcin Zielinski"
+                    android:layout_marginLeft="@dimen/screen_margin_half"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+>
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_calendar"
+                    android:tint="@color/black"
+                    android:layout_margin="@dimen/screen_margin_half"
+                    android:layout_gravity="center"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/event_date"
+                    android:textSize="@dimen/text_big_size_20"
+                    android:layout_gravity="center_vertical"
+                    android:singleLine="false"
+                    tools:text="08.06.2016 18:00"
+                    android:layout_marginLeft="@dimen/screen_margin_half"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_location"
+                    android:tint="@color/black"
+                    android:layout_margin="@dimen/screen_margin_half"
+                    android:layout_gravity="center"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/event_location"
+                    android:textSize="@dimen/text_big_size_20"
+                    android:layout_gravity="center_vertical"
+                    android:singleLine="false"
+                    tools:text="Only pro players, not amateurs"
+                    android:layout_marginLeft="@dimen/screen_margin_half"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_people"
+                    android:tint="@color/black"
+                    android:layout_margin="@dimen/screen_margin_half"
+                    android:layout_gravity="center"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/event_places"
+                    android:textSize="@dimen/text_big_size_20"
+                    android:layout_gravity="center_vertical"
+                    android:singleLine="false"
+                    tools:text="7/12"
+                    android:layout_marginLeft="@dimen/screen_margin_half"/>
+
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -29,74 +130,15 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:id="@+id/event_discipline"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="@dimen/text_bigger_size"
+                    android:textAllCaps="true"
+                    android:textSize="@dimen/text_big_size_20"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginRight="@dimen/screen_margin_half"
-                    android:singleLine="false"
-                    android:text="Organizer:"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/event_organizer"
-                    android:textSize="@dimen/text_bigger_size"
-                    android:layout_gravity="center_vertical"
-                    android:singleLine="false"
-                    tools:text="Marcin Zielinski"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:layout_marginTop="@dimen/screen_margin_half">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="@dimen/text_bigger_size"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginRight="@dimen/screen_margin_half"
-                    android:singleLine="false"
-                    android:text="Date:"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/event_date"
-                    android:textSize="@dimen/text_bigger_size"
-                    android:layout_gravity="center_vertical"
-                    android:singleLine="false"
-                    tools:text="08.06.2016 18:00"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:layout_marginTop="@dimen/screen_margin_half">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="@dimen/text_bigger_size"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginRight="@dimen/screen_margin_half"
-                    android:singleLine="false"
-                    android:text="Description:"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/event_desc"
-                    android:textSize="@dimen/text_bigger_size"
-                    android:layout_gravity="center_vertical"
-                    android:singleLine="false"
-                    tools:text="Only pro players, not amateurs"/>
+                    tools:text="Basketball"
+                    android:gravity="right"
+                    android:layout_margin="@dimen/screen_margin_small"/>
 
             </LinearLayout>
 

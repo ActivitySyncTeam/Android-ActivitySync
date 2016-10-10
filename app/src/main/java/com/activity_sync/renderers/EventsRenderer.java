@@ -16,11 +16,17 @@ public class EventsRenderer extends Renderer<Event>
     @Bind(R.id.event_organizer)
     TextView eventOrganizer;
 
-    @Bind(R.id.event_desc)
-    TextView eventDescription;
+    @Bind(R.id.event_location)
+    TextView eventLocation;
 
     @Bind(R.id.event_date)
     TextView eventDate;
+
+    @Bind(R.id.event_places)
+    TextView eventPlaces;
+
+    @Bind(R.id.event_discipline)
+    TextView eventDiscipline;
 
     public EventsRenderer(int layoutRes)
     {
@@ -30,9 +36,12 @@ public class EventsRenderer extends Renderer<Event>
     @Override
     public void render()
     {
-        eventOrganizer.setText(getContent().getOrganizer().getName());
-        eventDescription.setText(getContent().getDescription());
-        eventDate.setText(getContent().getDate());
+        eventOrganizer.setText(String.format("%s %s", getContent().getOrganizer().getUserDetails().getFirstName(),
+                getContent().getOrganizer().getUserDetails().getLastName()));
+        eventLocation.setText(getContent().getLocation().getName());
+        eventDate.setText(getContent().getReadableDate());
+        eventDiscipline.setText(getContent().getDiscipline().getName());
+        eventPlaces.setText(String.format("0/%d", getContent().getPlaces()));
     }
 
     public static class Builder extends RendererBuilder<Event>
