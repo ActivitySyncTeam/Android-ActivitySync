@@ -83,7 +83,7 @@ abstract public class EventsFragmentFragmentBase extends FragmentScreen implemen
     @Override
     public void eventSelected(Event event)
     {
-        Toast.makeText(getContext(), String.format(getString(R.string.txt_event_clicked), event.getId()), Toast.LENGTH_LONG).show();
+        Toast.makeText(getContext(), String.format("Event with id: %d has been clicked", event.getId()), Toast.LENGTH_LONG).show();
     }
 
     @Override

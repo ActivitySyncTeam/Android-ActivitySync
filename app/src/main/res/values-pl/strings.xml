@@ -6,15 +6,14 @@
     <string name="txt_intro_easy_organizing">Organizacja sportowych wydarzeń\nnigdy nie była łatwiejsza!</string>
     <string name="txt_intro_happy">Dziękujemy za instalację aplikacji\nMiło nam Cię poznać!</string>
     <string name="txt_intro_friends">Bierz udział w różnego\nrodzaju sportowych wydarzeniach\ni poznawaj nowych przyjaciół!</string>
-    <string name="txt_intro_last_screen">Wprowadzenie zakończone dlatego...\nCzas przejść do aplikacji!</string>
+    <string name="txt_intro_last_screen">Wprowadzenie zakończone dlatego…\nCzas przejść do aplikacji!</string>
     <string name="txt_intro_locations">Aby używać ActivitySync\nbez ograniczeń musisz wyrazić zgodę\nna używanie Twojej obecnej lokalizacji</string>
     <string name="btn_allow_location">Zezwól</string>
     <string name="btn_login">Zaloguj się</string>
     <string name="btn_register">Rejestracja</string>
     <string name="menu_dummy_screen">Dummy Ekran</string>
     <string name="menu_events">Wydarzenia</string>
-    <string name="tab_all_events">Wszystkie wydarzenia</string>
-    <string name="tab_my_events">Moje wydarzenia</string>
+    <string name="tab_all_events">Wszystkie</string>
+    <string name="tab_my_events">Moje</string>
     <string name="title_events">Wydarzenia</string>
-    <string name="txt_event_clicked">Wydarzenie o id %d zostało kliknięte</string>
 </resources>
