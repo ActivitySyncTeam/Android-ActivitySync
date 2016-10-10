@@ -9,4 +9,6 @@ public interface INavigator
     void openWelcomeScreen();
 
     void openEventsScreen();
+
+    void openEventDetailsScreen(int eventId);
 }
