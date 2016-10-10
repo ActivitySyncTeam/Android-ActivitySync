@@ -25,4 +25,7 @@
     <string name="title_events">Events</string>
     <string name="tab_all_events">All events</string>
     <string name="tab_my_events">My events</string>
+
+    <!-- EventDetailsScreen strings -->
+    <string name="btn_join_event">Join this event</string>
 </resources>

@@ -1,6 +1,7 @@
 package com.activity_sync.di;
 
 import com.activity_sync.App;
+import com.activity_sync.screens.EventDetailsScreen;
 import com.activity_sync.screens.EventsFragmentFragmentBase;
 import com.activity_sync.screens.DummyScreen;
 import com.activity_sync.screens.EventsScreen;
@@ -43,4 +44,6 @@ public interface DiComponent
     void inject(EventsScreen eventsScreen);
 
     void inject(EventsFragmentFragmentBase eventsFragmentBase);
+
+    void inject(EventDetailsScreen eventDetailsScreen);
 }
