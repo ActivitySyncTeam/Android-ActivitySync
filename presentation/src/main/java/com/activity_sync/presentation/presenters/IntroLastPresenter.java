@@ -24,7 +24,7 @@ public class IntroLastPresenter extends Presenter<IIntroLastView>
         subscriptions.add(view.checkImageClick()
                 .observeOn(uiThread)
                 .subscribe(o -> {
-                    navigator.openDummyScreen();
+                    navigator.openWelcomeScreen();
                 })
         );
     }

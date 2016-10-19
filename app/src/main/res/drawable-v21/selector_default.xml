@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <ripple xmlns:android="http://schemas.android.com/apk/res/android"
-        android:color="@color/main_screen_button_pressed_bg_color">
-    <item android:drawable="@color/main_screen_button_bg_color"/>
+        android:color="@color/default_button_state_pressed">
+    <item android:drawable="@color/default_button_state_normal"/>
 </ripple>

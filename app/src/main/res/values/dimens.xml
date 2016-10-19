@@ -29,6 +29,9 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="appbar_layout_elevation">2dp</dimen>
+    <dimen name="logo_back_line_height">8dp</dimen>
+    <dimen name="welcome_logo_height">100dp</dimen>
+    <dimen name="welcome_logo_border_width">7dp</dimen>
     <dimen name="navigation_drawer_height">140dp</dimen>
 
     <!-- IntroScreen dimens-->

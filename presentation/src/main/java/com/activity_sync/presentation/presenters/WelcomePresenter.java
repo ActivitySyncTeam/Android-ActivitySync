@@ -1,19 +1,20 @@
 package com.activity_sync.presentation.presenters;
 
 import com.activity_sync.presentation.services.INavigator;
-import com.activity_sync.presentation.views.IIntroBaseView;
+import com.activity_sync.presentation.views.IWelcomeView;
 
 import rx.Scheduler;
 
-public class IntroBasePresenter extends Presenter<IIntroBaseView>
+public class WelcomePresenter extends Presenter<IWelcomeView>
 {
     private final Scheduler uiThread;
     private final INavigator navigator;
 
-    public IntroBasePresenter(Scheduler uiThread, IIntroBaseView view, INavigator navigator) {
+    public WelcomePresenter(Scheduler uiThread, IWelcomeView view, INavigator navigator)
+    {
         super(view);
-        this.uiThread = uiThread;
         this.navigator = navigator;
+        this.uiThread = uiThread;
     }
 
     @Override
@@ -21,17 +22,17 @@ public class IntroBasePresenter extends Presenter<IIntroBaseView>
     {
         super.start();
 
-        subscriptions.add(view.skipButtonClicked()
+        subscriptions.add(view.loginBtnClick()
                 .observeOn(uiThread)
                 .subscribe(o -> {
-                    navigator.openWelcomeScreen();
+                    navigator.openDummyScreen();
                 })
         );
 
-        subscriptions.add(view.doneButtonClicked()
+        subscriptions.add(view.registerBtnClick()
                 .observeOn(uiThread)
                 .subscribe(o -> {
-                    navigator.openWelcomeScreen();
+                    navigator.openDummyScreen();
                 })
         );
     }
