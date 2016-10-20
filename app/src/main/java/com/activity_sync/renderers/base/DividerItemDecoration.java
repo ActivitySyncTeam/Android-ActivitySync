@@ -10,11 +10,11 @@ import com.activity_sync.R;
 
 public class DividerItemDecoration extends RecyclerView.ItemDecoration
 {
-    private Drawable mDivider;
+    private Drawable divider;
 
     public DividerItemDecoration(Context context)
     {
-        mDivider = ContextCompat.getDrawable(context, R.drawable.line_divider);
+        divider = ContextCompat.getDrawable(context, R.drawable.line_divider);
     }
 
     @Override
@@ -31,10 +31,10 @@ public class DividerItemDecoration extends RecyclerView.ItemDecoration
             RecyclerView.LayoutParams params = (RecyclerView.LayoutParams) child.getLayoutParams();
 
             int top = child.getBottom() + params.bottomMargin;
-            int bottom = top + mDivider.getIntrinsicHeight();
+            int bottom = top + divider.getIntrinsicHeight();
 
-            mDivider.setBounds(left, top, right, bottom);
-            mDivider.draw(c);
+            divider.setBounds(left, top, right, bottom);
+            divider.draw(c);
         }
     }
 }
