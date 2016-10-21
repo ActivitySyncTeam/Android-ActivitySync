@@ -19,6 +19,7 @@
 
         <activity android:name=".screens.DummyScreen"/>
         <activity android:name=".screens.WelcomeScreen"/>
+        <activity android:name=".screens.EventsScreen"/>
 
     </application>
 </manifest>

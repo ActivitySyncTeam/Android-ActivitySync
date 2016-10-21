@@ -7,4 +7,6 @@ public interface INavigator
     void openIntroScreen();
 
     void openWelcomeScreen();
+
+    void openEventsScreen();
 }

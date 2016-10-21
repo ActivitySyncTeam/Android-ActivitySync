@@ -6,9 +6,8 @@
             android:title="@string/menu_dummy_screen"/>
 
         <item
-            android:id="@+id/menu_dummy_2"
-            android:title="@string/menu_dummy_screen_2"/>
-
+            android:id="@+id/menu_events"
+            android:title="@string/menu_events"/>
     </group>
 
 </menu>
