@@ -1,14 +1,21 @@
 package com.activity_sync.presentation.models.builders;
 
+import com.activity_sync.presentation.models.Discipline;
 import com.activity_sync.presentation.models.Event;
+import com.activity_sync.presentation.models.Location;
 import com.activity_sync.presentation.models.User;
+
+import java.util.Date;
 
 public class EventBuilder
 {
     private int id;
     private User organizer;
     private String description;
-    private String date;
+    private Date date;
+    private int places;
+    private Location location;
+    private Discipline discipline;
 
     public EventBuilder setId(int id)
     {
@@ -28,14 +35,32 @@ public class EventBuilder
         return this;
     }
 
-    public EventBuilder setDate(String date)
+    public EventBuilder setDate(Date date)
     {
         this.date = date;
         return this;
     }
 
+    public EventBuilder setPlaces(int places)
+    {
+        this.places = places;
+        return this;
+    }
+
+    public EventBuilder setLocation(Location location)
+    {
+        this.location = location;
+        return this;
+    }
+
+    public EventBuilder setDiscipline(Discipline discipline)
+    {
+        this.discipline = discipline;
+        return this;
+    }
+
     public Event createEvent()
     {
-        return new Event(id, organizer, description, date);
+        return new Event(id, organizer, description, date, places, location, discipline);
     }
 }

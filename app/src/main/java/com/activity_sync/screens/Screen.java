@@ -55,14 +55,20 @@ public abstract class Screen extends BaseActivity
     protected void onStart()
     {
         super.onStart();
-        this.presenter.start();
+        if (presenter != null)
+        {
+            this.presenter.start();
+        }
     }
 
     @Override
     protected void onStop()
     {
         super.onStop();
-        this.presenter.stop();
+        if (presenter != null)
+        {
+            this.presenter.stop();
+        }
     }
 
     protected abstract IPresenter createPresenter(Screen screen, Bundle savedInstanceState);

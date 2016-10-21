@@ -1,11 +1,12 @@
 package com.activity_sync.di;
 
 import com.activity_sync.App;
+import com.activity_sync.screens.EventsFragmentFragmentBase;
 import com.activity_sync.screens.DummyScreen;
 import com.activity_sync.screens.EventsScreen;
-import com.activity_sync.screens.WelcomeScreen;
 import com.activity_sync.screens.IntroLastScreen;
 import com.activity_sync.screens.IntroScreen;
+import com.activity_sync.screens.WelcomeScreen;
 
 import javax.inject.Singleton;
 
@@ -40,4 +41,6 @@ public interface DiComponent
     void inject(WelcomeScreen welcomeScreen);
 
     void inject(EventsScreen eventsScreen);
+
+    void inject(EventsFragmentFragmentBase eventsFragmentBase);
 }

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Activity Sync</string>
+    <string name="app_name" translatable="false">Activity Sync</string>
 
     <!-- DummyScreen strings -->
     <string name="btn_open_intro_screen">Open Future Intro</string>
@@ -22,6 +22,7 @@
     <string name="menu_events">Events</string>
 
     <!-- EventsScreen strings -->
-    <string name="title_events">Available events</string>
-    <string name="txt_event_clicked">Event with id: %d has been clicked</string>
+    <string name="title_events">Events</string>
+    <string name="tab_all_events">All events</string>
+    <string name="tab_my_events">My events</string>
 </resources>

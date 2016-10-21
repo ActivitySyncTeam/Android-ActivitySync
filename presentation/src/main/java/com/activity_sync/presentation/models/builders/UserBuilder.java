@@ -1,11 +1,13 @@
 package com.activity_sync.presentation.models.builders;
 
 import com.activity_sync.presentation.models.User;
+import com.activity_sync.presentation.models.UserDetails;
 
 public class UserBuilder
 {
     private int id;
-    private String name;
+    private UserDetails userDetails;
+    private String creditability;
 
     public UserBuilder setId(int id)
     {
@@ -13,15 +15,20 @@ public class UserBuilder
         return this;
     }
 
-    public UserBuilder setName(String name)
+    public UserBuilder setUserDetails(UserDetails userDetails)
     {
-        this.name = name;
+        this.userDetails = userDetails;
         return this;
     }
 
+    public UserBuilder setCreditability(String creditability)
+    {
+        this.creditability = creditability;
+        return this;
+    }
 
     public User createUser()
     {
-        return new User(id, name);
+        return new User(id, userDetails, creditability);
     }
 }
