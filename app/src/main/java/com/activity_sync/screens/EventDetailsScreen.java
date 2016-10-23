@@ -1,6 +1,7 @@
 package com.activity_sync.screens;
 
 import android.os.Bundle;
+import android.support.v4.app.FragmentTransaction;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -11,6 +12,12 @@ import com.activity_sync.presentation.presenters.EventDetailsPresenter;
 import com.activity_sync.presentation.presenters.IPresenter;
 import com.activity_sync.presentation.services.INavigator;
 import com.activity_sync.presentation.views.IEventDetailsView;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 import javax.inject.Inject;
 
@@ -19,7 +26,7 @@ import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.android.view.ViewObservable;
 
-public class EventDetailsScreen extends ScreenWithMenu implements IEventDetailsView
+public class EventDetailsScreen extends Screen implements IEventDetailsView, OnMapReadyCallback
 {
     @Inject
     INavigator navigator;
@@ -39,6 +46,8 @@ public class EventDetailsScreen extends ScreenWithMenu implements IEventDetailsV
     @Bind(R.id.join_event_btn)
     Button joinEventButton;
 
+    private GoogleMap map;
+
     public EventDetailsScreen()
     {
         super(R.layout.event_details_screen);
@@ -50,8 +59,17 @@ public class EventDetailsScreen extends ScreenWithMenu implements IEventDetailsV
         App.component(this).inject(this);
         super.onCreate(savedInstanceState);
 
+        SupportMapFragment supportMapFragment = new SupportMapFragment();
+
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.map, supportMapFragment);
+        transaction.commit();
+
+        supportMapFragment.getMapAsync(this);
+
         setTitle(R.string.title_event_details);
     }
+
 
     @Override
     protected IPresenter createPresenter(Screen screen, Bundle savedInstanceState)
@@ -75,5 +93,14 @@ public class EventDetailsScreen extends ScreenWithMenu implements IEventDetailsV
     public void organizerSelected()
     {
         Toast.makeText(this, "Organizer field has been clicked", Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void onMapReady(GoogleMap googleMap)
+    {
+        map = googleMap;
+        LatLng jordan = new LatLng(50.061124, 19.914123);
+        map.addMarker(new MarkerOptions().position(jordan).title("Marker in Jordan"));
+        map.moveCamera(CameraUpdateFactory.newLatLngZoom(jordan, 15));
     }
 }
