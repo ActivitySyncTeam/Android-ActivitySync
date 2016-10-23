@@ -1,5 +1,7 @@
 package com.activity_sync.presentation.views;
 
+import com.activity_sync.presentation.models.Event;
+
 import rx.Observable;
 
 public interface IEventDetailsView
@@ -9,4 +11,6 @@ public interface IEventDetailsView
     Observable organizerDetailsClick();
 
     void organizerSelected();
+
+    void setEventData(Event event);
 }

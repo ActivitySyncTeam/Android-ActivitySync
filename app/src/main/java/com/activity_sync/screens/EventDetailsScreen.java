@@ -8,6 +8,7 @@ import android.widget.Toast;
 
 import com.activity_sync.App;
 import com.activity_sync.R;
+import com.activity_sync.presentation.models.Event;
 import com.activity_sync.presentation.presenters.EventDetailsPresenter;
 import com.activity_sync.presentation.presenters.IPresenter;
 import com.activity_sync.presentation.services.INavigator;
@@ -93,6 +94,12 @@ public class EventDetailsScreen extends Screen implements IEventDetailsView, OnM
     public void organizerSelected()
     {
         Toast.makeText(this, "Organizer field has been clicked", Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void setEventData(Event event)
+    {
+
     }
 
     @Override
