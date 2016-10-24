@@ -3,7 +3,6 @@ package com.activity_sync.screens;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.activity_sync.App;
@@ -32,17 +31,17 @@ public class EventDetailsScreen extends Screen implements IEventDetailsView, OnM
     @Inject
     INavigator navigator;
 
-    @Bind(R.id.event_organizer)
-    TextView eventOrganizer;
-
-    @Bind(R.id.event_location)
-    TextView eventLocation;
-
-    @Bind(R.id.event_date)
-    TextView eventDate;
-
-    @Bind(R.id.event_places)
-    TextView eventPlaces;
+//    @Bind(R.id.event_organizer)
+//    TextView eventOrganizer;
+//
+//    @Bind(R.id.event_location)
+//    TextView eventLocation;
+//
+//    @Bind(R.id.event_date)
+//    TextView eventDate;
+//
+//    @Bind(R.id.event_places)
+//    TextView eventPlaces;
 
     @Bind(R.id.join_event_btn)
     Button joinEventButton;
@@ -87,7 +86,7 @@ public class EventDetailsScreen extends Screen implements IEventDetailsView, OnM
     @Override
     public Observable organizerDetailsClick()
     {
-        return ViewObservable.clicks(eventOrganizer);
+        return ViewObservable.clicks(joinEventButton);
     }
 
     @Override
