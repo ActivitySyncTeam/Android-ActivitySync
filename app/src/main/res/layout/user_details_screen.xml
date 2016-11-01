@@ -153,8 +153,8 @@
 
                                 <ImageView
                                     android:id="@+id/image_creditability"
-                                    android:layout_width="48dp"
-                                    android:layout_height="48dp" />
+                                    android:layout_width="@dimen/text_drawable_default_width"
+                                    android:layout_height="@dimen/text_drawable_default_height" />
 
                                 <TextView
                                     android:id="@+id/tv_creditability"
