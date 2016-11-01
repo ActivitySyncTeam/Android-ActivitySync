@@ -18,6 +18,8 @@ public class EventBuilder
     private Location location;
     private Discipline discipline;
     private Price price;
+    private boolean isOrganizer;
+    private boolean isParticipant;
 
     public EventBuilder setId(int id)
     {
@@ -67,8 +69,20 @@ public class EventBuilder
         return this;
     }
 
+    public EventBuilder setIsOrganizer(boolean isOrganizer)
+    {
+        this.isOrganizer = isOrganizer;
+        return this;
+    }
+
+    public EventBuilder setIsParticipant(boolean isParticipant)
+    {
+        this.isParticipant = isParticipant;
+        return this;
+    }
+
     public Event createEvent()
     {
-        return new Event(id, organizer, description, date, places, location, discipline, price);
+        return new Event(id, organizer, description, date, places, location, discipline, price, isOrganizer, isParticipant);
     }
 }
