@@ -25,6 +25,7 @@
         <activity android:name=".screens.EventsScreen"/>
         <activity android:name=".screens.EventDetailsScreen"/>
         <activity android:name=".screens.UserDetailsScreen"/>
+        <activity android:name=".screens.ParticipantsScreen"/>
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
