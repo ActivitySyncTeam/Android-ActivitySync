@@ -39,7 +39,10 @@ public class Event implements Serializable
     @SerializedName("is_participant")
     private boolean isParticipant;
 
-    public Event(int id, User organizer, String description, Date date, int places, Location location, Discipline discipline, Price price, boolean isOrganizer, boolean isParticipant)
+    @SerializedName("is_active")
+    private boolean isActive;
+
+    public Event(int id, User organizer, String description, Date date, int places, Location location, Discipline discipline, Price price, boolean isOrganizer, boolean isParticipant, boolean isActive)
     {
         this.id = id;
         this.organizer = organizer;
@@ -51,6 +54,7 @@ public class Event implements Serializable
         this.price = price;
         this.isOrganizer = isOrganizer;
         this.isParticipant = isParticipant;
+        this.isActive = isActive;
     }
 
     public Event()
@@ -156,6 +160,16 @@ public class Event implements Serializable
     public void setPrice(Price price)
     {
         this.price = price;
+    }
+
+    public boolean isActive()
+    {
+        return isActive;
+    }
+
+    public void setActive(boolean active)
+    {
+        isActive = active;
     }
 
     public String getReadableDate()

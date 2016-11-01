@@ -20,6 +20,7 @@ public class EventBuilder
     private Price price;
     private boolean isOrganizer;
     private boolean isParticipant;
+    private boolean isActive;
 
     public EventBuilder setId(int id)
     {
@@ -81,8 +82,14 @@ public class EventBuilder
         return this;
     }
 
+    public EventBuilder setIsActive(boolean isActive)
+    {
+        this.isActive = isActive;
+        return this;
+    }
+
     public Event createEvent()
     {
-        return new Event(id, organizer, description, date, places, location, discipline, price, isOrganizer, isParticipant);
+        return new Event(id, organizer, description, date, places, location, discipline, price, isOrganizer, isParticipant, isActive);
     }
 }
