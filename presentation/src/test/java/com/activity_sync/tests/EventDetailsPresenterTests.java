@@ -50,7 +50,7 @@ public class EventDetailsPresenterTests
         presenter.start();
 
         organizerDetailsClickEvent.onNext(this);
-        Mockito.verify(view).organizerSelected();
+        Mockito.verify(navigator).openUserDetailsScreen(1);
     }
 
     private EventDetailsPresenter createPresenter()

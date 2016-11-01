@@ -73,5 +73,7 @@
     <item name="user_details_bad" type="color">#f27228</item>
     <item name="user_details_terrible" type="color">#f23228</item>
 
+    <item name="user_details_event_item_normal" type="color">@color/white</item>
+    <item name="user_details_event_item_pressed" type="color">#a39c9c</item>
 
 </resources>

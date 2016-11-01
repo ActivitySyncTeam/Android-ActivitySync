@@ -87,7 +87,7 @@ public class UserDetailsScreen extends Screen implements IUserDetailsView
             color = ContextCompat.getColor(this, R.color.user_details_terrible);
         }
 
-        TextDrawable drawable = TextDrawable.builder().buildRoundRect(String.format("%d", creditabilityScore), color, 10);
+        TextDrawable drawable = TextDrawable.builder().buildRound(String.format("%d", creditabilityScore), color);
         creditabilityImageView.setImageDrawable(drawable);
     }
 }

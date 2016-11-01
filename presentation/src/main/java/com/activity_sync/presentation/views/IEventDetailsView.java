@@ -10,7 +10,5 @@ public interface IEventDetailsView
 
     Observable organizerDetailsClick();
 
-    void organizerSelected();
-
     void setEventData(Event event);
 }

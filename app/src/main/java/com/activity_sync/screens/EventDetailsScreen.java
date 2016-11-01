@@ -3,8 +3,8 @@ package com.activity_sync.screens;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.activity_sync.App;
 import com.activity_sync.R;
@@ -56,6 +56,9 @@ public class EventDetailsScreen extends Screen implements IEventDetailsView, OnM
     @Bind(R.id.join_event_btn)
     Button joinEventButton;
 
+    @Bind(R.id.organizer_layout)
+    LinearLayout organizerLayout;
+
     private GoogleMap map;
 
     public EventDetailsScreen()
@@ -96,13 +99,7 @@ public class EventDetailsScreen extends Screen implements IEventDetailsView, OnM
     @Override
     public Observable organizerDetailsClick()
     {
-        return ViewObservable.clicks(joinEventButton);
-    }
-
-    @Override
-    public void organizerSelected()
-    {
-        Toast.makeText(this, "Organizer field has been clicked", Toast.LENGTH_LONG).show();
+        return ViewObservable.clicks(organizerLayout);
     }
 
     @Override
