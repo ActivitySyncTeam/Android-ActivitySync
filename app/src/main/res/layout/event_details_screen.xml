@@ -14,8 +14,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:background="@color/event_details_bg">
+            android:background="@color/event_details_bg"
+            android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -27,7 +27,7 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:orientation="vertical">
 
                     <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -35,73 +35,131 @@
                         android:id="@+id/map"
                         android:name="com.google.android.gms.maps.SupportMapFragment"
                         android:layout_width="match_parent"
-                        android:layout_height="300dp"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
                         tools:context=".MapActivity" />
 
-                    <ScrollView
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="vertical">
+                            android:orientation="vertical"
+                            android:background="?attr/colorPrimary"
+                            android:padding="@dimen/screen_margin_half">
+
+                            <TextView
+                                style="@style/EventDetailsScreenMainUpRow"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="basketball"/>
+
+                            <TextView
+                                style="@style/EventDetailsScreenMainDownRow"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/screen_margin_small"
+                                android:text="Jordan"/>
+
+                        </LinearLayout>
+
+                        <ScrollView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:orientation="horizontal">
+                                android:orientation="vertical">
 
                                 <LinearLayout
-                                    android:layout_width="0dp"
-                                    android:layout_height="match_parent"
-                                    android:orientation="vertical"
-                                    android:layout_weight="1"
-                                    android:layout_gravity="left">
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:layout_margin="@dimen/screen_margin_half">
 
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:text="no elo"/>
+                                    <LinearLayout
+                                        android:layout_width="0dp"
+                                        android:layout_height="match_parent"
+                                        android:layout_gravity="left"
+                                        android:layout_weight="1"
+                                        android:orientation="vertical">
 
+                                        <TextView
+                                            style="@style/EventDetailsScreenItemUpRow"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="organizer" />
 
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:text="no elo"/>
+                                        <TextView
+                                            style="@style/EventDetailsScreenItemDownRow"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="Marcin Zielinski" />
 
+                                    </LinearLayout>
 
+                                    <LinearLayout
+                                        android:layout_width="0dp"
+                                        android:layout_height="match_parent"
+                                        android:layout_weight="1"
+                                        android:gravity="right"
+                                        android:orientation="vertical">
+
+                                        <TextView
+                                            style="@style/EventDetailsScreenItemUpRow"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="participants" />
+
+                                        <TextView
+                                            style="@style/EventDetailsScreenItemDownRow"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="6/12" />
+
+                                    </LinearLayout>
 
                                 </LinearLayout>
 
                                 <LinearLayout
-                                    android:layout_width="0dp"
-                                    android:layout_height="match_parent"
-                                    android:orientation="vertical"
-                                    android:layout_weight="1"
-                                    android:gravity="right">
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:layout_margin="@dimen/screen_margin_half">
 
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:text="no elo"/>
+                                    <LinearLayout
+                                        android:layout_width="0dp"
+                                        android:layout_height="match_parent"
+                                        android:layout_gravity="left"
+                                        android:layout_weight="1"
+                                        android:orientation="vertical">
 
+                                        <TextView
+                                            style="@style/EventDetailsScreenItemUpRow"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="organizer" />
 
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:text="no elo"/>
+                                        <TextView
+                                            style="@style/EventDetailsScreenItemDownRow"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="Marcin Zielinski" />
 
+                                    </LinearLayout>
 
                                 </LinearLayout>
-
-
 
                             </LinearLayout>
 
-                        </LinearLayout>
+                        </ScrollView>
 
-                    </ScrollView>
+                    </LinearLayout>
 
                 </LinearLayout>
 
