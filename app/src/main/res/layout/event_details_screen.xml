@@ -130,7 +130,9 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:orientation="horizontal"
-                                    android:layout_margin="@dimen/screen_margin_half">
+                                    android:layout_marginLeft="@dimen/screen_margin_half"
+                                    android:layout_marginRight="@dimen/screen_margin_half"
+                                    android:layout_marginBottom="@dimen/screen_margin_half">
 
                                     <LinearLayout
                                         android:layout_width="0dp"
@@ -143,13 +145,64 @@
                                             style="@style/EventDetailsScreenItemUpRow"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
-                                            android:text="organizer" />
+                                            android:text="Date" />
 
                                         <TextView
                                             style="@style/EventDetailsScreenItemDownRow"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
-                                            android:text="Marcin Zielinski" />
+                                            android:text="12/12/2016 18:00" />
+
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="0dp"
+                                        android:layout_height="match_parent"
+                                        android:layout_weight="1"
+                                        android:gravity="right"
+                                        android:orientation="vertical">
+
+                                        <TextView
+                                            style="@style/EventDetailsScreenItemUpRow"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="Price" />
+
+                                        <TextView
+                                            style="@style/EventDetailsScreenItemDownRow"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="free" />
+
+                                    </LinearLayout>
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:layout_marginLeft="@dimen/screen_margin_half"
+                                    android:layout_marginRight="@dimen/screen_margin_half"
+                                    android:layout_marginBottom="@dimen/screen_margin_half">
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:layout_gravity="left"
+                                        android:orientation="vertical">
+
+                                        <TextView
+                                            style="@style/EventDetailsScreenItemUpRow"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="Description" />
+
+                                        <TextView
+                                            style="@style/EventDetailsScreenItemDownRow"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="bardz dlug itekst blabla bla, fsfdsf sdf sdf sdf sdf sdfs dfds fds fsdf  dsfdsfdsfsdfsd" />
 
                                     </LinearLayout>
 

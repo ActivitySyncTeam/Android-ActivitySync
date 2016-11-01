@@ -3,6 +3,7 @@ package com.activity_sync.presentation.models.builders;
 import com.activity_sync.presentation.models.Discipline;
 import com.activity_sync.presentation.models.Event;
 import com.activity_sync.presentation.models.Location;
+import com.activity_sync.presentation.models.Price;
 import com.activity_sync.presentation.models.User;
 
 import java.util.Date;
@@ -16,6 +17,7 @@ public class EventBuilder
     private int places;
     private Location location;
     private Discipline discipline;
+    private Price price;
 
     public EventBuilder setId(int id)
     {
@@ -59,8 +61,14 @@ public class EventBuilder
         return this;
     }
 
+    public EventBuilder setPrice(Price price)
+    {
+        this.price = price;
+        return this;
+    }
+
     public Event createEvent()
     {
-        return new Event(id, organizer, description, date, places, location, discipline);
+        return new Event(id, organizer, description, date, places, location, discipline, price);
     }
 }
