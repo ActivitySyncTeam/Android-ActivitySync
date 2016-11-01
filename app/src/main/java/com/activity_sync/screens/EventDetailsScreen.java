@@ -3,6 +3,7 @@ package com.activity_sync.screens;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.activity_sync.App;
@@ -31,6 +32,26 @@ public class EventDetailsScreen extends Screen implements IEventDetailsView, OnM
     @Inject
     INavigator navigator;
 
+    @Bind(R.id.event_det_date)
+    TextView eventDate;
+
+    @Bind(R.id.event_det_description)
+    TextView eventDescription;
+
+    @Bind(R.id.event_det_location)
+    TextView eventLocation;
+
+    @Bind(R.id.event_det_organizer)
+    TextView eventOrganizer;
+
+    @Bind(R.id.event_det_participants)
+    TextView eventParticipants;
+
+    @Bind(R.id.event_det_price)
+    TextView eventPrice;
+
+    @Bind(R.id.event_det_discipline)
+    TextView eventDiscipline;
 
     @Bind(R.id.join_event_btn)
     Button joinEventButton;
@@ -87,7 +108,13 @@ public class EventDetailsScreen extends Screen implements IEventDetailsView, OnM
     @Override
     public void setEventData(Event event)
     {
-
+        eventDate.setText(event.getReadableDate());
+        eventDescription.setText(event.getDescription());
+        eventLocation.setText(event.getLocation().getName());
+        eventOrganizer.setText(event.getOrganizer().getUserDetails().getUserName());
+        eventParticipants.setText(String.format("%d/%d", event.getOccupiedPlaces(), event.getMaxPlaces()));
+        eventPrice.setText(String.format("%.2f%s", event.getPrice().getAmount(), event.getPrice().getCurrency()));
+        eventDiscipline.setText(event.getDiscipline().getName());
     }
 
     @Override

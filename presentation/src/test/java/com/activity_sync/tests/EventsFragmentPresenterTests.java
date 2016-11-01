@@ -55,7 +55,7 @@ public class EventsFragmentPresenterTests
                 .setDiscipline(new DisciplineBuilder()
                         .setName("Basketball")
                         .createDiscipline())
-                .setPlaces(12)
+                .setMaxPlaces(12)
                 .setId(123)
                 .createEvent();
 

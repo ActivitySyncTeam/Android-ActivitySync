@@ -14,7 +14,8 @@ public class EventBuilder
     private User organizer;
     private String description;
     private Date date;
-    private int places;
+    private int maxPlaces;
+    private int occupiedPlaces;
     private Location location;
     private Discipline discipline;
     private Price price;
@@ -46,9 +47,15 @@ public class EventBuilder
         return this;
     }
 
-    public EventBuilder setPlaces(int places)
+    public EventBuilder setMaxPlaces(int maxPlaces)
     {
-        this.places = places;
+        this.maxPlaces = maxPlaces;
+        return this;
+    }
+
+    public EventBuilder setOccupiedPlaces(int occupiedPlaces)
+    {
+        this.occupiedPlaces = occupiedPlaces;
         return this;
     }
 
@@ -90,6 +97,6 @@ public class EventBuilder
 
     public Event createEvent()
     {
-        return new Event(id, organizer, description, date, places, location, discipline, price, isOrganizer, isParticipant, isActive);
+        return new Event(id, organizer, description, date, maxPlaces, occupiedPlaces, location, discipline, price, isOrganizer, isParticipant, isActive);
     }
 }
