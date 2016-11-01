@@ -7,7 +7,7 @@ public class UserBuilder
 {
     private int id;
     private UserDetails userDetails;
-    private String creditability;
+    private int creditability;
 
     public UserBuilder setId(int id)
     {
@@ -21,7 +21,7 @@ public class UserBuilder
         return this;
     }
 
-    public UserBuilder setCreditability(String creditability)
+    public UserBuilder setCreditability(int creditability)
     {
         this.creditability = creditability;
         return this;

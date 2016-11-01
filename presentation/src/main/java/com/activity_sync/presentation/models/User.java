@@ -13,9 +13,9 @@ public class User implements Serializable
     private UserDetails userDetails;
 
     @SerializedName("creditability")
-    private String creditability;
+    private int creditability;
 
-    public User(int id, UserDetails userDetails, String creditability)
+    public User(int id, UserDetails userDetails, int creditability)
     {
         this.id = id;
         this.userDetails = userDetails;
@@ -47,12 +47,12 @@ public class User implements Serializable
         this.userDetails = userDetails;
     }
 
-    public String getCreditability()
+    public int getCreditability()
     {
         return creditability;
     }
 
-    public void setCreditability(String creditability)
+    public void setCreditability(int creditability)
     {
         this.creditability = creditability;
     }

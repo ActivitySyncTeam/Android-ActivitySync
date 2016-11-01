@@ -56,6 +56,7 @@
     <style name="EventDetailsScreenItemDownRow">
         <item name="android:fontFamily">sans-serif-light</item>
         <item name="android:textSize">@dimen/text_default_size</item>
+        <item name="android:layout_marginBottom">@dimen/screen_margin_small</item>
     </style>
 
 </resources>

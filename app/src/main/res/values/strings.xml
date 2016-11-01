@@ -29,4 +29,17 @@
     <!-- EventDetailsScreen strings -->
     <string name="btn_join_event">Join this event</string>
     <string name="title_event_details">Event details</string>
+
+    <!-- UserDetailsScreen strings -->
+    <string name="txt_username">Username</string>
+    <string name="txt_name">Name</string>
+    <string name="txt_lastname">Lastname</string>
+    <string name="txt_email">E-mail</string>
+    <string name="txt_creditability">Creditability</string>
+    <string name="txt_very_good">very good</string>
+    <string name="txt_good">good</string>
+    <string name="txt_ok">ok</string>
+    <string name="txt_poor">poor</string>
+    <string name="txt_bad">bad</string>
+    <string name="txt_terrible">terrible</string>
 </resources>

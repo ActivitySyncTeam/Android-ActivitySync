@@ -53,17 +53,19 @@
                             android:padding="@dimen/screen_margin_half">
 
                             <TextView
+                                android:id="@+id/event_det_discipline"
                                 style="@style/EventDetailsScreenMainUpRow"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="basketball"/>
 
                             <TextView
+                                android:id="@+id/event_det_location"
                                 style="@style/EventDetailsScreenMainDownRow"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/screen_margin_small"
-                                android:text="Jordan"/>
+                                tools:text="Jordan"/>
 
                         </LinearLayout>
 
@@ -96,10 +98,11 @@
                                             android:text="organizer" />
 
                                         <TextView
+                                            android:id="@+id/event_det_organizer"
                                             style="@style/EventDetailsScreenItemDownRow"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
-                                            android:text="Marcin Zielinski" />
+                                            tools:text="Marcin Zielinski" />
 
                                     </LinearLayout>
 
@@ -117,10 +120,11 @@
                                             android:text="participants" />
 
                                         <TextView
+                                            android:id="@+id/event_det_participants"
                                             style="@style/EventDetailsScreenItemDownRow"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
-                                            android:text="6/12" />
+                                            tools:text="6/12" />
 
                                     </LinearLayout>
 
@@ -148,10 +152,11 @@
                                             android:text="Date" />
 
                                         <TextView
+                                            android:id="@+id/event_det_date"
                                             style="@style/EventDetailsScreenItemDownRow"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
-                                            android:text="12/12/2016 18:00" />
+                                            tools:text="12/12/2016 18:00" />
 
                                     </LinearLayout>
 
@@ -169,10 +174,11 @@
                                             android:text="Price" />
 
                                         <TextView
+                                            android:id="@+id/event_det_price"
                                             style="@style/EventDetailsScreenItemDownRow"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
-                                            android:text="free" />
+                                            tools:text="free" />
 
                                     </LinearLayout>
 
@@ -199,10 +205,11 @@
                                             android:text="Description" />
 
                                         <TextView
+                                            android:id="@+id/event_det_description"
                                             style="@style/EventDetailsScreenItemDownRow"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
-                                            android:text="bardz dlug itekst blabla bla, fsfdsf sdf sdf sdf sdf sdfs dfds fds fsdf  dsfdsfdsfsdfsd" />
+                                            tools:text="Very long text written in order to check if two lines of text here are displaying correctly" />
 
                                     </LinearLayout>
 

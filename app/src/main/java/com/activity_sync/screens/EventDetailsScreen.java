@@ -31,17 +31,6 @@ public class EventDetailsScreen extends Screen implements IEventDetailsView, OnM
     @Inject
     INavigator navigator;
 
-//    @Bind(R.id.event_organizer)
-//    TextView eventOrganizer;
-//
-//    @Bind(R.id.event_location)
-//    TextView eventLocation;
-//
-//    @Bind(R.id.event_date)
-//    TextView eventDate;
-//
-//    @Bind(R.id.event_places)
-//    TextView eventPlaces;
 
     @Bind(R.id.join_event_btn)
     Button joinEventButton;
