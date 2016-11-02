@@ -6,7 +6,7 @@ import rx.Observable;
 
 public interface IParticipantsView
 {
-    public Observable<User> selectedUser();
+    Observable<User> selectedUser();
 
     void addUsersList(Collection<User> users);
 

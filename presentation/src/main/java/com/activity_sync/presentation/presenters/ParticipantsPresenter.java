@@ -1,11 +1,86 @@
 package com.activity_sync.presentation.presenters;
 
+import com.activity_sync.presentation.models.User;
+import com.activity_sync.presentation.models.builders.UserBuilder;
+import com.activity_sync.presentation.models.builders.UserDetailsBuilder;
+import com.activity_sync.presentation.services.INavigator;
 import com.activity_sync.presentation.views.IParticipantsView;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import rx.Scheduler;
 
 public class ParticipantsPresenter extends Presenter<IParticipantsView>
 {
-    public ParticipantsPresenter(IParticipantsView view)
+    private final INavigator navigator;
+    private Scheduler uiThread;
+
+    public ParticipantsPresenter(IParticipantsView view, INavigator navigator, Scheduler uiThread)
     {
         super(view);
+        this.navigator = navigator;
+        this.uiThread = uiThread;
+    }
+
+    @Override
+    public void start()
+    {
+        super.start();
+        loadUsers();
+
+        subscriptions.add(view.refreshEvents()
+                .subscribe(event -> {
+                    loadUsers();
+                    view.refreshingVisible(false);
+                })
+        );
+
+        subscriptions.add(view.selectedUser()
+                .subscribe(event -> {
+                    navigator.openUserDetailsScreen(1);
+                })
+        );
+    }
+
+    void loadUsers()
+    {
+        //API CALL WILL BE HERE
+
+        List<User> users = new ArrayList<>();
+
+        users.add(new UserBuilder()
+                .setUserDetails(new UserDetailsBuilder()
+                        .setFirstName("Marcin")
+                        .setlastName("Zielinski")
+                        .createUserDetails())
+                .setCreditability(85)
+                .createUser());
+
+        users.add(new UserBuilder()
+                .setUserDetails(new UserDetailsBuilder()
+                        .setFirstName("Michał")
+                        .setlastName("Wolny")
+                        .createUserDetails())
+                .setCreditability(67)
+                .createUser());
+
+        users.add(new UserBuilder()
+                .setUserDetails(new UserDetailsBuilder()
+                        .setFirstName("Luke")
+                        .setlastName("Petka")
+                        .createUserDetails())
+                .setCreditability(12)
+                .createUser());
+
+        users.add(new UserBuilder()
+                .setUserDetails(new UserDetailsBuilder()
+                        .setFirstName("Michał")
+                        .setlastName("Dudzik")
+                        .createUserDetails())
+                .setCreditability(92)
+                .createUser());
+
+        view.addUsersList(users);
     }
 }

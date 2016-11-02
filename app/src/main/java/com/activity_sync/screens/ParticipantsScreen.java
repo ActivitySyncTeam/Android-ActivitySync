@@ -25,6 +25,7 @@ import javax.inject.Inject;
 
 import butterknife.Bind;
 import rx.Observable;
+import rx.android.schedulers.AndroidSchedulers;
 import rx.subjects.PublishSubject;
 
 public class ParticipantsScreen extends Screen implements IParticipantsView
@@ -94,6 +95,6 @@ public class ParticipantsScreen extends Screen implements IParticipantsView
     @Override
     protected IPresenter createPresenter(Screen screen, Bundle savedInstanceState)
     {
-        return new ParticipantsPresenter(this);
+        return new ParticipantsPresenter(this, navigator, AndroidSchedulers.mainThread());
     }
 }
