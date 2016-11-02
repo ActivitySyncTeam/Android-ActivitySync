@@ -36,7 +36,7 @@
     <string name="txt_event_det_description">Description</string>
 
     <!-- UserDetailsScreen strings -->
-    <string name="title_user_details">User's details</string>
+    <string name="title_user_details">User details</string>
     <string name="txt_username">Username</string>
     <string name="txt_name">Name</string>
     <string name="txt_lastname">Lastname</string>
