@@ -57,7 +57,7 @@
                                 style="@style/EventDetailsScreenMainUpRow"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="basketball"/>
+                                tools:text="basketball"/>
 
                             <TextView
                                 android:id="@+id/event_det_location"
@@ -97,7 +97,7 @@
                                             style="@style/EventDetailsScreenItemUpRow"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
-                                            android:text="organizer" />
+                                            android:text="@string/txt_event_det_organizer" />
 
                                         <TextView
                                             android:id="@+id/event_det_organizer"
@@ -122,7 +122,7 @@
                                             style="@style/EventDetailsScreenItemUpRow"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
-                                            android:text="participants" />
+                                            android:text="@string/txt_event_det_participants" />
 
                                         <TextView
                                             android:id="@+id/event_det_participants"
@@ -152,7 +152,7 @@
                                             style="@style/EventDetailsScreenItemUpRow"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
-                                            android:text="Date" />
+                                            android:text="@string/txt_event_det_date" />
 
                                         <TextView
                                             android:id="@+id/event_det_date"
@@ -175,7 +175,7 @@
                                             style="@style/EventDetailsScreenItemUpRow"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
-                                            android:text="Price" />
+                                            android:text="@string/txt_event_det_price" />
 
                                         <TextView
                                             android:id="@+id/event_det_price"
@@ -204,7 +204,7 @@
                                             style="@style/EventDetailsScreenItemUpRow"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
-                                            android:text="Description" />
+                                            android:text="@string/txt_event_det_description" />
 
                                         <TextView
                                             android:id="@+id/event_det_description"

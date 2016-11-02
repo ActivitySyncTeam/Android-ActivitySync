@@ -47,7 +47,7 @@
                     android:layout_weight="1"/>
 
                 <ImageView
-                    android:id="@+id/participant_creditability_image"
+                    android:id="@+id/participant_credibility_image"
                     android:layout_width="@dimen/text_drawable_default_width"
                     android:layout_height="@dimen/text_drawable_default_height" />
 

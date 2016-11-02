@@ -54,7 +54,7 @@ public class ParticipantsPresenter extends Presenter<IParticipantsView>
                         .setFirstName("Marcin")
                         .setlastName("Zielinski")
                         .createUserDetails())
-                .setCreditability(85)
+                .setCredibility(85)
                 .createUser());
 
         users.add(new UserBuilder()
@@ -62,7 +62,7 @@ public class ParticipantsPresenter extends Presenter<IParticipantsView>
                         .setFirstName("Michał")
                         .setlastName("Wolny")
                         .createUserDetails())
-                .setCreditability(67)
+                .setCredibility(67)
                 .createUser());
 
         users.add(new UserBuilder()
@@ -70,7 +70,7 @@ public class ParticipantsPresenter extends Presenter<IParticipantsView>
                         .setFirstName("Luke")
                         .setlastName("Petka")
                         .createUserDetails())
-                .setCreditability(12)
+                .setCredibility(12)
                 .createUser());
 
         users.add(new UserBuilder()
@@ -78,7 +78,7 @@ public class ParticipantsPresenter extends Presenter<IParticipantsView>
                         .setFirstName("Michał")
                         .setlastName("Dudzik")
                         .createUserDetails())
-                .setCreditability(92)
+                .setCredibility(92)
                 .createUser());
 
         view.addUsersList(users);

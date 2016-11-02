@@ -5,42 +5,42 @@ import android.support.v4.content.ContextCompat;
 
 import com.activity_sync.R;
 
-public class CreditabilityService
+public class CredibilityService
 {
     public int colorSource;
     public int descriptionSource;
 
     private Context context;
 
-    public CreditabilityService(Context context, int creditabilityScore)
+    public CredibilityService(Context context, int credibilityScore)
     {
-        calculateResourcesValues(creditabilityScore);
+        calculateResourcesValues(credibilityScore);
         this.context = context;
     }
 
-    public void calculateResourcesValues(int creditabilityScore)
+    public void calculateResourcesValues(int credibilityScore)
     {
-        if (creditabilityScore >= 90)
+        if (credibilityScore >= 90)
         {
             descriptionSource = R.string.txt_very_good;
             colorSource = R.color.user_details_very_good;
         }
-        else if (creditabilityScore >= 80 && creditabilityScore < 90)
+        else if (credibilityScore >= 80 && credibilityScore < 90)
         {
             descriptionSource = R.string.txt_good;
             colorSource = R.color.user_details_good;
         }
-        else if (creditabilityScore >= 65 && creditabilityScore < 80)
+        else if (credibilityScore >= 65 && credibilityScore < 80)
         {
             descriptionSource = R.string.txt_ok;
             colorSource = R.color.user_details_ok;
         }
-        else if (creditabilityScore >= 50 && creditabilityScore < 65)
+        else if (credibilityScore >= 50 && credibilityScore < 65)
         {
             descriptionSource = R.string.txt_poor;
             colorSource = R.color.user_details_poor;
         }
-        else if (creditabilityScore >= 30 && creditabilityScore < 50)
+        else if (credibilityScore >= 30 && credibilityScore < 50)
         {
             descriptionSource = R.string.txt_bad;
             colorSource = R.color.user_details_bad;

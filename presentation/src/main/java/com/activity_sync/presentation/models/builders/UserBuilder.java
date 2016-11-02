@@ -7,7 +7,7 @@ public class UserBuilder
 {
     private int id;
     private UserDetails userDetails;
-    private int creditability;
+    private int credibility;
 
     public UserBuilder setId(int id)
     {
@@ -21,14 +21,14 @@ public class UserBuilder
         return this;
     }
 
-    public UserBuilder setCreditability(int creditability)
+    public UserBuilder setCredibility(int credibility)
     {
-        this.creditability = creditability;
+        this.credibility = credibility;
         return this;
     }
 
     public User createUser()
     {
-        return new User(id, userDetails, creditability);
+        return new User(id, userDetails, credibility);
     }
 }

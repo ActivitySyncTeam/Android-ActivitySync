@@ -8,7 +8,7 @@ import com.activity_sync.R;
 import com.activity_sync.presentation.models.User;
 import com.activity_sync.renderers.base.Renderer;
 import com.activity_sync.renderers.base.RendererBuilder;
-import com.activity_sync.utils.CreditabilityService;
+import com.activity_sync.utils.CredibilityService;
 import com.amulyakhare.textdrawable.TextDrawable;
 
 import java.util.Arrays;
@@ -19,8 +19,8 @@ public class ParticipantsRenderer extends Renderer<User>
 {
     private Context context;
 
-    @Bind(R.id.participant_creditability_image)
-    ImageView participantCreditabilityImage;
+    @Bind(R.id.participant_credibility_image)
+    ImageView participantCredibilityImage;
 
     @Bind(R.id.participant_name)
     TextView participantName;
@@ -41,9 +41,9 @@ public class ParticipantsRenderer extends Renderer<User>
     {
         participantName.setText(String.format("%s %s", getContent().getUserDetails().getFirstName(), getContent().getUserDetails().getLastName()));
 
-        CreditabilityService creditabilityService = new CreditabilityService(context, getContent().getCreditability());
-        TextDrawable drawable = TextDrawable.builder().buildRound(String.format("%d", getContent().getCreditability()), creditabilityService.getColor());
-        participantCreditabilityImage.setImageDrawable(drawable);
+        CredibilityService credibilityService = new CredibilityService(context, getContent().getCredibility());
+        TextDrawable drawable = TextDrawable.builder().buildRound(String.format("%d", getContent().getCredibility()), credibilityService.getColor());
+        participantCredibilityImage.setImageDrawable(drawable);
     }
 
     public static class Builder extends RendererBuilder<User>

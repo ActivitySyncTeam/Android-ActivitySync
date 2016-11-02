@@ -12,14 +12,14 @@ public class User implements Serializable
     @SerializedName("user")
     private UserDetails userDetails;
 
-    @SerializedName("creditability")
-    private int creditability;
+    @SerializedName("credibility")
+    private int credibility;
 
-    public User(int id, UserDetails userDetails, int creditability)
+    public User(int id, UserDetails userDetails, int credibility)
     {
         this.id = id;
         this.userDetails = userDetails;
-        this.creditability = creditability;
+        this.credibility = credibility;
     }
 
     public User()
@@ -47,13 +47,13 @@ public class User implements Serializable
         this.userDetails = userDetails;
     }
 
-    public int getCreditability()
+    public int getCredibility()
     {
-        return creditability;
+        return credibility;
     }
 
-    public void setCreditability(int creditability)
+    public void setCredibility(int credibility)
     {
-        this.creditability = creditability;
+        this.credibility = credibility;
     }
 }

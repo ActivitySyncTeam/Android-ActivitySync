@@ -24,7 +24,7 @@ public class UserDetailsPresenter extends Presenter<IUserDetailsView>
                         .setEmail("kmarcinzielnski@gmail.com")
                     .createUserDetails())
                 .setId(123)
-                .setCreditability(85)
+                .setCredibility(85)
                 .createUser());
     }
 }

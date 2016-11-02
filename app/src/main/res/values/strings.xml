@@ -35,11 +35,18 @@
     <string name="txt_name">Name</string>
     <string name="txt_lastname">Lastname</string>
     <string name="txt_email">E-mail</string>
-    <string name="txt_creditability">Creditability</string>
-    <string name="txt_very_good">very good</string>
+    <string name="txt_credibility">Credibility</string>
+    <string name="txt_very_good">Very good</string>
     <string name="txt_good">good</string>
     <string name="txt_ok">ok</string>
-    <string name="txt_poor">poor</string>
-    <string name="txt_bad">bad</string>
-    <string name="txt_terrible">terrible</string>
+    <string name="txt_poor">Poor</string>
+    <string name="txt_bad">Bad</string>
+    <string name="txt_terrible">Terrible</string>
+
+
+    <string name="txt_event_det_organizer">Organizer</string>
+    <string name="txt_event_det_participants">Participants</string>
+    <string name="txt_event_det_date">Date</string>
+    <string name="txt_event_det_price">Price</string>
+    <string name="txt_event_det_description">Description</string>
 </resources>
