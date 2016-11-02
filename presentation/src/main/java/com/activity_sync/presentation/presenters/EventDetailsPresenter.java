@@ -65,5 +65,12 @@ public class EventDetailsPresenter extends Presenter<IEventDetailsView>
                     navigator.openUserDetailsScreen(1);
                 })
         );
+
+        subscriptions.add(view.participantsDetailsClick()
+                .observeOn(uiThread)
+                .subscribe(o -> {
+                    navigator.openParticipantsScreen();
+                })
+        );
     }
 }

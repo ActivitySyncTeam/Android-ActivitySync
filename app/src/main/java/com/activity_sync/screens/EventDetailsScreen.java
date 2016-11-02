@@ -59,6 +59,9 @@ public class EventDetailsScreen extends Screen implements IEventDetailsView, OnM
     @Bind(R.id.organizer_layout)
     LinearLayout organizerLayout;
 
+    @Bind(R.id.participants_layout)
+    LinearLayout participantsLayout;
+
     private GoogleMap map;
 
     public EventDetailsScreen()
@@ -100,6 +103,12 @@ public class EventDetailsScreen extends Screen implements IEventDetailsView, OnM
     public Observable organizerDetailsClick()
     {
         return ViewObservable.clicks(organizerLayout);
+    }
+
+    @Override
+    public Observable participantsDetailsClick()
+    {
+        return ViewObservable.clicks(participantsLayout);
     }
 
     @Override

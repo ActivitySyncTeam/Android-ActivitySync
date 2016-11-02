@@ -13,4 +13,6 @@ public interface INavigator
     void openEventDetailsScreen(int eventId);
 
     void openUserDetailsScreen(int userId);
+
+    void openParticipantsScreen();
 }

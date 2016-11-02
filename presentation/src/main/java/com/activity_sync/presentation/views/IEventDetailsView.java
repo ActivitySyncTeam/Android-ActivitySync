@@ -10,5 +10,7 @@ public interface IEventDetailsView
 
     Observable organizerDetailsClick();
 
+    Observable participantsDetailsClick();
+
     void setEventData(Event event);
 }

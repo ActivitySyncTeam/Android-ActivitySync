@@ -109,6 +109,8 @@
                                     </LinearLayout>
 
                                     <LinearLayout
+                                        android:id="@+id/participants_layout"
+                                        android:background="@drawable/selector_event_details_item"
                                         android:layout_width="0dp"
                                         android:layout_height="match_parent"
                                         android:layout_weight="1"
