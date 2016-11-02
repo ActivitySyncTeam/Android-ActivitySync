@@ -63,6 +63,8 @@ public class ParticipantsScreen extends Screen implements IParticipantsView
         participantsList.setLayoutManager(linearLayoutManager);
         participantsList.addItemDecoration(new DividerItemDecoration(this));
         participantsList.setAdapter(adapter);
+
+        setTitle(getString(R.string.title_participants));
     }
 
     @Override

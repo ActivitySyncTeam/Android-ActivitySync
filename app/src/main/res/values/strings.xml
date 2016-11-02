@@ -29,8 +29,14 @@
     <!-- EventDetailsScreen strings -->
     <string name="btn_join_event">Join this event</string>
     <string name="title_event_details">Event details</string>
+    <string name="txt_event_det_organizer">Organizer</string>
+    <string name="txt_event_det_participants">Participants</string>
+    <string name="txt_event_det_date">Date</string>
+    <string name="txt_event_det_price">Price</string>
+    <string name="txt_event_det_description">Description</string>
 
     <!-- UserDetailsScreen strings -->
+    <string name="title_user_details">User's details</string>
     <string name="txt_username">Username</string>
     <string name="txt_name">Name</string>
     <string name="txt_lastname">Lastname</string>
@@ -38,15 +44,12 @@
     <string name="txt_credibility">Credibility</string>
     <string name="txt_very_good">Very good</string>
     <string name="txt_good">good</string>
-    <string name="txt_ok">ok</string>
+    <string name="txt_ok">OK</string>
     <string name="txt_poor">Poor</string>
     <string name="txt_bad">Bad</string>
     <string name="txt_terrible">Terrible</string>
 
+    <!-- ParticipantsScreen strings -->
+    <string name="title_participants">Participants list</string>
 
-    <string name="txt_event_det_organizer">Organizer</string>
-    <string name="txt_event_det_participants">Participants</string>
-    <string name="txt_event_det_date">Date</string>
-    <string name="txt_event_det_price">Price</string>
-    <string name="txt_event_det_description">Description</string>
 </resources>

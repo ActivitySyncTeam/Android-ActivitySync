@@ -24,7 +24,7 @@
     <string name="txt_event_det_date">Data</string>
     <string name="txt_event_det_description">Opis</string>
     <string name="txt_event_det_organizer">Organizator</string>
-    <string name="txt_event_det_participants">Zapisani uczestnicy</string>
+    <string name="txt_event_det_participants">Uczestnicy</string>
     <string name="txt_event_det_price">Cena</string>
     <string name="txt_good">Dobra</string>
     <string name="txt_lastname">Nazwisko</string>
@@ -34,5 +34,7 @@
     <string name="txt_terrible">Tragiczna</string>
     <string name="txt_username">Nazwa użytkownika</string>
     <string name="txt_very_good">Bardzo dobra</string>
+    <string name="title_participants">Lista uczestników</string>
+    <string name="title_user_details">Szczegóły użytkownika</string>
 
 </resources>
