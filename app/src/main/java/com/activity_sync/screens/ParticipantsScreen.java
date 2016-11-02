@@ -56,7 +56,7 @@ public class ParticipantsScreen extends Screen implements IParticipantsView
 
         participantsRefreshLayout.setOnRefreshListener(() -> refreshParticipants.onNext(this));
 
-        adapter = new RVRendererAdapter<>(this, new ParticipantsRenderer.Builder());
+        adapter = new RVRendererAdapter<>(this, new ParticipantsRenderer.Builder(this));
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
 

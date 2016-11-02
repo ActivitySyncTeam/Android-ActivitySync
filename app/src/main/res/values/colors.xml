@@ -66,10 +66,10 @@
     <item name="user_details_bg" type="color">@color/white</item>
     <item name="user_details_avatar" type="color">#9e9e9e</item>
 
-    <item name="user_details_very_good" type="color">#17ec04</item>
-    <item name="user_details_good" type="color">#97f228</item>
-    <item name="user_details_ok" type="color">#c3f228</item>
-    <item name="user_details_poor" type="color">#f2de28</item>
+    <item name="user_details_very_good" type="color">#14f700</item>
+    <item name="user_details_good" type="color">#8bd630</item>
+    <item name="user_details_ok" type="color">#bdec58</item>
+    <item name="user_details_poor" type="color">#f7ba04</item>
     <item name="user_details_bad" type="color">#f27228</item>
     <item name="user_details_terrible" type="color">#f23228</item>
 
