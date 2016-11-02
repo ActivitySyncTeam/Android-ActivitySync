@@ -29,7 +29,7 @@ public class ParticipantsPresenter extends Presenter<IParticipantsView>
         super.start();
         loadUsers();
 
-        subscriptions.add(view.refreshEvents()
+        subscriptions.add(view.refreshParticipants()
                 .subscribe(event -> {
                     loadUsers();
                     view.refreshingVisible(false);

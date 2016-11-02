@@ -83,7 +83,7 @@ public class ParticipantsScreen extends Screen implements IParticipantsView
     }
 
     @Override
-    public Observable refreshEvents()
+    public Observable refreshParticipants()
     {
         return refreshParticipants;
     }

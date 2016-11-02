@@ -25,12 +25,14 @@ public class EventDetailsPresenterTests
 
     PublishSubject joinEventClickEvent = PublishSubject.create();
     PublishSubject organizerDetailsClickEvent = PublishSubject.create();
+    PublishSubject participantsClickEvent = PublishSubject.create();
 
     @Before
     public void setup()
     {
         Mockito.when(view.joinEventClick()).thenReturn(joinEventClickEvent);
         Mockito.when(view.organizerDetailsClick()).thenReturn(organizerDetailsClickEvent);
+        Mockito.when(view.participantsDetailsClick()).thenReturn(participantsClickEvent);
     }
 
     @Test
@@ -44,13 +46,23 @@ public class EventDetailsPresenterTests
     }
 
     @Test
-    public void eventDetailsPresenter_clickUserDetailsEvent_userSelected()
+    public void eventDetailsPresenter_clickOrganizerDetailsEvent_openDetailsScreen()
     {
         EventDetailsPresenter presenter = createPresenter();
         presenter.start();
 
         organizerDetailsClickEvent.onNext(this);
         Mockito.verify(navigator).openUserDetailsScreen(1);
+    }
+
+    @Test
+    public void eventDetailsPresenter_clickParticipantsEvent_openParticipantsScreen()
+    {
+        EventDetailsPresenter presenter = createPresenter();
+        presenter.start();
+
+        participantsClickEvent.onNext(this);
+        Mockito.verify(navigator).openParticipantsScreen();
     }
 
     private EventDetailsPresenter createPresenter()

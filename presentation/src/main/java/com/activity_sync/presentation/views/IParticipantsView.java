@@ -10,7 +10,7 @@ public interface IParticipantsView
 
     void addUsersList(Collection<User> users);
 
-    Observable refreshEvents();
+    Observable refreshParticipants();
 
     void refreshingVisible(boolean isRefreshing);
 }
