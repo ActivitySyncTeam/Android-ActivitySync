@@ -12,6 +12,7 @@ machine:
         JAVA7_HOME: /usr/lib/jvm/java-7-openjdk-amd64
         JAVA8_HOME: /usr/lib/jvm/java-8-openjdk-amd64
         JAVA_HOME: /usr/lib/jvm/java-8-openjdk-amd64
+        GRADLE_OPTS: '-Dorg.gradle.jvmargs="-Xmx2048m -XX:+HeapDumpOnOutOfMemoryError"'
 
 dependencies:
     override:
