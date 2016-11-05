@@ -41,7 +41,7 @@ public class EventsRenderer extends Renderer<Event>
         eventLocation.setText(getContent().getLocation().getName());
         eventDate.setText(getContent().getReadableDate());
         eventDiscipline.setText(getContent().getDiscipline().getName());
-        eventPlaces.setText(String.format("0/%d", getContent().getPlaces()));
+        eventPlaces.setText(String.format("0/%d", getContent().getMaxPlaces()));
     }
 
     public static class Builder extends RendererBuilder<Event>

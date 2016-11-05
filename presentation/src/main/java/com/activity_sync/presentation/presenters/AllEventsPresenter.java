@@ -44,7 +44,7 @@ public class AllEventsPresenter extends EventsFragmentBasePresenter
                 .setDiscipline(new DisciplineBuilder()
                         .setName("Basketball")
                         .createDiscipline())
-                .setPlaces(12)
+                .setMaxPlaces(12)
                 .setId(123)
                 .createEvent());
 
@@ -63,7 +63,7 @@ public class AllEventsPresenter extends EventsFragmentBasePresenter
                 .setDiscipline(new DisciplineBuilder()
                         .setName("Football")
                         .createDiscipline())
-                .setPlaces(10)
+                .setMaxPlaces(10)
                 .setId(123)
                 .createEvent());
 
@@ -82,7 +82,7 @@ public class AllEventsPresenter extends EventsFragmentBasePresenter
                 .setDiscipline(new DisciplineBuilder()
                         .setName("Wrestling")
                         .createDiscipline())
-                .setPlaces(1)
+                .setMaxPlaces(1)
                 .setId(123)
                 .createEvent());
 
@@ -101,7 +101,7 @@ public class AllEventsPresenter extends EventsFragmentBasePresenter
                 .setDiscipline(new DisciplineBuilder()
                         .setName("Horse riding")
                         .createDiscipline())
-                .setPlaces(2)
+                .setMaxPlaces(2)
                 .setId(123)
                 .createEvent());
 
@@ -121,7 +121,7 @@ public class AllEventsPresenter extends EventsFragmentBasePresenter
                         .setName("Football")
                         .createDiscipline())
                 .setId(123)
-                .setPlaces(8)
+                .setMaxPlaces(8)
                 .createEvent());
 
         view.addEventsList(events);

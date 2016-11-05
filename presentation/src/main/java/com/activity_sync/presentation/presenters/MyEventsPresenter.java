@@ -44,7 +44,7 @@ public class MyEventsPresenter extends EventsFragmentBasePresenter
                 .setDiscipline(new DisciplineBuilder()
                         .setName("Basketball")
                         .createDiscipline())
-                .setPlaces(12)
+                .setMaxPlaces(12)
                 .setId(123)
                 .createEvent());
 
@@ -63,7 +63,7 @@ public class MyEventsPresenter extends EventsFragmentBasePresenter
                 .setDiscipline(new DisciplineBuilder()
                         .setName("Football")
                         .createDiscipline())
-                .setPlaces(10)
+                .setMaxPlaces(10)
                 .setId(123)
                 .createEvent());
 

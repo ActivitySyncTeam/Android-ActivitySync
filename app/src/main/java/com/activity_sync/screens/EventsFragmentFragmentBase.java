@@ -5,7 +5,6 @@ import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.widget.Toast;
 
 import com.activity_sync.App;
 import com.activity_sync.R;
@@ -78,12 +77,6 @@ abstract public class EventsFragmentFragmentBase extends FragmentScreen implemen
         this.events.addAll(events);
         adapter.addAll(events);
         adapter.notifyDataSetChanged();
-    }
-
-    @Override
-    public void eventSelected(Event event)
-    {
-        Toast.makeText(getContext(), String.format("Event with id: %d has been clicked", event.getId()), Toast.LENGTH_LONG).show();
     }
 
     @Override

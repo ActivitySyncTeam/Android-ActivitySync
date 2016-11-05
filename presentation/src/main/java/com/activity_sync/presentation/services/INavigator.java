@@ -9,4 +9,10 @@ public interface INavigator
     void openWelcomeScreen();
 
     void openEventsScreen();
+
+    void openEventDetailsScreen(int eventId);
+
+    void openUserDetailsScreen(int userId);
+
+    void openParticipantsScreen();
 }

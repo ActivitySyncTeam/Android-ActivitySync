@@ -3,6 +3,7 @@ package com.activity_sync.presentation.models.builders;
 import com.activity_sync.presentation.models.Discipline;
 import com.activity_sync.presentation.models.Event;
 import com.activity_sync.presentation.models.Location;
+import com.activity_sync.presentation.models.Price;
 import com.activity_sync.presentation.models.User;
 
 import java.util.Date;
@@ -13,9 +14,14 @@ public class EventBuilder
     private User organizer;
     private String description;
     private Date date;
-    private int places;
+    private int maxPlaces;
+    private int occupiedPlaces;
     private Location location;
     private Discipline discipline;
+    private Price price;
+    private boolean isOrganizer;
+    private boolean isParticipant;
+    private boolean isActive;
 
     public EventBuilder setId(int id)
     {
@@ -41,9 +47,15 @@ public class EventBuilder
         return this;
     }
 
-    public EventBuilder setPlaces(int places)
+    public EventBuilder setMaxPlaces(int maxPlaces)
     {
-        this.places = places;
+        this.maxPlaces = maxPlaces;
+        return this;
+    }
+
+    public EventBuilder setOccupiedPlaces(int occupiedPlaces)
+    {
+        this.occupiedPlaces = occupiedPlaces;
         return this;
     }
 
@@ -59,8 +71,32 @@ public class EventBuilder
         return this;
     }
 
+    public EventBuilder setPrice(Price price)
+    {
+        this.price = price;
+        return this;
+    }
+
+    public EventBuilder setIsOrganizer(boolean isOrganizer)
+    {
+        this.isOrganizer = isOrganizer;
+        return this;
+    }
+
+    public EventBuilder setIsParticipant(boolean isParticipant)
+    {
+        this.isParticipant = isParticipant;
+        return this;
+    }
+
+    public EventBuilder setIsActive(boolean isActive)
+    {
+        this.isActive = isActive;
+        return this;
+    }
+
     public Event createEvent()
     {
-        return new Event(id, organizer, description, date, places, location, discipline);
+        return new Event(id, organizer, description, date, maxPlaces, occupiedPlaces, location, discipline, price, isOrganizer, isParticipant, isActive);
     }
 }

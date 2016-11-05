@@ -55,7 +55,7 @@ public class EventsFragmentPresenterTests
                 .setDiscipline(new DisciplineBuilder()
                         .setName("Basketball")
                         .createDiscipline())
-                .setPlaces(12)
+                .setMaxPlaces(12)
                 .setId(123)
                 .createEvent();
 
@@ -70,8 +70,7 @@ public class EventsFragmentPresenterTests
         presenter.start();
 
         eventSelectedEvent.onNext(testedEvent);
-        //Mockito.verify(navigator).openEventDetailsScreen();
-        Mockito.verify(view).eventSelected(testedEvent);
+        Mockito.verify(navigator).openEventDetailsScreen(testedEvent.getId());
     }
 
     @Test

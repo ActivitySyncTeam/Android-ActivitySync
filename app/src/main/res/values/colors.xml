@@ -54,8 +54,26 @@
 
     <item name="intro_locations_bg" type="color">#5a949b</item>
     <item name="intro_last_screen_bg" type="color">#8ab367</item>
+
     <!--Navigation Colors-->
     <item name="navigation_menu_bg" type="color">@color/white</item>
     <item name="navigation_menu_item" type="color">@color/colorPrimary</item>
+
+    <!--Event Details Screen Colors-->
+    <item name="event_details_bg" type="color">@color/white</item>
+
+    <!--User Details Screen Colors-->
+    <item name="user_details_bg" type="color">@color/white</item>
+    <item name="user_details_avatar" type="color">#9e9e9e</item>
+
+    <item name="user_details_very_good" type="color">#14f700</item>
+    <item name="user_details_good" type="color">#8bd630</item>
+    <item name="user_details_ok" type="color">#bdec58</item>
+    <item name="user_details_poor" type="color">#f7ba04</item>
+    <item name="user_details_bad" type="color">#f27228</item>
+    <item name="user_details_terrible" type="color">#f23228</item>
+
+    <item name="user_details_event_item_normal" type="color">@color/white</item>
+    <item name="user_details_event_item_pressed" type="color">#a39c9c</item>
 
 </resources>
