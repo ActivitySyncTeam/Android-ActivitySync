@@ -24,5 +24,6 @@ public class SplashPresenter extends Presenter<ISplashView>
 
         //will be more conditions here
         navigator.openIntroScreen();
+        view.finishSplashScreen();
     }
 }

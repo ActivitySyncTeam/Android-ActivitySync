@@ -35,4 +35,10 @@ public class SplashScreen extends AppCompatActivity implements ISplashView
         super.onStart();
         presenter.start();
     }
+
+    @Override
+    public void finishSplashScreen()
+    {
+        finish();
+    }
 }
