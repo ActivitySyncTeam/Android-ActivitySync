@@ -28,7 +28,7 @@ public abstract class ScreenWithMenu extends Screen
     DrawerLayout drawerLayout;
 
     @PlaybackStateCompat.State
-    int selectedItem;
+    private static final StateHolder<Integer> stateHolder = new StateHolder<>(0);
 
     private MenuNavigator menuNavigator;
 
@@ -89,13 +89,13 @@ public abstract class ScreenWithMenu extends Screen
         menuNavigator = new MenuNavigator(new Navigator(this), () -> this.drawerLayout.closeDrawers());
         menuNavigator.addAction(R.id.menu_dummy, INavigator::openDummyScreen);
         menuNavigator.addAction(R.id.menu_events, INavigator::openEventsScreen);
-
         navigationView.setNavigationItemSelectedListener(menuItem -> {
-            if (menuItem.getItemId() == selectedItem)
+            if (stateHolder.getState() == menuItem.getItemId())
             {
                 drawerLayout.closeDrawers();
                 return true;
             }
+            stateHolder.setState(menuItem.getItemId());
             menuNavigator.runAction(menuItem.getItemId());
             return true;
         });
@@ -142,7 +142,6 @@ public abstract class ScreenWithMenu extends Screen
             {
                 return;
             }
-
             onBeforeAction.execute();
             actions.get(id).execute(navigator);
         }
@@ -168,6 +167,21 @@ public abstract class ScreenWithMenu extends Screen
         else
         {
             super.onBackPressed();
+        }
+    }
+
+    private static class StateHolder<T> {
+        private T state;
+        public StateHolder(T state) {
+            this.state = state;
+        }
+
+        public T getState() {
+            return state;
+        }
+
+        public void setState(T state) {
+            this.state = state;
         }
     }
 }
