@@ -20,6 +20,7 @@
     <!-- Menu strings -->
     <string name="menu_dummy_screen">Dummy Screen</string>
     <string name="menu_events">Events</string>
+    <string name="menu_settings">Settings</string>
 
     <!-- EventsScreen strings -->
     <string name="title_events">Events</string>
@@ -51,5 +52,6 @@
 
     <!-- ParticipantsScreen strings -->
     <string name="title_participants">Participants list</string>
+    <string name="title_settings">Settings</string>
 
 </resources>
