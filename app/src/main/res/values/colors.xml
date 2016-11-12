@@ -76,4 +76,9 @@
     <item name="user_details_event_item_normal" type="color">@color/white</item>
     <item name="user_details_event_item_pressed" type="color">#a39c9c</item>
 
+    <!--Settings Screen Colors-->
+    <item name="settings_accent" type="color">#FF009688</item>
+    <item name="settings_primary" type="color">#FFF5F5F5</item>
+    <item name="settings_primary_dark" type="color">#FF757575</item>
+
 </resources>

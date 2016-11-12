@@ -20,7 +20,7 @@ public class SettingsScreen extends ScreenWithMenu implements ISettingsView
 
     public SettingsScreen()
     {
-        super(R.layout.settings_screen);
+        super(R.layout.settings_screen_wrapper);
     }
 
     @Override
@@ -28,6 +28,8 @@ public class SettingsScreen extends ScreenWithMenu implements ISettingsView
     {
         App.component(this).inject(this);
         super.onCreate(savedInstanceState);
+        getSupportFragmentManager().beginTransaction()
+                .add(R.id.settings_fragment_frame, new SettingsFragment()).commit();
         setTitle(R.string.title_settings);
     }
 

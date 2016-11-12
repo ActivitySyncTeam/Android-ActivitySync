@@ -38,5 +38,11 @@
     <string name="title_participants">Lista uczestników</string>
     <string name="title_user_details">Szczegóły użytkownika</string>
     <string name="title_settings">Ustawienia</string>
+    <string name="pref_cat_location">Lokalizacja</string>
+    <string name="pref_cat_notification">Powiadomienia</string>
+    <string name="pref_location_switch">Włącz lokalizację</string>
+    <string name="pref_notification_switch">Włącz powiadomienia</string>
+    <string name="pref_notification_sound_chk">Dźwięk powiadomienia</string>
+    <string name="pref_notification_vibration_chk">Wibracje powiadomienia</string>
 
 </resources>
