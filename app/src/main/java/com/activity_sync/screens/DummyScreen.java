@@ -35,6 +35,12 @@ public class DummyScreen extends ScreenWithMenu implements IDummyView
     }
 
     @Override
+    protected int getMenuId()
+    {
+        return R.id.menu_dummy;
+    }
+
+    @Override
     protected IPresenter createPresenter(Screen screen, Bundle savedInstanceState)
     {
         return new DummyPresenter(AndroidSchedulers.mainThread(), this, navigator);

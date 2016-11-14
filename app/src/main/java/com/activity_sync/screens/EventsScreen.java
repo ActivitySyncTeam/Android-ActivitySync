@@ -43,6 +43,12 @@ public class EventsScreen extends ScreenWithMenu implements IEventsView
     }
 
     @Override
+    protected int getMenuId()
+    {
+        return R.id.menu_events;
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         App.component(this).inject(this);

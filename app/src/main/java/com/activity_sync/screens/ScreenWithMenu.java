@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.annotation.StringRes;
 import android.support.design.widget.NavigationView;
-import android.support.v4.media.session.PlaybackStateCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.view.MenuItem;
@@ -27,15 +26,14 @@ public abstract class ScreenWithMenu extends Screen
     @Bind(R.id.navigation_drawer_layout)
     DrawerLayout drawerLayout;
 
-    @PlaybackStateCompat.State
-    private static final StateHolder<Integer> stateHolder = new StateHolder<>(0);
-
     private MenuNavigator menuNavigator;
 
     protected ScreenWithMenu(int layoutResId)
     {
         super(layoutResId);
     }
+
+    protected abstract int getMenuId();
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -90,12 +88,11 @@ public abstract class ScreenWithMenu extends Screen
         menuNavigator.addAction(R.id.menu_dummy, INavigator::openDummyScreen);
         menuNavigator.addAction(R.id.menu_events, INavigator::openEventsScreen);
         navigationView.setNavigationItemSelectedListener(menuItem -> {
-            if (stateHolder.getState() == menuItem.getItemId())
+            if (getMenuId() == menuItem.getItemId())
             {
                 drawerLayout.closeDrawers();
                 return true;
             }
-            stateHolder.setState(menuItem.getItemId());
             menuNavigator.runAction(menuItem.getItemId());
             return true;
         });
@@ -167,21 +164,6 @@ public abstract class ScreenWithMenu extends Screen
         else
         {
             super.onBackPressed();
-        }
-    }
-
-    private static class StateHolder<T> {
-        private T state;
-        public StateHolder(T state) {
-            this.state = state;
-        }
-
-        public T getState() {
-            return state;
-        }
-
-        public void setState(T state) {
-            this.state = state;
         }
     }
 }
