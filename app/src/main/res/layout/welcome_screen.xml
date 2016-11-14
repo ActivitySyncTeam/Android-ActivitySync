@@ -48,12 +48,8 @@
                 android:layout_height="wrap_content"
                 android:text="dadas"/>
 
-
         </LinearLayout>
 
-
     </LinearLayout>
-
-
 
 </LinearLayout>
