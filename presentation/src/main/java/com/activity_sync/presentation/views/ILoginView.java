@@ -2,9 +2,9 @@ package com.activity_sync.presentation.views;
 
 import rx.Observable;
 
-public interface IWelcomeView
+public interface ILoginView
 {
     Observable loginBtnClick();
 
-    Observable registerBtnClick();
+    Observable createAccountClick();
 }

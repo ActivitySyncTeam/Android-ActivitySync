@@ -2,13 +2,14 @@ package com.activity_sync.screens;
 
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.activity_sync.App;
 import com.activity_sync.R;
 import com.activity_sync.presentation.presenters.IPresenter;
-import com.activity_sync.presentation.presenters.WelcomePresenter;
+import com.activity_sync.presentation.presenters.LoginPresenter;
 import com.activity_sync.presentation.services.INavigator;
-import com.activity_sync.presentation.views.IWelcomeView;
+import com.activity_sync.presentation.views.ILoginView;
 
 import javax.inject.Inject;
 
@@ -17,7 +18,7 @@ import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.android.view.ViewObservable;
 
-public class WelcomeScreen extends Screen implements IWelcomeView
+public class LoginScreen extends Screen implements ILoginView
 {
     @Inject
     INavigator navigator;
@@ -25,12 +26,12 @@ public class WelcomeScreen extends Screen implements IWelcomeView
     @Bind(R.id.login_btn)
     Button loginBtn;
 
-    @Bind(R.id.register_btn)
-    Button registerBtn;
+    @Bind(R.id.create_account)
+    TextView createAccountTv;
 
-    public WelcomeScreen()
+    public LoginScreen()
     {
-        super(R.layout.welcome_screen);
+        super(R.layout.login_screen);
     }
 
     @Override
@@ -43,7 +44,7 @@ public class WelcomeScreen extends Screen implements IWelcomeView
     @Override
     protected IPresenter createPresenter(Screen screen, Bundle savedInstanceState)
     {
-        return new WelcomePresenter(AndroidSchedulers.mainThread(), this, navigator);
+        return new LoginPresenter(AndroidSchedulers.mainThread(), this, navigator);
     }
 
     @Override
@@ -53,8 +54,8 @@ public class WelcomeScreen extends Screen implements IWelcomeView
     }
 
     @Override
-    public Observable registerBtnClick()
+    public Observable createAccountClick()
     {
-        return ViewObservable.clicks(registerBtn);
+        return ViewObservable.clicks(createAccountTv);
     }
 }

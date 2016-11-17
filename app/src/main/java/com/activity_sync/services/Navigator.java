@@ -30,7 +30,7 @@ public class Navigator implements INavigator
     @Override
     public void openWelcomeScreen()
     {
-        this.startActivity(getIntent(WelcomeScreen.class));
+        this.startActivity(getIntent(LoginScreen.class));
     }
 
     @Override

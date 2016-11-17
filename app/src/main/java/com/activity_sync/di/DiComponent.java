@@ -9,7 +9,7 @@ import com.activity_sync.screens.IntroLastScreen;
 import com.activity_sync.screens.IntroScreen;
 import com.activity_sync.screens.ParticipantsScreen;
 import com.activity_sync.screens.SplashScreen;
-import com.activity_sync.screens.WelcomeScreen;
+import com.activity_sync.screens.LoginScreen;
 
 import javax.inject.Singleton;
 
@@ -41,7 +41,7 @@ public interface DiComponent
 
     void inject(IntroLastScreen introLastScreen);
 
-    void inject(WelcomeScreen welcomeScreen);
+    void inject(LoginScreen loginScreen);
 
     void inject(EventsScreen eventsScreen);
 

@@ -27,7 +27,7 @@
         </activity>
 
         <activity android:name=".screens.DummyScreen"/>
-        <activity android:name=".screens.WelcomeScreen"/>
+        <activity android:name=".screens.LoginScreen"/>
         <activity android:name=".screens.EventsScreen"/>
         <activity android:name=".screens.EventDetailsScreen"/>
         <activity android:name=".screens.UserDetailsScreen"/>

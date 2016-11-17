@@ -1,8 +1,8 @@
 package com.activity_sync.tests;
 
-import com.activity_sync.presentation.presenters.WelcomePresenter;
+import com.activity_sync.presentation.presenters.LoginPresenter;
 import com.activity_sync.presentation.services.INavigator;
-import com.activity_sync.presentation.views.IWelcomeView;
+import com.activity_sync.presentation.views.ILoginView;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -15,29 +15,29 @@ import rx.schedulers.Schedulers;
 import rx.subjects.PublishSubject;
 
 @RunWith(MockitoJUnitRunner.class)
-public class WelcomePresenterTests
+public class LoginPresenterTests
 {
     @Mock
     INavigator navigator;
 
     @Mock
-    IWelcomeView view;
+    ILoginView view;
 
     PublishSubject loginBtnClickEvent = PublishSubject.create();
-    PublishSubject registerBtnClickEvent = PublishSubject.create();
+    PublishSubject createAccountClickEvent = PublishSubject.create();
 
     @Before
     public void setup()
     {
         Mockito.when(view.loginBtnClick()).thenReturn(loginBtnClickEvent);
-        Mockito.when(view.registerBtnClick()).thenReturn(registerBtnClickEvent);
+        Mockito.when(view.createAccountClick()).thenReturn(createAccountClickEvent);
     }
 
     @Test
     public void welcomePresenter_clickLoginBtn_openEventsScreen()
     {
-        WelcomePresenter welcomePresenter = createPresenter();
-        welcomePresenter.start();
+        LoginPresenter loginPresenter = createPresenter();
+        loginPresenter.start();
 
         loginBtnClickEvent.onNext(this);
         Mockito.verify(navigator).openEventsScreen();
@@ -46,15 +46,15 @@ public class WelcomePresenterTests
     @Test
     public void welcomePresenter_clickRegisterBtn_openEventsScreen()
     {
-        WelcomePresenter welcomePresenter = createPresenter();
-        welcomePresenter.start();
+        LoginPresenter loginPresenter = createPresenter();
+        loginPresenter.start();
 
-        registerBtnClickEvent.onNext(this);
+        createAccountClickEvent.onNext(this);
         Mockito.verify(navigator).openEventsScreen();
     }
 
-    private WelcomePresenter createPresenter()
+    private LoginPresenter createPresenter()
     {
-        return new WelcomePresenter(Schedulers.immediate(), view, navigator);
+        return new LoginPresenter(Schedulers.immediate(), view, navigator);
     }
 }

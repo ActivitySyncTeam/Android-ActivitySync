@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@color/blue">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/logo"
+                    android:tint="@color/white"
+                    android:layout_centerInParent="true" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="3"
+                android:orientation="vertical"
+                android:layout_centerInParent="true"
+                android:layout_margin="@dimen/screen_margin">
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/text_input_layout_login"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:hintTextAppearance="@style/DefaultFloatingHint">
+
+                    <android.support.v7.widget.AppCompatEditText
+                        style="@style/DefaultEditText"
+                        android:id="@+id/login"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Login / Email"
+                        android:imeOptions="actionNext"
+                        android:drawableLeft="@drawable/ic_account" />
+
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/text_input_layout_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/screen_margin"
+                    app:hintTextAppearance="@style/DefaultFloatingHint">
+
+                    <android.support.v7.widget.AppCompatEditText
+                        style="@style/DefaultEditText"
+                        android:id="@+id/password"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Password"
+                        android:inputType="textPassword"
+                        android:imeOptions="actionDone"
+                        android:drawableLeft="@drawable/ic_lock" />
+
+                </android.support.design.widget.TextInputLayout>
+
+                <Button
+                    android:id="@+id/login_btn"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/default_button_height"
+                    android:layout_marginTop="@dimen/screen_margin_twice"
+                    android:background="#27bc79"
+                    android:textStyle="bold"
+                    android:text="Login"/>
+
+                <TextView
+                    android:id="@+id/create_account"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="No account yet? Create one"
+                    android:textSize="@dimen/text_big_size"
+                    android:gravity="center"
+                    android:layout_marginTop="@dimen/screen_margin"/>
+
+            </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>
