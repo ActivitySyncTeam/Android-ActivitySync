@@ -36,7 +36,6 @@
                 android:layout_height="0dp"
                 android:layout_weight="3"
                 android:orientation="vertical"
-                android:layout_centerInParent="true"
                 android:layout_margin="@dimen/screen_margin">
 
                 <android.support.design.widget.TextInputLayout
@@ -50,7 +49,7 @@
                         android:id="@+id/login"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Login / Email"
+                        android:hint="@string/hint_login"
                         android:imeOptions="actionNext"
                         android:drawableLeft="@drawable/ic_account" />
 
@@ -68,7 +67,7 @@
                         android:id="@+id/password"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Password"
+                        android:hint="@string/hint_password"
                         android:inputType="textPassword"
                         android:imeOptions="actionDone"
                         android:drawableLeft="@drawable/ic_lock" />
@@ -82,13 +81,13 @@
                     android:layout_marginTop="@dimen/screen_margin_twice"
                     android:background="#27bc79"
                     android:textStyle="bold"
-                    android:text="Login"/>
+                    android:text="@string/btn_login"/>
 
                 <TextView
                     android:id="@+id/create_account"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="No account yet? Create one"
+                    android:text="@string/txt_no_account"
                     android:textSize="@dimen/text_big_size"
                     android:gravity="center"
                     android:layout_marginTop="@dimen/screen_margin"/>

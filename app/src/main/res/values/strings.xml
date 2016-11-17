@@ -6,8 +6,6 @@
     <string name="btn_display_test_message">Display test message</string>
     <string name="txt_hello_message">Hi stranger! This app will be awesome!</string>
     <string name="title_dummy_screen">Dummy Screen</string>
-    <string name="btn_login">Login</string>
-    <string name="btn_register">Register</string>
 
     <!-- IntroScreen strings -->
     <string name="txt_intro_easy_organizing">Organizing sport events\nnever have been easier before!</string>
@@ -51,5 +49,11 @@
 
     <!-- ParticipantsScreen strings -->
     <string name="title_participants">Participants list</string>
+
+    <!-- LoginScreen strings -->
+    <string name="btn_login">Login</string>
+    <string name="hint_login">Login / Email</string>
+    <string name="hint_password">Password</string>
+    <string name="txt_no_account">No account yet? Create one</string>
 
 </resources>
