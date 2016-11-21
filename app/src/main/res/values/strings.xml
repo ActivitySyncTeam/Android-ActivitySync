@@ -59,5 +59,9 @@
     <!-- RegisterScreen strings -->
     <string name="txt_already_registered">Already registered! Login me.</string>
     <string name="btn_register">Register</string>
+    <string name="hint_first_name">First Name</string>
+    <string name="hint_last_name">Last Name</string>
+    <string name="hint_email">Email</string>
+    <string name="hint_nick">Nick</string>
 
 </resources>

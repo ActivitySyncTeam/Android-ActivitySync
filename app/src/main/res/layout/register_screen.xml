@@ -56,7 +56,7 @@
                         style="@style/DefaultEditText"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="First Name"
+                        android:hint="@string/hint_first_name"
                         android:imeOptions="actionNext" />
 
                 </android.support.design.widget.TextInputLayout>
@@ -74,7 +74,7 @@
                         style="@style/DefaultEditText"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Last Name"
+                        android:hint="@string/hint_last_name"
                         android:imeOptions="actionNext" />
 
                 </android.support.design.widget.TextInputLayout>
@@ -92,7 +92,7 @@
                     style="@style/DefaultEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Email"
+                    android:hint="@string/hint_email"
                     android:imeOptions="actionNext" />
 
             </android.support.design.widget.TextInputLayout>
@@ -115,7 +115,7 @@
                         style="@style/DefaultEditText"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Nick"
+                        android:hint="@string/hint_nick"
                         android:imeOptions="actionDone" />
 
                 </android.support.design.widget.TextInputLayout>
