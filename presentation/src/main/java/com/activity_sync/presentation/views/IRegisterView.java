@@ -8,21 +8,33 @@ public interface IRegisterView
 
     Observable alreadyRegisteredClick();
 
-    String fullName();
+    String firstName();
 
-    String login();
+    String lastName();
+
+    String nickName();
+
+    String email();
 
     String password();
 
-    void fullNameErrorText(String error);
+    void firstNameErrorText(String error);
 
-    void loginErrorText(String error);
+    void lastNameErrorText(String error);
+
+    void nickNameErrorText(String error);
+
+    void emailErrorText(String error);
 
     void passwordErrorText(String error);
 
-    void fullNameErrorEnabled(boolean enabled);
+    void firstNameErrorEnabled(boolean enabled);
 
-    void loginErrorEnabled(boolean enabled);
+    void lastNameErrorEnabled(boolean enabled);
+
+    void nickNameErrorEnabled(boolean enabled);
+
+    void emailErrorEnabled(boolean enabled);
 
     void passwordErrorEnabled(boolean enabled);
 }

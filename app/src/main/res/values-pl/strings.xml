@@ -39,7 +39,6 @@
     <string name="hint_password">Hasło</string>
     <string name="hint_login">Login / Email</string>
     <string name="btn_register">Stwórz konto</string>
-    <string name="hint_full_name">Pełne imię</string>
     <string name="txt_already_registered">Już mam konto! Zaloguj.</string>
 
 </resources>

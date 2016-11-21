@@ -57,7 +57,6 @@
     <string name="txt_no_account">No account yet? Create one</string>
 
     <!-- RegisterScreen strings -->
-    <string name="hint_full_name">Full name</string>
     <string name="txt_already_registered">Already registered! Login me.</string>
     <string name="btn_register">Register</string>
 

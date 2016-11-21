@@ -30,7 +30,7 @@ public class LoginPresenterTests
     PublishSubject loginBtnClickEvent = PublishSubject.create();
     PublishSubject createAccountClickEvent = PublishSubject.create();
 
-    String login = "login";
+    String login = "email";
     String password = "password";
 
     @Before

@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:background="@color/blue">
+        android:background="@color/blue"
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -23,9 +23,9 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
                     android:src="@drawable/logo"
-                    android:tint="@color/white"
-                    android:layout_centerInParent="true" />
+                    android:tint="@color/white" />
 
             </RelativeLayout>
 
@@ -34,61 +34,113 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:layout_margin="@dimen/screen_margin"
             android:layout_weight="2"
-            android:orientation="vertical"
-            android:layout_margin="@dimen/screen_margin">
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/text_input_layout_first_name"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/screen_margin_half"
+                    android:layout_weight="1"
+                    app:hintTextAppearance="@style/DefaultFloatingHint">
+
+                    <android.support.v7.widget.AppCompatEditText
+                        android:id="@+id/first_name"
+                        style="@style/DefaultEditText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="First Name"
+                        android:imeOptions="actionNext" />
+
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/text_input_layout_last_name"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/screen_margin_half"
+                    android:layout_weight="1"
+                    app:hintTextAppearance="@style/DefaultFloatingHint">
+
+                    <android.support.v7.widget.AppCompatEditText
+                        android:id="@+id/last_name"
+                        style="@style/DefaultEditText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Last Name"
+                        android:imeOptions="actionNext" />
+
+                </android.support.design.widget.TextInputLayout>
+
+            </LinearLayout>
 
             <android.support.design.widget.TextInputLayout
-                android:id="@+id/text_input_layout_full_name"
+                android:id="@+id/text_input_layout_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:hintTextAppearance="@style/DefaultFloatingHint">
 
                 <android.support.v7.widget.AppCompatEditText
+                    android:id="@+id/email"
                     style="@style/DefaultEditText"
-                    android:id="@+id/full_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/hint_full_name"
-                    android:imeOptions="actionNext"
-                    android:drawableLeft="@drawable/ic_account" />
+                    android:hint="Email"
+                    android:imeOptions="actionNext" />
 
             </android.support.design.widget.TextInputLayout>
 
-            <android.support.design.widget.TextInputLayout
-                android:id="@+id/text_input_layout_login"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:hintTextAppearance="@style/DefaultFloatingHint">
+                android:orientation="horizontal">
 
-                <android.support.v7.widget.AppCompatEditText
-                    style="@style/DefaultEditText"
-                    android:id="@+id/login"
-                    android:layout_width="match_parent"
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/text_input_layout_nickname"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:hint="@string/hint_login"
-                    android:imeOptions="actionNext"
-                    android:drawableLeft="@drawable/ic_mail" />
+                    android:layout_marginRight="@dimen/screen_margin_half"
+                    android:layout_weight="1"
+                    app:hintTextAppearance="@style/DefaultFloatingHint">
 
-            </android.support.design.widget.TextInputLayout>
+                    <android.support.v7.widget.AppCompatEditText
+                        android:id="@+id/nickname"
+                        style="@style/DefaultEditText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Nick"
+                        android:imeOptions="actionDone" />
 
-            <android.support.design.widget.TextInputLayout
-                android:id="@+id/text_input_layout_password"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:hintTextAppearance="@style/DefaultFloatingHint">
+                </android.support.design.widget.TextInputLayout>
 
-                <android.support.v7.widget.AppCompatEditText
-                    style="@style/DefaultEditText"
-                    android:id="@+id/password"
-                    android:layout_width="match_parent"
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/text_input_layout_password"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:hint="@string/hint_password"
-                    android:inputType="textPassword"
-                    android:imeOptions="actionDone"
-                    android:drawableLeft="@drawable/ic_lock" />
+                    android:layout_marginLeft="@dimen/screen_margin_half"
+                    android:layout_weight="1"
+                    app:hintTextAppearance="@style/DefaultFloatingHint">
 
-            </android.support.design.widget.TextInputLayout>
+                    <android.support.v7.widget.AppCompatEditText
+                        android:id="@+id/password"
+                        style="@style/DefaultEditText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/hint_password"
+                        android:imeOptions="actionDone"
+                        android:inputType="textPassword" />
+
+                </android.support.design.widget.TextInputLayout>
+
+            </LinearLayout>
+
 
             <Button
                 android:id="@+id/register_btn"
@@ -96,17 +148,17 @@
                 android:layout_height="@dimen/default_button_height"
                 android:layout_marginTop="@dimen/screen_margin_twice"
                 android:background="#27bc79"
-                android:textStyle="bold"
-                android:text="@string/btn_register"/>
+                android:text="@string/btn_register"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/already_registered"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/txt_already_registered"
-                android:textSize="@dimen/text_big_size"
+                android:layout_marginTop="@dimen/screen_margin"
                 android:gravity="center"
-                android:layout_marginTop="@dimen/screen_margin"/>
+                android:text="@string/txt_already_registered"
+                android:textSize="@dimen/text_big_size" />
 
         </LinearLayout>
 

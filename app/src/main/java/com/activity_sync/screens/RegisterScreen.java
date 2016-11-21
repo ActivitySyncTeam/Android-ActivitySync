@@ -33,20 +33,32 @@ public class RegisterScreen extends Screen implements IRegisterView
     @Bind(R.id.already_registered)
     TextView alreadyRegisteredTv;
 
-    @Bind(R.id.text_input_layout_full_name)
-    TextInputLayout inputFullNameLayout;
+    @Bind(R.id.text_input_layout_first_name)
+    TextInputLayout inputFirstNameLayout;
 
-    @Bind(R.id.text_input_layout_login)
+    @Bind(R.id.text_input_layout_last_name)
+    TextInputLayout inputLastNameLayout;
+
+    @Bind(R.id.text_input_layout_email)
     TextInputLayout inputLoginLayout;
+
+    @Bind(R.id.text_input_layout_nickname)
+    TextInputLayout inputNickNameLayout;
 
     @Bind(R.id.text_input_layout_password)
     TextInputLayout inputPasswordLayout;
 
-    @Bind(R.id.full_name)
-    AppCompatEditText fullNameEditText;
+    @Bind(R.id.first_name)
+    AppCompatEditText firstNameEditText;
 
-    @Bind(R.id.login)
-    AppCompatEditText loginEditText;
+    @Bind(R.id.last_name)
+    AppCompatEditText lastNameEditText;
+
+    @Bind(R.id.email)
+    AppCompatEditText emailEditText;
+
+    @Bind(R.id.nickname)
+    AppCompatEditText nickNameEditText;
 
     @Bind(R.id.password)
     AppCompatEditText passwordEditText;
@@ -84,15 +96,27 @@ public class RegisterScreen extends Screen implements IRegisterView
     }
 
     @Override
-    public String fullName()
+    public String firstName()
     {
-        return fullNameEditText.getText().toString();
+        return firstNameEditText.getText().toString();
     }
 
     @Override
-    public String login()
+    public String lastName()
     {
-        return loginEditText.getText().toString();
+        return lastNameEditText.getText().toString();
+    }
+
+    @Override
+    public String nickName()
+    {
+        return nickNameEditText.getText().toString();
+    }
+
+    @Override
+    public String email()
+    {
+        return emailEditText.getText().toString();
     }
 
     @Override
@@ -102,13 +126,25 @@ public class RegisterScreen extends Screen implements IRegisterView
     }
 
     @Override
-    public void fullNameErrorText(String error)
+    public void firstNameErrorText(String error)
     {
-        inputFullNameLayout.setError(error);
+        inputFirstNameLayout.setError(error);
     }
 
     @Override
-    public void loginErrorText(String error)
+    public void lastNameErrorText(String error)
+    {
+        inputLastNameLayout.setError(error);
+    }
+
+    @Override
+    public void nickNameErrorText(String error)
+    {
+        inputNickNameLayout.setError(error);
+    }
+
+    @Override
+    public void emailErrorText(String error)
     {
         inputLoginLayout.setError(error);
     }
@@ -120,13 +156,25 @@ public class RegisterScreen extends Screen implements IRegisterView
     }
 
     @Override
-    public void fullNameErrorEnabled(boolean enabled)
+    public void firstNameErrorEnabled(boolean enabled)
     {
-        inputFullNameLayout.setErrorEnabled(enabled);
+        inputFirstNameLayout.setErrorEnabled(enabled);
     }
 
     @Override
-    public void loginErrorEnabled(boolean enabled)
+    public void lastNameErrorEnabled(boolean enabled)
+    {
+        inputLastNameLayout.setErrorEnabled(enabled);
+    }
+
+    @Override
+    public void nickNameErrorEnabled(boolean enabled)
+    {
+        inputNickNameLayout.setErrorEnabled(enabled);
+    }
+
+    @Override
+    public void emailErrorEnabled(boolean enabled)
     {
         inputLoginLayout.setErrorEnabled(enabled);
     }
@@ -139,12 +187,12 @@ public class RegisterScreen extends Screen implements IRegisterView
 
     private void prepareEditTexts()
     {
-        fullNameEditText.addTextChangedListener(new TextWatcher()
+        firstNameEditText.addTextChangedListener(new TextWatcher()
         {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after)
             {
-                fullNameErrorEnabled(false);
+                firstNameErrorEnabled(false);
             }
 
             @Override
@@ -158,12 +206,50 @@ public class RegisterScreen extends Screen implements IRegisterView
             }
         });
 
-        loginEditText.addTextChangedListener(new TextWatcher()
+        lastNameEditText.addTextChangedListener(new TextWatcher()
         {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after)
             {
-                loginErrorEnabled(false);
+                lastNameErrorEnabled(false);
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count)
+            {
+            }
+
+            @Override
+            public void afterTextChanged(Editable s)
+            {
+            }
+        });
+
+        emailEditText.addTextChangedListener(new TextWatcher()
+        {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after)
+            {
+                emailErrorEnabled(false);
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count)
+            {
+            }
+
+            @Override
+            public void afterTextChanged(Editable s)
+            {
+            }
+        });
+
+        nickNameEditText.addTextChangedListener(new TextWatcher()
+        {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after)
+            {
+                nickNameErrorEnabled(false);
             }
 
             @Override

@@ -30,17 +30,21 @@ public class RegisterPresenterTests
     PublishSubject regsiterBtnClickEvent = PublishSubject.create();
     PublishSubject alreadyRegisteredClickEvent = PublishSubject.create();
 
-    String fullName = "Full name";
-    String login = "login";
-    String password = "password";
+    String firstName = "First name";
+    String lastName = "Last name";
+    String email = "Email";
+    String nickName = "Nick name";
+    String password = "Password";
 
     @Before
     public void setup()
     {
         Mockito.when(view.registerBtnClick()).thenReturn(regsiterBtnClickEvent);
         Mockito.when(view.alreadyRegisteredClick()).thenReturn(alreadyRegisteredClickEvent);
-        Mockito.when(view.fullName()).thenReturn(fullName);
-        Mockito.when(view.login()).thenReturn(login);
+        Mockito.when(view.firstName()).thenReturn(firstName);
+        Mockito.when(view.lastName()).thenReturn(lastName);
+        Mockito.when(view.email()).thenReturn(email);
+        Mockito.when(view.nickName()).thenReturn(nickName);
         Mockito.when(view.password()).thenReturn(password);
     }
 
@@ -65,31 +69,59 @@ public class RegisterPresenterTests
     }
 
     @Test
-    public void registerPresenter_clickRegisterBtn_fullNameEmptyError()
+    public void registerPresenter_clickRegisterBtn_firstNameEmptyError()
     {
-        Mockito.when(view.fullName()).thenReturn(StringUtils.EMPTY);
+        Mockito.when(view.firstName()).thenReturn(StringUtils.EMPTY);
 
         RegisterPresenter registerPresenter = createPresenter();
         registerPresenter.start();
 
         regsiterBtnClickEvent.onNext(this);
         Mockito.verify(navigator, never()).openEventsScreen();
-        Mockito.verify(view).fullNameErrorEnabled(true);
-        Mockito.verify(view).fullNameErrorText(anyString());
+        Mockito.verify(view).firstNameErrorEnabled(true);
+        Mockito.verify(view).firstNameErrorText(anyString());
     }
 
     @Test
-    public void registerPresenter_clickRegisterBtn_loginEmptyError()
+    public void registerPresenter_clickRegisterBtn_lastNameEmptyError()
     {
-        Mockito.when(view.login()).thenReturn(StringUtils.EMPTY);
+        Mockito.when(view.lastName()).thenReturn(StringUtils.EMPTY);
 
         RegisterPresenter registerPresenter = createPresenter();
         registerPresenter.start();
 
         regsiterBtnClickEvent.onNext(this);
         Mockito.verify(navigator, never()).openEventsScreen();
-        Mockito.verify(view).loginErrorEnabled(true);
-        Mockito.verify(view).loginErrorText(anyString());
+        Mockito.verify(view).lastNameErrorEnabled(true);
+        Mockito.verify(view).lastNameErrorText(anyString());
+    }
+
+    @Test
+    public void registerPresenter_clickRegisterBtn_emailEmptyError()
+    {
+        Mockito.when(view.email()).thenReturn(StringUtils.EMPTY);
+
+        RegisterPresenter registerPresenter = createPresenter();
+        registerPresenter.start();
+
+        regsiterBtnClickEvent.onNext(this);
+        Mockito.verify(navigator, never()).openEventsScreen();
+        Mockito.verify(view).emailErrorEnabled(true);
+        Mockito.verify(view).emailErrorText(anyString());
+    }
+
+    @Test
+    public void registerPresenter_clickRegisterBtn_nickNameEmptyError()
+    {
+        Mockito.when(view.nickName()).thenReturn(StringUtils.EMPTY);
+
+        RegisterPresenter registerPresenter = createPresenter();
+        registerPresenter.start();
+
+        regsiterBtnClickEvent.onNext(this);
+        Mockito.verify(navigator, never()).openEventsScreen();
+        Mockito.verify(view).nickNameErrorEnabled(true);
+        Mockito.verify(view).nickNameErrorText(anyString());
     }
 
     @Test

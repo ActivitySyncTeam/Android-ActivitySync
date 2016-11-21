@@ -29,17 +29,31 @@ public class RegisterPresenter extends Presenter<IRegisterView>
 
                     boolean canContinue = true;
 
-                    if (StringUtils.isNullOrEmpty(view.fullName()))
+                    if (StringUtils.isNullOrEmpty(view.firstName()))
                     {
-                        view.fullNameErrorEnabled(true);
-                        view.fullNameErrorText("Please provide your full name");
+                        view.firstNameErrorEnabled(true);
+                        view.firstNameErrorText("Please provide your first name");
                         canContinue = false;
                     }
 
-                    if (StringUtils.isNullOrEmpty(view.login()))
+                    if (StringUtils.isNullOrEmpty(view.lastName()))
                     {
-                        view.loginErrorEnabled(true);
-                        view.loginErrorText("Please provide your login");
+                        view.lastNameErrorEnabled(true);
+                        view.lastNameErrorText("Please provide your last name");
+                        canContinue = false;
+                    }
+
+                    if (StringUtils.isNullOrEmpty(view.email()))
+                    {
+                        view.emailErrorEnabled(true);
+                        view.emailErrorText("Please provide your email");
+                        canContinue = false;
+                    }
+
+                    if (StringUtils.isNullOrEmpty(view.nickName()))
+                    {
+                        view.nickNameErrorEnabled(true);
+                        view.nickNameErrorText("Please provide your nick");
                         canContinue = false;
                     }
 

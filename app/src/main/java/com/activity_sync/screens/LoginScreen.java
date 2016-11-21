@@ -33,13 +33,13 @@ public class LoginScreen extends Screen implements ILoginView
     @Bind(R.id.create_account)
     TextView createAccountTv;
 
-    @Bind(R.id.text_input_layout_login)
+    @Bind(R.id.text_input_layout_email)
     TextInputLayout inputLoginLayout;
 
     @Bind(R.id.text_input_layout_password)
     TextInputLayout inputPasswordLayout;
 
-    @Bind(R.id.login)
+    @Bind(R.id.email)
     AppCompatEditText loginEditText;
 
     @Bind(R.id.password)
