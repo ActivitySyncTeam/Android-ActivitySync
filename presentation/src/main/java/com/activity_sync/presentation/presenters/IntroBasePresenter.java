@@ -24,14 +24,14 @@ public class IntroBasePresenter extends Presenter<IIntroBaseView>
         subscriptions.add(view.skipButtonClicked()
                 .observeOn(uiThread)
                 .subscribe(o -> {
-                    navigator.openWelcomeScreen();
+                    navigator.openLoginScreen();
                 })
         );
 
         subscriptions.add(view.doneButtonClicked()
                 .observeOn(uiThread)
                 .subscribe(o -> {
-                    navigator.openWelcomeScreen();
+                    navigator.openLoginScreen();
                 })
         );
     }

@@ -144,7 +144,7 @@ public class RegisterScreen extends Screen implements IRegisterView
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after)
             {
-                loginErrorEnabled(false);
+                fullNameErrorEnabled(false);
             }
 
             @Override

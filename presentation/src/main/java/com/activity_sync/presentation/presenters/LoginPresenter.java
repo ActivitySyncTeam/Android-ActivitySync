@@ -53,7 +53,7 @@ public class LoginPresenter extends Presenter<ILoginView>
         subscriptions.add(view.createAccountClick()
                 .observeOn(uiThread)
                 .subscribe(o -> {
-                    navigator.openEventsScreen();
+                    navigator.openRegisterScreen();
                 })
         );
     }
