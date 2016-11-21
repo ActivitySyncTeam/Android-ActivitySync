@@ -1,6 +1,10 @@
 package com.activity_sync.screens;
 
 import android.os.Bundle;
+import android.support.design.widget.TextInputLayout;
+import android.support.v7.widget.AppCompatEditText;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -29,6 +33,18 @@ public class LoginScreen extends Screen implements ILoginView
     @Bind(R.id.create_account)
     TextView createAccountTv;
 
+    @Bind(R.id.text_input_layout_login)
+    TextInputLayout inputLoginLayout;
+
+    @Bind(R.id.text_input_layout_password)
+    TextInputLayout inputPasswordLayout;
+
+    @Bind(R.id.login)
+    AppCompatEditText loginEditText;
+
+    @Bind(R.id.password)
+    AppCompatEditText passwordEditText;
+
     public LoginScreen()
     {
         super(R.layout.login_screen);
@@ -39,6 +55,44 @@ public class LoginScreen extends Screen implements ILoginView
     {
         App.component(this).inject(this);
         super.onCreate(savedInstanceState);
+
+        loginEditText.addTextChangedListener(new TextWatcher()
+        {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after)
+            {
+                loginErrorEnabled(false);
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count)
+            {
+            }
+
+            @Override
+            public void afterTextChanged(Editable s)
+            {
+            }
+        });
+
+        passwordEditText.addTextChangedListener(new TextWatcher()
+        {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after)
+            {
+                passwordErrorEnabled(false);
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count)
+            {
+            }
+
+            @Override
+            public void afterTextChanged(Editable s)
+            {
+            }
+        });
     }
 
     @Override
@@ -57,5 +111,41 @@ public class LoginScreen extends Screen implements ILoginView
     public Observable createAccountClick()
     {
         return ViewObservable.clicks(createAccountTv);
+    }
+
+    @Override
+    public String login()
+    {
+        return loginEditText.getText().toString();
+    }
+
+    @Override
+    public String password()
+    {
+        return passwordEditText.getText().toString();
+    }
+
+    @Override
+    public void loginErrorText(String error)
+    {
+        inputLoginLayout.setError(error);
+    }
+
+    @Override
+    public void passwordErrorText(String error)
+    {
+        inputPasswordLayout.setError(error);
+    }
+
+    @Override
+    public void loginErrorEnabled(boolean enabled)
+    {
+        inputLoginLayout.setErrorEnabled(enabled);
+    }
+
+    @Override
+    public void passwordErrorEnabled(boolean enabled)
+    {
+        inputPasswordLayout.setErrorEnabled(enabled);
     }
 }

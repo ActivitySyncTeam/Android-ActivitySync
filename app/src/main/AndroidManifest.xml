@@ -27,10 +27,17 @@
         </activity>
 
         <activity android:name=".screens.DummyScreen"/>
-        <activity android:name=".screens.LoginScreen"/>
+
+        <activity
+            android:name=".screens.LoginScreen"
+            android:theme="@style/AppTheme.LoginScreen"/>
+
         <activity android:name=".screens.EventsScreen"/>
+
         <activity android:name=".screens.EventDetailsScreen"/>
+
         <activity android:name=".screens.UserDetailsScreen"/>
+
         <activity android:name=".screens.ParticipantsScreen"/>
 
         <meta-data
