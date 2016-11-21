@@ -8,6 +8,7 @@ import com.activity_sync.screens.EventsScreen;
 import com.activity_sync.screens.IntroLastScreen;
 import com.activity_sync.screens.IntroScreen;
 import com.activity_sync.screens.ParticipantsScreen;
+import com.activity_sync.screens.RegisterScreen;
 import com.activity_sync.screens.SplashScreen;
 import com.activity_sync.screens.LoginScreen;
 
@@ -52,4 +53,6 @@ public interface DiComponent
     void inject(ParticipantsScreen participantsScreen);
 
     void inject(SplashScreen splashScreen);
+
+    void inject(RegisterScreen registerScreen);
 }

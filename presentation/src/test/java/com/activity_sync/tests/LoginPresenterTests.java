@@ -34,7 +34,7 @@ public class LoginPresenterTests
     }
 
     @Test
-    public void welcomePresenter_clickLoginBtn_openEventsScreen()
+    public void loginPresenter_clickLoginBtn_openEventsScreen()
     {
         LoginPresenter loginPresenter = createPresenter();
         loginPresenter.start();
@@ -44,7 +44,7 @@ public class LoginPresenterTests
     }
 
     @Test
-    public void welcomePresenter_clickRegisterBtn_openEventsScreen()
+    public void loginPresenter_clickRegisterBtn_openEventsScreen()
     {
         LoginPresenter loginPresenter = createPresenter();
         loginPresenter.start();

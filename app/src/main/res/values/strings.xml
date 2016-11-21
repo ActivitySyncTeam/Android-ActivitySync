@@ -37,7 +37,7 @@
     <string name="title_user_details">User details</string>
     <string name="txt_username">Username</string>
     <string name="txt_name">Name</string>
-    <string name="txt_lastname">Lastname</string>
+    <string name="txt_last_name">Last name</string>
     <string name="txt_email">E-mail</string>
     <string name="txt_credibility">Credibility</string>
     <string name="txt_very_good">Very good</string>
@@ -55,5 +55,10 @@
     <string name="hint_login">Login / Email</string>
     <string name="hint_password">Password</string>
     <string name="txt_no_account">No account yet? Create one</string>
+
+    <!-- RegisterScreen strings -->
+    <string name="hint_full_name">Full name</string>
+    <string name="txt_already_registered">Already registered! Login me.</string>
+    <string name="btn_register">Register</string>
 
 </resources>

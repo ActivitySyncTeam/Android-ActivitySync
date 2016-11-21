@@ -32,6 +32,10 @@
             android:name=".screens.LoginScreen"
             android:theme="@style/AppTheme.LoginScreen"/>
 
+        <activity
+            android:name=".screens.RegisterScreen"
+            android:theme="@style/AppTheme.LoginScreen"/>
+
         <activity android:name=".screens.EventsScreen"/>
 
         <activity android:name=".screens.EventDetailsScreen"/>
