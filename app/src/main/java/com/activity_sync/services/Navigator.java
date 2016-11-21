@@ -28,9 +28,15 @@ public class Navigator implements INavigator
     }
 
     @Override
-    public void openWelcomeScreen()
+    public void openLoginScreen()
     {
         this.startActivity(getIntent(LoginScreen.class));
+    }
+
+    @Override
+    public void openRegisterScreen()
+    {
+        this.startActivity(getIntent(RegisterScreen.class));
     }
 
     @Override
