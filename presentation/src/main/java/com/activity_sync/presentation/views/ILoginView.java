@@ -19,4 +19,6 @@ public interface ILoginView
     void loginErrorEnabled(boolean enabled);
 
     void passwordErrorEnabled(boolean enabled);
+
+    String emptyFieldErrorText();
 }

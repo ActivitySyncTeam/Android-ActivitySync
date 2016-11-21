@@ -37,4 +37,6 @@ public interface IRegisterView
     void emailErrorEnabled(boolean enabled);
 
     void passwordErrorEnabled(boolean enabled);
+
+    String emptyFieldErrorText();
 }

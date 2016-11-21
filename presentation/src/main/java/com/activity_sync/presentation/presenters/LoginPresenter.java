@@ -32,14 +32,14 @@ public class LoginPresenter extends Presenter<ILoginView>
                     if (StringUtils.isNullOrEmpty(view.login()))
                     {
                         view.loginErrorEnabled(true);
-                        view.loginErrorText("Please provide your email");
+                        view.loginErrorText(view.emptyFieldErrorText());
                         canContinue = false;
                     }
 
                     if (StringUtils.isNullOrEmpty(view.password()))
                     {
                         view.passwordErrorEnabled(true);
-                        view.passwordErrorText("Please provide your password");
+                        view.passwordErrorText(view.emptyFieldErrorText());
                         canContinue = false;
                     }
 

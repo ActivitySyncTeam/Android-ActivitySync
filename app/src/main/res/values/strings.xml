@@ -63,5 +63,6 @@
     <string name="hint_last_name">Last Name</string>
     <string name="hint_email">Email</string>
     <string name="hint_nick">Nick</string>
+    <string name="err_empty_field">This field cannot be empty</string>
 
 </resources>

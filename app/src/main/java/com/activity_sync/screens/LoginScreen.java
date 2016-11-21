@@ -113,6 +113,12 @@ public class LoginScreen extends Screen implements ILoginView
         inputPasswordLayout.setErrorEnabled(enabled);
     }
 
+    @Override
+    public String emptyFieldErrorText()
+    {
+        return getString(R.string.err_empty_field);
+    }
+
     private void prepareEditTexts()
     {
         loginEditText.addTextChangedListener(new TextWatcher()

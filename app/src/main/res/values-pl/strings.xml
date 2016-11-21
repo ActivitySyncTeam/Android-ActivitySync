@@ -44,5 +44,6 @@
     <string name="hint_first_name">Imię</string>
     <string name="hint_last_name">Nazwisko</string>
     <string name="hint_nick">Nick</string>
+    <string name="err_empty_field">To pole nie może być puste</string>
 
 </resources>

@@ -35,12 +35,14 @@ public class RegisterPresenterTests
     String email = "Email";
     String nickName = "Nick name";
     String password = "Password";
+    String emptyFieldError = "Error";
 
     @Before
     public void setup()
     {
         Mockito.when(view.registerBtnClick()).thenReturn(registerBtnClickEvent);
         Mockito.when(view.alreadyRegisteredClick()).thenReturn(alreadyRegisteredClickEvent);
+        Mockito.when(view.emptyFieldErrorText()).thenReturn(emptyFieldError);
         Mockito.when(view.firstName()).thenReturn(firstName);
         Mockito.when(view.lastName()).thenReturn(lastName);
         Mockito.when(view.email()).thenReturn(email);
