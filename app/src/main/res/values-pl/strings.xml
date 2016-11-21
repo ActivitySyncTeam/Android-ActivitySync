@@ -36,5 +36,7 @@
     <string name="txt_very_good">Bardzo dobra</string>
     <string name="title_participants">Lista uczestników</string>
     <string name="title_user_details">Szczegóły użytkownika</string>
+    <string name="search_toolbar_discipline_hint">Dyscyplina</string>
+    <string name="btn_search_toolbar_search">Szukaj</string>
 
 </resources>

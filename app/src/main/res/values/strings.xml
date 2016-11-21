@@ -25,6 +25,7 @@
     <string name="title_events">Events</string>
     <string name="tab_all_events">All events</string>
     <string name="tab_my_events">My events</string>
+    <string name="btn_search_toolbar_search">Search</string>
 
     <!-- EventDetailsScreen strings -->
     <string name="btn_join_event">Join this event</string>
@@ -51,5 +52,5 @@
 
     <!-- ParticipantsScreen strings -->
     <string name="title_participants">Participants list</string>
-
+    <string name="search_toolbar_discipline_hint">Discipline</string>
 </resources>
