@@ -26,11 +26,16 @@ public class LoginPresenterTests
     PublishSubject loginBtnClickEvent = PublishSubject.create();
     PublishSubject createAccountClickEvent = PublishSubject.create();
 
+    String login = "login";
+    String password = "password";
+
     @Before
     public void setup()
     {
         Mockito.when(view.loginBtnClick()).thenReturn(loginBtnClickEvent);
         Mockito.when(view.createAccountClick()).thenReturn(createAccountClickEvent);
+        Mockito.when(view.login()).thenReturn(login);
+        Mockito.when(view.password()).thenReturn(password);
     }
 
     @Test
@@ -44,13 +49,13 @@ public class LoginPresenterTests
     }
 
     @Test
-    public void loginPresenter_clickRegisterBtn_openEventsScreen()
+    public void loginPresenter_clickRegisterBtn_openRegsiterScreen()
     {
         LoginPresenter loginPresenter = createPresenter();
         loginPresenter.start();
 
         createAccountClickEvent.onNext(this);
-        Mockito.verify(navigator).openEventsScreen();
+        Mockito.verify(navigator).openRegisterScreen();
     }
 
     private LoginPresenter createPresenter()
