@@ -3,7 +3,6 @@ package com.activity_sync.screens;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.preference.PreferenceManager;
 
 import com.activity_sync.App;
 import com.activity_sync.R;
@@ -35,7 +34,6 @@ public class IntroScreen extends AppIntro2 implements IIntroBaseView
     protected void onCreate(Bundle savedInstanceState)
     {
         App.component(this).inject(this);
-        PreferenceManager.setDefaultValues(this, R.xml.settings, false);
         super.onCreate(savedInstanceState);
 
         addSlide(new IntroHappyScreen());

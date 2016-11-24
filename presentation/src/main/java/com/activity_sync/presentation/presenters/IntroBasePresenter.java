@@ -25,7 +25,7 @@ public class IntroBasePresenter extends Presenter<IIntroBaseView>
     {
         super.start();
 
-        permanentStorage.save(IPermanentStorage.IS_APP_OPENED_BEFORE, true);
+        permanentStorage.saveBoolean(IPermanentStorage.IS_APP_OPENED_BEFORE, true);
 
         subscriptions.add(view.skipButtonClicked()
                 .observeOn(uiThread)

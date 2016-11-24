@@ -53,5 +53,7 @@
     <string name="pref_notification_switch">Włącz powiadomienia</string>
     <string name="pref_notification_sound_chk">Dźwięk powiadomienia</string>
     <string name="pref_notification_vibration_chk">Wibracje powiadomienia</string>
+    <string name="pref_cat_search">Domyślne wartości wyszukiwania</string>
+    <string name="pref_search_days">Zakres wyzukiwania (w dniach)</string>
 
 </resources>

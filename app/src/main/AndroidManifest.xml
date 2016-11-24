@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.activity_sync">
+          package="com.activity_sync">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.INTERNET"/>
@@ -15,9 +15,9 @@
             android:name=".screens.SplashScreen"
             android:theme="@style/SplashTheme">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.MAIN"/>
 
-                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
 
@@ -30,13 +30,13 @@
 
         <activity
             android:name=".screens.LoginScreen"
-            android:theme="@style/AppTheme.LoginScreen"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.LoginScreen"/>
 
         <activity
             android:name=".screens.RegisterScreen"
-            android:theme="@style/AppTheme.LoginScreen"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.LoginScreen"/>
 
         <activity android:name=".screens.EventsScreen"/>
 
@@ -45,6 +45,7 @@
         <activity android:name=".screens.UserDetailsScreen"/>
 
         <activity android:name=".screens.ParticipantsScreen"/>
+
         <activity android:name=".screens.SettingsScreen"/>
 
         <meta-data
