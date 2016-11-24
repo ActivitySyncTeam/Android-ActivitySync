@@ -14,6 +14,8 @@ import org.mockito.runners.MockitoJUnitRunner;
 import rx.schedulers.Schedulers;
 import rx.subjects.PublishSubject;
 
+import static org.mockito.Matchers.any;
+
 @RunWith(MockitoJUnitRunner.class)
 public class EventDetailsPresenterTests
 {
@@ -23,25 +25,94 @@ public class EventDetailsPresenterTests
     @Mock
     IEventDetailsView view;
 
-    PublishSubject joinEventClickEvent = PublishSubject.create();
+    PublishSubject joinLeaveEventClickEvent = PublishSubject.create();
+    PublishSubject cancelEventClickEvent = PublishSubject.create();
+    PublishSubject joinEventConfirmEvent = PublishSubject.create();
+    PublishSubject leaveEventConfirmEvent = PublishSubject.create();
+    PublishSubject cancelEventConfirmEvent = PublishSubject.create();
     PublishSubject organizerDetailsClickEvent = PublishSubject.create();
     PublishSubject participantsClickEvent = PublishSubject.create();
+
+    int eventId = 1;
 
     @Before
     public void setup()
     {
-        Mockito.when(view.joinLeaveEventClick()).thenReturn(joinEventClickEvent);
+        Mockito.when(view.joinLeaveEventClick()).thenReturn(joinLeaveEventClickEvent);
+        Mockito.when(view.cancelEventClick()).thenReturn(cancelEventClickEvent);
+
+        Mockito.when(view.joinEventConfirmClick()).thenReturn(joinEventConfirmEvent);
+        Mockito.when(view.leaveEventConfirmClick()).thenReturn(leaveEventConfirmEvent);
+        Mockito.when(view.cancelEventConfirmClick()).thenReturn(cancelEventConfirmEvent);
+
         Mockito.when(view.organizerDetailsClick()).thenReturn(organizerDetailsClickEvent);
         Mockito.when(view.participantsDetailsClick()).thenReturn(participantsClickEvent);
     }
 
     @Test
-    public void eventDetailsPresenter_clickJoinEvent_openEventsScreen()
+    public void eventDetailsPresenter_clickJoinEvent_displayJoinConfirmationDialog()
+    {
+        EventDetailsPresenter presenter = createPresenter();
+        presenter.start();
+        presenter.createEvent(false, false, false); //will be deleted when api
+
+        joinLeaveEventClickEvent.onNext(this);
+        Mockito.verify(view).showJoinConfirmationDialog();
+    }
+
+    @Test
+    public void eventDetailsPresenter_clickCancelEvent_displayCancelConfirmationDialog()
     {
         EventDetailsPresenter presenter = createPresenter();
         presenter.start();
 
-        joinEventClickEvent.onNext(this);
+        cancelEventClickEvent.onNext(this);
+        Mockito.verify(view).showCancelConfirmationDialog();
+    }
+
+    @Test
+    public void eventDetailsPresenter_clickLeaveEvent_displayLeaveConfirmationDialog()
+    {
+        EventDetailsPresenter presenter = createPresenter();
+        presenter.start();
+        presenter.createEvent(false, true, false);  //will be deleted when api
+
+        joinLeaveEventClickEvent.onNext(this);
+        Mockito.verify(view).showLeaveConfirmationDialog();
+    }
+
+    @Test
+    public void eventDetailsPresenter_clickConfirmJoinEvent_showJoinMessage()
+    {
+        EventDetailsPresenter presenter = createPresenter();
+        presenter.start();
+        presenter.createEvent(false, false, false); //will be deleted when api
+
+        joinEventConfirmEvent.onNext(this);
+        Mockito.verify(view).setOrganizerParticipantView(any());
+        Mockito.verify(view).showJoinEventMessage();
+    }
+
+    @Test
+    public void eventDetailsPresenter_clickConfirmLeaveEvent_showLeaveMessage()
+    {
+        EventDetailsPresenter presenter = createPresenter();
+        presenter.start();
+        presenter.createEvent(false, false, false); //will be deleted when api
+
+        leaveEventConfirmEvent.onNext(this);
+        Mockito.verify(view).setOrganizerParticipantView(any());
+        Mockito.verify(view).showLeaveEventMessage();
+    }
+
+    @Test
+    public void eventDetailsPresenter_clickConfirmCancelEvent_openEventsScreen()
+    {
+        EventDetailsPresenter presenter = createPresenter();
+        presenter.start();
+        presenter.createEvent(false, false, false); //will be deleted when api
+
+        cancelEventConfirmEvent.onNext(this);
         Mockito.verify(navigator).openEventsScreen();
     }
 
@@ -67,6 +138,6 @@ public class EventDetailsPresenterTests
 
     private EventDetailsPresenter createPresenter()
     {
-        return new EventDetailsPresenter(Schedulers.immediate(), view, navigator);
+        return new EventDetailsPresenter(Schedulers.immediate(), view, navigator, eventId);
     }
 }

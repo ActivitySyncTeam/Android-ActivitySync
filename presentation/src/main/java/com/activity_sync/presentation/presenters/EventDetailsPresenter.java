@@ -35,30 +35,7 @@ public class EventDetailsPresenter extends Presenter<IEventDetailsView>
     {
         super.start();
 
-        event = new EventBuilder()
-                .setId(eventId)
-                .setUser(new UserBuilder()
-                        .setUserDetails(new UserDetailsBuilder()
-                                .setUserName("mzielu")
-                                .createUserDetails())
-                        .createUser())
-                .setDiscipline(new DisciplineBuilder()
-                        .setName("Basketball")
-                        .createDiscipline())
-                .setLocation(new LocationBuilder()
-                        .setName("Park Jordana")
-                        .createLocation())
-                .setMaxPlaces(12)
-                .setOccupiedPlaces(7)
-                .setDate(new Date("2016/11/01"))
-                .setLevel(new LevelBuilder()
-                        .setName("medium")
-                        .createLevel())
-                .setDescription("Very long text written in order to check if two lines of text here are displaying correctly. Yeah!")
-                .setIsActive(true)
-                .setIsParticipant(false)
-                .setIsOrganizer(true)
-                .createEvent();
+        createEvent(true, false, true);
 
         view.setEventData(event);
 
@@ -121,5 +98,33 @@ public class EventDetailsPresenter extends Presenter<IEventDetailsView>
                     navigator.openParticipantsScreen();
                 })
         );
+    }
+
+    public void createEvent(boolean isActive, boolean isParticipant, boolean isOrganizer)      //for tests purposes, delete when api provided
+    {
+        event = new EventBuilder()
+                .setId(eventId)
+                .setUser(new UserBuilder()
+                        .setUserDetails(new UserDetailsBuilder()
+                                .setUserName("mzielu")
+                                .createUserDetails())
+                        .createUser())
+                .setDiscipline(new DisciplineBuilder()
+                        .setName("Basketball")
+                        .createDiscipline())
+                .setLocation(new LocationBuilder()
+                        .setName("Park Jordana")
+                        .createLocation())
+                .setMaxPlaces(12)
+                .setOccupiedPlaces(7)
+                .setDate(new Date("2016/11/01"))
+                .setLevel(new LevelBuilder()
+                        .setName("medium")
+                        .createLevel())
+                .setDescription("Very long text written in order to check if two lines of text here are displaying correctly. Yeah!")
+                .setIsActive(isActive)
+                .setIsParticipant(isParticipant)
+                .setIsOrganizer(isOrganizer)
+                .createEvent();
     }
 }
