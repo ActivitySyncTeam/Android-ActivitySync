@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.annotation.StringRes;
 import android.support.design.widget.NavigationView;
-import android.support.v4.media.session.PlaybackStateCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.view.MenuItem;
@@ -27,15 +26,14 @@ public abstract class ScreenWithMenu extends Screen
     @Bind(R.id.navigation_drawer_layout)
     DrawerLayout drawerLayout;
 
-    @PlaybackStateCompat.State
-    int selectedItem;
-
     private MenuNavigator menuNavigator;
 
     protected ScreenWithMenu(int layoutResId)
     {
         super(layoutResId);
     }
+
+    protected abstract int getMenuId();
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -89,9 +87,8 @@ public abstract class ScreenWithMenu extends Screen
         menuNavigator = new MenuNavigator(new Navigator(this), () -> this.drawerLayout.closeDrawers());
         menuNavigator.addAction(R.id.menu_dummy, INavigator::openDummyScreen);
         menuNavigator.addAction(R.id.menu_events, INavigator::openEventsScreen);
-
         navigationView.setNavigationItemSelectedListener(menuItem -> {
-            if (menuItem.getItemId() == selectedItem)
+            if (getMenuId() == menuItem.getItemId())
             {
                 drawerLayout.closeDrawers();
                 return true;
@@ -142,7 +139,6 @@ public abstract class ScreenWithMenu extends Screen
             {
                 return;
             }
-
             onBeforeAction.execute();
             actions.get(id).execute(navigator);
         }
