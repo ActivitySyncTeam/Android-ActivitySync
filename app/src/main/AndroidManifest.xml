@@ -12,19 +12,38 @@
         android:theme="@style/AppTheme">
 
         <activity
-            android:name=".screens.IntroScreen"
-            android:screenOrientation="portrait">
+            android:name=".screens.SplashScreen"
+            android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
+        <activity
+            android:name=".screens.IntroScreen"
+            android:screenOrientation="portrait">
+        </activity>
+
         <activity android:name=".screens.DummyScreen"/>
-        <activity android:name=".screens.WelcomeScreen"/>
+
+        <activity
+            android:name=".screens.LoginScreen"
+            android:theme="@style/AppTheme.LoginScreen"
+            android:screenOrientation="portrait"/>
+
+        <activity
+            android:name=".screens.RegisterScreen"
+            android:theme="@style/AppTheme.LoginScreen"
+            android:screenOrientation="portrait"/>
+
         <activity android:name=".screens.EventsScreen"/>
+
         <activity android:name=".screens.EventDetailsScreen"/>
+
         <activity android:name=".screens.UserDetailsScreen"/>
+
         <activity android:name=".screens.ParticipantsScreen"/>
         <activity android:name=".screens.SettingsScreen"/>
 

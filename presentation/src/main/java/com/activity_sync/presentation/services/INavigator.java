@@ -6,7 +6,9 @@ public interface INavigator
 
     void openIntroScreen();
 
-    void openWelcomeScreen();
+    void openLoginScreen();
+
+    void openRegisterScreen();
 
     void openEventsScreen();
 
