@@ -6,8 +6,6 @@
     <string name="btn_display_test_message">Display test message</string>
     <string name="txt_hello_message">Hi stranger! This app will be awesome!</string>
     <string name="title_dummy_screen">Dummy Screen</string>
-    <string name="btn_login">Login</string>
-    <string name="btn_register">Register</string>
 
     <!-- IntroScreen strings -->
     <string name="txt_intro_easy_organizing">Organizing sport events\nnever have been easier before!</string>
@@ -39,7 +37,7 @@
     <string name="title_user_details">User details</string>
     <string name="txt_username">Username</string>
     <string name="txt_name">Name</string>
-    <string name="txt_lastname">Lastname</string>
+    <string name="txt_last_name">Last name</string>
     <string name="txt_email">E-mail</string>
     <string name="txt_credibility">Credibility</string>
     <string name="txt_very_good">Very good</string>
@@ -51,5 +49,20 @@
 
     <!-- ParticipantsScreen strings -->
     <string name="title_participants">Participants list</string>
+
+    <!-- LoginScreen strings -->
+    <string name="btn_login">Login</string>
+    <string name="hint_login">Login / Email</string>
+    <string name="hint_password">Password</string>
+    <string name="txt_no_account">No account yet? Create one</string>
+
+    <!-- RegisterScreen strings -->
+    <string name="txt_already_registered">Already registered! Login me.</string>
+    <string name="btn_register">Register</string>
+    <string name="hint_first_name">First Name</string>
+    <string name="hint_last_name">Last Name</string>
+    <string name="hint_email">Email</string>
+    <string name="hint_nick">Nick</string>
+    <string name="err_empty_field">This field cannot be empty</string>
 
 </resources>
