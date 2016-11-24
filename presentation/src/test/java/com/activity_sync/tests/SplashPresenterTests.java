@@ -42,7 +42,7 @@ public class SplashPresenterTests
         SplashPresenter presenter = createPresenter();
         presenter.start();
 
-        Mockito.verify(navigator).openWelcomeScreen();
+        Mockito.verify(navigator).openLoginScreen();
     }
 
     private SplashPresenter createPresenter()
