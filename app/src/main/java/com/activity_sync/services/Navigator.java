@@ -18,43 +18,45 @@ public class Navigator implements INavigator
     @Override
     public void openDummyScreen()
     {
-        this.startActivity(getIntent(DummyScreen.class));
+        startActivity(getIntent(DummyScreen.class));
     }
 
     @Override
     public void openIntroScreen()
     {
-        this.startActivity(getIntent(IntroScreen.class));
+        startActivity(getIntent(IntroScreen.class));
     }
 
     @Override
     public void openWelcomeScreen()
     {
-        this.startActivity(getIntent(WelcomeScreen.class));
+        startActivity(getIntent(WelcomeScreen.class));
     }
 
     @Override
     public void openEventsScreen()
     {
-        this.startActivity(getIntent(EventsScreen.class));
+        startActivity(getIntent(EventsScreen.class));
     }
 
     @Override
     public void openEventDetailsScreen(int eventId)
     {
-        this.startActivity(getIntent(EventDetailsScreen.class));
+        Intent intent = new Intent(context, EventDetailsScreen.class);
+        intent.putExtra(EventDetailsScreen.EVENT_ID, eventId);
+        startActivity(intent);
     }
 
     @Override
     public void openUserDetailsScreen(int userId)
     {
-        this.startActivity(getIntent(UserDetailsScreen.class));
+        startActivity(getIntent(UserDetailsScreen.class));
     }
 
     @Override
     public void openParticipantsScreen()
     {
-        this.startActivity(getIntent(ParticipantsScreen.class));
+        startActivity(getIntent(ParticipantsScreen.class));
     }
 
     private void startActivity(Intent intent)

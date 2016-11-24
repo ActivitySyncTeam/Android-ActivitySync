@@ -1,5 +1,6 @@
 package com.activity_sync.presentation.presenters;
 
+import com.activity_sync.presentation.models.Event;
 import com.activity_sync.presentation.models.builders.DisciplineBuilder;
 import com.activity_sync.presentation.models.builders.EventBuilder;
 import com.activity_sync.presentation.models.builders.LocationBuilder;
@@ -17,12 +18,16 @@ public class EventDetailsPresenter extends Presenter<IEventDetailsView>
 {
     private final Scheduler uiThread;
     private final INavigator navigator;
+    private final int eventId;
 
-    public EventDetailsPresenter(Scheduler uiThread, IEventDetailsView view, INavigator navigator)
+    private Event event;
+
+    public EventDetailsPresenter(Scheduler uiThread, IEventDetailsView view, INavigator navigator, int eventId)
     {
         super(view);
         this.uiThread = uiThread;
         this.navigator = navigator;
+        this.eventId = eventId;
     }
 
     @Override
@@ -30,7 +35,8 @@ public class EventDetailsPresenter extends Presenter<IEventDetailsView>
     {
         super.start();
 
-        view.setEventData(new EventBuilder()
+        event = new EventBuilder()
+                .setId(eventId)
                 .setUser(new UserBuilder()
                         .setUserDetails(new UserDetailsBuilder()
                                 .setUserName("mzielu")
@@ -50,12 +56,14 @@ public class EventDetailsPresenter extends Presenter<IEventDetailsView>
                         .setCurrency("zł")
                         .createPrice())
                 .setDescription("Very long text written in order to check if two lines of text here are displaying correctly. Yeah!")
-                .createEvent());
+                .createEvent();
+
+        view.setEventData(event);
 
         subscriptions.add(view.joinEventClick()
                 .observeOn(uiThread)
                 .subscribe(o -> {
-                    navigator.openEventsScreen();
+                   // view.showDialog();
                 })
         );
 

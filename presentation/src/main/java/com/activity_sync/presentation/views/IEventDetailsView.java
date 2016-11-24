@@ -13,4 +13,26 @@ public interface IEventDetailsView
     Observable participantsDetailsClick();
 
     void setEventData(Event event);
+
+    void showDialog(String message);
+
+    Observable confirmationDialogOk();
+
+    Observable confirmationDialogCancel();
+
+    String joinEventConfirmationText();
+
+    String joinEventConfirmationTitle();
+
+    String leaveEventConfirmationText();
+
+    String leaveEventConfirmationTitle();
+
+    String cancelEventConfirmationText();
+
+    String cancelEventConfirmationTitle();
+
+    void showJoinEventMessage();
+
+    void showLeaveEventMessage();
 }

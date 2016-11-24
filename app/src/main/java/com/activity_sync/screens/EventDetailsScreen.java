@@ -1,7 +1,10 @@
 package com.activity_sync.screens;
 
 import android.os.Bundle;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AlertDialog;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -26,11 +29,17 @@ import butterknife.Bind;
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.android.view.ViewObservable;
+import rx.subjects.PublishSubject;
 
 public class EventDetailsScreen extends Screen implements IEventDetailsView, OnMapReadyCallback
 {
+    public static final String EVENT_ID = "event_id";
+
     @Inject
     INavigator navigator;
+
+    @Bind(R.id.coordinator_layout)
+    CoordinatorLayout coordinatorLayout;
 
     @Bind(R.id.event_det_date)
     TextView eventDate;
@@ -64,6 +73,9 @@ public class EventDetailsScreen extends Screen implements IEventDetailsView, OnM
 
     private GoogleMap map;
 
+    private PublishSubject confirmationDialogOk = PublishSubject.create();
+    private PublishSubject confirmationDialogCancel = PublishSubject.create();
+
     public EventDetailsScreen()
     {
         super(R.layout.event_details_screen);
@@ -86,11 +98,11 @@ public class EventDetailsScreen extends Screen implements IEventDetailsView, OnM
         setTitle(R.string.title_event_details);
     }
 
-
     @Override
     protected IPresenter createPresenter(Screen screen, Bundle savedInstanceState)
     {
-        return new EventDetailsPresenter(AndroidSchedulers.mainThread(), this, navigator);
+        int eventID = getIntent().getIntExtra(EventDetailsScreen.EVENT_ID, 1);
+        return new EventDetailsPresenter(AndroidSchedulers.mainThread(), this, navigator, eventID);
     }
 
     @Override
@@ -130,5 +142,89 @@ public class EventDetailsScreen extends Screen implements IEventDetailsView, OnM
         LatLng jordan = new LatLng(50.061124, 19.914123);
         map.addMarker(new MarkerOptions().position(jordan).title("Marker in Jordan"));
         map.moveCamera(CameraUpdateFactory.newLatLngZoom(jordan, 15));
+    }
+
+    @Override
+    public Observable confirmationDialogOk()
+    {
+        return confirmationDialogOk;
+    }
+
+    @Override
+    public Observable confirmationDialogCancel()
+    {
+        return confirmationDialogCancel;
+    }
+
+    @Override
+    public String joinEventConfirmationText()
+    {
+        return "Are you sure you want to join this event?";
+    }
+
+    @Override
+    public String joinEventConfirmationTitle()
+    {
+        return "Join Event Confirmation";
+    }
+
+    @Override
+    public String leaveEventConfirmationText()
+    {
+        return "Are you sure you want to leave this event?";
+    }
+
+    @Override
+    public String leaveEventConfirmationTitle()
+    {
+        return "Leave Event Confirmation";
+    }
+
+    @Override
+    public String cancelEventConfirmationText()
+    {
+        return "Are you sure you want to cancel this event? This operation cannot be undone.";
+    }
+
+    @Override
+    public String cancelEventConfirmationTitle()
+    {
+        return "Cancel Event Confirmation";
+    }
+
+    @Override
+    public void showJoinEventMessage()
+    {
+        Snackbar snackbar = Snackbar.make(coordinatorLayout, "You have joined this event", Snackbar.LENGTH_LONG);
+        snackbar.show();
+    }
+
+    @Override
+    public void showLeaveEventMessage()
+    {
+        Snackbar snackbar = Snackbar.make(coordinatorLayout, "You have left this event", Snackbar.LENGTH_LONG);
+        snackbar.show();
+    }
+
+    @Override
+    public void showDialog(String message)
+    {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.MyAlertDialogStyle);
+        builder.setMessage(message);
+
+        String positiveText = getString(android.R.string.ok);
+        builder.setPositiveButton(positiveText, (dialog, which) ->
+        {
+            confirmationDialogOk.onNext(this);
+        });
+
+        String negativeText = getString(android.R.string.cancel);
+        builder.setNegativeButton(negativeText, (dialog, which) ->
+        {
+            confirmationDialogCancel.onNext(this);
+        });
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 }
