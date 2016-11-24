@@ -42,6 +42,15 @@ public class EventDetailsScreen extends Screen implements IEventDetailsView, OnM
     @Bind(R.id.coordinator_layout)
     CoordinatorLayout coordinatorLayout;
 
+    @Bind(R.id.event_details_base_info_layout)
+    LinearLayout baseInfoLayout;
+
+    @Bind(R.id.you_organizer_layout)
+    LinearLayout youOranizerLayout;
+
+    @Bind(R.id.you_participant_layout)
+    LinearLayout youParticipantLayout;
+
     @Bind(R.id.event_det_date)
     TextView eventDate;
 
@@ -142,25 +151,7 @@ public class EventDetailsScreen extends Screen implements IEventDetailsView, OnM
         eventPrice.setText(String.format("%.2f%s", event.getPrice().getAmount(), event.getPrice().getCurrency()));
         eventDiscipline.setText(event.getDiscipline().getName());
 
-        if (!event.isActive())
-        {
-            buttonsLayout.setVisibility(View.GONE);
-            return;
-        }
-
-        if (!event.isOrganizer())
-        {
-            cancelEventButton.setVisibility(View.GONE);
-        }
-
-        if (event.isParticipant())
-        {
-            setLeaveEventText();
-        }
-        else
-        {
-            setJoinEventText();
-        }
+        setOrganizerParticipantView(event);
     }
 
     @Override
@@ -234,16 +225,48 @@ public class EventDetailsScreen extends Screen implements IEventDetailsView, OnM
         snackbar.show();
     }
 
-    @Override
-    public void setJoinEventText()
+    public void setOrganizerParticipantView(Event event)
     {
-        joinLeaveEventButton.setText(getResources().getString(R.string.btn_leave_event));
-    }
+        if (event.isOrganizer() || event.isParticipant())
+        {
+            baseInfoLayout.setVisibility(View.VISIBLE);
 
-    @Override
-    public void setLeaveEventText()
-    {
-        joinLeaveEventButton.setText(getResources().getString(R.string.btn_leave_event));
+            if (event.isOrganizer())
+            {
+                youOranizerLayout.setVisibility(View.VISIBLE);
+                cancelEventButton.setVisibility(View.VISIBLE);
+            }
+            else
+            {
+                youOranizerLayout.setVisibility(View.GONE);
+                cancelEventButton.setVisibility(View.GONE);
+            }
+
+            if (event.isParticipant())
+            {
+                youParticipantLayout.setVisibility(View.VISIBLE);
+                joinLeaveEventButton.setText(getResources().getString(R.string.btn_leave_event));
+
+            }
+            else
+            {
+                youParticipantLayout.setVisibility(View.GONE);
+                joinLeaveEventButton.setText(getResources().getString(R.string.btn_join_event));
+            }
+        }
+        else
+        {
+            baseInfoLayout.setVisibility(View.GONE);
+        }
+
+        if (event.isActive())
+        {
+            buttonsLayout.setVisibility(View.VISIBLE);
+        }
+        else
+        {
+            buttonsLayout.setVisibility(View.GONE);
+        }
     }
 
     @Override

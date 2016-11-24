@@ -35,8 +35,4 @@ public interface IEventDetailsView
     void showJoinEventMessage();
 
     void showLeaveEventMessage();
-
-    void setJoinEventText();
-
-    void setLeaveEventText();
 }

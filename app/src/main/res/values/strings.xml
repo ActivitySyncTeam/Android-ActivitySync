@@ -27,6 +27,7 @@
     <!-- EventDetailsScreen strings -->
     <string name="btn_join_event">Join event</string>
     <string name="btn_leave_event">Leave event</string>
+    <string name="btn_cancel_event">Cancel Event</string>
     <string name="title_event_details">Event details</string>
     <string name="txt_event_det_organizer">Organizer</string>
     <string name="txt_event_det_participants">Participants</string>

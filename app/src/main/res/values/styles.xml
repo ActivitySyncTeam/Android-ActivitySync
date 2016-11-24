@@ -24,13 +24,21 @@
     </style>
 
     <style name="DefaultButton">
-        <item name="android:background">@drawable/selector_default</item>
-        <item name="android:textColor">@color/default_button_text</item>
         <item name="android:layout_height">@dimen/default_button_height</item>
         <item name="android:layout_width">@dimen/default_button_width</item>
         <item name="android:paddingLeft">@dimen/screen_margin</item>
         <item name="android:paddingRight">@dimen/screen_margin</item>
         <item name="android:textAllCaps">true</item>
+    </style>
+
+    <style name="DefaultButton.Positive" parent="DefaultButton">
+        <item name="android:background">@drawable/selector_default_positive</item>
+        <item name="android:textColor">@color/default_button_text</item>
+    </style>
+
+    <style name="DefaultButton.Negative" parent="DefaultButton">
+        <item name="android:background">@drawable/selector_default_negative</item>
+        <item name="android:textColor">@color/default_button_text</item>
     </style>
 
     <style name="DefaultIntroTextView">
