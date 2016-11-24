@@ -88,7 +88,9 @@ public class EventDetailsPresenter extends Presenter<IEventDetailsView>
                 .observeOn(uiThread)
                 .subscribe(o -> {
                     view.showJoinEventMessage();
-                    view.setOrganizerParticipantView(new EventBuilder().setIsParticipant(true).setIsActive(true).setIsOrganizer(true).createEvent());
+                    view.setOrganizerParticipantView(new EventBuilder().setIsParticipant(true).setIsActive(true).setIsOrganizer(false).createEvent());
+
+                    event.setParticipant(true);
                 })
         );
 
@@ -96,14 +98,15 @@ public class EventDetailsPresenter extends Presenter<IEventDetailsView>
                 .observeOn(uiThread)
                 .subscribe(o -> {
                     view.showLeaveEventMessage();
-                    view.setOrganizerParticipantView(new EventBuilder().setIsParticipant(false).setIsActive(true).setIsOrganizer(true).createEvent());
+                    view.setOrganizerParticipantView(new EventBuilder().setIsParticipant(false).setIsActive(true).setIsOrganizer(false).createEvent());
+
+                    event.setParticipant(false);
                 })
         );
 
         subscriptions.add(view.cancelEventConfirmClick()
                 .observeOn(uiThread)
                 .subscribe(o -> {
-                    view.showLeaveEventMessage();
                     navigator.openEventsScreen();
                 })
         );

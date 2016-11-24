@@ -252,6 +252,7 @@ public class EventDetailsScreen extends Screen implements IEventDetailsView, OnM
         else
         {
             baseInfoLayout.setVisibility(View.GONE);
+            joinLeaveEventButton.setText(getResources().getString(R.string.btn_join_event));
         }
 
         if (event.isActive())

@@ -12,7 +12,7 @@
         android:layout_height="match_parent"
         android:background="@android:color/transparent">
 
-        <LinearLayout
+        <com.activity_sync.custom.MoveUpwardAwareLinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/event_details_bg"
@@ -313,10 +313,11 @@
                     android:elevation="4dp"
                     android:text="@string/btn_cancel_event"
                     android:layout_marginLeft="@dimen/screen_margin_half"
-                    android:layout_marginRight="@dimen/screen_margin_half" />
+                    android:layout_marginRight="@dimen/screen_margin_half"
+                    android:visibility="gone"/>
 
             </LinearLayout>
-        </LinearLayout>
+        </com.activity_sync.custom.MoveUpwardAwareLinearLayout>
 
     </android.support.design.widget.CoordinatorLayout>
 
