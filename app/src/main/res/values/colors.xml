@@ -20,6 +20,7 @@
     <item name="transparent" type="color">#00000000</item>
 
     <!-- MainScreen colors-->
+    <item name="colorPrimaryLight" type="color">#343f59</item>
     <item name="colorPrimary" type="color">#283042</item>
     <item name="colorPrimaryDark" type="color">#FF212121</item>
     <item name="colorAccent" type="color">#141820</item>

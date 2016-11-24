@@ -25,13 +25,23 @@
     <string name="tab_my_events">My events</string>
 
     <!-- EventDetailsScreen strings -->
-    <string name="btn_join_event">Join this event</string>
+    <string name="btn_join_event">Join event</string>
+    <string name="btn_leave_event">Leave event</string>
     <string name="title_event_details">Event details</string>
     <string name="txt_event_det_organizer">Organizer</string>
     <string name="txt_event_det_participants">Participants</string>
     <string name="txt_event_det_date">Date</string>
     <string name="txt_event_det_price">Price</string>
     <string name="txt_event_det_description">Description</string>
+    <string name="txt_join_confirmation_text">Are you sure you want to join this event?</string>
+    <string name="txt_join_confirmation_title">Join Event Confirmation</string>
+    <string name="txt_leave_confirmation_text">Are you sure you want to leave this event?</string>
+    <string name="txt_leave_confirmation_title">Leave Event Confirmation</string>
+    <string name="txt_cancel_confirmation_text">Are you sure you want to cancel this event? This operation cannot be undone.</string>
+    <string name="txt_cancel_confirmation_title">Cancel Event Confirmation</string>
+    <string name="txt_join_message">You have joined this event</string>
+    <string name="txt_leave_message">You have left this event</string>
+    <string name="txt_participant">Participant</string>
 
     <!-- UserDetailsScreen strings -->
     <string name="title_user_details">User details</string>

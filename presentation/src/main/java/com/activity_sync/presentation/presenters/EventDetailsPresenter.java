@@ -60,7 +60,7 @@ public class EventDetailsPresenter extends Presenter<IEventDetailsView>
 
         view.setEventData(event);
 
-        subscriptions.add(view.joinEventClick()
+        subscriptions.add(view.joinLeaveEventClick()
                 .observeOn(uiThread)
                 .subscribe(o -> {
                    // view.showDialog();

@@ -6,7 +6,7 @@ import rx.Observable;
 
 public interface IEventDetailsView
 {
-    Observable joinEventClick();
+    Observable joinLeaveEventClick();
 
     Observable organizerDetailsClick();
 
@@ -35,4 +35,8 @@ public interface IEventDetailsView
     void showJoinEventMessage();
 
     void showLeaveEventMessage();
+
+    void setJoinEventText();
+
+    void setLeaveEventText();
 }

@@ -30,7 +30,7 @@ public class EventDetailsPresenterTests
     @Before
     public void setup()
     {
-        Mockito.when(view.joinEventClick()).thenReturn(joinEventClickEvent);
+        Mockito.when(view.joinLeaveEventClick()).thenReturn(joinEventClickEvent);
         Mockito.when(view.organizerDetailsClick()).thenReturn(organizerDetailsClickEvent);
         Mockito.when(view.participantsDetailsClick()).thenReturn(participantsClickEvent);
     }

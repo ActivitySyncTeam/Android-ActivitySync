@@ -5,6 +5,7 @@ import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
+import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -62,14 +63,21 @@ public class EventDetailsScreen extends Screen implements IEventDetailsView, OnM
     @Bind(R.id.event_det_discipline)
     TextView eventDiscipline;
 
-    @Bind(R.id.join_event_btn)
-    Button joinEventButton;
+    @Bind(R.id.join_leave_event_btn)
+    Button joinLeaveEventButton;
+
+    @Bind(R.id.cancel_event_btn)
+    Button cancelEventButton;
 
     @Bind(R.id.organizer_layout)
     LinearLayout organizerLayout;
 
     @Bind(R.id.participants_layout)
     LinearLayout participantsLayout;
+
+    @Bind(R.id.event_details_buttons_layout)
+    LinearLayout buttonsLayout;
+
 
     private GoogleMap map;
 
@@ -106,9 +114,9 @@ public class EventDetailsScreen extends Screen implements IEventDetailsView, OnM
     }
 
     @Override
-    public Observable joinEventClick()
+    public Observable joinLeaveEventClick()
     {
-        return ViewObservable.clicks(joinEventButton);
+        return ViewObservable.clicks(joinLeaveEventButton);
     }
 
     @Override
@@ -133,6 +141,26 @@ public class EventDetailsScreen extends Screen implements IEventDetailsView, OnM
         eventParticipants.setText(String.format("%d/%d", event.getOccupiedPlaces(), event.getMaxPlaces()));
         eventPrice.setText(String.format("%.2f%s", event.getPrice().getAmount(), event.getPrice().getCurrency()));
         eventDiscipline.setText(event.getDiscipline().getName());
+
+        if (!event.isActive())
+        {
+            buttonsLayout.setVisibility(View.GONE);
+            return;
+        }
+
+        if (!event.isOrganizer())
+        {
+            cancelEventButton.setVisibility(View.GONE);
+        }
+
+        if (event.isParticipant())
+        {
+            setLeaveEventText();
+        }
+        else
+        {
+            setJoinEventText();
+        }
     }
 
     @Override
@@ -159,51 +187,63 @@ public class EventDetailsScreen extends Screen implements IEventDetailsView, OnM
     @Override
     public String joinEventConfirmationText()
     {
-        return "Are you sure you want to join this event?";
+        return getString(R.string.txt_join_confirmation_text);
     }
 
     @Override
     public String joinEventConfirmationTitle()
     {
-        return "Join Event Confirmation";
+        return getString(R.string.txt_join_confirmation_title);
     }
 
     @Override
     public String leaveEventConfirmationText()
     {
-        return "Are you sure you want to leave this event?";
+        return getString(R.string.txt_leave_confirmation_text);
     }
 
     @Override
     public String leaveEventConfirmationTitle()
     {
-        return "Leave Event Confirmation";
+        return getString(R.string.txt_leave_confirmation_title);
     }
 
     @Override
     public String cancelEventConfirmationText()
     {
-        return "Are you sure you want to cancel this event? This operation cannot be undone.";
+        return getString(R.string.txt_cancel_confirmation_text);
     }
 
     @Override
     public String cancelEventConfirmationTitle()
     {
-        return "Cancel Event Confirmation";
+        return getString(R.string.txt_cancel_confirmation_title);
     }
 
     @Override
     public void showJoinEventMessage()
     {
-        Snackbar snackbar = Snackbar.make(coordinatorLayout, "You have joined this event", Snackbar.LENGTH_LONG);
+        Snackbar snackbar = Snackbar.make(coordinatorLayout, R.string.txt_join_message, Snackbar.LENGTH_LONG);
         snackbar.show();
     }
 
     @Override
     public void showLeaveEventMessage()
     {
-        Snackbar snackbar = Snackbar.make(coordinatorLayout, "You have left this event", Snackbar.LENGTH_LONG);
+        Snackbar snackbar = Snackbar.make(coordinatorLayout, R.string.txt_leave_message, Snackbar.LENGTH_LONG);
         snackbar.show();
+    }
+
+    @Override
+    public void setJoinEventText()
+    {
+        joinLeaveEventButton.setText(getResources().getString(R.string.btn_leave_event));
+    }
+
+    @Override
+    public void setLeaveEventText()
+    {
+        joinLeaveEventButton.setText(getResources().getString(R.string.btn_leave_event));
     }
 
     @Override
