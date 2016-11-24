@@ -67,8 +67,8 @@ public class EventDetailsScreen extends Screen implements IEventDetailsView, OnM
     @Bind(R.id.event_det_participants)
     TextView eventParticipants;
 
-    @Bind(R.id.event_det_price)
-    TextView eventPrice;
+    @Bind(R.id.event_det_level)
+    TextView eventLevel;
 
     @Bind(R.id.event_det_discipline)
     TextView eventDiscipline;
@@ -155,7 +155,7 @@ public class EventDetailsScreen extends Screen implements IEventDetailsView, OnM
         eventLocation.setText(event.getLocation().getName());
         eventOrganizer.setText(event.getOrganizer().getUserDetails().getUserName());
         eventParticipants.setText(String.format("%d/%d", event.getOccupiedPlaces(), event.getMaxPlaces()));
-        eventPrice.setText(String.format("%.2f%s", event.getPrice().getAmount(), event.getPrice().getCurrency()));
+        eventLevel.setText(event.getLevel().getName());
         eventDiscipline.setText(event.getDiscipline().getName());
 
         setOrganizerParticipantView(event);

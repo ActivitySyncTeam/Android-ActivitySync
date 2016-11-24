@@ -4,7 +4,7 @@ import com.activity_sync.presentation.models.Event;
 import com.activity_sync.presentation.models.builders.DisciplineBuilder;
 import com.activity_sync.presentation.models.builders.EventBuilder;
 import com.activity_sync.presentation.models.builders.LocationBuilder;
-import com.activity_sync.presentation.models.builders.PriceBuilder;
+import com.activity_sync.presentation.models.builders.LevelBuilder;
 import com.activity_sync.presentation.models.builders.UserBuilder;
 import com.activity_sync.presentation.models.builders.UserDetailsBuilder;
 import com.activity_sync.presentation.services.INavigator;
@@ -51,10 +51,9 @@ public class EventDetailsPresenter extends Presenter<IEventDetailsView>
                 .setMaxPlaces(12)
                 .setOccupiedPlaces(7)
                 .setDate(new Date("2016/11/01"))
-                .setPrice(new PriceBuilder()
-                        .setAmount(3.0f)
-                        .setCurrency("zł")
-                        .createPrice())
+                .setLevel(new LevelBuilder()
+                        .setName("medium")
+                        .createLevel())
                 .setDescription("Very long text written in order to check if two lines of text here are displaying correctly. Yeah!")
                 .setIsActive(true)
                 .setIsParticipant(false)

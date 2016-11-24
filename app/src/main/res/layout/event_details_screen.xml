@@ -233,14 +233,14 @@
                                             style="@style/EventDetailsScreenItemUpRow"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
-                                            android:text="@string/txt_event_det_price" />
+                                            android:text="@string/txt_event_det_level" />
 
                                         <TextView
-                                            android:id="@+id/event_det_price"
+                                            android:id="@+id/event_det_level"
                                             style="@style/EventDetailsScreenItemDownRow"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
-                                            tools:text="free" />
+                                            tools:text="medium" />
 
                                     </LinearLayout>
 
