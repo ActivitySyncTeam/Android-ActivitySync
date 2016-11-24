@@ -2,8 +2,8 @@ package com.activity_sync.presentation.models.builders;
 
 import com.activity_sync.presentation.models.Discipline;
 import com.activity_sync.presentation.models.Event;
+import com.activity_sync.presentation.models.Level;
 import com.activity_sync.presentation.models.Location;
-import com.activity_sync.presentation.models.Price;
 import com.activity_sync.presentation.models.User;
 
 import java.util.Date;
@@ -18,7 +18,7 @@ public class EventBuilder
     private int occupiedPlaces;
     private Location location;
     private Discipline discipline;
-    private Price price;
+    private Level level;
     private boolean isOrganizer;
     private boolean isParticipant;
     private boolean isActive;
@@ -71,9 +71,9 @@ public class EventBuilder
         return this;
     }
 
-    public EventBuilder setPrice(Price price)
+    public EventBuilder setLevel(Level level)
     {
-        this.price = price;
+        this.level = level;
         return this;
     }
 
@@ -97,6 +97,6 @@ public class EventBuilder
 
     public Event createEvent()
     {
-        return new Event(id, organizer, description, date, maxPlaces, occupiedPlaces, location, discipline, price, isOrganizer, isParticipant, isActive);
+        return new Event(id, organizer, description, date, maxPlaces, occupiedPlaces, location, discipline, level, isOrganizer, isParticipant, isActive);
     }
 }
