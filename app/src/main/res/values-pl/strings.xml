@@ -10,7 +10,6 @@
     <string name="txt_intro_locations">Aby używać ActivitySync\nbez ograniczeń musisz wyrazić zgodę\nna używanie Twojej obecnej lokalizacji</string>
     <string name="btn_allow_location">Zezwól</string>
     <string name="btn_login">Zaloguj się</string>
-    <string name="btn_register">Rejestracja</string>
     <string name="menu_dummy_screen">Dummy Ekran</string>
     <string name="menu_events">Wydarzenia</string>
     <string name="tab_all_events">Wszystkie</string>
@@ -27,7 +26,7 @@
     <string name="txt_event_det_participants">Uczestnicy</string>
     <string name="txt_event_det_price">Cena</string>
     <string name="txt_good">Dobra</string>
-    <string name="txt_lastname">Nazwisko</string>
+    <string name="txt_last_name">Nazwisko</string>
     <string name="txt_name">Imię</string>
     <string name="txt_ok">OK</string>
     <string name="txt_poor">Słaba</string>
@@ -36,5 +35,15 @@
     <string name="txt_very_good">Bardzo dobra</string>
     <string name="title_participants">Lista uczestników</string>
     <string name="title_user_details">Szczegóły użytkownika</string>
+    <string name="txt_no_account">Nie masz konta? Stwórz je teraz</string>
+    <string name="hint_password">Hasło</string>
+    <string name="hint_login">Login / Email</string>
+    <string name="btn_register">Stwórz konto</string>
+    <string name="txt_already_registered">Już mam konto! Zaloguj.</string>
+    <string name="hint_email">Email</string>
+    <string name="hint_first_name">Imię</string>
+    <string name="hint_last_name">Nazwisko</string>
+    <string name="hint_nick">Nick</string>
+    <string name="err_empty_field">To pole nie może być puste</string>
 
 </resources>

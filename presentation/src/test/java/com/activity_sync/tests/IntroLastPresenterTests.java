@@ -39,7 +39,7 @@ public class IntroLastPresenterTests
         introLastPresenter.start();
 
         checkImageClickEvent.onNext(this);
-        Mockito.verify(navigator).openWelcomeScreen();
+        Mockito.verify(navigator).openLoginScreen();
     }
 
     private IntroLastPresenter createPresenter()
