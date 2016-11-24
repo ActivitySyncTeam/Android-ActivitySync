@@ -45,5 +45,16 @@
     <string name="hint_last_name">Nazwisko</string>
     <string name="hint_nick">Nick</string>
     <string name="err_empty_field">To pole nie może być puste</string>
+    <string name="btn_cancel_event">Odwołaj wydarzenie</string>
+    <string name="btn_leave_event">Opuść wydarzenie</string>
+    <string name="txt_cancel_confirmation_text">Jesteś pewien, że chcesz odwołać to wydarzenie? Tej operacji nie będzie można cofnąć.</string>
+    <string name="txt_cancel_confirmation_title">Potwierdzenie usunięcia wydarzenia</string>
+    <string name="txt_join_confirmation_text">Jesteś pewien, że chcesz dołączyć do wydarzenia?</string>
+    <string name="txt_leave_confirmation_text">Jesteś pewien, że chcesz wypisać się z wydarzenia?</string>
+    <string name="txt_join_confirmation_title">Potwierdzenie dołączenia do wydarzenia</string>
+    <string name="txt_leave_confirmation_title">Potwierdzenie opuszczenia wydarzenia</string>
+    <string name="txt_leave_message">Wypisałeś się z wydarzenia</string>
+    <string name="txt_join_message">Dołączyłeś do wydarzenia</string>
+    <string name="txt_participant">Uczestnik</string>
 
 </resources>

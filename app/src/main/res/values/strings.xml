@@ -35,11 +35,11 @@
     <string name="txt_event_det_price">Price</string>
     <string name="txt_event_det_description">Description</string>
     <string name="txt_join_confirmation_text">Are you sure you want to join this event?</string>
-    <string name="txt_join_confirmation_title">Join Event Confirmation</string>
+    <string name="txt_join_confirmation_title">Join event confirmation</string>
     <string name="txt_leave_confirmation_text">Are you sure you want to leave this event?</string>
-    <string name="txt_leave_confirmation_title">Leave Event Confirmation</string>
+    <string name="txt_leave_confirmation_title">Leave event confirmation</string>
     <string name="txt_cancel_confirmation_text">Are you sure you want to cancel this event? This operation cannot be undone.</string>
-    <string name="txt_cancel_confirmation_title">Cancel Event Confirmation</string>
+    <string name="txt_cancel_confirmation_title">Cancel event confirmation</string>
     <string name="txt_join_message">You have joined this event</string>
     <string name="txt_leave_message">You have left this event</string>
     <string name="txt_participant">Participant</string>
