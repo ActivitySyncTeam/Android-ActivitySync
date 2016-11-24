@@ -46,7 +46,7 @@ public class EventDetailsScreen extends Screen implements IEventDetailsView, OnM
     LinearLayout baseInfoLayout;
 
     @Bind(R.id.you_organizer_layout)
-    LinearLayout youOranizerLayout;
+    LinearLayout youOrganizerLayout;
 
     @Bind(R.id.you_participant_layout)
     LinearLayout youParticipantLayout;
@@ -87,11 +87,11 @@ public class EventDetailsScreen extends Screen implements IEventDetailsView, OnM
     @Bind(R.id.event_details_buttons_layout)
     LinearLayout buttonsLayout;
 
-
     private GoogleMap map;
 
-    private PublishSubject confirmationDialogOk = PublishSubject.create();
-    private PublishSubject confirmationDialogCancel = PublishSubject.create();
+    private PublishSubject joinEventConfirmed = PublishSubject.create();
+    private PublishSubject leaveEventConfirmed = PublishSubject.create();
+    private PublishSubject cancelEventConfirmed = PublishSubject.create();
 
     public EventDetailsScreen()
     {
@@ -129,6 +129,12 @@ public class EventDetailsScreen extends Screen implements IEventDetailsView, OnM
     }
 
     @Override
+    public Observable cancelEventClick()
+    {
+        return ViewObservable.clicks(cancelEventButton);
+    }
+
+    @Override
     public Observable organizerDetailsClick()
     {
         return ViewObservable.clicks(organizerLayout);
@@ -155,6 +161,24 @@ public class EventDetailsScreen extends Screen implements IEventDetailsView, OnM
     }
 
     @Override
+    public void showJoinConfirmationDialog()
+    {
+        showDialog(R.string.txt_join_confirmation_title, R.string.txt_join_confirmation_text, joinEventConfirmed);
+    }
+
+    @Override
+    public void showLeaveConfirmationDialog()
+    {
+        showDialog(R.string.txt_leave_confirmation_title, R.string.txt_leave_confirmation_text, leaveEventConfirmed);
+    }
+
+    @Override
+    public void showCancelConfirmationDialog()
+    {
+        showDialog(R.string.txt_cancel_confirmation_title, R.string.txt_cancel_confirmation_text, cancelEventConfirmed);
+    }
+
+    @Override
     public void onMapReady(GoogleMap googleMap)
     {
         map = googleMap;
@@ -164,51 +188,21 @@ public class EventDetailsScreen extends Screen implements IEventDetailsView, OnM
     }
 
     @Override
-    public Observable confirmationDialogOk()
+    public Observable joinEventConfirmClick()
     {
-        return confirmationDialogOk;
+        return joinEventConfirmed;
     }
 
     @Override
-    public Observable confirmationDialogCancel()
+    public Observable leaveEventConfirmClick()
     {
-        return confirmationDialogCancel;
+        return leaveEventConfirmed;
     }
 
     @Override
-    public String joinEventConfirmationText()
+    public Observable cancelEventConfirmClick()
     {
-        return getString(R.string.txt_join_confirmation_text);
-    }
-
-    @Override
-    public String joinEventConfirmationTitle()
-    {
-        return getString(R.string.txt_join_confirmation_title);
-    }
-
-    @Override
-    public String leaveEventConfirmationText()
-    {
-        return getString(R.string.txt_leave_confirmation_text);
-    }
-
-    @Override
-    public String leaveEventConfirmationTitle()
-    {
-        return getString(R.string.txt_leave_confirmation_title);
-    }
-
-    @Override
-    public String cancelEventConfirmationText()
-    {
-        return getString(R.string.txt_cancel_confirmation_text);
-    }
-
-    @Override
-    public String cancelEventConfirmationTitle()
-    {
-        return getString(R.string.txt_cancel_confirmation_title);
+        return cancelEventConfirmed;
     }
 
     @Override
@@ -225,6 +219,7 @@ public class EventDetailsScreen extends Screen implements IEventDetailsView, OnM
         snackbar.show();
     }
 
+    @Override
     public void setOrganizerParticipantView(Event event)
     {
         if (event.isOrganizer() || event.isParticipant())
@@ -233,12 +228,12 @@ public class EventDetailsScreen extends Screen implements IEventDetailsView, OnM
 
             if (event.isOrganizer())
             {
-                youOranizerLayout.setVisibility(View.VISIBLE);
+                youOrganizerLayout.setVisibility(View.VISIBLE);
                 cancelEventButton.setVisibility(View.VISIBLE);
             }
             else
             {
-                youOranizerLayout.setVisibility(View.GONE);
+                youOrganizerLayout.setVisibility(View.GONE);
                 cancelEventButton.setVisibility(View.GONE);
             }
 
@@ -269,22 +264,23 @@ public class EventDetailsScreen extends Screen implements IEventDetailsView, OnM
         }
     }
 
-    @Override
-    public void showDialog(String message)
+    public void showDialog(int title, int message, PublishSubject confirmClicked)
     {
         AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.MyAlertDialogStyle);
+
+        builder.setTitle(title);
         builder.setMessage(message);
 
         String positiveText = getString(android.R.string.ok);
         builder.setPositiveButton(positiveText, (dialog, which) ->
         {
-            confirmationDialogOk.onNext(this);
+            confirmClicked.onNext(this);
         });
 
         String negativeText = getString(android.R.string.cancel);
         builder.setNegativeButton(negativeText, (dialog, which) ->
         {
-            confirmationDialogCancel.onNext(this);
+            dialog.dismiss();
         });
 
         AlertDialog dialog = builder.create();

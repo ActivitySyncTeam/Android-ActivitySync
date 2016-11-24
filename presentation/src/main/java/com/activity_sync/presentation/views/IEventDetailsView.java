@@ -8,31 +8,29 @@ public interface IEventDetailsView
 {
     Observable joinLeaveEventClick();
 
+    Observable cancelEventClick();
+
     Observable organizerDetailsClick();
 
     Observable participantsDetailsClick();
 
     void setEventData(Event event);
 
-    void showDialog(String message);
+    void showJoinConfirmationDialog();
 
-    Observable confirmationDialogOk();
+    void showLeaveConfirmationDialog();
 
-    Observable confirmationDialogCancel();
+    void showCancelConfirmationDialog();
 
-    String joinEventConfirmationText();
+    Observable joinEventConfirmClick();
 
-    String joinEventConfirmationTitle();
+    Observable leaveEventConfirmClick();
 
-    String leaveEventConfirmationText();
-
-    String leaveEventConfirmationTitle();
-
-    String cancelEventConfirmationText();
-
-    String cancelEventConfirmationTitle();
+    Observable cancelEventConfirmClick();
 
     void showJoinEventMessage();
 
     void showLeaveEventMessage();
+
+    void setOrganizerParticipantView(Event event);
 }

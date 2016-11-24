@@ -56,6 +56,9 @@ public class EventDetailsPresenter extends Presenter<IEventDetailsView>
                         .setCurrency("zł")
                         .createPrice())
                 .setDescription("Very long text written in order to check if two lines of text here are displaying correctly. Yeah!")
+                .setIsActive(true)
+                .setIsParticipant(false)
+                .setIsOrganizer(false)
                 .createEvent();
 
         view.setEventData(event);
@@ -63,7 +66,45 @@ public class EventDetailsPresenter extends Presenter<IEventDetailsView>
         subscriptions.add(view.joinLeaveEventClick()
                 .observeOn(uiThread)
                 .subscribe(o -> {
-                   // view.showDialog();
+                    if (event.isParticipant())
+                    {
+                        view.showLeaveConfirmationDialog();
+                    }
+                    else
+                    {
+                        view.showJoinConfirmationDialog();
+                    }
+                })
+        );
+
+        subscriptions.add(view.cancelEventClick()
+                .observeOn(uiThread)
+                .subscribe(o -> {
+                    view.showCancelConfirmationDialog();
+                })
+        );
+
+        subscriptions.add(view.joinEventConfirmClick()
+                .observeOn(uiThread)
+                .subscribe(o -> {
+                    view.showJoinEventMessage();
+                    view.setOrganizerParticipantView(new EventBuilder().setIsParticipant(true).setIsActive(true).setIsOrganizer(true).createEvent());
+                })
+        );
+
+        subscriptions.add(view.leaveEventConfirmClick()
+                .observeOn(uiThread)
+                .subscribe(o -> {
+                    view.showLeaveEventMessage();
+                    view.setOrganizerParticipantView(new EventBuilder().setIsParticipant(false).setIsActive(true).setIsOrganizer(true).createEvent());
+                })
+        );
+
+        subscriptions.add(view.cancelEventConfirmClick()
+                .observeOn(uiThread)
+                .subscribe(o -> {
+                    view.showLeaveEventMessage();
+                    navigator.openEventsScreen();
                 })
         );
 
