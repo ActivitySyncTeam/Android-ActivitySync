@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.Button;
@@ -240,19 +241,19 @@ public class EventDetailsScreen extends Screen implements IEventDetailsView, OnM
             if (event.isParticipant())
             {
                 youParticipantLayout.setVisibility(View.VISIBLE);
-                joinLeaveEventButton.setText(getResources().getString(R.string.btn_leave_event));
+                prepareLeavenButton();
 
             }
             else
             {
                 youParticipantLayout.setVisibility(View.GONE);
-                joinLeaveEventButton.setText(getResources().getString(R.string.btn_join_event));
+                prepareJoinButton();
             }
         }
         else
         {
             baseInfoLayout.setVisibility(View.GONE);
-            joinLeaveEventButton.setText(getResources().getString(R.string.btn_join_event));
+            prepareJoinButton();
         }
 
         if (event.isActive())
@@ -263,6 +264,18 @@ public class EventDetailsScreen extends Screen implements IEventDetailsView, OnM
         {
             buttonsLayout.setVisibility(View.GONE);
         }
+    }
+
+    private void prepareJoinButton()
+    {
+        joinLeaveEventButton.setText(getResources().getString(R.string.btn_join_event));
+        joinLeaveEventButton.setBackground(ContextCompat.getDrawable(this, R.drawable.selector_default_positive));
+    }
+
+    private void prepareLeavenButton()
+    {
+        joinLeaveEventButton.setText(getResources().getString(R.string.btn_leave_event));
+        joinLeaveEventButton.setBackground(ContextCompat.getDrawable(this, R.drawable.selector_default_negative));
     }
 
     public void showDialog(int title, int message, PublishSubject confirmClicked)

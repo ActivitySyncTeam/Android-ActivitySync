@@ -58,7 +58,7 @@ public class EventDetailsPresenter extends Presenter<IEventDetailsView>
                 .setDescription("Very long text written in order to check if two lines of text here are displaying correctly. Yeah!")
                 .setIsActive(true)
                 .setIsParticipant(false)
-                .setIsOrganizer(false)
+                .setIsOrganizer(true)
                 .createEvent();
 
         view.setEventData(event);
@@ -88,9 +88,8 @@ public class EventDetailsPresenter extends Presenter<IEventDetailsView>
                 .observeOn(uiThread)
                 .subscribe(o -> {
                     view.showJoinEventMessage();
-                    view.setOrganizerParticipantView(new EventBuilder().setIsParticipant(true).setIsActive(true).setIsOrganizer(false).createEvent());
-
-                    event.setParticipant(true);
+                    view.setOrganizerParticipantView(new EventBuilder().setIsParticipant(true).setIsActive(true).setIsOrganizer(true).createEvent());
+                    event.setParticipant(true); // delete when api provided
                 })
         );
 
@@ -98,9 +97,8 @@ public class EventDetailsPresenter extends Presenter<IEventDetailsView>
                 .observeOn(uiThread)
                 .subscribe(o -> {
                     view.showLeaveEventMessage();
-                    view.setOrganizerParticipantView(new EventBuilder().setIsParticipant(false).setIsActive(true).setIsOrganizer(false).createEvent());
-
-                    event.setParticipant(false);
+                    view.setOrganizerParticipantView(new EventBuilder().setIsParticipant(false).setIsActive(true).setIsOrganizer(true).createEvent());
+                    event.setParticipant(false); // delete when api provided
                 })
         );
 
