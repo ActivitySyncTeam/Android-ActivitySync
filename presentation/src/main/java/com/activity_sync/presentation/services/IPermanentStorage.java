@@ -14,6 +14,8 @@ public interface IPermanentStorage
     boolean IS_NOTIFICATION_VIBRATION_ENABLED_DEFAULT = true;
     String SEARCH_DAYS_AHEAD = "search_days_ahead";
     int SEARCH_DAYS_AHEAD_DEFAULT = 21;
+    String SEARCH_RANGE = "search_range";
+    int SEARCH_RANGE_DEFAULT = 5;
 
     void saveBoolean(String key, boolean value);
 

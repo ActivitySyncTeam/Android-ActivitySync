@@ -21,14 +21,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="@dimen/screen_margin"
-                android:orientation="vertical"
-                android:padding="@dimen/screen_margin_half"
-                android:theme="@style/AppTheme.SettingsScreen">
+                android:orientation="vertical">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/screen_margin_half"
+                    android:layout_marginLeft="@dimen/screen_margin"
+                    android:layout_marginRight="@dimen/screen_margin"
                     android:text="@string/pref_cat_location"
                     android:textColor="@color/settings_accent"
                     android:textSize="@dimen/text_default_size"/>
@@ -36,21 +35,26 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:layout_marginTop="@dimen/screen_margin_small"
+                    android:layout_marginBottom="@dimen/screen_margin_half"
+                    android:layout_marginTop="@dimen/screen_margin_half"
                     android:background="@color/settings_primary"/>
 
 
                 <android.support.v7.widget.SwitchCompat
                     android:id="@+id/location_switch"
+                    android:theme="@style/PreferencesViews"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/screen_margin_quarter"
+                    android:layout_marginLeft="@dimen/screen_margin"
+                    android:layout_marginRight="@dimen/screen_margin"
                     android:text="@string/pref_location_switch"
                     android:textSize="@dimen/text_big_size"/>
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/screen_margin"
+                    android:layout_marginRight="@dimen/screen_margin"
                     android:layout_marginTop="@dimen/screen_margin_big"
                     android:text="@string/pref_cat_notification"
                     android:textColor="@color/settings_accent"
@@ -59,24 +63,27 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:layout_marginTop="@dimen/screen_margin_small"
+                    android:layout_marginBottom="@dimen/screen_margin_half"
+                    android:layout_marginTop="@dimen/screen_margin_half"
                     android:background="@color/settings_primary"/>
 
                 <android.support.v7.widget.SwitchCompat
                     android:id="@+id/notification_switch"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/screen_margin_quarter"
+                    android:layout_marginLeft="@dimen/screen_margin"
+                    android:layout_marginRight="@dimen/screen_margin"
                     android:text="@string/pref_notification_switch"
-                    android:textSize="@dimen/text_big_size"/>
+                    android:textSize="@dimen/text_big_size"
+                    android:theme="@style/PreferencesViews"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/screen_margin_quarter"
-                    android:orientation="horizontal"
-                    android:paddingLeft="@dimen/screen_margin_quarter"
-                    android:paddingRight="@dimen/screen_margin_quarter">
+                    android:layout_marginLeft="@dimen/screen_margin"
+                    android:layout_marginRight="@dimen/screen_margin"
+                    android:layout_marginTop="@dimen/screen_margin_half"
+                    android:orientation="horizontal">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -92,17 +99,18 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="end|center_vertical"
                         android:layout_weight="0"
-                        android:text=""/>
+                        android:text=""
+                        android:theme="@style/PreferencesViews"/>
 
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/screen_margin_quarter"
-                    android:orientation="horizontal"
-                    android:paddingLeft="@dimen/screen_margin_quarter"
-                    android:paddingRight="@dimen/screen_margin_quarter">
+                    android:layout_marginLeft="@dimen/screen_margin"
+                    android:layout_marginRight="@dimen/screen_margin"
+                    android:layout_marginTop="@dimen/screen_margin_half"
+                    android:orientation="horizontal">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -114,6 +122,7 @@
 
                     <android.support.v7.widget.AppCompatCheckBox
                         android:id="@+id/notification_vibrate_checkbox"
+                        android:theme="@style/PreferencesViews"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="end|center_vertical"
@@ -125,7 +134,9 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/screen_margin_big"
+                    android:layout_marginLeft="@dimen/screen_margin"
+                    android:layout_marginRight="@dimen/screen_margin"
+                    android:layout_marginTop="@dimen/screen_margin"
                     android:text="@string/pref_cat_search"
                     android:textColor="@color/settings_accent"
                     android:textSize="@dimen/text_default_size"/>
@@ -133,40 +144,82 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:layout_marginTop="@dimen/screen_margin_small"
+                    android:layout_marginBottom="@dimen/screen_margin_half"
+                    android:layout_marginTop="@dimen/screen_margin_half"
                     android:background="@color/settings_primary"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/screen_margin_quarter"
+                    android:layout_marginLeft="@dimen/screen_margin"
+                    android:layout_marginRight="@dimen/screen_margin"
                     android:orientation="horizontal">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="start|center_vertical"
+                        android:layout_weight="1"
                         android:text="@string/pref_search_days"
                         android:textColor="@color/black"
-                        android:textSize="@dimen/text_big_size"
-                        android:layout_weight="1"/>
+                        android:textSize="@dimen/text_big_size"/>
 
                     <TextView
                         android:id="@+id/search_days_ahead_label"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="end|center_vertical"
-                        android:textSize="@dimen/text_default_size"
-                        android:layout_weight="0"/>
+                        android:layout_weight="0"
+                        android:textSize="@dimen/text_default_size"/>
 
                 </LinearLayout>
 
                 <android.support.v7.widget.AppCompatSeekBar
                     android:id="@+id/days_seekbar"
+                    android:theme="@style/PreferencesViews"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/screen_margin_quarter"
+                    android:layout_marginLeft="@dimen/screen_margin"
+                    android:layout_marginRight="@dimen/screen_margin"
+                    android:layout_marginTop="@dimen/screen_margin_half"
                     android:max="150"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/screen_margin"
+                    android:layout_marginRight="@dimen/screen_margin"
+                    android:layout_marginTop="@dimen/screen_margin"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start|center_vertical"
+                        android:layout_weight="1"
+                        android:text="@string/pref_search_range"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_big_size"/>
+
+                    <TextView
+                        android:id="@+id/search_range_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end|center_vertical"
+                        android:layout_weight="0"
+                        android:textSize="@dimen/text_default_size"/>
+
+                </LinearLayout>
+
+                <android.support.v7.widget.AppCompatSeekBar
+                    android:id="@+id/range_seekbar"
+                    android:theme="@style/PreferencesViews"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/screen_margin"
+                    android:layout_marginRight="@dimen/screen_margin"
+                    android:layout_marginTop="@dimen/screen_margin_half"
+                    android:max="50"/>
 
             </LinearLayout>
 

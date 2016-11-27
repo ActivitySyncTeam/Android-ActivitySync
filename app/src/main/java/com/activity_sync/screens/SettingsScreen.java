@@ -20,7 +20,6 @@ import javax.inject.Inject;
 
 import butterknife.Bind;
 import rx.Observable;
-import rx.android.schedulers.AndroidSchedulers;
 import rx.subjects.PublishSubject;
 
 public class SettingsScreen extends ScreenWithMenu implements ISettingsView
@@ -46,14 +45,21 @@ public class SettingsScreen extends ScreenWithMenu implements ISettingsView
     @Bind(R.id.days_seekbar)
     AppCompatSeekBar daysSeekbar;
 
+    @Bind(R.id.range_seekbar)
+    AppCompatSeekBar rangeSeekbar;
+
     @Bind(R.id.search_days_ahead_label)
     TextView searchDaysAheadLabel;
+
+    @Bind(R.id.search_range_label)
+    TextView searchRangeLabel;
 
     private PublishSubject<Boolean> enableNotificationsChange = PublishSubject.create();
     private PublishSubject<Boolean> enableLocationChange = PublishSubject.create();
     private PublishSubject<Boolean> enableNotificationsSoundChange = PublishSubject.create();
     private PublishSubject<Boolean> enableNotificationsVibrateChange = PublishSubject.create();
     private PublishSubject<Integer> searchDaysChange = PublishSubject.create();
+    private PublishSubject<Integer> searchRangeChange = PublishSubject.create();
 
     public SettingsScreen()
     {
@@ -101,6 +107,31 @@ public class SettingsScreen extends ScreenWithMenu implements ISettingsView
                 searchDaysChange.onNext(seekBar.getProgress());
             }
         });
+        rangeSeekbar.setOnSeekBarChangeListener(new AppCompatSeekBar.OnSeekBarChangeListener()
+        {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int i, boolean b)
+            {
+                if (i < 1)
+                {
+                    seekBar.setProgress(1);
+                }
+                searchRangeLabel.setText(String.valueOf(seekBar.getProgress()));
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar)
+            {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar)
+            {
+                searchRangeLabel.setText(String.valueOf(seekBar.getProgress()));
+                searchRangeChange.onNext(seekBar.getProgress());
+            }
+        });
     }
 
     @Override
@@ -113,6 +144,8 @@ public class SettingsScreen extends ScreenWithMenu implements ISettingsView
         notificationSoundCheckBox.setChecked(permanentStorage.retrieveBoolean(IPermanentStorage.IS_NOTIFICATION_SOUND_ENABLED, IPermanentStorage.IS_NOTIFICATION_SOUND_ENABLED_DEFAULT));
         daysSeekbar.setProgress(permanentStorage.retrieveInteger(IPermanentStorage.SEARCH_DAYS_AHEAD, IPermanentStorage.SEARCH_DAYS_AHEAD_DEFAULT));
         searchDaysAheadLabel.setText(String.valueOf(daysSeekbar.getProgress()));
+        rangeSeekbar.setProgress(permanentStorage.retrieveInteger(IPermanentStorage.SEARCH_RANGE, IPermanentStorage.SEARCH_RANGE_DEFAULT));
+        searchRangeLabel.setText(String.valueOf(rangeSeekbar.getProgress()));
     }
 
     private void notificationSwitchChanged(CompoundButton c, Boolean value)
@@ -130,7 +163,7 @@ public class SettingsScreen extends ScreenWithMenu implements ISettingsView
     @Override
     protected IPresenter createPresenter(Screen screen, Bundle savedInstanceState)
     {
-        return new SettingsPresenter(this, navigator, AndroidSchedulers.mainThread(), permanentStorage);
+        return new SettingsPresenter(this, permanentStorage);
     }
 
     public Observable<Boolean> enableNotificationsChange()
@@ -157,5 +190,11 @@ public class SettingsScreen extends ScreenWithMenu implements ISettingsView
     public Observable<Integer> searchDaysChange()
     {
         return searchDaysChange;
+    }
+
+    @Override
+    public Observable<Integer> searchRangeChange()
+    {
+        return searchRangeChange;
     }
 }

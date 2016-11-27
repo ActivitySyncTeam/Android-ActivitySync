@@ -15,4 +15,6 @@ public interface ISettingsView
     Observable<Boolean> enableNotificationsVibrateChange();
 
     Observable<Integer> searchDaysChange();
+
+    Observable<Integer> searchRangeChange();
 }

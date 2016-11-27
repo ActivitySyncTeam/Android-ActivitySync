@@ -8,6 +8,11 @@
         <item name="android:textColor">@color/white</item>
     </style>
 
+    <style name="PreferencesViews" parent="Theme.AppCompat.Light">
+        <item name="android:colorControlNormal">@color/settings_primary_dark</item>
+        <item name="android:colorControlActivated">@color/settings_accent</item>
+    </style>
+
     <style name="DefaultFloatingHint">
         <item name="android:textColor">@color/white</item>
         <item name="android:textColorHighlight">@color/white</item>

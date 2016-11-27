@@ -60,7 +60,8 @@
     <string name="pref_notification_switch">Enable notifications</string>
     <string name="pref_notification_sound_chk">Notification sound</string>
     <string name="pref_notification_vibration_chk">Notification vibration</string>
-    <string name="pref_search_days">Search range (in days)</string>
+    <string name="pref_search_days">Search days ahead</string>
+    <string name="pref_search_range">Search range [km]</string>
 
     <!-- LoginScreen strings -->
     <string name="btn_login">Login</string>
