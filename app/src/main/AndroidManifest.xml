@@ -46,6 +46,8 @@
 
         <activity android:name=".screens.ParticipantsScreen"/>
 
+        <activity android:name=".screens.EventCreatorScreen"/>
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyBeiPRuuv-i15I6eJQDtW-irGPer2E1ZJs"/>
