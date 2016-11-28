@@ -32,7 +32,7 @@
                 android:layout_marginTop="@dimen/screen_margin_quarter" />
 
             <Button
-                style="@style/DefaultButton"
+                style="@style/DefaultButton.Positive"
                 android:id="@+id/btn_location_permission"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
