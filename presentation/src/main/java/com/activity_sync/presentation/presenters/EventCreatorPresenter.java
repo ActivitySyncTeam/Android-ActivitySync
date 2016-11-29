@@ -22,15 +22,15 @@ public class EventCreatorPresenter extends Presenter<IEventCreatorView>
     {
         super.start();
 
-        view.openDisciplineSpinner(new String[]{
-                "dupa",
-                "elo",
-                "test",
-                "xd",
-                "kappa"
-        });
+//        view.openDisciplineSpinner(new String[]{
+//                "dupa",
+//                "elo",
+//                "test",
+//                "xd",
+//                "kappa"
+//        });
 
-        subscriptions.add(view.noeldoClick()
+        subscriptions.add(view.createEventClick()
                 .observeOn(uiThread)
                 .subscribe(o -> {
                     view.openPickerScreen();

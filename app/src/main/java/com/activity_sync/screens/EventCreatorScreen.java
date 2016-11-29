@@ -2,23 +2,26 @@ package com.activity_sync.screens;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.AutoCompleteTextView;
+import android.support.v7.widget.CardView;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
-
 import com.activity_sync.App;
 import com.activity_sync.R;
+import com.activity_sync.presentation.models.Location;
+import com.activity_sync.presentation.models.builders.LocationBuilder;
 import com.activity_sync.presentation.presenters.EventCreatorPresenter;
 import com.activity_sync.presentation.presenters.IPresenter;
 import com.activity_sync.presentation.services.INavigator;
 import com.activity_sync.presentation.views.IEventCreatorView;
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.common.GooglePlayServicesRepairableException;
-import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlaceAutocomplete;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.LatLngBounds;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -30,22 +33,40 @@ import rx.subjects.PublishSubject;
 
 public class EventCreatorScreen extends Screen implements IEventCreatorView
 {
-    private static final String LOG_TAG = "PlaceSelectionListener";
-    private static final LatLngBounds BOUNDS_MOUNTAIN_VIEW = new LatLngBounds(
-            new LatLng(37.398160, -122.180831), new LatLng(37.430610, -121.972090));
-    private static final int REQUEST_SELECT_PLACE = 1000;
-
+    private static final int REQUEST_SELECT_PLACE = 1111;
 
     @Inject
     INavigator navigator;
 
-    @Bind(R.id.spinner)
-    AutoCompleteTextView testSpinner;
+    @Bind(R.id.event_date_layout)
+    CardView eventDateLayout;
 
-    @Bind(R.id.elo)
-    Button elo;
+    @Bind(R.id.event_location_layout)
+    CardView eventLocationLayout;
 
-    PublishSubject<String> disciplineSelect = PublishSubject.create();
+    @Bind(R.id.event_date)
+    TextView eventDate;
+
+    @Bind(R.id.event_location)
+    TextView eventLocation;
+
+    @Bind(R.id.spinner_discipline)
+    Spinner disciplineSpinner;
+
+    @Bind(R.id.spinner_level)
+    Spinner levelSpinner;
+
+    @Bind(R.id.spinner_players)
+    Spinner playersSpinner;
+
+    @Bind(R.id.event_checkbox)
+    CheckBox eventCheckbox;
+
+    @Bind(R.id.btn_create_event)
+    Button createEventButton;
+
+    PublishSubject<Location> newLocationOccurred = PublishSubject.create();
+    PublishSubject locationErrorOccurred = PublishSubject.create();
 
     public EventCreatorScreen()
     {
@@ -65,51 +86,124 @@ public class EventCreatorScreen extends Screen implements IEventCreatorView
         super.onCreate(savedInstanceState);
     }
 
+
     @Override
-    public void openDisciplineSpinner(String[] disciplines)
+    public void openDisciplineSpinner(List<String> disciplines)
     {
 
     }
 
     @Override
-    public Observable noeldoClick()
+    public void openLevelSpinner(List<String> disciplines)
     {
-        return ViewObservable.clicks(elo);
+
+    }
+
+    @Override
+    public void openPlayersSpinner()
+    {
+
+    }
+
+    @Override
+    public String date()
+    {
+        return eventDate.toString();
+    }
+
+    @Override
+    public String location()
+    {
+        return eventLocation.toString();
+    }
+
+    @Override
+    public void date(String date)
+    {
+        eventDate.setText(date);
+    }
+
+    @Override
+    public void location(String location)
+    {
+        eventLocation.setText(location);
+    }
+
+    @Override
+    public String discipline()
+    {
+        return disciplineSpinner.getSelectedItem().toString();
+    }
+
+    @Override
+    public String level()
+    {
+        return levelSpinner.getSelectedItem().toString();
+    }
+
+    @Override
+    public String players()
+    {
+        return playersSpinner.getSelectedItem().toString();
+    }
+
+    @Override
+    public Observable createEventClick()
+    {
+        return ViewObservable.clicks(createEventButton);
+    }
+
+    @Override
+    public Observable<Location> newLocationEvent()
+    {
+        return locationErrorOccurred;
+    }
+
+    @Override
+    public Observable locationErrorEvent()
+    {
+        return locationErrorOccurred;
     }
 
     @Override
     public void openPickerScreen()
     {
-        try {
-            Intent intent = new PlaceAutocomplete.IntentBuilder
-                    (PlaceAutocomplete.MODE_FULLSCREEN)
-                    .setBoundsBias(BOUNDS_MOUNTAIN_VIEW)
-                    .build(this);
+        try
+        {
+            Intent intent = new PlaceAutocomplete.IntentBuilder(PlaceAutocomplete.MODE_FULLSCREEN).build(this);
             startActivityForResult(intent, REQUEST_SELECT_PLACE);
-        } catch (GooglePlayServicesRepairableException |
-                GooglePlayServicesNotAvailableException e) {
+        }
+        catch (GooglePlayServicesRepairableException | GooglePlayServicesNotAvailableException e)
+        {
             e.printStackTrace();
         }
     }
 
-    public void onPlaceSelected(Place place) {
-        Toast.makeText(this, "Place selection failed: ",
-                Toast.LENGTH_SHORT).show();
+    @Override
+    public void showPickerLocationErrorMessage()
+    {
+        Toast.makeText(this, "Location has not been chosen properly", Toast.LENGTH_LONG).show();
     }
 
-    public void onError(Status status) {
-        Toast.makeText(this, "Place selection failed: " + status.getStatusMessage(),
-                Toast.LENGTH_SHORT).show();
-    }
-
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == REQUEST_SELECT_PLACE) {
-            if (resultCode == RESULT_OK) {
+    public void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
+        if (requestCode == REQUEST_SELECT_PLACE)
+        {
+            if (resultCode == RESULT_OK)
+            {
                 Place place = PlaceAutocomplete.getPlace(this, data);
-                this.onPlaceSelected(place);
-            } else if (resultCode == PlaceAutocomplete.RESULT_ERROR) {
-                Status status = PlaceAutocomplete.getStatus(this, data);
-                this.onError(status);
+
+                Location location = new LocationBuilder()
+                        .setName(place.getName().toString())
+                        .setLatitude(place.getLatLng().latitude)
+                        .setLongitude(place.getLatLng().longitude)
+                        .createLocation();
+
+                newLocationOccurred.onNext(location);
+            }
+            else if (resultCode == PlaceAutocomplete.RESULT_ERROR)
+            {
+                locationErrorOccurred.onNext(null);
             }
         }
         super.onActivityResult(requestCode, resultCode, data);

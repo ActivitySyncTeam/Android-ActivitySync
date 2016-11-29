@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<android.support.v4.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/navigation_drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -13,206 +13,288 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:background="@color/event_creator_bg">
+            android:background="@color/event_creator_bg"
+            android:orientation="vertical">
 
             <include layout="@layout/toolbar" />
 
-            <ScrollView
-                android:id="@+id/scroll_view"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
-                <LinearLayout
+                <android.support.v7.widget.CardView
+                    android:id="@+id/event_date_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+                    android:layout_marginLeft="@dimen/screen_margin_half"
+                    android:layout_marginRight="@dimen/screen_margin_half"
+                    android:layout_marginTop="@dimen/screen_margin_half"
+                    android:background="@drawable/selector_event_creator_item"
+                    android:minHeight="60dp">
 
-                    <android.support.v7.widget.CardView
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/screen_margin_half"
-                        android:layout_marginLeft="@dimen/screen_margin_half"
-                        android:layout_marginRight="@dimen/screen_margin_half"
-                        android:background="@drawable/selector_event_creator_item"
-                        android:minHeight="60dp">
+                        android:layout_gravity="center"
+                        android:layout_margin="@dimen/screen_margin_half"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/screen_margin"
+                            android:src="@drawable/ic_calendar"
+                            android:tint="@color/black" />
 
                         <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="@dimen/screen_margin_half"
-                            android:orientation="horizontal"
-                            android:layout_gravity="center">
+                            android:layout_height="match_parent"
+                            android:orientation="vertical">
 
-                            <ImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_margin="@dimen/screen_margin"
-                                android:src="@drawable/ic_gps"
-                                android:tint="@color/black" />
-
-                            <LinearLayout
+                            <TextView
+                                style="@style/EventCreatorUpperRow"
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:orientation="vertical">
+                                android:layout_height="0dp"
+                                android:layout_weight="1"
+                                android:gravity="center_vertical"
+                                android:text="Choose date" />
 
-                                <TextView
-                                    style="@style/EventCreatorUpperRow"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="0dp"
-                                    android:layout_weight="1"
-                                    android:gravity="center_vertical"
-                                    android:text="Choose location" />
-
-                                <TextView
-                                    style="@style/EventCreatorLowerRow"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="0dp"
-                                    android:layout_weight="1"
-                                    android:gravity="center_vertical"
-                                    android:text="Not selected" />
-                            </LinearLayout>
-
+                            <TextView
+                                android:id="@+id/event_date"
+                                style="@style/EventCreatorLowerRow"
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_weight="1"
+                                android:gravity="center_vertical"
+                                android:text="Not selected" />
                         </LinearLayout>
 
-                    </android.support.v7.widget.CardView>
+                    </LinearLayout>
 
-                    <android.support.v7.widget.CardView
+                </android.support.v7.widget.CardView>
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/event_location_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/screen_margin_half"
+                    android:layout_marginRight="@dimen/screen_margin_half"
+                    android:layout_marginTop="@dimen/screen_margin_half"
+                    android:background="@drawable/selector_event_creator_item"
+                    android:minHeight="60dp">
+
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/screen_margin_half"
-                        android:layout_marginLeft="@dimen/screen_margin_half"
-                        android:layout_marginRight="@dimen/screen_margin_half"
-                        android:background="@drawable/selector_event_creator_item"
-                        android:minHeight="60dp">
+                        android:layout_gravity="center"
+                        android:layout_margin="@dimen/screen_margin_half"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/screen_margin"
+                            android:src="@drawable/ic_gps"
+                            android:tint="@color/black" />
 
                         <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="@dimen/screen_margin_half"
-                            android:orientation="horizontal"
-                            android:layout_gravity="center">
+                            android:layout_height="match_parent"
+                            android:orientation="vertical">
 
-                            <ImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_margin="@dimen/screen_margin"
-                                android:src="@drawable/ic_calendar"
-                                android:tint="@color/black" />
-
-                            <LinearLayout
+                            <TextView
+                                style="@style/EventCreatorUpperRow"
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:orientation="vertical">
+                                android:layout_height="0dp"
+                                android:layout_weight="1"
+                                android:gravity="center_vertical"
+                                android:text="Choose location" />
 
-                                <TextView
-                                    style="@style/EventCreatorUpperRow"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="0dp"
-                                    android:layout_weight="1"
-                                    android:gravity="center_vertical"
-                                    android:text="Choose date" />
-
-                                <TextView
-                                    style="@style/EventCreatorLowerRow"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="0dp"
-                                    android:layout_weight="1"
-                                    android:gravity="center_vertical"
-                                    android:text="Not selected" />
-                            </LinearLayout>
-
+                            <TextView
+                                android:id="@+id/event_location"
+                                style="@style/EventCreatorLowerRow"
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_weight="1"
+                                android:gravity="center_vertical"
+                                android:text="Not selected" />
                         </LinearLayout>
 
-                    </android.support.v7.widget.CardView>
+                    </LinearLayout>
 
-                    <android.support.v7.widget.CardView
+                </android.support.v7.widget.CardView>
+
+                <android.support.v7.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/screen_margin_half"
+                    android:layout_marginRight="@dimen/screen_margin_half"
+                    android:layout_marginTop="@dimen/screen_margin_half"
+                    android:background="@drawable/selector_event_creator_item">
+
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/screen_margin_half"
-                        android:layout_marginLeft="@dimen/screen_margin_half"
-                        android:layout_marginRight="@dimen/screen_margin_half"
-                        android:background="@drawable/selector_event_creator_item"
-                        android:minHeight="60dp">
+                        android:layout_gravity="center"
+                        android:layout_margin="@dimen/screen_margin_half"
+                        android:orientation="vertical">
 
                         <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="@dimen/screen_margin_half"
-                            android:orientation="horizontal"
-                            android:layout_gravity="center">
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal">
 
-                            <ImageView
+                            <TextView
+                                style="@style/EventCreatorUpperRow"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_margin="@dimen/screen_margin"
-                                android:src="@drawable/ic_gps"
-                                android:tint="@color/black" />
+                                android:layout_gravity="center"
+                                android:text="Discipline" />
 
-                            <LinearLayout
+                            <Spinner
+                                android:id="@+id/spinner_discipline"
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:orientation="vertical">
-
-                                <TextView
-                                    style="@style/EventCreatorUpperRow"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="0dp"
-                                    android:layout_weight="1"
-                                    android:gravity="center_vertical"
-                                    android:text="Choose location" />
-
-                                <TextView
-                                    style="@style/EventCreatorLowerRow"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="0dp"
-                                    android:layout_weight="1"
-                                    android:gravity="center_vertical"
-                                    android:text="Not selected" />
-                            </LinearLayout>
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="right" />
 
                         </LinearLayout>
 
-                    </android.support.v7.widget.CardView>
+                    </LinearLayout>
 
-                    <EditText
+                </android.support.v7.widget.CardView>
+
+                <android.support.v7.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/screen_margin_half"
+                    android:layout_marginRight="@dimen/screen_margin_half"
+                    android:layout_marginTop="@dimen/screen_margin_half"
+                    android:background="@drawable/selector_event_creator_item">
+
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="top"
-                        android:hint="Choose location"
-                        android:minLines="4"
-                        android:textColorHint="@color/gray"
-                        android:textSize="@dimen/text_default_size" />
+                        android:layout_gravity="center"
+                        android:layout_margin="@dimen/screen_margin_half"
+                        android:orientation="vertical">
 
-                    <Button
-                        android:id="@+id/elo"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="xd" />
-
-
-                    <android.support.design.widget.TextInputLayout
-                        android:id="@+id/text_input_layout_email"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        app:hintTextAppearance="@style/DefaultFloatingHint">
-
-                        <AutoCompleteTextView
-                            android:id="@+id/spinner"
-                            style="@style/DefaultEditText"
+                        <LinearLayout
                             android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                style="@style/EventCreatorUpperRow"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:text="Level" />
+
+                            <Spinner
+                                android:id="@+id/spinner_level"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="right"
+                                android:backgroundTint="@color/black" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </android.support.v7.widget.CardView>
+
+                <android.support.v7.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/screen_margin_half"
+                    android:layout_marginRight="@dimen/screen_margin_half"
+                    android:layout_marginTop="@dimen/screen_margin_half"
+                    android:background="@drawable/selector_event_creator_item">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_margin="@dimen/screen_margin_half"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                style="@style/EventCreatorUpperRow"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:text="Players number" />
+
+                            <Spinner
+                                android:id="@+id/spinner_players"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="right" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </android.support.v7.widget.CardView>
+
+                <android.support.v7.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/screen_margin_half"
+                    android:layout_marginRight="@dimen/screen_margin_half"
+                    android:layout_marginTop="@dimen/screen_margin_half"
+                    android:layout_weight="1"
+                    android:background="@drawable/selector_event_creator_item">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="@dimen/screen_margin_half"
+                        android:orientation="vertical">
+
+                        <TextView
+                            style="@style/EventCreatorUpperRow"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:drawableLeft="@drawable/ic_account"
-                            android:hint="@string/hint_login"
-                            android:imeOptions="actionNext" />
+                            android:text="Description" />
 
-                    </android.support.design.widget.TextInputLayout>
+                        <EditText
+                            android:id="@+id/event_description"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="top"
+                            android:textColorHint="@color/black"
+                            android:textSize="@dimen/text_default_size" />
 
+                    </LinearLayout>
 
-                </LinearLayout>
+                </android.support.v7.widget.CardView>
 
-            </ScrollView>
+                <CheckBox
+                    android:id="@+id/event_checkbox"
+                    style="@style/EventCreatorUpperRow"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Enroll as a participant"
+                    android:layout_marginLeft="@dimen/screen_margin_quarter"
+                    android:layout_marginRight="@dimen/screen_margin_half"
+                    android:layout_marginTop="@dimen/screen_margin_half"/>
+
+                <Button
+                    android:id="@+id/btn_create_event"
+                    style="@style/DefaultButton.Positive"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/screen_margin_half"
+                    android:text="Create event" />
+
+            </LinearLayout>
 
         </LinearLayout>
 
