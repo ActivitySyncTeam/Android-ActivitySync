@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v7.widget.AppCompatCheckBox;
 import android.support.v7.widget.AppCompatSeekBar;
 import android.support.v7.widget.SwitchCompat;
+import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.SeekBar;
 import android.widget.TextView;
@@ -20,6 +21,8 @@ import javax.inject.Inject;
 
 import butterknife.Bind;
 import rx.Observable;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.android.view.ViewObservable;
 import rx.subjects.PublishSubject;
 
 public class SettingsScreen extends ScreenWithMenu implements ISettingsView
@@ -53,6 +56,12 @@ public class SettingsScreen extends ScreenWithMenu implements ISettingsView
 
     @Bind(R.id.search_range_label)
     TextView searchRangeLabel;
+
+    @Bind(R.id.edit_account_button)
+    Button editAccountButton;
+
+    @Bind(R.id.change_password_button)
+    Button changePasswordButton;
 
     private PublishSubject<Boolean> enableNotificationsChange = PublishSubject.create();
     private PublishSubject<Boolean> enableLocationChange = PublishSubject.create();
@@ -163,7 +172,7 @@ public class SettingsScreen extends ScreenWithMenu implements ISettingsView
     @Override
     protected IPresenter createPresenter(Screen screen, Bundle savedInstanceState)
     {
-        return new SettingsPresenter(this, permanentStorage);
+        return new SettingsPresenter(this, navigator, AndroidSchedulers.mainThread(), permanentStorage);
     }
 
     public Observable<Boolean> enableNotificationsChange()
@@ -196,5 +205,23 @@ public class SettingsScreen extends ScreenWithMenu implements ISettingsView
     public Observable<Integer> searchRangeChange()
     {
         return searchRangeChange;
+    }
+
+    @Override
+    protected int getMenuId()
+    {
+        return R.id.menu_settings;
+    }
+
+    @Override
+    public Observable editUserAccount()
+    {
+        return ViewObservable.clicks(editAccountButton);
+    }
+
+    @Override
+    public Observable changeUserPassword()
+    {
+        return ViewObservable.clicks(changePasswordButton);
     }
 }

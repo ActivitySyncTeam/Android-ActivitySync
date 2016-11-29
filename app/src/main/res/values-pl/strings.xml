@@ -67,5 +67,11 @@
     <string name="pref_cat_search">Domyślne wartości wyszukiwania</string>
     <string name="pref_search_days">Szukaj dni do pzodu</string>
     <string name="pref_search_range">Zasięg wyszukiwania [km]</string>
+    <string name="pref_cat_account">Konto użytkownika</string>
+    <string name="pref_change_pwd_btn">Zmień hasło</string>
+    <string name="pref_edit_account_btn">Edytuj konto</string>
+    <string name="pref_name">Imię</string>
+    <string name="pref_surname">Nazwisko</string>
+    <string name="pref_signature">Sygnatura</string>
 
 </resources>

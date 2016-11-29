@@ -1,15 +1,22 @@
 package com.activity_sync.presentation.presenters;
 
+import com.activity_sync.presentation.services.INavigator;
 import com.activity_sync.presentation.services.IPermanentStorage;
 import com.activity_sync.presentation.views.ISettingsView;
+
+import rx.Scheduler;
 
 public class SettingsPresenter extends Presenter<ISettingsView>
 {
     private IPermanentStorage permanentStorage;
+    private Scheduler uiThread;
+    private INavigator navigator;
 
-    public SettingsPresenter(ISettingsView view, IPermanentStorage permanentStorage)
+    public SettingsPresenter(ISettingsView view, INavigator navigator, Scheduler uiThread, IPermanentStorage permanentStorage)
     {
         super(view);
+        this.uiThread = uiThread;
+        this.navigator = navigator;
         this.permanentStorage = permanentStorage;
     }
 
@@ -26,5 +33,17 @@ public class SettingsPresenter extends Presenter<ISettingsView>
         subscriptions.add(view.enableNotificationsVibrateChange().subscribe(value -> permanentStorage.saveBoolean(IPermanentStorage.IS_NOTIFICATION_VIBRATION_ENABLED, value)));
         subscriptions.add(view.searchDaysChange().subscribe(value -> permanentStorage.saveInteger(IPermanentStorage.SEARCH_DAYS_AHEAD, value)));
         subscriptions.add(view.searchRangeChange().subscribe(value -> permanentStorage.saveInteger(IPermanentStorage.SEARCH_RANGE, value)));
+
+        subscriptions.add(view.editUserAccount()
+                .observeOn(uiThread)
+                .subscribe(o -> {
+//                    navigator.openEditAccountScreen();
+                }));
+
+        subscriptions.add(view.changeUserPassword()
+                .observeOn(uiThread)
+                .subscribe(o -> {
+//                    navigator.openChangePasswordScreen();
+                }));
     }
 }

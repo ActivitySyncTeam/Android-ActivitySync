@@ -17,4 +17,8 @@ public interface ISettingsView
     Observable<Integer> searchDaysChange();
 
     Observable<Integer> searchRangeChange();
+
+    Observable editUserAccount();
+
+    Observable changeUserPassword();
 }

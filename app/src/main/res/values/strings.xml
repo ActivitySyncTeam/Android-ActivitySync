@@ -67,12 +67,20 @@
     <string name="pref_cat_location">Location</string>
     <string name="pref_cat_notification">Notifications</string>
     <string name="pref_cat_search">Default search values</string>
+    <string name="pref_cat_account">User account</string>
     <string name="pref_location_switch">Enable location</string>
     <string name="pref_notification_switch">Enable notifications</string>
     <string name="pref_notification_sound_chk">Notification sound</string>
     <string name="pref_notification_vibration_chk">Notification vibration</string>
     <string name="pref_search_days">Search days ahead</string>
     <string name="pref_search_range">Search range [km]</string>
+    <string name="pref_edit_account_btn">Edit account</string>
+    <string name="pref_change_pwd_btn">Change password</string>
+    <string name="pref_name">Name</string>
+    <string name="pref_surname">Surname</string>
+    <string name="pref_login" translatable="false">Login</string>
+    <string name="pref_signature">Signature</string>
+    <string name="pref_email" translatable="false">E-mail</string>
 
     <!-- LoginScreen strings -->
     <string name="btn_login">Login</string>
