@@ -21,5 +21,20 @@ public class EventCreatorPresenter extends Presenter<IEventCreatorView>
     public void start()
     {
         super.start();
+
+        view.openDisciplineSpinner(new String[]{
+                "dupa",
+                "elo",
+                "test",
+                "xd",
+                "kappa"
+        });
+
+        subscriptions.add(view.noeldoClick()
+                .observeOn(uiThread)
+                .subscribe(o -> {
+                    view.openPickerScreen();
+                })
+        );
     }
 }

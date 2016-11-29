@@ -28,12 +28,28 @@
                     android:orientation="vertical"
                     app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-
-                    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                        android:id="@+id/place_autocomplete_fragment"
-                        android:name="com.google.android.gms.location.places.ui.PlaceAutocompleteFragment"
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/text_input_layout_email"
                         android:layout_width="match_parent"
-                        android:layout_height="200dp" />
+                        android:layout_height="wrap_content"
+                        app:hintTextAppearance="@style/DefaultFloatingHint">
+
+                        <AutoCompleteTextView
+                            style="@style/DefaultEditText"
+                            android:id="@+id/spinner"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/hint_login"
+                            android:imeOptions="actionNext"
+                            android:drawableLeft="@drawable/ic_account" />
+
+                    </android.support.design.widget.TextInputLayout>
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="noelo"
+                        android:id="@+id/elo"/>
 
                     <TextView
                         android:layout_width="wrap_content"
