@@ -75,8 +75,12 @@
     <item name="user_details_poor" type="color">#f7ba04</item>
     <item name="user_details_bad" type="color">#f27228</item>
     <item name="user_details_terrible" type="color">#f23228</item>
-
     <item name="user_details_event_item_normal" type="color">@color/white</item>
     <item name="user_details_event_item_pressed" type="color">#a39c9c</item>
+
+    <!--Event Creator Screen Colors-->
+    <item name="event_creator_bg" type="color">#d4cdcd</item>
+    <item name="event_creator_item_normal" type="color">@color/event_creator_bg</item>
+    <item name="event_creator_item_pressed" type="color">#a39c9c</item>
 
 </resources>

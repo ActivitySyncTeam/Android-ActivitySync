@@ -108,4 +108,18 @@
         <item name="android:background">@color/white</item>
     </style>
 
+    <style name="EventCreatorUpperRow">
+        <item name="android:fontFamily">sans-serif-light</item>
+        <item name="android:textSize">@dimen/text_big_size</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="EventCreatorLowerRow">
+        <item name="android:fontFamily">sans-serif-light</item>
+        <item name="android:textSize">@dimen/text_default_size</item>
+        <item name="android:layout_marginBottom">@dimen/screen_margin_small</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
 </resources>

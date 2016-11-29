@@ -13,7 +13,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:background="@color/event_creator_bg">
 
             <include layout="@layout/toolbar" />
 
@@ -28,6 +29,169 @@
                     android:orientation="vertical"
                     app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
+                    <android.support.v7.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/screen_margin_half"
+                        android:layout_marginLeft="@dimen/screen_margin_half"
+                        android:layout_marginRight="@dimen/screen_margin_half"
+                        android:background="@drawable/selector_event_creator_item"
+                        android:minHeight="60dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/screen_margin_half"
+                            android:orientation="horizontal"
+                            android:layout_gravity="center">
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="@dimen/screen_margin"
+                                android:src="@drawable/ic_gps"
+                                android:tint="@color/black" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    style="@style/EventCreatorUpperRow"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="0dp"
+                                    android:layout_weight="1"
+                                    android:gravity="center_vertical"
+                                    android:text="Choose location" />
+
+                                <TextView
+                                    style="@style/EventCreatorLowerRow"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="0dp"
+                                    android:layout_weight="1"
+                                    android:gravity="center_vertical"
+                                    android:text="Not selected" />
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                    </android.support.v7.widget.CardView>
+
+                    <android.support.v7.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/screen_margin_half"
+                        android:layout_marginLeft="@dimen/screen_margin_half"
+                        android:layout_marginRight="@dimen/screen_margin_half"
+                        android:background="@drawable/selector_event_creator_item"
+                        android:minHeight="60dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/screen_margin_half"
+                            android:orientation="horizontal"
+                            android:layout_gravity="center">
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="@dimen/screen_margin"
+                                android:src="@drawable/ic_calendar"
+                                android:tint="@color/black" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    style="@style/EventCreatorUpperRow"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="0dp"
+                                    android:layout_weight="1"
+                                    android:gravity="center_vertical"
+                                    android:text="Choose date" />
+
+                                <TextView
+                                    style="@style/EventCreatorLowerRow"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="0dp"
+                                    android:layout_weight="1"
+                                    android:gravity="center_vertical"
+                                    android:text="Not selected" />
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                    </android.support.v7.widget.CardView>
+
+                    <android.support.v7.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/screen_margin_half"
+                        android:layout_marginLeft="@dimen/screen_margin_half"
+                        android:layout_marginRight="@dimen/screen_margin_half"
+                        android:background="@drawable/selector_event_creator_item"
+                        android:minHeight="60dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/screen_margin_half"
+                            android:orientation="horizontal"
+                            android:layout_gravity="center">
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="@dimen/screen_margin"
+                                android:src="@drawable/ic_gps"
+                                android:tint="@color/black" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    style="@style/EventCreatorUpperRow"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="0dp"
+                                    android:layout_weight="1"
+                                    android:gravity="center_vertical"
+                                    android:text="Choose location" />
+
+                                <TextView
+                                    style="@style/EventCreatorLowerRow"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="0dp"
+                                    android:layout_weight="1"
+                                    android:gravity="center_vertical"
+                                    android:text="Not selected" />
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                    </android.support.v7.widget.CardView>
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="top"
+                        android:hint="Choose location"
+                        android:minLines="4"
+                        android:textColorHint="@color/gray"
+                        android:textSize="@dimen/text_default_size" />
+
+                    <Button
+                        android:id="@+id/elo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="xd" />
+
+
                     <android.support.design.widget.TextInputLayout
                         android:id="@+id/text_input_layout_email"
                         android:layout_width="match_parent"
@@ -35,112 +199,16 @@
                         app:hintTextAppearance="@style/DefaultFloatingHint">
 
                         <AutoCompleteTextView
-                            style="@style/DefaultEditText"
                             android:id="@+id/spinner"
+                            style="@style/DefaultEditText"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:drawableLeft="@drawable/ic_account"
                             android:hint="@string/hint_login"
-                            android:imeOptions="actionNext"
-                            android:drawableLeft="@drawable/ic_account" />
+                            android:imeOptions="actionNext" />
 
                     </android.support.design.widget.TextInputLayout>
 
-                    <Button
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="noelo"
-                        android:id="@+id/elo"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="@dimen/screen_margin_big"
-                        android:layout_marginTop="@dimen/screen_margin_big"
-                        android:text="no elo" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="@dimen/screen_margin_big"
-                        android:layout_marginTop="@dimen/screen_margin_big"
-                        android:text="no elo" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="@dimen/screen_margin_big"
-                        android:layout_marginTop="@dimen/screen_margin_big"
-                        android:text="no elo" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="@dimen/screen_margin_big"
-                        android:layout_marginTop="@dimen/screen_margin_big"
-                        android:text="no elo" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="@dimen/screen_margin_big"
-                        android:layout_marginTop="@dimen/screen_margin_big"
-                        android:text="no elo" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="@dimen/screen_margin_big"
-                        android:layout_marginTop="@dimen/screen_margin_big"
-                        android:text="no elo" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="@dimen/screen_margin_big"
-                        android:layout_marginTop="@dimen/screen_margin_big"
-                        android:text="no elo" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="@dimen/screen_margin_big"
-                        android:layout_marginTop="@dimen/screen_margin_big"
-                        android:text="no elo" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="@dimen/screen_margin_big"
-                        android:layout_marginTop="@dimen/screen_margin_big"
-                        android:text="no elo" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="@dimen/screen_margin_big"
-                        android:layout_marginTop="@dimen/screen_margin_big"
-                        android:text="no elo" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="@dimen/screen_margin_big"
-                        android:layout_marginTop="@dimen/screen_margin_big"
-                        android:text="no elo" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="@dimen/screen_margin_big"
-                        android:layout_marginTop="@dimen/screen_margin_big"
-                        android:text="no elo" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="@dimen/screen_margin_big"
-                        android:layout_marginTop="@dimen/screen_margin_big"
-                        android:text="no elo" />
 
                 </LinearLayout>
 
