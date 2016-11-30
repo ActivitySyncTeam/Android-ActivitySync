@@ -39,7 +39,12 @@ public class EventDetailsPresenter extends Presenter<IEventDetailsView>
 
         createEvent(true, false, true);
 
-        view.setEventData(event);
+        subscriptions.add(view.googleMapAsyncCompleted()
+                .observeOn(uiThread)
+                .subscribe(o -> {
+                    view.setEventData(event);
+                })
+        );
 
         subscriptions.add(view.joinLeaveEventClick()
                 .observeOn(uiThread)
@@ -50,7 +55,7 @@ public class EventDetailsPresenter extends Presenter<IEventDetailsView>
                     }
                     else
                     {
-                        view.showJoinConfirmationDialog();
+                        view.showEnrollConfirmationDialog();
                     }
                 })
         );
@@ -72,7 +77,7 @@ public class EventDetailsPresenter extends Presenter<IEventDetailsView>
                             .setCandidate(false)
                             .createEnrollmentStatus();
 
-                    view.showJoinEventMessage();
+                    view.showEnrollMessage();
                     view.setOrganizerParticipantView(new EventBuilder().setEnrollmentStatus(enrollmentStatus).setIsActive(true).createEvent());
                     event.setEnrollmentStatus(enrollmentStatus); // delete when api provided
                 })
@@ -130,6 +135,8 @@ public class EventDetailsPresenter extends Presenter<IEventDetailsView>
                         .createDiscipline())
                 .setLocation(new LocationBuilder()
                         .setName("Park Jordana")
+                        .setLatitude(50.061124)
+                        .setLongitude(19.914123)
                         .createLocation())
                 .setMaxPlaces(12)
                 .setOccupiedPlaces(7)

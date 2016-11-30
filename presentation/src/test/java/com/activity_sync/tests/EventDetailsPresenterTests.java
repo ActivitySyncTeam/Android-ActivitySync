@@ -57,7 +57,7 @@ public class EventDetailsPresenterTests
         presenter.createEvent(false, false, false); //will be deleted when api
 
         joinLeaveEventClickEvent.onNext(this);
-        Mockito.verify(view).showJoinConfirmationDialog();
+        Mockito.verify(view).showEnrollConfirmationDialog();
     }
 
     @Test
@@ -90,7 +90,7 @@ public class EventDetailsPresenterTests
 
         joinEventConfirmEvent.onNext(this);
         Mockito.verify(view).setOrganizerParticipantView(any());
-        Mockito.verify(view).showJoinEventMessage();
+        Mockito.verify(view).showEnrollMessage();
     }
 
     @Test

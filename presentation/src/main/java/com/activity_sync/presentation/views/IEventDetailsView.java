@@ -16,7 +16,7 @@ public interface IEventDetailsView
 
     void setEventData(Event event);
 
-    void showJoinConfirmationDialog();
+    void showEnrollConfirmationDialog();
 
     void showLeaveConfirmationDialog();
 
@@ -28,9 +28,11 @@ public interface IEventDetailsView
 
     Observable cancelEventConfirmClick();
 
-    void showJoinEventMessage();
+    void showEnrollMessage();
 
     void showLeaveEventMessage();
 
     void setOrganizerParticipantView(Event event);
+
+    Observable googleMapAsyncCompleted();
 }
