@@ -41,7 +41,7 @@
     <dimen name="intro_circle_image_width">@dimen/intro_circle_image_height</dimen>
 
     <!-- UserDetailsScreen dimens-->
-    <dimen name="text_drawable_default_height">48dp</dimen>
+    <dimen name="text_drawable_default_height">40dp</dimen>
     <dimen name="text_drawable_default_width">@dimen/text_drawable_default_height</dimen>
 
 </resources>
