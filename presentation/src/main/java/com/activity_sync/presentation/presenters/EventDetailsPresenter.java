@@ -1,7 +1,9 @@
 package com.activity_sync.presentation.presenters;
 
+import com.activity_sync.presentation.models.EnrollmentStatus;
 import com.activity_sync.presentation.models.Event;
 import com.activity_sync.presentation.models.builders.DisciplineBuilder;
+import com.activity_sync.presentation.models.builders.EnrollmentStatusBuilder;
 import com.activity_sync.presentation.models.builders.EventBuilder;
 import com.activity_sync.presentation.models.builders.LocationBuilder;
 import com.activity_sync.presentation.models.builders.LevelBuilder;
@@ -42,7 +44,7 @@ public class EventDetailsPresenter extends Presenter<IEventDetailsView>
         subscriptions.add(view.joinLeaveEventClick()
                 .observeOn(uiThread)
                 .subscribe(o -> {
-                    if (event.isParticipant())
+                    if (event.getEnrollmentStatus().isParticipant())
                     {
                         view.showLeaveConfirmationDialog();
                     }
@@ -63,18 +65,32 @@ public class EventDetailsPresenter extends Presenter<IEventDetailsView>
         subscriptions.add(view.joinEventConfirmClick()
                 .observeOn(uiThread)
                 .subscribe(o -> {
+
+                    EnrollmentStatus enrollmentStatus = new EnrollmentStatusBuilder()
+                            .setOrganizer(true)
+                            .setParticipant(true)
+                            .setCandidate(false)
+                            .createEnrollmentStatus();
+
                     view.showJoinEventMessage();
-                    view.setOrganizerParticipantView(new EventBuilder().setIsParticipant(true).setIsActive(true).setIsOrganizer(true).createEvent());
-                    event.setParticipant(true); // delete when api provided
+                    view.setOrganizerParticipantView(new EventBuilder().setEnrollmentStatus(enrollmentStatus).setIsActive(true).createEvent());
+                    event.setEnrollmentStatus(enrollmentStatus); // delete when api provided
                 })
         );
 
         subscriptions.add(view.leaveEventConfirmClick()
                 .observeOn(uiThread)
                 .subscribe(o -> {
+
+                    EnrollmentStatus enrollmentStatus = new EnrollmentStatusBuilder()
+                            .setOrganizer(true)
+                            .setParticipant(false)
+                            .setCandidate(false)
+                            .createEnrollmentStatus();
+
                     view.showLeaveEventMessage();
-                    view.setOrganizerParticipantView(new EventBuilder().setIsParticipant(false).setIsActive(true).setIsOrganizer(true).createEvent());
-                    event.setParticipant(false); // delete when api provided
+                    view.setOrganizerParticipantView(new EventBuilder().setEnrollmentStatus(enrollmentStatus).setIsActive(true).createEvent());
+                    event.setEnrollmentStatus(enrollmentStatus); // delete when api provided
                 })
         );
 
@@ -122,9 +138,11 @@ public class EventDetailsPresenter extends Presenter<IEventDetailsView>
                         .setName("medium")
                         .createLevel())
                 .setDescription("Very long text written in order to check if two lines of text here are displaying correctly. Yeah!")
+                .setEnrollmentStatus(new EnrollmentStatusBuilder()
+                        .setParticipant(isParticipant)
+                        .setOrganizer(isOrganizer)
+                        .createEnrollmentStatus())
                 .setIsActive(isActive)
-                .setIsParticipant(isParticipant)
-                .setIsOrganizer(isOrganizer)
                 .createEvent();
     }
 }

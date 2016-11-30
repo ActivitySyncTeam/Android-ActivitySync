@@ -223,11 +223,11 @@ public class EventDetailsScreen extends Screen implements IEventDetailsView, OnM
     @Override
     public void setOrganizerParticipantView(Event event)
     {
-        if (event.isOrganizer() || event.isParticipant())
+        if (event.getEnrollmentStatus().isOrganizer() || event.getEnrollmentStatus().isParticipant())
         {
             baseInfoLayout.setVisibility(View.VISIBLE);
 
-            if (event.isOrganizer())
+            if (event.getEnrollmentStatus().isOrganizer())
             {
                 youOrganizerLayout.setVisibility(View.VISIBLE);
                 cancelEventButton.setVisibility(View.VISIBLE);
@@ -238,7 +238,7 @@ public class EventDetailsScreen extends Screen implements IEventDetailsView, OnM
                 cancelEventButton.setVisibility(View.GONE);
             }
 
-            if (event.isParticipant())
+            if (event.getEnrollmentStatus().isParticipant())
             {
                 youParticipantLayout.setVisibility(View.VISIBLE);
                 prepareLeavenButton();
