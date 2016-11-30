@@ -31,6 +31,7 @@ import com.google.android.gms.location.places.ui.PlaceAutocomplete;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
 
@@ -199,13 +200,13 @@ public class EventCreatorScreen extends Screen implements IEventCreatorView
     @Override
     public Observable openLocationPickerScreenClick()
     {
-        return ViewObservable.clicks(eventLocationLayout);
+        return ViewObservable.clicks(eventLocationLayout).throttleFirst(2, TimeUnit.SECONDS);
     }
 
     @Override
     public Observable openDatePickerClick()
     {
-        return ViewObservable.clicks(eventDateLayout);
+        return ViewObservable.clicks(eventDateLayout).throttleFirst(2, TimeUnit.SECONDS);
     }
 
     @Override
@@ -298,7 +299,7 @@ public class EventCreatorScreen extends Screen implements IEventCreatorView
                 Place place = PlaceAutocomplete.getPlace(this, data);
 
                 Location location = new LocationBuilder()
-                        .setName(place.getName().toString())
+                        .setName(place.getAddress().toString())
                         .setLatitude(place.getLatLng().latitude)
                         .setLongitude(place.getLatLng().longitude)
                         .createLocation();

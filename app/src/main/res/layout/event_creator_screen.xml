@@ -14,7 +14,9 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/event_creator_bg"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:descendantFocusability="beforeDescendants"
+            android:focusableInTouchMode="true">
 
             <include layout="@layout/toolbar" />
 
@@ -24,14 +26,11 @@
                 android:orientation="vertical">
 
                 <android.support.v7.widget.CardView
+                    style="@style/CardViewDefault"
                     android:id="@+id/event_date_layout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/screen_margin_half"
                     android:layout_marginRight="@dimen/screen_margin_half"
-                    android:layout_marginTop="@dimen/screen_margin_half"
-                    android:background="@drawable/selector_event_creator_item"
-                    android:minHeight="60dp">
+                    android:layout_marginTop="@dimen/screen_margin_half">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -75,14 +74,11 @@
                 </android.support.v7.widget.CardView>
 
                 <android.support.v7.widget.CardView
+                    style="@style/CardViewDefault"
                     android:id="@+id/event_location_layout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/screen_margin_half"
                     android:layout_marginRight="@dimen/screen_margin_half"
-                    android:layout_marginTop="@dimen/screen_margin_half"
-                    android:background="@drawable/selector_event_creator_item"
-                    android:minHeight="60dp">
+                    android:layout_marginTop="@dimen/screen_margin_half">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -151,7 +147,8 @@
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
-                                android:text="@string/txt_discipline" />
+                                android:text="@string/txt_discipline"
+                                android:paddingLeft="@dimen/screen_margin_half"/>
 
                             <Spinner
                                 android:id="@+id/spinner_discipline"
@@ -167,12 +164,10 @@
                 </android.support.v7.widget.CardView>
 
                 <android.support.v7.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    style="@style/CardViewDefault.NotClickable"
                     android:layout_marginLeft="@dimen/screen_margin_half"
                     android:layout_marginRight="@dimen/screen_margin_half"
-                    android:layout_marginTop="@dimen/screen_margin_half"
-                    android:background="@drawable/selector_event_creator_item">
+                    android:layout_marginTop="@dimen/screen_margin_half">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -192,7 +187,8 @@
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
-                                android:text="@string/txt_level" />
+                                android:text="@string/txt_level"
+                                android:paddingLeft="@dimen/screen_margin_half"/>
 
                             <Spinner
                                 android:id="@+id/spinner_level"
@@ -209,12 +205,10 @@
                 </android.support.v7.widget.CardView>
 
                 <android.support.v7.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    style="@style/CardViewDefault.NotClickable"
                     android:layout_marginLeft="@dimen/screen_margin_half"
                     android:layout_marginRight="@dimen/screen_margin_half"
-                    android:layout_marginTop="@dimen/screen_margin_half"
-                    android:background="@drawable/selector_event_creator_item">
+                    android:layout_marginTop="@dimen/screen_margin_half">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -234,7 +228,8 @@
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
-                                android:text="@string/txt_number_of_players" />
+                                android:text="@string/txt_number_of_players"
+                                android:paddingLeft="@dimen/screen_margin_half"/>
 
                             <Spinner
                                 android:id="@+id/spinner_players"
@@ -251,13 +246,11 @@
                 </android.support.v7.widget.CardView>
 
                 <android.support.v7.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    style="@style/CardViewDefault.NotClickable"
                     android:layout_marginLeft="@dimen/screen_margin_half"
                     android:layout_marginRight="@dimen/screen_margin_half"
                     android:layout_marginTop="@dimen/screen_margin_half"
-                    android:layout_weight="1"
-                    android:background="@drawable/selector_event_creator_item">
+                    android:layout_weight="1">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -269,7 +262,8 @@
                             style="@style/EventCreatorUpperRow"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/txt_description" />
+                            android:text="@string/txt_description"
+                            android:paddingLeft="@dimen/screen_margin_half"/>
 
                         <EditText
                             style="@style/EventCreatorEditText"
