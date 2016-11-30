@@ -56,5 +56,18 @@
     <string name="txt_leave_message">Wypisałeś się z wydarzenia</string>
     <string name="txt_join_message">Dołączyłeś do wydarzenia</string>
     <string name="txt_participant">Uczestnik</string>
+    <string name="title_event_creator">Kreator wydarzenia</string>
+    <string name="txt_choose_date">Wybierz datę</string>
+    <string name="txt_choose_location">Wybierz miejsca wydarzenia</string>
+    <string name="txt_create_event">Stwórz wydarzenie</string>
+    <string name="txt_create_event_confirmation_text">Jesteś pewien, że chcesz stworzyć to wydarzenie?</string>
+    <string name="txt_create_event_confirmation_title">Potwierdzenie tworzenia wydarzenia</string>
+    <string name="txt_description">Opis</string>
+    <string name="txt_discipline">Dyscyplina</string>
+    <string name="txt_enroll_as_a_participant">Zapisz mnie jako uczestnika</string>
+    <string name="txt_error_choosing_location">Miejsce nie zostało poprawnie wybrane</string>
+    <string name="txt_level">Poziom</string>
+    <string name="txt_not_selected">Nie wybrano</string>
+    <string name="txt_number_of_players">Liczba uczestników</string>
 
 </resources>
