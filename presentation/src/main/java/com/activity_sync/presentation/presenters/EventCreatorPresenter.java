@@ -53,7 +53,7 @@ public class EventCreatorPresenter extends Presenter<IEventCreatorView>
 
         subscriptions.add(view.locationErrorEvent()
                 .observeOn(uiThread)
-                .subscribe(location -> {
+                .subscribe(o -> {
                     view.showPickerLocationErrorMessage();
                 })
         );
