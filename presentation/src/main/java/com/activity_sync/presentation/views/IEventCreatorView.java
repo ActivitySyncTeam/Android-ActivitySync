@@ -36,7 +36,21 @@ public interface IEventCreatorView
 
     Observable locationErrorEvent();
 
-    void openPickerScreen();
+    Observable<String> newDateEvent();
+
+    Observable openLocationPickerScreenClick();
+
+    Observable openDatePickerClick();
+
+    void openLocationPickerScreen();
+
+    void openDatePicker();
 
     void showPickerLocationErrorMessage();
+
+    boolean isOrganizerEnrolled();
+
+    void showConfirmationDialog();
+
+    Observable confirmCreationClickEvent();
 }

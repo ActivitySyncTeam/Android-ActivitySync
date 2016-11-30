@@ -81,6 +81,6 @@
     <!--Event Creator Screen Colors-->
     <item name="event_creator_bg" type="color">#d4cdcd</item>
     <item name="event_creator_item_normal" type="color">@color/event_creator_bg</item>
-    <item name="event_creator_item_pressed" type="color">#a39c9c</item>
+    <item name="event_creator_item_pressed" type="color">#796c6c</item>
 
 </resources>

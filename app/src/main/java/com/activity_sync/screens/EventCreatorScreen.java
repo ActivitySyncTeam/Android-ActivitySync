@@ -1,7 +1,10 @@
 package com.activity_sync.screens;
 
+import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.CardView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -26,6 +29,7 @@ import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlaceAutocomplete;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -72,6 +76,8 @@ public class EventCreatorScreen extends Screen implements IEventCreatorView
 
     PublishSubject<Location> newLocationOccurred = PublishSubject.create();
     PublishSubject locationErrorOccurred = PublishSubject.create();
+    PublishSubject<String> newDateOccurred = PublishSubject.create();
+    PublishSubject confirmClicked = PublishSubject.create();
 
     public EventCreatorScreen()
     {
@@ -96,16 +102,16 @@ public class EventCreatorScreen extends Screen implements IEventCreatorView
     @Override
     public void prepareDisciplineSpinner(List<Discipline> disciplines)
     {
-        ArrayAdapter<Discipline> adapter = new ArrayAdapter<>(this, R.layout.settings_spinner_item, disciplines);
-        adapter.setDropDownViewResource(R.layout.settings_spinner_item);
+        ArrayAdapter<Discipline> adapter = new ArrayAdapter<>(this, R.layout.spinner_deafult_main_item, disciplines);
+        adapter.setDropDownViewResource(R.layout.spinner_default_dropdown_item);
         disciplineSpinner.setAdapter(adapter);
     }
 
     @Override
     public void prepareLevelSpinner(List<Level> levels)
     {
-        ArrayAdapter<Level> adapter = new ArrayAdapter<>(this, R.layout.settings_spinner_item, levels);
-        adapter.setDropDownViewResource(R.layout.settings_spinner_item);
+        ArrayAdapter<Level> adapter = new ArrayAdapter<>(this, R.layout.spinner_deafult_main_item, levels);
+        adapter.setDropDownViewResource(R.layout.spinner_default_dropdown_item);
         levelSpinner.setAdapter(adapter);
     }
 
@@ -114,13 +120,13 @@ public class EventCreatorScreen extends Screen implements IEventCreatorView
     {
         List<String> players = new ArrayList<>();
 
-        for (int i = 0; i < 100; i++)
+        for (int i = 0; i < 40; i++)
         {
             players.add(String.valueOf(i));
         }
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.settings_spinner_item, players);
-        adapter.setDropDownViewResource(R.layout.settings_spinner_item);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.spinner_deafult_main_item, players);
+        adapter.setDropDownViewResource(R.layout.spinner_default_dropdown_item);
         playersSpinner.setAdapter(adapter);
     }
 
@@ -175,7 +181,7 @@ public class EventCreatorScreen extends Screen implements IEventCreatorView
     @Override
     public Observable<Location> newLocationEvent()
     {
-        return locationErrorOccurred;
+        return newLocationOccurred;
     }
 
     @Override
@@ -185,7 +191,25 @@ public class EventCreatorScreen extends Screen implements IEventCreatorView
     }
 
     @Override
-    public void openPickerScreen()
+    public Observable newDateEvent()
+    {
+        return newDateOccurred;
+    }
+
+    @Override
+    public Observable openLocationPickerScreenClick()
+    {
+        return ViewObservable.clicks(eventLocationLayout);
+    }
+
+    @Override
+    public Observable openDatePickerClick()
+    {
+        return ViewObservable.clicks(eventDateLayout);
+    }
+
+    @Override
+    public void openLocationPickerScreen()
     {
         try
         {
@@ -199,9 +223,70 @@ public class EventCreatorScreen extends Screen implements IEventCreatorView
     }
 
     @Override
+    public void openDatePicker()
+    {
+        final Calendar calendar = Calendar.getInstance();
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH);
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+        int hour = calendar.get(Calendar.HOUR_OF_DAY);
+        int minute = calendar.get(Calendar.MINUTE);
+
+        DatePickerDialog datePickerDialog = new DatePickerDialog(this, (view, selectedYear, selectedMonth, selectedDay) ->
+        {
+            TimePickerDialog timePickerDialog = new TimePickerDialog(this, (view1, selectedHour, selectedMinute) ->
+            {
+                newDateOccurred.onNext(String.format("%d-%d-%d %d:%d:00", selectedYear, selectedMonth, selectedDay, selectedHour, selectedMinute));
+
+            }, hour, minute, false);
+
+            timePickerDialog.show();
+
+        }, year, month, day);
+
+        datePickerDialog.show();
+    }
+
+    @Override
     public void showPickerLocationErrorMessage()
     {
         Toast.makeText(this, "Location has not been chosen properly", Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public boolean isOrganizerEnrolled()
+    {
+        return eventCheckbox.isChecked();
+    }
+
+    @Override
+    public void showConfirmationDialog()
+    {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.MyAlertDialogStyle);
+
+        builder.setTitle("Create event confirmation");
+        builder.setMessage("Are you sure you want to create this event?");
+
+        String positiveText = getString(android.R.string.ok);
+        builder.setPositiveButton(positiveText, (dialog, which) ->
+        {
+            confirmClicked.onNext(this);
+        });
+
+        String negativeText = getString(android.R.string.cancel);
+        builder.setNegativeButton(negativeText, (dialog, which) ->
+        {
+            dialog.dismiss();
+        });
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
+    @Override
+    public Observable confirmCreationClickEvent()
+    {
+        return confirmClicked;
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent data)
