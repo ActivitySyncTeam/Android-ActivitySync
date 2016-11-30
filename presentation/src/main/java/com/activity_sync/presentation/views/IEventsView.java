@@ -5,6 +5,4 @@ import rx.Observable;
 public interface IEventsView
 {
     Observable addNewEventClick();
-
-    void newEventClicked();
 }
