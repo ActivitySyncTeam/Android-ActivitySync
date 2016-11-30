@@ -96,7 +96,7 @@ public class EventCreatorScreen extends Screen implements IEventCreatorView
         App.component(this).inject(this);
         super.onCreate(savedInstanceState);
 
-        setTitle("Event creator");
+        setTitle(getString(R.string.title_event_creator));
     }
 
     @Override
@@ -236,7 +236,7 @@ public class EventCreatorScreen extends Screen implements IEventCreatorView
         {
             TimePickerDialog timePickerDialog = new TimePickerDialog(this, (view1, selectedHour, selectedMinute) ->
             {
-                newDateOccurred.onNext(String.format("%d-%d-%d %d:%d:00", selectedYear, selectedMonth, selectedDay, selectedHour, selectedMinute));
+                newDateOccurred.onNext(String.format(getString(R.string.date_format), selectedYear, selectedMonth, selectedDay, selectedHour, selectedMinute));
 
             }, hour, minute, false);
 
@@ -250,7 +250,7 @@ public class EventCreatorScreen extends Screen implements IEventCreatorView
     @Override
     public void showPickerLocationErrorMessage()
     {
-        Toast.makeText(this, "Location has not been chosen properly", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, R.string.txt_error_choosing_location, Toast.LENGTH_LONG).show();
     }
 
     @Override
@@ -264,8 +264,8 @@ public class EventCreatorScreen extends Screen implements IEventCreatorView
     {
         AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.MyAlertDialogStyle);
 
-        builder.setTitle("Create event confirmation");
-        builder.setMessage("Are you sure you want to create this event?");
+        builder.setTitle(R.string.txt_create_event_confirmation_title);
+        builder.setMessage(R.string.txt_create_event_confirmation_text);
 
         String positiveText = getString(android.R.string.ok);
         builder.setPositiveButton(positiveText, (dialog, which) ->

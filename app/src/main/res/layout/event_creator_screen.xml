@@ -58,7 +58,7 @@
                                 android:layout_height="0dp"
                                 android:layout_weight="1"
                                 android:gravity="center_vertical"
-                                android:text="Choose date" />
+                                android:text="@string/txt_choose_date" />
 
                             <TextView
                                 android:id="@+id/event_date"
@@ -67,7 +67,7 @@
                                 android:layout_height="0dp"
                                 android:layout_weight="1"
                                 android:gravity="center_vertical"
-                                android:text="Not selected" />
+                                android:text="@string/txt_not_selected" />
                         </LinearLayout>
 
                     </LinearLayout>
@@ -109,7 +109,7 @@
                                 android:layout_height="0dp"
                                 android:layout_weight="1"
                                 android:gravity="center_vertical"
-                                android:text="Choose location" />
+                                android:text="@string/txt_choose_location" />
 
                             <TextView
                                 android:id="@+id/event_location"
@@ -118,7 +118,7 @@
                                 android:layout_height="0dp"
                                 android:layout_weight="1"
                                 android:gravity="center_vertical"
-                                android:text="Not selected" />
+                                android:text="@string/txt_not_selected" />
                         </LinearLayout>
 
                     </LinearLayout>
@@ -151,7 +151,7 @@
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
-                                android:text="Discipline" />
+                                android:text="@string/txt_discipline" />
 
                             <Spinner
                                 android:id="@+id/spinner_discipline"
@@ -192,7 +192,7 @@
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
-                                android:text="Level" />
+                                android:text="@string/txt_level" />
 
                             <Spinner
                                 android:id="@+id/spinner_level"
@@ -234,7 +234,7 @@
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
-                                android:text="Players number" />
+                                android:text="@string/txt_number_of_players" />
 
                             <Spinner
                                 android:id="@+id/spinner_players"
@@ -269,7 +269,7 @@
                             style="@style/EventCreatorUpperRow"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Description" />
+                            android:text="@string/txt_description" />
 
                         <EditText
                             style="@style/EventCreatorEditText"
@@ -290,7 +290,7 @@
                     android:id="@+id/event_checkbox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Enroll as a participant"
+                    android:text="@string/txt_enroll_as_a_participant"
                     android:layout_marginLeft="@dimen/screen_margin_quarter"
                     android:layout_marginRight="@dimen/screen_margin_half"
                     android:layout_marginTop="@dimen/screen_margin_half"/>
@@ -301,7 +301,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/screen_margin_half"
-                    android:text="Create event" />
+                    android:text="@string/txt_create_event" />
 
             </LinearLayout>
 
