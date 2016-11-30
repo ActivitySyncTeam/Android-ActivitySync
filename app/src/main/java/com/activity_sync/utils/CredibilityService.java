@@ -54,7 +54,14 @@ public class CredibilityService
 
     public int getColor()
     {
-        return ContextCompat.getColor(context, colorSource);
+        if (context != null)
+        {
+            return ContextCompat.getColor(context, colorSource);
+        }
+        else
+        {
+            return R.color.yellow;
+        }
     }
 
     public String getDescription()
