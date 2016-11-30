@@ -27,8 +27,8 @@ public class EventCreatorPresenter extends Presenter<IEventCreatorView>
         super.start();
 
         view.preparePlayersSpinner();
-        view.prepareDisciplineSpinner(Arrays.asList(new Discipline(1, "Basketball"), new Discipline(2, "Football")));
-        view.prepareLevelSpinner(Arrays.asList(new Level(1, "Poor"), new Level(2, "Medium"), new Level(3, "Excellent")));
+        view.prepareDisciplineSpinner(Arrays.asList(new Discipline(1, "Koszykówka"), new Discipline(2, "Piłka nożna")));
+        view.prepareLevelSpinner(Arrays.asList(new Level(1, "Niski"), new Level(2, "Średni"), new Level(3, "Wysoki")));
 
         subscriptions.add(view.openDatePickerClick()
                 .observeOn(uiThread)
