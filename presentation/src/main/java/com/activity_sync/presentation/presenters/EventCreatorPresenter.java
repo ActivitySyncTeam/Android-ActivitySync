@@ -22,13 +22,7 @@ public class EventCreatorPresenter extends Presenter<IEventCreatorView>
     {
         super.start();
 
-//        view.openDisciplineSpinner(new String[]{
-//                "dupa",
-//                "elo",
-//                "test",
-//                "xd",
-//                "kappa"
-//        });
+        //view.preparePlayersSpinner();
 
         subscriptions.add(view.createEventClick()
                 .observeOn(uiThread)

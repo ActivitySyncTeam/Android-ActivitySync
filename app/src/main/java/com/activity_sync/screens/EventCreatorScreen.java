@@ -3,13 +3,17 @@ package com.activity_sync.screens;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.activity_sync.App;
 import com.activity_sync.R;
+import com.activity_sync.presentation.models.Discipline;
+import com.activity_sync.presentation.models.Level;
 import com.activity_sync.presentation.models.Location;
 import com.activity_sync.presentation.models.builders.LocationBuilder;
 import com.activity_sync.presentation.presenters.EventCreatorPresenter;
@@ -21,6 +25,7 @@ import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlaceAutocomplete;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -84,25 +89,39 @@ public class EventCreatorScreen extends Screen implements IEventCreatorView
     {
         App.component(this).inject(this);
         super.onCreate(savedInstanceState);
-    }
 
-
-    @Override
-    public void openDisciplineSpinner(List<String> disciplines)
-    {
-
+        setTitle("Event creator");
     }
 
     @Override
-    public void openLevelSpinner(List<String> disciplines)
+    public void prepareDisciplineSpinner(List<Discipline> disciplines)
     {
-
+        ArrayAdapter<Discipline> adapter = new ArrayAdapter<>(this, R.layout.settings_spinner_item, disciplines);
+        adapter.setDropDownViewResource(R.layout.settings_spinner_item);
+        disciplineSpinner.setAdapter(adapter);
     }
 
     @Override
-    public void openPlayersSpinner()
+    public void prepareLevelSpinner(List<Level> levels)
     {
+        ArrayAdapter<Level> adapter = new ArrayAdapter<>(this, R.layout.settings_spinner_item, levels);
+        adapter.setDropDownViewResource(R.layout.settings_spinner_item);
+        levelSpinner.setAdapter(adapter);
+    }
 
+    @Override
+    public void preparePlayersSpinner()
+    {
+        List<String> players = new ArrayList<>();
+
+        for (int i = 0; i < 100; i++)
+        {
+            players.add(String.valueOf(i));
+        }
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.settings_spinner_item, players);
+        adapter.setDropDownViewResource(R.layout.settings_spinner_item);
+        playersSpinner.setAdapter(adapter);
     }
 
     @Override
@@ -130,15 +149,15 @@ public class EventCreatorScreen extends Screen implements IEventCreatorView
     }
 
     @Override
-    public String discipline()
+    public Discipline discipline()
     {
-        return disciplineSpinner.getSelectedItem().toString();
+        return (Discipline) disciplineSpinner.getSelectedItem();
     }
 
     @Override
-    public String level()
+    public Level level()
     {
-        return levelSpinner.getSelectedItem().toString();
+        return (Level) levelSpinner.getSelectedItem();
     }
 
     @Override

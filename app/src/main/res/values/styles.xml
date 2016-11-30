@@ -29,6 +29,7 @@
         <item name="android:paddingLeft">@dimen/screen_margin</item>
         <item name="android:paddingRight">@dimen/screen_margin</item>
         <item name="android:textAllCaps">true</item>
+        <item name="android:textStyle">bold</item>
     </style>
 
     <style name="DefaultButton.Positive" parent="DefaultButton">

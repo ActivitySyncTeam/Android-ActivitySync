@@ -6,7 +6,8 @@
     android:layout_height="wrap_content"
     android:layout_centerHorizontal="true"
     android:layout_centerVertical="true"
-    android:textSize="@dimen/text_big_size_20"
+    android:textSize="@dimen/text_default_size"
     android:textColor="@color/black"
     android:padding="@dimen/screen_margin_half"
+    android:textStyle="bold"
     tools:text="spinner item test" />

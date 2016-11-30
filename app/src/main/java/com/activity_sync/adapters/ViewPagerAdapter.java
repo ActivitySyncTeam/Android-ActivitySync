@@ -14,8 +14,8 @@ public class ViewPagerAdapter extends FragmentPagerAdapter
     public ViewPagerAdapter(FragmentManager fragmentManager)
     {
         super(fragmentManager);
-        titles = new ArrayList<String>();
-        fragments = new ArrayList<Fragment>();
+        titles = new ArrayList<>();
+        fragments = new ArrayList<>();
     }
 
     @Override

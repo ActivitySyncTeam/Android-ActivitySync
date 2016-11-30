@@ -1,5 +1,7 @@
 package com.activity_sync.presentation.views;
 
+import com.activity_sync.presentation.models.Discipline;
+import com.activity_sync.presentation.models.Level;
 import com.activity_sync.presentation.models.Location;
 
 import java.util.List;
@@ -8,11 +10,11 @@ import rx.Observable;
 
 public interface IEventCreatorView
 {
-    void openDisciplineSpinner(List<String> disciplines);
+    void prepareDisciplineSpinner(List<Discipline> disciplines);
 
-    void openLevelSpinner(List<String> disciplines);
+    void prepareLevelSpinner(List<Level> disciplines);
 
-    void openPlayersSpinner();
+    void preparePlayersSpinner();
 
     String date();
 
@@ -22,9 +24,9 @@ public interface IEventCreatorView
 
     void location(String location);
 
-    String discipline();
+    Discipline discipline();
 
-    String level();
+    Level level();
 
     String players();
 
