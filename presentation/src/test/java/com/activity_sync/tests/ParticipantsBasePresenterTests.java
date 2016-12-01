@@ -27,10 +27,10 @@ public class ParticipantsBasePresenterTests
     @Mock
     IParticipantsFragmentView view;
 
-    PublishSubject participantSelectedEvent = PublishSubject.create();
-    PublishSubject refreshParticipantsEvent = PublishSubject.create();
+    protected PublishSubject participantSelectedEvent = PublishSubject.create();
+    protected PublishSubject refreshParticipantsEvent = PublishSubject.create();
 
-    User testedParticipant;
+    protected User testedParticipant;
 
     @Before
     public void setup()
