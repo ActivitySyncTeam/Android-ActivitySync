@@ -9,7 +9,6 @@ import com.activity_sync.presentation.presenters.IPresenter;
 import com.activity_sync.renderers.CandidatesRenderer;
 import com.activity_sync.renderers.base.RendererBuilder;
 
-import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 
 public class CandidatesFragment extends ParticipantsFragmentBase implements IParticipantActionListener
