@@ -38,7 +38,11 @@ public class CandidatesRenderer extends RegisteredParticipantsRenderer
     public void render()
     {
         super.render();
-        approveSign.setVisibility(View.VISIBLE);
+
+        if (isOrganizer)
+        {
+            approveSign.setVisibility(View.VISIBLE);
+        }
     }
 
     public static class Builder extends RendererBuilder<User>
