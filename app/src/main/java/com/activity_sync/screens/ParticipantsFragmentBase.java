@@ -12,9 +12,9 @@ import com.activity_sync.presentation.action_listeners.IParticipantActionListene
 import com.activity_sync.presentation.models.User;
 import com.activity_sync.presentation.services.INavigator;
 import com.activity_sync.presentation.views.IParticipantsFragmentView;
-import com.activity_sync.renderers.ParticipantsRenderer;
 import com.activity_sync.renderers.base.DividerItemDecoration;
 import com.activity_sync.renderers.base.RVRendererAdapter;
+import com.activity_sync.renderers.base.RendererBuilder;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -41,7 +41,9 @@ abstract public class ParticipantsFragmentBase extends FragmentScreen implements
     private RVRendererAdapter<User> adapter;
     private List<User> participants = new ArrayList<>();
 
-    private final boolean isOrganizer;
+    protected final boolean isOrganizer;
+    PublishSubject<User> onDeclinedEvent = PublishSubject.create();
+    PublishSubject<User> onApprovedEvent = PublishSubject.create();
 
     public ParticipantsFragmentBase(boolean isOrganizer)
     {
@@ -67,7 +69,7 @@ abstract public class ParticipantsFragmentBase extends FragmentScreen implements
     {
         super.onActivityCreated(savedInstanceState);
         participantsRefreshLayout.setOnRefreshListener(() -> refreshParticipants.onNext(this));
-        adapter = new RVRendererAdapter<>(getContext(), new ParticipantsRenderer.Builder(getContext(), isOrganizer, this));
+        adapter = new RVRendererAdapter<>(getContext(), getRendererBuilder());
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         participantsList.setLayoutManager(linearLayoutManager);
         participantsList.addItemDecoration(new DividerItemDecoration(getContext()));
@@ -99,5 +101,31 @@ abstract public class ParticipantsFragmentBase extends FragmentScreen implements
     public void refreshingVisible(boolean isRefreshing)
     {
         participantsRefreshLayout.post(() -> participantsRefreshLayout.setRefreshing(isRefreshing));
+    }
+
+    abstract RendererBuilder<User> getRendererBuilder();
+
+    @Override
+    public void onDeclineButtonClick(User user)
+    {
+        onDeclinedEvent.onNext(user);
+    }
+
+    @Override
+    public void onApproveButtonClick(User user)
+    {
+        onApprovedEvent.onNext(user);
+    }
+
+    @Override
+    public Observable approvedEvent()
+    {
+        return onApprovedEvent;
+    }
+
+    @Override
+    public Observable declinedEvent()
+    {
+        return onDeclinedEvent;
     }
 }

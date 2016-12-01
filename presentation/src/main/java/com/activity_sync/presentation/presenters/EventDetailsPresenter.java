@@ -116,7 +116,11 @@ public class EventDetailsPresenter extends Presenter<IEventDetailsView>
         subscriptions.add(view.participantsDetailsClick()
                 .observeOn(uiThread)
                 .subscribe(o -> {
-                    navigator.openParticipantsScreen();
+
+                    if (event != null)
+                    {
+                        navigator.openParticipantsScreen(event.getEnrollmentStatus().isOrganizer());
+                    }
                 })
         );
     }

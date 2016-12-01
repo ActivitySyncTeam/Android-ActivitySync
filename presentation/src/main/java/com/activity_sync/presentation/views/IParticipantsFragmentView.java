@@ -12,4 +12,7 @@ public interface IParticipantsFragmentView
     Observable refreshParticipants();
     void addParticipantsList(Collection<User> participants);
     void refreshingVisible(boolean isRefreshing);
+
+    Observable approvedEvent();
+    Observable declinedEvent();
 }

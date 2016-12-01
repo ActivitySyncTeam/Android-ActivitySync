@@ -10,13 +10,15 @@ abstract public class ParticipantsFragmentBasePresenter extends Presenter<IParti
     public static final String EVENT_CHOSEN = "EVENT_CHOSEN";
 
     private final INavigator navigator;
-    private Scheduler uiThread;
+    private final Scheduler uiThread;
+    protected final boolean isOrganizer;
 
-    public ParticipantsFragmentBasePresenter(IParticipantsFragmentView view, INavigator navigator, Scheduler uiThread)
+    public ParticipantsFragmentBasePresenter(IParticipantsFragmentView view, INavigator navigator, Scheduler uiThread, boolean isOrganizer)
     {
         super(view);
         this.navigator = navigator;
         this.uiThread = uiThread;
+        this.isOrganizer = isOrganizer;
     }
 
     @Override

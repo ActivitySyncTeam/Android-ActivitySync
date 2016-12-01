@@ -20,9 +20,9 @@ import butterknife.OnClick;
 
 public class ParticipantsRenderer extends Renderer<User>
 {
-    private Context context;
-    private boolean isOrganizer;
-    private IParticipantActionListener actionListener;
+    protected Context context;
+    protected boolean isOrganizer;
+    protected IParticipantActionListener actionListener;
 
     @Bind(R.id.participant_credibility_image)
     ImageView participantCredibilityImage;
@@ -43,19 +43,6 @@ public class ParticipantsRenderer extends Renderer<User>
         actionListener.onDeclineButtonClick(getContent());
     }
 
-    @Bind(R.id.approve_sign)
-    ImageView approveSign;
-
-    @OnClick(R.id.approve_sign)
-    public void onApproveButtonClick(View view)
-    {
-        if (actionListener == null)
-        {
-            return;
-        }
-        actionListener.onApproveButtonClick(getContent());
-    }
-
     public ParticipantsRenderer(Context context, int layoutRes, boolean isOrganizer, IParticipantActionListener actionListener)
     {
         super(layoutRes);
@@ -71,7 +58,6 @@ public class ParticipantsRenderer extends Renderer<User>
         TextDrawable drawable = TextDrawable.builder().buildRound(String.format("%d", getContent().getCredibility()), credibilityService.getColor());
         participantCredibilityImage.setImageDrawable(drawable);
 
-        if (isOrganizer)
     }
 
     public static class Builder extends RendererBuilder<User>

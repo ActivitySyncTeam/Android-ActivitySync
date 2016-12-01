@@ -53,7 +53,8 @@
                     android:src="@drawable/ic_check"
                     android:tint="@color/black"
                     android:padding="@dimen/screen_margin"
-                    android:layout_gravity="center"/>
+                    android:layout_gravity="center"
+                    android:visibility="gone"/>
 
                 <ImageView
                     android:id="@+id/decline_sign"

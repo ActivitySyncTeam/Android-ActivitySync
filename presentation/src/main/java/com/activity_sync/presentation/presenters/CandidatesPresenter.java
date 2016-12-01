@@ -13,9 +13,9 @@ import rx.Scheduler;
 
 public class CandidatesPresenter extends ParticipantsFragmentBasePresenter
 {
-    public CandidatesPresenter(IParticipantsFragmentView view, INavigator navigator, Scheduler uiThread)
+    public CandidatesPresenter(IParticipantsFragmentView view, INavigator navigator, Scheduler uiThread, boolean isOrganizer)
     {
-        super(view, navigator, uiThread);
+        super(view, navigator, uiThread, isOrganizer);
     }
 
     @Override
