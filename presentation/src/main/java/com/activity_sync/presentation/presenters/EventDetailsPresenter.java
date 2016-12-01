@@ -37,7 +37,7 @@ public class EventDetailsPresenter extends Presenter<IEventDetailsView>
     {
         super.start();
 
-        createEvent(true, false, false);
+        createEvent(true, false, true);
 
         subscriptions.add(view.googleMapAsyncCompleted()
                 .observeOn(uiThread)

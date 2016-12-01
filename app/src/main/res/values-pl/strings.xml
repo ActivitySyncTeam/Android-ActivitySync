@@ -73,5 +73,11 @@
     <string name="txt_candidates">Kandydaci</string>
     <string name="txt_declined">Odrzuceni</string>
     <string name="txt_registered">Zapisani</string>
+    <string name="txt_accept_participant_confirmation_text">Jesteś pewien, że chcesz zaakceptować tego użytkownika?</string>
+    <string name="txt_accept_participant_confirmation_title">Potwierdzenie akceptacji użytkownika</string>
+    <string name="txt_accept_success">%s %s został zaakceptowany</string>
+    <string name="txt_remove_participant_confirmation_text">Czy jesteś pewien, że chcesz usunąć tego uczestnika? Tej operacji nie będzie można cofnąć.</string>
+    <string name="txt_remove_participant_confirmation_title">Potwierdzenie usunięcia uczestnika</string>
+    <string name="txt_remove_success">%s % został usunięty z wydarzenia</string>
 
 </resources>
