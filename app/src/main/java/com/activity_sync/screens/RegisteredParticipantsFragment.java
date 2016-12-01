@@ -6,10 +6,9 @@ import com.activity_sync.presentation.action_listeners.IParticipantActionListene
 import com.activity_sync.presentation.models.User;
 import com.activity_sync.presentation.presenters.IPresenter;
 import com.activity_sync.presentation.presenters.RegisteredParticipantsPresenter;
-import com.activity_sync.renderers.ParticipantsRenderer;
+import com.activity_sync.renderers.ParticipantsMainRenderer;
 import com.activity_sync.renderers.base.RendererBuilder;
 
-import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 
 public class RegisteredParticipantsFragment extends ParticipantsFragmentBase implements IParticipantActionListener
@@ -27,7 +26,7 @@ public class RegisteredParticipantsFragment extends ParticipantsFragmentBase imp
     @Override
     RendererBuilder<User> getRendererBuilder()
     {
-        return new ParticipantsRenderer.Builder(getContext(), isOrganizer, this);
+        return new ParticipantsMainRenderer.Builder(getContext(), isOrganizer, this);
     }
 
     @Override

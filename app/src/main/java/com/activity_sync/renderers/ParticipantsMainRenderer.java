@@ -18,7 +18,7 @@ import java.util.Arrays;
 import butterknife.Bind;
 import butterknife.OnClick;
 
-public class ParticipantsRenderer extends Renderer<User>
+public class ParticipantsMainRenderer extends Renderer<User>
 {
     protected Context context;
     protected boolean isOrganizer;
@@ -43,7 +43,7 @@ public class ParticipantsRenderer extends Renderer<User>
         actionListener.onDeclineButtonClick(getContent());
     }
 
-    public ParticipantsRenderer(Context context, int layoutRes, boolean isOrganizer, IParticipantActionListener actionListener)
+    public ParticipantsMainRenderer(Context context, int layoutRes, boolean isOrganizer, IParticipantActionListener actionListener)
     {
         super(layoutRes);
         this.context = context;
@@ -58,19 +58,23 @@ public class ParticipantsRenderer extends Renderer<User>
         TextDrawable drawable = TextDrawable.builder().buildRound(String.format("%d", getContent().getCredibility()), credibilityService.getColor());
         participantCredibilityImage.setImageDrawable(drawable);
 
+        if (!isOrganizer)
+        {
+            declineSign.setVisibility(View.GONE);
+        }
     }
 
     public static class Builder extends RendererBuilder<User>
     {
         public Builder(Context context, boolean isOrganizer, IParticipantActionListener actionListener)
         {
-            super(Arrays.asList(new ParticipantsRenderer(context, R.layout.participant_item_view, isOrganizer, actionListener)));
+            super(Arrays.asList(new ParticipantsMainRenderer(context, R.layout.participant_item_view, isOrganizer, actionListener)));
         }
 
         @Override
         protected Class getPrototypeClass(User content)
         {
-            return ParticipantsRenderer.class;
+            return ParticipantsMainRenderer.class;
         }
     }
 }

@@ -14,7 +14,7 @@ import java.util.Arrays;
 import butterknife.Bind;
 import butterknife.OnClick;
 
-public class CandidatesRenderer extends ParticipantsRenderer
+public class CandidatesMainRenderer extends ParticipantsMainRenderer
 {
     @Bind(R.id.approve_sign)
     ImageView approveSign;
@@ -29,7 +29,7 @@ public class CandidatesRenderer extends ParticipantsRenderer
         actionListener.onApproveButtonClick(getContent());
     }
 
-    public CandidatesRenderer(Context context, int layoutRes, boolean isOrganizer, IParticipantActionListener actionListener)
+    public CandidatesMainRenderer(Context context, int layoutRes, boolean isOrganizer, IParticipantActionListener actionListener)
     {
         super(context, layoutRes, isOrganizer, actionListener);
     }
@@ -45,13 +45,13 @@ public class CandidatesRenderer extends ParticipantsRenderer
     {
         public Builder(Context context, boolean isOrganizer, IParticipantActionListener actionListener)
         {
-            super(Arrays.asList(new CandidatesRenderer(context, R.layout.participant_item_view, isOrganizer, actionListener)));
+            super(Arrays.asList(new CandidatesMainRenderer(context, R.layout.participant_item_view, isOrganizer, actionListener)));
         }
 
         @Override
         protected Class getPrototypeClass(User content)
         {
-            return CandidatesRenderer.class;
+            return CandidatesMainRenderer.class;
         }
     }
 }
