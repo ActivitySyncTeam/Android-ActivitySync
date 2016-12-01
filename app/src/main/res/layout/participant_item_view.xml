@@ -32,7 +32,9 @@
                     android:layout_width="@dimen/text_drawable_default_width"
                     android:layout_height="@dimen/text_drawable_default_height"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="@dimen/screen_margin_half"/>
+                    android:layout_marginLeft="@dimen/screen_margin_half"
+                    android:layout_marginTop="@dimen/screen_margin_half"
+                    android:layout_marginBottom="@dimen/screen_margin_half"/>
 
                 <TextView
                     android:id="@+id/participant_name"

@@ -3,7 +3,8 @@ package com.activity_sync.tests;
 import com.activity_sync.presentation.models.User;
 import com.activity_sync.presentation.models.builders.UserBuilder;
 import com.activity_sync.presentation.models.builders.UserDetailsBuilder;
-import com.activity_sync.presentation.presenters.RegisteredParticipantsPresenter;
+import com.activity_sync.presentation.presenters.DeclinedParticipantsPresenter;
+import com.activity_sync.presentation.presenters.ParticipantsFragmentBasePresenter;
 import com.activity_sync.presentation.services.INavigator;
 import com.activity_sync.presentation.views.IParticipantsFragmentView;
 
@@ -18,7 +19,7 @@ import rx.schedulers.Schedulers;
 import rx.subjects.PublishSubject;
 
 @RunWith(MockitoJUnitRunner.class)
-public class ParticipantsPresenterTests
+public class ParticipantsBasePresenterTests
 {
     @Mock
     INavigator navigator;
@@ -49,7 +50,7 @@ public class ParticipantsPresenterTests
     @Test
     public void participantsPresenter_selectParticipant_openUserDetailsScreen()
     {
-        RegisteredParticipantsPresenter presenter = createPresenter(true);
+        ParticipantsFragmentBasePresenter presenter = createPresenter(true);
         presenter.start();
 
         participantSelectedEvent.onNext(testedParticipant);
@@ -59,7 +60,7 @@ public class ParticipantsPresenterTests
     @Test
     public void participantsPresenter_refreshList_reloadParticipants()
     {
-        RegisteredParticipantsPresenter presenter = createPresenter(true);
+        ParticipantsFragmentBasePresenter presenter = createPresenter(true);
         presenter.start();
 
         refreshParticipantsEvent.onNext(this);
@@ -67,8 +68,8 @@ public class ParticipantsPresenterTests
         Mockito.verify(view).refreshingVisible(false);
     }
 
-    private RegisteredParticipantsPresenter createPresenter(boolean isOrganizer)
+    private ParticipantsFragmentBasePresenter createPresenter(boolean isOrganizer)
     {
-        return new RegisteredParticipantsPresenter(view, navigator, Schedulers.immediate(), isOrganizer);
+        return new DeclinedParticipantsPresenter(view, navigator, Schedulers.immediate(), isOrganizer);
     }
 }

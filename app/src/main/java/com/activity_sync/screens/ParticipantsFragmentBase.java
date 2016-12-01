@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.widget.Toast;
 
 import com.activity_sync.App;
 import com.activity_sync.R;
@@ -118,14 +119,32 @@ abstract public class ParticipantsFragmentBase extends FragmentScreen implements
     }
 
     @Override
-    public Observable approvedEvent()
+    public Observable<User> acceptEvent()
     {
         return onApprovedEvent;
     }
 
     @Override
-    public Observable declinedEvent()
+    public Observable<User> declinedEvent()
     {
         return onDeclinedEvent;
+    }
+
+    @Override
+    public void removedMessage()
+    {
+        Toast.makeText(getContext(), "User has been removed from participants list", Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void acceptMessage()
+    {
+        Toast.makeText(getContext(), "User request has been accepted", Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void declinedMessage()
+    {
+        Toast.makeText(getContext(), "User request has been declined", Toast.LENGTH_LONG).show();
     }
 }

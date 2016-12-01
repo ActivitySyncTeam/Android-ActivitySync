@@ -19,6 +19,24 @@ public class CandidatesPresenter extends ParticipantsFragmentBasePresenter
     }
 
     @Override
+    public void start()
+    {
+        super.start();
+
+        subscriptions.add(view.acceptEvent()
+                .subscribe(event -> {
+                    view.acceptMessage();
+                })
+        );
+
+        subscriptions.add(view.declinedEvent()
+                .subscribe(event -> {
+                    view.declinedMessage();
+                })
+        );
+    }
+
+    @Override
     void loadParticipants()
     {
         List<User> users = new ArrayList<>();

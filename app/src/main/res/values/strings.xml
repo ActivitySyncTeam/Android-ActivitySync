@@ -61,7 +61,7 @@
 
     <!-- ParticipantsScreen strings -->
     <string name="title_participants">Participants list</string>
-    <string name="txt_participants">Participants</string>
+    <string name="txt_registered">Registered</string>
     <string name="txt_candidates">Candidates</string>
     <string name="txt_declined">Declined</string>
 

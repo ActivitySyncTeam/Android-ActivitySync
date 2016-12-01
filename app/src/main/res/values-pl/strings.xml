@@ -72,6 +72,6 @@
     <string name="txt_enrolled">Oczekujący</string>
     <string name="txt_candidates">Kandydaci</string>
     <string name="txt_declined">Odrzuceni</string>
-    <string name="txt_participants">Zatwierdzeni</string>
+    <string name="txt_registered">Zapisani</string>
 
 </resources>
