@@ -70,5 +70,8 @@
     <string name="txt_not_selected">Nie wybrano</string>
     <string name="txt_number_of_players">Liczba uczestników</string>
     <string name="txt_enrolled">Oczekujący</string>
+    <string name="txt_candidates">Kandydaci</string>
+    <string name="txt_declined">Odrzuceni</string>
+    <string name="txt_participants">Zatwierdzeni</string>
 
 </resources>
