@@ -19,6 +19,7 @@ import com.activity_sync.renderers.base.RendererBuilder;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -95,6 +96,24 @@ abstract public class ParticipantsFragmentBase extends FragmentScreen implements
         adapter.clear();
         this.participants.addAll(participants);
         adapter.addAll(participants);
+        adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void removeParticpant(User userToDelete)
+    {
+        Iterator<User> usersIterator = participants.iterator();
+
+        while (usersIterator.hasNext())
+        {
+            if (usersIterator.next().getId() == userToDelete.getId())
+            {
+                adapter.remove(userToDelete);
+                usersIterator.remove();
+                break;
+            }
+        }
+
         adapter.notifyDataSetChanged();
     }
 

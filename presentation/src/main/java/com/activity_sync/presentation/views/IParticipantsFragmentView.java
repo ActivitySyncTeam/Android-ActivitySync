@@ -12,6 +12,7 @@ public interface IParticipantsFragmentView
     Observable refreshParticipants();
     void addParticipantsList(Collection<User> participants);
     void refreshingVisible(boolean isRefreshing);
+    void removeParticpant(User userToDelete);
 
     Observable<User> acceptEvent();
     Observable<User> declinedEvent();

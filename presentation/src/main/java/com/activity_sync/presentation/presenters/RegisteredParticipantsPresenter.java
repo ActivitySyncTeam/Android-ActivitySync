@@ -24,8 +24,9 @@ public class RegisteredParticipantsPresenter extends ParticipantsFragmentBasePre
         super.start();
 
         subscriptions.add(view.declinedEvent()
-                .subscribe(event -> {
-                    view.declinedMessage();
+                .subscribe(user -> {
+                    view.removedMessage();
+                    view.removeParticpant(user);
                 })
         );
     }

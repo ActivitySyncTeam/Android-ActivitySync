@@ -24,14 +24,16 @@ public class CandidatesPresenter extends ParticipantsFragmentBasePresenter
         super.start();
 
         subscriptions.add(view.acceptEvent()
-                .subscribe(event -> {
+                .subscribe(user -> {
                     view.acceptMessage();
+                    view.removeParticpant(user);
                 })
         );
 
         subscriptions.add(view.declinedEvent()
-                .subscribe(event -> {
+                .subscribe(user -> {
                     view.declinedMessage();
+                    view.removeParticpant(user);
                 })
         );
     }

@@ -28,7 +28,7 @@ abstract public class ParticipantsFragmentBasePresenter extends Presenter<IParti
         loadParticipants();
 
         subscriptions.add(view.refreshParticipants()
-                .subscribe(event -> {
+                .subscribe(participants -> {
                     loadParticipants();
                     view.refreshingVisible(false);
                 })
