@@ -23,17 +23,25 @@ public class CandidatesPresenter extends ParticipantsFragmentBasePresenter
     {
         super.start();
 
-        subscriptions.add(view.acceptEvent()
+        subscriptions.add(view.acceptEventClick()
+                .subscribe(view::openAcceptConfirmationDialog)
+        );
+
+        subscriptions.add(view.removeEventClick()
+                .subscribe(view::openRemoveConfirmationDialog)
+        );
+
+        subscriptions.add(view.acceptConfirmClick()
                 .subscribe(user -> {
-                    view.acceptMessage();
-                    view.removeParticpant(user);
+                    view.acceptSuccessMessage(user);
+                    view.removeParticipant(user);
                 })
         );
 
-        subscriptions.add(view.declinedEvent()
+        subscriptions.add(view.removeConfirmClick()
                 .subscribe(user -> {
-                    view.declinedMessage();
-                    view.removeParticpant(user);
+                    view.removeSuccessMessage(user);
+                    view.removeParticipant(user);
                 })
         );
     }

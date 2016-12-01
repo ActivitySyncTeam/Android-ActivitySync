@@ -4,7 +4,6 @@ import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.CardView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -263,25 +262,7 @@ public class EventCreatorScreen extends Screen implements IEventCreatorView
     @Override
     public void showConfirmationDialog()
     {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.MyAlertDialogStyle);
-
-        builder.setTitle(R.string.txt_create_event_confirmation_title);
-        builder.setMessage(R.string.txt_create_event_confirmation_text);
-
-        String positiveText = getString(android.R.string.ok);
-        builder.setPositiveButton(positiveText, (dialog, which) ->
-        {
-            confirmClicked.onNext(this);
-        });
-
-        String negativeText = getString(android.R.string.cancel);
-        builder.setNegativeButton(negativeText, (dialog, which) ->
-        {
-            dialog.dismiss();
-        });
-
-        AlertDialog dialog = builder.create();
-        dialog.show();
+        showDialog(R.string.txt_create_event_confirmation_title, R.string.txt_create_event_confirmation_text, confirmClicked);
     }
 
     @Override

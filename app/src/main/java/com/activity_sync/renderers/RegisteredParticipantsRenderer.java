@@ -28,7 +28,7 @@ public class RegisteredParticipantsRenderer extends ParticipantsRendererBase
         {
             return;
         }
-        actionListener.onDeclineButtonClick(getContent());
+        actionListener.onDeclineButtonAction(getContent());
     }
 
     public RegisteredParticipantsRenderer(Context context, int layoutRes, boolean isOrganizer, IParticipantActionListener actionListener)

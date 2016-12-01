@@ -23,10 +23,14 @@ public class RegisteredParticipantsPresenter extends ParticipantsFragmentBasePre
     {
         super.start();
 
-        subscriptions.add(view.declinedEvent()
+        subscriptions.add(view.removeEventClick()
+                .subscribe(view::openRemoveConfirmationDialog)
+        );
+
+        subscriptions.add(view.removeConfirmClick()
                 .subscribe(user -> {
-                    view.removedMessage();
-                    view.removeParticpant(user);
+                    view.removeSuccessMessage(user);
+                    view.removeParticipant(user);
                 })
         );
     }

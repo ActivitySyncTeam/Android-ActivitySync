@@ -12,12 +12,17 @@ public interface IParticipantsFragmentView
     Observable refreshParticipants();
     void addParticipantsList(Collection<User> participants);
     void refreshingVisible(boolean isRefreshing);
-    void removeParticpant(User userToDelete);
+    void removeParticipant(User userToDelete);
 
-    Observable<User> acceptEvent();
-    Observable<User> declinedEvent();
+    Observable<User> acceptEventClick();
+    Observable<User> removeEventClick();
 
-    void removedMessage();
-    void acceptMessage();
-    void declinedMessage();
+    void removeSuccessMessage(User user);
+    void acceptSuccessMessage(User user);
+
+    void openRemoveConfirmationDialog(User user);
+    void openAcceptConfirmationDialog(User user);
+
+    Observable<User> acceptConfirmClick();
+    Observable<User> removeConfirmClick();
 }

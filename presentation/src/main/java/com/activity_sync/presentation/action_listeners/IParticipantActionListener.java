@@ -4,7 +4,7 @@ import com.activity_sync.presentation.models.User;
 
 public interface IParticipantActionListener
 {
-    void onDeclineButtonClick(User user);
+    void onDeclineButtonAction(User user);
 
-    void onApproveButtonClick(User user);
+    void onAcceptButtonAction(User user);
 }

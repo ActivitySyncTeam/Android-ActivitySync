@@ -3,6 +3,7 @@ package com.activity_sync.screens;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.Toast;
@@ -39,13 +40,17 @@ abstract public class ParticipantsFragmentBase extends FragmentScreen implements
     @Bind(R.id.participants_list)
     RecyclerView participantsList;
 
+    private PublishSubject<User> removeAction = PublishSubject.create();
+    private PublishSubject<User> acceptAction = PublishSubject.create();
+
+    private PublishSubject<User> removeConfirmed = PublishSubject.create();
+    private PublishSubject<User> acceptConfirmed = PublishSubject.create();
+
     private PublishSubject refreshParticipants = PublishSubject.create();
     private RVRendererAdapter<User> adapter;
     private List<User> participants = new ArrayList<>();
 
     protected final boolean isOrganizer;
-    PublishSubject<User> onDeclinedEvent = PublishSubject.create();
-    PublishSubject<User> onApprovedEvent = PublishSubject.create();
 
     public ParticipantsFragmentBase(boolean isOrganizer)
     {
@@ -100,7 +105,7 @@ abstract public class ParticipantsFragmentBase extends FragmentScreen implements
     }
 
     @Override
-    public void removeParticpant(User userToDelete)
+    public void removeParticipant(User userToDelete)
     {
         Iterator<User> usersIterator = participants.iterator();
 
@@ -126,44 +131,89 @@ abstract public class ParticipantsFragmentBase extends FragmentScreen implements
     abstract RendererBuilder<User> getRendererBuilder();
 
     @Override
-    public void onDeclineButtonClick(User user)
+    public void onDeclineButtonAction(User user)
     {
-        onDeclinedEvent.onNext(user);
+        removeAction.onNext(user);
     }
 
     @Override
-    public void onApproveButtonClick(User user)
+    public void onAcceptButtonAction(User user)
     {
-        onApprovedEvent.onNext(user);
+        acceptAction.onNext(user);
     }
 
     @Override
-    public Observable<User> acceptEvent()
+    public Observable<User> acceptEventClick()
     {
-        return onApprovedEvent;
+        return acceptAction;
     }
 
     @Override
-    public Observable<User> declinedEvent()
+    public Observable<User> removeEventClick()
     {
-        return onDeclinedEvent;
+        return removeAction;
     }
 
     @Override
-    public void removedMessage()
+    public void removeSuccessMessage(User user)
     {
-        Toast.makeText(getContext(), "User has been removed from participants list", Toast.LENGTH_LONG).show();
+        Toast.makeText(getContext(), String.format(getContext().getString(R.string.txt_remove_success),
+                user.getUserDetails().getFirstName(),
+                user.getUserDetails().getLastName()), Toast.LENGTH_LONG).show();
     }
 
     @Override
-    public void acceptMessage()
+    public void acceptSuccessMessage(User user)
     {
-        Toast.makeText(getContext(), "User request has been accepted", Toast.LENGTH_LONG).show();
+        Toast.makeText(getContext(), String.format(getContext().getString(R.string.txt_accept_success),
+                user.getUserDetails().getFirstName(),
+                user.getUserDetails().getLastName()), Toast.LENGTH_LONG).show();
     }
 
     @Override
-    public void declinedMessage()
+    public void openRemoveConfirmationDialog(User user)
     {
-        Toast.makeText(getContext(), "User request has been declined", Toast.LENGTH_LONG).show();
+        showDialog(R.string.txt_remove_participant_confirmation_title, R.string.txt_remove_participant_confirmation_text, user, removeConfirmed);
+    }
+
+    @Override
+    public void openAcceptConfirmationDialog(User user)
+    {
+        showDialog(R.string.txt_accept_participant_confirmation_title, R.string.txt_accept_participant_confirmation_text, user, acceptConfirmed);
+    }
+
+    @Override
+    public Observable acceptConfirmClick()
+    {
+        return acceptConfirmed;
+    }
+
+    @Override
+    public Observable removeConfirmClick()
+    {
+        return removeConfirmed;
+    }
+
+    public void showDialog(int title, int message, User user, PublishSubject<User> confirmClicked)
+    {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext(), R.style.MyAlertDialogStyle);
+
+        builder.setTitle(title);
+        builder.setMessage(message);
+
+        String positiveText = getString(android.R.string.ok);
+        builder.setPositiveButton(positiveText, (dialog, which) ->
+        {
+            confirmClicked.onNext(user);
+        });
+
+        String negativeText = getString(android.R.string.cancel);
+        builder.setNegativeButton(negativeText, (dialog, which) ->
+        {
+            dialog.dismiss();
+        });
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 }

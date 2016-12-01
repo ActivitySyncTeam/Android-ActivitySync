@@ -26,7 +26,7 @@ public class CandidatesRenderer extends RegisteredParticipantsRenderer
         {
             return;
         }
-        actionListener.onApproveButtonClick(getContent());
+        actionListener.onAcceptButtonAction(getContent());
     }
 
     public CandidatesRenderer(Context context, int layoutRes, boolean isOrganizer, IParticipantActionListener actionListener)

@@ -5,7 +5,6 @@ import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -312,28 +311,5 @@ public class EventDetailsScreen extends Screen implements IEventDetailsView, OnM
     private boolean isEnrolledForEvent(Event event)
     {
         return event.getEnrollmentStatus().isParticipant() || event.getEnrollmentStatus().isCandidate();
-    }
-
-    public void showDialog(int title, int message, PublishSubject confirmClicked)
-    {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.MyAlertDialogStyle);
-
-        builder.setTitle(title);
-        builder.setMessage(message);
-
-        String positiveText = getString(android.R.string.ok);
-        builder.setPositiveButton(positiveText, (dialog, which) ->
-        {
-            confirmClicked.onNext(this);
-        });
-
-        String negativeText = getString(android.R.string.cancel);
-        builder.setNegativeButton(negativeText, (dialog, which) ->
-        {
-            dialog.dismiss();
-        });
-
-        AlertDialog dialog = builder.create();
-        dialog.show();
     }
 }
