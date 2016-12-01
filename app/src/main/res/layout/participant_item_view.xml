@@ -63,7 +63,8 @@
                     android:src="@drawable/ic_x_sign"
                     android:tint="@color/black"
                     android:padding="@dimen/screen_margin"
-                    android:layout_gravity="center"/>
+                    android:layout_gravity="center"
+                    android:visibility="gone"/>
 
             </LinearLayout>
 

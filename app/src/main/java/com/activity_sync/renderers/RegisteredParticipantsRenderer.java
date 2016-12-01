@@ -14,44 +14,51 @@ import java.util.Arrays;
 import butterknife.Bind;
 import butterknife.OnClick;
 
-public class CandidatesMainRenderer extends ParticipantsMainRenderer
+public class RegisteredParticipantsRenderer extends ParticipantsRendererBase
 {
-    @Bind(R.id.approve_sign)
-    ImageView approveSign;
+    protected IParticipantActionListener actionListener;
 
-    @OnClick(R.id.approve_sign)
-    public void onApproveButtonClick(View view)
+    @Bind(R.id.decline_sign)
+    ImageView declineSign;
+
+    @OnClick(R.id.decline_sign)
+    public void onDeclineButtonClick(View view)
     {
         if (actionListener == null)
         {
             return;
         }
-        actionListener.onApproveButtonClick(getContent());
+        actionListener.onDeclineButtonClick(getContent());
     }
 
-    public CandidatesMainRenderer(Context context, int layoutRes, boolean isOrganizer, IParticipantActionListener actionListener)
+    public RegisteredParticipantsRenderer(Context context, int layoutRes, boolean isOrganizer, IParticipantActionListener actionListener)
     {
-        super(context, layoutRes, isOrganizer, actionListener);
+        super(context, layoutRes, isOrganizer);
+        this.actionListener = actionListener;
     }
 
     @Override
     public void render()
     {
         super.render();
-        approveSign.setVisibility(View.VISIBLE);
+
+        if(isOrganizer)
+        {
+            declineSign.setVisibility(View.VISIBLE);
+        }
     }
 
     public static class Builder extends RendererBuilder<User>
     {
         public Builder(Context context, boolean isOrganizer, IParticipantActionListener actionListener)
         {
-            super(Arrays.asList(new CandidatesMainRenderer(context, R.layout.participant_item_view, isOrganizer, actionListener)));
+            super(Arrays.asList(new RegisteredParticipantsRenderer(context, R.layout.participant_item_view, isOrganizer, actionListener)));
         }
 
         @Override
         protected Class getPrototypeClass(User content)
         {
-            return CandidatesMainRenderer.class;
+            return RegisteredParticipantsRenderer.class;
         }
     }
 }

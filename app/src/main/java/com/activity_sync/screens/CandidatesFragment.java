@@ -6,7 +6,7 @@ import com.activity_sync.presentation.action_listeners.IParticipantActionListene
 import com.activity_sync.presentation.models.User;
 import com.activity_sync.presentation.presenters.CandidatesPresenter;
 import com.activity_sync.presentation.presenters.IPresenter;
-import com.activity_sync.renderers.CandidatesMainRenderer;
+import com.activity_sync.renderers.CandidatesRenderer;
 import com.activity_sync.renderers.base.RendererBuilder;
 
 import rx.android.schedulers.AndroidSchedulers;
@@ -26,7 +26,7 @@ public class CandidatesFragment extends ParticipantsFragmentBase implements IPar
     @Override
     RendererBuilder<User> getRendererBuilder()
     {
-        return new CandidatesMainRenderer.Builder(getContext(), isOrganizer, this);
+        return new CandidatesRenderer.Builder(getContext(), isOrganizer, this);
     }
 
     @Override

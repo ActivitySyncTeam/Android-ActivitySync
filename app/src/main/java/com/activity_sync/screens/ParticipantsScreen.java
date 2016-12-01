@@ -44,8 +44,9 @@ public class ParticipantsScreen extends Screen
         boolean isOrganizer = getIntent().getBooleanExtra(ParticipantsScreen.IS_ORGANIZER, false);
 
         adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new RegisteredParticipantsFragment(isOrganizer), "Participants");
-        adapter.addFragment(new CandidatesFragment(isOrganizer), "Candidates");
+        adapter.addFragment(new RegisteredParticipantsFragment(isOrganizer), getString(R.string.txt_participants));
+        adapter.addFragment(new CandidatesFragment(isOrganizer), getString(R.string.txt_candidates));
+        adapter.addFragment(new DeclinedParticipantsFragment(isOrganizer), getString(R.string.txt_declined));
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
 
