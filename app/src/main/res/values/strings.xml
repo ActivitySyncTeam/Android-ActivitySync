@@ -68,6 +68,8 @@
     <string name="txt_remove_participant_confirmation_title">Remove participant confirmation</string>
     <string name="txt_accept_participant_confirmation_text">Are you sure you want to accept this user?</string>
     <string name="txt_accept_participant_confirmation_title">Accept participant confirmation</string>
+    <string name="txt_remove_success" formatted="false">%s %s has been removed from this event</string>
+    <string name="txt_accept_success" formatted="false">%s %s request has been accepted</string>
 
     <!-- LoginScreen strings -->
     <string name="btn_login">Login</string>
@@ -99,7 +101,5 @@
     <string name="txt_error_choosing_location">Location has not been chosen properly</string>
     <string name="txt_create_event_confirmation_title">Create event confirmation</string>
     <string name="txt_create_event_confirmation_text">Are you sure you want to create this event?</string>
-    <string name="txt_remove_success" formatted="false">%s %s has been removed from this event</string>
-    <string name="txt_accept_success" formatted="false">%s %s request has been accepted</string>
 
 </resources>
