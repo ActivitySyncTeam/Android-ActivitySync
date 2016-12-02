@@ -35,4 +35,6 @@ public interface IEventDetailsView
     void setOrganizerParticipantView(Event event);
 
     Observable googleMapAsyncCompleted();
+
+    Observable commentsClick();
 }

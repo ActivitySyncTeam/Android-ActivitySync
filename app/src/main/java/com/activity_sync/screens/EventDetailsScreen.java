@@ -91,6 +91,9 @@ public class EventDetailsScreen extends Screen implements IEventDetailsView, OnM
     @Bind(R.id.participant_tv)
     TextView participantTv;
 
+    @Bind(R.id.comments_on_map_btn)
+    LinearLayout commentsLayout;
+
     private GoogleMap map;
 
     private PublishSubject joinEventConfirmed = PublishSubject.create();
@@ -202,6 +205,12 @@ public class EventDetailsScreen extends Screen implements IEventDetailsView, OnM
     public Observable googleMapAsyncCompleted()
     {
         return googleMapReadyEvent;
+    }
+
+    @Override
+    public Observable commentsClick()
+    {
+        return ViewObservable.clicks(commentsLayout);
     }
 
     @Override
