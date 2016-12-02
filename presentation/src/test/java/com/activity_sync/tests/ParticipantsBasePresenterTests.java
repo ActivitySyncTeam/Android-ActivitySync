@@ -48,7 +48,7 @@ public class ParticipantsBasePresenterTests
     }
 
     @Test
-    public void participantsPresenter_selectParticipant_openUserDetailsScreen()
+    public void participantsBasePresenter_selectParticipant_openUserDetailsScreen()
     {
         ParticipantsFragmentBasePresenter presenter = createPresenter(true);
         presenter.start();
@@ -58,7 +58,7 @@ public class ParticipantsBasePresenterTests
     }
 
     @Test
-    public void participantsPresenter_refreshList_reloadParticipants()
+    public void participantsBasePresenter_refreshList_reloadParticipants()
     {
         ParticipantsFragmentBasePresenter presenter = createPresenter(true);
         presenter.start();
