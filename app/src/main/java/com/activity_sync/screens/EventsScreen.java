@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
-import android.widget.Toast;
 
 import com.activity_sync.App;
 import com.activity_sync.R;
@@ -73,11 +72,5 @@ public class EventsScreen extends ScreenWithMenu implements IEventsView
     public Observable addNewEventClick()
     {
         return ViewObservable.clicks(addNewEventButton);
-    }
-
-    @Override
-    public void newEventClicked()
-    {
-        Toast.makeText(this, "New event button clicked", Toast.LENGTH_LONG).show();
     }
 }

@@ -65,6 +65,12 @@ public class Navigator implements INavigator
         startActivity(getIntent(ParticipantsScreen.class));
     }
 
+    @Override
+    public void openEventCreatorScreen()
+    {
+        startActivity(getIntent(EventCreatorScreen.class));
+    }
+
     private void startActivity(Intent intent)
     {
         if (context instanceof Activity == false)

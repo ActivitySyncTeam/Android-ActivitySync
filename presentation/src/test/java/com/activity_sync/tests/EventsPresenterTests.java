@@ -38,7 +38,7 @@ public class EventsPresenterTests
         presenter.start();
 
         addNewEventClickEvent.onNext(this);
-        Mockito.verify(view).newEventClicked();
+        Mockito.verify(navigator).openEventCreatorScreen();
     }
 
     private EventsPresenter createPresenter()
