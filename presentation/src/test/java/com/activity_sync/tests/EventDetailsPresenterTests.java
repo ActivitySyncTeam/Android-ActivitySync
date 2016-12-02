@@ -32,8 +32,7 @@ public class EventDetailsPresenterTests
     PublishSubject cancelEventConfirmEvent = PublishSubject.create();
     PublishSubject organizerDetailsClickEvent = PublishSubject.create();
     PublishSubject participantsClickEvent = PublishSubject.create();
-
-    int eventId = 1;
+    PublishSubject googleMapAsyncEvent = PublishSubject.create();
 
     @Before
     public void setup()
@@ -47,6 +46,8 @@ public class EventDetailsPresenterTests
 
         Mockito.when(view.organizerDetailsClick()).thenReturn(organizerDetailsClickEvent);
         Mockito.when(view.participantsDetailsClick()).thenReturn(participantsClickEvent);
+
+        Mockito.when(view.googleMapAsyncCompleted()).thenReturn(googleMapAsyncEvent);
     }
 
     @Test
@@ -57,7 +58,7 @@ public class EventDetailsPresenterTests
         presenter.createEvent(false, false, false); //will be deleted when api
 
         joinLeaveEventClickEvent.onNext(this);
-        Mockito.verify(view).showJoinConfirmationDialog();
+        Mockito.verify(view).showEnrollConfirmationDialog();
     }
 
     @Test
@@ -90,7 +91,7 @@ public class EventDetailsPresenterTests
 
         joinEventConfirmEvent.onNext(this);
         Mockito.verify(view).setOrganizerParticipantView(any());
-        Mockito.verify(view).showJoinEventMessage();
+        Mockito.verify(view).showEnrollMessage();
     }
 
     @Test
@@ -133,11 +134,11 @@ public class EventDetailsPresenterTests
         presenter.start();
 
         participantsClickEvent.onNext(this);
-        Mockito.verify(navigator).openParticipantsScreen();
+        Mockito.verify(navigator).openParticipantsScreen(true);
     }
 
     private EventDetailsPresenter createPresenter()
     {
-        return new EventDetailsPresenter(Schedulers.immediate(), view, navigator, eventId);
+        return new EventDetailsPresenter(Schedulers.immediate(), view, navigator, 1);
     }
 }

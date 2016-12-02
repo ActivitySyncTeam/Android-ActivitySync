@@ -78,6 +78,7 @@
                                 android:layout_marginRight="@dimen/screen_margin_half"/>
 
                             <TextView
+                                android:id="@+id/participant_tv"
                                 style="@style/EventDetailsScreenMainDownRow"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"

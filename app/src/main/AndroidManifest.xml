@@ -27,7 +27,9 @@
             android:screenOrientation="portrait">
         </activity>
 
-        <activity android:name=".screens.DummyScreen"/>
+        <activity
+            android:name=".screens.DummyScreen"
+            android:screenOrientation="portrait"/>
 
         <activity
             android:name=".screens.LoginScreen"
@@ -39,15 +41,25 @@
             android:theme="@style/AppTheme.LoginScreen"
             android:screenOrientation="portrait"/>
 
-        <activity android:name=".screens.EventsScreen"/>
+        <activity
+            android:name=".screens.EventsScreen"
+            android:screenOrientation="portrait"/>
 
-        <activity android:name=".screens.EventDetailsScreen"/>
+        <activity
+            android:name=".screens.EventDetailsScreen"
+            android:screenOrientation="portrait"/>
 
-        <activity android:name=".screens.UserDetailsScreen"/>
+        <activity
+            android:name=".screens.UserDetailsScreen"
+            android:screenOrientation="portrait"/>
 
-        <activity android:name=".screens.ParticipantsScreen"/>
+        <activity
+            android:name=".screens.ParticipantsScreen"
+            android:screenOrientation="portrait"/>
 
-        <activity android:name=".screens.EventCreatorScreen"/>
+        <activity
+            android:name=".screens.EventCreatorScreen"
+            android:screenOrientation="portrait"/>
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"

@@ -5,7 +5,6 @@ import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -13,6 +12,7 @@ import android.widget.TextView;
 
 import com.activity_sync.App;
 import com.activity_sync.R;
+import com.activity_sync.presentation.models.EnrollmentStatus;
 import com.activity_sync.presentation.models.Event;
 import com.activity_sync.presentation.presenters.EventDetailsPresenter;
 import com.activity_sync.presentation.presenters.IPresenter;
@@ -88,11 +88,15 @@ public class EventDetailsScreen extends Screen implements IEventDetailsView, OnM
     @Bind(R.id.event_details_buttons_layout)
     LinearLayout buttonsLayout;
 
+    @Bind(R.id.participant_tv)
+    TextView participantTv;
+
     private GoogleMap map;
 
     private PublishSubject joinEventConfirmed = PublishSubject.create();
     private PublishSubject leaveEventConfirmed = PublishSubject.create();
     private PublishSubject cancelEventConfirmed = PublishSubject.create();
+    private PublishSubject googleMapReadyEvent = PublishSubject.create();
 
     public EventDetailsScreen()
     {
@@ -158,13 +162,14 @@ public class EventDetailsScreen extends Screen implements IEventDetailsView, OnM
         eventLevel.setText(event.getLevel().getName());
         eventDiscipline.setText(event.getDiscipline().getName());
 
+        loadMap(event);
         setOrganizerParticipantView(event);
     }
 
     @Override
-    public void showJoinConfirmationDialog()
+    public void showEnrollConfirmationDialog()
     {
-        showDialog(R.string.txt_join_confirmation_title, R.string.txt_join_confirmation_text, joinEventConfirmed);
+        showDialog(R.string.txt_enroll_confirmation_title, R.string.txt_enroll_confirmation_text, joinEventConfirmed);
     }
 
     @Override
@@ -183,9 +188,20 @@ public class EventDetailsScreen extends Screen implements IEventDetailsView, OnM
     public void onMapReady(GoogleMap googleMap)
     {
         map = googleMap;
-        LatLng jordan = new LatLng(50.061124, 19.914123);
-        map.addMarker(new MarkerOptions().position(jordan).title("Marker in Jordan"));
-        map.moveCamera(CameraUpdateFactory.newLatLngZoom(jordan, 15));
+        googleMapReadyEvent.onNext(this);
+    }
+
+    private void loadMap(Event event)
+    {
+        LatLng location = new LatLng(event.getLocation().getLatitude(), event.getLocation().getLongitude());
+        map.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 15));
+        map.addMarker(new MarkerOptions().position(location));
+    }
+
+    @Override
+    public Observable googleMapAsyncCompleted()
+    {
+        return googleMapReadyEvent;
     }
 
     @Override
@@ -207,9 +223,9 @@ public class EventDetailsScreen extends Screen implements IEventDetailsView, OnM
     }
 
     @Override
-    public void showJoinEventMessage()
+    public void showEnrollMessage()
     {
-        Snackbar snackbar = Snackbar.make(coordinatorLayout, R.string.txt_join_message, Snackbar.LENGTH_LONG);
+        Snackbar snackbar = Snackbar.make(coordinatorLayout, R.string.txt_enroll_message, Snackbar.LENGTH_LONG);
         snackbar.show();
     }
 
@@ -223,11 +239,11 @@ public class EventDetailsScreen extends Screen implements IEventDetailsView, OnM
     @Override
     public void setOrganizerParticipantView(Event event)
     {
-        if (event.isOrganizer() || event.isParticipant())
+        if (isConnectedWithEvent(event))
         {
             baseInfoLayout.setVisibility(View.VISIBLE);
 
-            if (event.isOrganizer())
+            if (event.getEnrollmentStatus().isOrganizer())
             {
                 youOrganizerLayout.setVisibility(View.VISIBLE);
                 cancelEventButton.setVisibility(View.VISIBLE);
@@ -238,22 +254,19 @@ public class EventDetailsScreen extends Screen implements IEventDetailsView, OnM
                 cancelEventButton.setVisibility(View.GONE);
             }
 
-            if (event.isParticipant())
+            if (isEnrolledForEvent(event))
             {
-                youParticipantLayout.setVisibility(View.VISIBLE);
-                prepareLeavenButton();
-
+                prepareLeaveLayout(event.getEnrollmentStatus());
             }
             else
             {
-                youParticipantLayout.setVisibility(View.GONE);
-                prepareJoinButton();
+                prepareJoinLayout();
             }
         }
         else
         {
             baseInfoLayout.setVisibility(View.GONE);
-            prepareJoinButton();
+            prepareJoinLayout();
         }
 
         if (event.isActive())
@@ -266,38 +279,37 @@ public class EventDetailsScreen extends Screen implements IEventDetailsView, OnM
         }
     }
 
-    private void prepareJoinButton()
+    private void prepareJoinLayout()
     {
+        youParticipantLayout.setVisibility(View.GONE);
         joinLeaveEventButton.setText(getResources().getString(R.string.btn_join_event));
         joinLeaveEventButton.setBackground(ContextCompat.getDrawable(this, R.drawable.selector_default_positive));
     }
 
-    private void prepareLeavenButton()
+    private void prepareLeaveLayout(EnrollmentStatus enrollmentStatus)
     {
+        youParticipantLayout.setVisibility(View.VISIBLE);
+
+        if (enrollmentStatus.isParticipant())
+        {
+            participantTv.setText(getResources().getString(R.string.txt_participant));
+        }
+        else
+        {
+            participantTv.setText(getResources().getString(R.string.txt_enrolled));
+        }
+
         joinLeaveEventButton.setText(getResources().getString(R.string.btn_leave_event));
         joinLeaveEventButton.setBackground(ContextCompat.getDrawable(this, R.drawable.selector_default_negative));
     }
 
-    public void showDialog(int title, int message, PublishSubject confirmClicked)
+    private boolean isConnectedWithEvent(Event event)
     {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.MyAlertDialogStyle);
+        return event.getEnrollmentStatus().isOrganizer() || event.getEnrollmentStatus().isParticipant() || event.getEnrollmentStatus().isCandidate();
+    }
 
-        builder.setTitle(title);
-        builder.setMessage(message);
-
-        String positiveText = getString(android.R.string.ok);
-        builder.setPositiveButton(positiveText, (dialog, which) ->
-        {
-            confirmClicked.onNext(this);
-        });
-
-        String negativeText = getString(android.R.string.cancel);
-        builder.setNegativeButton(negativeText, (dialog, which) ->
-        {
-            dialog.dismiss();
-        });
-
-        AlertDialog dialog = builder.create();
-        dialog.show();
+    private boolean isEnrolledForEvent(Event event)
+    {
+        return event.getEnrollmentStatus().isParticipant() || event.getEnrollmentStatus().isCandidate();
     }
 }

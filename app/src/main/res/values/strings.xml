@@ -34,15 +34,16 @@
     <string name="txt_event_det_date">Date</string>
     <string name="txt_event_det_level">Level</string>
     <string name="txt_event_det_description">Description</string>
-    <string name="txt_join_confirmation_text">Are you sure you want to join this event?</string>
-    <string name="txt_join_confirmation_title">Join event confirmation</string>
+    <string name="txt_enroll_confirmation_text">Are you sure you want to enroll for this event?</string>
+    <string name="txt_enroll_confirmation_title">Enroll event confirmation</string>
     <string name="txt_leave_confirmation_text">Are you sure you want to leave this event?</string>
     <string name="txt_leave_confirmation_title">Leave event confirmation</string>
     <string name="txt_cancel_confirmation_text">Are you sure you want to cancel this event? This operation cannot be undone.</string>
     <string name="txt_cancel_confirmation_title">Cancel event confirmation</string>
-    <string name="txt_join_message">You have joined this event</string>
+    <string name="txt_enroll_message">You have enrolled for this event</string>
     <string name="txt_leave_message">You have left this event</string>
     <string name="txt_participant">Participant</string>
+    <string name="txt_enrolled">Enrolled</string>
 
     <!-- UserDetailsScreen strings -->
     <string name="title_user_details">User details</string>
@@ -60,6 +61,13 @@
 
     <!-- ParticipantsScreen strings -->
     <string name="title_participants">Participants list</string>
+    <string name="txt_registered">Registered</string>
+    <string name="txt_candidates">Candidates</string>
+    <string name="txt_declined">Declined</string>
+    <string name="txt_remove_participant_confirmation_text">Are you sure you want to remove this user from the event? This operation cannot be undone.</string>
+    <string name="txt_remove_participant_confirmation_title">Remove participant confirmation</string>
+    <string name="txt_accept_participant_confirmation_text">Are you sure you want to accept this user?</string>
+    <string name="txt_accept_participant_confirmation_title">Accept participant confirmation</string>
 
     <!-- LoginScreen strings -->
     <string name="btn_login">Login</string>
@@ -87,9 +95,11 @@
     <string name="txt_enroll_as_a_participant">Enroll as a participant</string>
     <string name="txt_create_event">Create event</string>
     <string name="title_event_creator">Event creator</string>
-    <string name="date_format" translatable="false">%d-%d-%d %d:%d:00</string>
+    <string name="date_format" translatable="false">%d-%d-%d %d:%02d:00</string>
     <string name="txt_error_choosing_location">Location has not been chosen properly</string>
     <string name="txt_create_event_confirmation_title">Create event confirmation</string>
     <string name="txt_create_event_confirmation_text">Are you sure you want to create this event?</string>
+    <string name="txt_remove_success" formatted="false">%s %s has been removed from this event</string>
+    <string name="txt_accept_success" formatted="false">%s %s request has been accepted</string>
 
 </resources>

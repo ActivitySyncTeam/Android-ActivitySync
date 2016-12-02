@@ -25,7 +25,7 @@ import butterknife.Bind;
 import rx.Observable;
 import rx.subjects.PublishSubject;
 
-abstract public class EventsFragmentFragmentBase extends FragmentScreen implements IEventsFragmentView
+abstract public class EventsFragmentBase extends FragmentScreen implements IEventsFragmentView
 {
     @Inject
     INavigator navigator;
@@ -40,7 +40,7 @@ abstract public class EventsFragmentFragmentBase extends FragmentScreen implemen
     private RVRendererAdapter<Event> adapter;
     private List<Event> events = new ArrayList<>();
 
-    public EventsFragmentFragmentBase()
+    public EventsFragmentBase()
     {
         super(R.layout.events_fragment);
     }
