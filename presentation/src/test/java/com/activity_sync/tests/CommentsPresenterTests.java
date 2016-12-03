@@ -78,6 +78,6 @@ public class CommentsPresenterTests
 
     private CommentsPresenter createPresenter()
     {
-        return new CommentsPresenter(view, Schedulers.immediate(), eventId);
+        return new CommentsPresenter(view, Schedulers.immediate(), eventId, apiService);
     }
 }

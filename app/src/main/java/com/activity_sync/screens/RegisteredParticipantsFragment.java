@@ -32,6 +32,6 @@ public class RegisteredParticipantsFragment extends ParticipantsFragmentBase imp
     @Override
     protected IPresenter createPresenter(FragmentScreen screen, Bundle savedInstanceState)
     {
-        return new RegisteredParticipantsPresenter(this, navigator, AndroidSchedulers.mainThread(), isOrganizer);
+        return new RegisteredParticipantsPresenter(this, navigator, AndroidSchedulers.mainThread(), isOrganizer, apiService);
     }
 }

@@ -10,7 +10,6 @@ import com.activity_sync.R;
 import com.activity_sync.adapters.ViewPagerAdapter;
 import com.activity_sync.presentation.presenters.EventsPresenter;
 import com.activity_sync.presentation.presenters.IPresenter;
-import com.activity_sync.presentation.services.IApiService;
 import com.activity_sync.presentation.services.INavigator;
 import com.activity_sync.presentation.views.IEventsView;
 
@@ -25,9 +24,6 @@ public class EventsScreen extends ScreenWithMenu implements IEventsView
 {
     @Inject
     INavigator navigator;
-
-    @Inject
-    IApiService apiService;
 
     @Bind(R.id.tabLayout)
     TabLayout tabLayout;

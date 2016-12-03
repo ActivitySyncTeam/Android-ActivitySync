@@ -91,7 +91,7 @@ public class EventCreatorScreen extends Screen implements IEventCreatorView
     @Override
     protected IPresenter createPresenter(Screen screen, Bundle savedInstanceState)
     {
-        return new EventCreatorPresenter(AndroidSchedulers.mainThread(), this, navigator);
+        return new EventCreatorPresenter(AndroidSchedulers.mainThread(), this, navigator, apiService);
     }
 
     @Override

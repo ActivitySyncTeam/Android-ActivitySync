@@ -131,7 +131,7 @@ public class EventDetailsScreen extends Screen implements IEventDetailsView, OnM
     protected IPresenter createPresenter(Screen screen, Bundle savedInstanceState)
     {
         int eventID = getIntent().getIntExtra(EventDetailsScreen.EVENT_ID, 1);
-        return new EventDetailsPresenter(AndroidSchedulers.mainThread(), this, navigator, eventID);
+        return new EventDetailsPresenter(AndroidSchedulers.mainThread(), this, navigator, eventID, apiService);
     }
 
     @Override

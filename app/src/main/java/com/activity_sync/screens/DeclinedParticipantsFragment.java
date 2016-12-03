@@ -32,6 +32,6 @@ public class DeclinedParticipantsFragment extends ParticipantsFragmentBase imple
     @Override
     protected IPresenter createPresenter(FragmentScreen screen, Bundle savedInstanceState)
     {
-        return new DeclinedParticipantsPresenter(this, navigator, AndroidSchedulers.mainThread(), isOrganizer);
+        return new DeclinedParticipantsPresenter(this, navigator, AndroidSchedulers.mainThread(), isOrganizer, apiService);
     }
 }

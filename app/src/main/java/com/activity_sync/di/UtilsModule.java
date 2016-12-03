@@ -34,6 +34,6 @@ public class UtilsModule
     @Singleton
     public IApiService provideApiRestService()
     {
-        return new ApiService("url_to_server_here");
+        return new ApiService("https://secret-gorge-99838.herokuapp.com");
     }
 }

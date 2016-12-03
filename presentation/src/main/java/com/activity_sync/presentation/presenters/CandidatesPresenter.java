@@ -3,6 +3,7 @@ package com.activity_sync.presentation.presenters;
 import com.activity_sync.presentation.models.User;
 import com.activity_sync.presentation.models.builders.UserBuilder;
 import com.activity_sync.presentation.models.builders.UserDetailsBuilder;
+import com.activity_sync.presentation.services.IApiService;
 import com.activity_sync.presentation.services.INavigator;
 import com.activity_sync.presentation.views.IParticipantsFragmentView;
 
@@ -13,9 +14,9 @@ import rx.Scheduler;
 
 public class CandidatesPresenter extends ParticipantsFragmentBasePresenter
 {
-    public CandidatesPresenter(IParticipantsFragmentView view, INavigator navigator, Scheduler uiThread, boolean isOrganizer)
+    public CandidatesPresenter(IParticipantsFragmentView view, INavigator navigator, Scheduler uiThread, boolean isOrganizer, IApiService apiService)
     {
-        super(view, navigator, uiThread, isOrganizer);
+        super(view, navigator, uiThread, isOrganizer, apiService);
     }
 
     @Override

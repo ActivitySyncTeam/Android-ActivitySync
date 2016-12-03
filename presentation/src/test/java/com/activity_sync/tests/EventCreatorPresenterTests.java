@@ -148,6 +148,6 @@ public class EventCreatorPresenterTests
 
     private EventCreatorPresenter createPresenter()
     {
-        return new EventCreatorPresenter(Schedulers.immediate(), view, navigator);
+        return new EventCreatorPresenter(Schedulers.immediate(), view, navigator, apiService);
     }
 }

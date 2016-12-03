@@ -75,7 +75,7 @@ public class RegisterScreen extends Screen implements IRegisterView
     @Override
     protected IPresenter createPresenter(Screen screen, Bundle savedInstanceState)
     {
-        return new RegisterPresenter(AndroidSchedulers.mainThread(), this, navigator);
+        return new RegisterPresenter(AndroidSchedulers.mainThread(), this, navigator, apiService);
     }
 
     @Override

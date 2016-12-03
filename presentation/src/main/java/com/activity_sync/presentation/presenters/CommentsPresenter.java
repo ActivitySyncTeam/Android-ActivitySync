@@ -2,6 +2,7 @@ package com.activity_sync.presentation.presenters;
 
 import com.activity_sync.presentation.models.Comment;
 import com.activity_sync.presentation.models.builders.CommentBuilder;
+import com.activity_sync.presentation.services.IApiService;
 import com.activity_sync.presentation.utils.StringUtils;
 import com.activity_sync.presentation.views.ICommentsView;
 
@@ -14,12 +15,14 @@ public class CommentsPresenter extends Presenter<ICommentsView>
 {
     private final Scheduler uiThread;
     private final int eventId;
+    private final IApiService apiService;
 
-    public CommentsPresenter(ICommentsView view, Scheduler uiThread, int eventId)
+    public CommentsPresenter(ICommentsView view, Scheduler uiThread, int eventId, IApiService apiService)
     {
         super(view);
         this.uiThread = uiThread;
         this.eventId = eventId;
+        this.apiService = apiService;
     }
 
     @Override

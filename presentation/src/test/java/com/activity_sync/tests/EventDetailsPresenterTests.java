@@ -153,6 +153,6 @@ public class EventDetailsPresenterTests
 
     private EventDetailsPresenter createPresenter()
     {
-        return new EventDetailsPresenter(Schedulers.immediate(), view, navigator, eventId);
+        return new EventDetailsPresenter(Schedulers.immediate(), view, navigator, eventId, apiService);
     }
 }

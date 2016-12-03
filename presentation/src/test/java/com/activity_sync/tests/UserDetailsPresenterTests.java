@@ -29,6 +29,6 @@ public class UserDetailsPresenterTests
 
     private UserDetailsPresenter createPresenter()
     {
-        return new UserDetailsPresenter(view);
+        return new UserDetailsPresenter(view, apiService);
     }
 }

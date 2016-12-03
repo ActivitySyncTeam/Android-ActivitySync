@@ -32,6 +32,6 @@ public class CandidatesFragment extends ParticipantsFragmentBase implements IPar
     @Override
     protected IPresenter createPresenter(FragmentScreen screen, Bundle savedInstanceState)
     {
-        return new CandidatesPresenter(this, navigator, AndroidSchedulers.mainThread(), isOrganizer);
+        return new CandidatesPresenter(this, navigator, AndroidSchedulers.mainThread(), isOrganizer, apiService);
     }
 }

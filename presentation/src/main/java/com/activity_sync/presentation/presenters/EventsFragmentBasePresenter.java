@@ -1,5 +1,6 @@
 package com.activity_sync.presentation.presenters;
 
+import com.activity_sync.presentation.services.IApiService;
 import com.activity_sync.presentation.services.INavigator;
 import com.activity_sync.presentation.views.IEventsFragmentView;
 
@@ -10,13 +11,15 @@ abstract public class EventsFragmentBasePresenter extends Presenter<IEventsFragm
     public static final String EVENT_CHOSEN = "EVENT_CHOSEN";
 
     private final INavigator navigator;
-    private Scheduler uiThread;
+    private final Scheduler uiThread;
+    private final IApiService apiService;
 
-    public EventsFragmentBasePresenter(IEventsFragmentView view, INavigator navigator, Scheduler uiThread)
+    public EventsFragmentBasePresenter(IEventsFragmentView view, INavigator navigator, Scheduler uiThread, IApiService apiService)
     {
         super(view);
         this.navigator = navigator;
         this.uiThread = uiThread;
+        this.apiService = apiService;
     }
 
     @Override

@@ -48,7 +48,7 @@ public class UserDetailsScreen extends Screen implements IUserDetailsView
     @Override
     protected IPresenter createPresenter(Screen screen, Bundle savedInstanceState)
     {
-        return new UserDetailsPresenter(this);
+        return new UserDetailsPresenter(this, apiService);
     }
 
     @Override

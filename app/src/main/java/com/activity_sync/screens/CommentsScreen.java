@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.activity_sync.App;
 import com.activity_sync.R;
 import com.activity_sync.presentation.models.Comment;
 import com.activity_sync.presentation.presenters.CommentsPresenter;
@@ -65,13 +66,13 @@ public class CommentsScreen extends Screen implements ICommentsView
     protected IPresenter createPresenter(Screen screen, Bundle savedInstanceState)
     {
         int eventId = getIntent().getIntExtra(CommentsScreen.EVENT_ID, 0);
-
-        return new CommentsPresenter(this, AndroidSchedulers.mainThread(), eventId);
+        return new CommentsPresenter(this, AndroidSchedulers.mainThread(), eventId, apiService);
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
+        App.component(this).inject(this);
         super.onCreate(savedInstanceState);
 
         commentsRefreshLayout.setOnRefreshListener(() -> refreshComments.onNext(this));
