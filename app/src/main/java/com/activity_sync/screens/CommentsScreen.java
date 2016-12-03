@@ -14,6 +14,7 @@ import com.activity_sync.R;
 import com.activity_sync.presentation.models.Comment;
 import com.activity_sync.presentation.presenters.CommentsPresenter;
 import com.activity_sync.presentation.presenters.IPresenter;
+import com.activity_sync.presentation.services.IApiService;
 import com.activity_sync.presentation.utils.StringUtils;
 import com.activity_sync.presentation.views.ICommentsView;
 import com.activity_sync.renderers.CommentsRenderer;
@@ -24,6 +25,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import javax.inject.Inject;
+
 import butterknife.Bind;
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
@@ -33,6 +36,9 @@ import rx.subjects.PublishSubject;
 public class CommentsScreen extends Screen implements ICommentsView
 {
     public static final String EVENT_ID = "event_id";
+
+    @Inject
+    IApiService apiService;
 
     @Bind(R.id.comments_refresh)
     SwipeRefreshLayout commentsRefreshLayout;

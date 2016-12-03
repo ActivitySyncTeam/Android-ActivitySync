@@ -8,14 +8,20 @@ import com.activity_sync.R;
 import com.activity_sync.presentation.models.User;
 import com.activity_sync.presentation.presenters.IPresenter;
 import com.activity_sync.presentation.presenters.UserDetailsPresenter;
+import com.activity_sync.presentation.services.IApiService;
 import com.activity_sync.presentation.views.IUserDetailsView;
 import com.activity_sync.utils.CredibilityService;
 import com.amulyakhare.textdrawable.TextDrawable;
+
+import javax.inject.Inject;
 
 import butterknife.Bind;
 
 public class UserDetailsScreen extends Screen implements IUserDetailsView
 {
+    @Inject
+    IApiService apiService;
+
     @Bind(R.id.tv_username)
     TextView username;
 

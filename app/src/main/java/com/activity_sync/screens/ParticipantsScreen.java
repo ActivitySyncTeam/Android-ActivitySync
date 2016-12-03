@@ -9,6 +9,7 @@ import com.activity_sync.App;
 import com.activity_sync.R;
 import com.activity_sync.adapters.ViewPagerAdapter;
 import com.activity_sync.presentation.presenters.IPresenter;
+import com.activity_sync.presentation.services.IApiService;
 import com.activity_sync.presentation.services.INavigator;
 
 import javax.inject.Inject;
@@ -21,6 +22,9 @@ public class ParticipantsScreen extends Screen
 
     @Inject
     INavigator navigator;
+
+    @Inject
+    IApiService apiService;
 
     @Bind(R.id.tabLayout)
     TabLayout tabLayout;

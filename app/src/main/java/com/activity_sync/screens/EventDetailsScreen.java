@@ -16,6 +16,7 @@ import com.activity_sync.presentation.models.EnrollmentStatus;
 import com.activity_sync.presentation.models.Event;
 import com.activity_sync.presentation.presenters.EventDetailsPresenter;
 import com.activity_sync.presentation.presenters.IPresenter;
+import com.activity_sync.presentation.services.IApiService;
 import com.activity_sync.presentation.services.INavigator;
 import com.activity_sync.presentation.views.IEventDetailsView;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -36,6 +37,9 @@ import rx.subjects.PublishSubject;
 public class EventDetailsScreen extends Screen implements IEventDetailsView, OnMapReadyCallback
 {
     public static final String EVENT_ID = "event_id";
+
+    @Inject
+    IApiService apiService;
 
     @Inject
     INavigator navigator;

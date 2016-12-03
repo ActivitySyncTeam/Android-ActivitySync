@@ -20,6 +20,7 @@ import com.activity_sync.presentation.models.Location;
 import com.activity_sync.presentation.models.builders.LocationBuilder;
 import com.activity_sync.presentation.presenters.EventCreatorPresenter;
 import com.activity_sync.presentation.presenters.IPresenter;
+import com.activity_sync.presentation.services.IApiService;
 import com.activity_sync.presentation.services.INavigator;
 import com.activity_sync.presentation.views.IEventCreatorView;
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
@@ -43,6 +44,9 @@ import rx.subjects.PublishSubject;
 public class EventCreatorScreen extends Screen implements IEventCreatorView
 {
     private static final int REQUEST_SELECT_PLACE = 1111;
+
+    @Inject
+    IApiService apiService;
 
     @Inject
     INavigator navigator;

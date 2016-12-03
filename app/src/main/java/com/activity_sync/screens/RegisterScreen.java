@@ -12,6 +12,7 @@ import com.activity_sync.App;
 import com.activity_sync.R;
 import com.activity_sync.presentation.presenters.IPresenter;
 import com.activity_sync.presentation.presenters.RegisterPresenter;
+import com.activity_sync.presentation.services.IApiService;
 import com.activity_sync.presentation.services.INavigator;
 import com.activity_sync.presentation.views.IRegisterView;
 
@@ -26,6 +27,9 @@ public class RegisterScreen extends Screen implements IRegisterView
 {
     @Inject
     INavigator navigator;
+
+    @Inject
+    IApiService apiService;
 
     @Bind(R.id.register_btn)
     Button registerBtn;

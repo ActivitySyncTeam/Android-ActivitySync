@@ -1,5 +1,6 @@
 package com.activity_sync.presentation.presenters;
 
+import com.activity_sync.presentation.services.IApiService;
 import com.activity_sync.presentation.services.INavigator;
 import com.activity_sync.presentation.utils.StringUtils;
 import com.activity_sync.presentation.views.ILoginView;
@@ -10,12 +11,14 @@ public class LoginPresenter extends Presenter<ILoginView>
 {
     private final Scheduler uiThread;
     private final INavigator navigator;
+    private final IApiService apiService;
 
-    public LoginPresenter(Scheduler uiThread, ILoginView view, INavigator navigator)
+    public LoginPresenter(Scheduler uiThread, ILoginView view, INavigator navigator, IApiService apiService)
     {
         super(view);
         this.navigator = navigator;
         this.uiThread = uiThread;
+        this.apiService = apiService;
     }
 
     @Override
