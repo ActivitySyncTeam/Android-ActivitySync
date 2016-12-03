@@ -151,4 +151,6 @@
         <item name="android:clickable">false</item>
     </style>
 
+    <style name="CardViewDefault.RecyclerView" parent="@style/CardViewDefault.NotClickable"/>
+
 </resources>
