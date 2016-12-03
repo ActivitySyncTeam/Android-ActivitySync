@@ -20,6 +20,7 @@
     <string name="menu_events">Events</string>
     <string name="menu_create_event">Crate new event</string>
     <string name="log_out">Log out</string>
+    <string name="menu_settings">Settings</string>
 
     <!-- EventsScreen strings -->
     <string name="title_events">Events</string>
@@ -72,6 +73,47 @@
     <string name="txt_accept_participant_confirmation_title">Accept participant confirmation</string>
     <string name="txt_remove_success" formatted="false">%s %s has been removed from this event</string>
     <string name="txt_accept_success" formatted="false">%s %s request has been accepted</string>
+
+    <!-- SettingsScreen strings -->
+    <string name="title_preferences">Settings</string>
+    <string name="pref_cat_location">Location</string>
+    <string name="pref_cat_notification">Notifications</string>
+    <string name="pref_cat_search">Default search values</string>
+    <string name="pref_cat_account">User account</string>
+    <string name="pref_location_switch">Enable location</string>
+    <string name="pref_notification_switch">Enable notifications</string>
+    <string name="pref_notification_sound_chk">Notification sound</string>
+    <string name="pref_notification_vibration_chk">Notification vibration</string>
+    <string name="pref_search_days">Search days ahead</string>
+    <string name="pref_search_range">Search range [km]</string>
+    <string name="pref_edit_account_btn">EDIT ACCOUNT</string>
+    <string name="pref_change_pwd_btn">CHANGE PASSWORD</string>
+    <string name="pref_name">First name</string>
+    <string name="pref_last_name">Last name</string>
+    <string name="pref_login" translatable="false">Login</string>
+    <string name="pref_signature">Signature</string>
+    <string name="pref_email" translatable="false">E-mail</string>
+
+    <!-- EditAccountScreen strings -->
+    <string name="title_edit_account">Edit account</string>
+    <string name="ea_hint_first_name">First Name</string>
+    <string name="ea_hint_last_name">Last Name</string>
+    <string name="ea_hint_email">Email</string>
+    <string name="ea_hint_signature">Signature</string>
+    <string name="ea_hint_password">Type password to confirm</string>
+    <string name="ea_err_empty_field">This field cannot be empty</string>
+    <string name="ea_save_btn">SAVE</string>
+    <string name="ea_save_succ">Profile saved!</string>
+
+    <!-- ChangePasswordScreen strings -->
+    <string name="title_change_password">Change Password</string>
+    <string name="cp_hint_old_password">Old password</string>
+    <string name="cp_hint_new_password">New password</string>
+    <string name="cp_hint_confirm_new_password">Confirm new password</string>
+    <string name="cp_save_btn">SAVE</string>
+    <string name="cp_save_succ">Password changed!</string>
+    <string name="err_confirmed_not_matching">Confirm password does not math the password</string>
+    <string name="err_same_passwords">New password must be different from old password</string>
 
     <!-- LoginScreen strings -->
     <string name="btn_login">Login</string>

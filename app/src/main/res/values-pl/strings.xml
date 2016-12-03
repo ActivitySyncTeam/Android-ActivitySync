@@ -12,6 +12,7 @@
     <string name="btn_login">Zaloguj się</string>
     <string name="menu_dummy_screen">Dummy Ekran</string>
     <string name="menu_events">Wydarzenia</string>
+    <string name="menu_settings">Ustawienia</string>
     <string name="tab_all_events">Wszystkie</string>
     <string name="tab_my_events">Moje</string>
     <string name="title_events">Wydarzenia</string>
@@ -56,6 +57,36 @@
     <string name="txt_leave_message">Wypisałeś się z wydarzenia</string>
     <string name="txt_enroll_message">Zapisałeś się na wydarzenie</string>
     <string name="txt_participant">Uczestnik</string>
+    <string name="title_preferences">Ustawienia</string>
+    <string name="pref_cat_location">Lokalizacja</string>
+    <string name="pref_cat_notification">Powiadomienia</string>
+    <string name="pref_location_switch">Włącz lokalizację</string>
+    <string name="pref_notification_switch">Włącz powiadomienia</string>
+    <string name="pref_notification_sound_chk">Dźwięk powiadomienia</string>
+    <string name="pref_notification_vibration_chk">Wibracje powiadomienia</string>
+    <string name="pref_cat_search">Domyślne wartości wyszukiwania</string>
+    <string name="pref_search_days">Szukaj dni do przodu</string>
+    <string name="pref_search_range">Zasięg wyszukiwania [km]</string>
+    <string name="pref_cat_account">Konto użytkownika</string>
+    <string name="pref_change_pwd_btn">ZMIEŃ HASŁO</string>
+    <string name="pref_edit_account_btn">EDYTUJ KONTO</string>
+    <string name="pref_name">Imię</string>
+    <string name="pref_last_name">Nazwisko</string>
+    <string name="pref_signature">Sygnatura</string>
+    <string name="title_change_password">Zmień hasło</string>
+    <string name="title_edit_account">Edytuj konto</string>
+    <string name="ea_err_empty_field">To pole nie może być puste</string>
+    <string name="ea_hint_email">Email</string>
+    <string name="ea_hint_first_name">Imię</string>
+    <string name="ea_hint_last_name">Nazwisko</string>
+    <string name="ea_hint_signature">Sygnatura</string>
+    <string name="ea_hint_password">Wprowadź hasło by potwierdzić</string>
+    <string name="ea_save_btn">ZAPISZ</string>
+    <string name="ea_save_succ">Profil zapisany!</string>
+    <string name="cp_hint_confirm_new_password">Potwierdź nowe hasło</string>
+    <string name="cp_hint_new_password">Nowe hasło</string>
+    <string name="cp_hint_old_password">Stare hasło</string>
+    <string name="cp_save_btn">ZAPISZ</string>
     <string name="title_event_creator">Kreator wydarzenia</string>
     <string name="txt_choose_date">Data wydarzenia</string>
     <string name="txt_choose_location">Miejsca wydarzenia</string>
@@ -86,5 +117,8 @@
     <string name="title_comments">Komentarze</string>
     <string name="menu_create_event">Stwórz nowe wydarzenie</string>
     <string name="log_out">Wyloguj się</string>
+    <string name="cp_save_succ">Hasło zmienione!</string>
+    <string name="err_confirmed_not_matching">Potwierdzone hasło różni się od nowego hasła</string>
+    <string name="err_same_passwords">Nowe hasło nie może być takie samo jak stare hasło</string>
 
 </resources>

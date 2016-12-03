@@ -43,7 +43,7 @@ public class IntroBasePresenterTests
         IntroBasePresenter introBasePresenter = createPresenter();
         introBasePresenter.start();
 
-        Mockito.verify(permanentStorage).save(IPermanentStorage.IS_APP_OPENED_BEFORE, true);
+        Mockito.verify(permanentStorage).saveBoolean(IPermanentStorage.IS_APP_OPENED_BEFORE, true);
     }
 
     @Test

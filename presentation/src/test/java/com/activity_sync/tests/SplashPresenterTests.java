@@ -37,7 +37,7 @@ public class SplashPresenterTests
     @Test
     public void splashPresenter_init_openLoginScreen()
     {
-        Mockito.when(permanentStorage.retrieveBoolean(IPermanentStorage.IS_APP_OPENED_BEFORE, false)).thenReturn(true);
+        Mockito.when(permanentStorage.retrieveBoolean(IPermanentStorage.IS_APP_OPENED_BEFORE, IPermanentStorage.IS_APP_OPENED_BEFORE_DEFAULT)).thenReturn(true);
 
         SplashPresenter presenter = createPresenter();
         presenter.start();

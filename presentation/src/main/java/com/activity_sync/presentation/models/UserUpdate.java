@@ -4,8 +4,11 @@ import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
-public class UserDetails implements Serializable
+public class UserUpdate implements Serializable
 {
+    @SerializedName("userid")
+    private int userId;
+
     @SerializedName("username")
     private String userName;
 
@@ -18,18 +21,32 @@ public class UserDetails implements Serializable
     @SerializedName("email")
     private String email;
 
-    public UserDetails()
+    @SerializedName("signature")
+    private String signature;
+
+    public UserUpdate()
     {
 
     }
 
-    public UserDetails(String userName, String firstName, String lastName, String email)
+    public UserUpdate(int userId, String userName, String firstName, String lastName, String email, String signature)
     {
+        this.userId = userId;
         this.userName = userName;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
-        ;
+        this.signature = signature;
+    }
+
+    public int getUserId()
+    {
+        return userId;
+    }
+
+    public void setUserId(int userId)
+    {
+        this.userId = userId;
     }
 
     public String getUserName()
@@ -70,5 +87,15 @@ public class UserDetails implements Serializable
     public void setEmail(String email)
     {
         this.email = email;
+    }
+
+    public String getSignature()
+    {
+        return signature;
+    }
+
+    public void setSignature(String signature)
+    {
+        this.signature = signature;
     }
 }

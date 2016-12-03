@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.activity_sync">
+          package="com.activity_sync">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.INTERNET"/>
@@ -16,9 +16,9 @@
             android:name=".screens.SplashScreen"
             android:theme="@style/SplashTheme">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.MAIN"/>
 
-                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
 
@@ -33,13 +33,13 @@
 
         <activity
             android:name=".screens.LoginScreen"
-            android:theme="@style/AppTheme.LoginScreen"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.LoginScreen"/>
 
         <activity
             android:name=".screens.RegisterScreen"
-            android:theme="@style/AppTheme.LoginScreen"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.LoginScreen"/>
 
         <activity
             android:name=".screens.EventsScreen"
@@ -65,6 +65,21 @@
             android:name=".screens.CommentsScreen"
             android:theme="@style/AppTheme.CommentsScreen"
             android:screenOrientation="portrait"/>
+
+        <activity
+            android:name=".screens.SettingsScreen"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.SettingsScreen"/>
+
+        <activity
+            android:name=".screens.ChangePasswordScreen"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.SettingsScreen"/>
+
+        <activity
+            android:name=".screens.EditAccountScreen"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.SettingsScreen"/>
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
