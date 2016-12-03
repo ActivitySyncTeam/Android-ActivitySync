@@ -61,9 +61,9 @@
 
     <!-- ParticipantsScreen strings -->
     <string name="title_participants">Participants list</string>
-    <string name="title_settings">Settings</string>
 
     <!-- Preferences -->
+    <string name="title_preferences">Settings</string>
     <string name="pref_cat_location">Location</string>
     <string name="pref_cat_notification">Notifications</string>
     <string name="pref_cat_search">Default search values</string>
@@ -74,13 +74,31 @@
     <string name="pref_notification_vibration_chk">Notification vibration</string>
     <string name="pref_search_days">Search days ahead</string>
     <string name="pref_search_range">Search range [km]</string>
-    <string name="pref_edit_account_btn">Edit account</string>
-    <string name="pref_change_pwd_btn">Change password</string>
-    <string name="pref_name">Name</string>
-    <string name="pref_surname">Surname</string>
+    <string name="pref_edit_account_btn">EDIT ACCOUNT</string>
+    <string name="pref_change_pwd_btn">CHANGE PASSWORD</string>
+    <string name="pref_name">First name</string>
+    <string name="pref_surname">Last name</string>
     <string name="pref_login" translatable="false">Login</string>
     <string name="pref_signature">Signature</string>
     <string name="pref_email" translatable="false">E-mail</string>
+
+    <!-- EditAccount strings -->
+    <string name="title_edit_account">Edit account</string>
+    <string name="ea_hint_first_name">First Name</string>
+    <string name="ea_hint_last_name">Last Name</string>
+    <string name="ea_hint_email">Email</string>
+    <string name="ea_hint_signature">Signature</string>
+    <string name="ea_hint_password">Type password to confirm</string>
+    <string name="ea_err_empty_field">This field cannot be empty</string>
+    <string name="ea_save_btn">SAVE</string>
+    <string name="ea_save_succ">Profile saved!</string>
+
+    <!-- ChangePassword strings -->
+    <string name="title_change_password">Change Password</string>
+    <string name="cp_hint_old_password">Old password</string>
+    <string name="cp_hint_new_password">New password</string>
+    <string name="cp_hint_confirm_new_password">Confirm new password</string>
+    <string name="cp_save_btn">SAVE</string>
 
     <!-- LoginScreen strings -->
     <string name="btn_login">Login</string>

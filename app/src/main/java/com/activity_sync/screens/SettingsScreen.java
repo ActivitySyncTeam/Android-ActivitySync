@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.activity_sync.App;
 import com.activity_sync.R;
+import com.activity_sync.presentation.models.UserUpdate;
 import com.activity_sync.presentation.presenters.IPresenter;
 import com.activity_sync.presentation.presenters.SettingsPresenter;
 import com.activity_sync.presentation.services.INavigator;
@@ -63,6 +64,21 @@ public class SettingsScreen extends ScreenWithMenu implements ISettingsView
     @Bind(R.id.change_password_button)
     Button changePasswordButton;
 
+    @Bind(R.id.pref_email_text)
+    TextView emailTextView;
+
+    @Bind(R.id.pref_name_text)
+    TextView nameTextView;
+
+    @Bind(R.id.pref_signature_text)
+    TextView signatureTextView;
+
+    @Bind(R.id.pref_surname_text)
+    TextView surnameTextView;
+
+    @Bind(R.id.pref_username_text)
+    TextView usernameTextView;
+
     private PublishSubject<Boolean> enableNotificationsChange = PublishSubject.create();
     private PublishSubject<Boolean> enableLocationChange = PublishSubject.create();
     private PublishSubject<Boolean> enableNotificationsSoundChange = PublishSubject.create();
@@ -80,7 +96,7 @@ public class SettingsScreen extends ScreenWithMenu implements ISettingsView
     {
         App.component(this).inject(this);
         super.onCreate(savedInstanceState);
-        setTitle(R.string.title_settings);
+        setTitle(R.string.title_preferences);
 
         initializeListeners();
     }
@@ -155,6 +171,16 @@ public class SettingsScreen extends ScreenWithMenu implements ISettingsView
         searchDaysAheadLabel.setText(String.valueOf(daysSeekbar.getProgress()));
         rangeSeekbar.setProgress(permanentStorage.retrieveInteger(IPermanentStorage.SEARCH_RANGE, IPermanentStorage.SEARCH_RANGE_DEFAULT));
         searchRangeLabel.setText(String.valueOf(rangeSeekbar.getProgress()));
+    }
+
+    @Override
+    public void setAccountData(UserUpdate userUpdateDetails)
+    {
+        nameTextView.setText(userUpdateDetails.getFirstName());
+        surnameTextView.setText(userUpdateDetails.getLastName());
+        usernameTextView.setText(userUpdateDetails.getUserName());
+        emailTextView.setText(userUpdateDetails.getEmail());
+        signatureTextView.setText(userUpdateDetails.getSignature());
     }
 
     private void notificationSwitchChanged(CompoundButton c, Boolean value)

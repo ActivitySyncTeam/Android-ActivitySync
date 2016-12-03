@@ -1,9 +1,11 @@
 package com.activity_sync.presentation.presenters;
 
+import com.activity_sync.presentation.models.UserUpdate;
 import com.activity_sync.presentation.services.INavigator;
 import com.activity_sync.presentation.services.IPermanentStorage;
 import com.activity_sync.presentation.views.ISettingsView;
 
+import rx.Observable;
 import rx.Scheduler;
 
 public class SettingsPresenter extends Presenter<ISettingsView>
@@ -11,6 +13,8 @@ public class SettingsPresenter extends Presenter<ISettingsView>
     private IPermanentStorage permanentStorage;
     private Scheduler uiThread;
     private INavigator navigator;
+
+    private UserUpdate userUpdateDetails;
 
     public SettingsPresenter(ISettingsView view, INavigator navigator, Scheduler uiThread, IPermanentStorage permanentStorage)
     {
@@ -27,6 +31,8 @@ public class SettingsPresenter extends Presenter<ISettingsView>
 
         view.loadSavedValues();
 
+        Observable.just(getUserUpdateDetails()).observeOn(uiThread).subscribe(view::setAccountData);
+
         subscriptions.add(view.enableLocationChange().subscribe(value -> permanentStorage.saveBoolean(IPermanentStorage.IS_LOCATION_ENABLED, value)));
         subscriptions.add(view.enableNotificationsChange().subscribe(value -> permanentStorage.saveBoolean(IPermanentStorage.IS_NOTIFICATION_ENABLED, value)));
         subscriptions.add(view.enableNotificationsSoundChange().subscribe(value -> permanentStorage.saveBoolean(IPermanentStorage.IS_NOTIFICATION_SOUND_ENABLED, value)));
@@ -37,13 +43,20 @@ public class SettingsPresenter extends Presenter<ISettingsView>
         subscriptions.add(view.editUserAccount()
                 .observeOn(uiThread)
                 .subscribe(o -> {
-//                    navigator.openEditAccountScreen();
+                    navigator.openEditAccountScreen(userUpdateDetails);
                 }));
 
         subscriptions.add(view.changeUserPassword()
                 .observeOn(uiThread)
                 .subscribe(o -> {
-//                    navigator.openChangePasswordScreen();
+                    navigator.openChangePasswordScreen();
                 }));
+    }
+
+    private UserUpdate getUserUpdateDetails()
+    {
+        //API call here UserUpdate created from UserDetails
+        userUpdateDetails = new UserUpdate(123, "jkowalski", "Jan", "Kowalski", "jan.kowalski@gmail.com", "Jestem wesoły romek, mam na przedmieściu domek...");
+        return userUpdateDetails;
     }
 }

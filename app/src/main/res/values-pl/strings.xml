@@ -57,7 +57,7 @@
     <string name="txt_leave_message">Wypisałeś się z wydarzenia</string>
     <string name="txt_join_message">Dołączyłeś do wydarzenia</string>
     <string name="txt_participant">Uczestnik</string>
-    <string name="title_settings">Ustawienia</string>
+    <string name="title_preferences">Ustawienia</string>
     <string name="pref_cat_location">Lokalizacja</string>
     <string name="pref_cat_notification">Powiadomienia</string>
     <string name="pref_location_switch">Włącz lokalizację</string>
@@ -68,10 +68,24 @@
     <string name="pref_search_days">Szukaj dni do pzodu</string>
     <string name="pref_search_range">Zasięg wyszukiwania [km]</string>
     <string name="pref_cat_account">Konto użytkownika</string>
-    <string name="pref_change_pwd_btn">Zmień hasło</string>
-    <string name="pref_edit_account_btn">Edytuj konto</string>
+    <string name="pref_change_pwd_btn">ZMIEŃ HASŁO</string>
+    <string name="pref_edit_account_btn">EDYTUJ KONTO</string>
     <string name="pref_name">Imię</string>
     <string name="pref_surname">Nazwisko</string>
     <string name="pref_signature">Sygnatura</string>
+    <string name="title_change_password">Zmień hasło</string>
+    <string name="title_edit_account">Edytuj konto</string>
+    <string name="ea_err_empty_field">To pole nie może być puste</string>
+    <string name="ea_hint_email">Email</string>
+    <string name="ea_hint_first_name">Imię</string>
+    <string name="ea_hint_last_name">Nazwisko</string>
+    <string name="ea_hint_signature">Sygnatura</string>
+    <string name="ea_hint_password">Wprowadź hasło by potwierdzić</string>
+    <string name="ea_save_btn">ZAPISZ</string>
+    <string name="ea_save_succ">Profil zapisany!</string>
+    <string name="cp_hint_confirm_new_password">Potwierdź nowe hasło</string>
+    <string name="cp_hint_new_password">Nowe hasło</string>
+    <string name="cp_hint_old_password">Stare hasło</string>
+    <string name="cp_save_btn">ZAPISZ</string>
 
 </resources>

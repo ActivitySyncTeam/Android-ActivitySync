@@ -1,5 +1,7 @@
 package com.activity_sync.presentation.services;
 
+import com.activity_sync.presentation.models.UserUpdate;
+
 public interface INavigator
 {
     void openDummyScreen();
@@ -19,4 +21,8 @@ public interface INavigator
     void openParticipantsScreen();
 
     void openSettingsScreen();
+
+    void openChangePasswordScreen();
+
+    void openEditAccountScreen(UserUpdate userUpdateDetails);
 }
