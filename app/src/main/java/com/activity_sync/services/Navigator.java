@@ -73,6 +73,14 @@ public class Navigator implements INavigator
         startActivity(getIntent(EventCreatorScreen.class));
     }
 
+    @Override
+    public void openCommentsScreen(int eventId)
+    {
+        Intent intent = new Intent(context, CommentsScreen.class);
+        intent.putExtra(CommentsScreen.EVENT_ID, eventId);
+        startActivity(intent);
+    }
+
     private void startActivity(Intent intent)
     {
         if (context instanceof Activity == false)

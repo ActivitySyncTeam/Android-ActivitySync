@@ -102,4 +102,11 @@
     <string name="txt_create_event_confirmation_title">Create event confirmation</string>
     <string name="txt_create_event_confirmation_text">Are you sure you want to create this event?</string>
 
+    <!-- CommentsScreen strings -->
+    <string name="title_comments">Comments</string>
+    <string name="txt_comment_author" formatted="false">%s wrote:</string>
+    <string name="err_comment_empty">Your comment cannot be empty</string>
+    <string name="txt_comment_hint">Write your comment here</string>
+    <string name="btn_send">Send</string>
+
 </resources>

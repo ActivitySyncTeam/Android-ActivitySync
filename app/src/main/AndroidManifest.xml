@@ -61,6 +61,11 @@
             android:name=".screens.EventCreatorScreen"
             android:screenOrientation="portrait"/>
 
+        <activity
+            android:name=".screens.CommentsScreen"
+            android:theme="@style/AppTheme.CommentsScreen"
+            android:screenOrientation="portrait"/>
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyBeiPRuuv-i15I6eJQDtW-irGPer2E1ZJs"/>

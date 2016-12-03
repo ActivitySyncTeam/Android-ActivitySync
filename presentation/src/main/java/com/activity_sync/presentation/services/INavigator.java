@@ -19,4 +19,6 @@ public interface INavigator
     void openParticipantsScreen(boolean isOrganizer);
 
     void openEventCreatorScreen();
+
+    void openCommentsScreen(int eventId);
 }

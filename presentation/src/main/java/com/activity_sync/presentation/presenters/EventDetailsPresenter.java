@@ -123,6 +123,16 @@ public class EventDetailsPresenter extends Presenter<IEventDetailsView>
                     }
                 })
         );
+
+        subscriptions.add(view.commentsClick()
+                .observeOn(uiThread)
+                .subscribe(o -> {
+                    if (event != null)
+                    {
+                        navigator.openCommentsScreen(event.getId());
+                    }
+                })
+        );
     }
 
     public void createEvent(boolean isActive, boolean isParticipant, boolean isOrganizer)      //for tests purposes, delete when api provided

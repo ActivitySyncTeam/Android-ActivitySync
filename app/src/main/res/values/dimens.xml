@@ -43,5 +43,7 @@
     <!-- UserDetailsScreen dimens-->
     <dimen name="text_drawable_default_height">40dp</dimen>
     <dimen name="text_drawable_default_width">@dimen/text_drawable_default_height</dimen>
+    <dimen name="on_map_btn_default_width">20dp</dimen>
+    <dimen name="on_map_btn_default_height">@dimen/on_map_btn_default_width</dimen>
 
 </resources>

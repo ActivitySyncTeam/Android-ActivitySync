@@ -68,6 +68,9 @@
     <!--User Details Screen Colors-->
     <item name="user_details_bg" type="color">@color/white</item>
     <item name="user_details_avatar" type="color">#9e9e9e</item>
+    <item name="on_map_button_normal" type="color">#80000000</item>
+    <item name="on_map_button_pressed" type="color">#3d3939</item>
+    <item name="on_map_button_text" type="color">@color/white</item>
 
     <item name="user_details_very_good" type="color">#14f700</item>
     <item name="user_details_good" type="color">#8bd630</item>
@@ -82,5 +85,8 @@
     <item name="event_creator_bg" type="color">#d4cdcd</item>
     <item name="event_creator_item_normal" type="color">@color/event_creator_bg</item>
     <item name="event_creator_item_pressed" type="color">#796c6c</item>
+
+    <!--Comments Screen Colors-->
+    <item name="comments_bg" type="color">@color/white</item>
 
 </resources>

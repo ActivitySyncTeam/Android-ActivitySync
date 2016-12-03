@@ -33,6 +33,9 @@ public class EventDetailsPresenterTests
     PublishSubject organizerDetailsClickEvent = PublishSubject.create();
     PublishSubject participantsClickEvent = PublishSubject.create();
     PublishSubject googleMapAsyncEvent = PublishSubject.create();
+    PublishSubject commentsClickEvent = PublishSubject.create();
+
+    private int eventId = 1;
 
     @Before
     public void setup()
@@ -43,6 +46,7 @@ public class EventDetailsPresenterTests
         Mockito.when(view.joinEventConfirmClick()).thenReturn(joinEventConfirmEvent);
         Mockito.when(view.leaveEventConfirmClick()).thenReturn(leaveEventConfirmEvent);
         Mockito.when(view.cancelEventConfirmClick()).thenReturn(cancelEventConfirmEvent);
+        Mockito.when(view.commentsClick()).thenReturn(commentsClickEvent);
 
         Mockito.when(view.organizerDetailsClick()).thenReturn(organizerDetailsClickEvent);
         Mockito.when(view.participantsDetailsClick()).thenReturn(participantsClickEvent);
@@ -137,8 +141,18 @@ public class EventDetailsPresenterTests
         Mockito.verify(navigator).openParticipantsScreen(true);
     }
 
+    @Test
+    public void eventDetailsPresenter_clickComments_openCommentsScreen()
+    {
+        EventDetailsPresenter presenter = createPresenter();
+        presenter.start();
+
+        commentsClickEvent.onNext(this);
+        Mockito.verify(navigator).openCommentsScreen(eventId);
+    }
+
     private EventDetailsPresenter createPresenter()
     {
-        return new EventDetailsPresenter(Schedulers.immediate(), view, navigator, 1);
+        return new EventDetailsPresenter(Schedulers.immediate(), view, navigator, eventId);
     }
 }
