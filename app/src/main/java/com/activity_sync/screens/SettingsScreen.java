@@ -84,7 +84,9 @@ public class SettingsScreen extends ScreenWithMenu implements ISettingsView
     private PublishSubject<Boolean> enableNotificationsSoundChange = PublishSubject.create();
     private PublishSubject<Boolean> enableNotificationsVibrateChange = PublishSubject.create();
     private PublishSubject<Integer> searchDaysChange = PublishSubject.create();
+    private PublishSubject<Integer> searchDaysStopTracking = PublishSubject.create();
     private PublishSubject<Integer> searchRangeChange = PublishSubject.create();
+    private PublishSubject<Integer> searchRangeStopTracking = PublishSubject.create();
 
     public SettingsScreen()
     {
@@ -112,11 +114,7 @@ public class SettingsScreen extends ScreenWithMenu implements ISettingsView
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b)
             {
-                if (i < 1)
-                {
-                    seekBar.setProgress(1);
-                }
-                searchDaysAheadLabel.setText(String.valueOf(seekBar.getProgress()));
+                searchDaysChange.onNext(i);
             }
 
             @Override
@@ -128,8 +126,7 @@ public class SettingsScreen extends ScreenWithMenu implements ISettingsView
             @Override
             public void onStopTrackingTouch(SeekBar seekBar)
             {
-                searchDaysAheadLabel.setText(String.valueOf(seekBar.getProgress()));
-                searchDaysChange.onNext(seekBar.getProgress());
+                searchDaysStopTracking.onNext(seekBar.getProgress());
             }
         });
         rangeSeekbar.setOnSeekBarChangeListener(new AppCompatSeekBar.OnSeekBarChangeListener()
@@ -137,11 +134,7 @@ public class SettingsScreen extends ScreenWithMenu implements ISettingsView
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b)
             {
-                if (i < 1)
-                {
-                    seekBar.setProgress(1);
-                }
-                searchRangeLabel.setText(String.valueOf(seekBar.getProgress()));
+                searchRangeChange.onNext(i);
             }
 
             @Override
@@ -153,8 +146,7 @@ public class SettingsScreen extends ScreenWithMenu implements ISettingsView
             @Override
             public void onStopTrackingTouch(SeekBar seekBar)
             {
-                searchRangeLabel.setText(String.valueOf(seekBar.getProgress()));
-                searchRangeChange.onNext(seekBar.getProgress());
+                searchRangeStopTracking.onNext(seekBar.getProgress());
             }
         });
     }
@@ -249,5 +241,41 @@ public class SettingsScreen extends ScreenWithMenu implements ISettingsView
     public Observable changeUserPassword()
     {
         return ViewObservable.clicks(changePasswordButton);
+    }
+
+    @Override
+    public Observable<Integer> searchDaysStopTracking()
+    {
+        return searchDaysStopTracking;
+    }
+
+    @Override
+    public Observable<Integer> searchRangeStopTracking()
+    {
+        return searchRangeStopTracking;
+    }
+
+    @Override
+    public void setSearchDaysAhead(int progress)
+    {
+        daysSeekbar.setProgress(progress);
+    }
+
+    @Override
+    public void setSearchRange(int progress)
+    {
+        rangeSeekbar.setProgress(progress);
+    }
+
+    @Override
+    public void setSearchDaysAheadLabelText(String value)
+    {
+        searchDaysAheadLabel.setText(value);
+    }
+
+    @Override
+    public void setSearchRangeLabelText(String value)
+    {
+        searchRangeLabel.setText(value);
     }
 }

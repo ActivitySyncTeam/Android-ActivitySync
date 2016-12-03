@@ -37,7 +37,9 @@ public class SettingsPresenterTest
     private PublishSubject<Boolean> enableNotificationsSoundChange = PublishSubject.create();
     private PublishSubject<Boolean> enableNotificationsVibrateChange = PublishSubject.create();
     private PublishSubject<Integer> searchDaysChange = PublishSubject.create();
+    private PublishSubject<Integer> searchDaysStopTracking = PublishSubject.create();
     private PublishSubject<Integer> searchRangeChange = PublishSubject.create();
+    private PublishSubject<Integer> searchRangeStopTracking = PublishSubject.create();
 
     private PublishSubject openEditAccountScreenEvent = PublishSubject.create();
     private PublishSubject openChangePasswordScreenEvent = PublishSubject.create();
@@ -53,7 +55,9 @@ public class SettingsPresenterTest
         when(view.enableNotificationsSoundChange()).thenReturn(enableNotificationsSoundChange);
         when(view.enableNotificationsVibrateChange()).thenReturn(enableNotificationsVibrateChange);
         when(view.searchDaysChange()).thenReturn(searchDaysChange);
+        when(view.searchDaysStopTracking()).thenReturn(searchDaysStopTracking);
         when(view.searchRangeChange()).thenReturn(searchRangeChange);
+        when(view.searchRangeStopTracking()).thenReturn(searchRangeStopTracking);
         when(view.editUserAccount()).thenReturn(openEditAccountScreenEvent);
         when(view.changeUserPassword()).thenReturn(openChangePasswordScreenEvent);
 
@@ -93,18 +97,56 @@ public class SettingsPresenterTest
     }
 
     @Test
-    public void settingsPresenter_changeSearchDaysValue_persistInPermanentStorage() throws Exception
+    public void settingsPresenter_changeSearchDaysValue_setSearchDaysLabel() throws Exception
     {
         int changeValue = 35;
+        int expectedValue = 35;
         searchDaysChange.onNext(changeValue);
+        verify(view).setSearchDaysAheadLabelText(String.valueOf(expectedValue));
+    }
+
+    @Test
+    public void settingsPresenter_changeSearchDaysValueBelowZero_setSearchDaysLabel() throws Exception
+    {
+        int changeValue = -5;
+        int expectedValue = 1;
+        searchDaysChange.onNext(changeValue);
+        verify(view).setSearchDaysAhead(expectedValue);
+        verify(view).setSearchDaysAheadLabelText(String.valueOf(expectedValue));
+    }
+
+    @Test
+    public void settingsPresenter_changeSearchDaysValue_persistInPermanentStorage() throws Exception
+    {
+        int changeValue = 100;
+        searchDaysStopTracking.onNext(changeValue);
         verify(permanentStorage).saveInteger(IPermanentStorage.SEARCH_DAYS_AHEAD, changeValue);
+    }
+
+    @Test
+    public void settingsPresenter_changeSearchRangeValue_setSearchDaysLabel() throws Exception
+    {
+        int changeValue = 35;
+        int expectedValue = 35;
+        searchRangeChange.onNext(changeValue);
+        verify(view).setSearchRangeLabelText(String.valueOf(expectedValue));
+    }
+
+    @Test
+    public void settingsPresenter_changeSearchRangeValueBelowZero_setSearchDaysLabel() throws Exception
+    {
+        int changeValue = -5;
+        int expectedValue = 1;
+        searchRangeChange.onNext(changeValue);
+        verify(view).setSearchRange(expectedValue);
+        verify(view).setSearchRangeLabelText(String.valueOf(expectedValue));
     }
 
     @Test
     public void settingsPresenter_changeSearchRangeValue_persistInPermanentStorage() throws Exception
     {
         int changeValue = 100;
-        searchRangeChange.onNext(changeValue);
+        searchRangeStopTracking.onNext(changeValue);
         verify(permanentStorage).saveInteger(IPermanentStorage.SEARCH_RANGE, changeValue);
     }
 

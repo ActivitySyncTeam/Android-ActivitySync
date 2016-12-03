@@ -20,9 +20,21 @@ public interface ISettingsView
 
     Observable<Integer> searchDaysChange();
 
+    Observable<Integer> searchDaysStopTracking();
+
     Observable<Integer> searchRangeChange();
+
+    Observable<Integer> searchRangeStopTracking();
 
     Observable editUserAccount();
 
     Observable changeUserPassword();
+
+    void setSearchDaysAhead(int progress);
+
+    void setSearchRange(int progress);
+
+    void setSearchDaysAheadLabelText(String value);
+
+    void setSearchRangeLabelText(String value);
 }

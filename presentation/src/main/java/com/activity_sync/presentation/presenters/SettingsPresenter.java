@@ -37,8 +37,42 @@ public class SettingsPresenter extends Presenter<ISettingsView>
         subscriptions.add(view.enableNotificationsChange().subscribe(value -> permanentStorage.saveBoolean(IPermanentStorage.IS_NOTIFICATION_ENABLED, value)));
         subscriptions.add(view.enableNotificationsSoundChange().subscribe(value -> permanentStorage.saveBoolean(IPermanentStorage.IS_NOTIFICATION_SOUND_ENABLED, value)));
         subscriptions.add(view.enableNotificationsVibrateChange().subscribe(value -> permanentStorage.saveBoolean(IPermanentStorage.IS_NOTIFICATION_VIBRATION_ENABLED, value)));
-        subscriptions.add(view.searchDaysChange().subscribe(value -> permanentStorage.saveInteger(IPermanentStorage.SEARCH_DAYS_AHEAD, value)));
-        subscriptions.add(view.searchRangeChange().subscribe(value -> permanentStorage.saveInteger(IPermanentStorage.SEARCH_RANGE, value)));
+
+        subscriptions.add(view.searchRangeChange()
+                .observeOn(uiThread)
+                .subscribe(value -> {
+                    int progress = value;
+                    if (progress < 1)
+                    {
+                        view.setSearchRange(1);
+                        progress = 1;
+                    }
+                    view.setSearchRangeLabelText(String.valueOf(progress));
+                }));
+
+        subscriptions.add(view.searchRangeStopTracking()
+                .observeOn(uiThread)
+                .subscribe(value -> {
+                    permanentStorage.saveInteger(IPermanentStorage.SEARCH_RANGE, value);
+                }));
+
+        subscriptions.add(view.searchDaysChange()
+                .observeOn(uiThread)
+                .subscribe(value -> {
+                    int progress = value;
+                    if (progress < 1)
+                    {
+                        view.setSearchDaysAhead(1);
+                        progress = 1;
+                    }
+                    view.setSearchDaysAheadLabelText(String.valueOf(progress));
+                }));
+
+        subscriptions.add(view.searchDaysStopTracking()
+                .observeOn(uiThread)
+                .subscribe(value -> {
+                    permanentStorage.saveInteger(IPermanentStorage.SEARCH_DAYS_AHEAD, value);
+                }));
 
         subscriptions.add(view.editUserAccount()
                 .observeOn(uiThread)
