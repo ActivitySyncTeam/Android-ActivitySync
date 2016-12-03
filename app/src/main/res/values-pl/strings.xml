@@ -88,8 +88,8 @@
     <string name="cp_hint_old_password">Stare hasło</string>
     <string name="cp_save_btn">ZAPISZ</string>
     <string name="title_event_creator">Kreator wydarzenia</string>
-    <string name="txt_choose_date">Wybierz datę</string>
-    <string name="txt_choose_location">Wybierz miejsca wydarzenia</string>
+    <string name="txt_choose_date">Data wydarzenia</string>
+    <string name="txt_choose_location">Miejsca wydarzenia</string>
     <string name="txt_create_event">Stwórz wydarzenie</string>
     <string name="txt_create_event_confirmation_text">Jesteś pewien, że chcesz stworzyć to wydarzenie?</string>
     <string name="txt_create_event_confirmation_title">Potwierdzenie tworzenia wydarzenia</string>
@@ -109,12 +109,14 @@
     <string name="txt_accept_success" formatted="false">%s %s został zaakceptowany</string>
     <string name="txt_remove_participant_confirmation_text">Czy jesteś pewien, że chcesz usunąć tego uczestnika? Tej operacji nie będzie można cofnąć.</string>
     <string name="txt_remove_participant_confirmation_title">Potwierdzenie usunięcia uczestnika</string>
-    <string name="txt_remove_success" formatted="false">%s % został usunięty z wydarzenia</string>
+    <string name="txt_remove_success" formatted="false">%s %s został usunięty z wydarzenia</string>
     <string name="btn_send">Prześlij</string>
     <string name="err_comment_empty">Komentarz nie może być pusty</string>
-    <string name="txt_comment_author" formatted="false">% napisał:</string>
+    <string name="txt_comment_author" formatted="false">%s napisał:</string>
     <string name="txt_comment_hint">Napisz tutaj swój komentarz</string>
     <string name="title_comments">Komentarze</string>
+    <string name="menu_create_event">Stwórz nowe wydarzenie</string>
+    <string name="log_out">Wyloguj się</string>
     <string name="cp_save_succ">Hasło zmienione!</string>
     <string name="err_confirmed_not_matching">Potwierdzone hasło różni się od nowego hasła</string>
     <string name="err_same_passwords">Nie może być takie samo jak stare hasło</string>

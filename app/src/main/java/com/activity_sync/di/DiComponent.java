@@ -1,15 +1,16 @@
 package com.activity_sync.di;
 
 import com.activity_sync.App;
+import com.activity_sync.screens.CommentsScreen;
+import com.activity_sync.screens.DummyScreen;
 import com.activity_sync.screens.EventCreatorScreen;
 import com.activity_sync.screens.EventDetailsScreen;
 import com.activity_sync.screens.EventsFragmentBase;
-import com.activity_sync.screens.DummyScreen;
 import com.activity_sync.screens.EventsScreen;
 import com.activity_sync.screens.IntroLastScreen;
 import com.activity_sync.screens.IntroScreen;
+import com.activity_sync.screens.LoginScreen;
 import com.activity_sync.screens.ParticipantsFragmentBase;
-import com.activity_sync.screens.ParticipantsScreen;
 import com.activity_sync.screens.RegisterScreen;
 import com.activity_sync.screens.SplashScreen;
 import com.activity_sync.screens.LoginScreen;
@@ -53,8 +54,6 @@ public interface DiComponent
 
     void inject(EventDetailsScreen eventDetailsScreen);
 
-    void inject(ParticipantsScreen participantsScreen);
-
     void inject(SplashScreen splashScreen);
 
     void inject(RegisterScreen registerScreen);
@@ -62,6 +61,8 @@ public interface DiComponent
     void inject(EventCreatorScreen eventCreatorScreen);
 
     void inject(ParticipantsFragmentBase participantsFragmentBase);
+
+    void inject(CommentsScreen commentsScreen);
 
     void inject(SettingsScreen settingsScreen);
 }

@@ -5,22 +5,15 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 
-import com.activity_sync.App;
 import com.activity_sync.R;
 import com.activity_sync.adapters.ViewPagerAdapter;
 import com.activity_sync.presentation.presenters.IPresenter;
-import com.activity_sync.presentation.services.INavigator;
-
-import javax.inject.Inject;
 
 import butterknife.Bind;
 
 public class ParticipantsScreen extends Screen
 {
     public static final String IS_ORGANIZER = "is_organizer";
-
-    @Inject
-    INavigator navigator;
 
     @Bind(R.id.tabLayout)
     TabLayout tabLayout;
@@ -38,7 +31,6 @@ public class ParticipantsScreen extends Screen
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState)
     {
-        App.component(this).inject(this);
         super.onCreate(savedInstanceState);
 
         boolean isOrganizer = getIntent().getBooleanExtra(ParticipantsScreen.IS_ORGANIZER, false);

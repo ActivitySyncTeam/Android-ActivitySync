@@ -9,6 +9,7 @@
     android:background="@color/transparent">
 
     <android.support.v7.widget.CardView
+        style="@style/CardViewDefault.RecyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardCornerRadius="4dp"

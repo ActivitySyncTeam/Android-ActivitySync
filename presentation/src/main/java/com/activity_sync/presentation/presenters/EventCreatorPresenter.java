@@ -2,6 +2,7 @@ package com.activity_sync.presentation.presenters;
 
 import com.activity_sync.presentation.models.Discipline;
 import com.activity_sync.presentation.models.Level;
+import com.activity_sync.presentation.services.IApiService;
 import com.activity_sync.presentation.services.INavigator;
 import com.activity_sync.presentation.views.IEventCreatorView;
 
@@ -13,12 +14,14 @@ public class EventCreatorPresenter extends Presenter<IEventCreatorView>
 {
     private final Scheduler uiThread;
     private final INavigator navigator;
+    private final IApiService apiService;
 
-    public EventCreatorPresenter(Scheduler uiThread, IEventCreatorView view, INavigator navigator)
+    public EventCreatorPresenter(Scheduler uiThread, IEventCreatorView view, INavigator navigator, IApiService apiService)
     {
         super(view);
         this.navigator = navigator;
         this.uiThread = uiThread;
+        this.apiService = apiService;
     }
 
     @Override

@@ -1,8 +1,11 @@
 package com.activity_sync.di;
 
 import android.content.Context;
+
+import com.activity_sync.presentation.services.IApiService;
 import com.activity_sync.presentation.services.INavigator;
 import com.activity_sync.presentation.services.IPermanentStorage;
+import com.activity_sync.services.ApiService;
 import com.activity_sync.services.Navigator;
 import com.activity_sync.services.PermanentStorage;
 
@@ -25,5 +28,12 @@ public class UtilsModule
     public IPermanentStorage providePermanentStorage(Context context)
     {
         return new PermanentStorage(context);
+    }
+
+    @Provides
+    @Singleton
+    public IApiService provideApiRestService()
+    {
+        return new ApiService("https://secret-gorge-99838.herokuapp.com");
     }
 }

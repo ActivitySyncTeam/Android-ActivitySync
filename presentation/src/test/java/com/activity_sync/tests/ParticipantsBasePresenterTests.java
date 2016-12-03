@@ -5,6 +5,7 @@ import com.activity_sync.presentation.models.builders.UserBuilder;
 import com.activity_sync.presentation.models.builders.UserDetailsBuilder;
 import com.activity_sync.presentation.presenters.DeclinedParticipantsPresenter;
 import com.activity_sync.presentation.presenters.ParticipantsFragmentBasePresenter;
+import com.activity_sync.presentation.services.IApiService;
 import com.activity_sync.presentation.services.INavigator;
 import com.activity_sync.presentation.views.IParticipantsFragmentView;
 
@@ -26,6 +27,9 @@ public class ParticipantsBasePresenterTests
 
     @Mock
     IParticipantsFragmentView view;
+
+    @Mock
+    IApiService apiService;
 
     protected PublishSubject participantSelectedEvent = PublishSubject.create();
     protected PublishSubject refreshParticipantsEvent = PublishSubject.create();
@@ -70,6 +74,6 @@ public class ParticipantsBasePresenterTests
 
     private ParticipantsFragmentBasePresenter createPresenter(boolean isOrganizer)
     {
-        return new DeclinedParticipantsPresenter(view, navigator, Schedulers.immediate(), isOrganizer);
+        return new DeclinedParticipantsPresenter(view, navigator, Schedulers.immediate(), isOrganizer, apiService);
     }
 }

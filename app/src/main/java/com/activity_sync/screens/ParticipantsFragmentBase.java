@@ -12,6 +12,7 @@ import com.activity_sync.App;
 import com.activity_sync.R;
 import com.activity_sync.presentation.action_listeners.IParticipantActionListener;
 import com.activity_sync.presentation.models.User;
+import com.activity_sync.presentation.services.IApiService;
 import com.activity_sync.presentation.services.INavigator;
 import com.activity_sync.presentation.views.IParticipantsFragmentView;
 import com.activity_sync.renderers.base.DividerItemDecoration;
@@ -33,6 +34,9 @@ abstract public class ParticipantsFragmentBase extends FragmentScreen implements
 {
     @Inject
     INavigator navigator;
+
+    @Inject
+    IApiService apiService;
 
     @Bind(R.id.participants_refresh)
     SwipeRefreshLayout participantsRefreshLayout;

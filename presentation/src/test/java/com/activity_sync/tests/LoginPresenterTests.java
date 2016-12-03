@@ -1,6 +1,7 @@
 package com.activity_sync.tests;
 
 import com.activity_sync.presentation.presenters.LoginPresenter;
+import com.activity_sync.presentation.services.IApiService;
 import com.activity_sync.presentation.services.INavigator;
 import com.activity_sync.presentation.utils.StringUtils;
 import com.activity_sync.presentation.views.ILoginView;
@@ -26,6 +27,9 @@ public class LoginPresenterTests
 
     @Mock
     ILoginView view;
+
+    @Mock
+    IApiService apiService;
 
     PublishSubject loginBtnClickEvent = PublishSubject.create();
     PublishSubject createAccountClickEvent = PublishSubject.create();
@@ -92,6 +96,6 @@ public class LoginPresenterTests
 
     private LoginPresenter createPresenter()
     {
-        return new LoginPresenter(Schedulers.immediate(), view, navigator);
+        return new LoginPresenter(Schedulers.immediate(), view, navigator, apiService);
     }
 }

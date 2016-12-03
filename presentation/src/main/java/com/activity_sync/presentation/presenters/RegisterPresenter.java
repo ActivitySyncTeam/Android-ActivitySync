@@ -1,5 +1,6 @@
 package com.activity_sync.presentation.presenters;
 
+import com.activity_sync.presentation.services.IApiService;
 import com.activity_sync.presentation.services.INavigator;
 import com.activity_sync.presentation.utils.StringUtils;
 import com.activity_sync.presentation.views.IRegisterView;
@@ -10,12 +11,14 @@ public class RegisterPresenter extends Presenter<IRegisterView>
 {
     private final Scheduler uiThread;
     private final INavigator navigator;
+    private final IApiService apiService;
 
-    public RegisterPresenter(Scheduler uiThread, IRegisterView view, INavigator navigator)
+    public RegisterPresenter(Scheduler uiThread, IRegisterView view, INavigator navigator, IApiService apiService)
     {
         super(view);
         this.navigator = navigator;
         this.uiThread = uiThread;
+        this.apiService = apiService;
     }
 
     @Override

@@ -11,6 +11,6 @@ public class MyEventsFragment extends EventsFragmentBase implements IEventsFragm
 {
     @Override
     protected IPresenter createPresenter(FragmentScreen screen, Bundle savedInstanceState) {
-        return new MyEventsPresenter(this, navigator, AndroidSchedulers.mainThread());
+        return new MyEventsPresenter(this, navigator, AndroidSchedulers.mainThread(), apiService);
     }
 }

@@ -74,6 +74,6 @@ public class CandidatesPresenterTests extends ParticipantsBasePresenterTests
 
     private CandidatesPresenter createPresenter(boolean isOrganizer)
     {
-        return new CandidatesPresenter(view, navigator, Schedulers.immediate(), isOrganizer);
+        return new CandidatesPresenter(view, navigator, Schedulers.immediate(), isOrganizer, apiService);
     }
 }
