@@ -1,6 +1,7 @@
 package com.activity_sync.tests;
 
 import com.activity_sync.presentation.presenters.RegisterPresenter;
+import com.activity_sync.presentation.services.IApiService;
 import com.activity_sync.presentation.services.INavigator;
 import com.activity_sync.presentation.utils.StringUtils;
 import com.activity_sync.presentation.views.IRegisterView;
@@ -26,6 +27,9 @@ public class RegisterPresenterTests
 
     @Mock
     IRegisterView view;
+
+    @Mock
+    IApiService apiService;
 
     PublishSubject registerBtnClickEvent = PublishSubject.create();
     PublishSubject alreadyRegisteredClickEvent = PublishSubject.create();

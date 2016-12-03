@@ -1,6 +1,7 @@
 package com.activity_sync.tests;
 
 import com.activity_sync.presentation.presenters.UserDetailsPresenter;
+import com.activity_sync.presentation.services.IApiService;
 import com.activity_sync.presentation.views.IUserDetailsView;
 
 import org.junit.Test;
@@ -17,6 +18,9 @@ public class UserDetailsPresenterTests
 {
     @Mock
     IUserDetailsView view;
+
+    @Mock
+    IApiService apiService;
 
     @Test
     public void userDetailsPresenter_initTest_loadData()

@@ -1,6 +1,7 @@
 package com.activity_sync.tests;
 
 import com.activity_sync.presentation.presenters.EventDetailsPresenter;
+import com.activity_sync.presentation.services.IApiService;
 import com.activity_sync.presentation.services.INavigator;
 import com.activity_sync.presentation.views.IEventDetailsView;
 
@@ -21,6 +22,9 @@ public class EventDetailsPresenterTests
 {
     @Mock
     INavigator navigator;
+
+    @Mock
+    IApiService apiService;
 
     @Mock
     IEventDetailsView view;

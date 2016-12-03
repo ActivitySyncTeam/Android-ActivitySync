@@ -3,6 +3,7 @@ package com.activity_sync.tests;
 import com.activity_sync.presentation.models.Location;
 import com.activity_sync.presentation.models.builders.LocationBuilder;
 import com.activity_sync.presentation.presenters.EventCreatorPresenter;
+import com.activity_sync.presentation.services.IApiService;
 import com.activity_sync.presentation.services.INavigator;
 import com.activity_sync.presentation.views.IEventCreatorView;
 
@@ -23,6 +24,9 @@ public class EventCreatorPresenterTests
 {
     @Mock
     INavigator navigator;
+
+    @Mock
+    IApiService apiService;
 
     @Mock
     IEventCreatorView view;
