@@ -8,5 +8,13 @@ public interface IDummyView
 
     Observable openIntroScreenClick();
 
+    Observable showProgressClick();
+
+    Observable hideProgressClick();
+
     void displayMessage();
+
+    void showProgressBar();
+
+    void hideProgressBar();
 }
