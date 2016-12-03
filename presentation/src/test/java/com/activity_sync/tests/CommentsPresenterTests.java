@@ -1,6 +1,5 @@
 package com.activity_sync.tests;
 
-import com.activity_sync.presentation.models.User;
 import com.activity_sync.presentation.presenters.CommentsPresenter;
 import com.activity_sync.presentation.utils.StringUtils;
 import com.activity_sync.presentation.views.ICommentsView;
@@ -29,8 +28,6 @@ public class CommentsPresenterTests
 
     private int eventId = 1;
     private String testComment = "Test comment";
-
-    protected User testedParticipant;
 
     @Before
     public void setup()
