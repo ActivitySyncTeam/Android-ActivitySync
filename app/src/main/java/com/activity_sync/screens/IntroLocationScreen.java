@@ -6,6 +6,7 @@ import android.support.annotation.ColorInt;
 import android.support.v4.content.ContextCompat;
 import android.widget.Button;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.activity_sync.R;
 import com.activity_sync.presentation.presenters.IPresenter;
@@ -75,7 +76,14 @@ public class IntroLocationScreen extends FragmentScreenWithLogic implements ISli
             @Override
             public void onPermissionsChecked(MultiplePermissionsReport report)
             {
-
+                if (report.getDeniedPermissionResponses().size() > 0)
+                {
+                    Toast.makeText(getContext(), R.string.txt_permission_not_granted, Toast.LENGTH_LONG).show();
+                }
+                else
+                {
+                    Toast.makeText(getContext(), R.string.txt_permission_granted, Toast.LENGTH_LONG).show();
+                }
             }
 
             @Override

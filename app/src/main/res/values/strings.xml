@@ -14,7 +14,8 @@
     <string name="txt_intro_last_screen">You are all set up now\nLet\'s get started!</string>
     <string name="txt_intro_locations">In order to use ActivitySync\nwith no limit we would like to\nuse your current location.</string>
     <string name="btn_allow_now">Allow now</string>
-    <string name="txt_location_perm_success">You have successfully allowed for location permissions.</string>
+    <string name="txt_permission_granted">Permission has been granted</string>
+    <string name="txt_permission_not_granted">Permission has not been granted</string>
 
     <!-- Menu strings -->
     <string name="menu_dummy_screen">Dummy Screen</string>
