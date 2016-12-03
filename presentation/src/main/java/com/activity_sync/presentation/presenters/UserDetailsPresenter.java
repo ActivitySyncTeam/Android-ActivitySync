@@ -2,13 +2,17 @@ package com.activity_sync.presentation.presenters;
 
 import com.activity_sync.presentation.models.builders.UserBuilder;
 import com.activity_sync.presentation.models.builders.UserDetailsBuilder;
+import com.activity_sync.presentation.services.IApiService;
 import com.activity_sync.presentation.views.IUserDetailsView;
 
 public class UserDetailsPresenter extends Presenter<IUserDetailsView>
 {
-    public UserDetailsPresenter(IUserDetailsView view)
+    private final IApiService apiService;
+
+    public UserDetailsPresenter(IUserDetailsView view, IApiService apiService)
     {
         super(view);
+        this.apiService = apiService;
     }
 
     @Override

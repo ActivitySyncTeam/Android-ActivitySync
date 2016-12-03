@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import com.activity_sync.App;
 import com.activity_sync.R;
 import com.activity_sync.presentation.models.Event;
+import com.activity_sync.presentation.services.IApiService;
 import com.activity_sync.presentation.services.INavigator;
 import com.activity_sync.presentation.views.IEventsFragmentView;
 import com.activity_sync.renderers.EventsRenderer;
@@ -29,6 +30,9 @@ abstract public class EventsFragmentBase extends FragmentScreen implements IEven
 {
     @Inject
     INavigator navigator;
+
+    @Inject
+    IApiService apiService;
 
     @Bind(R.id.events_refresh)
     SwipeRefreshLayout eventsRefreshLayout;

@@ -9,6 +9,7 @@ import com.activity_sync.presentation.models.builders.LocationBuilder;
 import com.activity_sync.presentation.models.builders.LevelBuilder;
 import com.activity_sync.presentation.models.builders.UserBuilder;
 import com.activity_sync.presentation.models.builders.UserDetailsBuilder;
+import com.activity_sync.presentation.services.IApiService;
 import com.activity_sync.presentation.services.INavigator;
 import com.activity_sync.presentation.views.IEventDetailsView;
 
@@ -21,15 +22,17 @@ public class EventDetailsPresenter extends Presenter<IEventDetailsView>
     private final Scheduler uiThread;
     private final INavigator navigator;
     private final int eventId;
+    private final IApiService apiService;
 
     private Event event;
 
-    public EventDetailsPresenter(Scheduler uiThread, IEventDetailsView view, INavigator navigator, int eventId)
+    public EventDetailsPresenter(Scheduler uiThread, IEventDetailsView view, INavigator navigator, int eventId, IApiService apiService)
     {
         super(view);
         this.uiThread = uiThread;
         this.navigator = navigator;
         this.eventId = eventId;
+        this.apiService = apiService;
     }
 
     @Override

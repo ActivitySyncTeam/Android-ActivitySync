@@ -318,13 +318,13 @@
             </LinearLayout>
 
 
-            <Button
-                android:id="@+id/btn_create_event"
-                style="@style/DefaultButton.Positive"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/screen_margin_half"
-                android:text="@string/txt_create_event" />
+                <Button
+                    android:id="@+id/btn_create_event"
+                    style="@style/DefaultButton.Positive"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/screen_margin_half"
+                    android:text="@string/txt_create_event" />
 
         </com.activity_sync.custom.MoveUpwardAwareLinearLayout>
 

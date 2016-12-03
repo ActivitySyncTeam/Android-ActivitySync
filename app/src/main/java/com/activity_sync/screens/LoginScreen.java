@@ -12,6 +12,7 @@ import com.activity_sync.App;
 import com.activity_sync.R;
 import com.activity_sync.presentation.presenters.IPresenter;
 import com.activity_sync.presentation.presenters.LoginPresenter;
+import com.activity_sync.presentation.services.IApiService;
 import com.activity_sync.presentation.services.INavigator;
 import com.activity_sync.presentation.views.ILoginView;
 
@@ -26,6 +27,9 @@ public class LoginScreen extends Screen implements ILoginView
 {
     @Inject
     INavigator navigator;
+
+    @Inject
+    IApiService apiService;
 
     @Bind(R.id.login_btn)
     Button loginBtn;
@@ -62,7 +66,7 @@ public class LoginScreen extends Screen implements ILoginView
     @Override
     protected IPresenter createPresenter(Screen screen, Bundle savedInstanceState)
     {
-        return new LoginPresenter(AndroidSchedulers.mainThread(), this, navigator);
+        return new LoginPresenter(AndroidSchedulers.mainThread(), this, navigator, apiService);
     }
 
     @Override

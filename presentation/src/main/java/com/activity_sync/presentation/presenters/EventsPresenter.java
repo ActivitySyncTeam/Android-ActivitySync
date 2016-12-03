@@ -2,6 +2,7 @@ package com.activity_sync.presentation.presenters;
 
 import com.activity_sync.presentation.services.INavigator;
 import com.activity_sync.presentation.views.IEventsView;
+
 import rx.Scheduler;
 
 public class EventsPresenter extends Presenter<IEventsView>

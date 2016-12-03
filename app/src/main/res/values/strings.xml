@@ -18,6 +18,8 @@
     <!-- Menu strings -->
     <string name="menu_dummy_screen">Dummy Screen</string>
     <string name="menu_events">Events</string>
+    <string name="menu_create_event">Crate new event</string>
+    <string name="log_out">Log out</string>
 
     <!-- EventsScreen strings -->
     <string name="title_events">Events</string>
@@ -87,9 +89,9 @@
     <string name="err_empty_field">This field cannot be empty</string>
 
     <!-- EventCreatorScreen strings -->
-    <string name="txt_choose_date">Choose date</string>
+    <string name="txt_choose_date">Date of the event</string>
     <string name="txt_not_selected">Not selected</string>
-    <string name="txt_choose_location">Choose location</string>
+    <string name="txt_choose_location">Location of the event</string>
     <string name="txt_discipline">Discipline</string>
     <string name="txt_level">Level</string>
     <string name="txt_number_of_players">Number of players</string>
@@ -97,7 +99,7 @@
     <string name="txt_enroll_as_a_participant">Enroll as a participant</string>
     <string name="txt_create_event">Create event</string>
     <string name="title_event_creator">Event creator</string>
-    <string name="date_format" translatable="false">%d-%d-%d %d:%02d:00</string>
+    <string name="date_format" translatable="false">%d-%d-%d %02d:%02d:00</string>
     <string name="txt_error_choosing_location">Location has not been chosen properly</string>
     <string name="txt_create_event_confirmation_title">Create event confirmation</string>
     <string name="txt_create_event_confirmation_text">Are you sure you want to create this event?</string>
