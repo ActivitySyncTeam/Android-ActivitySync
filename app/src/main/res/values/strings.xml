@@ -13,7 +13,8 @@
     <string name="txt_intro_friends">Participate in various types of\nevents and meet new friends!</string>
     <string name="txt_intro_last_screen">You are all set up now\nLet\'s get started!</string>
     <string name="txt_intro_locations">In order to use ActivitySync\nwith no limit we would like to\nuse your current location.</string>
-    <string name="btn_allow_location">Allow location permission</string>
+    <string name="btn_allow_now">Allow now</string>
+    <string name="txt_location_perm_success">You have successfully allowed for location permissions.</string>
 
     <!-- Menu strings -->
     <string name="menu_dummy_screen">Dummy Screen</string>

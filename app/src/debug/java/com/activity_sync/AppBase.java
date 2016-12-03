@@ -3,6 +3,9 @@ package com.activity_sync;
 import android.app.Application;
 import android.content.Context;
 import android.support.multidex.MultiDex;
+
+import com.karumi.dexter.Dexter;
+
 import timber.log.Timber;
 
 public class AppBase extends Application
@@ -12,6 +15,7 @@ public class AppBase extends Application
     {
         super.onCreate();
         Timber.d("Activity Sync Debug");
+        Dexter.initialize(this);
     }
 
     @Override

@@ -6,5 +6,5 @@ public interface IIntroLocationView
 {
     Observable allowPermissionClick();
 
-    void openPermissionDialog();
+    void checkLocationPermissions();
 }

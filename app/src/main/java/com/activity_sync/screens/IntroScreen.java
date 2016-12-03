@@ -1,5 +1,6 @@
 package com.activity_sync.screens;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
@@ -39,7 +40,12 @@ public class IntroScreen extends AppIntro2 implements IIntroBaseView
         addSlide(new IntroHappyScreen());
         addSlide(new IntroEasyOrganizingScreen());
         addSlide(new IntroFriendsScreen());
-        addSlide(new IntroLocationScreen());
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M )
+        {
+            addSlide(new IntroLocationScreen());
+        }
+
         addSlide(new IntroLastScreen());
 
         setColorTransitionsEnabled(true);

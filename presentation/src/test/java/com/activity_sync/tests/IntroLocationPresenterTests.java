@@ -36,7 +36,7 @@ public class IntroLocationPresenterTests
         introLocationPresenter.start();
 
         enablePermissionBtnClickEvent.onNext(this);
-        Mockito.verify(view).openPermissionDialog();
+        Mockito.verify(view).checkLocationPermissions();
     }
 
     private IntroLocationPresenter createPresenter()
