@@ -119,6 +119,6 @@
     <string name="log_out">Wyloguj się</string>
     <string name="cp_save_succ">Hasło zmienione!</string>
     <string name="err_confirmed_not_matching">Potwierdzone hasło różni się od nowego hasła</string>
-    <string name="err_same_passwords">Nie może być takie samo jak stare hasło</string>
+    <string name="err_same_passwords">Nowe hasło nie może być takie samo jak stare hasło</string>
 
 </resources>
