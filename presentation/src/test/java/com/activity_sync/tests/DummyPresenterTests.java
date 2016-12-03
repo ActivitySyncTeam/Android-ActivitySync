@@ -25,12 +25,16 @@ public class DummyPresenterTests
 
     PublishSubject openIntroScreenEvent = PublishSubject.create();
     PublishSubject displayMessageEvent = PublishSubject.create();
+    PublishSubject hideProgressBarEvent = PublishSubject.create();
+    PublishSubject showProgressBarEvent = PublishSubject.create();
 
     @Before
     public void setup()
     {
         Mockito.when(view.openIntroScreenClick()).thenReturn(openIntroScreenEvent);
         Mockito.when(view.displayMessageClick()).thenReturn(displayMessageEvent);
+        Mockito.when(view.hideProgressClick()).thenReturn(hideProgressBarEvent);
+        Mockito.when(view.showProgressClick()).thenReturn(showProgressBarEvent);
     }
 
     @Test
@@ -51,6 +55,26 @@ public class DummyPresenterTests
 
         displayMessageEvent.onNext(this);
         Mockito.verify(view).displayMessage();
+    }
+
+    @Test
+    public void dummyPresenter_clickShowProgressBarBtn_showProgressBar()
+    {
+        DummyPresenter dummyPresenter = createPresenter();
+        dummyPresenter.start();
+
+        showProgressBarEvent.onNext(this);
+        Mockito.verify(view).showProgressBar();
+    }
+
+    @Test
+    public void dummyPresenter_clickHideProgressBarBtn_hideProgressBar()
+    {
+        DummyPresenter dummyPresenter = createPresenter();
+        dummyPresenter.start();
+
+        hideProgressBarEvent.onNext(this);
+        Mockito.verify(view).hideProgressBar();
     }
 
     private DummyPresenter createPresenter()

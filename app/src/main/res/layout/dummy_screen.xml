@@ -34,10 +34,25 @@
                 <Button
                     android:id="@+id/dummy_message_btn"
                     style="@style/DefaultButton.Positive"
+                    android:layout_marginBottom="@dimen/screen_margin_big"
                     android:text="@string/btn_display_test_message" />
 
+                <Button
+                    android:id="@+id/dummy_show_progress_btn"
+                    style="@style/DefaultButton.Positive"
+                    android:layout_marginBottom="@dimen/screen_margin_big"
+                    android:text="@string/btn_show_progress"/>
+
+                <Button
+                    android:id="@+id/dummy_hide_progress_btn"
+                    style="@style/DefaultButton.Positive"
+                    android:layout_marginBottom="@dimen/screen_margin_big"
+                    android:text="@string/btn_hide_progress"/>
+
             </LinearLayout>
+
         </LinearLayout>
+
     </android.support.design.widget.CoordinatorLayout>
 
     <include layout="@layout/navigation_view" />
