@@ -2,12 +2,16 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/menu_dummy"
-            android:title="@string/menu_dummy_screen"/>
+            android:id="@+id/menu_create_event"
+            android:title="@string/menu_create_event"/>
 
         <item
             android:id="@+id/menu_events"
             android:title="@string/menu_events"/>
+
+        <item
+            android:id="@+id/menu_dummy"
+            android:title="@string/menu_dummy_screen"/>
     </group>
 
 </menu>

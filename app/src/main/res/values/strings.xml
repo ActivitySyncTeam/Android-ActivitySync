@@ -18,6 +18,7 @@
     <!-- Menu strings -->
     <string name="menu_dummy_screen">Dummy Screen</string>
     <string name="menu_events">Events</string>
+    <string name="menu_create_event">Crate new event</string>
 
     <!-- EventsScreen strings -->
     <string name="title_events">Events</string>

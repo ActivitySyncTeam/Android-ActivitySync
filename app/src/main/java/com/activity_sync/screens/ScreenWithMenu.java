@@ -87,6 +87,7 @@ public abstract class ScreenWithMenu extends Screen
         menuNavigator = new MenuNavigator(new Navigator(this), () -> this.drawerLayout.closeDrawers());
         menuNavigator.addAction(R.id.menu_dummy, INavigator::openDummyScreen);
         menuNavigator.addAction(R.id.menu_events, INavigator::openEventsScreen);
+        menuNavigator.addAction(R.id.menu_create_event, INavigator::openEventCreatorScreen);
         navigationView.setNavigationItemSelectedListener(menuItem -> {
             if (getMenuId() == menuItem.getItemId())
             {
