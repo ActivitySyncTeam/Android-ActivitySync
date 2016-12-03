@@ -87,7 +87,7 @@
     <string name="pref_edit_account_btn">EDIT ACCOUNT</string>
     <string name="pref_change_pwd_btn">CHANGE PASSWORD</string>
     <string name="pref_name">First name</string>
-    <string name="pref_surname">Last name</string>
+    <string name="pref_last_name">Last name</string>
     <string name="pref_login" translatable="false">Login</string>
     <string name="pref_signature">Signature</string>
     <string name="pref_email" translatable="false">E-mail</string>
@@ -110,6 +110,8 @@
     <string name="cp_hint_confirm_new_password">Confirm new password</string>
     <string name="cp_save_btn">SAVE</string>
     <string name="cp_save_succ">Password changed!</string>
+    <string name="err_confirmed_not_matching">Confirm password does not math the password</string>
+    <string name="err_same_passwords">Must be different from old password</string>
 
     <!-- LoginScreen strings -->
     <string name="btn_login">Login</string>

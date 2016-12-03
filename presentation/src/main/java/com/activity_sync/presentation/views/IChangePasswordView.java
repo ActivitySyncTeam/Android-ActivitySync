@@ -26,6 +26,10 @@ public interface IChangePasswordView
 
     String emptyFieldErrorText();
 
+    String confirmedNotMatchingErrorText();
+
+    String samePasswordsErrorText();
+
     void saveSucceded();
 
     void saveFailed(String message);

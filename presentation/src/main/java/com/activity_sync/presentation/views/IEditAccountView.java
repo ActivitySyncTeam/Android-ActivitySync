@@ -1,7 +1,5 @@
 package com.activity_sync.presentation.views;
 
-import com.activity_sync.presentation.models.UserUpdate;
-
 import rx.Observable;
 
 public interface IEditAccountView
@@ -28,7 +26,13 @@ public interface IEditAccountView
 
     String emptyFieldErrorText();
 
-    UserUpdate getUserUpdateDetails();
+    String getFirstName();
+
+    String getLastName();
+
+    String getEmail();
+
+    String getSignature();
 
     String getPassword();
 

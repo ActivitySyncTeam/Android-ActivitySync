@@ -25,6 +25,26 @@ public class ChangePasswordPresenter extends Presenter<IChangePasswordView>
                 .subscribe(o -> {
                     boolean canContinue = true;
 
+                    if (!(StringUtils.isNullOrEmpty(view.getNewPassword()) || StringUtils.isNullOrEmpty(view.getConfirmNewPassword())))
+                    {
+                        if (!view.getNewPassword().equals(view.getConfirmNewPassword()))
+                        {
+                            view.confirmNewPasswordErrorEnabled(true);
+                            view.confirmNewPasswordErrorText(view.confirmedNotMatchingErrorText());
+                            canContinue = false;
+                        }
+                    }
+
+                    if (!(StringUtils.isNullOrEmpty(view.getOldPassword()) || StringUtils.isNullOrEmpty(view.getNewPassword())))
+                    {
+                        if (view.getNewPassword().equals(view.getOldPassword()))
+                        {
+                            view.newPasswordErrorEnabled(true);
+                            view.newPasswordErrorText(view.samePasswordsErrorText());
+                            canContinue = false;
+                        }
+                    }
+
                     if (StringUtils.isNullOrEmpty(view.getOldPassword()))
                     {
                         view.oldPasswordErrorEnabled(true);

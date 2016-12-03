@@ -182,6 +182,18 @@ public class ChangePasswordScreen extends Screen implements IChangePasswordView
     }
 
     @Override
+    public String confirmedNotMatchingErrorText()
+    {
+        return getString(R.string.err_confirmed_not_matching);
+    }
+
+    @Override
+    public String samePasswordsErrorText()
+    {
+        return getString(R.string.err_same_passwords);
+    }
+
+    @Override
     public Observable onSaveClick()
     {
         return ViewObservable.clicks(saveButton);

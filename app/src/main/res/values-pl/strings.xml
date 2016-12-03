@@ -65,13 +65,13 @@
     <string name="pref_notification_sound_chk">Dźwięk powiadomienia</string>
     <string name="pref_notification_vibration_chk">Wibracje powiadomienia</string>
     <string name="pref_cat_search">Domyślne wartości wyszukiwania</string>
-    <string name="pref_search_days">Szukaj dni do pzodu</string>
+    <string name="pref_search_days">Szukaj dni do przodu</string>
     <string name="pref_search_range">Zasięg wyszukiwania [km]</string>
     <string name="pref_cat_account">Konto użytkownika</string>
     <string name="pref_change_pwd_btn">ZMIEŃ HASŁO</string>
     <string name="pref_edit_account_btn">EDYTUJ KONTO</string>
     <string name="pref_name">Imię</string>
-    <string name="pref_surname">Nazwisko</string>
+    <string name="pref_last_name">Nazwisko</string>
     <string name="pref_signature">Sygnatura</string>
     <string name="title_change_password">Zmień hasło</string>
     <string name="title_edit_account">Edytuj konto</string>
@@ -116,5 +116,7 @@
     <string name="txt_comment_hint">Napisz tutaj swój komentarz</string>
     <string name="title_comments">Komentarze</string>
     <string name="cp_save_succ">Hasło zmienione!</string>
+    <string name="err_confirmed_not_matching">Potwierdzone hasło różni się od nowego hasła</string>
+    <string name="err_same_passwords">Nie może być takie samo jak stare hasło</string>
 
 </resources>

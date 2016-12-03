@@ -1,6 +1,5 @@
 package com.activity_sync.presentation.presenters;
 
-import com.activity_sync.presentation.models.UserUpdate;
 import com.activity_sync.presentation.utils.StringUtils;
 import com.activity_sync.presentation.views.IEditAccountView;
 
@@ -9,7 +8,6 @@ import rx.Scheduler;
 public class EditAccountPresenter extends Presenter<IEditAccountView>
 {
     private Scheduler uiThread;
-    private UserUpdate userUpdateDetails;
 
     public EditAccountPresenter(IEditAccountView view, Scheduler uiThread)
     {
@@ -23,25 +21,23 @@ public class EditAccountPresenter extends Presenter<IEditAccountView>
         super.start();
 
         subscriptions.add(view.onSaveClick().observeOn(uiThread).subscribe(o -> {
-            this.userUpdateDetails = view.getUserUpdateDetails();
-
             boolean canContinue = true;
 
-            if (StringUtils.isNullOrEmpty(userUpdateDetails.getFirstName()))
+            if (StringUtils.isNullOrEmpty(view.getFirstName()))
             {
                 view.firstNameErrorEnabled(true);
                 view.firstNameErrorText(view.emptyFieldErrorText());
                 canContinue = false;
             }
 
-            if (StringUtils.isNullOrEmpty(userUpdateDetails.getLastName()))
+            if (StringUtils.isNullOrEmpty(view.getLastName()))
             {
                 view.lastNameErrorEnabled(true);
                 view.lastNameErrorText(view.emptyFieldErrorText());
                 canContinue = false;
             }
 
-            if (StringUtils.isNullOrEmpty(userUpdateDetails.getEmail()))
+            if (StringUtils.isNullOrEmpty(view.getEmail()))
             {
                 view.emailErrorEnabled(true);
                 view.emailErrorText(view.emptyFieldErrorText());

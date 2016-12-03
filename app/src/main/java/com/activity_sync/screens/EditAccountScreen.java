@@ -83,7 +83,7 @@ public class EditAccountScreen extends Screen implements IEditAccountView
     private void setUserUpdateDetails()
     {
         firstNameEditText.setText(userUpdateDetails.getFirstName());
-        lastNameEditText.setText(userUpdateDetails.getUserName());
+        lastNameEditText.setText(userUpdateDetails.getLastName());
         userNameTextView.setText(userUpdateDetails.getUserName());
         emailEditText.setText(userUpdateDetails.getEmail());
         signatureEditText.setText(userUpdateDetails.getSignature());
@@ -217,16 +217,6 @@ public class EditAccountScreen extends Screen implements IEditAccountView
     }
 
     @Override
-    public UserUpdate getUserUpdateDetails()
-    {
-        userUpdateDetails.setFirstName(firstNameEditText.getText().toString());
-        userUpdateDetails.setLastName(lastNameEditText.getText().toString());
-        userUpdateDetails.setEmail(emailEditText.getText().toString());
-        userUpdateDetails.setSignature(signatureEditText.getText().toString());
-        return userUpdateDetails;
-    }
-
-    @Override
     public Observable onSaveClick()
     {
         return ViewObservable.clicks(saveButton);
@@ -260,5 +250,29 @@ public class EditAccountScreen extends Screen implements IEditAccountView
     public String getPassword()
     {
         return passwordEditText.getText().toString();
+    }
+
+    @Override
+    public String getFirstName()
+    {
+        return firstNameEditText.getText().toString();
+    }
+
+    @Override
+    public String getLastName()
+    {
+        return lastNameEditText.getText().toString();
+    }
+
+    @Override
+    public String getEmail()
+    {
+        return emailEditText.getText().toString();
+    }
+
+    @Override
+    public String getSignature()
+    {
+        return signatureEditText.getText().toString();
     }
 }

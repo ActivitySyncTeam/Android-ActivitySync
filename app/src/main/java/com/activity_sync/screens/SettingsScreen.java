@@ -73,7 +73,7 @@ public class SettingsScreen extends ScreenWithMenu implements ISettingsView
     @Bind(R.id.pref_signature_text)
     TextView signatureTextView;
 
-    @Bind(R.id.pref_surname_text)
+    @Bind(R.id.pref_last_name_text)
     TextView surnameTextView;
 
     @Bind(R.id.pref_username_text)

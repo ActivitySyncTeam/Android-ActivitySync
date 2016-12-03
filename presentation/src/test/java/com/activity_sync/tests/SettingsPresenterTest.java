@@ -1,6 +1,7 @@
 package com.activity_sync.tests;
 
 import com.activity_sync.presentation.presenters.SettingsPresenter;
+import com.activity_sync.presentation.services.INavigator;
 import com.activity_sync.presentation.services.IPermanentStorage;
 import com.activity_sync.presentation.views.ISettingsView;
 
@@ -8,10 +9,13 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
+import rx.schedulers.Schedulers;
 import rx.subjects.PublishSubject;
 
+import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -19,6 +23,9 @@ public class SettingsPresenterTest
 {
     @Mock
     ISettingsView view;
+
+    @Mock
+    INavigator navigator;
 
     @Mock
     IPermanentStorage permanentStorage;
@@ -32,11 +39,14 @@ public class SettingsPresenterTest
     private PublishSubject<Integer> searchDaysChange = PublishSubject.create();
     private PublishSubject<Integer> searchRangeChange = PublishSubject.create();
 
+    private PublishSubject openEditAccountScreenEvent = PublishSubject.create();
+    private PublishSubject openChangePasswordScreenEvent = PublishSubject.create();
+
     @Before
     public void setUp() throws Exception
     {
         MockitoAnnotations.initMocks(this);
-        settingsPresenter = new SettingsPresenter(view, permanentStorage);
+        settingsPresenter = new SettingsPresenter(view, navigator, Schedulers.immediate(), permanentStorage);
 
         when(view.enableNotificationsChange()).thenReturn(enableNotificationsChange);
         when(view.enableLocationChange()).thenReturn(enableLocationChange);
@@ -44,6 +54,8 @@ public class SettingsPresenterTest
         when(view.enableNotificationsVibrateChange()).thenReturn(enableNotificationsVibrateChange);
         when(view.searchDaysChange()).thenReturn(searchDaysChange);
         when(view.searchRangeChange()).thenReturn(searchRangeChange);
+        when(view.editUserAccount()).thenReturn(openEditAccountScreenEvent);
+        when(view.changeUserPassword()).thenReturn(openChangePasswordScreenEvent);
 
         settingsPresenter.start();
     }
@@ -94,6 +106,20 @@ public class SettingsPresenterTest
         int changeValue = 100;
         searchRangeChange.onNext(changeValue);
         verify(permanentStorage).saveInteger(IPermanentStorage.SEARCH_RANGE, changeValue);
+    }
+
+    @Test
+    public void settingsPresenter_clickEditAccountBtn_openEditAccountScreen()
+    {
+        openEditAccountScreenEvent.onNext(this);
+        Mockito.verify(navigator).openEditAccountScreen(any());
+    }
+
+    @Test
+    public void settingsPresenter_clickChangePasswordBtn_openChangePasswordScreen()
+    {
+        openChangePasswordScreenEvent.onNext(this);
+        Mockito.verify(navigator).openChangePasswordScreen();
     }
 
     @After

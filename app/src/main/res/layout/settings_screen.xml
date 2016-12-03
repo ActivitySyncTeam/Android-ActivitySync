@@ -291,12 +291,12 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="@string/pref_surname"
+                                android:text="@string/pref_last_name"
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/text_big_size"/>
 
                             <TextView
-                                android:id="@+id/pref_surname_text"
+                                android:id="@+id/pref_last_name_text"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:textColor="@color/settings_primary_dark"
