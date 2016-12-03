@@ -1,0 +1,46 @@
+<resources>
+
+    <style name="AppTheme.LoginScreen" parent="AppTheme.Base">
+        <item name="colorControlNormal">@color/white</item>
+        <item name="colorControlActivated">@color/white</item>
+        <item name="colorControlHighlight">@color/white</item>
+
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="AppTheme.CommentsScreen" parent="AppTheme.Base">
+        <item name="colorControlNormal">@color/white</item>
+        <item name="colorControlActivated">@color/white</item>
+        <item name="colorControlHighlight">@color/white</item>
+    </style>
+
+    <style name="AppTheme.SettingsScreen" parent="AppTheme.Base">
+        <item name="colorControlNormal">@color/settings_primary_dark</item>
+        <item name="colorControlActivated">@color/settings_accent</item>
+        <item name="android:textColorPrimary">@color/white</item>
+        <item name="android:textColorHint">@color/settings_primary_dark</item>
+    </style>
+
+    <style name="SettingsFloatingHint" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textColorHighlight">@color/settings_accent</item>
+        <item name="android:textColorLink">@color/settings_accent</item>
+        <item name="android:textColorHint">@color/settings_primary_dark</item>
+        <item name="android:textSize">@dimen/text_smaller_size</item>
+        <item name="colorAccent">@color/settings_accent</item>
+        <item name="colorControlNormal">@color/settings_primary_dark</item>
+        <item name="colorControlActivated">@color/settings_accent</item>
+    </style>
+
+    <style name="DefaultFloatingHint">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textColorHighlight">@color/white</item>
+        <item name="android:textColorHint">@color/white</item>
+        <item name="android:textColorLink">@color/white</item>
+        <item name="android:textSize">@dimen/text_smaller_size</item>
+        <item name="android:colorAccent">@color/white</item>
+        <item name="colorAccent">@color/white</item>
+        <item name="colorControlNormal">@color/white</item>
+        <item name="colorControlActivated">@color/white</item>
+    </style>
+</resources>

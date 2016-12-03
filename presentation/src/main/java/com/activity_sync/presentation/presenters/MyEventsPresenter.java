@@ -6,6 +6,7 @@ import com.activity_sync.presentation.models.builders.EventBuilder;
 import com.activity_sync.presentation.models.builders.LocationBuilder;
 import com.activity_sync.presentation.models.builders.UserBuilder;
 import com.activity_sync.presentation.models.builders.UserDetailsBuilder;
+import com.activity_sync.presentation.services.IApiService;
 import com.activity_sync.presentation.services.INavigator;
 import com.activity_sync.presentation.views.IEventsFragmentView;
 
@@ -17,9 +18,9 @@ import rx.Scheduler;
 
 public class MyEventsPresenter extends EventsFragmentBasePresenter
 {
-    public MyEventsPresenter(IEventsFragmentView view, INavigator navigator, Scheduler uiThread)
+    public MyEventsPresenter(IEventsFragmentView view, INavigator navigator, Scheduler uiThread, IApiService apiService)
     {
-        super(view, navigator, uiThread);
+        super(view, navigator, uiThread, apiService);
     }
 
     @Override

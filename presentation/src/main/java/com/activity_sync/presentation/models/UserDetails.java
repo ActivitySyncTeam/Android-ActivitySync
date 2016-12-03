@@ -29,6 +29,7 @@ public class UserDetails implements Serializable
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
+        ;
     }
 
     public String getUserName()

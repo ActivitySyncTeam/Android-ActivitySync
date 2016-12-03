@@ -1,8 +1,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.activity_sync">
+          package="com.activity_sync">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
 
     <application
         android:name=".App"
@@ -12,20 +13,73 @@
         android:theme="@style/AppTheme">
 
         <activity
-            android:name=".screens.IntroScreen"
-            android:screenOrientation="portrait">
+            android:name=".screens.SplashScreen"
+            android:theme="@style/SplashTheme">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
 
-        <activity android:name=".screens.DummyScreen"/>
-        <activity android:name=".screens.WelcomeScreen"/>
-        <activity android:name=".screens.EventsScreen"/>
-        <activity android:name=".screens.EventDetailsScreen"/>
-        <activity android:name=".screens.UserDetailsScreen"/>
-        <activity android:name=".screens.ParticipantsScreen"/>
+        <activity
+            android:name=".screens.IntroScreen"
+            android:screenOrientation="portrait">
+        </activity>
+
+        <activity
+            android:name=".screens.DummyScreen"
+            android:screenOrientation="portrait"/>
+
+        <activity
+            android:name=".screens.LoginScreen"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.LoginScreen"/>
+
+        <activity
+            android:name=".screens.RegisterScreen"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.LoginScreen"/>
+
+        <activity
+            android:name=".screens.EventsScreen"
+            android:screenOrientation="portrait"/>
+
+        <activity
+            android:name=".screens.EventDetailsScreen"
+            android:screenOrientation="portrait"/>
+
+        <activity
+            android:name=".screens.UserDetailsScreen"
+            android:screenOrientation="portrait"/>
+
+        <activity
+            android:name=".screens.ParticipantsScreen"
+            android:screenOrientation="portrait"/>
+
+        <activity
+            android:name=".screens.EventCreatorScreen"
+            android:screenOrientation="portrait"/>
+
+        <activity
+            android:name=".screens.CommentsScreen"
+            android:theme="@style/AppTheme.CommentsScreen"
+            android:screenOrientation="portrait"/>
+
+        <activity
+            android:name=".screens.SettingsScreen"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.SettingsScreen"/>
+
+        <activity
+            android:name=".screens.ChangePasswordScreen"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.SettingsScreen"/>
+
+        <activity
+            android:name=".screens.EditAccountScreen"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.SettingsScreen"/>
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"

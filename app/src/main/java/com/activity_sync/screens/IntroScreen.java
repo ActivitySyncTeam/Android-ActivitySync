@@ -8,6 +8,7 @@ import com.activity_sync.App;
 import com.activity_sync.R;
 import com.activity_sync.presentation.presenters.IntroBasePresenter;
 import com.activity_sync.presentation.services.INavigator;
+import com.activity_sync.presentation.services.IPermanentStorage;
 import com.activity_sync.presentation.views.IIntroBaseView;
 import com.github.paolorotolo.appintro.AppIntro2;
 
@@ -21,6 +22,9 @@ public class IntroScreen extends AppIntro2 implements IIntroBaseView
 {
     @Inject
     INavigator navigator;
+
+    @Inject
+    IPermanentStorage permanentStorage;
 
     private IntroBasePresenter presenter;
     private PublishSubject skipButtonClicked = PublishSubject.create();
@@ -42,7 +46,7 @@ public class IntroScreen extends AppIntro2 implements IIntroBaseView
         setIndicatorColor(ContextCompat.getColor(this, R.color.intro_indicator_selected),
                 ContextCompat.getColor(this, R.color.intro_indicator_unselected));
 
-        presenter = new IntroBasePresenter(AndroidSchedulers.mainThread(), this, navigator);
+        presenter = new IntroBasePresenter(AndroidSchedulers.mainThread(), this, navigator, permanentStorage);
     }
 
     @Override

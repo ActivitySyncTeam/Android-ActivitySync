@@ -3,8 +3,22 @@ package com.activity_sync.services;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+
+import com.activity_sync.presentation.models.UserUpdate;
 import com.activity_sync.presentation.services.INavigator;
-import com.activity_sync.screens.*;
+import com.activity_sync.screens.ChangePasswordScreen;
+import com.activity_sync.screens.CommentsScreen;
+import com.activity_sync.screens.DummyScreen;
+import com.activity_sync.screens.EditAccountScreen;
+import com.activity_sync.screens.EventCreatorScreen;
+import com.activity_sync.screens.EventDetailsScreen;
+import com.activity_sync.screens.EventsScreen;
+import com.activity_sync.screens.IntroScreen;
+import com.activity_sync.screens.LoginScreen;
+import com.activity_sync.screens.ParticipantsScreen;
+import com.activity_sync.screens.RegisterScreen;
+import com.activity_sync.screens.SettingsScreen;
+import com.activity_sync.screens.UserDetailsScreen;
 
 public class Navigator implements INavigator
 {
@@ -18,43 +32,73 @@ public class Navigator implements INavigator
     @Override
     public void openDummyScreen()
     {
-        this.startActivity(getIntent(DummyScreen.class));
+        startActivity(getIntent(DummyScreen.class));
     }
 
     @Override
     public void openIntroScreen()
     {
-        this.startActivity(getIntent(IntroScreen.class));
+        startActivity(getIntent(IntroScreen.class));
     }
 
     @Override
-    public void openWelcomeScreen()
+    public void openLoginScreen()
     {
-        this.startActivity(getIntent(WelcomeScreen.class));
+        this.startActivity(getIntent(LoginScreen.class));
+    }
+
+    @Override
+    public void openRegisterScreen()
+    {
+        this.startActivity(getIntent(RegisterScreen.class));
     }
 
     @Override
     public void openEventsScreen()
     {
-        this.startActivity(getIntent(EventsScreen.class));
+        startActivity(getIntent(EventsScreen.class));
     }
 
     @Override
     public void openEventDetailsScreen(int eventId)
     {
-        this.startActivity(getIntent(EventDetailsScreen.class));
+        Intent intent = new Intent(context, EventDetailsScreen.class);
+        intent.putExtra(EventDetailsScreen.EVENT_ID, eventId);
+        startActivity(intent);
     }
 
     @Override
     public void openUserDetailsScreen(int userId)
     {
-        this.startActivity(getIntent(UserDetailsScreen.class));
+        startActivity(getIntent(UserDetailsScreen.class));
     }
 
     @Override
-    public void openParticipantsScreen()
+    public void openParticipantsScreen(boolean isOrganizer)
     {
-        this.startActivity(getIntent(ParticipantsScreen.class));
+        Intent intent = new Intent(context, ParticipantsScreen.class);
+        intent.putExtra(ParticipantsScreen.IS_ORGANIZER, isOrganizer);
+        startActivity(intent);
+    }
+
+    @Override
+    public void openEventCreatorScreen()
+    {
+        startActivity(getIntent(EventCreatorScreen.class));
+    }
+
+    @Override
+    public void openCommentsScreen(int eventId)
+    {
+        Intent intent = new Intent(context, CommentsScreen.class);
+        intent.putExtra(CommentsScreen.EVENT_ID, eventId);
+        startActivity(intent);
+    }
+
+    @Override
+    public void openSettingsScreen()
+    {
+        this.startActivity(getIntent(SettingsScreen.class));
     }
 
     private void startActivity(Intent intent)
@@ -64,6 +108,20 @@ public class Navigator implements INavigator
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
         }
         context.startActivity(intent);
+    }
+
+    @Override
+    public void openChangePasswordScreen()
+    {
+        startActivity(getIntent(ChangePasswordScreen.class));
+    }
+
+    @Override
+    public void openEditAccountScreen(UserUpdate userUpdateDetails)
+    {
+        Intent intent = new Intent(context, EditAccountScreen.class);
+        intent.putExtra(EditAccountScreen.USER_UPDATE_DETAILS, userUpdateDetails);
+        startActivity(intent);
     }
 
     private Intent getIntent(Class<? extends Activity> type)

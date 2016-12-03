@@ -11,23 +11,13 @@
         android:layout_height="match_parent"
         android:background="@android:color/transparent">
 
-        <include layout="@layout/toolbar" />
+        <include layout="@layout/tab_layout_toolbar" />
 
-        <android.support.v4.widget.SwipeRefreshLayout
-            android:id="@+id/participants_refresh"
+        <android.support.v4.view.ViewPager
+            android:id="@+id/view_pager"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/participants_list"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/backgroundColor"
-                android:clipToPadding="false"
-                android:paddingTop="@dimen/screen_margin_half" />
-
-        </android.support.v4.widget.SwipeRefreshLayout>
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 
     </android.support.design.widget.CoordinatorLayout>
 

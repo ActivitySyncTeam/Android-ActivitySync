@@ -8,6 +8,7 @@ import com.activity_sync.presentation.models.builders.UserBuilder;
 import com.activity_sync.presentation.models.builders.UserDetailsBuilder;
 import com.activity_sync.presentation.presenters.AllEventsPresenter;
 import com.activity_sync.presentation.presenters.EventsFragmentBasePresenter;
+import com.activity_sync.presentation.services.IApiService;
 import com.activity_sync.presentation.services.INavigator;
 import com.activity_sync.presentation.views.IEventsFragmentView;
 
@@ -31,6 +32,9 @@ public class EventsFragmentPresenterTests
 
     @Mock
     IEventsFragmentView view;
+
+    @Mock
+    IApiService apiService;
 
     PublishSubject eventSelectedEvent = PublishSubject.create();
     PublishSubject refreshEventsEvent = PublishSubject.create();
@@ -86,6 +90,6 @@ public class EventsFragmentPresenterTests
 
     private EventsFragmentBasePresenter createPresenter()
     {
-        return new AllEventsPresenter(view, navigator, Schedulers.immediate());
+        return new AllEventsPresenter(view, navigator, Schedulers.immediate(), apiService);
     }
 }

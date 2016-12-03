@@ -6,11 +6,35 @@ import rx.Observable;
 
 public interface IEventDetailsView
 {
-    Observable joinEventClick();
+    Observable joinLeaveEventClick();
+
+    Observable cancelEventClick();
 
     Observable organizerDetailsClick();
 
     Observable participantsDetailsClick();
 
     void setEventData(Event event);
+
+    void showEnrollConfirmationDialog();
+
+    void showLeaveConfirmationDialog();
+
+    void showCancelConfirmationDialog();
+
+    Observable joinEventConfirmClick();
+
+    Observable leaveEventConfirmClick();
+
+    Observable cancelEventConfirmClick();
+
+    void showEnrollMessage();
+
+    void showLeaveEventMessage();
+
+    void setOrganizerParticipantView(Event event);
+
+    Observable googleMapAsyncCompleted();
+
+    Observable commentsClick();
 }

@@ -33,19 +33,16 @@ public class Event implements Serializable
     @SerializedName("discipline")
     private Discipline discipline;
 
-    @SerializedName("price")
-    private Price price;
+    @SerializedName("level")
+    private Level level;
 
-    @SerializedName("is_organizer")
-    private boolean isOrganizer;
-
-    @SerializedName("is_participant")
-    private boolean isParticipant;
+    @SerializedName("user")
+    private EnrollmentStatus enrollmentStatus;
 
     @SerializedName("is_active")
     private boolean isActive;
 
-    public Event(int id, User organizer, String description, Date date, int maxPlaces, int occupiedPlaces, Location location, Discipline discipline, Price price, boolean isOrganizer, boolean isParticipant, boolean isActive)
+    public Event(int id, User organizer, String description, Date date, int maxPlaces, int occupiedPlaces, Location location, Discipline discipline, Level level, EnrollmentStatus enrollmentStatus, boolean isActive)
     {
         this.id = id;
         this.organizer = organizer;
@@ -55,9 +52,8 @@ public class Event implements Serializable
         this.occupiedPlaces = occupiedPlaces;
         this.location = location;
         this.discipline = discipline;
-        this.price = price;
-        this.isOrganizer = isOrganizer;
-        this.isParticipant = isParticipant;
+        this.level = level;
+        this.enrollmentStatus = enrollmentStatus;
         this.isActive = isActive;
     }
 
@@ -136,34 +132,14 @@ public class Event implements Serializable
         this.discipline = discipline;
     }
 
-    public boolean isOrganizer()
+    public Level getLevel()
     {
-        return isOrganizer;
+        return level;
     }
 
-    public void setOrganizer(boolean organizer)
+    public void setLevel(Level level)
     {
-        isOrganizer = organizer;
-    }
-
-    public boolean isParticipant()
-    {
-        return isParticipant;
-    }
-
-    public void setParticipant(boolean participant)
-    {
-        isParticipant = participant;
-    }
-
-    public Price getPrice()
-    {
-        return price;
-    }
-
-    public void setPrice(Price price)
-    {
-        this.price = price;
+        this.level = level;
     }
 
     public boolean isActive()
@@ -184,6 +160,16 @@ public class Event implements Serializable
     public void setOccupiedPlaces(int occupiedPlaces)
     {
         this.occupiedPlaces = occupiedPlaces;
+    }
+
+    public EnrollmentStatus getEnrollmentStatus()
+    {
+        return enrollmentStatus;
+    }
+
+    public void setEnrollmentStatus(EnrollmentStatus enrollmentStatus)
+    {
+        this.enrollmentStatus = enrollmentStatus;
     }
 
     public String getReadableDate()

@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
-import android.widget.Toast;
 
 import com.activity_sync.App;
 import com.activity_sync.R;
@@ -43,14 +42,20 @@ public class EventsScreen extends ScreenWithMenu implements IEventsView
     }
 
     @Override
+    protected int getMenuId()
+    {
+        return R.id.menu_events;
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         App.component(this).inject(this);
         super.onCreate(savedInstanceState);
 
         adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new AllEventsFragmentFragment(), getString(R.string.tab_all_events));
-        adapter.addFragment(new MyEventsFragmentFragment(), getString(R.string.tab_my_events));
+        adapter.addFragment(new AllEventsFragment(), getString(R.string.tab_all_events));
+        adapter.addFragment(new MyEventsFragment(), getString(R.string.tab_my_events));
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
 
@@ -67,11 +72,5 @@ public class EventsScreen extends ScreenWithMenu implements IEventsView
     public Observable addNewEventClick()
     {
         return ViewObservable.clicks(addNewEventButton);
-    }
-
-    @Override
-    public void newEventClicked()
-    {
-        Toast.makeText(this, "New event button clicked", Toast.LENGTH_LONG).show();
     }
 }

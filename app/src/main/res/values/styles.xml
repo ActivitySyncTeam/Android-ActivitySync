@@ -1,5 +1,6 @@
 <resources>
-    <style name="AppTheme" parent="AppTheme.Base"></style>
+
+    <style name="AppTheme" parent="AppTheme.Base"/>
 
     <style name="AppTheme.Base" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
@@ -10,16 +11,76 @@
         <item name="android:textColorHint">@color/white</item>
         <item name="android:windowBackground">@color/backgroundColor</item>
         <item name="colorControlNormal">@color/white</item>
+
+        <item name="android:fontFamily">sans-serif-light</item>
+    </style>
+
+    <style name="AppTheme.LoginScreen" parent="AppTheme.Base">
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="AppTheme.SettingsScreen" parent="AppTheme.Base">
+        <item name="colorControlNormal">@color/settings_primary_dark</item>
+        <item name="colorControlActivated">@color/settings_accent</item>
+        <item name="android:textColorPrimary">@color/white</item>
+        <item name="android:textColorHint">@color/settings_primary_dark</item>
+    </style>
+
+    <style name="SettingsTheme" parent="Theme.AppCompat.Light">
+        <item name="colorControlNormal">@color/settings_primary_dark</item>
+        <item name="colorControlActivated">@color/settings_accent</item>
+    </style>
+
+    <style name="SettingsFloatingHint" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textColorHighlight">@color/settings_accent</item>
+        <item name="android:textColorLink">@color/settings_accent</item>
+        <item name="android:textColorHint">@color/settings_primary_dark</item>
+        <item name="android:textSize">@dimen/text_smaller_size</item>
+        <item name="colorAccent">@color/settings_accent</item>
+        <item name="colorControlNormal">@color/settings_primary_dark</item>
+        <item name="colorControlActivated">@color/settings_accent</item>
+    </style>
+
+    <style name="SettingsEditText" parent="TextAppearance.AppCompat">
+        <item name="colorControlNormal">@color/black</item>
+        <item name="colorControlActivated">@color/black</item>
+        <item name="colorControlHighlight">@color/settings_primary_dark</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_gravity">center_horizontal</item>
+        <item name="android:textColorHint">@color/black</item>
+        <item name="android:textColorHighlight">@color/settings_primary_dark</item>
+        <item name="android:textColorLink">@color/black</item>
+        <item name="android:textColorPrimary">@color/black</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">@dimen/text_default_size</item>
+        <item name="android:singleLine">true</item>
+    </style>
+
+    <style name="AppTheme.CommentsScreen" parent="AppTheme.Base"/>
+
+    <style name="SplashTheme" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:windowBackground">@drawable/splash_layer</item>
     </style>
 
     <style name="DefaultButton">
-        <item name="android:background">@drawable/selector_default</item>
-        <item name="android:textColor">@color/default_button_text</item>
         <item name="android:layout_height">@dimen/default_button_height</item>
         <item name="android:layout_width">@dimen/default_button_width</item>
         <item name="android:paddingLeft">@dimen/screen_margin</item>
         <item name="android:paddingRight">@dimen/screen_margin</item>
         <item name="android:textAllCaps">true</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="DefaultButton.Positive" parent="DefaultButton">
+        <item name="android:background">@drawable/selector_default_positive</item>
+        <item name="android:textColor">@color/default_button_text</item>
+    </style>
+
+    <style name="DefaultButton.Negative" parent="DefaultButton">
+        <item name="android:background">@drawable/selector_default_negative</item>
+        <item name="android:textColor">@color/default_button_text</item>
     </style>
 
     <style name="DefaultIntroTextView">
@@ -57,6 +118,100 @@
         <item name="android:fontFamily">sans-serif-light</item>
         <item name="android:textSize">@dimen/text_default_size</item>
         <item name="android:layout_marginBottom">@dimen/screen_margin_small</item>
+    </style>
+
+    <style name="DefaultFloatingHint">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textColorHighlight">@color/white</item>
+        <item name="android:textColorHint">@color/white</item>
+        <item name="android:textColorLink">@color/white</item>
+        <item name="android:textSize">@dimen/text_smaller_size</item>
+        <item name="colorAccent">@color/white</item>
+        <item name="colorControlNormal">@color/white</item>
+        <item name="colorControlActivated">@color/white</item>
+    </style>
+
+    <style name="DefaultEditText" parent="TextAppearance.AppCompat">
+        <item name="colorControlNormal">@color/white</item>
+        <item name="colorControlActivated">@color/white</item>
+        <item name="colorControlHighlight">@color/white</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_gravity">center_horizontal</item>
+        <item name="android:textColorHint">@color/white</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">@dimen/text_default_size</item>
+        <item name="android:singleLine">true</item>
+    </style>
+
+    <style name="EventCreatorEditText" parent="TextAppearance.AppCompat">
+        <item name="colorControlNormal">@color/colorPrimary</item>
+        <item name="colorControlActivated">@color/colorPrimary</item>
+        <item name="colorControlHighlight">@color/colorPrimary</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">@dimen/text_default_size</item>
+    </style>
+
+    <style name="DefaultCheckbox" parent="Theme.AppCompat.Light">
+        <item name="colorControlNormal">@color/colorPrimary</item>
+        <item name="colorControlActivated">@color/colorPrimary</item>
+    </style>
+
+    <style name="MyAlertDialogStyle" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="colorAccent">@color/red</item>
+        <item name="android:textColorPrimary">@color/black</item>
+        <item name="android:background">@color/white</item>
+    </style>
+
+    <style name="EventCreatorUpperRow">
+        <item name="android:fontFamily">sans-serif-light</item>
+        <item name="android:textSize">@dimen/text_big_size</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="EventCreatorLowerRow">
+        <item name="android:fontFamily">sans-serif-light</item>
+        <item name="android:textSize">@dimen/text_default_size</item>
+        <item name="android:layout_marginBottom">@dimen/screen_margin_small</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="CardViewDefault">
+        <item name="android:clickable">true</item>
+        <item name="android:foreground">?android:attr/selectableItemBackground</item>
+        <item name="android:minHeight">@dimen/card_view_default_height</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="CardViewDefault.NotClickable" parent="@style/CardViewDefault">
+        <item name="android:clickable">false</item>
+    </style>
+
+    <style name="CardViewDefault.RecyclerView" parent="@style/CardViewDefault.NotClickable"/>
+
+    <style name="EventItemTextView">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/text_big_size_20</item>
+        <item name="android:layout_gravity">center_vertical</item>
+        <item name="android:layout_marginLeft">@dimen/screen_margin_half</item>
+    </style>
+
+    <style name="EventItemImageView">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:tint">@color/black</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:layout_margin">@dimen/screen_margin_half</item>
+    </style>
+
+    <style name="DatePickerStyle" parent="Theme.AppCompat.Light.Dialog">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimary</item>
+        <item name="colorAccent">@color/colorPrimary</item>
     </style>
 
 </resources>

@@ -2,6 +2,7 @@ package com.activity_sync.tests;
 
 import com.activity_sync.presentation.presenters.IntroBasePresenter;
 import com.activity_sync.presentation.services.INavigator;
+import com.activity_sync.presentation.services.IPermanentStorage;
 import com.activity_sync.presentation.views.IIntroBaseView;
 
 import org.junit.Before;
@@ -23,6 +24,9 @@ public class IntroBasePresenterTests
     @Mock
     IIntroBaseView view;
 
+    @Mock
+    IPermanentStorage permanentStorage;
+
     PublishSubject skipButtonClickEvent = PublishSubject.create();
     PublishSubject doneButtonClickEvent = PublishSubject.create();
 
@@ -34,13 +38,22 @@ public class IntroBasePresenterTests
     }
 
     @Test
-    public void introBasePresenter_clickSkipBtn_openDummyScreen()
+    public void introBasePresenter_init_updatePermanentStorage()
+    {
+        IntroBasePresenter introBasePresenter = createPresenter();
+        introBasePresenter.start();
+
+        Mockito.verify(permanentStorage).saveBoolean(IPermanentStorage.IS_APP_OPENED_BEFORE, true);
+    }
+
+    @Test
+    public void introBasePresenter_clickSkipBtn_openLoginScreen()
     {
         IntroBasePresenter introBasePresenter = createPresenter();
         introBasePresenter.start();
 
         skipButtonClickEvent.onNext(this);
-        Mockito.verify(navigator).openWelcomeScreen();
+        Mockito.verify(navigator).openLoginScreen();
     }
 
     @Test
@@ -50,11 +63,11 @@ public class IntroBasePresenterTests
         introBasePresenter.start();
 
         doneButtonClickEvent.onNext(this);
-        Mockito.verify(navigator).openWelcomeScreen();
+        Mockito.verify(navigator).openLoginScreen();
     }
 
     private IntroBasePresenter createPresenter()
     {
-        return new IntroBasePresenter(Schedulers.immediate(), view, navigator);
+        return new IntroBasePresenter(Schedulers.immediate(), view, navigator, permanentStorage);
     }
 }

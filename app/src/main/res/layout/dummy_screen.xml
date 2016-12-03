@@ -27,13 +27,13 @@
 
                 <Button
                     android:id="@+id/dummy_open_intro_screen_btn"
-                    style="@style/DefaultButton"
+                    style="@style/DefaultButton.Positive"
                     android:layout_marginBottom="@dimen/screen_margin_big"
                     android:text="@string/btn_open_intro_screen" />
 
                 <Button
                     android:id="@+id/dummy_message_btn"
-                    style="@style/DefaultButton"
+                    style="@style/DefaultButton.Positive"
                     android:text="@string/btn_display_test_message" />
 
             </LinearLayout>

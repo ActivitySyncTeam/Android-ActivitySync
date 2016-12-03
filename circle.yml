@@ -26,6 +26,6 @@ test:
     override:
         - (chmod +x gradlew)
         - (./gradlew test):
-            timeout: 360
+            timeout: 600
         - (./gradlew assemble):
-            timeout: 360
+            timeout: 600

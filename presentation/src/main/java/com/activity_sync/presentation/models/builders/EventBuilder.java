@@ -1,9 +1,10 @@
 package com.activity_sync.presentation.models.builders;
 
 import com.activity_sync.presentation.models.Discipline;
+import com.activity_sync.presentation.models.EnrollmentStatus;
 import com.activity_sync.presentation.models.Event;
+import com.activity_sync.presentation.models.Level;
 import com.activity_sync.presentation.models.Location;
-import com.activity_sync.presentation.models.Price;
 import com.activity_sync.presentation.models.User;
 
 import java.util.Date;
@@ -18,9 +19,8 @@ public class EventBuilder
     private int occupiedPlaces;
     private Location location;
     private Discipline discipline;
-    private Price price;
-    private boolean isOrganizer;
-    private boolean isParticipant;
+    private Level level;
+    private EnrollmentStatus enrollmentStatus;
     private boolean isActive;
 
     public EventBuilder setId(int id)
@@ -71,21 +71,15 @@ public class EventBuilder
         return this;
     }
 
-    public EventBuilder setPrice(Price price)
+    public EventBuilder setLevel(Level level)
     {
-        this.price = price;
+        this.level = level;
         return this;
     }
 
-    public EventBuilder setIsOrganizer(boolean isOrganizer)
+    public EventBuilder setEnrollmentStatus(EnrollmentStatus enrollmentStatus)
     {
-        this.isOrganizer = isOrganizer;
-        return this;
-    }
-
-    public EventBuilder setIsParticipant(boolean isParticipant)
-    {
-        this.isParticipant = isParticipant;
+        this.enrollmentStatus = enrollmentStatus;
         return this;
     }
 
@@ -97,6 +91,6 @@ public class EventBuilder
 
     public Event createEvent()
     {
-        return new Event(id, organizer, description, date, maxPlaces, occupiedPlaces, location, discipline, price, isOrganizer, isParticipant, isActive);
+        return new Event(id, organizer, description, date, maxPlaces, occupiedPlaces, location, discipline, level, enrollmentStatus, isActive);
     }
 }
