@@ -97,7 +97,7 @@
     <string name="txt_enroll_as_a_participant">Enroll as a participant</string>
     <string name="txt_create_event">Create event</string>
     <string name="title_event_creator">Event creator</string>
-    <string name="date_format" translatable="false">%d-%d-%d %d:%02d:00</string>
+    <string name="date_format" translatable="false">%d-%d-%d %02d:%02d:00</string>
     <string name="txt_error_choosing_location">Location has not been chosen properly</string>
     <string name="txt_create_event_confirmation_title">Create event confirmation</string>
     <string name="txt_create_event_confirmation_text">Are you sure you want to create this event?</string>

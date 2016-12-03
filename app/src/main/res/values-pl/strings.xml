@@ -78,10 +78,10 @@
     <string name="txt_accept_success" formatted="false">%s %s został zaakceptowany</string>
     <string name="txt_remove_participant_confirmation_text">Czy jesteś pewien, że chcesz usunąć tego uczestnika? Tej operacji nie będzie można cofnąć.</string>
     <string name="txt_remove_participant_confirmation_title">Potwierdzenie usunięcia uczestnika</string>
-    <string name="txt_remove_success" formatted="false">%s % został usunięty z wydarzenia</string>
+    <string name="txt_remove_success" formatted="false">%s %s został usunięty z wydarzenia</string>
     <string name="btn_send">Prześlij</string>
     <string name="err_comment_empty">Komentarz nie może być pusty</string>
-    <string name="txt_comment_author" formatted="false">% napisał:</string>
+    <string name="txt_comment_author" formatted="false">%s napisał:</string>
     <string name="txt_comment_hint">Napisz tutaj swój komentarz</string>
     <string name="title_comments">Komentarze</string>
 
