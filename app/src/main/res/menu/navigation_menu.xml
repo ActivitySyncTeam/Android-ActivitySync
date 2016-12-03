@@ -12,6 +12,10 @@
         <item
             android:id="@+id/menu_dummy"
             android:title="@string/menu_dummy_screen"/>
+
+        <item
+            android:id="@+id/menu_logout"
+            android:title="@string/log_out"/>
     </group>
 
 </menu>

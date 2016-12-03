@@ -85,5 +85,6 @@
     <string name="txt_comment_hint">Napisz tutaj swój komentarz</string>
     <string name="title_comments">Komentarze</string>
     <string name="menu_create_event">Stwórz nowe wydarzenie</string>
+    <string name="log_out">Wyloguj się</string>
 
 </resources>
