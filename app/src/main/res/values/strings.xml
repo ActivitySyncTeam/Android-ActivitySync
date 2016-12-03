@@ -89,9 +89,9 @@
     <string name="err_empty_field">This field cannot be empty</string>
 
     <!-- EventCreatorScreen strings -->
-    <string name="txt_choose_date">Choose date</string>
+    <string name="txt_choose_date">Date of the event</string>
     <string name="txt_not_selected">Not selected</string>
-    <string name="txt_choose_location">Choose location</string>
+    <string name="txt_choose_location">Location of the event</string>
     <string name="txt_discipline">Discipline</string>
     <string name="txt_level">Level</string>
     <string name="txt_number_of_players">Number of players</string>

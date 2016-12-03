@@ -57,8 +57,8 @@
     <string name="txt_enroll_message">Zapisałeś się na wydarzenie</string>
     <string name="txt_participant">Uczestnik</string>
     <string name="title_event_creator">Kreator wydarzenia</string>
-    <string name="txt_choose_date">Wybierz datę</string>
-    <string name="txt_choose_location">Wybierz miejsca wydarzenia</string>
+    <string name="txt_choose_date">Data wydarzenia</string>
+    <string name="txt_choose_location">Miejsca wydarzenia</string>
     <string name="txt_create_event">Stwórz wydarzenie</string>
     <string name="txt_create_event_confirmation_text">Jesteś pewien, że chcesz stworzyć to wydarzenie?</string>
     <string name="txt_create_event_confirmation_title">Potwierdzenie tworzenia wydarzenia</string>

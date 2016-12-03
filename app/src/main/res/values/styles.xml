@@ -168,4 +168,11 @@
         <item name="android:layout_gravity">center</item>
         <item name="android:layout_margin">@dimen/screen_margin_half</item>
     </style>
+
+    <style name="DatePickerStyle" parent="Theme.AppCompat.Light.Dialog">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimary</item>
+        <item name="colorAccent">@color/colorPrimary</item>
+    </style>
+
 </resources>

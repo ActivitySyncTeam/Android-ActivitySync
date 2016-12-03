@@ -236,9 +236,9 @@ public class EventCreatorScreen extends Screen implements IEventCreatorView
         int hour = calendar.get(Calendar.HOUR_OF_DAY);
         int minute = calendar.get(Calendar.MINUTE);
 
-        DatePickerDialog datePickerDialog = new DatePickerDialog(this, (view, selectedYear, selectedMonth, selectedDay) ->
+        DatePickerDialog datePickerDialog = new DatePickerDialog(this, R.style.DatePickerStyle, (view, selectedYear, selectedMonth, selectedDay) ->
         {
-            TimePickerDialog timePickerDialog = new TimePickerDialog(this, (view1, selectedHour, selectedMinute) ->
+            TimePickerDialog timePickerDialog = new TimePickerDialog(this, R.style.DatePickerStyle, (view1, selectedHour, selectedMinute) ->
             {
                 newDateOccurred.onNext(String.format(getString(R.string.date_format), selectedYear, selectedMonth, selectedDay, selectedHour, selectedMinute));
 
