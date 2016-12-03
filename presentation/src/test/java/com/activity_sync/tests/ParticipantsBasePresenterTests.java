@@ -3,9 +3,10 @@ package com.activity_sync.tests;
 import com.activity_sync.presentation.models.User;
 import com.activity_sync.presentation.models.builders.UserBuilder;
 import com.activity_sync.presentation.models.builders.UserDetailsBuilder;
-import com.activity_sync.presentation.presenters.ParticipantsPresenter;
+import com.activity_sync.presentation.presenters.DeclinedParticipantsPresenter;
+import com.activity_sync.presentation.presenters.ParticipantsFragmentBasePresenter;
 import com.activity_sync.presentation.services.INavigator;
-import com.activity_sync.presentation.views.IParticipantsView;
+import com.activity_sync.presentation.views.IParticipantsFragmentView;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -18,18 +19,18 @@ import rx.schedulers.Schedulers;
 import rx.subjects.PublishSubject;
 
 @RunWith(MockitoJUnitRunner.class)
-public class ParticipantsPresenterTests
+public class ParticipantsBasePresenterTests
 {
     @Mock
     INavigator navigator;
 
     @Mock
-    IParticipantsView view;
+    IParticipantsFragmentView view;
 
-    PublishSubject participantSelectedEvent = PublishSubject.create();
-    PublishSubject refreshParticipantsEvent = PublishSubject.create();
+    protected PublishSubject participantSelectedEvent = PublishSubject.create();
+    protected PublishSubject refreshParticipantsEvent = PublishSubject.create();
 
-    User testedParticipant;
+    protected User testedParticipant;
 
     @Before
     public void setup()
@@ -42,24 +43,24 @@ public class ParticipantsPresenterTests
                 .setCredibility(85)
                 .createUser();
 
-        Mockito.when(view.selectedUser()).thenReturn(participantSelectedEvent);
+        Mockito.when(view.selectedParticipant()).thenReturn(participantSelectedEvent);
         Mockito.when(view.refreshParticipants()).thenReturn(refreshParticipantsEvent);
     }
 
     @Test
-    public void participantsPresenter_selectParticipant_openUserDetailsScreen()
+    public void participantsBasePresenter_selectParticipant_openUserDetailsScreen()
     {
-        ParticipantsPresenter presenter = createPresenter();
+        ParticipantsFragmentBasePresenter presenter = createPresenter(true);
         presenter.start();
 
         participantSelectedEvent.onNext(testedParticipant);
-        Mockito.verify(navigator).openUserDetailsScreen(1);
+        Mockito.verify(navigator).openUserDetailsScreen(0);
     }
 
     @Test
-    public void participantsPresenter_refreshList_reloadParticipants()
+    public void participantsBasePresenter_refreshList_reloadParticipants()
     {
-        ParticipantsPresenter presenter = createPresenter();
+        ParticipantsFragmentBasePresenter presenter = createPresenter(true);
         presenter.start();
 
         refreshParticipantsEvent.onNext(this);
@@ -67,8 +68,8 @@ public class ParticipantsPresenterTests
         Mockito.verify(view).refreshingVisible(false);
     }
 
-    private ParticipantsPresenter createPresenter()
+    private ParticipantsFragmentBasePresenter createPresenter(boolean isOrganizer)
     {
-        return new ParticipantsPresenter(view, navigator, Schedulers.immediate());
+        return new DeclinedParticipantsPresenter(view, navigator, Schedulers.immediate(), isOrganizer);
     }
 }

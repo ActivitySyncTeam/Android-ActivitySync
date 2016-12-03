@@ -78,6 +78,7 @@
                                 android:layout_marginRight="@dimen/screen_margin_half"/>
 
                             <TextView
+                                android:id="@+id/participant_tv"
                                 style="@style/EventDetailsScreenMainDownRow"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -88,14 +89,53 @@
 
                     </LinearLayout>
 
-                    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                        xmlns:tools="http://schemas.android.com/tools"
-                        android:id="@+id/map"
-                        android:name="com.google.android.gms.maps.SupportMapFragment"
+                    <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
-                        android:layout_weight="4"
-                        tools:context=".MapActivity" />
+                        android:layout_weight="4">
+
+                        <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                            xmlns:tools="http://schemas.android.com/tools"
+                            android:id="@+id/map"
+                            android:name="com.google.android.gms.maps.SupportMapFragment"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            tools:context=".MapActivity" />
+
+                        <LinearLayout
+                            android:id="@+id/comments_on_map_btn"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_alignParentBottom="true"
+                            android:layout_alignParentRight="true"
+                            android:layout_margin="@dimen/screen_margin_half"
+                            android:background="@drawable/selector_default_on_map"
+                            android:clickable="true">
+
+                            <ImageView
+                                android:layout_width="@dimen/on_map_btn_default_width"
+                                android:layout_height="@dimen/on_map_btn_default_height"
+                                android:layout_gravity="center"
+                                android:src="@drawable/ic_comment"
+                                android:tint="@color/on_map_button_text"
+                                android:layout_margin="@dimen/screen_margin_quarter"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="COMMENTS"
+                                android:textColor="@color/on_map_button_text"
+                                android:textStyle="bold"
+                                android:textSize="@dimen/text_smaller_size"
+                                android:layout_gravity="center"
+                                android:layout_marginTop="@dimen/screen_margin_half"
+                                android:layout_marginBottom="@dimen/screen_margin_half"
+                                android:layout_marginRight="@dimen/screen_margin_half" />
+
+                        </LinearLayout>
+
+                    </RelativeLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"

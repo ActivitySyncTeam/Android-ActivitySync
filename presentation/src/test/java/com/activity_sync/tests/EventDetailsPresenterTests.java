@@ -32,8 +32,10 @@ public class EventDetailsPresenterTests
     PublishSubject cancelEventConfirmEvent = PublishSubject.create();
     PublishSubject organizerDetailsClickEvent = PublishSubject.create();
     PublishSubject participantsClickEvent = PublishSubject.create();
+    PublishSubject googleMapAsyncEvent = PublishSubject.create();
+    PublishSubject commentsClickEvent = PublishSubject.create();
 
-    int eventId = 1;
+    private int eventId = 1;
 
     @Before
     public void setup()
@@ -44,9 +46,12 @@ public class EventDetailsPresenterTests
         Mockito.when(view.joinEventConfirmClick()).thenReturn(joinEventConfirmEvent);
         Mockito.when(view.leaveEventConfirmClick()).thenReturn(leaveEventConfirmEvent);
         Mockito.when(view.cancelEventConfirmClick()).thenReturn(cancelEventConfirmEvent);
+        Mockito.when(view.commentsClick()).thenReturn(commentsClickEvent);
 
         Mockito.when(view.organizerDetailsClick()).thenReturn(organizerDetailsClickEvent);
         Mockito.when(view.participantsDetailsClick()).thenReturn(participantsClickEvent);
+
+        Mockito.when(view.googleMapAsyncCompleted()).thenReturn(googleMapAsyncEvent);
     }
 
     @Test
@@ -57,7 +62,7 @@ public class EventDetailsPresenterTests
         presenter.createEvent(false, false, false); //will be deleted when api
 
         joinLeaveEventClickEvent.onNext(this);
-        Mockito.verify(view).showJoinConfirmationDialog();
+        Mockito.verify(view).showEnrollConfirmationDialog();
     }
 
     @Test
@@ -90,7 +95,7 @@ public class EventDetailsPresenterTests
 
         joinEventConfirmEvent.onNext(this);
         Mockito.verify(view).setOrganizerParticipantView(any());
-        Mockito.verify(view).showJoinEventMessage();
+        Mockito.verify(view).showEnrollMessage();
     }
 
     @Test
@@ -133,7 +138,17 @@ public class EventDetailsPresenterTests
         presenter.start();
 
         participantsClickEvent.onNext(this);
-        Mockito.verify(navigator).openParticipantsScreen();
+        Mockito.verify(navigator).openParticipantsScreen(true);
+    }
+
+    @Test
+    public void eventDetailsPresenter_clickComments_openCommentsScreen()
+    {
+        EventDetailsPresenter presenter = createPresenter();
+        presenter.start();
+
+        commentsClickEvent.onNext(this);
+        Mockito.verify(navigator).openCommentsScreen(eventId);
     }
 
     private EventDetailsPresenter createPresenter()

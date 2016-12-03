@@ -33,6 +33,7 @@
     <dimen name="welcome_logo_height">100dp</dimen>
     <dimen name="welcome_logo_border_width">7dp</dimen>
     <dimen name="navigation_drawer_height">140dp</dimen>
+    <dimen name="card_view_default_height">60dp</dimen>
 
     <!-- IntroScreen dimens-->
     <dimen name="intro_circle_image_border">8dp</dimen>
@@ -40,7 +41,9 @@
     <dimen name="intro_circle_image_width">@dimen/intro_circle_image_height</dimen>
 
     <!-- UserDetailsScreen dimens-->
-    <dimen name="text_drawable_default_height">48dp</dimen>
+    <dimen name="text_drawable_default_height">40dp</dimen>
     <dimen name="text_drawable_default_width">@dimen/text_drawable_default_height</dimen>
+    <dimen name="on_map_btn_default_width">20dp</dimen>
+    <dimen name="on_map_btn_default_height">@dimen/on_map_btn_default_width</dimen>
 
 </resources>

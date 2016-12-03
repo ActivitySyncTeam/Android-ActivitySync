@@ -25,4 +25,10 @@ public interface INavigator
     void openChangePasswordScreen();
 
     void openEditAccountScreen(UserUpdate userUpdateDetails);
+
+    void openParticipantsScreen(boolean isOrganizer);
+
+    void openEventCreatorScreen();
+
+    void openCommentsScreen(int eventId);
 }

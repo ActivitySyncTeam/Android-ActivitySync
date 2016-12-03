@@ -22,8 +22,7 @@ public class EventsPresenter extends Presenter<IEventsView>
 
         subscriptions.add(view.addNewEventClick()
                 .subscribe(event -> {
-                    //navigator.openNewEventCreatorScreen();
-                    view.newEventClicked();
+                    navigator.openEventCreatorScreen();
                 })
         );
     }

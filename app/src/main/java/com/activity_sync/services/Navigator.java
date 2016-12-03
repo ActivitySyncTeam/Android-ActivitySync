@@ -72,9 +72,25 @@ public class Navigator implements INavigator
     }
 
     @Override
-    public void openParticipantsScreen()
+    public void openParticipantsScreen(boolean isOrganizer)
     {
-        startActivity(getIntent(ParticipantsScreen.class));
+        Intent intent = new Intent(context, ParticipantsScreen.class);
+        intent.putExtra(ParticipantsScreen.IS_ORGANIZER, isOrganizer);
+        startActivity(intent);
+    }
+
+    @Override
+    public void openEventCreatorScreen()
+    {
+        startActivity(getIntent(EventCreatorScreen.class));
+    }
+
+    @Override
+    public void openCommentsScreen(int eventId)
+    {
+        Intent intent = new Intent(context, CommentsScreen.class);
+        intent.putExtra(CommentsScreen.EVENT_ID, eventId);
+        startActivity(intent);
     }
 
     @Override

@@ -3,6 +3,7 @@
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
 
     <application
         android:name=".App"
@@ -26,7 +27,9 @@
             android:screenOrientation="portrait">
         </activity>
 
-        <activity android:name=".screens.DummyScreen"/>
+        <activity
+            android:name=".screens.DummyScreen"
+            android:screenOrientation="portrait"/>
 
         <activity
             android:name=".screens.LoginScreen"
@@ -38,13 +41,30 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.LoginScreen"/>
 
-        <activity android:name=".screens.EventsScreen"/>
+        <activity
+            android:name=".screens.EventsScreen"
+            android:screenOrientation="portrait"/>
 
-        <activity android:name=".screens.EventDetailsScreen"/>
+        <activity
+            android:name=".screens.EventDetailsScreen"
+            android:screenOrientation="portrait"/>
 
-        <activity android:name=".screens.UserDetailsScreen"/>
+        <activity
+            android:name=".screens.UserDetailsScreen"
+            android:screenOrientation="portrait"/>
 
-        <activity android:name=".screens.ParticipantsScreen"/>
+        <activity
+            android:name=".screens.ParticipantsScreen"
+            android:screenOrientation="portrait"/>
+
+        <activity
+            android:name=".screens.EventCreatorScreen"
+            android:screenOrientation="portrait"/>
+
+        <activity
+            android:name=".screens.CommentsScreen"
+            android:theme="@style/AppTheme.CommentsScreen"
+            android:screenOrientation="portrait"/>
 
         <activity android:name=".screens.SettingsScreen"/>
 

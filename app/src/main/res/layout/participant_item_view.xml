@@ -17,7 +17,7 @@
         android:layout_marginLeft="@dimen/screen_margin_half">
 
         <LinearLayout
-            android:layout_margin="@dimen/screen_margin_half"
+            android:layout_margin="@dimen/screen_margin_quarter"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
@@ -28,28 +28,45 @@
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_account"
-                    android:tint="@color/black"
-                    android:layout_margin="@dimen/screen_margin_half"
-                    android:layout_gravity="center"/>
+                    android:id="@+id/participant_credibility_image"
+                    android:layout_width="@dimen/text_drawable_default_width"
+                    android:layout_height="@dimen/text_drawable_default_height"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/screen_margin_half"
+                    android:layout_marginTop="@dimen/screen_margin_half"
+                    android:layout_marginBottom="@dimen/screen_margin_half"/>
 
                 <TextView
                     android:id="@+id/participant_name"
-                    android:layout_width="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:textSize="@dimen/text_big_size_20"
+                    android:textSize="@dimen/text_big_size"
+                    android:textStyle="bold"
                     android:layout_gravity="center_vertical"
                     android:singleLine="false"
-                    tools:text="Marcin Zielinski"
-                    android:layout_marginLeft="@dimen/screen_margin_half"
-                    android:layout_weight="1"/>
+                    android:paddingLeft="@dimen/screen_margin"
+                    tools:text="Marcin Zielinski" />
 
                 <ImageView
-                    android:id="@+id/participant_credibility_image"
-                    android:layout_width="@dimen/text_drawable_default_width"
-                    android:layout_height="@dimen/text_drawable_default_height" />
+                    android:id="@+id/approve_sign"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_check"
+                    android:tint="@color/black"
+                    android:padding="@dimen/screen_margin"
+                    android:layout_gravity="center"
+                    android:visibility="gone"/>
+
+                <ImageView
+                    android:id="@+id/decline_sign"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_x_sign"
+                    android:tint="@color/black"
+                    android:padding="@dimen/screen_margin"
+                    android:layout_gravity="center"
+                    android:visibility="gone"/>
 
             </LinearLayout>
 

@@ -7,10 +7,11 @@ import com.activity_sync.presentation.views.IEventsFragmentView;
 
 import rx.android.schedulers.AndroidSchedulers;
 
-public class AllEventsFragmentFragment extends EventsFragmentFragmentBase implements IEventsFragmentView
+public class AllEventsFragment extends EventsFragmentBase implements IEventsFragmentView
 {
     @Override
-    protected IPresenter createPresenter(FragmentScreen screen, Bundle savedInstanceState) {
+    protected IPresenter createPresenter(FragmentScreen screen, Bundle savedInstanceState)
+    {
         return new AllEventsPresenter(this, navigator, AndroidSchedulers.mainThread());
     }
 }

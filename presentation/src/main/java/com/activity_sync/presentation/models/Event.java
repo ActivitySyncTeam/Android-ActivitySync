@@ -36,16 +36,13 @@ public class Event implements Serializable
     @SerializedName("level")
     private Level level;
 
-    @SerializedName("is_organizer")
-    private boolean isOrganizer;
-
-    @SerializedName("is_participant")
-    private boolean isParticipant;
+    @SerializedName("user")
+    private EnrollmentStatus enrollmentStatus;
 
     @SerializedName("is_active")
     private boolean isActive;
 
-    public Event(int id, User organizer, String description, Date date, int maxPlaces, int occupiedPlaces, Location location, Discipline discipline, Level level, boolean isOrganizer, boolean isParticipant, boolean isActive)
+    public Event(int id, User organizer, String description, Date date, int maxPlaces, int occupiedPlaces, Location location, Discipline discipline, Level level, EnrollmentStatus enrollmentStatus, boolean isActive)
     {
         this.id = id;
         this.organizer = organizer;
@@ -56,8 +53,7 @@ public class Event implements Serializable
         this.location = location;
         this.discipline = discipline;
         this.level = level;
-        this.isOrganizer = isOrganizer;
-        this.isParticipant = isParticipant;
+        this.enrollmentStatus = enrollmentStatus;
         this.isActive = isActive;
     }
 
@@ -136,26 +132,6 @@ public class Event implements Serializable
         this.discipline = discipline;
     }
 
-    public boolean isOrganizer()
-    {
-        return isOrganizer;
-    }
-
-    public void setOrganizer(boolean organizer)
-    {
-        isOrganizer = organizer;
-    }
-
-    public boolean isParticipant()
-    {
-        return isParticipant;
-    }
-
-    public void setParticipant(boolean participant)
-    {
-        isParticipant = participant;
-    }
-
     public Level getLevel()
     {
         return level;
@@ -184,6 +160,16 @@ public class Event implements Serializable
     public void setOccupiedPlaces(int occupiedPlaces)
     {
         this.occupiedPlaces = occupiedPlaces;
+    }
+
+    public EnrollmentStatus getEnrollmentStatus()
+    {
+        return enrollmentStatus;
+    }
+
+    public void setEnrollmentStatus(EnrollmentStatus enrollmentStatus)
+    {
+        this.enrollmentStatus = enrollmentStatus;
     }
 
     public String getReadableDate()

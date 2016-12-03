@@ -5,6 +5,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.activity_sync.R;
+import com.activity_sync.presentation.action_listeners.IParticipantActionListener;
 import com.activity_sync.presentation.models.User;
 import com.activity_sync.renderers.base.Renderer;
 import com.activity_sync.renderers.base.RendererBuilder;
@@ -15,9 +16,10 @@ import java.util.Arrays;
 
 import butterknife.Bind;
 
-public class ParticipantsRenderer extends Renderer<User>
+public class ParticipantsRendererBase extends Renderer<User>
 {
-    private Context context;
+    protected Context context;
+    protected boolean isOrganizer;
 
     @Bind(R.id.participant_credibility_image)
     ImageView participantCredibilityImage;
@@ -25,22 +27,17 @@ public class ParticipantsRenderer extends Renderer<User>
     @Bind(R.id.participant_name)
     TextView participantName;
 
-    public ParticipantsRenderer(int layoutRes)
-    {
-        super(layoutRes);
-    }
-
-    public ParticipantsRenderer(Context context, int layoutRes)
+    public ParticipantsRendererBase(Context context, int layoutRes, boolean isOrganizer)
     {
         super(layoutRes);
         this.context = context;
+        this.isOrganizer = isOrganizer;
     }
 
     @Override
     public void render()
     {
         participantName.setText(String.format("%s %s", getContent().getUserDetails().getFirstName(), getContent().getUserDetails().getLastName()));
-
         CredibilityService credibilityService = new CredibilityService(context, getContent().getCredibility());
         TextDrawable drawable = TextDrawable.builder().buildRound(String.format("%d", getContent().getCredibility()), credibilityService.getColor());
         participantCredibilityImage.setImageDrawable(drawable);
@@ -48,20 +45,15 @@ public class ParticipantsRenderer extends Renderer<User>
 
     public static class Builder extends RendererBuilder<User>
     {
-        public Builder()
+        public Builder(Context context, boolean isOrganizer, IParticipantActionListener actionListener)
         {
-            super(Arrays.asList(new ParticipantsRenderer(R.layout.participant_item_view)));
-        }
-
-        public Builder(Context context)
-        {
-            super(Arrays.asList(new ParticipantsRenderer(context, R.layout.participant_item_view)));
+            super(Arrays.asList(new ParticipantsRendererBase(context, R.layout.participant_item_view, isOrganizer)));
         }
 
         @Override
         protected Class getPrototypeClass(User content)
         {
-            return ParticipantsRenderer.class;
+            return ParticipantsRendererBase.class;
         }
     }
 }

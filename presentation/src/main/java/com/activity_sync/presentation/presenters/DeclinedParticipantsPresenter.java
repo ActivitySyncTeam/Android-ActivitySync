@@ -4,49 +4,23 @@ import com.activity_sync.presentation.models.User;
 import com.activity_sync.presentation.models.builders.UserBuilder;
 import com.activity_sync.presentation.models.builders.UserDetailsBuilder;
 import com.activity_sync.presentation.services.INavigator;
-import com.activity_sync.presentation.views.IParticipantsView;
+import com.activity_sync.presentation.views.IParticipantsFragmentView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import rx.Scheduler;
 
-public class ParticipantsPresenter extends Presenter<IParticipantsView>
+public class DeclinedParticipantsPresenter  extends ParticipantsFragmentBasePresenter
 {
-    private final INavigator navigator;
-    private Scheduler uiThread;
-
-    public ParticipantsPresenter(IParticipantsView view, INavigator navigator, Scheduler uiThread)
+    public DeclinedParticipantsPresenter(IParticipantsFragmentView view, INavigator navigator, Scheduler uiThread, boolean isOrganizer)
     {
-        super(view);
-        this.navigator = navigator;
-        this.uiThread = uiThread;
+        super(view, navigator, uiThread, isOrganizer);
     }
 
     @Override
-    public void start()
+    void loadParticipants()
     {
-        super.start();
-        loadUsers();
-
-        subscriptions.add(view.refreshParticipants()
-                .subscribe(event -> {
-                    loadUsers();
-                    view.refreshingVisible(false);
-                })
-        );
-
-        subscriptions.add(view.selectedUser()
-                .subscribe(event -> {
-                    navigator.openUserDetailsScreen(1);
-                })
-        );
-    }
-
-    void loadUsers()
-    {
-        //API CALL WILL BE HERE
-
         List<User> users = new ArrayList<>();
 
         users.add(new UserBuilder()
@@ -81,6 +55,6 @@ public class ParticipantsPresenter extends Presenter<IParticipantsView>
                 .setCredibility(92)
                 .createUser());
 
-        view.addUsersList(users);
+        view.addParticipantsList(users);
     }
 }
