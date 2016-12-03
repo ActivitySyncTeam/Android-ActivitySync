@@ -122,5 +122,7 @@
     <string name="err_same_passwords">Nowe hasło nie może być takie samo jak stare hasło</string>
     <string name="txt_permission_granted">Zezwolenie zostało udzielone</string>
     <string name="txt_permission_not_granted">Zezwolenie nie zostało udzielone</string>
+    <string name="btn_hide_progress">Schowaj progressbar</string>
+    <string name="btn_show_progress">Pokaż progressbar</string>
 
 </resources>

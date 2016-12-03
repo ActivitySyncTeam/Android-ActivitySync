@@ -29,6 +29,12 @@ public class DummyScreen extends ScreenWithMenu implements IDummyView
     @Bind(R.id.dummy_open_intro_screen_btn)
     Button openIntroBtn;
 
+    @Bind(R.id.dummy_show_progress_btn)
+    Button showProgressButton;
+
+    @Bind(R.id.dummy_hide_progress_btn)
+    Button hideProgressButton;
+
     public DummyScreen()
     {
         super(R.layout.dummy_screen);
@@ -71,5 +77,17 @@ public class DummyScreen extends ScreenWithMenu implements IDummyView
     public void displayMessage()
     {
         Toast.makeText(this, R.string.txt_hello_message, Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public Observable showProgressClick()
+    {
+        return ViewObservable.clicks(showProgressButton);
+    }
+
+    @Override
+    public Observable hideProgressClick()
+    {
+        return ViewObservable.clicks(hideProgressButton);
     }
 }
