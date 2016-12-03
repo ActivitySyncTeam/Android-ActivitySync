@@ -7,6 +7,8 @@
         android:orderInCategory="100"
         android:title="Loading..."
         android:visible="false"
+        android:right="@dimen/screen_margin"
+        android:left="@dimen/screen_margin"
         app:actionLayout="@layout/action_progress"
         app:showAsAction="always"/>
 

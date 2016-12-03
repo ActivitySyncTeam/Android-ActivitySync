@@ -46,4 +46,7 @@
     <dimen name="on_map_btn_default_width">20dp</dimen>
     <dimen name="on_map_btn_default_height">@dimen/on_map_btn_default_width</dimen>
 
+    <!-- Other -->
+    <dimen name="progress_bar_right_gap">12dp</dimen>
+
 </resources>
