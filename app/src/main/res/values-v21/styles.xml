@@ -14,9 +14,11 @@
         <item name="colorControlHighlight">@color/white</item>
     </style>
 
-    <style name="SettingsTheme" parent="Theme.AppCompat.Light">
+    <style name="AppTheme.SettingsScreen" parent="AppTheme.Base">
         <item name="colorControlNormal">@color/settings_primary_dark</item>
         <item name="colorControlActivated">@color/settings_accent</item>
+        <item name="android:textColorPrimary">@color/white</item>
+        <item name="android:textColorHint">@color/settings_primary_dark</item>
     </style>
 
     <style name="SettingsFloatingHint" parent="TextAppearance.AppCompat">
@@ -28,22 +30,6 @@
         <item name="colorAccent">@color/settings_accent</item>
         <item name="colorControlNormal">@color/settings_primary_dark</item>
         <item name="colorControlActivated">@color/settings_accent</item>
-    </style>
-
-    <style name="SettingsEditText" parent="TextAppearance.AppCompat">
-        <item name="colorControlNormal">@color/black</item>
-        <item name="colorControlActivated">@color/settings_accent</item>
-        <item name="colorControlHighlight">@color/settings_accent</item>
-        <item name="android:layout_height">match_parent</item>
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_gravity">center_horizontal</item>
-        <item name="android:textColorHint">@color/black</item>
-        <item name="android:textColorHighlight">@color/settings_accent</item>
-        <item name="android:textColorLink">@color/settings_accent</item>
-        <item name="android:textColorPrimary">@color/black</item>
-        <item name="android:textColor">@color/black</item>
-        <item name="android:textSize">@dimen/text_default_size</item>
-        <item name="android:singleLine">true</item>
     </style>
 
     <style name="DefaultFloatingHint">

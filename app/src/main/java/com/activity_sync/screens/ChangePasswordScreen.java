@@ -6,6 +6,7 @@ import android.support.v7.widget.AppCompatEditText;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.activity_sync.R;
 import com.activity_sync.presentation.presenters.ChangePasswordPresenter;
@@ -56,6 +57,7 @@ public class ChangePasswordScreen extends Screen implements IChangePasswordView
     {
         super.onCreate(savedInstanceState);
 
+        prepareEditTexts();
         setTitle(R.string.title_change_password);
     }
 
@@ -183,6 +185,24 @@ public class ChangePasswordScreen extends Screen implements IChangePasswordView
     public Observable onSaveClick()
     {
         return ViewObservable.clicks(saveButton);
+    }
+
+    @Override
+    public void saveSucceded()
+    {
+        Toast.makeText(this, R.string.cp_save_succ, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void saveFailed(String message)
+    {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void close()
+    {
+        this.finish();
     }
 }
 

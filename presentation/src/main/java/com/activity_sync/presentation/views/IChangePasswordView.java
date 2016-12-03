@@ -25,4 +25,10 @@ public interface IChangePasswordView
     String getConfirmNewPassword();
 
     String emptyFieldErrorText();
+
+    void saveSucceded();
+
+    void saveFailed(String message);
+
+    void close();
 }

@@ -45,6 +45,19 @@ public class ChangePasswordPresenter extends Presenter<IChangePasswordView>
                         view.confirmNewPasswordErrorText(view.emptyFieldErrorText());
                         canContinue = false;
                     }
+
+                    if (canContinue)
+                    {
+                        boolean callSucceded = true;
+                        if (callSucceded)
+                        {
+                            view.saveSucceded();
+                            view.close();
+                        } else
+                        {
+                            view.saveFailed("Wrong password.");
+                        }
+                    }
                 }));
     }
 }

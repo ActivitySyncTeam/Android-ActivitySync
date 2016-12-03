@@ -115,5 +115,6 @@
     <string name="txt_comment_author" formatted="false">% napisał:</string>
     <string name="txt_comment_hint">Napisz tutaj swój komentarz</string>
     <string name="title_comments">Komentarze</string>
+    <string name="cp_save_succ">Hasło zmienione!</string>
 
 </resources>

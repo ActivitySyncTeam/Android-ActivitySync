@@ -66,14 +66,19 @@
             android:theme="@style/AppTheme.CommentsScreen"
             android:screenOrientation="portrait"/>
 
-        <activity android:name=".screens.SettingsScreen"/>
+        <activity
+            android:name=".screens.SettingsScreen"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.SettingsScreen"/>
 
         <activity
             android:name=".screens.ChangePasswordScreen"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.SettingsScreen"/>
 
         <activity
             android:name=".screens.EditAccountScreen"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.SettingsScreen"/>
 
         <meta-data

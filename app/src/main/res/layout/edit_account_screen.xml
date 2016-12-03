@@ -3,6 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:descendantFocusability="beforeDescendants"
     android:fitsSystemWindows="true"
     android:focusableInTouchMode="true">
@@ -133,12 +134,12 @@
                         <android.support.v7.widget.AppCompatEditText
                             android:id="@+id/ea_password"
                             style="@style/SettingsEditText"
+                            app:passwordToggleEnabled="true"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="@string/ea_hint_password"
                             android:imeOptions="actionDone"
-                            android:inputType="textPassword"
-                            android:singleLine="false"/>
+                            android:inputType="textPassword"/>
 
                     </android.support.design.widget.TextInputLayout>
 
