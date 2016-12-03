@@ -30,22 +30,13 @@
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_organizer"
-                    android:tint="@color/black"
-                    android:layout_margin="@dimen/screen_margin_half"
-                    android:layout_gravity="center"/>
+                    style="@style/EventItemImageView"
+                    android:src="@drawable/ic_organizer" />
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
                     android:id="@+id/event_organizer"
-                    android:textSize="@dimen/text_big_size_20"
-                    android:layout_gravity="center_vertical"
-                    android:singleLine="false"
-                    tools:text="Marcin Zielinski"
-                    android:layout_marginLeft="@dimen/screen_margin_half"/>
+                    style="@style/EventItemTextView"
+                    tools:text="Marcin Zielinski" />
 
             </LinearLayout>
 
@@ -55,22 +46,13 @@
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_calendar"
-                    android:tint="@color/black"
-                    android:layout_margin="@dimen/screen_margin_half"
-                    android:layout_gravity="center"/>
+                    style="@style/EventItemImageView"
+                    android:src="@drawable/ic_calendar" />
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
                     android:id="@+id/event_date"
-                    android:textSize="@dimen/text_big_size_20"
-                    android:layout_gravity="center_vertical"
-                    android:singleLine="false"
-                    tools:text="08.06.2016 18:00"
-                    android:layout_marginLeft="@dimen/screen_margin_half"/>
+                    style="@style/EventItemTextView"
+                    tools:text="08.06.2016 18:00" />
 
             </LinearLayout>
 
@@ -80,22 +62,13 @@
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_location"
-                    android:tint="@color/black"
-                    android:layout_margin="@dimen/screen_margin_half"
-                    android:layout_gravity="center"/>
+                    style="@style/EventItemImageView"
+                    android:src="@drawable/ic_location" />
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
                     android:id="@+id/event_location"
-                    android:textSize="@dimen/text_big_size_20"
-                    android:layout_gravity="center_vertical"
-                    android:singleLine="false"
-                    tools:text="Only pro players, not amateurs"
-                    android:layout_marginLeft="@dimen/screen_margin_half"/>
+                    style="@style/EventItemTextView"
+                    tools:text="Only pro players, not amateurs" />
 
             </LinearLayout>
 
@@ -105,22 +78,13 @@
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_people"
-                    android:tint="@color/black"
-                    android:layout_margin="@dimen/screen_margin_half"
-                    android:layout_gravity="center"/>
+                    style="@style/EventItemImageView"
+                    android:src="@drawable/ic_people" />
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
                     android:id="@+id/event_places"
-                    android:textSize="@dimen/text_big_size_20"
-                    android:layout_gravity="center_vertical"
-                    android:singleLine="false"
-                    tools:text="7/12"
-                    android:layout_marginLeft="@dimen/screen_margin_half"/>
+                    style="@style/EventItemTextView"
+                    tools:text="7/12" />
 
             </LinearLayout>
 
@@ -132,9 +96,7 @@
                 <TextView
                     android:id="@+id/event_discipline"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="@dimen/text_big_size_20"
-                    android:layout_gravity="center_vertical"
+                    style="@style/EventItemTextView"
                     tools:text="BASKETBALL"
                     android:gravity="right"
                     android:layout_margin="@dimen/screen_margin_small"/>
