@@ -86,4 +86,7 @@
     <item name="event_creator_item_normal" type="color">@color/event_creator_bg</item>
     <item name="event_creator_item_pressed" type="color">#796c6c</item>
 
+    <!--Comments Screen Colors-->
+    <item name="comments_bg" type="color">@color/white</item>
+
 </resources>
