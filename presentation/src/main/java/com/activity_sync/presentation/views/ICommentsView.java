@@ -16,5 +16,9 @@ public interface ICommentsView
     Observable sendCommentClick();
     String comment();
 
-    void sendCommentMessage();
+    void hideKeyboard();
+    void scrollToBottom();
+    void clearComment();
+
+    void showEmptyCommentError();
 }

@@ -2,6 +2,7 @@ package com.activity_sync.presentation.presenters;
 
 import com.activity_sync.presentation.models.Comment;
 import com.activity_sync.presentation.models.builders.CommentBuilder;
+import com.activity_sync.presentation.utils.StringUtils;
 import com.activity_sync.presentation.views.ICommentsView;
 
 import java.util.ArrayList;
@@ -26,6 +27,8 @@ public class CommentsPresenter extends Presenter<ICommentsView>
     {
         super.start();
 
+        loadComments();
+
         subscriptions.add(view.refreshComments()
                 .subscribe(event -> {
                     loadComments();
@@ -35,14 +38,23 @@ public class CommentsPresenter extends Presenter<ICommentsView>
 
         subscriptions.add(view.sendCommentClick()
                 .subscribe(event -> {
-                    view.sendCommentMessage();
 
-                    Comment comment = new CommentBuilder()
-                            .setComment(view.comment())
-                            .setName("Marcin Zielinski")
-                            .createComment();
+                    if (view.comment().equals(StringUtils.EMPTY))
+                    {
+                        view.showEmptyCommentError();
+                    }
+                    else
+                    {
+                        Comment comment = new CommentBuilder()
+                                .setComment(view.comment())
+                                .setName("Marcin Zielinski")
+                                .createComment();
 
-                    view.addSingleComment(comment);
+                        view.addSingleComment(comment);
+                        view.clearComment();
+                        view.hideKeyboard();
+                        view.scrollToBottom();
+                    }
                 })
         );
     }

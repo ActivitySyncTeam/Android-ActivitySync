@@ -1,9 +1,11 @@
 package com.activity_sync.screens;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -12,8 +14,9 @@ import com.activity_sync.R;
 import com.activity_sync.presentation.models.Comment;
 import com.activity_sync.presentation.presenters.CommentsPresenter;
 import com.activity_sync.presentation.presenters.IPresenter;
+import com.activity_sync.presentation.utils.StringUtils;
 import com.activity_sync.presentation.views.ICommentsView;
-import com.activity_sync.renderers.EventsRenderer;
+import com.activity_sync.renderers.CommentsRenderer;
 import com.activity_sync.renderers.base.DividerItemDecoration;
 import com.activity_sync.renderers.base.RVRendererAdapter;
 
@@ -66,11 +69,13 @@ public class CommentsScreen extends Screen implements ICommentsView
         super.onCreate(savedInstanceState);
 
         commentsRefreshLayout.setOnRefreshListener(() -> refreshComments.onNext(this));
-        adapter = new RVRendererAdapter<>(this, new EventsRenderer.Builder());
+        adapter = new RVRendererAdapter<>(this, new CommentsRenderer.Builder(this));
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         commentsList.setLayoutManager(linearLayoutManager);
         commentsList.addItemDecoration(new DividerItemDecoration(this));
         commentsList.setAdapter(adapter);
+
+        setTitle(getString(R.string.title_comments));
     }
 
     @Override
@@ -115,8 +120,27 @@ public class CommentsScreen extends Screen implements ICommentsView
     }
 
     @Override
-    public void sendCommentMessage()
+    public void hideKeyboard()
     {
-        Toast.makeText(this, "You have successfully added a comment", Toast.LENGTH_LONG).show();
+        InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+    }
+
+    @Override
+    public void scrollToBottom()
+    {
+        commentsList.scrollToPosition(comments.size() - 1);
+    }
+
+    @Override
+    public void clearComment()
+    {
+       commentEditText.setText(StringUtils.EMPTY);
+    }
+
+    @Override
+    public void showEmptyCommentError()
+    {
+        Toast.makeText(this, R.string.err_comment_empty, Toast.LENGTH_LONG).show();
     }
 }

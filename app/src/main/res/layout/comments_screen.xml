@@ -57,7 +57,7 @@
                     android:layout_weight="1"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:hint="Write your comment here"
+                    android:hint="@string/txt_comment_hint"
                     android:layout_gravity="bottom"
                     android:textColorHint="@color/white"
                     android:inputType="textMultiLine"
@@ -68,7 +68,7 @@
                     style="@style/DefaultButton.Positive"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Send"
+                    android:text="@string/btn_send"
                     android:layout_gravity="center"
                     android:layout_marginLeft="@dimen/screen_margin_half"/>
 

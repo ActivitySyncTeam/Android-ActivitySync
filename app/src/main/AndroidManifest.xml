@@ -63,6 +63,7 @@
 
         <activity
             android:name=".screens.CommentsScreen"
+            android:theme="@style/AppTheme.CommentsScreen"
             android:screenOrientation="portrait"/>
 
         <meta-data
