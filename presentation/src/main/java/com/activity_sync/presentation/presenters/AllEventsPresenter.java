@@ -24,10 +24,49 @@ public class AllEventsPresenter extends EventsFragmentBasePresenter
     }
 
     @Override
+    public void start()
+    {
+        if (view.checkLocationPermissions() == false)
+        {
+            view.eventsListVisible(false);
+            view.refreshingVisible(false);
+
+            view.askForPermission();
+        }
+        else
+        {
+            super.start();
+        }
+
+        subscriptions.add(view.locationEnabled()
+                .observeOn(uiThread)
+                .subscribe(isEnabled -> {
+
+                    if (isEnabled)
+                    {
+                        view.eventsListVisible(true);
+                        loadEvents();
+                    }
+                    else
+                    {
+                        view.eventsListVisible(false);
+                    }
+                })
+        );
+
+        subscriptions.add(view.enableLocationButtonClick()
+                .observeOn(uiThread)
+                .subscribe(isEnabled -> {
+
+                    view.askForPermission();
+                })
+        );
+    }
+
+    @Override
     void loadEvents()
     {
         //API CALL WILL BE HERE
-
         List<Event> events = new ArrayList<>();
 
         events.add(new EventBuilder()

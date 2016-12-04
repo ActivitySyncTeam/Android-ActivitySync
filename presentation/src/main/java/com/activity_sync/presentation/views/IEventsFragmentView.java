@@ -10,4 +10,12 @@ public interface IEventsFragmentView
     Observable refreshEvents();
     void addEventsList(Collection<Event> events);
     void refreshingVisible(boolean isRefreshing);
+
+    boolean checkLocationPermissions();
+    void askForPermission();
+
+    Observable<Boolean> locationEnabled();
+    void eventsListVisible(boolean isVisible);
+
+    Observable enableLocationButtonClick();
 }
