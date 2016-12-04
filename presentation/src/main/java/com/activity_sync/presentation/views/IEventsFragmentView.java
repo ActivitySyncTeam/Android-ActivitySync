@@ -21,20 +21,15 @@ public interface IEventsFragmentView
     void refreshingVisible(boolean isRefreshing);
 
     void setFragmentToolbarVisibility(int visibility);
-
     void openDatePicker();
-
     void setDate(String date);
-
     void prepareDisciplineSpinner(List<Discipline> disciplines);
-
     Discipline getDiscipline();
 
     boolean checkLocationPermissions();
     void askForPermission();
-
     Observable<Boolean> locationEnabled();
-    void eventsListVisible(boolean isVisible);
-
     Observable enableLocationButtonClick();
+
+    void eventsListVisible(boolean isVisible);
 }

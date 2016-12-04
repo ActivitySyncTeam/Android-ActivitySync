@@ -11,7 +11,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.LinearLayout;
 
 import com.activity_sync.App;
 import com.activity_sync.R;
@@ -180,6 +179,7 @@ abstract public class EventsFragmentBase extends FragmentScreen implements IEven
         {
             eventsList.setVisibility(View.VISIBLE);
             emptyView.setVisibility(View.GONE);
+            fragmentToolbar.setVisibility(View.GONE);
 
             eventsRefreshLayout.setEnabled(true);
         }
@@ -187,6 +187,7 @@ abstract public class EventsFragmentBase extends FragmentScreen implements IEven
         {
             eventsList.setVisibility(View.GONE);
             emptyView.setVisibility(View.VISIBLE);
+            fragmentToolbar.setVisibility(View.VISIBLE);
 
             eventsRefreshLayout.setEnabled(false);
         }

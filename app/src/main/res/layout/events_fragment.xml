@@ -71,19 +71,19 @@
                     android:orientation="vertical"
                     android:gravity="center">
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Yo have to enable location permission in order to load events near you"
-                        android:gravity="center"
-                        android:padding="@dimen/screen_margin_twice"/>
-
                     <Button
                         android:id="@+id/events_enable_btn"
                         style="@style/DefaultButton.EventsFragment"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="ENABLE NOW" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Yo have to enable location permission in order to load events near you"
+                        android:gravity="center"
+                        android:padding="@dimen/screen_margin_twice"/>
 
                 </LinearLayout>
 

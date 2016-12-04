@@ -31,27 +31,8 @@ public class AllEventsPresenter extends EventsFragmentBasePresenter
     @Override
     public void start()
     {
-        super.start();
-
         view.prepareDisciplineSpinner(Arrays.asList(new Discipline(1, "Koszykówka"), new Discipline(2, "Piłka nożna")));
 
-        subscriptions.add(view.searchDateClick()
-                .observeOn(uiThread)
-                .subscribe(o -> {
-                    view.openDatePicker();
-                })
-        );
-
-        subscriptions.add(view.newDateEvent()
-                .observeOn(uiThread)
-                .subscribe(date -> {
-                    view.setDate(date);
-                }));
-    }
-
-    @Override
-    public void start()
-    {
         if (view.checkLocationPermissions() == false)
         {
             view.eventsListVisible(false);
@@ -86,6 +67,19 @@ public class AllEventsPresenter extends EventsFragmentBasePresenter
                     view.askForPermission();
                 })
         );
+
+        subscriptions.add(view.searchDateClick()
+                .observeOn(uiThread)
+                .subscribe(o -> {
+                    view.openDatePicker();
+                })
+        );
+
+        subscriptions.add(view.newDateEvent()
+                .observeOn(uiThread)
+                .subscribe(date -> {
+                    view.setDate(date);
+                }));
     }
 
     @Override
