@@ -115,7 +115,7 @@
     <string name="txt_comment_author" formatted="false">%s napisał:</string>
     <string name="txt_comment_hint">Napisz tutaj swój komentarz</string>
     <string name="title_comments">Komentarze</string>
-    <string name="menu_create_event">Stwórz nowe wydarzenie</string>
+    <string name="menu_create_event">Nowe wydarzenie</string>
     <string name="log_out">Wyloguj się</string>
     <string name="cp_save_succ">Hasło zmienione!</string>
     <string name="err_confirmed_not_matching">Potwierdzone hasło różni się od nowego hasła</string>
