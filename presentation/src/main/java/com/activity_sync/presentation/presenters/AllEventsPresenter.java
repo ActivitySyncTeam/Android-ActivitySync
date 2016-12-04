@@ -13,6 +13,7 @@ import com.activity_sync.presentation.views.IEventsFragmentView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -31,17 +32,17 @@ public class AllEventsPresenter extends EventsFragmentBasePresenter
     @Override
     public void start()
     {
-        view.prepareDisciplineSpinner(Arrays.asList(new Discipline(1, "Koszykówka"), new Discipline(2, "Piłka nożna")));
-
         if (view.checkLocationPermissions() == false)
         {
             view.eventsListVisible(false);
+            view.fragmentToolbarVisibible(false);
             view.refreshingVisible(false);
 
             view.askForPermission();
         }
         else
         {
+            prepareFinalView();
             super.start();
         }
 
@@ -51,11 +52,13 @@ public class AllEventsPresenter extends EventsFragmentBasePresenter
 
                     if (isEnabled)
                     {
+                        prepareFinalView();
                         super.start();
                     }
                     else
                     {
                         view.eventsListVisible(false);
+                        view.fragmentToolbarVisibible(false);
                     }
                 })
         );
@@ -184,5 +187,22 @@ public class AllEventsPresenter extends EventsFragmentBasePresenter
                 .createEvent());
 
         view.addEventsList(events);
+    }
+
+    private String currentDate()
+    {
+        final Calendar calendar = Calendar.getInstance();
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH);
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+
+        return String.format("%d-%02d-%02d", year, month, day);
+    }
+
+    private void prepareFinalView()
+    {
+        view.setDate(currentDate());
+        view.prepareDisciplineSpinner(Arrays.asList(new Discipline(1, "Koszykówka"), new Discipline(2, "Piłka nożna")));
+        view.fragmentToolbarVisibible(true);
     }
 }

@@ -24,6 +24,13 @@ public class MyEventsPresenter extends EventsFragmentBasePresenter
     }
 
     @Override
+    public void start()
+    {
+        view.fragmentToolbarVisibible(false);
+        super.start();
+    }
+
+    @Override
     void loadEvents()
     {
         //API CALL WILL BE HERE

@@ -20,7 +20,7 @@ public interface IEventsFragmentView
     void addEventsList(Collection<Event> events);
     void refreshingVisible(boolean isRefreshing);
 
-    void setFragmentToolbarVisibility(int visibility);
+    void fragmentToolbarVisibible(boolean isVisible);
     void openDatePicker();
     void setDate(String date);
     void prepareDisciplineSpinner(List<Discipline> disciplines);

@@ -1,6 +1,8 @@
 package com.activity_sync.screens;
 
 import android.Manifest;
+import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -9,11 +11,14 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
 
 import com.activity_sync.App;
 import com.activity_sync.R;
+import com.activity_sync.presentation.models.Discipline;
 import com.activity_sync.presentation.models.Event;
 import com.activity_sync.presentation.services.IApiService;
 import com.activity_sync.presentation.services.INavigator;
@@ -28,6 +33,7 @@ import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.List;
 
@@ -61,8 +67,15 @@ abstract public class EventsFragmentBase extends FragmentScreen implements IEven
     @Bind(R.id.events_enable_btn)
     Button enablePermissionBtn;
 
+    @Bind(R.id.search_date_btn)
+    Button searchDateButton;
+
+    @Bind(R.id.spinner_discipline)
+    Spinner disciplineSpinner;
+
     private PublishSubject refreshEvents = PublishSubject.create();
     private PublishSubject<Boolean> locationsEnabled = PublishSubject.create();
+    private PublishSubject<String> newDateOccurred = PublishSubject.create();
     private RVRendererAdapter<Event> adapter;
     private List<Event> events = new ArrayList<>();
     private List<String> disciplines = new ArrayList<String>()
@@ -121,9 +134,7 @@ abstract public class EventsFragmentBase extends FragmentScreen implements IEven
     @Override
     public void refreshingVisible(boolean isRefreshing)
     {
-        eventsRefreshLayout.post(() -> {
-            eventsRefreshLayout.setRefreshing(isRefreshing);
-        });
+        eventsRefreshLayout.post(() -> eventsRefreshLayout.setRefreshing(isRefreshing));
     }
 
     @Override
@@ -179,7 +190,6 @@ abstract public class EventsFragmentBase extends FragmentScreen implements IEven
         {
             eventsList.setVisibility(View.VISIBLE);
             emptyView.setVisibility(View.GONE);
-            fragmentToolbar.setVisibility(View.GONE);
 
             eventsRefreshLayout.setEnabled(true);
         }
@@ -187,7 +197,6 @@ abstract public class EventsFragmentBase extends FragmentScreen implements IEven
         {
             eventsList.setVisibility(View.GONE);
             emptyView.setVisibility(View.VISIBLE);
-            fragmentToolbar.setVisibility(View.VISIBLE);
 
             eventsRefreshLayout.setEnabled(false);
         }
@@ -200,8 +209,73 @@ abstract public class EventsFragmentBase extends FragmentScreen implements IEven
     }
 
     @Override
-    public void setFragmentToolbarVisibility(int visibility)
+    public void fragmentToolbarVisibible(boolean isVisible)
     {
-        fragmentToolbar.setVisibility(visibility);
+        if (isVisible)
+        {
+            fragmentToolbar.setVisibility(View.VISIBLE);
+        }
+        else
+        {
+            fragmentToolbar.setVisibility(View.GONE);
+        }
+
+    }
+
+    @Override
+    public Observable searchDateClick()
+    {
+        return ViewObservable.clicks(searchDateButton);
+    }
+
+    @Override
+    public void openDatePicker()
+    {
+        final Calendar calendar = Calendar.getInstance();
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH);
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+        int hour = calendar.get(Calendar.HOUR_OF_DAY);
+        int minute = calendar.get(Calendar.MINUTE);
+
+        DatePickerDialog datePickerDialog = new DatePickerDialog(getActivity(), R.style.DatePickerStyle, (view, selectedYear, selectedMonth, selectedDay) ->
+        {
+            TimePickerDialog timePickerDialog = new TimePickerDialog(getActivity(), R.style.DatePickerStyle, (view1, selectedHour, selectedMinute) ->
+            {
+                newDateOccurred.onNext(String.format(getString(R.string.date_format), selectedYear, selectedMonth, selectedDay, selectedHour, selectedMinute));
+
+            }, hour, minute, false);
+
+            timePickerDialog.show();
+
+        }, year, month, day);
+
+        datePickerDialog.show();
+    }
+
+    @Override
+    public Observable<String> newDateEvent()
+    {
+        return newDateOccurred;
+    }
+
+    @Override
+    public void setDate(String date)
+    {
+        searchDateButton.setText(date);
+    }
+
+    @Override
+    public void prepareDisciplineSpinner(List<Discipline> disciplines)
+    {
+        ArrayAdapter<Discipline> adapter = new ArrayAdapter<>(getActivity(), R.layout.spinner_search_bar_item, disciplines);
+        adapter.setDropDownViewResource(R.layout.spinner_default_dropdown_item);
+        disciplineSpinner.setAdapter(adapter);
+    }
+
+    @Override
+    public Discipline getDiscipline()
+    {
+        return (Discipline) disciplineSpinner.getSelectedItem();
     }
 }
