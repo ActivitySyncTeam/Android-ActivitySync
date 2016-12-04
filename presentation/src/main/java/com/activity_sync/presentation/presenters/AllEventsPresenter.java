@@ -44,8 +44,7 @@ public class AllEventsPresenter extends EventsFragmentBasePresenter
 
                     if (isEnabled)
                     {
-                        view.eventsListVisible(true);
-                        loadEvents();
+                        super.start();
                     }
                     else
                     {

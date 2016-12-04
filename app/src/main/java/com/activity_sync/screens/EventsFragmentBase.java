@@ -111,7 +111,9 @@ abstract public class EventsFragmentBase extends FragmentScreen implements IEven
     @Override
     public void refreshingVisible(boolean isRefreshing)
     {
-        eventsRefreshLayout.post(() -> eventsRefreshLayout.setRefreshing(isRefreshing));
+        eventsRefreshLayout.post(() -> {
+            eventsRefreshLayout.setRefreshing(isRefreshing);
+        });
     }
 
     @Override
