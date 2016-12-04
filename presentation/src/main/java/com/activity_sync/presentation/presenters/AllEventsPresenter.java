@@ -1,5 +1,6 @@
 package com.activity_sync.presentation.presenters;
 
+import com.activity_sync.presentation.models.Discipline;
 import com.activity_sync.presentation.models.Event;
 import com.activity_sync.presentation.models.builders.DisciplineBuilder;
 import com.activity_sync.presentation.models.builders.EventBuilder;
@@ -11,6 +12,7 @@ import com.activity_sync.presentation.services.INavigator;
 import com.activity_sync.presentation.views.IEventsFragmentView;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -18,9 +20,33 @@ import rx.Scheduler;
 
 public class AllEventsPresenter extends EventsFragmentBasePresenter
 {
+    private final Scheduler uiThread;
+
     public AllEventsPresenter(IEventsFragmentView view, INavigator navigator, Scheduler uiThread, IApiService apiService)
     {
         super(view, navigator, uiThread, apiService);
+        this.uiThread = uiThread;
+    }
+
+    @Override
+    public void start()
+    {
+        super.start();
+
+        view.prepareDisciplineSpinner(Arrays.asList(new Discipline(1, "Koszykówka"), new Discipline(2, "Piłka nożna")));
+
+        subscriptions.add(view.searchDateClick()
+                .observeOn(uiThread)
+                .subscribe(o -> {
+                    view.openDatePicker();
+                })
+        );
+
+        subscriptions.add(view.newDateEvent()
+                .observeOn(uiThread)
+                .subscribe(date -> {
+                    view.setDate(date);
+                }));
     }
 
     @Override

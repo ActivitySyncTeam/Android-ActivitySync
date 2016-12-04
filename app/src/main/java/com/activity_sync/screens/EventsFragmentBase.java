@@ -1,13 +1,10 @@
 package com.activity_sync.screens;
 
 import android.os.Bundle;
-import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
-import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 
 import com.activity_sync.App;
@@ -50,7 +47,8 @@ abstract public class EventsFragmentBase extends FragmentScreen implements IEven
     private PublishSubject refreshEvents = PublishSubject.create();
     private RVRendererAdapter<Event> adapter;
     private List<Event> events = new ArrayList<>();
-    private List<String> disciplines = new ArrayList<String>(){{
+    private List<String> disciplines = new ArrayList<String>()
+    {{
         add("Koszykówka");
         add("Siatkówka");
         add("Piłka nożna");
@@ -73,8 +71,6 @@ abstract public class EventsFragmentBase extends FragmentScreen implements IEven
     {
         super.onActivityCreated(savedInstanceState);
 
-        fragmentToolbar.addView(LayoutInflater.from(getContext()).inflate(getFragmentToolbarId(), null));
-//        disciplineSpinner.setAdapter(new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, disciplines));
         eventsRefreshLayout.setOnRefreshListener(() -> refreshEvents.onNext(this));
         adapter = new RVRendererAdapter<>(getContext(), new EventsRenderer.Builder());
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
@@ -110,5 +106,9 @@ abstract public class EventsFragmentBase extends FragmentScreen implements IEven
         eventsRefreshLayout.post(() -> eventsRefreshLayout.setRefreshing(isRefreshing));
     }
 
-    protected abstract @LayoutRes int getFragmentToolbarId();
+    @Override
+    public void setFragmentToolbarVisibility(int visibility)
+    {
+        fragmentToolbar.setVisibility(visibility);
+    }
 }
