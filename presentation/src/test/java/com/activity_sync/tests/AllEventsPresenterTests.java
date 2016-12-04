@@ -42,6 +42,8 @@ public class AllEventsPresenterTests
     PublishSubject refreshEventsEvent = PublishSubject.create();
     PublishSubject enableLocationClickEvent = PublishSubject.create();
     PublishSubject<Boolean> locationEnabledEvent = PublishSubject.create();
+    PublishSubject searchDateClickEvent = PublishSubject.create();
+    PublishSubject<String> dateSelectedEvent = PublishSubject.create();
 
     Event testedEvent;
 
@@ -72,6 +74,8 @@ public class AllEventsPresenterTests
         Mockito.when(view.checkLocationPermissions()).thenReturn(true);
         Mockito.when(view.enableLocationButtonClick()).thenReturn(enableLocationClickEvent);
         Mockito.when(view.locationEnabled()).thenReturn(locationEnabledEvent);
+        Mockito.when(view.searchDateClick()).thenReturn(searchDateClickEvent);
+        Mockito.when(view.newDateEvent()).thenReturn(dateSelectedEvent);
     }
 
     @Test
