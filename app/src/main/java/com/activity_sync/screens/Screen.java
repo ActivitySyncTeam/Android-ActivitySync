@@ -2,9 +2,11 @@ package com.activity_sync.screens;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.view.MenuItem;
 
 import com.activity_sync.R;
@@ -20,6 +22,7 @@ public abstract class Screen extends BaseActivity
     @Bind(R.id.toolbar)
     Toolbar toolbar;
 
+    private MenuItem actionProgress;
     protected IPresenter presenter;
     private final int layoutResId;
     protected Screen(int layoutResId)
@@ -80,9 +83,19 @@ public abstract class Screen extends BaseActivity
             case android.R.id.home:
                 super.onBackPressed();
                 return true;
+            case R.id.action_progress:
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
+        getMenuInflater().inflate(R.menu.actionbar_menu, menu);
+        actionProgress = menu.findItem(R.id.action_progress);
+        MenuItemCompat.getActionView(actionProgress);
+        return super.onCreateOptionsMenu(menu);
     }
 
     public void showDialog(int title, int message, PublishSubject confirmClicked)
@@ -106,6 +119,17 @@ public abstract class Screen extends BaseActivity
 
         AlertDialog dialog = builder.create();
         dialog.show();
+    }
+
+
+    public void showProgressBar()
+    {
+        actionProgress.setVisible(true);
+    }
+
+    public void hideProgressBar()
+    {
+        actionProgress.setVisible(false);
     }
 
     protected abstract IPresenter createPresenter(Screen screen, Bundle savedInstanceState);

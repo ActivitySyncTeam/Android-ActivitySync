@@ -6,8 +6,7 @@ import com.activity_sync.presentation.models.builders.EventBuilder;
 import com.activity_sync.presentation.models.builders.LocationBuilder;
 import com.activity_sync.presentation.models.builders.UserBuilder;
 import com.activity_sync.presentation.models.builders.UserDetailsBuilder;
-import com.activity_sync.presentation.presenters.AllEventsPresenter;
-import com.activity_sync.presentation.presenters.EventsFragmentBasePresenter;
+import com.activity_sync.presentation.presenters.MyEventsPresenter;
 import com.activity_sync.presentation.services.IApiService;
 import com.activity_sync.presentation.services.INavigator;
 import com.activity_sync.presentation.views.IEventsFragmentView;
@@ -25,7 +24,7 @@ import rx.schedulers.Schedulers;
 import rx.subjects.PublishSubject;
 
 @RunWith(MockitoJUnitRunner.class)
-public class EventsFragmentPresenterTests
+public class MyEventsPresenterTests
 {
     @Mock
     INavigator navigator;
@@ -68,9 +67,9 @@ public class EventsFragmentPresenterTests
     }
 
     @Test
-    public void eventsFragmentBasePresenter_selectEvent_openEventDetails()
+    public void myEventsPresenter_selectEvent_openEventDetails()
     {
-        EventsFragmentBasePresenter presenter = createPresenter();
+        MyEventsPresenter presenter = createPresenter();
         presenter.start();
 
         eventSelectedEvent.onNext(testedEvent);
@@ -78,9 +77,9 @@ public class EventsFragmentPresenterTests
     }
 
     @Test
-    public void eventsFragmentBasePresenter_refreshEvent_loadEvents()
+    public void myEventsPresenter_refreshEvent_loadEvents()
     {
-        EventsFragmentBasePresenter presenter = createPresenter();
+        MyEventsPresenter presenter = createPresenter();
         presenter.start();
 
         refreshEventsEvent.onNext(this);
@@ -88,8 +87,8 @@ public class EventsFragmentPresenterTests
         Mockito.verify(view).refreshingVisible(false);
     }
 
-    private EventsFragmentBasePresenter createPresenter()
+    private MyEventsPresenter createPresenter()
     {
-        return new AllEventsPresenter(view, navigator, Schedulers.immediate(), apiService);
+        return new MyEventsPresenter(view, navigator, Schedulers.immediate(), apiService);
     }
 }

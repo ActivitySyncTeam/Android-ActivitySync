@@ -1,5 +1,7 @@
 package com.activity_sync.screens;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
@@ -39,7 +41,12 @@ public class IntroScreen extends AppIntro2 implements IIntroBaseView
         addSlide(new IntroHappyScreen());
         addSlide(new IntroEasyOrganizingScreen());
         addSlide(new IntroFriendsScreen());
-        addSlide(new IntroLocationScreen());
+
+        if (!isLocationPermissionEnabled())
+        {
+            addSlide(new IntroLocationScreen());
+        }
+
         addSlide(new IntroLastScreen());
 
         setColorTransitionsEnabled(true);
@@ -85,5 +92,13 @@ public class IntroScreen extends AppIntro2 implements IIntroBaseView
     {
         super.onStop();
         presenter.stop();
+    }
+
+    public boolean isLocationPermissionEnabled()
+    {
+        int locationCoarse = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION);
+        int LocationFine = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION);
+
+        return locationCoarse == PackageManager.PERMISSION_GRANTED && LocationFine == PackageManager.PERMISSION_GRANTED;
     }
 }

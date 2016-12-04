@@ -35,5 +35,17 @@ public class DummyPresenter extends Presenter<IDummyView>
                     view.displayMessage();
                 })
         );
+
+        subscriptions.add(view.showProgressClick()
+                .observeOn(uiThread)
+                .subscribe(o -> {
+                    view.showProgressBar();
+                }));
+
+        subscriptions.add(view.hideProgressClick()
+                .observeOn(uiThread)
+                .subscribe(o -> {
+                    view.hideProgressBar();
+                }));
     }
 }

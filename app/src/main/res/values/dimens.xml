@@ -50,4 +50,7 @@
     <dimen name="material_spinner_arrow_size">8dp</dimen>
     <dimen name="material_spinner_height">36dp</dimen>
 
+    <!-- Other -->
+    <dimen name="progress_bar_right_gap">12dp</dimen>
+
 </resources>

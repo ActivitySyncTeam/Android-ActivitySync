@@ -4,64 +4,91 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-        <LinearLayout
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:id="@+id/fragment_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorPrimaryLight"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/screen_margin_half"
+                android:paddingRight="@dimen/screen_margin_half">
+
+                <Button
+                    android:id="@+id/search_date_btn"
+                    android:layout_width="160dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start|center_vertical"
+                    android:layout_weight="0"
+                    android:textSize="@dimen/text_smaller_size"
+                    android:background="@color/colorPrimaryLight"
+                    android:drawableLeft="@drawable/ic_calendar"
+                    android:textColor="@color/white"/>
+
+                <Spinner
+                    android:id="@+id/spinner_discipline"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right|center_vertical"
+                    android:textColor="@color/white"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/white"/>
+
+            </LinearLayout>
+
+        </FrameLayout>
+
+        <android.support.v4.widget.SwipeRefreshLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/events_refresh"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
             <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <LinearLayout
-                    android:id="@+id/fragment_toolbar"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/colorPrimaryLight"
-                    android:orientation="horizontal"
-                    android:paddingLeft="@dimen/screen_margin_half"
-                    android:paddingRight="@dimen/screen_margin_half">
-
-                    <Button
-                        android:id="@+id/search_date_btn"
-                        android:layout_width="160dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="start|center_vertical"
-                        android:layout_weight="0"
-                        android:textSize="@dimen/text_smaller_size"
-                        android:background="@color/colorPrimaryLight"
-                        android:drawableLeft="@drawable/ic_calendar"
-                        android:textColor="@color/white"/>
-
-                    <Spinner
-                        android:id="@+id/spinner_discipline"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="right|center_vertical"
-                        android:textColor="@color/white"
-                        android:layout_weight="1"
-                        android:backgroundTint="@color/white"/>
-
-                </LinearLayout>
-
-            </FrameLayout>
-
-            <android.support.v4.widget.SwipeRefreshLayout
-                xmlns:android="http://schemas.android.com/apk/res/android"
-                android:id="@+id/events_refresh"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="match_parent"
+                android:background="@color/backgroundColor">
 
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/events_list"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/backgroundColor"
-                    android:clipToPadding="false"
-                    android:paddingTop="@dimen/screen_margin_half"/>
+                    android:layout_height="match_parent"
+                    android:paddingTop="@dimen/screen_margin_half"
+                    android:clipToPadding="false" />
 
-            </android.support.v4.widget.SwipeRefreshLayout>
+                <LinearLayout
+                    android:id="@+id/empty_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:gravity="center">
 
-        </LinearLayout>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Yo have to enable location permission in order to load events near you"
+                        android:gravity="center"
+                        android:padding="@dimen/screen_margin_twice"/>
+
+                    <Button
+                        android:id="@+id/events_enable_btn"
+                        style="@style/DefaultButton.EventsFragment"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="ENABLE NOW" />
+
+                </LinearLayout>
+
+            </FrameLayout>   </android.support.v4.widget.SwipeRefreshLayout>
+
+    </LinearLayout>
 
 </android.support.design.widget.CoordinatorLayout>

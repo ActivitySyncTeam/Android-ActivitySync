@@ -21,7 +21,7 @@ public class IntroLocationPresenter extends Presenter<IIntroLocationView>
         subscriptions.add(view.allowPermissionClick()
                 .observeOn(uiThread)
                 .subscribe(o -> {
-                    view.openPermissionDialog();
+                    view.checkLocationPermissions();
                 })
         );
     }

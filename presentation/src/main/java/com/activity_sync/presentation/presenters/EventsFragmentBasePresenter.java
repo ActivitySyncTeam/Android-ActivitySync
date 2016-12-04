@@ -10,9 +10,9 @@ abstract public class EventsFragmentBasePresenter extends Presenter<IEventsFragm
 {
     public static final String EVENT_CHOSEN = "EVENT_CHOSEN";
 
-    private final INavigator navigator;
-    private final Scheduler uiThread;
-    private final IApiService apiService;
+    protected final INavigator navigator;
+    protected final Scheduler uiThread;
+    protected final IApiService apiService;
 
     public EventsFragmentBasePresenter(IEventsFragmentView view, INavigator navigator, Scheduler uiThread, IApiService apiService)
     {
@@ -26,10 +26,12 @@ abstract public class EventsFragmentBasePresenter extends Presenter<IEventsFragm
     public void start()
     {
         super.start();
+
+        view.eventsListVisible(true);
         loadEvents();
 
         subscriptions.add(view.refreshEvents()
-                .subscribe(event -> {
+                .subscribe(o -> {
                     loadEvents();
                     view.refreshingVisible(false);
                 })

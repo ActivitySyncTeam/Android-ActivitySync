@@ -4,6 +4,8 @@
     <!-- DummyScreen strings -->
     <string name="btn_open_intro_screen">Open Future Intro</string>
     <string name="btn_display_test_message">Display test message</string>
+    <string name="btn_show_progress">Show progress</string>
+    <string name="btn_hide_progress">Hide progress</string>
     <string name="txt_hello_message">Hi stranger! This app will be awesome!</string>
     <string name="title_dummy_screen">Dummy Screen</string>
 
@@ -13,7 +15,9 @@
     <string name="txt_intro_friends">Participate in various types of\nevents and meet new friends!</string>
     <string name="txt_intro_last_screen">You are all set up now\nLet\'s get started!</string>
     <string name="txt_intro_locations">In order to use ActivitySync\nwith no limit we would like to\nuse your current location.</string>
-    <string name="btn_allow_location">Allow location permission</string>
+    <string name="btn_allow_now">Allow now</string>
+    <string name="txt_permission_granted">Permission has been granted</string>
+    <string name="txt_permission_not_granted">Permission has not been granted</string>
 
     <!-- Menu strings -->
     <string name="menu_dummy_screen">Dummy Screen</string>
