@@ -5,12 +5,41 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/events_list"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingTop="@dimen/screen_margin_half"
-        android:clipToPadding="false"
-        android:background="@color/backgroundColor"/>
+        android:layout_height="match_parent"
+        android:background="@color/backgroundColor">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/events_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingTop="@dimen/screen_margin_half"
+            android:clipToPadding="false" />
+
+        <LinearLayout
+            android:id="@+id/empty_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Yo have to enable location permission in order to load events near you"
+                android:gravity="center"
+                android:padding="@dimen/screen_margin_twice"/>
+
+            <Button
+                android:id="@+id/events_enable_btn"
+                style="@style/DefaultButton.EventsFragment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ENABLE NOW" />
+
+        </LinearLayout>
+
+    </FrameLayout>
 
 </android.support.v4.widget.SwipeRefreshLayout>

@@ -1,5 +1,6 @@
 package com.activity_sync.screens;
 
+import android.Manifest;
 import android.os.Bundle;
 import android.support.annotation.ColorInt;
 import android.support.v4.content.ContextCompat;
@@ -12,6 +13,13 @@ import com.activity_sync.presentation.presenters.IPresenter;
 import com.activity_sync.presentation.presenters.IntroLocationPresenter;
 import com.activity_sync.presentation.views.IIntroLocationView;
 import com.github.paolorotolo.appintro.ISlideBackgroundColorHolder;
+import com.karumi.dexter.Dexter;
+import com.karumi.dexter.MultiplePermissionsReport;
+import com.karumi.dexter.PermissionToken;
+import com.karumi.dexter.listener.PermissionRequest;
+import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
+
+import java.util.List;
 
 import butterknife.Bind;
 import rx.Observable;
@@ -56,8 +64,33 @@ public class IntroLocationScreen extends FragmentScreenWithLogic implements ISli
     }
 
     @Override
-    public void openPermissionDialog()
+    public void checkLocationPermissions()
     {
-        Toast.makeText(getContext(), "It will be implemented in different task", Toast.LENGTH_LONG).show();
+        if (Dexter.isRequestOngoing())
+        {
+            return;
+        }
+
+        Dexter.checkPermissions(new MultiplePermissionsListener()
+        {
+            @Override
+            public void onPermissionsChecked(MultiplePermissionsReport report)
+            {
+                if (report.getDeniedPermissionResponses().size() > 0)
+                {
+                    Toast.makeText(getContext(), R.string.txt_permission_not_granted, Toast.LENGTH_LONG).show();
+                }
+                else
+                {
+                    Toast.makeText(getContext(), R.string.txt_permission_granted, Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onPermissionRationaleShouldBeShown(List<PermissionRequest> permissions, PermissionToken token)
+            {
+                token.continuePermissionRequest();
+            }
+        }, Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION);
     }
 }

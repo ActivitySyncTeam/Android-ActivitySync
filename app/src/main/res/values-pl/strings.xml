@@ -8,7 +8,7 @@
     <string name="txt_intro_friends">Bierz udział w różnego\nrodzaju sportowych wydarzeniach\ni poznawaj nowych przyjaciół!</string>
     <string name="txt_intro_last_screen">Wprowadzenie zakończone dlatego…\nCzas przejść do aplikacji!</string>
     <string name="txt_intro_locations">Aby używać ActivitySync\nbez ograniczeń musisz wyrazić zgodę\nna używanie Twojej obecnej lokalizacji</string>
-    <string name="btn_allow_location">Zezwól</string>
+    <string name="btn_allow_now">Zezwól teraz</string>
     <string name="btn_login">Zaloguj się</string>
     <string name="menu_dummy_screen">Dummy Ekran</string>
     <string name="menu_events">Wydarzenia</string>
@@ -120,6 +120,8 @@
     <string name="cp_save_succ">Hasło zmienione!</string>
     <string name="err_confirmed_not_matching">Potwierdzone hasło różni się od nowego hasła</string>
     <string name="err_same_passwords">Nowe hasło nie może być takie samo jak stare hasło</string>
+    <string name="txt_permission_granted">Zezwolenie zostało udzielone</string>
+    <string name="txt_permission_not_granted">Zezwolenie nie zostało udzielone</string>
     <string name="btn_hide_progress">Schowaj progressbar</string>
     <string name="btn_show_progress">Pokaż progressbar</string>
 
