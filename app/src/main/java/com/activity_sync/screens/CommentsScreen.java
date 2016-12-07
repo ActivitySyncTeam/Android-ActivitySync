@@ -15,6 +15,7 @@ import com.activity_sync.R;
 import com.activity_sync.presentation.models.Comment;
 import com.activity_sync.presentation.presenters.CommentsPresenter;
 import com.activity_sync.presentation.presenters.IPresenter;
+import com.activity_sync.presentation.services.CurrentUser;
 import com.activity_sync.presentation.services.IApiService;
 import com.activity_sync.presentation.utils.StringUtils;
 import com.activity_sync.presentation.views.ICommentsView;
@@ -41,6 +42,9 @@ public class CommentsScreen extends Screen implements ICommentsView
     @Inject
     IApiService apiService;
 
+    @Inject
+    CurrentUser currentUser;
+
     @Bind(R.id.comments_refresh)
     SwipeRefreshLayout commentsRefreshLayout;
 
@@ -66,7 +70,7 @@ public class CommentsScreen extends Screen implements ICommentsView
     protected IPresenter createPresenter(Screen screen, Bundle savedInstanceState)
     {
         int eventId = getIntent().getIntExtra(CommentsScreen.EVENT_ID, 0);
-        return new CommentsPresenter(this, AndroidSchedulers.mainThread(), eventId, apiService);
+        return new CommentsPresenter(this, AndroidSchedulers.mainThread(), eventId, apiService, currentUser);
     }
 
     @Override
