@@ -1,5 +1,6 @@
 package com.activity_sync.screens;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
@@ -50,4 +51,7 @@ public class ParticipantsScreen extends Screen
     {
         return null;
     }
+
+    @Override
+    protected void inject(Context screen) {}
 }

@@ -1,5 +1,6 @@
 package com.activity_sync.screens;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.widget.AppCompatEditText;
@@ -61,7 +62,6 @@ public class LoginScreen extends Screen implements ILoginView
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
-        App.component(this).inject(this);
         super.onCreate(savedInstanceState);
 
         prepareEditTexts();
@@ -71,6 +71,12 @@ public class LoginScreen extends Screen implements ILoginView
     protected IPresenter createPresenter(Screen screen, Bundle savedInstanceState)
     {
         return new LoginPresenter(AndroidSchedulers.mainThread(), this, navigator, apiService, currentUser);
+    }
+
+    @Override
+    protected void inject(Context screen)
+    {
+        App.component(this).inject(this);
     }
 
     @Override

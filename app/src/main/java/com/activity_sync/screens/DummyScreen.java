@@ -1,5 +1,6 @@
 package com.activity_sync.screens;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.Toast;
@@ -53,9 +54,14 @@ public class DummyScreen extends ScreenWithMenu implements IDummyView
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
+    protected void inject(Context screen)
     {
         App.component(this).inject(this);
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
 
         setTitle(getString(R.string.title_dummy_screen));

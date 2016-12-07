@@ -74,6 +74,12 @@ public class CommentsScreen extends Screen implements ICommentsView
     }
 
     @Override
+    protected void inject(Context screen)
+    {
+        App.component(this).inject(this);
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         App.component(this).inject(this);
