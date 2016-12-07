@@ -1,5 +1,7 @@
 package com.activity_sync.presentation.services;
 
+import com.activity_sync.presentation.utils.StringUtils;
+
 import javax.inject.Inject;
 
 public class CurrentUser
@@ -32,5 +34,11 @@ public class CurrentUser
     public void userID(String userID)
     {
         permanentStorage.saveString(IPermanentStorage.CURRENT_USER_ID, userID);
+    }
+
+    public void logout()
+    {
+        authToken(StringUtils.EMPTY);
+        userID(StringUtils.EMPTY);
     }
 }

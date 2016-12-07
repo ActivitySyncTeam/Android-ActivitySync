@@ -10,11 +10,14 @@ import android.support.v4.widget.DrawerLayout;
 import android.view.MenuItem;
 
 import com.activity_sync.R;
+import com.activity_sync.presentation.services.CurrentUser;
 import com.activity_sync.presentation.services.INavigator;
 import com.activity_sync.services.Navigator;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import javax.inject.Inject;
 
 import butterknife.Bind;
 
@@ -25,6 +28,9 @@ public abstract class ScreenWithMenu extends Screen
 
     @Bind(R.id.navigation_drawer_layout)
     DrawerLayout drawerLayout;
+
+    @Inject
+    CurrentUser currentUser;
 
     private MenuNavigator menuNavigator;
 
@@ -85,11 +91,19 @@ public abstract class ScreenWithMenu extends Screen
         clearAndInflateMenu();
 
         menuNavigator = new MenuNavigator(new Navigator(this), () -> this.drawerLayout.closeDrawers());
+
         menuNavigator.addAction(R.id.menu_dummy, INavigator::openDummyScreen);
+
         menuNavigator.addAction(R.id.menu_events, INavigator::openEventsScreen);
+
         menuNavigator.addAction(R.id.menu_settings, INavigator::openSettingsScreen);
+
         menuNavigator.addAction(R.id.menu_create_event, INavigator::openEventCreatorScreen);
-        menuNavigator.addAction(R.id.menu_logout, INavigator::openLoginScreen);
+
+        menuNavigator.addAction(R.id.menu_logout, navigator -> {
+            currentUser.logout();
+            navigator.openLoginScreen();
+        });
 
         navigationView.setNavigationItemSelectedListener(menuItem -> {
             if (getMenuId() == menuItem.getItemId())
