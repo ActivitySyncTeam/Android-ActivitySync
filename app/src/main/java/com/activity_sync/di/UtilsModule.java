@@ -2,6 +2,7 @@ package com.activity_sync.di;
 
 import android.content.Context;
 
+import com.activity_sync.presentation.services.CurrentUser;
 import com.activity_sync.presentation.services.IApiService;
 import com.activity_sync.presentation.services.INavigator;
 import com.activity_sync.presentation.services.IPermanentStorage;
@@ -35,5 +36,12 @@ public class UtilsModule
     public IApiService provideApiRestService()
     {
         return new ApiService("https://secret-gorge-99838.herokuapp.com");
+    }
+
+    @Provides
+    @Singleton
+    CurrentUser provideCurrentUser(IPermanentStorage permanentStorage, INavigator navigator)
+    {
+        return new CurrentUser(permanentStorage, navigator);
     }
 }
