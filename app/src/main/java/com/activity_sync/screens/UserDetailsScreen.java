@@ -45,6 +45,15 @@ public class UserDetailsScreen extends Screen implements IUserDetailsView
     @Bind(R.id.tv_email)
     TextView email;
 
+    @Bind(R.id.tv_register_date)
+    TextView registerDate;
+
+    @Bind(R.id.tv_signature)
+    TextView signature;
+
+    @Bind(R.id.tv_events_number)
+    TextView eventsNumber;
+
     @Bind(R.id.tv_credibility)
     TextView credibilityTextView;
 
@@ -89,6 +98,9 @@ public class UserDetailsScreen extends Screen implements IUserDetailsView
         name.setText(user.getName());
         lastname.setText(user.getSurname());
         email.setText(user.getEmail());
+        registerDate.setText(user.getRegisterDate());
+        eventsNumber.setText(String.valueOf(user.getEvents()));
+        signature.setText(user.getSignature());
 
         CredibilityService credibilityService = new CredibilityService(this, user.getCredibility());
 
