@@ -39,10 +39,9 @@ public class ParticipantsBasePresenterTests
     public void setup()
     {
         testedParticipant = new UserBuilder()
-                .setUserDetails(new UserDetailsBuilder()
-                        .setFirstName("Marcin")
-                        .setlastName("Zielinski")
-                        .createUserDetails())
+                .setUserId(12)
+                .setName("Marcin")
+                .setSurname("Zielinski")
                 .setCredibility(85)
                 .createUser();
 
@@ -57,7 +56,7 @@ public class ParticipantsBasePresenterTests
         presenter.start();
 
         participantSelectedEvent.onNext(testedParticipant);
-        Mockito.verify(navigator).openUserDetailsScreen(0);
+        Mockito.verify(navigator).openUserDetailsScreen(12);
     }
 
     @Test
