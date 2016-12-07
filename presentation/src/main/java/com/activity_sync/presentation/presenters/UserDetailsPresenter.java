@@ -88,14 +88,21 @@ public class UserDetailsPresenter extends Presenter<IUserDetailsView>
                     if (user.getAdditionalInfo().isCandidate())
                     {
                         view.displayFriendRequestCanceledMessage();
+                        user.setAdditionalInfo(new AdditionalInfoBuilder().setFriend(false).setCandidate(false).createAdditionalInfo());
+                        view.setFriendBtnAppearance(user);
+
                     }
                     else if (user.getAdditionalInfo().isFriend())
                     {
                         view.displayFriendRemovedMessage();
+                        user.setAdditionalInfo(new AdditionalInfoBuilder().setFriend(false).setCandidate(false).createAdditionalInfo());
+                        view.setFriendBtnAppearance(user);
                     }
                     else
                     {
                         view.displayFriendRequestSentMessage();
+                        user.setAdditionalInfo(new AdditionalInfoBuilder().setFriend(false).setCandidate(true).createAdditionalInfo());
+                        view.setFriendBtnAppearance(user);
                     }
                 })
         );
