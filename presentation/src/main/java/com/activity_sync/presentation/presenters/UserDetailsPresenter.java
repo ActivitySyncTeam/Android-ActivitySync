@@ -30,7 +30,7 @@ public class UserDetailsPresenter extends Presenter<IUserDetailsView>
     {
         super.start();
 
-        user = createUser();
+        createUser(0);
         view.setData(user);
 
         if (currentUser.userID() == user.getUserId())
@@ -39,7 +39,8 @@ public class UserDetailsPresenter extends Presenter<IUserDetailsView>
         }
         else
         {
-            view.setThumbsColor(0);
+            view.thumbsVisible(true);
+            view.setThumbsColor(user.getAdditionalInfo().getRate());
         }
 
         subscriptions.add(view.thumbUpClick()
@@ -81,9 +82,9 @@ public class UserDetailsPresenter extends Presenter<IUserDetailsView>
         );
     }
 
-    private User createUser()
+    public void createUser(int rate)
     {
-        return new UserBuilder()
+        user = new UserBuilder()
                 .setName("Marcin")
                 .setSurname("Zielinski")
                 .setUsername("mzielu")
@@ -91,7 +92,7 @@ public class UserDetailsPresenter extends Presenter<IUserDetailsView>
                 .setUserId(1234)
                 .setCredibility(85)
                 .setAdditionalInfo(new AdditionalInfoBuilder()
-                        .setRate(0)
+                        .setRate(rate)
                         .createAdditionalInfo())
                 .createUser();
     }
