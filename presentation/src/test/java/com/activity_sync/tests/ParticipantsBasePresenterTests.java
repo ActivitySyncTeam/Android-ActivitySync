@@ -2,7 +2,6 @@ package com.activity_sync.tests;
 
 import com.activity_sync.presentation.models.User;
 import com.activity_sync.presentation.models.builders.UserBuilder;
-import com.activity_sync.presentation.models.builders.UserDetailsBuilder;
 import com.activity_sync.presentation.presenters.DeclinedParticipantsPresenter;
 import com.activity_sync.presentation.presenters.ParticipantsFragmentBasePresenter;
 import com.activity_sync.presentation.services.IApiService;

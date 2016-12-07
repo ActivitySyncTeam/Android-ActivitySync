@@ -5,7 +5,6 @@ import com.activity_sync.presentation.models.builders.DisciplineBuilder;
 import com.activity_sync.presentation.models.builders.EventBuilder;
 import com.activity_sync.presentation.models.builders.LocationBuilder;
 import com.activity_sync.presentation.models.builders.UserBuilder;
-import com.activity_sync.presentation.models.builders.UserDetailsBuilder;
 import com.activity_sync.presentation.services.IApiService;
 import com.activity_sync.presentation.services.INavigator;
 import com.activity_sync.presentation.views.IEventsFragmentView;
@@ -69,12 +68,10 @@ public class AllEventsPresenter extends EventsFragmentBasePresenter
         List<Event> events = new ArrayList<>();
 
         events.add(new EventBuilder()
-                .setUser(new UserBuilder()
-                        .setId(12)
-                        .setUserDetails(new UserDetailsBuilder()
-                                .setFirstName("Marcin")
-                                .setlastName("Zielinski")
-                                .createUserDetails())
+                .setOrganizer(new UserBuilder()
+                        .setUserId(12)
+                        .setName("Marcin")
+                        .setSurname("Zielinski")
                         .createUser())
                 .setDate(new Date("2016/10/15"))
                 .setLocation(new LocationBuilder()
@@ -88,12 +85,10 @@ public class AllEventsPresenter extends EventsFragmentBasePresenter
                 .createEvent());
 
         events.add(new EventBuilder()
-                .setUser(new UserBuilder()
-                        .setId(12)
-                        .setUserDetails(new UserDetailsBuilder()
-                                .setFirstName("Marcin")
-                                .setlastName("Zielinski")
-                                .createUserDetails())
+                .setOrganizer(new UserBuilder()
+                        .setUserId(12)
+                        .setName("Michał")
+                        .setSurname("Wolny")
                         .createUser())
                 .setDate(new Date("2016/10/15"))
                 .setLocation(new LocationBuilder()
@@ -107,12 +102,10 @@ public class AllEventsPresenter extends EventsFragmentBasePresenter
                 .createEvent());
 
         events.add(new EventBuilder()
-                .setUser(new UserBuilder()
-                        .setId(12)
-                        .setUserDetails(new UserDetailsBuilder()
-                                .setFirstName("Michael")
-                                .setlastName("Wolny")
-                                .createUserDetails())
+                .setOrganizer(new UserBuilder()
+                        .setUserId(12)
+                        .setName("Marcin")
+                        .setSurname("Zielinski")
                         .createUser())
                 .setDate(new Date("2016/10/15"))
                 .setLocation(new LocationBuilder()
@@ -126,12 +119,10 @@ public class AllEventsPresenter extends EventsFragmentBasePresenter
                 .createEvent());
 
         events.add(new EventBuilder()
-                .setUser(new UserBuilder()
-                        .setId(12)
-                        .setUserDetails(new UserDetailsBuilder()
-                                .setFirstName("Luke")
-                                .setlastName("Petka")
-                                .createUserDetails())
+                .setOrganizer(new UserBuilder()
+                        .setUserId(12)
+                        .setName("Luke")
+                        .setSurname("Petka")
                         .createUser())
                 .setDate(new Date("2016/10/15"))
                 .setLocation(new LocationBuilder()
@@ -145,12 +136,10 @@ public class AllEventsPresenter extends EventsFragmentBasePresenter
                 .createEvent());
 
         events.add(new EventBuilder()
-                .setUser(new UserBuilder()
-                        .setId(12)
-                        .setUserDetails(new UserDetailsBuilder()
-                                .setFirstName("Michael")
-                                .setlastName("Dudzik")
-                                .createUserDetails())
+                .setOrganizer(new UserBuilder()
+                        .setUserId(12)
+                        .setName("Michał")
+                        .setSurname("Dudzik")
                         .createUser())
                 .setDate(new Date("2016/10/15"))
                 .setLocation(new LocationBuilder()
