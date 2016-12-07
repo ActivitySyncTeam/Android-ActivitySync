@@ -1,5 +1,6 @@
 package com.activity_sync.screens;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
@@ -50,7 +51,6 @@ public class EventsScreen extends ScreenWithMenu implements IEventsView
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
-        App.component(this).inject(this);
         super.onCreate(savedInstanceState);
 
         adapter = new ViewPagerAdapter(getSupportFragmentManager());
@@ -66,6 +66,12 @@ public class EventsScreen extends ScreenWithMenu implements IEventsView
     protected IPresenter createPresenter(Screen screen, Bundle savedInstanceState)
     {
         return new EventsPresenter(this, navigator, AndroidSchedulers.mainThread());
+    }
+
+    @Override
+    protected void inject(Context screen)
+    {
+        App.component(this).inject(this);
     }
 
     @Override

@@ -12,9 +12,9 @@ import com.activity_sync.screens.IntroScreen;
 import com.activity_sync.screens.LoginScreen;
 import com.activity_sync.screens.ParticipantsFragmentBase;
 import com.activity_sync.screens.RegisterScreen;
-import com.activity_sync.screens.SplashScreen;
-import com.activity_sync.screens.LoginScreen;
 import com.activity_sync.screens.SettingsScreen;
+import com.activity_sync.screens.SplashScreen;
+import com.activity_sync.screens.UserDetailsScreen;
 
 import javax.inject.Singleton;
 
@@ -65,4 +65,6 @@ public interface DiComponent
     void inject(CommentsScreen commentsScreen);
 
     void inject(SettingsScreen settingsScreen);
+
+    void inject(UserDetailsScreen userDetailsScreen);
 }

@@ -1,6 +1,7 @@
 package com.activity_sync.tests;
 
 import com.activity_sync.presentation.presenters.CommentsPresenter;
+import com.activity_sync.presentation.services.CurrentUser;
 import com.activity_sync.presentation.services.IApiService;
 import com.activity_sync.presentation.utils.StringUtils;
 import com.activity_sync.presentation.views.ICommentsView;
@@ -26,6 +27,9 @@ public class CommentsPresenterTests
 
     @Mock
     ICommentsView view;
+
+    @Mock
+    CurrentUser currentUser;
 
     protected PublishSubject sendCommentEvent = PublishSubject.create();
     protected PublishSubject refreshCommentsEvent = PublishSubject.create();
@@ -82,6 +86,6 @@ public class CommentsPresenterTests
 
     private CommentsPresenter createPresenter()
     {
-        return new CommentsPresenter(view, Schedulers.immediate(), eventId, apiService);
+        return new CommentsPresenter(view, Schedulers.immediate(), eventId, apiService, currentUser);
     }
 }

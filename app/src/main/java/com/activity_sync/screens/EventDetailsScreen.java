@@ -1,5 +1,6 @@
 package com.activity_sync.screens;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
@@ -113,7 +114,6 @@ public class EventDetailsScreen extends Screen implements IEventDetailsView, OnM
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
-        App.component(this).inject(this);
         super.onCreate(savedInstanceState);
 
         SupportMapFragment supportMapFragment = new SupportMapFragment();
@@ -132,6 +132,12 @@ public class EventDetailsScreen extends Screen implements IEventDetailsView, OnM
     {
         int eventID = getIntent().getIntExtra(EventDetailsScreen.EVENT_ID, 1);
         return new EventDetailsPresenter(AndroidSchedulers.mainThread(), this, navigator, eventID, apiService);
+    }
+
+    @Override
+    protected void inject(Context screen)
+    {
+        App.component(this).inject(this);
     }
 
     @Override
