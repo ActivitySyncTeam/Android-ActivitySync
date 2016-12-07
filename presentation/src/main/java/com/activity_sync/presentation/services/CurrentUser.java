@@ -26,19 +26,19 @@ public class CurrentUser
         permanentStorage.saveString(IPermanentStorage.AUTH_TOKEN, authToken);
     }
 
-    public String userID()
+    public int userID()
     {
-        return permanentStorage.retrieveString(IPermanentStorage.CURRENT_USER_ID, IPermanentStorage.CURRENT_USER_ID_DEFAULT);
+        return permanentStorage.retrieveInteger(IPermanentStorage.CURRENT_USER_ID, IPermanentStorage.CURRENT_USER_ID_DEFAULT);
     }
 
-    public void userID(String userID)
+    public void userID(int userID)
     {
-        permanentStorage.saveString(IPermanentStorage.CURRENT_USER_ID, userID);
+        permanentStorage.saveInteger(IPermanentStorage.CURRENT_USER_ID, userID);
     }
 
     public void logout()
     {
         authToken(StringUtils.EMPTY);
-        userID(StringUtils.EMPTY);
+        userID(0);
     }
 }

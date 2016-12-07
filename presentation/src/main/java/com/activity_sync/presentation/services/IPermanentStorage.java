@@ -21,7 +21,7 @@ public interface IPermanentStorage
     String AUTH_TOKEN = "auth_token";
     String AUTH_TOKEN_DEFAULT = StringUtils.EMPTY;
     String CURRENT_USER_ID = "current_user_id";
-    String CURRENT_USER_ID_DEFAULT = StringUtils.EMPTY;
+    int CURRENT_USER_ID_DEFAULT = 0;
 
     void saveBoolean(String key, boolean value);
 

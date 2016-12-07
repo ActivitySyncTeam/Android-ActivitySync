@@ -3,6 +3,7 @@ package com.activity_sync.screens;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -11,6 +12,7 @@ import com.activity_sync.R;
 import com.activity_sync.presentation.models.User;
 import com.activity_sync.presentation.presenters.IPresenter;
 import com.activity_sync.presentation.presenters.UserDetailsPresenter;
+import com.activity_sync.presentation.services.CurrentUser;
 import com.activity_sync.presentation.services.IApiService;
 import com.activity_sync.presentation.views.IUserDetailsView;
 import com.activity_sync.utils.CredibilityService;
@@ -27,6 +29,9 @@ public class UserDetailsScreen extends Screen implements IUserDetailsView
 {
     @Inject
     IApiService apiService;
+
+    @Inject
+    CurrentUser currentUser;
 
     @Bind(R.id.tv_username)
     TextView username;
@@ -58,9 +63,17 @@ public class UserDetailsScreen extends Screen implements IUserDetailsView
     }
 
     @Override
+    protected void onCreate(Bundle savedInstanceState)
+    {
+        super.onCreate(savedInstanceState);
+
+        setTitle(getString(R.string.title_user_details));
+    }
+
+    @Override
     protected IPresenter createPresenter(Screen screen, Bundle savedInstanceState)
     {
-        return new UserDetailsPresenter(this, apiService, AndroidSchedulers.mainThread());
+        return new UserDetailsPresenter(this, apiService, AndroidSchedulers.mainThread(), currentUser);
     }
 
     @Override
@@ -83,8 +96,21 @@ public class UserDetailsScreen extends Screen implements IUserDetailsView
         credibilityImageView.setImageDrawable(drawable);
 
         credibilityTextView.setText(credibilityService.getDescription());
+    }
 
-        setThumbsColor(user.getAdditionalInfo().getRate());
+    @Override
+    public void thumbsVisible(boolean areVisible)
+    {
+        if (areVisible)
+        {
+            thumbDown.setVisibility(View.VISIBLE);
+            thumbUp.setVisibility(View.VISIBLE);
+        }
+        else
+        {
+            thumbDown.setVisibility(View.INVISIBLE);
+            thumbUp.setVisibility(View.INVISIBLE);
+        }
     }
 
     @Override

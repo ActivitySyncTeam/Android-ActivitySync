@@ -33,6 +33,6 @@ public class UserDetailsPresenterTests
 
     private UserDetailsPresenter createPresenter()
     {
-        return new UserDetailsPresenter(view, apiService, uiThread);
+        return new UserDetailsPresenter(view, apiService, uiThread, currentUser);
     }
 }

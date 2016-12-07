@@ -8,6 +8,8 @@ public interface IUserDetailsView
 {
     void setData(User user);
 
+    void thumbsVisible(boolean areVisible);
+
     Observable thumbUpClick();
 
     Observable thumbDownClick();
