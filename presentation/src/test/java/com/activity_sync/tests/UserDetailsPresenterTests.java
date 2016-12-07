@@ -32,12 +32,14 @@ public class UserDetailsPresenterTests
 
     PublishSubject thumbUpClickEvent = PublishSubject.create();
     PublishSubject thumbDownClickEvent = PublishSubject.create();
+    PublishSubject friendsClickEvent = PublishSubject.create();
 
     @Before
     public void setup()
     {
         Mockito.when(view.thumbDownClick()).thenReturn(thumbDownClickEvent);
         Mockito.when(view.thumbUpClick()).thenReturn(thumbUpClickEvent);
+        Mockito.when(view.friendsBtnClick()).thenReturn(friendsClickEvent);
     }
 
 
@@ -58,7 +60,7 @@ public class UserDetailsPresenterTests
         UserDetailsPresenter presenter = createPresenter();
         presenter.start();
 
-        Mockito.verify(view).thumbsVisible(false);
+        Mockito.verify(view).thumbsAndFollowBtnVisible(false);
     }
 
     @Test
@@ -69,7 +71,7 @@ public class UserDetailsPresenterTests
         UserDetailsPresenter presenter = createPresenter();
         presenter.start();
 
-        Mockito.verify(view).thumbsVisible(true);
+        Mockito.verify(view).thumbsAndFollowBtnVisible(true);
     }
 
     @Test
@@ -101,7 +103,7 @@ public class UserDetailsPresenterTests
         presenter.start();
 
         Mockito.reset(view);
-        presenter.createUser(-1);
+        presenter.createUser(-1, false, false);
 
         thumbDownClickEvent.onNext(this);
         Mockito.verify(view).setThumbsColor(0);
@@ -114,10 +116,49 @@ public class UserDetailsPresenterTests
         presenter.start();
 
         Mockito.reset(view);
-        presenter.createUser(1);
+        presenter.createUser(1, false, false);
 
         thumbUpClickEvent.onNext(this);
         Mockito.verify(view).setThumbsColor(0);
+    }
+
+    @Test
+    public void userDetailsPresenter_friendAlready_deleteFriend()
+    {
+        UserDetailsPresenter presenter = createPresenter();
+        presenter.start();
+
+        Mockito.reset(view);
+        presenter.createUser(1, true, false);
+
+        friendsClickEvent.onNext(this);
+        Mockito.verify(view).displayFriendRemovedMessage();
+    }
+
+    @Test
+    public void userDetailsPresenter_candidateAlready_cancelFriendRequest()
+    {
+        UserDetailsPresenter presenter = createPresenter();
+        presenter.start();
+
+        Mockito.reset(view);
+        presenter.createUser(1, false, true);
+
+        friendsClickEvent.onNext(this);
+        Mockito.verify(view).displayFriendRequestCanceledMessage();
+    }
+
+    @Test
+    public void userDetailsPresenter_stranger_sendFriendRequest()
+    {
+        UserDetailsPresenter presenter = createPresenter();
+        presenter.start();
+
+        Mockito.reset(view);
+        presenter.createUser(1, false, false);
+
+        friendsClickEvent.onNext(this);
+        Mockito.verify(view).displayFriendRequestSentMessage();
     }
 
     private UserDetailsPresenter createPresenter()
