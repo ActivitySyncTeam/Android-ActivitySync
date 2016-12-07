@@ -30,17 +30,18 @@ public class UserDetailsPresenter extends Presenter<IUserDetailsView>
     {
         super.start();
 
-        createUser(0);
+        createUser(0, false, false);
         view.setData(user);
 
         if (currentUser.userID() == user.getUserId())
         {
-            view.thumbsVisible(false);
+            view.thumbsAndFollowBtnVisible(false);
         }
         else
         {
-            view.thumbsVisible(true);
+            view.thumbsAndFollowBtnVisible(true);
             view.setThumbsColor(user.getAdditionalInfo().getRate());
+            view.setFriendBtnAppearance(user);
         }
 
         subscriptions.add(view.thumbUpClick()
@@ -80,9 +81,27 @@ public class UserDetailsPresenter extends Presenter<IUserDetailsView>
                     }
                 })
         );
+
+        subscriptions.add(view.friendsBtnClick()
+                .observeOn(uiThread)
+                .subscribe(o -> {
+                    if (user.getAdditionalInfo().isCandidate())
+                    {
+                        view.displayFriendRequestCanceledMessage();
+                    }
+                    else if (user.getAdditionalInfo().isFriend())
+                    {
+                        view.displayFriendRemovedMessage();
+                    }
+                    else
+                    {
+                        view.displayFriendRequestSentMessage();
+                    }
+                })
+        );
     }
 
-    public void createUser(int rate)
+    public void createUser(int rate, boolean isFriend, boolean isCandidate)
     {
         user = new UserBuilder()
                 .setName("Marcin")
@@ -96,6 +115,8 @@ public class UserDetailsPresenter extends Presenter<IUserDetailsView>
                 .setCredibility(85)
                 .setAdditionalInfo(new AdditionalInfoBuilder()
                         .setRate(rate)
+                        .setFriend(isFriend)
+                        .setCandidate(isCandidate)
                         .createAdditionalInfo())
                 .createUser();
     }
