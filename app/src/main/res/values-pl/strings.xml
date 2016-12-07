@@ -126,5 +126,11 @@
     <string name="btn_show_progress">Pokaż progressbar</string>
     <string name="txt_events_number">Ilość wydarzeń</string>
     <string name="txt_user_det_signature">Krótki opis</string>
+    <string name="btn_add_to_friends">Dodaj do znajomych</string>
+    <string name="btn_cancel_friend_request">Wycofaj zaproszenie</string>
+    <string name="btn_remove_from_friends">Usuń z listy znajomych</string>
+    <string name="txt_friend_removed">Użytkownik usunięty z listy znajomych</string>
+    <string name="txt_friends_request_sent">Zaproszenie zostało wysłane</string>
+    <string name="txt_friends_request_turned_down">Zaproszenie zostało anulowane</string>
 
 </resources>
