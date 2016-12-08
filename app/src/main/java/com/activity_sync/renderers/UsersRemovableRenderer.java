@@ -5,7 +5,7 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.activity_sync.R;
-import com.activity_sync.presentation.action_listeners.IParticipantActionListener;
+import com.activity_sync.presentation.action_listeners.IUserActionListener;
 import com.activity_sync.presentation.models.User;
 import com.activity_sync.renderers.base.RendererBuilder;
 
@@ -14,9 +14,9 @@ import java.util.Arrays;
 import butterknife.Bind;
 import butterknife.OnClick;
 
-public class RegisteredParticipantsRenderer extends ParticipantsRendererBase
+public class UsersRemovableRenderer extends SimpleUsersRenderer
 {
-    protected IParticipantActionListener actionListener;
+    protected IUserActionListener actionListener;
 
     @Bind(R.id.decline_sign)
     ImageView declineSign;
@@ -31,9 +31,15 @@ public class RegisteredParticipantsRenderer extends ParticipantsRendererBase
         actionListener.onDeclineButtonAction(getContent());
     }
 
-    public RegisteredParticipantsRenderer(Context context, int layoutRes, boolean isOrganizer, IParticipantActionListener actionListener)
+    public UsersRemovableRenderer(Context context, int layoutRes, boolean isOrganizer, IUserActionListener actionListener)
     {
         super(context, layoutRes, isOrganizer);
+        this.actionListener = actionListener;
+    }
+
+    public UsersRemovableRenderer(Context context, int layoutRes, IUserActionListener actionListener)
+    {
+        super(context, layoutRes);
         this.actionListener = actionListener;
     }
 
@@ -50,15 +56,20 @@ public class RegisteredParticipantsRenderer extends ParticipantsRendererBase
 
     public static class Builder extends RendererBuilder<User>
     {
-        public Builder(Context context, boolean isOrganizer, IParticipantActionListener actionListener)
+        public Builder(Context context, boolean isOrganizer, IUserActionListener actionListener)
         {
-            super(Arrays.asList(new RegisteredParticipantsRenderer(context, R.layout.participant_item_view, isOrganizer, actionListener)));
+            super(Arrays.asList(new UsersRemovableRenderer(context, R.layout.user_item_view, isOrganizer, actionListener)));
+        }
+
+        public Builder(Context context, IUserActionListener actionListener)
+        {
+            super(Arrays.asList(new UsersRemovableRenderer(context, R.layout.user_item_view, actionListener)));
         }
 
         @Override
         protected Class getPrototypeClass(User content)
         {
-            return RegisteredParticipantsRenderer.class;
+            return UsersRemovableRenderer.class;
         }
     }
 }

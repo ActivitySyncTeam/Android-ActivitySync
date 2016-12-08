@@ -1,7 +1,7 @@
 package com.activity_sync.tests;
 
 import com.activity_sync.presentation.models.User;
-import com.activity_sync.presentation.presenters.CandidatesPresenter;
+import com.activity_sync.presentation.presenters.EventCandidatesPresenter;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -12,7 +12,7 @@ import rx.schedulers.Schedulers;
 import rx.subjects.PublishSubject;
 
 @RunWith(MockitoJUnitRunner.class)
-public class CandidatesPresenterTests extends ParticipantsBasePresenterTests
+public class EventCandidatesPresenterTests extends ParticipantsBasePresenterTests
 {
     private PublishSubject<User> acceptEventClick = PublishSubject.create();
     private PublishSubject<User> removeEventClick = PublishSubject.create();
@@ -33,7 +33,7 @@ public class CandidatesPresenterTests extends ParticipantsBasePresenterTests
     @Test
     public void candidatesPresenter_acceptClick_openAcceptConfDialog()
     {
-        CandidatesPresenter presenter = createPresenter(true);
+        EventCandidatesPresenter presenter = createPresenter(true);
         presenter.start();
 
         acceptEventClick.onNext(testedParticipant);
@@ -43,7 +43,7 @@ public class CandidatesPresenterTests extends ParticipantsBasePresenterTests
     @Test
     public void candidatesPresenter_removeClick_openRemoveConfDialog()
     {
-        CandidatesPresenter presenter = createPresenter(true);
+        EventCandidatesPresenter presenter = createPresenter(true);
         presenter.start();
 
         removeEventClick.onNext(testedParticipant);
@@ -53,27 +53,27 @@ public class CandidatesPresenterTests extends ParticipantsBasePresenterTests
     @Test
     public void candidatesPresenter_confirmAccept_refresh()
     {
-        CandidatesPresenter presenter = createPresenter(true);
+        EventCandidatesPresenter presenter = createPresenter(true);
         presenter.start();
 
         acceptConfirmEvent.onNext(testedParticipant);
         Mockito.verify(view).acceptSuccessMessage(testedParticipant);
-        Mockito.verify(view).removeParticipant(testedParticipant);
+        Mockito.verify(view).removeUser(testedParticipant);
     }
 
     @Test
     public void candidatesPresenter_removeAccept_refresh()
     {
-        CandidatesPresenter presenter = createPresenter(true);
+        EventCandidatesPresenter presenter = createPresenter(true);
         presenter.start();
 
         removeConfirmEvent.onNext(testedParticipant);
         Mockito.verify(view).removeSuccessMessage(testedParticipant);
-        Mockito.verify(view).removeParticipant(testedParticipant);
+        Mockito.verify(view).removeUser(testedParticipant);
     }
 
-    private CandidatesPresenter createPresenter(boolean isOrganizer)
+    private EventCandidatesPresenter createPresenter(boolean isOrganizer)
     {
-        return new CandidatesPresenter(view, navigator, Schedulers.immediate(), isOrganizer, apiService);
+        return new EventCandidatesPresenter(view, navigator, Schedulers.immediate(), isOrganizer, apiService);
     }
 }

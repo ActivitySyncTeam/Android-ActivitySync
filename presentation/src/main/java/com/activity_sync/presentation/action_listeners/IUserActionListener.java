@@ -2,7 +2,7 @@ package com.activity_sync.presentation.action_listeners;
 
 import com.activity_sync.presentation.models.User;
 
-public interface IParticipantActionListener
+public interface IUserActionListener
 {
     void onDeclineButtonAction(User user);
 
