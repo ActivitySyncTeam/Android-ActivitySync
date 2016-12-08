@@ -27,7 +27,7 @@ public class AddedFriendsPresenterTests extends ParticipantsBasePresenterTests
     }
 
     @Test
-    public void registeredParticipantsPresenter_removeClick_openRemoveConfDialog()
+    public void addedFriendsPresenter_removeClick_openRemoveConfDialog()
     {
         AddedFriendsPresenter presenter = createPresenter();
         presenter.start();
@@ -37,7 +37,7 @@ public class AddedFriendsPresenterTests extends ParticipantsBasePresenterTests
     }
 
     @Test
-    public void registeredParticipantsPresenter_removeAccept_refresh()
+    public void addedFriendsPresenter_removeAccept_refresh()
     {
         AddedFriendsPresenter presenter = createPresenter();
         presenter.start();

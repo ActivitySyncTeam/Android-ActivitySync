@@ -31,7 +31,7 @@ public class FriendsRequestsPresenterTests extends ParticipantsBasePresenterTest
     }
 
     @Test
-    public void candidatesPresenter_acceptClick_openAcceptConfDialog()
+    public void friendRequestPresenter_acceptClick_openAcceptConfDialog()
     {
         FriendsRequestPresenter presenter = createPresenter();
         presenter.start();
@@ -41,7 +41,7 @@ public class FriendsRequestsPresenterTests extends ParticipantsBasePresenterTest
     }
 
     @Test
-    public void candidatesPresenter_removeClick_openRemoveConfDialog()
+    public void friendRequestPresenter_removeClick_openRemoveConfDialog()
     {
         FriendsRequestPresenter presenter = createPresenter();
         presenter.start();
@@ -51,7 +51,7 @@ public class FriendsRequestsPresenterTests extends ParticipantsBasePresenterTest
     }
 
     @Test
-    public void candidatesPresenter_confirmAccept_refresh()
+    public void friendRequestPresenter_confirmAccept_refresh()
     {
         FriendsRequestPresenter presenter = createPresenter();
         presenter.start();
@@ -62,7 +62,7 @@ public class FriendsRequestsPresenterTests extends ParticipantsBasePresenterTest
     }
 
     @Test
-    public void candidatesPresenter_removeAccept_refresh()
+    public void friendRequestPresenter_removeAccept_refresh()
     {
         FriendsRequestPresenter presenter = createPresenter();
         presenter.start();
