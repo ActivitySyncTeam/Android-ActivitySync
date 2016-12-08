@@ -26,7 +26,7 @@ public class ParticipantsScreen extends Screen
 
     public ParticipantsScreen()
     {
-        super(R.layout.particpants_screen);
+        super(R.layout.users_screen);
     }
 
     @Override
@@ -38,7 +38,7 @@ public class ParticipantsScreen extends Screen
 
         adapter = new ViewPagerAdapter(getSupportFragmentManager());
         adapter.addFragment(new RegisteredParticipantsFragment(isOrganizer), getString(R.string.txt_registered));
-        adapter.addFragment(new CandidatesFragment(isOrganizer), getString(R.string.txt_candidates));
+        adapter.addFragment(new EventCandidatesFragment(isOrganizer), getString(R.string.txt_candidates));
         adapter.addFragment(new DeclinedParticipantsFragment(isOrganizer), getString(R.string.txt_declined));
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);

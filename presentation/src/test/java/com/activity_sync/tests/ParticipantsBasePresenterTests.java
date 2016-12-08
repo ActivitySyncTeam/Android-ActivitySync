@@ -6,7 +6,7 @@ import com.activity_sync.presentation.presenters.DeclinedParticipantsPresenter;
 import com.activity_sync.presentation.presenters.ParticipantsFragmentBasePresenter;
 import com.activity_sync.presentation.services.IApiService;
 import com.activity_sync.presentation.services.INavigator;
-import com.activity_sync.presentation.views.IParticipantsFragmentView;
+import com.activity_sync.presentation.views.IUsersFragmentView;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -25,7 +25,7 @@ public class ParticipantsBasePresenterTests
     INavigator navigator;
 
     @Mock
-    IParticipantsFragmentView view;
+    IUsersFragmentView view;
 
     @Mock
     IApiService apiService;
@@ -45,8 +45,8 @@ public class ParticipantsBasePresenterTests
                 .setCredibility(85)
                 .createUser();
 
-        Mockito.when(view.selectedParticipant()).thenReturn(participantSelectedEvent);
-        Mockito.when(view.refreshParticipants()).thenReturn(refreshParticipantsEvent);
+        Mockito.when(view.selectedUser()).thenReturn(participantSelectedEvent);
+        Mockito.when(view.refreshUsers()).thenReturn(refreshParticipantsEvent);
     }
 
     @Test

@@ -13,6 +13,7 @@ import com.activity_sync.screens.EditAccountScreen;
 import com.activity_sync.screens.EventCreatorScreen;
 import com.activity_sync.screens.EventDetailsScreen;
 import com.activity_sync.screens.EventsScreen;
+import com.activity_sync.screens.FriendsScreen;
 import com.activity_sync.screens.IntroScreen;
 import com.activity_sync.screens.LoginScreen;
 import com.activity_sync.screens.ParticipantsScreen;
@@ -93,6 +94,12 @@ public class Navigator implements INavigator
         Intent intent = new Intent(context, CommentsScreen.class);
         intent.putExtra(CommentsScreen.EVENT_ID, eventId);
         startActivity(intent);
+    }
+
+    @Override
+    public void openFriendsScreen()
+    {
+        startActivity(getIntent(FriendsScreen.class));
     }
 
     @Override

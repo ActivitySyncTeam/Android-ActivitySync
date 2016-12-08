@@ -44,7 +44,7 @@ public class RegisteredParticipantsPresenterTests extends ParticipantsBasePresen
 
         removeConfirmEvent.onNext(testedParticipant);
         Mockito.verify(view).removeSuccessMessage(testedParticipant);
-        Mockito.verify(view).removeParticipant(testedParticipant);
+        Mockito.verify(view).removeUser(testedParticipant);
     }
 
     private RegisteredParticipantsPresenter createPresenter(boolean isOrganizer)

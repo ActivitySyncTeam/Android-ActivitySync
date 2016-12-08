@@ -4,7 +4,7 @@ import com.activity_sync.presentation.models.User;
 import com.activity_sync.presentation.models.builders.UserBuilder;
 import com.activity_sync.presentation.services.IApiService;
 import com.activity_sync.presentation.services.INavigator;
-import com.activity_sync.presentation.views.IParticipantsFragmentView;
+import com.activity_sync.presentation.views.IUsersFragmentView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +13,7 @@ import rx.Scheduler;
 
 public class RegisteredParticipantsPresenter extends ParticipantsFragmentBasePresenter
 {
-    public RegisteredParticipantsPresenter(IParticipantsFragmentView view, INavigator navigator, Scheduler uiThread, boolean isOrganizer, IApiService apiService)
+    public RegisteredParticipantsPresenter(IUsersFragmentView view, INavigator navigator, Scheduler uiThread, boolean isOrganizer, IApiService apiService)
     {
         super(view, navigator, uiThread, isOrganizer, apiService);
     }
@@ -30,7 +30,7 @@ public class RegisteredParticipantsPresenter extends ParticipantsFragmentBasePre
         subscriptions.add(view.removeConfirmClick()
                 .subscribe(user -> {
                     view.removeSuccessMessage(user);
-                    view.removeParticipant(user);
+                    view.removeUser(user);
                 })
         );
     }
@@ -64,6 +64,6 @@ public class RegisteredParticipantsPresenter extends ParticipantsFragmentBasePre
                 .setCredibility(92)
                 .createUser());
 
-        view.addParticipantsList(users);
+        view.addUsersList(users);
     }
 }

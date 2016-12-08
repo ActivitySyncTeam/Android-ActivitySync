@@ -29,4 +29,6 @@ public interface INavigator
     void openEventCreatorScreen();
 
     void openCommentsScreen(int eventId);
+
+    void openFriendsScreen();
 }

@@ -22,6 +22,7 @@
     <!-- Menu strings -->
     <string name="menu_dummy_screen">Dummy Screen</string>
     <string name="menu_events">Events</string>
+    <string name="menu_friends">Friends</string>
     <string name="menu_create_event">Crate new event</string>
     <string name="log_out">Log out</string>
     <string name="menu_settings">Settings</string>
@@ -85,6 +86,11 @@
     <string name="txt_accept_participant_confirmation_title">Accept participant confirmation</string>
     <string name="txt_remove_success" formatted="false">%s %s has been removed from this event</string>
     <string name="txt_accept_success" formatted="false">%s %s request has been accepted</string>
+
+    <!-- FriendsScreen strings -->
+    <string name="title_friends">Friends list</string>
+    <string name="txt_friends_requests">Friend requests</string>
+    <string name="txt_added_friends">Added friends</string>
 
     <!-- SettingsScreen strings -->
     <string name="title_preferences">Settings</string>
