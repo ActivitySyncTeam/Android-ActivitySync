@@ -6,25 +6,15 @@ import com.activity_sync.presentation.views.IUsersFragmentView;
 
 import rx.Scheduler;
 
-abstract public class ParticipantsFragmentBasePresenter extends Presenter<IUsersFragmentView>
+abstract public class UsersFragmentBasePresenter extends Presenter<IUsersFragmentView>
 {
     public static final String EVENT_CHOSEN = "EVENT_CHOSEN";
 
     private final INavigator navigator;
     private final Scheduler uiThread;
     private final IApiService apiService;
-    protected boolean isOrganizer;
 
-    public ParticipantsFragmentBasePresenter(IUsersFragmentView view, INavigator navigator, Scheduler uiThread, boolean isOrganizer, IApiService apiService)
-    {
-        super(view);
-        this.navigator = navigator;
-        this.uiThread = uiThread;
-        this.isOrganizer = isOrganizer;
-        this.apiService = apiService;
-    }
-
-    public ParticipantsFragmentBasePresenter(IUsersFragmentView view, INavigator navigator, Scheduler uiThread, IApiService apiService)
+    public UsersFragmentBasePresenter(IUsersFragmentView view, INavigator navigator, Scheduler uiThread, IApiService apiService)
     {
         super(view);
         this.navigator = navigator;

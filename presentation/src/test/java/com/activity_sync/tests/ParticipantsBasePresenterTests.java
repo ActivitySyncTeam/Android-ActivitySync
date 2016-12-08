@@ -2,8 +2,8 @@ package com.activity_sync.tests;
 
 import com.activity_sync.presentation.models.User;
 import com.activity_sync.presentation.models.builders.UserBuilder;
-import com.activity_sync.presentation.presenters.DeclinedParticipantsPresenter;
-import com.activity_sync.presentation.presenters.ParticipantsFragmentBasePresenter;
+import com.activity_sync.presentation.presenters.DeclinedUsersPresenter;
+import com.activity_sync.presentation.presenters.UsersFragmentBasePresenter;
 import com.activity_sync.presentation.services.IApiService;
 import com.activity_sync.presentation.services.INavigator;
 import com.activity_sync.presentation.views.IUsersFragmentView;
@@ -52,7 +52,7 @@ public class ParticipantsBasePresenterTests
     @Test
     public void participantsBasePresenter_selectParticipant_openUserDetailsScreen()
     {
-        ParticipantsFragmentBasePresenter presenter = createPresenter(true);
+        UsersFragmentBasePresenter presenter = createPresenter(true);
         presenter.start();
 
         participantSelectedEvent.onNext(testedParticipant);
@@ -62,7 +62,7 @@ public class ParticipantsBasePresenterTests
     @Test
     public void participantsBasePresenter_refreshList_reloadParticipants()
     {
-        ParticipantsFragmentBasePresenter presenter = createPresenter(true);
+        UsersFragmentBasePresenter presenter = createPresenter(true);
         presenter.start();
 
         refreshParticipantsEvent.onNext(this);
@@ -70,8 +70,8 @@ public class ParticipantsBasePresenterTests
         Mockito.verify(view).refreshingVisible(false);
     }
 
-    private ParticipantsFragmentBasePresenter createPresenter(boolean isOrganizer)
+    private UsersFragmentBasePresenter createPresenter(boolean isOrganizer)
     {
-        return new DeclinedParticipantsPresenter(view, navigator, Schedulers.immediate(), isOrganizer, apiService);
+        return new DeclinedUsersPresenter(view, navigator, Schedulers.immediate(), isOrganizer, apiService);
     }
 }

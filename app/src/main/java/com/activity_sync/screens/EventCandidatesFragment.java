@@ -13,25 +13,20 @@ import rx.android.schedulers.AndroidSchedulers;
 
 public class EventCandidatesFragment extends UsersFragmentBase implements IUserActionListener
 {
-    public EventCandidatesFragment(boolean isOrganizer)
+    public EventCandidatesFragment(boolean shouldDisplayAllOptions)
     {
-        super(isOrganizer);
-    }
-
-    public EventCandidatesFragment()
-    {
-        super();
+        super(shouldDisplayAllOptions);
     }
 
     @Override
     RendererBuilder<User> getRendererBuilder()
     {
-        return new UsersTwoOptionsRenderer.Builder(getContext(), isOrganizer, this);
+        return new UsersTwoOptionsRenderer.Builder(getContext(), shouldDisplayAllOptions, this);
     }
 
     @Override
     protected IPresenter createPresenter(FragmentScreen screen, Bundle savedInstanceState)
     {
-        return new EventCandidatesPresenter(this, navigator, AndroidSchedulers.mainThread(), isOrganizer, apiService);
+        return new EventCandidatesPresenter(this, navigator, AndroidSchedulers.mainThread(), apiService);
     }
 }

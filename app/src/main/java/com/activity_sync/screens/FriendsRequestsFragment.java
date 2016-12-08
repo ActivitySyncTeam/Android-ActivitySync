@@ -14,15 +14,15 @@ import rx.android.schedulers.AndroidSchedulers;
 
 public class FriendsRequestsFragment extends UsersFragmentBase implements IUserActionListener
 {
-    public FriendsRequestsFragment()
+    public FriendsRequestsFragment(boolean shouldDisplayAllOptions)
     {
-        super();
+        super(shouldDisplayAllOptions);
     }
 
     @Override
     RendererBuilder<User> getRendererBuilder()
     {
-        return new UsersTwoOptionsRenderer.Builder(getContext(), this);
+        return new UsersTwoOptionsRenderer.Builder(getContext(), shouldDisplayAllOptions, this);
     }
 
     @Override

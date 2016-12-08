@@ -34,17 +34,12 @@ public class UsersTwoOptionsRenderer extends UsersRemovableRenderer
         super(context, layoutRes, isOrganizer, actionListener);
     }
 
-    public UsersTwoOptionsRenderer(Context context, int layoutRes, IUserActionListener actionListener)
-    {
-        super(context, layoutRes, actionListener);
-    }
-
     @Override
     public void render()
     {
         super.render();
 
-        if (isOrganizer)
+        if (shouldDisplayAllOptions)
         {
             approveSign.setVisibility(View.VISIBLE);
         }
@@ -55,11 +50,6 @@ public class UsersTwoOptionsRenderer extends UsersRemovableRenderer
         public Builder(Context context, boolean isOrganizer, IUserActionListener actionListener)
         {
             super(Arrays.asList(new UsersTwoOptionsRenderer(context, R.layout.user_item_view, isOrganizer, actionListener)));
-        }
-
-        public Builder(Context context, IUserActionListener actionListener)
-        {
-            super(Arrays.asList(new UsersTwoOptionsRenderer(context, R.layout.user_item_view, actionListener)));
         }
 
         @Override

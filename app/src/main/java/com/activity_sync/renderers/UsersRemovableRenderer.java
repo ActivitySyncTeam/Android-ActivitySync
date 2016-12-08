@@ -31,15 +31,9 @@ public class UsersRemovableRenderer extends SimpleUsersRenderer
         actionListener.onDeclineButtonAction(getContent());
     }
 
-    public UsersRemovableRenderer(Context context, int layoutRes, boolean isOrganizer, IUserActionListener actionListener)
+    public UsersRemovableRenderer(Context context, int layoutRes, boolean shouldDisplayAllOptions, IUserActionListener actionListener)
     {
-        super(context, layoutRes, isOrganizer);
-        this.actionListener = actionListener;
-    }
-
-    public UsersRemovableRenderer(Context context, int layoutRes, IUserActionListener actionListener)
-    {
-        super(context, layoutRes);
+        super(context, layoutRes, shouldDisplayAllOptions);
         this.actionListener = actionListener;
     }
 
@@ -48,7 +42,7 @@ public class UsersRemovableRenderer extends SimpleUsersRenderer
     {
         super.render();
 
-        if(isOrganizer)
+        if(shouldDisplayAllOptions)
         {
             declineSign.setVisibility(View.VISIBLE);
         }
@@ -59,11 +53,6 @@ public class UsersRemovableRenderer extends SimpleUsersRenderer
         public Builder(Context context, boolean isOrganizer, IUserActionListener actionListener)
         {
             super(Arrays.asList(new UsersRemovableRenderer(context, R.layout.user_item_view, isOrganizer, actionListener)));
-        }
-
-        public Builder(Context context, IUserActionListener actionListener)
-        {
-            super(Arrays.asList(new UsersRemovableRenderer(context, R.layout.user_item_view, actionListener)));
         }
 
         @Override

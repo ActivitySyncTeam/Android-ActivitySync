@@ -4,7 +4,7 @@ import android.os.Bundle;
 
 import com.activity_sync.presentation.action_listeners.IUserActionListener;
 import com.activity_sync.presentation.models.User;
-import com.activity_sync.presentation.presenters.DeclinedParticipantsPresenter;
+import com.activity_sync.presentation.presenters.DeclinedUsersPresenter;
 import com.activity_sync.presentation.presenters.IPresenter;
 import com.activity_sync.renderers.SimpleUsersRenderer;
 import com.activity_sync.renderers.base.RendererBuilder;
@@ -13,25 +13,20 @@ import rx.android.schedulers.AndroidSchedulers;
 
 public class DeclinedParticipantsFragment extends UsersFragmentBase implements IUserActionListener
 {
-    public DeclinedParticipantsFragment(boolean isOrganizer)
+    public DeclinedParticipantsFragment(boolean shouldDisplayAllOptions)
     {
-        super(isOrganizer);
-    }
-
-    public DeclinedParticipantsFragment()
-    {
-        super();
+        super(shouldDisplayAllOptions);
     }
 
     @Override
     RendererBuilder<User> getRendererBuilder()
     {
-        return new SimpleUsersRenderer.Builder(getContext(), isOrganizer, this);
+        return new SimpleUsersRenderer.Builder(getContext(), shouldDisplayAllOptions, this);
     }
 
     @Override
     protected IPresenter createPresenter(FragmentScreen screen, Bundle savedInstanceState)
     {
-        return new DeclinedParticipantsPresenter(this, navigator, AndroidSchedulers.mainThread(), isOrganizer, apiService);
+        return new DeclinedUsersPresenter(this, navigator, AndroidSchedulers.mainThread(), apiService);
     }
 }

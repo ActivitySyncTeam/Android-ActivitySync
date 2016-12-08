@@ -33,8 +33,8 @@ public class FriendsScreen extends Screen
         super.onCreate(savedInstanceState);
 
         adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new AddedFriendsFragment(), getString(R.string.txt_added_friends));
-        adapter.addFragment(new FriendsRequestsFragment(), getString(R.string.txt_friends_requests));
+        adapter.addFragment(new AddedFriendsFragment(true), getString(R.string.txt_added_friends));
+        adapter.addFragment(new FriendsRequestsFragment(true), getString(R.string.txt_friends_requests));
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
 

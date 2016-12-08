@@ -20,7 +20,7 @@ import butterknife.Bind;
 public class SimpleUsersRenderer extends Renderer<User>
 {
     protected Context context;
-    protected boolean isOrganizer;
+    protected boolean shouldDisplayAllOptions;
 
     @Bind(R.id.user_name_image)
     ImageView usernameImage;
@@ -28,17 +28,11 @@ public class SimpleUsersRenderer extends Renderer<User>
     @Bind(R.id.user_name)
     TextView username;
 
-    public SimpleUsersRenderer(Context context, int layoutRes, boolean isOrganizer)
+    public SimpleUsersRenderer(Context context, int layoutRes, boolean shouldDisplayAllOptions)
     {
         super(layoutRes);
         this.context = context;
-        this.isOrganizer = isOrganizer;
-    }
-
-    public SimpleUsersRenderer(Context context, int layoutRes)
-    {
-        super(layoutRes);
-        this.context = context;
+        this.shouldDisplayAllOptions = shouldDisplayAllOptions;
     }
 
     @Override
@@ -56,11 +50,6 @@ public class SimpleUsersRenderer extends Renderer<User>
         public Builder(Context context, boolean isOrganizer, IUserActionListener actionListener)
         {
             super(Arrays.asList(new SimpleUsersRenderer(context, R.layout.user_item_view, isOrganizer)));
-        }
-
-        public Builder(Context context, IUserActionListener actionListener)
-        {
-            super(Arrays.asList(new SimpleUsersRenderer(context, R.layout.user_item_view)));
         }
 
         @Override

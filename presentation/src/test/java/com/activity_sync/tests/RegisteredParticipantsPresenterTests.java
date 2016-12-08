@@ -1,7 +1,7 @@
 package com.activity_sync.tests;
 
 import com.activity_sync.presentation.models.User;
-import com.activity_sync.presentation.presenters.RegisteredParticipantsPresenter;
+import com.activity_sync.presentation.presenters.RegisteredUsersPresenter;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -29,7 +29,7 @@ public class RegisteredParticipantsPresenterTests extends ParticipantsBasePresen
     @Test
     public void registeredParticipantsPresenter_removeClick_openRemoveConfDialog()
     {
-        RegisteredParticipantsPresenter presenter = createPresenter(true);
+        RegisteredUsersPresenter presenter = createPresenter(true);
         presenter.start();
 
         removeEventClick.onNext(testedParticipant);
@@ -39,7 +39,7 @@ public class RegisteredParticipantsPresenterTests extends ParticipantsBasePresen
     @Test
     public void registeredParticipantsPresenter_removeAccept_refresh()
     {
-        RegisteredParticipantsPresenter presenter = createPresenter(true);
+        RegisteredUsersPresenter presenter = createPresenter(true);
         presenter.start();
 
         removeConfirmEvent.onNext(testedParticipant);
@@ -47,8 +47,8 @@ public class RegisteredParticipantsPresenterTests extends ParticipantsBasePresen
         Mockito.verify(view).removeUser(testedParticipant);
     }
 
-    private RegisteredParticipantsPresenter createPresenter(boolean isOrganizer)
+    private RegisteredUsersPresenter createPresenter(boolean isOrganizer)
     {
-        return new RegisteredParticipantsPresenter(view, navigator, Schedulers.immediate(), isOrganizer, apiService);
+        return new RegisteredUsersPresenter(view, navigator, Schedulers.immediate(), isOrganizer, apiService);
     }
 }

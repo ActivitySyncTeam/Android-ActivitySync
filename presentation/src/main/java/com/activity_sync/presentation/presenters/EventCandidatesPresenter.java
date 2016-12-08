@@ -11,11 +11,11 @@ import java.util.List;
 
 import rx.Scheduler;
 
-public class EventCandidatesPresenter extends ParticipantsFragmentBasePresenter
+public class EventCandidatesPresenter extends UsersFragmentBasePresenter
 {
-    public EventCandidatesPresenter(IUsersFragmentView view, INavigator navigator, Scheduler uiThread, boolean isOrganizer, IApiService apiService)
+    public EventCandidatesPresenter(IUsersFragmentView view, INavigator navigator, Scheduler uiThread, IApiService apiService)
     {
-        super(view, navigator, uiThread, isOrganizer, apiService);
+        super(view, navigator, uiThread, apiService);
     }
 
     @Override

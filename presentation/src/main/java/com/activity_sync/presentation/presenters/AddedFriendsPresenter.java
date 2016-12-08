@@ -11,7 +11,7 @@ import java.util.List;
 
 import rx.Scheduler;
 
-public class AddedFriendsPresenter extends ParticipantsFragmentBasePresenter
+public class AddedFriendsPresenter extends UsersFragmentBasePresenter
 {
     public AddedFriendsPresenter(IUsersFragmentView view, INavigator navigator, Scheduler uiThread, IApiService apiService)
     {

@@ -12,7 +12,7 @@ import java.util.List;
 
 import rx.Scheduler;
 
-public class FriendsRequestPresenter extends ParticipantsFragmentBasePresenter
+public class FriendsRequestPresenter extends UsersFragmentBasePresenter
 {
     public FriendsRequestPresenter(IUsersFragmentView view, INavigator navigator, Scheduler uiThread, IApiService apiService)
     {

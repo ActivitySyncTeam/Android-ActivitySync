@@ -54,18 +54,12 @@ abstract public class UsersFragmentBase extends FragmentScreen implements IUsers
     private RVRendererAdapter<User> adapter;
     private List<User> participants = new ArrayList<>();
 
-    protected final boolean isOrganizer;
+    protected final boolean shouldDisplayAllOptions;
 
-    public UsersFragmentBase(boolean isOrganizer)
+    public UsersFragmentBase(boolean shouldDisplayAllOptions)
     {
         super(R.layout.participants_fragment);
-        this.isOrganizer = isOrganizer;
-    }
-
-    public UsersFragmentBase()
-    {
-        super(R.layout.participants_fragment);
-        this.isOrganizer = false;
+        this.shouldDisplayAllOptions = shouldDisplayAllOptions;
     }
 
     @Override
@@ -177,13 +171,13 @@ abstract public class UsersFragmentBase extends FragmentScreen implements IUsers
     @Override
     public void openRemoveConfirmationDialog(User user)
     {
-        showDialog(R.string.txt_remove_participant_confirmation_title, R.string.txt_remove_participant_confirmation_text, user, removeConfirmed);
+        showDialog(R.string.txt_remove_user_confirmation_title, R.string.txt_remove_user_confirmation_text, user, removeConfirmed);
     }
 
     @Override
     public void openAcceptConfirmationDialog(User user)
     {
-        showDialog(R.string.txt_accept_participant_confirmation_title, R.string.txt_accept_participant_confirmation_text, user, acceptConfirmed);
+        showDialog(R.string.txt_accept_user_confirmation_title, R.string.txt_accept_user_confirmation_text, user, acceptConfirmed);
     }
 
     @Override
