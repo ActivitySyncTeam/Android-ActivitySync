@@ -52,7 +52,7 @@ public class ParticipantsBasePresenterTests
     @Test
     public void participantsBasePresenter_selectParticipant_openUserDetailsScreen()
     {
-        UsersFragmentBasePresenter presenter = createPresenter(true);
+        UsersFragmentBasePresenter presenter = createPresenter();
         presenter.start();
 
         participantSelectedEvent.onNext(testedParticipant);
@@ -62,7 +62,7 @@ public class ParticipantsBasePresenterTests
     @Test
     public void participantsBasePresenter_refreshList_reloadParticipants()
     {
-        UsersFragmentBasePresenter presenter = createPresenter(true);
+        UsersFragmentBasePresenter presenter = createPresenter();
         presenter.start();
 
         refreshParticipantsEvent.onNext(this);
@@ -70,8 +70,8 @@ public class ParticipantsBasePresenterTests
         Mockito.verify(view).refreshingVisible(false);
     }
 
-    private UsersFragmentBasePresenter createPresenter(boolean isOrganizer)
+    private UsersFragmentBasePresenter createPresenter()
     {
-        return new DeclinedUsersPresenter(view, navigator, Schedulers.immediate(), isOrganizer, apiService);
+        return new DeclinedUsersPresenter(view, navigator, Schedulers.immediate(), apiService);
     }
 }
