@@ -8,6 +8,8 @@ public interface IEventDetailsView
 {
     Observable joinLeaveEventClick();
 
+    Observable editEventClick();
+
     Observable cancelEventClick();
 
     Observable organizerDetailsClick();
@@ -20,9 +22,13 @@ public interface IEventDetailsView
 
     void showLeaveConfirmationDialog();
 
+    void showEditConfirmationDialog();
+
     void showCancelConfirmationDialog();
 
     Observable joinEventConfirmClick();
+
+    Observable editEventConfirmClick();
 
     Observable leaveEventConfirmClick();
 

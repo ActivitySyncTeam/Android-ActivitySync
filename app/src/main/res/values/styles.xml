@@ -78,6 +78,7 @@
         <item name="android:textAllCaps">true</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textColor">@color/default_button_text</item>
+        <item name="android:background">@drawable/selector_default_button</item>
     </style>
 
     <style name="DefaultButton.Positive" parent="DefaultButton">

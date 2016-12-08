@@ -70,6 +70,13 @@ public class EventDetailsPresenter extends Presenter<IEventDetailsView>
                 })
         );
 
+        subscriptions.add(view.editEventClick()
+                .observeOn(uiThread)
+                .subscribe(o -> {
+                    view.showEditConfirmationDialog();
+                })
+        );
+
         subscriptions.add(view.joinEventConfirmClick()
                 .observeOn(uiThread)
                 .subscribe(o -> {
@@ -99,6 +106,13 @@ public class EventDetailsPresenter extends Presenter<IEventDetailsView>
                     view.showLeaveEventMessage();
                     view.setOrganizerParticipantView(new EventBuilder().setEnrollmentStatus(enrollmentStatus).setIsActive(true).createEvent());
                     event.setEnrollmentStatus(enrollmentStatus); // delete when api provided
+                })
+        );
+
+        subscriptions.add(view.editEventConfirmClick()
+                .observeOn(uiThread)
+                .subscribe(o -> {
+                    navigator.openEventCreatorScreen();
                 })
         );
 

@@ -16,7 +16,7 @@
     <string name="tab_all_events">Wszystkie</string>
     <string name="tab_my_events">Moje</string>
     <string name="title_events">Wydarzenia</string>
-    <string name="btn_join_event">Dołącz do wydarzenia</string>
+    <string name="btn_join_event">Dołącz</string>
     <string name="title_event_details">Szczegóły wydarzenia</string>
     <string name="txt_bad">Zła</string>
     <string name="txt_credibility">Wiarygodność</string>
@@ -46,8 +46,8 @@
     <string name="hint_last_name">Nazwisko</string>
     <string name="hint_nick">Nick</string>
     <string name="err_empty_field">To pole nie może być puste</string>
-    <string name="btn_cancel_event">Odwołaj wydarzenie</string>
-    <string name="btn_leave_event">Opuść wydarzenie</string>
+    <string name="btn_cancel_event">Odwołaj</string>
+    <string name="btn_leave_event">Opuść</string>
     <string name="txt_cancel_confirmation_text">Jesteś pewien, że chcesz odwołać to wydarzenie? Tej operacji nie będzie można cofnąć.</string>
     <string name="txt_cancel_confirmation_title">Potwierdzenie usunięcia wydarzenia</string>
     <string name="txt_enroll_confirmation_text">Jesteś pewien, że chcesz zapisać się na wydarzenie?</string>
@@ -124,5 +124,6 @@
     <string name="txt_permission_not_granted">Zezwolenie nie zostało udzielone</string>
     <string name="btn_hide_progress">Schowaj progressbar</string>
     <string name="btn_show_progress">Pokaż progressbar</string>
+    <string name="btn_edit">Edytuj</string>
 
 </resources>

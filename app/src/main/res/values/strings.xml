@@ -32,9 +32,9 @@
     <string name="tab_my_events">My events</string>
 
     <!-- EventDetailsScreen strings -->
-    <string name="btn_join_event">Join event</string>
-    <string name="btn_leave_event">Leave event</string>
-    <string name="btn_cancel_event">Cancel Event</string>
+    <string name="btn_join_event">Join</string>
+    <string name="btn_leave_event">Leave</string>
+    <string name="btn_cancel_event">Cancel</string>
     <string name="title_event_details">Event details</string>
     <string name="txt_event_det_organizer">Organizer</string>
     <string name="txt_event_det_participants">Participants</string>
@@ -51,6 +51,7 @@
     <string name="txt_leave_message">You have left this event</string>
     <string name="txt_participant">Participant</string>
     <string name="txt_enrolled">Enrolled</string>
+    <string name="btn_edit">Edit</string>
 
     <!-- UserDetailsScreen strings -->
     <string name="title_user_details">User details</string>
