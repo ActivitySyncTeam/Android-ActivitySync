@@ -134,5 +134,7 @@
     <string name="txt_friends_request_turned_down">Zaproszenie zostało anulowane</string>
     <string name="txt_added_friends">Dodani znajomi</string>
     <string name="txt_friends_requests">Zaproszenia znajomych</string>
+    <string name="menu_friends">Znajomi</string>
+    <string name="title_friends">Lista znajomych</string>
 
 </resources>
