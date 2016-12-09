@@ -37,7 +37,7 @@ public class EventCreatorPresenterTests
     PublishSubject<String> newDateOccurredEvent = PublishSubject.create();
     PublishSubject openLocationPickerClickEvent = PublishSubject.create();
     PublishSubject openDatePickerClickEvent = PublishSubject.create();
-    PublishSubject confirmEventCreationEvent = PublishSubject.create();
+    PublishSubject confirmActionEvent = PublishSubject.create();
 
     private Location testLocation;
     private String testDate = "29/02/2020";
@@ -52,7 +52,7 @@ public class EventCreatorPresenterTests
         Mockito.when(view.newDateEvent()).thenReturn(newDateOccurredEvent);
         Mockito.when(view.openLocationPickerScreenClick()).thenReturn(openLocationPickerClickEvent);
         Mockito.when(view.openDatePickerClick()).thenReturn(openDatePickerClickEvent);
-        Mockito.when(view.confirmCreationClickEvent()).thenReturn(confirmEventCreationEvent);
+        Mockito.when(view.confirmActionClickEvent()).thenReturn(confirmActionEvent);
 
         testLocation = new LocationBuilder()
                 .setId(1)
@@ -114,7 +114,7 @@ public class EventCreatorPresenterTests
 
         createEventClickEvent.onNext(this);
 
-        Mockito.verify(view).showConfirmationDialog();
+        Mockito.verify(view).showCreateConfirmationDialog();
     }
 
     @Test
@@ -123,7 +123,7 @@ public class EventCreatorPresenterTests
         EventCreatorPresenter presenter = createPresenter();
         presenter.start();
 
-        confirmEventCreationEvent.onNext(this);
+        confirmActionEvent.onNext(this);
 
         Mockito.verify(navigator).openEventsScreen();
     }
