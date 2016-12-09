@@ -13,7 +13,7 @@ import android.widget.TextView;
 
 import com.activity_sync.App;
 import com.activity_sync.R;
-import com.activity_sync.presentation.models.EnrollmentStatus;
+import com.activity_sync.presentation.models.AdditionalInfo;
 import com.activity_sync.presentation.models.Event;
 import com.activity_sync.presentation.presenters.EventDetailsPresenter;
 import com.activity_sync.presentation.presenters.IPresenter;
@@ -170,7 +170,7 @@ public class EventDetailsScreen extends Screen implements IEventDetailsView, OnM
         eventDate.setText(event.getReadableDate());
         eventDescription.setText(event.getDescription());
         eventLocation.setText(event.getLocation().getName());
-        eventOrganizer.setText(event.getOrganizer().getUserDetails().getUserName());
+        eventOrganizer.setText(event.getOrganizer().getUsername());
         eventParticipants.setText(String.format("%d/%d", event.getOccupiedPlaces(), event.getMaxPlaces()));
         eventLevel.setText(event.getLevel().getName());
         eventDiscipline.setText(event.getDiscipline().getName());
@@ -262,7 +262,7 @@ public class EventDetailsScreen extends Screen implements IEventDetailsView, OnM
         {
             baseInfoLayout.setVisibility(View.VISIBLE);
 
-            if (event.getEnrollmentStatus().isOrganizer())
+            if (event.getAdditionalInfo().isOrganizer())
             {
                 youOrganizerLayout.setVisibility(View.VISIBLE);
                 cancelEventButton.setVisibility(View.VISIBLE);
@@ -275,7 +275,7 @@ public class EventDetailsScreen extends Screen implements IEventDetailsView, OnM
 
             if (isEnrolledForEvent(event))
             {
-                prepareLeaveLayout(event.getEnrollmentStatus());
+                prepareLeaveLayout(event.getAdditionalInfo());
             }
             else
             {
@@ -305,11 +305,11 @@ public class EventDetailsScreen extends Screen implements IEventDetailsView, OnM
         joinLeaveEventButton.setBackground(ContextCompat.getDrawable(this, R.drawable.selector_default_positive));
     }
 
-    private void prepareLeaveLayout(EnrollmentStatus enrollmentStatus)
+    private void prepareLeaveLayout(AdditionalInfo additionalInfo)
     {
         youParticipantLayout.setVisibility(View.VISIBLE);
 
-        if (enrollmentStatus.isParticipant())
+        if (additionalInfo.isParticipant())
         {
             participantTv.setText(getResources().getString(R.string.txt_participant));
         }
@@ -324,11 +324,11 @@ public class EventDetailsScreen extends Screen implements IEventDetailsView, OnM
 
     private boolean isConnectedWithEvent(Event event)
     {
-        return event.getEnrollmentStatus().isOrganizer() || event.getEnrollmentStatus().isParticipant() || event.getEnrollmentStatus().isCandidate();
+        return event.getAdditionalInfo().isOrganizer() || event.getAdditionalInfo().isParticipant() || event.getAdditionalInfo().isCandidate();
     }
 
     private boolean isEnrolledForEvent(Event event)
     {
-        return event.getEnrollmentStatus().isParticipant() || event.getEnrollmentStatus().isCandidate();
+        return event.getAdditionalInfo().isParticipant() || event.getAdditionalInfo().isCandidate();
     }
 }

@@ -2,7 +2,6 @@ package com.activity_sync.tests;
 
 import com.activity_sync.presentation.models.User;
 import com.activity_sync.presentation.models.builders.UserBuilder;
-import com.activity_sync.presentation.models.builders.UserDetailsBuilder;
 import com.activity_sync.presentation.presenters.DeclinedParticipantsPresenter;
 import com.activity_sync.presentation.presenters.ParticipantsFragmentBasePresenter;
 import com.activity_sync.presentation.services.IApiService;
@@ -40,10 +39,9 @@ public class ParticipantsBasePresenterTests
     public void setup()
     {
         testedParticipant = new UserBuilder()
-                .setUserDetails(new UserDetailsBuilder()
-                        .setFirstName("Marcin")
-                        .setlastName("Zielinski")
-                        .createUserDetails())
+                .setUserId(12)
+                .setName("Marcin")
+                .setSurname("Zielinski")
                 .setCredibility(85)
                 .createUser();
 
@@ -58,7 +56,7 @@ public class ParticipantsBasePresenterTests
         presenter.start();
 
         participantSelectedEvent.onNext(testedParticipant);
-        Mockito.verify(navigator).openUserDetailsScreen(0);
+        Mockito.verify(navigator).openUserDetailsScreen(12);
     }
 
     @Test

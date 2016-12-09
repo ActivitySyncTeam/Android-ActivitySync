@@ -124,5 +124,7 @@
     <string name="txt_permission_not_granted">Zezwolenie nie zostało udzielone</string>
     <string name="btn_hide_progress">Schowaj progressbar</string>
     <string name="btn_show_progress">Pokaż progressbar</string>
+    <string name="txt_events_number">Ilość wydarzeń</string>
+    <string name="txt_user_det_signature">Krótki opis</string>
 
 </resources>

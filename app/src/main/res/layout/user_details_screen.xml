@@ -30,14 +30,55 @@
 
                     <include layout="@layout/toolbar" />
 
-                    <ImageView
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
-                        android:layout_gravity="center"
-                        android:layout_marginBottom="@dimen/screen_margin"
-                        android:layout_marginTop="@dimen/screen_margin"
-                        android:src="@drawable/ic_avatar"
-                        android:tint="@color/user_details_avatar" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical"
+                            android:layout_weight="1"
+                            android:gravity="center">
+
+                            <ImageView
+                                android:id="@+id/thumb_up"
+                                android:layout_width="48dp"
+                                android:layout_height="48dp"
+                                android:layout_gravity="center"
+                                android:src="@drawable/ic_thumb_up"
+                                android:tint="@color/user_details_thumb_default" />
+
+                        </LinearLayout>
+
+                        <ImageView
+                            android:layout_width="100dp"
+                            android:layout_height="100dp"
+                            android:layout_gravity="center"
+                            android:layout_marginBottom="@dimen/screen_margin"
+                            android:layout_marginTop="@dimen/screen_margin"
+                            android:src="@drawable/ic_avatar"
+                            android:tint="@color/user_details_avatar" />
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical"
+                            android:layout_weight="1"
+                            android:gravity="center">
+
+                            <ImageView
+                                android:id="@+id/thumb_down"
+                                android:layout_width="48dp"
+                                android:layout_height="48dp"
+                                android:layout_gravity="center"
+                                android:src="@drawable/ic_thumb_down"
+                                android:tint="@color/user_details_thumb_default" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -49,20 +90,163 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_gravity="left"
-                            android:orientation="vertical">
+                            android:orientation="horizontal">
 
-                            <TextView
-                                style="@style/EventDetailsScreenItemUpRow"
+                            <LinearLayout
                                 android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="@string/txt_username" />
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:orientation="vertical"
+                                android:layout_gravity="left"
+                                android:gravity="left">
 
-                            <TextView
-                                android:id="@+id/tv_username"
-                                style="@style/EventDetailsScreenItemDownRow"
+                                <TextView
+                                    style="@style/EventDetailsScreenItemUpRow"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/txt_name" />
+
+                                <TextView
+                                    android:id="@+id/tv_name"
+                                    style="@style/EventDetailsScreenItemDownRow"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    tools:text="Marcin" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
                                 android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                tools:text="mzielu" />
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:orientation="vertical"
+                                android:layout_gravity="right"
+                                android:gravity="right">
+
+                                <TextView
+                                    style="@style/EventDetailsScreenItemUpRow"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/txt_last_name" />
+
+                                <TextView
+                                    android:id="@+id/tv_lastname"
+                                    style="@style/EventDetailsScreenItemDownRow"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    tools:text="Zielinski" />
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="left"
+                            android:layout_marginTop="@dimen/screen_margin"
+                            android:orientation="horizontal">
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:orientation="vertical"
+                                android:layout_gravity="left"
+                                android:gravity="left">
+
+                                <TextView
+                                    style="@style/EventDetailsScreenItemUpRow"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/txt_username" />
+
+                                <TextView
+                                    android:id="@+id/tv_username"
+                                    style="@style/EventDetailsScreenItemDownRow"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    tools:text="mzielu" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:orientation="vertical"
+                                android:layout_gravity="right"
+                                android:gravity="right">
+
+                                <TextView
+                                    style="@style/EventDetailsScreenItemUpRow"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/txt_email" />
+
+                                <TextView
+                                    android:id="@+id/tv_email"
+                                    style="@style/EventDetailsScreenItemDownRow"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    tools:text="kmarcinzielinski@gmail.com" />
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="left"
+                            android:layout_marginTop="@dimen/screen_margin"
+                            android:orientation="horizontal">
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:orientation="vertical"
+                                android:layout_gravity="left"
+                                android:gravity="left">
+
+                                <TextView
+                                    style="@style/EventDetailsScreenItemUpRow"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/txt_registered" />
+
+                                <TextView
+                                    android:id="@+id/tv_register_date"
+                                    style="@style/EventDetailsScreenItemDownRow"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    tools:text="2015-12-12" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:orientation="vertical"
+                                android:layout_gravity="right"
+                                android:gravity="right">
+
+                                <TextView
+                                    style="@style/EventDetailsScreenItemUpRow"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/txt_events_number" />
+
+                                <TextView
+                                    android:id="@+id/tv_events_number"
+                                    style="@style/EventDetailsScreenItemDownRow"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    tools:text="34" />
+
+                            </LinearLayout>
 
                         </LinearLayout>
 
@@ -77,58 +261,15 @@
                                 style="@style/EventDetailsScreenItemUpRow"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="@string/txt_name" />
+                                android:text="@string/txt_user_det_signature" />
 
-                            <TextView
-                                android:id="@+id/tv_name"
-                                style="@style/EventDetailsScreenItemDownRow"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                tools:text="Marcin" />
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_gravity="left"
-                            android:layout_marginTop="@dimen/screen_margin"
-                            android:orientation="vertical">
-
-                            <TextView
-                                style="@style/EventDetailsScreenItemUpRow"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="@string/txt_last_name" />
-
-                            <TextView
-                                android:id="@+id/tv_lastname"
-                                style="@style/EventDetailsScreenItemDownRow"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                tools:text="Zielinski" />
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_gravity="left"
-                            android:layout_marginTop="@dimen/screen_margin"
-                            android:orientation="vertical">
-
-                            <TextView
-                                style="@style/EventDetailsScreenItemUpRow"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="@string/txt_email" />
-
-                            <TextView
-                                android:id="@+id/tv_email"
-                                style="@style/EventDetailsScreenItemDownRow"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                tools:text="kmarcinzielinski@gmail.com" />
+                                <TextView
+                                    android:id="@+id/tv_signature"
+                                    style="@style/EventDetailsScreenItemDownRow"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_vertical"
+                                    tools:text="Random signature" />
 
                         </LinearLayout>
 
@@ -169,7 +310,6 @@
                             </LinearLayout>
 
                         </LinearLayout>
-
 
                     </LinearLayout>
 

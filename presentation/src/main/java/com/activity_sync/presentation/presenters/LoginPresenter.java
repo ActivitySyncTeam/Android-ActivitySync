@@ -54,7 +54,7 @@ public class LoginPresenter extends Presenter<ILoginView>
                         //apiCall here
                         //if success:
                         currentUser.authToken("auth_token response");
-                        currentUser.userID("user_id response");
+                        currentUser.userID(1234);
                         navigator.openEventsScreen();
                     }
                 })

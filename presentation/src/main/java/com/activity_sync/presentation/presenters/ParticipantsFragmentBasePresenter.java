@@ -39,7 +39,7 @@ abstract public class ParticipantsFragmentBasePresenter extends Presenter<IParti
 
         subscriptions.add(view.selectedParticipant()
                 .subscribe(participant -> {
-                    navigator.openUserDetailsScreen(participant.getId());
+                    navigator.openUserDetailsScreen(participant.getUserId());
                 })
         );
     }

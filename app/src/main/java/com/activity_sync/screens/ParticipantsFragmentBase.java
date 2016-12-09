@@ -115,7 +115,7 @@ abstract public class ParticipantsFragmentBase extends FragmentScreen implements
 
         while (usersIterator.hasNext())
         {
-            if (usersIterator.next().getId() == userToDelete.getId())
+            if (usersIterator.next().getUserId() == userToDelete.getUserId())
             {
                 adapter.remove(userToDelete);
                 usersIterator.remove();
@@ -162,16 +162,16 @@ abstract public class ParticipantsFragmentBase extends FragmentScreen implements
     public void removeSuccessMessage(User user)
     {
         Toast.makeText(getContext(), String.format(getContext().getString(R.string.txt_remove_success),
-                user.getUserDetails().getFirstName(),
-                user.getUserDetails().getLastName()), Toast.LENGTH_LONG).show();
+                user.getName(),
+                user.getSurname()), Toast.LENGTH_LONG).show();
     }
 
     @Override
     public void acceptSuccessMessage(User user)
     {
         Toast.makeText(getContext(), String.format(getContext().getString(R.string.txt_accept_success),
-                user.getUserDetails().getFirstName(),
-                user.getUserDetails().getLastName()), Toast.LENGTH_LONG).show();
+                user.getName(),
+                user.getSurname()), Toast.LENGTH_LONG).show();
     }
 
     @Override

@@ -2,7 +2,6 @@ package com.activity_sync.presentation.presenters;
 
 import com.activity_sync.presentation.models.User;
 import com.activity_sync.presentation.models.builders.UserBuilder;
-import com.activity_sync.presentation.models.builders.UserDetailsBuilder;
 import com.activity_sync.presentation.services.IApiService;
 import com.activity_sync.presentation.services.INavigator;
 import com.activity_sync.presentation.views.IParticipantsFragmentView;
@@ -42,34 +41,26 @@ public class RegisteredParticipantsPresenter extends ParticipantsFragmentBasePre
         List<User> users = new ArrayList<>();
 
         users.add(new UserBuilder()
-                .setUserDetails(new UserDetailsBuilder()
-                        .setFirstName("Marcin")
-                        .setlastName("Zielinski")
-                        .createUserDetails())
+                .setName("Marcin")
+                .setSurname("Zielinski")
                 .setCredibility(85)
                 .createUser());
 
         users.add(new UserBuilder()
-                .setUserDetails(new UserDetailsBuilder()
-                        .setFirstName("Michał")
-                        .setlastName("Wolny")
-                        .createUserDetails())
+                .setName("Michał")
+                .setSurname("Wolny")
                 .setCredibility(67)
                 .createUser());
 
         users.add(new UserBuilder()
-                .setUserDetails(new UserDetailsBuilder()
-                        .setFirstName("Luke")
-                        .setlastName("Petka")
-                        .createUserDetails())
+                .setName("Luke")
+                .setSurname("Petka")
                 .setCredibility(12)
                 .createUser());
 
         users.add(new UserBuilder()
-                .setUserDetails(new UserDetailsBuilder()
-                        .setFirstName("Michał")
-                        .setlastName("Dudzik")
-                        .createUserDetails())
+                .setName("Michał")
+                .setSurname("Dudzik")
                 .setCredibility(92)
                 .createUser());
 

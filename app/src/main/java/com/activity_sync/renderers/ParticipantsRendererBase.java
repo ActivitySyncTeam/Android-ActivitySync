@@ -37,7 +37,7 @@ public class ParticipantsRendererBase extends Renderer<User>
     @Override
     public void render()
     {
-        participantName.setText(String.format("%s %s", getContent().getUserDetails().getFirstName(), getContent().getUserDetails().getLastName()));
+        participantName.setText(String.format("%s %s", getContent().getName(), getContent().getSurname()));
         CredibilityService credibilityService = new CredibilityService(context, getContent().getCredibility());
         TextDrawable drawable = TextDrawable.builder().buildRound(String.format("%d", getContent().getCredibility()), credibilityService.getColor());
         participantCredibilityImage.setImageDrawable(drawable);

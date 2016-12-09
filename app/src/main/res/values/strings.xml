@@ -65,6 +65,8 @@
     <string name="txt_poor">Poor</string>
     <string name="txt_bad">Bad</string>
     <string name="txt_terrible">Terrible</string>
+    <string name="txt_user_det_signature">Signature</string>
+    <string name="txt_events_number">Events number</string>
 
     <!-- ParticipantsScreen strings -->
     <string name="title_participants">Participants list</string>
