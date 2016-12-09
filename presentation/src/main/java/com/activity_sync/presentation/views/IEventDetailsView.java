@@ -22,13 +22,9 @@ public interface IEventDetailsView
 
     void showLeaveConfirmationDialog();
 
-    void showEditConfirmationDialog();
-
     void showCancelConfirmationDialog();
 
     Observable joinEventConfirmClick();
-
-    Observable editEventConfirmClick();
 
     Observable leaveEventConfirmClick();
 

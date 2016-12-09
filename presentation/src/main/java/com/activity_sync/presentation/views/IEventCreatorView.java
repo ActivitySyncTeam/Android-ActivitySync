@@ -20,15 +20,27 @@ public interface IEventCreatorView
 
     String location();
 
-    void date(String date);
-
-    void location(String location);
-
     Discipline discipline();
 
     Level level();
 
     String players();
+
+    String description();
+
+    boolean isOrganizerEnrolled();
+
+    void date(String date);
+
+    void location(String location);
+
+    void level(Level level);
+
+    void discipline(Discipline discipline);
+
+    void playersNumber(String players);
+
+    void description(String description);
 
     Observable createEventClick();
 
@@ -47,8 +59,6 @@ public interface IEventCreatorView
     void openDatePicker();
 
     void showPickerLocationErrorMessage();
-
-    boolean isOrganizerEnrolled();
 
     void showConfirmationDialog();
 

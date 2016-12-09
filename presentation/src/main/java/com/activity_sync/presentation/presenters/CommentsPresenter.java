@@ -82,6 +82,11 @@ public class CommentsPresenter extends Presenter<ICommentsView>
                 .setComment("Juz nie moge sei doczekac")
                 .createComment());
 
+        comments.add(new CommentBuilder()
+                .setName("Kasia Solecka")
+                .setComment("Lubię narty. A w sumie to wydarzenie odnośnie kosza. Sorka za spam")
+                .createComment());
+
         view.addCommentsList(comments);
     }
 }

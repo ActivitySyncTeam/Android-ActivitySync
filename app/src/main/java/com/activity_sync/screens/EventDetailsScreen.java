@@ -196,12 +196,6 @@ public class EventDetailsScreen extends Screen implements IEventDetailsView, OnM
     }
 
     @Override
-    public void showEditConfirmationDialog()
-    {
-        showDialog(R.string.txt_leave_confirmation_title, R.string.txt_leave_confirmation_text, editEventConfirmed);
-    }
-
-    @Override
     public void showCancelConfirmationDialog()
     {
         showDialog(R.string.txt_cancel_confirmation_title, R.string.txt_cancel_confirmation_text, cancelEventConfirmed);
@@ -237,12 +231,6 @@ public class EventDetailsScreen extends Screen implements IEventDetailsView, OnM
     public Observable joinEventConfirmClick()
     {
         return joinEventConfirmed;
-    }
-
-    @Override
-    public Observable editEventConfirmClick()
-    {
-        return editEventConfirmed;
     }
 
     @Override

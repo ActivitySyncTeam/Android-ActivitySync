@@ -33,6 +33,7 @@ public class EventDetailsPresenterTests
     PublishSubject cancelEventClickEvent = PublishSubject.create();
     PublishSubject joinEventConfirmEvent = PublishSubject.create();
     PublishSubject leaveEventConfirmEvent = PublishSubject.create();
+    PublishSubject ediEventClickEvent = PublishSubject.create();
     PublishSubject cancelEventConfirmEvent = PublishSubject.create();
     PublishSubject organizerDetailsClickEvent = PublishSubject.create();
     PublishSubject participantsClickEvent = PublishSubject.create();
@@ -46,6 +47,7 @@ public class EventDetailsPresenterTests
     {
         Mockito.when(view.joinLeaveEventClick()).thenReturn(joinLeaveEventClickEvent);
         Mockito.when(view.cancelEventClick()).thenReturn(cancelEventClickEvent);
+        Mockito.when(view.editEventClick()).thenReturn(ediEventClickEvent);
 
         Mockito.when(view.joinEventConfirmClick()).thenReturn(joinEventConfirmEvent);
         Mockito.when(view.leaveEventConfirmClick()).thenReturn(leaveEventConfirmEvent);
@@ -88,6 +90,17 @@ public class EventDetailsPresenterTests
 
         joinLeaveEventClickEvent.onNext(this);
         Mockito.verify(view).showLeaveConfirmationDialog();
+    }
+
+    @Test
+    public void eventDetailsPresenter_clickEditEvent_openEditEditor()
+    {
+        EventDetailsPresenter presenter = createPresenter();
+        presenter.start();
+        presenter.createEvent(false, true, false);  //will be deleted when api
+
+        ediEventClickEvent.onNext(this);
+        Mockito.verify(navigator).openEventUpdateScreen(1);
     }
 
     @Test
