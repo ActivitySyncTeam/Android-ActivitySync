@@ -321,13 +321,19 @@ abstract public class EventEditorScreenBase extends Screen implements IEventCrea
     }
 
     @Override
-    public void showConfirmationDialog()
+    public void showCreateConfirmationDialog()
     {
         showDialog(R.string.txt_create_event_confirmation_title, R.string.txt_create_event_confirmation_text, confirmClicked);
     }
 
     @Override
-    public Observable confirmCreationClickEvent()
+    public void showUpdateConfirmationDialog()
+    {
+        showDialog(R.string.txt_update_event_confirmation_title, R.string.txt_update_event_confirmation_text, confirmClicked);
+    }
+
+    @Override
+    public Observable confirmActionClickEvent()
     {
         return confirmClicked;
     }

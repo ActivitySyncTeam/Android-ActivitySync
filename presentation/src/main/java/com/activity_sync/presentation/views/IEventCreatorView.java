@@ -60,7 +60,9 @@ public interface IEventCreatorView
 
     void showPickerLocationErrorMessage();
 
-    void showConfirmationDialog();
+    void showCreateConfirmationDialog();
 
-    Observable confirmCreationClickEvent();
+    void showUpdateConfirmationDialog();
+
+    Observable confirmActionClickEvent();
 }

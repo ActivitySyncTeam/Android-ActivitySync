@@ -165,6 +165,8 @@
     <string name="txt_error_choosing_location">Location has not been chosen properly</string>
     <string name="txt_create_event_confirmation_title">Create event confirmation</string>
     <string name="txt_create_event_confirmation_text">Are you sure you want to create this event?</string>
+    <string name="txt_update_event_confirmation_title">Update event confirmation</string>
+    <string name="txt_update_event_confirmation_text">Are you sure you want to update this event?</string>
 
     <!-- CommentsScreen strings -->
     <string name="title_comments">Comments</string>

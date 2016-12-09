@@ -36,11 +36,11 @@ public class EventUpdatePresenter extends EventEditorPresenterBase
         subscriptions.add(view.createEventClick()
                 .observeOn(uiThread)
                 .subscribe(o -> {
-                    view.showConfirmationDialog();
+                    view.showUpdateConfirmationDialog();
                 })
         );
 
-        subscriptions.add(view.confirmCreationClickEvent()
+        subscriptions.add(view.confirmActionClickEvent()
                 .observeOn(uiThread)
                 .subscribe(o -> {
                     navigator.openEventDetailsScreen(event.getId());
@@ -77,7 +77,7 @@ public class EventUpdatePresenter extends EventEditorPresenterBase
                         .createLevel())
                 .setMaxPlaces(12)
                 .setDescription("testowy opis")
-                .setId(123)
+                .setId(1)
                 .createEvent();
     }
 }

@@ -21,11 +21,11 @@ public class EventCreatorPresenter extends EventEditorPresenterBase
         subscriptions.add(view.createEventClick()
                 .observeOn(uiThread)
                 .subscribe(o -> {
-                    view.showConfirmationDialog();
+                    view.showCreateConfirmationDialog();
                 })
         );
 
-        subscriptions.add(view.confirmCreationClickEvent()
+        subscriptions.add(view.confirmActionClickEvent()
                 .observeOn(uiThread)
                 .subscribe(o -> {
                     navigator.openEventsScreen();
