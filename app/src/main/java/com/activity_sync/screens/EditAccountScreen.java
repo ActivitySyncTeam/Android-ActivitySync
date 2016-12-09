@@ -1,5 +1,6 @@
 package com.activity_sync.screens;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.widget.AppCompatEditText;
@@ -64,6 +65,9 @@ public class EditAccountScreen extends Screen implements IEditAccountView
         this.userUpdateDetails = (UserUpdate) getIntent().getSerializableExtra(USER_UPDATE_DETAILS);
         return new EditAccountPresenter(this, AndroidSchedulers.mainThread());
     }
+
+    @Override
+    protected void inject(Context screen) {}
 
     public EditAccountScreen()
     {

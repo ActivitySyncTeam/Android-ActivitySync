@@ -1,9 +1,11 @@
 package com.activity_sync.screens;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.activity_sync.App;
 import com.activity_sync.R;
 import com.activity_sync.presentation.models.User;
 import com.activity_sync.presentation.presenters.IPresenter;
@@ -49,6 +51,12 @@ public class UserDetailsScreen extends Screen implements IUserDetailsView
     protected IPresenter createPresenter(Screen screen, Bundle savedInstanceState)
     {
         return new UserDetailsPresenter(this, apiService);
+    }
+
+    @Override
+    protected void inject(Context screen)
+    {
+        App.component(this).inject(this);
     }
 
     @Override

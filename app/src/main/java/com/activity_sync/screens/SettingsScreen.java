@@ -1,5 +1,6 @@
 package com.activity_sync.screens;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.widget.AppCompatCheckBox;
 import android.support.v7.widget.AppCompatSeekBar;
@@ -96,7 +97,6 @@ public class SettingsScreen extends ScreenWithMenu implements ISettingsView
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
-        App.component(this).inject(this);
         super.onCreate(savedInstanceState);
         setTitle(R.string.title_preferences);
 
@@ -191,6 +191,12 @@ public class SettingsScreen extends ScreenWithMenu implements ISettingsView
     protected IPresenter createPresenter(Screen screen, Bundle savedInstanceState)
     {
         return new SettingsPresenter(this, navigator, AndroidSchedulers.mainThread(), permanentStorage);
+    }
+
+    @Override
+    protected void inject(Context screen)
+    {
+        App.component(this).inject(this);
     }
 
     public Observable<Boolean> enableNotificationsChange()
