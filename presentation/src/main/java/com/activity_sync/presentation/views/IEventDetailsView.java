@@ -8,6 +8,8 @@ public interface IEventDetailsView
 {
     Observable joinLeaveEventClick();
 
+    Observable editEventClick();
+
     Observable cancelEventClick();
 
     Observable organizerDetailsClick();

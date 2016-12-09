@@ -23,7 +23,7 @@
     <string name="menu_dummy_screen">Dummy Screen</string>
     <string name="menu_events">Events</string>
     <string name="menu_friends">Friends</string>
-    <string name="menu_create_event">Crate new event</string>
+    <string name="menu_create_event">New event</string>
     <string name="log_out">Log out</string>
     <string name="menu_settings">Settings</string>
 
@@ -33,9 +33,9 @@
     <string name="tab_my_events">My events</string>
 
     <!-- EventDetailsScreen strings -->
-    <string name="btn_join_event">Join event</string>
-    <string name="btn_leave_event">Leave event</string>
-    <string name="btn_cancel_event">Cancel Event</string>
+    <string name="btn_join_event">Join</string>
+    <string name="btn_leave_event">Leave</string>
+    <string name="btn_cancel_event">Cancel</string>
     <string name="title_event_details">Event details</string>
     <string name="txt_event_det_organizer">Organizer</string>
     <string name="txt_event_det_participants">Participants</string>
@@ -52,6 +52,7 @@
     <string name="txt_leave_message">You have left this event</string>
     <string name="txt_participant">Participant</string>
     <string name="txt_enrolled">Enrolled</string>
+    <string name="btn_edit">Edit</string>
 
     <!-- UserDetailsScreen strings -->
     <string name="title_user_details">User details</string>
@@ -148,7 +149,7 @@
     <string name="hint_nick">Nick</string>
     <string name="err_empty_field">This field cannot be empty</string>
 
-    <!-- EventCreatorScreen strings -->
+    <!-- EventEditorScreenBase strings -->
     <string name="txt_choose_date">Date of the event</string>
     <string name="txt_not_selected">Not selected</string>
     <string name="txt_choose_location">Location of the event</string>
@@ -159,10 +160,13 @@
     <string name="txt_enroll_as_a_participant">Enroll as a participant</string>
     <string name="txt_create_event">Create event</string>
     <string name="title_event_creator">Event creator</string>
+    <string name="title_event_update">Updating event</string>
     <string name="date_format" translatable="false">%d-%d-%d %02d:%02d:00</string>
     <string name="txt_error_choosing_location">Location has not been chosen properly</string>
     <string name="txt_create_event_confirmation_title">Create event confirmation</string>
     <string name="txt_create_event_confirmation_text">Are you sure you want to create this event?</string>
+    <string name="txt_update_event_confirmation_title">Update event confirmation</string>
+    <string name="txt_update_event_confirmation_text">Are you sure you want to update this event?</string>
 
     <!-- CommentsScreen strings -->
     <string name="title_comments">Comments</string>

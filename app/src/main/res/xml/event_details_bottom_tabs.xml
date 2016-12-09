@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<tabs>
+    <tab
+        id="@+id/tab_favorites"
+        icon="@drawable/ic_account"
+        title="Favorites"
+        inActiveColor="#FF0000"
+        activeColor="#FF0000" />
+
+    <tab
+        id="@+id/tab_nearby"
+        icon="@drawable/ic_check"
+        title="Nearby"
+        inActiveColor="#FF0000"
+        activeColor="#FF0000" />
+
+    <tab
+        id="@+id/tab_friends"
+        icon="@drawable/ic_lock"
+        title="Friends"
+        inActiveColor="#FF0000"
+        activeColor="#FF0000" />
+</tabs>

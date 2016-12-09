@@ -32,6 +32,8 @@
     <item name="default_button_negative_state_pressed" type="color">#a71906</item>
     <item name="default_button_positive_state_normal" type="color">#2cc781</item>
     <item name="default_button_positive_state_pressed" type="color">#1c8154</item>
+    <item name="default_button_state_normal" type="color">#dfa02c</item>
+    <item name="default_button_state_pressed" type="color">#da7400</item>
 
     <!--Welcome Screen colors-->
     <item name="welcome_logo_border" type="color">@color/white</item>

@@ -81,6 +81,9 @@ public class EventDetailsScreen extends Screen implements IEventDetailsView, OnM
     @Bind(R.id.join_leave_event_btn)
     Button joinLeaveEventButton;
 
+    @Bind(R.id.edit_event_btn)
+    Button editEventButton;
+
     @Bind(R.id.cancel_event_btn)
     Button cancelEventButton;
 
@@ -103,6 +106,7 @@ public class EventDetailsScreen extends Screen implements IEventDetailsView, OnM
 
     private PublishSubject joinEventConfirmed = PublishSubject.create();
     private PublishSubject leaveEventConfirmed = PublishSubject.create();
+    private PublishSubject editEventConfirmed = PublishSubject.create();
     private PublishSubject cancelEventConfirmed = PublishSubject.create();
     private PublishSubject googleMapReadyEvent = PublishSubject.create();
 
@@ -144,6 +148,12 @@ public class EventDetailsScreen extends Screen implements IEventDetailsView, OnM
     public Observable joinLeaveEventClick()
     {
         return ViewObservable.clicks(joinLeaveEventButton);
+    }
+
+    @Override
+    public Observable editEventClick()
+    {
+        return ViewObservable.clicks(editEventButton);
     }
 
     @Override
@@ -265,11 +275,13 @@ public class EventDetailsScreen extends Screen implements IEventDetailsView, OnM
             if (event.getAdditionalInfo().isOrganizer())
             {
                 youOrganizerLayout.setVisibility(View.VISIBLE);
+                editEventButton.setVisibility(View.VISIBLE);
                 cancelEventButton.setVisibility(View.VISIBLE);
             }
             else
             {
                 youOrganizerLayout.setVisibility(View.GONE);
+                editEventButton.setVisibility(View.GONE);
                 cancelEventButton.setVisibility(View.GONE);
             }
 

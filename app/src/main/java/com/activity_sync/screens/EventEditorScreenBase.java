@@ -9,6 +9,7 @@ import android.support.v7.widget.CardView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -19,8 +20,6 @@ import com.activity_sync.presentation.models.Discipline;
 import com.activity_sync.presentation.models.Level;
 import com.activity_sync.presentation.models.Location;
 import com.activity_sync.presentation.models.builders.LocationBuilder;
-import com.activity_sync.presentation.presenters.EventCreatorPresenter;
-import com.activity_sync.presentation.presenters.IPresenter;
 import com.activity_sync.presentation.services.IApiService;
 import com.activity_sync.presentation.services.INavigator;
 import com.activity_sync.presentation.views.IEventCreatorView;
@@ -38,11 +37,10 @@ import javax.inject.Inject;
 
 import butterknife.Bind;
 import rx.Observable;
-import rx.android.schedulers.AndroidSchedulers;
 import rx.android.view.ViewObservable;
 import rx.subjects.PublishSubject;
 
-public class EventCreatorScreen extends Screen implements IEventCreatorView
+abstract public class EventEditorScreenBase extends Screen implements IEventCreatorView
 {
     private static final int REQUEST_SELECT_PLACE = 1111;
 
@@ -73,26 +71,27 @@ public class EventCreatorScreen extends Screen implements IEventCreatorView
     @Bind(R.id.spinner_players)
     Spinner playersSpinner;
 
+    @Bind(R.id.event_description)
+    EditText eventDescritption;
+
     @Bind(R.id.event_checkbox)
     CheckBox eventCheckbox;
 
-    @Bind(R.id.btn_create_event)
-    Button createEventButton;
+    @Bind(R.id.btn_editor_action)
+    Button editorActionButton;
 
     PublishSubject<Location> newLocationOccurred = PublishSubject.create();
     PublishSubject locationErrorOccurred = PublishSubject.create();
     PublishSubject<String> newDateOccurred = PublishSubject.create();
     PublishSubject confirmClicked = PublishSubject.create();
 
-    public EventCreatorScreen()
-    {
-        super(R.layout.event_creator_screen);
-    }
+    private List<Discipline> disciplines = new ArrayList<>();
+    private List<Level> levels = new ArrayList<>();
+    private List<String> playersNumbers = new ArrayList<>();
 
-    @Override
-    protected IPresenter createPresenter(Screen screen, Bundle savedInstanceState)
+    public EventEditorScreenBase()
     {
-        return new EventCreatorPresenter(AndroidSchedulers.mainThread(), this, navigator, apiService);
+        super(R.layout.event_editor_screen);
     }
 
     @Override
@@ -105,13 +104,14 @@ public class EventCreatorScreen extends Screen implements IEventCreatorView
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-
-        setTitle(getString(R.string.title_event_creator));
     }
 
     @Override
     public void prepareDisciplineSpinner(List<Discipline> disciplines)
     {
+        this.disciplines.clear();
+        this.disciplines = disciplines;
+
         ArrayAdapter<Discipline> adapter = new ArrayAdapter<>(this, R.layout.spinner_deafult_main_item, disciplines);
         adapter.setDropDownViewResource(R.layout.spinner_default_dropdown_item);
         disciplineSpinner.setAdapter(adapter);
@@ -120,6 +120,9 @@ public class EventCreatorScreen extends Screen implements IEventCreatorView
     @Override
     public void prepareLevelSpinner(List<Level> levels)
     {
+        this.levels.clear();
+        this.levels = levels;
+
         ArrayAdapter<Level> adapter = new ArrayAdapter<>(this, R.layout.spinner_deafult_main_item, levels);
         adapter.setDropDownViewResource(R.layout.spinner_default_dropdown_item);
         levelSpinner.setAdapter(adapter);
@@ -128,14 +131,14 @@ public class EventCreatorScreen extends Screen implements IEventCreatorView
     @Override
     public void preparePlayersSpinner()
     {
-        List<String> players = new ArrayList<>();
+        playersNumbers.clear();
 
         for (int i = 0; i < 40; i++)
         {
-            players.add(String.valueOf(i));
+            playersNumbers.add(String.valueOf(i));
         }
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.spinner_deafult_main_item, players);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.spinner_deafult_main_item, playersNumbers);
         adapter.setDropDownViewResource(R.layout.spinner_default_dropdown_item);
         playersSpinner.setAdapter(adapter);
     }
@@ -153,6 +156,12 @@ public class EventCreatorScreen extends Screen implements IEventCreatorView
     }
 
     @Override
+    public String description()
+    {
+        return eventDescritption.getText().toString();
+    }
+
+    @Override
     public void date(String date)
     {
         eventDate.setText(date);
@@ -162,6 +171,48 @@ public class EventCreatorScreen extends Screen implements IEventCreatorView
     public void location(String location)
     {
         eventLocation.setText(location);
+    }
+
+    @Override
+    public void level(Level level)
+    {
+        for (int i = 0; i < levels.size() ; i++)
+        {
+            if (level.getId() == levels.get(i).getId())
+            {
+                playersSpinner.setSelection(i);
+            }
+        }
+    }
+
+    @Override
+    public void discipline(Discipline discipline)
+    {
+        for (int i = 0; i < disciplines.size() ; i++)
+        {
+            if (discipline.getId() == disciplines.get(i).getId())
+            {
+                disciplineSpinner.setSelection(i);
+            }
+        }
+    }
+
+    @Override
+    public void playersNumber(String players)
+    {
+        for (int i = 0; i < playersNumbers.size() ; i++)
+        {
+            if (playersNumbers.get(i).equals(players))
+            {
+                playersSpinner.setSelection(i);
+            }
+        }
+    }
+
+    @Override
+    public void description(String description)
+    {
+        eventDescritption.setText(description);
     }
 
     @Override
@@ -185,7 +236,7 @@ public class EventCreatorScreen extends Screen implements IEventCreatorView
     @Override
     public Observable createEventClick()
     {
-        return ViewObservable.clicks(createEventButton);
+        return ViewObservable.clicks(editorActionButton);
     }
 
     @Override
@@ -270,13 +321,19 @@ public class EventCreatorScreen extends Screen implements IEventCreatorView
     }
 
     @Override
-    public void showConfirmationDialog()
+    public void showCreateConfirmationDialog()
     {
         showDialog(R.string.txt_create_event_confirmation_title, R.string.txt_create_event_confirmation_text, confirmClicked);
     }
 
     @Override
-    public Observable confirmCreationClickEvent()
+    public void showUpdateConfirmationDialog()
+    {
+        showDialog(R.string.txt_update_event_confirmation_title, R.string.txt_update_event_confirmation_text, confirmClicked);
+    }
+
+    @Override
+    public Observable confirmActionClickEvent()
     {
         return confirmClicked;
     }
