@@ -36,8 +36,8 @@ public class EventsRenderer extends Renderer<Event>
     @Override
     public void render()
     {
-        eventOrganizer.setText(String.format("%s %s", getContent().getOrganizer().getUserDetails().getFirstName(),
-                getContent().getOrganizer().getUserDetails().getLastName()));
+        eventOrganizer.setText(String.format("%s %s", getContent().getOrganizer().getName(),
+                getContent().getOrganizer().getSurname()));
         eventLocation.setText(getContent().getLocation().getName());
         eventDate.setText(getContent().getReadableDate());
         eventDiscipline.setText(getContent().getDiscipline().getName());

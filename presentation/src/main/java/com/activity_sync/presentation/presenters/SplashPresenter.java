@@ -25,13 +25,13 @@ public class SplashPresenter extends Presenter<ISplashView>
     {
         super.start();
 
-        if (permanentStorage.retrieveBoolean(IPermanentStorage.IS_APP_OPENED_BEFORE, IPermanentStorage.IS_APP_OPENED_BEFORE_DEFAULT))
+        if (permanentStorage.retrieveBoolean(IPermanentStorage.IS_APP_OPENED_BEFORE, IPermanentStorage.IS_APP_OPENED_BEFORE_DEFAULT) == false)
         {
-            navigator.openLoginScreen();
+            navigator.openIntroScreen();
         }
         else
         {
-            navigator.openIntroScreen();
+            navigator.openLoginScreen();
         }
 
         view.finishSplashScreen();

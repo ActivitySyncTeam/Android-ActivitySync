@@ -22,6 +22,7 @@
     <!-- Menu strings -->
     <string name="menu_dummy_screen">Dummy Screen</string>
     <string name="menu_events">Events</string>
+    <string name="menu_friends">Friends</string>
     <string name="menu_create_event">Crate new event</string>
     <string name="log_out">Log out</string>
     <string name="menu_settings">Settings</string>
@@ -66,18 +67,31 @@
     <string name="txt_poor">Poor</string>
     <string name="txt_bad">Bad</string>
     <string name="txt_terrible">Terrible</string>
+    <string name="txt_user_det_signature">Signature</string>
+    <string name="txt_events_number">Events number</string>
+    <string name="btn_add_to_friends">Add to friends</string>
+    <string name="btn_cancel_friend_request">Cancel friends request</string>
+    <string name="btn_remove_from_friends">Remove from your friends list</string>
+    <string name="txt_friends_request_sent">Friends request has been sent</string>
+    <string name="txt_friends_request_turned_down">Friends request has been canceled</string>
+    <string name="txt_friend_removed">User deleted from your friends</string>
 
     <!-- ParticipantsScreen strings -->
     <string name="title_participants">Participants list</string>
     <string name="txt_registered">Registered</string>
     <string name="txt_candidates">Candidates</string>
     <string name="txt_declined">Declined</string>
-    <string name="txt_remove_participant_confirmation_text">Are you sure you want to remove this user from the event? This operation cannot be undone.</string>
-    <string name="txt_remove_participant_confirmation_title">Remove participant confirmation</string>
-    <string name="txt_accept_participant_confirmation_text">Are you sure you want to accept this user?</string>
-    <string name="txt_accept_participant_confirmation_title">Accept participant confirmation</string>
-    <string name="txt_remove_success" formatted="false">%s %s has been removed from this event</string>
+    <string name="txt_remove_user_confirmation_text">Are you sure you want to remove this user from the list? This operation cannot be undone.</string>
+    <string name="txt_remove_user_confirmation_title">Remove user confirmation</string>
+    <string name="txt_accept_user_confirmation_text">Are you sure you want to add this user?</string>
+    <string name="txt_accept_user_confirmation_title">Accept request confirmation</string>
+    <string name="txt_remove_success" formatted="false">%s %s has been removed from this list</string>
     <string name="txt_accept_success" formatted="false">%s %s request has been accepted</string>
+
+    <!-- FriendsScreen strings -->
+    <string name="title_friends">Friends list</string>
+    <string name="txt_friends_requests">Friend requests</string>
+    <string name="txt_added_friends">Added friends</string>
 
     <!-- SettingsScreen strings -->
     <string name="title_preferences">Settings</string>

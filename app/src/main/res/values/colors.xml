@@ -70,6 +70,7 @@
     <!--User Details Screen Colors-->
     <item name="user_details_bg" type="color">@color/white</item>
     <item name="user_details_avatar" type="color">#9e9e9e</item>
+    <item name="user_details_thumb_default" type="color">#c9c8c8</item>
     <item name="on_map_button_normal" type="color">#80000000</item>
     <item name="on_map_button_pressed" type="color">#3d3939</item>
     <item name="on_map_button_text" type="color">@color/white</item>

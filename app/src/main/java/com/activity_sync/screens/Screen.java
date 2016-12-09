@@ -1,5 +1,6 @@
 package com.activity_sync.screens;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.view.MenuItemCompat;
@@ -41,6 +42,8 @@ public abstract class Screen extends BaseActivity
         super.onCreate(savedInstanceState);
 
         ButterKnife.bind(this);
+
+        inject(this);
         this.initToolbar();
         this.presenter = this.createPresenter(this, savedInstanceState);
     }
@@ -133,4 +136,6 @@ public abstract class Screen extends BaseActivity
     }
 
     protected abstract IPresenter createPresenter(Screen screen, Bundle savedInstanceState);
+
+    protected abstract void inject(Context screen);
 }

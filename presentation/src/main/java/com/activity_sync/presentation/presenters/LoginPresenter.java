@@ -1,5 +1,6 @@
 package com.activity_sync.presentation.presenters;
 
+import com.activity_sync.presentation.services.CurrentUser;
 import com.activity_sync.presentation.services.IApiService;
 import com.activity_sync.presentation.services.INavigator;
 import com.activity_sync.presentation.utils.StringUtils;
@@ -12,13 +13,15 @@ public class LoginPresenter extends Presenter<ILoginView>
     private final Scheduler uiThread;
     private final INavigator navigator;
     private final IApiService apiService;
+    private final CurrentUser currentUser;
 
-    public LoginPresenter(Scheduler uiThread, ILoginView view, INavigator navigator, IApiService apiService)
+    public LoginPresenter(Scheduler uiThread, ILoginView view, INavigator navigator, IApiService apiService, CurrentUser currentUser)
     {
         super(view);
         this.navigator = navigator;
         this.uiThread = uiThread;
         this.apiService = apiService;
+        this.currentUser = currentUser;
     }
 
     @Override
@@ -48,6 +51,10 @@ public class LoginPresenter extends Presenter<ILoginView>
 
                     if (canContinue)
                     {
+                        //apiCall here
+                        //if success:
+                        currentUser.authToken("auth_token response");
+                        currentUser.userID(1234);
                         navigator.openEventsScreen();
                     }
                 })

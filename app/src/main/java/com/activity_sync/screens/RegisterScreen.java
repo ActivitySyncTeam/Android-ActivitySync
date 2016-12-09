@@ -1,5 +1,6 @@
 package com.activity_sync.screens;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.widget.AppCompatEditText;
@@ -79,9 +80,14 @@ public class RegisterScreen extends Screen implements IRegisterView
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
+    protected void inject(Context screen)
     {
         App.component(this).inject(this);
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
 
         prepareEditTexts();

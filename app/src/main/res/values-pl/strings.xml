@@ -104,12 +104,12 @@
     <string name="txt_candidates">Kandydaci</string>
     <string name="txt_declined">Odrzuceni</string>
     <string name="txt_registered">Zapisani</string>
-    <string name="txt_accept_participant_confirmation_text">Jesteś pewien, że chcesz zaakceptować tego użytkownika?</string>
-    <string name="txt_accept_participant_confirmation_title">Potwierdzenie akceptacji użytkownika</string>
+    <string name="txt_accept_user_confirmation_text">Jesteś pewien, że chcesz zaakceptować tego użytkownika?</string>
+    <string name="txt_accept_user_confirmation_title">Potwierdzenie akceptacji użytkownika</string>
     <string name="txt_accept_success" formatted="false">%s %s został zaakceptowany</string>
-    <string name="txt_remove_participant_confirmation_text">Czy jesteś pewien, że chcesz usunąć tego uczestnika? Tej operacji nie będzie można cofnąć.</string>
-    <string name="txt_remove_participant_confirmation_title">Potwierdzenie usunięcia uczestnika</string>
-    <string name="txt_remove_success" formatted="false">%s %s został usunięty z wydarzenia</string>
+    <string name="txt_remove_user_confirmation_text">Czy jesteś pewien, że chcesz usunąć tego użytkownika? Tej operacji nie będzie można cofnąć.</string>
+    <string name="txt_remove_user_confirmation_title">Potwierdzenie usunięcia uczestnika</string>
+    <string name="txt_remove_success" formatted="false">%s %s został usunięty</string>
     <string name="btn_send">Prześlij</string>
     <string name="err_comment_empty">Komentarz nie może być pusty</string>
     <string name="txt_comment_author" formatted="false">%s napisał:</string>
@@ -125,5 +125,17 @@
     <string name="btn_hide_progress">Schowaj progressbar</string>
     <string name="btn_show_progress">Pokaż progressbar</string>
     <string name="btn_edit">Edytuj</string>
+    <string name="txt_events_number">Ilość wydarzeń</string>
+    <string name="txt_user_det_signature">Krótki opis</string>
+    <string name="btn_add_to_friends">Dodaj do znajomych</string>
+    <string name="btn_cancel_friend_request">Wycofaj zaproszenie</string>
+    <string name="btn_remove_from_friends">Usuń z listy znajomych</string>
+    <string name="txt_friend_removed">Użytkownik usunięty z listy znajomych</string>
+    <string name="txt_friends_request_sent">Zaproszenie zostało wysłane</string>
+    <string name="txt_friends_request_turned_down">Zaproszenie zostało anulowane</string>
+    <string name="txt_added_friends">Dodani znajomi</string>
+    <string name="txt_friends_requests">Zaproszenia znajomych</string>
+    <string name="menu_friends">Znajomi</string>
+    <string name="title_friends">Lista znajomych</string>
 
 </resources>

@@ -2,6 +2,7 @@ package com.activity_sync.screens;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
@@ -94,9 +95,14 @@ abstract public class EventEditorScreenBase extends Screen implements IEventCrea
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
+    protected void inject(Context screen)
     {
         App.component(this).inject(this);
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
     }
 

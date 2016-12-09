@@ -2,6 +2,7 @@ package com.activity_sync.presentation.presenters;
 
 import com.activity_sync.presentation.models.Comment;
 import com.activity_sync.presentation.models.builders.CommentBuilder;
+import com.activity_sync.presentation.services.CurrentUser;
 import com.activity_sync.presentation.services.IApiService;
 import com.activity_sync.presentation.utils.StringUtils;
 import com.activity_sync.presentation.views.ICommentsView;
@@ -16,13 +17,15 @@ public class CommentsPresenter extends Presenter<ICommentsView>
     private final Scheduler uiThread;
     private final int eventId;
     private final IApiService apiService;
+    private final CurrentUser currentUser;
 
-    public CommentsPresenter(ICommentsView view, Scheduler uiThread, int eventId, IApiService apiService)
+    public CommentsPresenter(ICommentsView view, Scheduler uiThread, int eventId, IApiService apiService, CurrentUser currentUser)
     {
         super(view);
         this.uiThread = uiThread;
         this.eventId = eventId;
         this.apiService = apiService;
+        this.currentUser = currentUser;
     }
 
     @Override
@@ -48,6 +51,9 @@ public class CommentsPresenter extends Presenter<ICommentsView>
                     }
                     else
                     {
+                        //current user test, will be important when api is implemented
+                        int userId = currentUser.userID();
+
                         Comment comment = new CommentBuilder()
                                 .setComment(view.comment())
                                 .setName("Marcin Zielinski")

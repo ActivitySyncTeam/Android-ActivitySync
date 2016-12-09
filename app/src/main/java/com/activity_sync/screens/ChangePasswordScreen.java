@@ -1,5 +1,6 @@
 package com.activity_sync.screens;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.widget.AppCompatEditText;
@@ -46,6 +47,9 @@ public class ChangePasswordScreen extends Screen implements IChangePasswordView
     {
         return new ChangePasswordPresenter(this, AndroidSchedulers.mainThread());
     }
+
+    @Override
+    protected void inject(Context screen) {}
 
     public ChangePasswordScreen()
     {

@@ -1,5 +1,7 @@
 package com.activity_sync.presentation.services;
 
+import com.activity_sync.presentation.utils.StringUtils;
+
 public interface IPermanentStorage
 {
     String IS_APP_OPENED_BEFORE = "is_app_opened_before";
@@ -16,14 +18,22 @@ public interface IPermanentStorage
     int SEARCH_DAYS_AHEAD_DEFAULT = 21;
     String SEARCH_RANGE = "search_range";
     int SEARCH_RANGE_DEFAULT = 5;
+    String AUTH_TOKEN = "auth_token";
+    String AUTH_TOKEN_DEFAULT = StringUtils.EMPTY;
+    String CURRENT_USER_ID = "current_user_id";
+    int CURRENT_USER_ID_DEFAULT = 0;
 
     void saveBoolean(String key, boolean value);
 
     void saveInteger(String key, int value);
 
+    void saveString(String key, String value);
+
     boolean retrieveBoolean(String key, boolean defaultValue);
 
     int retrieveInteger(String key, int defaultValue);
+
+    String retrieveString(String key, String defaultValue);
 
     void clear();
 }

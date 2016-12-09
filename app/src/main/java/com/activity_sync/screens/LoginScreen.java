@@ -1,5 +1,6 @@
 package com.activity_sync.screens;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.widget.AppCompatEditText;
@@ -12,6 +13,7 @@ import com.activity_sync.App;
 import com.activity_sync.R;
 import com.activity_sync.presentation.presenters.IPresenter;
 import com.activity_sync.presentation.presenters.LoginPresenter;
+import com.activity_sync.presentation.services.CurrentUser;
 import com.activity_sync.presentation.services.IApiService;
 import com.activity_sync.presentation.services.INavigator;
 import com.activity_sync.presentation.views.ILoginView;
@@ -30,6 +32,9 @@ public class LoginScreen extends Screen implements ILoginView
 
     @Inject
     IApiService apiService;
+
+    @Inject
+    CurrentUser currentUser;
 
     @Bind(R.id.login_btn)
     Button loginBtn;
@@ -57,7 +62,6 @@ public class LoginScreen extends Screen implements ILoginView
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
-        App.component(this).inject(this);
         super.onCreate(savedInstanceState);
 
         prepareEditTexts();
@@ -66,7 +70,13 @@ public class LoginScreen extends Screen implements ILoginView
     @Override
     protected IPresenter createPresenter(Screen screen, Bundle savedInstanceState)
     {
-        return new LoginPresenter(AndroidSchedulers.mainThread(), this, navigator, apiService);
+        return new LoginPresenter(AndroidSchedulers.mainThread(), this, navigator, apiService, currentUser);
+    }
+
+    @Override
+    protected void inject(Context screen)
+    {
+        App.component(this).inject(this);
     }
 
     @Override

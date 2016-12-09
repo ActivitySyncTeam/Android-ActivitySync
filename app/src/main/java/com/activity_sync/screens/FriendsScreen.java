@@ -12,10 +12,8 @@ import com.activity_sync.presentation.presenters.IPresenter;
 
 import butterknife.Bind;
 
-public class ParticipantsScreen extends Screen
+public class FriendsScreen extends Screen
 {
-    public static final String IS_ORGANIZER = "is_organizer";
-
     @Bind(R.id.tabLayout)
     TabLayout tabLayout;
 
@@ -24,7 +22,7 @@ public class ParticipantsScreen extends Screen
 
     private ViewPagerAdapter adapter;
 
-    public ParticipantsScreen()
+    public FriendsScreen()
     {
         super(R.layout.users_screen);
     }
@@ -34,16 +32,13 @@ public class ParticipantsScreen extends Screen
     {
         super.onCreate(savedInstanceState);
 
-        boolean isOrganizer = getIntent().getBooleanExtra(ParticipantsScreen.IS_ORGANIZER, false);
-
         adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new RegisteredParticipantsFragment(isOrganizer), getString(R.string.txt_registered));
-        adapter.addFragment(new EventCandidatesFragment(isOrganizer), getString(R.string.txt_candidates));
-        adapter.addFragment(new DeclinedParticipantsFragment(isOrganizer), getString(R.string.txt_declined));
+        adapter.addFragment(new AddedFriendsFragment(true), getString(R.string.txt_added_friends));
+        adapter.addFragment(new FriendsRequestsFragment(true), getString(R.string.txt_friends_requests));
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
 
-        setTitle(getString(R.string.title_participants));
+        setTitle(getString(R.string.title_friends));
     }
 
     @Override

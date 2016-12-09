@@ -37,12 +37,12 @@ public class Event implements Serializable
     private Level level;
 
     @SerializedName("user")
-    private EnrollmentStatus enrollmentStatus;
+    private AdditionalInfo additionalInfo;
 
     @SerializedName("is_active")
     private boolean isActive;
 
-    public Event(int id, User organizer, String description, Date date, int maxPlaces, int occupiedPlaces, Location location, Discipline discipline, Level level, EnrollmentStatus enrollmentStatus, boolean isActive)
+    public Event(int id, User organizer, String description, Date date, int maxPlaces, int occupiedPlaces, Location location, Discipline discipline, Level level, AdditionalInfo additionalInfo, boolean isActive)
     {
         this.id = id;
         this.organizer = organizer;
@@ -53,7 +53,7 @@ public class Event implements Serializable
         this.location = location;
         this.discipline = discipline;
         this.level = level;
-        this.enrollmentStatus = enrollmentStatus;
+        this.additionalInfo = additionalInfo;
         this.isActive = isActive;
     }
 
@@ -162,14 +162,14 @@ public class Event implements Serializable
         this.occupiedPlaces = occupiedPlaces;
     }
 
-    public EnrollmentStatus getEnrollmentStatus()
+    public AdditionalInfo getAdditionalInfo()
     {
-        return enrollmentStatus;
+        return additionalInfo;
     }
 
-    public void setEnrollmentStatus(EnrollmentStatus enrollmentStatus)
+    public void setAdditionalInfo(AdditionalInfo additionalInfo)
     {
-        this.enrollmentStatus = enrollmentStatus;
+        this.additionalInfo = additionalInfo;
     }
 
     public String getReadableDate()

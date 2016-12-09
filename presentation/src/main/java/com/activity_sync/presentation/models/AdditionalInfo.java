@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
-public class EnrollmentStatus implements Serializable
+public class AdditionalInfo implements Serializable
 {
     @SerializedName("isAdmin")
     private boolean isOrganizer;
@@ -15,18 +15,22 @@ public class EnrollmentStatus implements Serializable
     @SerializedName("isCandidate")
     private boolean isCandidate;
 
+    @SerializedName("isFriend")
+    private boolean isFriend;
+
     @SerializedName("rate")
     private int rate;
 
-    public EnrollmentStatus(boolean isOrganizer, boolean isParticipant, boolean isCandidate, int rate)
+    public AdditionalInfo(boolean isOrganizer, boolean isParticipant, boolean isFriend, boolean isCandidate, int rate)
     {
         this.isOrganizer = isOrganizer;
         this.isCandidate = isCandidate;
+        this.isFriend = isFriend;
         this.isParticipant = isParticipant;
         this.rate = rate;
     }
 
-    public EnrollmentStatus()
+    public AdditionalInfo()
     {
 
     }
@@ -59,6 +63,16 @@ public class EnrollmentStatus implements Serializable
     public void setCandidate(boolean candidate)
     {
         isCandidate = candidate;
+    }
+
+    public boolean isFriend()
+    {
+        return isFriend;
+    }
+
+    public void setFriend(boolean friend)
+    {
+        isFriend = friend;
     }
 
     public int getRate()

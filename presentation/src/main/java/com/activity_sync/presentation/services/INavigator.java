@@ -31,4 +31,6 @@ public interface INavigator
     void openEventUpdateScreen(int eventId);
 
     void openCommentsScreen(int eventId);
+
+    void openFriendsScreen();
 }

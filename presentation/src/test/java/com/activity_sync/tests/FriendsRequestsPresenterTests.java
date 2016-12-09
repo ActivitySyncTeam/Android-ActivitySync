@@ -1,7 +1,7 @@
 package com.activity_sync.tests;
 
 import com.activity_sync.presentation.models.User;
-import com.activity_sync.presentation.presenters.CandidatesPresenter;
+import com.activity_sync.presentation.presenters.FriendsRequestPresenter;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -12,7 +12,7 @@ import rx.schedulers.Schedulers;
 import rx.subjects.PublishSubject;
 
 @RunWith(MockitoJUnitRunner.class)
-public class CandidatesPresenterTests extends ParticipantsBasePresenterTests
+public class FriendsRequestsPresenterTests extends ParticipantsBasePresenterTests
 {
     private PublishSubject<User> acceptEventClick = PublishSubject.create();
     private PublishSubject<User> removeEventClick = PublishSubject.create();
@@ -31,9 +31,9 @@ public class CandidatesPresenterTests extends ParticipantsBasePresenterTests
     }
 
     @Test
-    public void candidatesPresenter_acceptClick_openAcceptConfDialog()
+    public void friendRequestPresenter_acceptClick_openAcceptConfDialog()
     {
-        CandidatesPresenter presenter = createPresenter(true);
+        FriendsRequestPresenter presenter = createPresenter();
         presenter.start();
 
         acceptEventClick.onNext(testedParticipant);
@@ -41,9 +41,9 @@ public class CandidatesPresenterTests extends ParticipantsBasePresenterTests
     }
 
     @Test
-    public void candidatesPresenter_removeClick_openRemoveConfDialog()
+    public void friendRequestPresenter_removeClick_openRemoveConfDialog()
     {
-        CandidatesPresenter presenter = createPresenter(true);
+        FriendsRequestPresenter presenter = createPresenter();
         presenter.start();
 
         removeEventClick.onNext(testedParticipant);
@@ -51,29 +51,29 @@ public class CandidatesPresenterTests extends ParticipantsBasePresenterTests
     }
 
     @Test
-    public void candidatesPresenter_confirmAccept_refresh()
+    public void friendRequestPresenter_confirmAccept_refresh()
     {
-        CandidatesPresenter presenter = createPresenter(true);
+        FriendsRequestPresenter presenter = createPresenter();
         presenter.start();
 
         acceptConfirmEvent.onNext(testedParticipant);
         Mockito.verify(view).acceptSuccessMessage(testedParticipant);
-        Mockito.verify(view).removeParticipant(testedParticipant);
+        Mockito.verify(view).removeUser(testedParticipant);
     }
 
     @Test
-    public void candidatesPresenter_removeAccept_refresh()
+    public void friendRequestPresenter_removeAccept_refresh()
     {
-        CandidatesPresenter presenter = createPresenter(true);
+        FriendsRequestPresenter presenter = createPresenter();
         presenter.start();
 
         removeConfirmEvent.onNext(testedParticipant);
         Mockito.verify(view).removeSuccessMessage(testedParticipant);
-        Mockito.verify(view).removeParticipant(testedParticipant);
+        Mockito.verify(view).removeUser(testedParticipant);
     }
 
-    private CandidatesPresenter createPresenter(boolean isOrganizer)
+    private FriendsRequestPresenter createPresenter()
     {
-        return new CandidatesPresenter(view, navigator, Schedulers.immediate(), isOrganizer, apiService);
+        return new FriendsRequestPresenter(view, navigator, Schedulers.immediate(), apiService);
     }
 }

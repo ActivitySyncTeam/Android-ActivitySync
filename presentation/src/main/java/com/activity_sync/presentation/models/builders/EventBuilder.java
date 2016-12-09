@@ -1,7 +1,7 @@
 package com.activity_sync.presentation.models.builders;
 
 import com.activity_sync.presentation.models.Discipline;
-import com.activity_sync.presentation.models.EnrollmentStatus;
+import com.activity_sync.presentation.models.AdditionalInfo;
 import com.activity_sync.presentation.models.Event;
 import com.activity_sync.presentation.models.Level;
 import com.activity_sync.presentation.models.Location;
@@ -20,7 +20,7 @@ public class EventBuilder
     private Location location;
     private Discipline discipline;
     private Level level;
-    private EnrollmentStatus enrollmentStatus;
+    private AdditionalInfo additionalInfo;
     private boolean isActive;
 
     public EventBuilder setId(int id)
@@ -29,7 +29,7 @@ public class EventBuilder
         return this;
     }
 
-    public EventBuilder setUser(User organizer)
+    public EventBuilder setOrganizer(User organizer)
     {
         this.organizer = organizer;
         return this;
@@ -77,9 +77,9 @@ public class EventBuilder
         return this;
     }
 
-    public EventBuilder setEnrollmentStatus(EnrollmentStatus enrollmentStatus)
+    public EventBuilder setAdditionalInfo(AdditionalInfo additionalInfo)
     {
-        this.enrollmentStatus = enrollmentStatus;
+        this.additionalInfo = additionalInfo;
         return this;
     }
 
@@ -91,6 +91,6 @@ public class EventBuilder
 
     public Event createEvent()
     {
-        return new Event(id, organizer, description, date, maxPlaces, occupiedPlaces, location, discipline, level, enrollmentStatus, isActive);
+        return new Event(id, organizer, description, date, maxPlaces, occupiedPlaces, location, discipline, level, additionalInfo, isActive);
     }
 }
