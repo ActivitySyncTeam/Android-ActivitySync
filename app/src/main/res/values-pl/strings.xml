@@ -92,7 +92,7 @@
     <string name="txt_choose_location">Miejsca wydarzenia</string>
     <string name="txt_create_event">Stwórz wydarzenie</string>
     <string name="txt_create_event_confirmation_text">Jesteś pewien, że chcesz stworzyć to wydarzenie?</string>
-    <string name="txt_create_event_confirmation_title">Potwierdzenie tworzenia wydarzenia</string>
+    <string name="txt_create_event_confirmation_title">Potwierdzenie utworzenia wydarzenia</string>
     <string name="txt_description">Opis</string>
     <string name="txt_discipline">Dyscyplina</string>
     <string name="txt_enroll_as_a_participant">Zapisz mnie jako uczestnika</string>
@@ -115,7 +115,7 @@
     <string name="txt_comment_author" formatted="false">%s napisał:</string>
     <string name="txt_comment_hint">Napisz tutaj swój komentarz</string>
     <string name="title_comments">Komentarze</string>
-    <string name="menu_create_event">Stwórz nowe wydarzenie</string>
+    <string name="menu_create_event">Nowe wydarzenie</string>
     <string name="log_out">Wyloguj się</string>
     <string name="cp_save_succ">Hasło zmienione!</string>
     <string name="err_confirmed_not_matching">Potwierdzone hasło różni się od nowego hasła</string>
@@ -138,7 +138,7 @@
     <string name="menu_friends">Znajomi</string>
     <string name="title_friends">Lista znajomych</string>
     <string name="title_event_update">Edycja wydarzenia</string>
-    <string name="txt_update_event_confirmation_text">Czy jesteś pewien, że chcesz dokonać zmian w tym wdyarzeniu?</string>
+    <string name="txt_update_event_confirmation_text">Czy jesteś pewien, że chcesz dokonać zmian w tym wydarzeniu?</string>
     <string name="txt_update_event_confirmation_title">Potwierdzenie edycji wydarzenia</string>
 
 </resources>

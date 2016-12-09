@@ -23,7 +23,7 @@
     <string name="menu_dummy_screen">Dummy Screen</string>
     <string name="menu_events">Events</string>
     <string name="menu_friends">Friends</string>
-    <string name="menu_create_event">Crate new event</string>
+    <string name="menu_create_event">New event</string>
     <string name="log_out">Log out</string>
     <string name="menu_settings">Settings</string>
 
