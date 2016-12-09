@@ -67,6 +67,12 @@
     <string name="txt_terrible">Terrible</string>
     <string name="txt_user_det_signature">Signature</string>
     <string name="txt_events_number">Events number</string>
+    <string name="btn_add_to_friends">Add to friends</string>
+    <string name="btn_cancel_friend_request">Cancel friends request</string>
+    <string name="btn_remove_from_friends">Remove from your friends list</string>
+    <string name="txt_friends_request_sent">Friends request has been sent</string>
+    <string name="txt_friends_request_turned_down">Friends request has been canceled</string>
+    <string name="txt_friend_removed">User deleted from your friends</string>
 
     <!-- ParticipantsScreen strings -->
     <string name="title_participants">Participants list</string>

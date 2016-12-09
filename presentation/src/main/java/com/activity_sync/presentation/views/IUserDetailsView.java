@@ -8,11 +8,15 @@ public interface IUserDetailsView
 {
     void setData(User user);
 
-    void thumbsVisible(boolean areVisible);
-
+    void thumbsAndFollowBtnVisible(boolean areVisible);
     Observable thumbUpClick();
-
     Observable thumbDownClick();
-
     void setThumbsColor(int rating);
+
+    Observable friendsBtnClick();
+    void setFriendBtnAppearance(User user);
+
+    void displayFriendRequestSentMessage();
+    void displayFriendRequestCanceledMessage();
+    void displayFriendRemovedMessage();
 }

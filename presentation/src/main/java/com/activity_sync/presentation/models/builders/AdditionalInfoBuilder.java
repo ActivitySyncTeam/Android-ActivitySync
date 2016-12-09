@@ -6,6 +6,7 @@ public class AdditionalInfoBuilder
 {
     private boolean isOrganizer;
     private boolean isParticipant;
+    private boolean isFriend;
     private boolean isCandidate;
     private int rate;
 
@@ -18,6 +19,12 @@ public class AdditionalInfoBuilder
     public AdditionalInfoBuilder setParticipant(boolean participant)
     {
         isParticipant = participant;
+        return this;
+    }
+
+    public AdditionalInfoBuilder setFriend(boolean friend)
+    {
+        isFriend = friend;
         return this;
     }
 
@@ -35,6 +42,6 @@ public class AdditionalInfoBuilder
 
     public AdditionalInfo createAdditionalInfo()
     {
-        return new AdditionalInfo(isOrganizer, isParticipant, isCandidate, rate);
+        return new AdditionalInfo(isOrganizer, isParticipant, isFriend, isCandidate, rate);
     }
 }

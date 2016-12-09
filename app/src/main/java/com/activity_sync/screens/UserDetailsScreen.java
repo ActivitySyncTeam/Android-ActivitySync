@@ -4,8 +4,10 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.activity_sync.App;
 import com.activity_sync.R;
@@ -60,6 +62,9 @@ public class UserDetailsScreen extends Screen implements IUserDetailsView
     @Bind(R.id.image_credibility)
     ImageView credibilityImageView;
 
+    @Bind(R.id.follow_btn)
+    Button followBtn;
+
     @Bind(R.id.thumb_up)
     ImageView thumbUp;
 
@@ -111,17 +116,19 @@ public class UserDetailsScreen extends Screen implements IUserDetailsView
     }
 
     @Override
-    public void thumbsVisible(boolean areVisible)
+    public void thumbsAndFollowBtnVisible(boolean areVisible)
     {
         if (areVisible)
         {
             thumbDown.setVisibility(View.VISIBLE);
             thumbUp.setVisibility(View.VISIBLE);
+            followBtn.setVisibility(View.VISIBLE);
         }
         else
         {
             thumbDown.setVisibility(View.INVISIBLE);
             thumbUp.setVisibility(View.INVISIBLE);
+            followBtn.setVisibility(View.GONE);
         }
     }
 
@@ -155,5 +162,49 @@ public class UserDetailsScreen extends Screen implements IUserDetailsView
             thumbUp.setColorFilter(ContextCompat.getColor(this, R.color.user_details_thumb_default));
             thumbDown.setColorFilter(ContextCompat.getColor(this, R.color.user_details_thumb_default));
         }
+    }
+
+    @Override
+    public void setFriendBtnAppearance(User user)
+    {
+        if (user.getAdditionalInfo().isFriend())
+        {
+            followBtn.setText(getString(R.string.btn_remove_from_friends));
+            followBtn.setBackground(ContextCompat.getDrawable(this, R.drawable.selector_default_negative));
+        }
+        else if (user.getAdditionalInfo().isCandidate())
+        {
+            followBtn.setText(getString(R.string.btn_cancel_friend_request));
+            followBtn.setBackground(ContextCompat.getDrawable(this, R.drawable.selector_default_negative));
+        }
+        else
+        {
+            followBtn.setText(getString(R.string.btn_add_to_friends));
+            followBtn.setBackground(ContextCompat.getDrawable(this, R.drawable.selector_default_positive));
+        }
+    }
+
+    @Override
+    public void displayFriendRequestSentMessage()
+    {
+        Toast.makeText(this, getString(R.string.txt_friends_request_sent), Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void displayFriendRequestCanceledMessage()
+    {
+        Toast.makeText(this, getString(R.string.txt_friends_request_turned_down), Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void displayFriendRemovedMessage()
+    {
+        Toast.makeText(this, getString(R.string.txt_friend_removed), Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public Observable friendsBtnClick()
+    {
+        return ViewObservable.clicks(followBtn);
     }
 }
