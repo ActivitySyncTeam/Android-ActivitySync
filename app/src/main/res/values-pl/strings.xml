@@ -137,5 +137,8 @@
     <string name="txt_friends_requests">Zaproszenia znajomych</string>
     <string name="menu_friends">Znajomi</string>
     <string name="title_friends">Lista znajomych</string>
+    <string name="title_event_update">Edycja wydarzenia</string>
+    <string name="txt_update_event_confirmation_text">Czy jesteś pewien, że chcesz dokonać zmian w tym wdyarzeniu?</string>
+    <string name="txt_update_event_confirmation_title">Potwierdzenie edycji wydarzenia</string>
 
 </resources>
