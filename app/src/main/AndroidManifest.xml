@@ -59,7 +59,11 @@
             android:screenOrientation="portrait"/>
 
         <activity
-            android:name=".screens.EventCreatorScreen"
+            android:name=".screens.CreateNewEventScreen"
+            android:screenOrientation="portrait"/>
+
+        <activity
+            android:name=".screens.EventUpdateScreen"
             android:screenOrientation="portrait"/>
 
         <activity
