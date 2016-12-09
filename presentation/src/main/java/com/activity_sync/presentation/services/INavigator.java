@@ -28,5 +28,7 @@ public interface INavigator
 
     void openEventCreatorScreen();
 
+    void openEventUpdateScreen(int eventId);
+
     void openCommentsScreen(int eventId);
 }

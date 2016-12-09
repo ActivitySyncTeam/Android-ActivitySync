@@ -8,10 +8,11 @@ import com.activity_sync.presentation.models.UserUpdate;
 import com.activity_sync.presentation.services.INavigator;
 import com.activity_sync.screens.ChangePasswordScreen;
 import com.activity_sync.screens.CommentsScreen;
+import com.activity_sync.screens.CreateNewEventScreen;
 import com.activity_sync.screens.DummyScreen;
 import com.activity_sync.screens.EditAccountScreen;
-import com.activity_sync.screens.EventCreatorScreen;
 import com.activity_sync.screens.EventDetailsScreen;
+import com.activity_sync.screens.EventUpdateScreen;
 import com.activity_sync.screens.EventsScreen;
 import com.activity_sync.screens.IntroScreen;
 import com.activity_sync.screens.LoginScreen;
@@ -84,7 +85,15 @@ public class Navigator implements INavigator
     @Override
     public void openEventCreatorScreen()
     {
-        startActivity(getIntent(EventCreatorScreen.class));
+        startActivity(getIntent(CreateNewEventScreen.class));
+    }
+
+    @Override
+    public void openEventUpdateScreen(int eventId)
+    {
+        Intent intent = new Intent(context, EventUpdateScreen.class);
+        intent.putExtra(EventUpdateScreen.EVENT_ID, eventId);
+        startActivity(intent);
     }
 
     @Override
