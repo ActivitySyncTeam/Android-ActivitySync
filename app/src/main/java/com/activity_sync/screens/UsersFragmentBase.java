@@ -10,11 +10,11 @@ import android.widget.Toast;
 
 import com.activity_sync.App;
 import com.activity_sync.R;
-import com.activity_sync.presentation.action_listeners.IParticipantActionListener;
+import com.activity_sync.presentation.action_listeners.IUserActionListener;
 import com.activity_sync.presentation.models.User;
 import com.activity_sync.presentation.services.IApiService;
 import com.activity_sync.presentation.services.INavigator;
-import com.activity_sync.presentation.views.IParticipantsFragmentView;
+import com.activity_sync.presentation.views.IUsersFragmentView;
 import com.activity_sync.renderers.base.DividerItemDecoration;
 import com.activity_sync.renderers.base.RVRendererAdapter;
 import com.activity_sync.renderers.base.RendererBuilder;
@@ -30,7 +30,7 @@ import butterknife.Bind;
 import rx.Observable;
 import rx.subjects.PublishSubject;
 
-abstract public class ParticipantsFragmentBase extends FragmentScreen implements IParticipantsFragmentView, IParticipantActionListener
+abstract public class UsersFragmentBase extends FragmentScreen implements IUsersFragmentView, IUserActionListener
 {
     @Inject
     INavigator navigator;
@@ -54,18 +54,12 @@ abstract public class ParticipantsFragmentBase extends FragmentScreen implements
     private RVRendererAdapter<User> adapter;
     private List<User> participants = new ArrayList<>();
 
-    protected final boolean isOrganizer;
+    protected final boolean shouldDisplayAllOptions;
 
-    public ParticipantsFragmentBase(boolean isOrganizer)
+    public UsersFragmentBase(boolean shouldDisplayAllOptions)
     {
         super(R.layout.participants_fragment);
-        this.isOrganizer = isOrganizer;
-    }
-
-    public ParticipantsFragmentBase()
-    {
-        super(R.layout.participants_fragment);
-        this.isOrganizer = false;
+        this.shouldDisplayAllOptions = shouldDisplayAllOptions;
     }
 
     @Override
@@ -88,28 +82,28 @@ abstract public class ParticipantsFragmentBase extends FragmentScreen implements
     }
 
     @Override
-    public Observable<User> selectedParticipant()
+    public Observable<User> selectedUser()
     {
         return adapter.itemSelected();
     }
 
     @Override
-    public Observable refreshParticipants()
+    public Observable refreshUsers()
     {
         return refreshParticipants;
     }
 
     @Override
-    public void addParticipantsList(Collection<User> participants)
+    public void addUsersList(Collection<User> users)
     {
         adapter.clear();
-        this.participants.addAll(participants);
-        adapter.addAll(participants);
+        this.participants.addAll(users);
+        adapter.addAll(users);
         adapter.notifyDataSetChanged();
     }
 
     @Override
-    public void removeParticipant(User userToDelete)
+    public void removeUser(User userToDelete)
     {
         Iterator<User> usersIterator = participants.iterator();
 
@@ -177,13 +171,13 @@ abstract public class ParticipantsFragmentBase extends FragmentScreen implements
     @Override
     public void openRemoveConfirmationDialog(User user)
     {
-        showDialog(R.string.txt_remove_participant_confirmation_title, R.string.txt_remove_participant_confirmation_text, user, removeConfirmed);
+        showDialog(R.string.txt_remove_user_confirmation_title, R.string.txt_remove_user_confirmation_text, user, removeConfirmed);
     }
 
     @Override
     public void openAcceptConfirmationDialog(User user)
     {
-        showDialog(R.string.txt_accept_participant_confirmation_title, R.string.txt_accept_participant_confirmation_text, user, acceptConfirmed);
+        showDialog(R.string.txt_accept_user_confirmation_title, R.string.txt_accept_user_confirmation_text, user, acceptConfirmed);
     }
 
     @Override

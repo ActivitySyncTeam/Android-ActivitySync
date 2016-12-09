@@ -6,13 +6,13 @@ import java.util.Collection;
 
 import rx.Observable;
 
-public interface IParticipantsFragmentView
+public interface IUsersFragmentView
 {
-    Observable<User> selectedParticipant();
-    Observable refreshParticipants();
-    void addParticipantsList(Collection<User> participants);
+    Observable<User> selectedUser();
+    Observable refreshUsers();
+    void addUsersList(Collection<User> users);
     void refreshingVisible(boolean isRefreshing);
-    void removeParticipant(User userToDelete);
+    void removeUser(User userToDelete);
 
     Observable<User> acceptEventClick();
     Observable<User> removeEventClick();
