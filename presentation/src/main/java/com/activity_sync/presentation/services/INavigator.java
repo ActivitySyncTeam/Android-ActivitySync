@@ -33,4 +33,8 @@ public interface INavigator
     void openCommentsScreen(int eventId);
 
     void openFriendsScreen();
+
+    void startBackgroundService();
+
+    void stopBackgroundService();
 }
