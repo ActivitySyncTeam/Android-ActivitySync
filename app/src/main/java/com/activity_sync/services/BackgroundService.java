@@ -5,17 +5,26 @@ import android.content.Intent;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
 
+import com.activity_sync.App;
+import com.activity_sync.presentation.services.IPermanentStorage;
+
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import javax.inject.Inject;
+
 import timber.log.Timber;
 
 public class BackgroundService extends Service
 {
-    private long timerTime = 30 * 1000;
+    @Inject
+    IPermanentStorage permanentStorage;
 
+    private long timerTime = 30 * 1000;     //30 seconds
+
+    private LocationService locationService;
     private ExecutorService executor;
     private Timer timer;
     private TimerTask timerTask;
@@ -29,8 +38,12 @@ public class BackgroundService extends Service
     public void onCreate()
     {
         super.onCreate();
+        App.component(this).inject(this);
         Timber.d("BackgroundService Started");
 
+        locationService = new LocationService(getApplicationContext(), permanentStorage);
+
+        locationService.start();
         executor = Executors.newCachedThreadPool();
         startRequestingServer();
     }
@@ -74,6 +87,7 @@ public class BackgroundService extends Service
     public void onDestroy()
     {
         Timber.d("BackgroundService Ended");
+        locationService.stop();
         stopRequestingServer();
     }
 }
