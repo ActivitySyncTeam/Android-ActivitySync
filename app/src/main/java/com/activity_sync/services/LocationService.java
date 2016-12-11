@@ -8,12 +8,15 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 
+import com.activity_sync.events.LocationChangeEvent;
 import com.activity_sync.presentation.services.IPermanentStorage;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.ActivityRecognition;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
+
+import org.greenrobot.eventbus.EventBus;
 
 import timber.log.Timber;
 
@@ -125,6 +128,9 @@ public class LocationService implements GoogleApiClient.ConnectionCallbacks, Goo
     public void onLocationChanged(Location location)
     {
         Timber.d("Location changed: %s %s", location.getLatitude(), location.getLongitude());
-        currentLocation = location;
+        permanentStorage.saveFloat(IPermanentStorage.LAST_LATITUDE, (float) location.getLatitude());
+        permanentStorage.saveFloat(IPermanentStorage.LAST_LONGITUDE, (float) location.getLongitude());
+
+        EventBus.getDefault().post(new LocationChangeEvent());
     }
 }
