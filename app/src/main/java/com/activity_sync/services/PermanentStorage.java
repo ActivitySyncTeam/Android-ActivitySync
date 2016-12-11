@@ -37,6 +37,13 @@ public class PermanentStorage implements IPermanentStorage
     }
 
     @Override
+    public float retrieveFloat(String key, float defaultValue)
+    {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(ACTIVITY_SYNC_PREFERENCES, Context.MODE_PRIVATE);
+        return sharedPreferences.getFloat(key, defaultValue);
+    }
+
+    @Override
     public void saveBoolean(String key, boolean value)
     {
         SharedPreferences sharedPreferences = context.getSharedPreferences(ACTIVITY_SYNC_PREFERENCES, Context.MODE_PRIVATE);
@@ -60,6 +67,15 @@ public class PermanentStorage implements IPermanentStorage
         SharedPreferences sharedPreferences = context.getSharedPreferences(ACTIVITY_SYNC_PREFERENCES, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString(key, value);
+        editor.apply();
+    }
+
+    @Override
+    public void saveFloat(String key, float value)
+    {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(ACTIVITY_SYNC_PREFERENCES, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putFloat(key, value);
         editor.apply();
     }
 

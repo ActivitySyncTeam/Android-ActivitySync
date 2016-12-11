@@ -29,11 +29,15 @@ public interface IPermanentStorage
 
     void saveString(String key, String value);
 
+    void saveFloat(String key, float value);
+
     boolean retrieveBoolean(String key, boolean defaultValue);
 
     int retrieveInteger(String key, int defaultValue);
 
     String retrieveString(String key, String defaultValue);
+
+    float retrieveFloat(String key, float defaultValue);
 
     void clear();
 }
