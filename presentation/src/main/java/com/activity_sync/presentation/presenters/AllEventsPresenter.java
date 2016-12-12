@@ -31,7 +31,7 @@ public class AllEventsPresenter extends EventsFragmentBasePresenter
     @Override
     public void start()
     {
-        if (areLastCoordsSaved())
+        if (areLastCordsSaved())
         {
             super.start();
         }
@@ -41,7 +41,6 @@ public class AllEventsPresenter extends EventsFragmentBasePresenter
             {
                 view.noPermissionLayoutVisible();
                 view.refreshingVisible(false);
-
                 view.askForPermission();
             }
             else
@@ -182,7 +181,7 @@ public class AllEventsPresenter extends EventsFragmentBasePresenter
         alreadyLoaded = true;
     }
 
-    private boolean areLastCoordsSaved()
+    private boolean areLastCordsSaved()
     {
         return permanentStorage.retrieveFloat(IPermanentStorage.LAST_LONGITUDE, IPermanentStorage.LAST_LONGITUDE_DEFAULT) != IPermanentStorage.LAST_LONGITUDE_DEFAULT;
     }
