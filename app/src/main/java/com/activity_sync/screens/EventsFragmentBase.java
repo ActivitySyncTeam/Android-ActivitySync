@@ -11,11 +11,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import com.activity_sync.App;
 import com.activity_sync.R;
-import com.activity_sync.presentation.events.LocationChangeEvent;
 import com.activity_sync.presentation.events.LocationPermissionGranted;
 import com.activity_sync.presentation.models.Event;
 import com.activity_sync.presentation.models.Location;
@@ -33,8 +31,6 @@ import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 
 import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -75,7 +71,7 @@ abstract public class EventsFragmentBase extends FragmentScreen implements IEven
 
     private PublishSubject refreshEvents = PublishSubject.create();
     private PublishSubject<Boolean> locationsEnabled = PublishSubject.create();
-    private PublishSubject<Location> locationFound = PublishSubject.create();
+    protected PublishSubject<Location> locationFound = PublishSubject.create();
     private RVRendererAdapter<Event> adapter;
     private List<Event> events = new ArrayList<>();
 
@@ -211,31 +207,6 @@ abstract public class EventsFragmentBase extends FragmentScreen implements IEven
     public Observable enableLocationButtonClick()
     {
         return ViewObservable.clicks(enablePermissionBtn);
-    }
-
-    @Override
-    public void onResume()
-    {
-        super.onResume();
-        EventBus.getDefault().register(this);
-    }
-
-    @Override
-    public void onPause()
-    {
-        super.onPause();
-        EventBus.getDefault().unregister(this);
-    }
-
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onMessageEvent(LocationChangeEvent event)
-    {
-        Toast.makeText(getContext(),
-                String.format("Location changed: %f %f", event.getLocation().getLatitude(), event.getLocation().getLongitude()),
-                Toast.LENGTH_LONG)
-                .show();
-
-        locationFound.onNext(event.getLocation());
     }
 
     @Override
