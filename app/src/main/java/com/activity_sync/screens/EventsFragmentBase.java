@@ -15,7 +15,7 @@ import android.widget.Toast;
 
 import com.activity_sync.App;
 import com.activity_sync.R;
-import com.activity_sync.events.LocationChangeEvent;
+import com.activity_sync.presentation.events.LocationChangeEvent;
 import com.activity_sync.presentation.models.Event;
 import com.activity_sync.presentation.services.IApiService;
 import com.activity_sync.presentation.services.INavigator;

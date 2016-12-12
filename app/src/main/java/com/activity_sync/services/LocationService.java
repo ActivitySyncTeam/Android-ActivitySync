@@ -8,7 +8,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 
-import com.activity_sync.events.LocationChangeEvent;
+import com.activity_sync.presentation.events.LocationChangeEvent;
 import com.activity_sync.presentation.services.IPermanentStorage;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -22,12 +22,11 @@ import timber.log.Timber;
 
 public class LocationService implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, com.google.android.gms.location.LocationListener
 {
-    public static final long UPDATE_INTERVAL_IN_MILLISECONDS = 5 * 60 * 1000;       //5 minutes
-    public static final long FASTEST_UPDATE_INTERVAL_IN_MILLISECONDS = 60 * 1000;   //1 minute
+    public static final long UPDATE_INTERVAL_IN_MILLISECONDS = 5 * 1000;       //5 minutes
+    public static final long FASTEST_UPDATE_INTERVAL_IN_MILLISECONDS = 3 * 1000;   //1 minute
 
     private GoogleApiClient googleApiClient;
     private LocationRequest locationRequest;
-    private Location currentLocation;
 
     private final Context context;
     private final IPermanentStorage permanentStorage;
