@@ -27,7 +27,7 @@ abstract public class EventsFragmentBasePresenter extends Presenter<IEventsFragm
     {
         super.start();
 
-        view.eventsListVisible(true);
+        view.eventsListVisible();
         loadEvents();
 
         subscriptions.add(view.refreshEvents()

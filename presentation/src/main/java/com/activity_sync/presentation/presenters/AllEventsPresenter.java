@@ -7,6 +7,7 @@ import com.activity_sync.presentation.models.builders.LocationBuilder;
 import com.activity_sync.presentation.models.builders.UserBuilder;
 import com.activity_sync.presentation.services.IApiService;
 import com.activity_sync.presentation.services.INavigator;
+import com.activity_sync.presentation.services.IPermanentStorage;
 import com.activity_sync.presentation.views.IEventsFragmentView;
 
 import java.util.ArrayList;
@@ -17,24 +18,36 @@ import rx.Scheduler;
 
 public class AllEventsPresenter extends EventsFragmentBasePresenter
 {
-    public AllEventsPresenter(IEventsFragmentView view, INavigator navigator, Scheduler uiThread, IApiService apiService)
+    private final IPermanentStorage permanentStorage;
+
+    public AllEventsPresenter(IEventsFragmentView view, INavigator navigator, Scheduler uiThread, IApiService apiService, IPermanentStorage permanentStorage)
     {
         super(view, navigator, uiThread, apiService);
+        this.permanentStorage = permanentStorage;
     }
+
+    private boolean alreadyLoaded = false;
 
     @Override
     public void start()
     {
-        if (view.checkLocationPermissions() == false)
+        if (areLastCoordsSaved())
         {
-            view.eventsListVisible(false);
-            view.refreshingVisible(false);
-
-            view.askForPermission();
+            super.start();
         }
         else
         {
-            super.start();
+            if (view.checkLocationPermissions() == false)
+            {
+                view.noPermissionLayoutVisible();
+                view.refreshingVisible(false);
+
+                view.askForPermission();
+            }
+            else
+            {
+                view.searchingForCordsVisible();
+            }
         }
 
         subscriptions.add(view.locationEnabled()
@@ -43,11 +56,23 @@ public class AllEventsPresenter extends EventsFragmentBasePresenter
 
                     if (isEnabled)
                     {
-                        super.start();
+                        view.postLocationPermissionsMessage();
+                        view.searchingForCordsVisible();
                     }
                     else
                     {
-                        view.eventsListVisible(false);
+                        view.noPermissionLayoutVisible();
+                    }
+                })
+        );
+
+        subscriptions.add(view.locationFound()
+                .observeOn(uiThread)
+                .subscribe(isEnabled -> {
+
+                    if (!alreadyLoaded)
+                    {
+                        super.start();
                     }
                 })
         );
@@ -153,5 +178,12 @@ public class AllEventsPresenter extends EventsFragmentBasePresenter
                 .createEvent());
 
         view.addEventsList(events);
+
+        alreadyLoaded = true;
+    }
+
+    private boolean areLastCoordsSaved()
+    {
+        return permanentStorage.retrieveFloat(IPermanentStorage.LAST_LONGITUDE, IPermanentStorage.LAST_LONGITUDE_DEFAULT) != IPermanentStorage.LAST_LONGITUDE_DEFAULT;
     }
 }

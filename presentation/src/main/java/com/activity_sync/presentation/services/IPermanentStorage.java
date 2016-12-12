@@ -32,10 +32,10 @@ public interface IPermanentStorage
     int CURRENT_USER_ID_DEFAULT = 0;
 
     String LAST_LATITUDE = "last_latitude";
-    float LAST_LATITUDE_DEFAULT = (float) 50.1083914;
+    float LAST_LATITUDE_DEFAULT = (float) -1000.00;
 
     String LAST_LONGITUDE = "last_longitude";
-    float LAST_LONGITUDE_DEFAULT = (float) 19.8076557;
+    float LAST_LONGITUDE_DEFAULT = (float) -1000.00;
 
     void saveBoolean(String key, boolean value);
 

@@ -1,6 +1,8 @@
 package com.activity_sync.presentation.views;
 
 import com.activity_sync.presentation.models.Event;
+import com.activity_sync.presentation.models.Location;
+
 import java.util.Collection;
 import rx.Observable;
 
@@ -15,7 +17,13 @@ public interface IEventsFragmentView
     void askForPermission();
 
     Observable<Boolean> locationEnabled();
-    void eventsListVisible(boolean isVisible);
+
+    void eventsListVisible();
+    void noPermissionLayoutVisible();
+    void searchingForCordsVisible();
 
     Observable enableLocationButtonClick();
+
+    void postLocationPermissionsMessage();
+    Observable<Location> locationFound();
 }

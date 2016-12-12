@@ -16,9 +16,12 @@ import android.widget.Toast;
 import com.activity_sync.App;
 import com.activity_sync.R;
 import com.activity_sync.presentation.events.LocationChangeEvent;
+import com.activity_sync.presentation.events.LocationPermissionGranted;
 import com.activity_sync.presentation.models.Event;
+import com.activity_sync.presentation.models.Location;
 import com.activity_sync.presentation.services.IApiService;
 import com.activity_sync.presentation.services.INavigator;
+import com.activity_sync.presentation.services.IPermanentStorage;
 import com.activity_sync.presentation.views.IEventsFragmentView;
 import com.activity_sync.renderers.EventsRenderer;
 import com.activity_sync.renderers.base.DividerItemDecoration;
@@ -52,20 +55,27 @@ abstract public class EventsFragmentBase extends FragmentScreen implements IEven
     @Inject
     IApiService apiService;
 
+    @Inject
+    IPermanentStorage permanentStorage;
+
     @Bind(R.id.events_refresh)
     SwipeRefreshLayout eventsRefreshLayout;
 
     @Bind(R.id.events_list)
     RecyclerView eventsList;
 
-    @Bind(R.id.empty_view)
-    LinearLayout emptyView;
+    @Bind(R.id.no_permission_view)
+    LinearLayout noPermissionView;
+
+    @Bind(R.id.looking_for_cords)
+    LinearLayout lookingForCordsView;
 
     @Bind(R.id.events_enable_btn)
     Button enablePermissionBtn;
 
     private PublishSubject refreshEvents = PublishSubject.create();
     private PublishSubject<Boolean> locationsEnabled = PublishSubject.create();
+    private PublishSubject<Location> locationFound = PublishSubject.create();
     private RVRendererAdapter<Event> adapter;
     private List<Event> events = new ArrayList<>();
 
@@ -117,9 +127,7 @@ abstract public class EventsFragmentBase extends FragmentScreen implements IEven
     @Override
     public void refreshingVisible(boolean isRefreshing)
     {
-        eventsRefreshLayout.post(() -> {
-            eventsRefreshLayout.setRefreshing(isRefreshing);
-        });
+        eventsRefreshLayout.post(() -> eventsRefreshLayout.setRefreshing(isRefreshing));
     }
 
     @Override
@@ -169,22 +177,34 @@ abstract public class EventsFragmentBase extends FragmentScreen implements IEven
     }
 
     @Override
-    public void eventsListVisible(boolean isVisible)
+    public void eventsListVisible()
     {
-        if (isVisible)
-        {
-            eventsList.setVisibility(View.VISIBLE);
-            emptyView.setVisibility(View.GONE);
 
-            eventsRefreshLayout.setEnabled(true);
-        }
-        else
-        {
-            eventsList.setVisibility(View.GONE);
-            emptyView.setVisibility(View.VISIBLE);
+        eventsList.setVisibility(View.VISIBLE);
+        noPermissionView.setVisibility(View.GONE);
+        lookingForCordsView.setVisibility(View.GONE);
 
-            eventsRefreshLayout.setEnabled(false);
-        }
+        eventsRefreshLayout.setEnabled(true);
+    }
+
+    @Override
+    public void noPermissionLayoutVisible()
+    {
+        eventsList.setVisibility(View.GONE);
+        lookingForCordsView.setVisibility(View.GONE);
+        noPermissionView.setVisibility(View.VISIBLE);
+
+        eventsRefreshLayout.setEnabled(false);
+    }
+
+    @Override
+    public void searchingForCordsVisible()
+    {
+        eventsList.setVisibility(View.GONE);
+        lookingForCordsView.setVisibility(View.VISIBLE);
+        noPermissionView.setVisibility(View.GONE);
+
+        eventsRefreshLayout.setEnabled(false);
     }
 
     @Override
@@ -211,6 +231,23 @@ abstract public class EventsFragmentBase extends FragmentScreen implements IEven
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onMessageEvent(LocationChangeEvent event)
     {
-        Toast.makeText(getContext(), "test location change", Toast.LENGTH_LONG).show();
+        Toast.makeText(getContext(),
+                String.format("Location changed: %f %f", event.getLocation().getLatitude(), event.getLocation().getLongitude()),
+                Toast.LENGTH_LONG)
+                .show();
+
+        locationFound.onNext(event.getLocation());
+    }
+
+    @Override
+    public void postLocationPermissionsMessage()
+    {
+        EventBus.getDefault().post(new LocationPermissionGranted());
+    }
+
+    @Override
+    public Observable<Location> locationFound()
+    {
+        return locationFound;
     }
 }
