@@ -18,11 +18,12 @@
             android:clipToPadding="false" />
 
         <LinearLayout
-            android:id="@+id/empty_view"
+            android:id="@+id/no_permission_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:gravity="center">
+            android:gravity="center"
+            android:visibility="gone">
 
             <TextView
                 android:layout_width="match_parent"
@@ -37,6 +38,28 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="ENABLE NOW" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/looking_for_cords"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Please wait a moment. We are checking your localization"
+                android:gravity="center"
+                android:paddingLeft="@dimen/screen_margin_biggest"
+                android:paddingRight="@dimen/screen_margin_biggest"/>
+
+            <ProgressBar
+                android:layout_width="@dimen/default_progressbar_width"
+                android:layout_height="@dimen/default_progressbar_height"
+                android:layout_margin="@dimen/screen_margin"/>
 
         </LinearLayout>
 

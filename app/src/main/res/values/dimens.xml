@@ -1,7 +1,4 @@
 <resources>
-    <dimen name="default_button_height">48dp</dimen>
-    <dimen name="default_button_width">250dp</dimen>
-
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="screen_margin_small">2dp</dimen>
     <dimen name="screen_margin_quarter">4dp</dimen>
@@ -12,6 +9,10 @@
     <dimen name="screen_margin_bigger">40dp</dimen>
     <dimen name="screen_margin_biggest">64dp</dimen>
     <dimen name="screen_marginTop_nav_view">16dp</dimen>
+    <dimen name="default_button_height">48dp</dimen>
+    <dimen name="default_button_width">250dp</dimen>
+    <dimen name="default_progressbar_height">32dp</dimen>
+    <dimen name="default_progressbar_width">32dp</dimen>
 
     <!-- Text values dimens -->
     <dimen name="text_smallest_size">8sp</dimen>
