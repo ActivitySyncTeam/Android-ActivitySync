@@ -213,18 +213,17 @@ abstract public class EventsFragmentBase extends FragmentScreen implements IEven
         return ViewObservable.clicks(enablePermissionBtn);
     }
 
-
     @Override
-    public void onStart()
+    public void onResume()
     {
-        super.onStart();
+        super.onResume();
         EventBus.getDefault().register(this);
     }
 
     @Override
-    public void onStop()
+    public void onPause()
     {
-        super.onStop();
+        super.onPause();
         EventBus.getDefault().unregister(this);
     }
 
