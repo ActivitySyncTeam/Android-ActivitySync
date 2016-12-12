@@ -1,6 +1,5 @@
 package com.activity_sync.services;
 
-
 import android.content.Context;
 import android.location.Location;
 import android.os.Bundle;
@@ -9,6 +8,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 
 import com.activity_sync.presentation.events.LocationChangeEvent;
+import com.activity_sync.presentation.models.builders.LocationBuilder;
 import com.activity_sync.presentation.services.IPermanentStorage;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -22,8 +22,8 @@ import timber.log.Timber;
 
 public class LocationService implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, com.google.android.gms.location.LocationListener
 {
-    public static final long UPDATE_INTERVAL_IN_MILLISECONDS = 5 * 1000;       //5 minutes
-    public static final long FASTEST_UPDATE_INTERVAL_IN_MILLISECONDS = 3 * 1000;   //1 minute
+    private static final long UPDATE_INTERVAL_IN_MILLISECONDS = 5 * 60 * 1000;       //5 minutes
+    private static final long FASTEST_UPDATE_INTERVAL_IN_MILLISECONDS = 1000;       //1 second
 
     private GoogleApiClient googleApiClient;
     private LocationRequest locationRequest;
@@ -96,6 +96,7 @@ public class LocationService implements GoogleApiClient.ConnectionCallbacks, Goo
 
     private void startLocationUpdates()
     {
+        Timber.d("Location Updates Started");
         try
         {
             LocationServices.FusedLocationApi.requestLocationUpdates(googleApiClient, locationRequest, this);
@@ -108,6 +109,7 @@ public class LocationService implements GoogleApiClient.ConnectionCallbacks, Goo
 
     private void stopLocationUpdates()
     {
+        Timber.d("Location Updates Stopped");
         LocationServices.FusedLocationApi.removeLocationUpdates(googleApiClient, this);
     }
 
@@ -130,6 +132,9 @@ public class LocationService implements GoogleApiClient.ConnectionCallbacks, Goo
         permanentStorage.saveFloat(IPermanentStorage.LAST_LATITUDE, (float) location.getLatitude());
         permanentStorage.saveFloat(IPermanentStorage.LAST_LONGITUDE, (float) location.getLongitude());
 
-        EventBus.getDefault().post(new LocationChangeEvent());
+        EventBus.getDefault().post(new LocationChangeEvent(new LocationBuilder()
+                .setLatitude(location.getLatitude())
+                .setLongitude(location.getLongitude())
+                .createLocation()));
     }
 }

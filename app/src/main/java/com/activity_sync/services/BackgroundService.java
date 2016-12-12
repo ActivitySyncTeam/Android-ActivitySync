@@ -8,7 +8,13 @@ import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 
 import com.activity_sync.App;
+import com.activity_sync.presentation.events.LocationPermissionGranted;
+import com.activity_sync.presentation.services.IApiService;
 import com.activity_sync.presentation.services.IPermanentStorage;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -23,6 +29,9 @@ public class BackgroundService extends Service
 {
     @Inject
     IPermanentStorage permanentStorage;
+
+    @Inject
+    IApiService apiService;
 
     private long timerTime = 30 * 1000;     //30 seconds
 
@@ -42,6 +51,8 @@ public class BackgroundService extends Service
         super.onCreate();
         App.component(this).inject(this);
         Timber.d("BackgroundService Started");
+
+        EventBus.getDefault().register(this);
 
         locationService = new LocationService(getApplicationContext(), permanentStorage);
 
@@ -95,5 +106,14 @@ public class BackgroundService extends Service
         Timber.d("BackgroundService Ended");
         locationService.stop();
         stopRequestingServer();
+
+        EventBus.getDefault().unregister(this);
+    }
+
+    @Subscribe(threadMode = ThreadMode.BACKGROUND)
+    public void onMessageEvent(LocationPermissionGranted event)
+    {
+        Timber.d("Location permission has been granted");
+        locationService.start();
     }
 }
