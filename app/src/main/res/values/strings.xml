@@ -174,5 +174,8 @@
     <string name="err_comment_empty">Your comment cannot be empty</string>
     <string name="txt_comment_hint">Write your comment here</string>
     <string name="btn_send">Send</string>
+    <string name="txt_pls_enable_locations">Yo have to enable location permission in order to load events near you.</string>
+    <string name="btn_enable_now">ENABLE NOW</string>
+    <string name="txt_wait_for_location">Please wait a moment. We are checking your localization.</string>
 
 </resources>

@@ -28,7 +28,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Yo have to enable location permission in order to load events near you"
+                android:text="@string/txt_pls_enable_locations"
                 android:gravity="center"
                 android:padding="@dimen/screen_margin_twice"/>
 
@@ -37,7 +37,7 @@
                 style="@style/DefaultButton.EventsFragment"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="ENABLE NOW" />
+                android:text="@string/btn_enable_now" />
 
         </LinearLayout>
 
@@ -51,7 +51,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Please wait a moment. We are checking your localization"
+                android:text="@string/txt_wait_for_location"
                 android:gravity="center"
                 android:paddingLeft="@dimen/screen_margin_biggest"
                 android:paddingRight="@dimen/screen_margin_biggest"/>
