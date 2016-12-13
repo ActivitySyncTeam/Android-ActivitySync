@@ -24,6 +24,7 @@ import java.util.Date;
 import rx.schedulers.Schedulers;
 import rx.subjects.PublishSubject;
 
+import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.never;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -84,6 +85,8 @@ public class AllEventsPresenterTests
         presenter.start();
 
         Mockito.verify(view, never()).askForPermission();
+        Mockito.verify(view).filterLayoutVisible(true);
+        Mockito.verify(view).prepareDisciplineSpinner(any());
     }
 
     @Test
@@ -174,6 +177,9 @@ public class AllEventsPresenterTests
         Mockito.verify(view).eventsListVisible();
         Mockito.verify(view, never()).noPermissionLayoutVisible();
         Mockito.verify(view, never()).searchingForCordsVisible();
+
+        Mockito.verify(view).filterLayoutVisible(true);
+        Mockito.verify(view).prepareDisciplineSpinner(any());
     }
 
     private AllEventsPresenter createPresenter()
