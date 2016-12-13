@@ -1,14 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.SwipeRefreshLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/backgroundColor"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/filter_events_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/colorPrimaryLight">
+
+        <LinearLayout
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center"
+            android:gravity="center">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_date_start"
+                android:tint="@color/white"
+                android:layout_marginRight="@dimen/screen_margin_half"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Today"
+                android:textColor="@color/white" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center"
+            android:gravity="center">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_whistle"
+                android:tint="@color/white"
+                android:layout_marginRight="@dimen/screen_margin_half"/>
+
+            <Spinner
+                android:id="@+id/disciplines_toolbar"
+                android:background="@null"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="From today"
+                android:textColor="@color/white" />
+
+        </LinearLayout>
+
+        <ImageView
+            android:src="@drawable/ic_refresh"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:text="Refresh"
+            android:layout_margin="@dimen/screen_margin_half" />
+
+    </LinearLayout>
+
+
+<android.support.v4.widget.SwipeRefreshLayout
     android:id="@+id/events_refresh"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/backgroundColor">
+        android:layout_height="match_parent">
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/events_list"
@@ -30,7 +100,9 @@
                 android:layout_height="wrap_content"
                 android:text="@string/txt_pls_enable_locations"
                 android:gravity="center"
-                android:padding="@dimen/screen_margin_twice"/>
+                android:padding="@dimen/screen_margin_twice"
+                android:drawableLeft="@drawable/ic_date_start"
+                android:backgroundTint="@color/white"/>
 
             <Button
                 android:id="@+id/events_enable_btn"
@@ -66,3 +138,5 @@
     </FrameLayout>
 
 </android.support.v4.widget.SwipeRefreshLayout>
+
+    </LinearLayout>

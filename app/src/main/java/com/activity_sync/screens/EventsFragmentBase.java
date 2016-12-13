@@ -9,12 +9,15 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
 
 import com.activity_sync.App;
 import com.activity_sync.R;
 import com.activity_sync.presentation.events.LocationPermissionGranted;
+import com.activity_sync.presentation.models.Discipline;
 import com.activity_sync.presentation.models.Event;
 import com.activity_sync.presentation.models.Location;
 import com.activity_sync.presentation.services.IApiService;
@@ -66,14 +69,22 @@ abstract public class EventsFragmentBase extends FragmentScreen implements IEven
     @Bind(R.id.looking_for_cords)
     LinearLayout lookingForCordsView;
 
+    @Bind(R.id.filter_events_layout)
+    LinearLayout filterEventsView;
+
     @Bind(R.id.events_enable_btn)
     Button enablePermissionBtn;
+
+    @Bind(R.id.disciplines_toolbar)
+    Spinner disciplineSpinner;
 
     private PublishSubject refreshEvents = PublishSubject.create();
     private PublishSubject<Boolean> locationsEnabled = PublishSubject.create();
     protected PublishSubject<Location> locationFound = PublishSubject.create();
     private RVRendererAdapter<Event> adapter;
     private List<Event> events = new ArrayList<>();
+
+    private List<Discipline> disciplines = new ArrayList<>();
 
     public EventsFragmentBase()
     {
@@ -175,12 +186,24 @@ abstract public class EventsFragmentBase extends FragmentScreen implements IEven
     @Override
     public void eventsListVisible()
     {
-
         eventsList.setVisibility(View.VISIBLE);
         noPermissionView.setVisibility(View.GONE);
         lookingForCordsView.setVisibility(View.GONE);
 
         eventsRefreshLayout.setEnabled(true);
+    }
+
+    @Override
+    public void filterLayoutVisible(boolean isVisible)
+    {
+        if (isVisible)
+        {
+            filterEventsView.setVisibility(View.VISIBLE);
+        }
+        else
+        {
+            filterEventsView.setVisibility(View.GONE);
+        }
     }
 
     @Override
@@ -219,5 +242,16 @@ abstract public class EventsFragmentBase extends FragmentScreen implements IEven
     public Observable<Location> locationFound()
     {
         return locationFound;
+    }
+
+    @Override
+    public void prepareDisciplineSpinner(List<Discipline> disciplines)
+    {
+        this.disciplines.clear();
+        this.disciplines = disciplines;
+
+        ArrayAdapter<Discipline> adapter = new ArrayAdapter<>(getContext(), R.layout.spinner_filter_toolbar_main_item, disciplines);
+        adapter.setDropDownViewResource(R.layout.spinner_default_dropdown_item);
+        disciplineSpinner.setAdapter(adapter);
     }
 }

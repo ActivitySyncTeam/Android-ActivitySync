@@ -1,5 +1,6 @@
 package com.activity_sync.presentation.presenters;
 
+import com.activity_sync.presentation.models.Discipline;
 import com.activity_sync.presentation.models.Event;
 import com.activity_sync.presentation.models.builders.DisciplineBuilder;
 import com.activity_sync.presentation.models.builders.EventBuilder;
@@ -11,6 +12,7 @@ import com.activity_sync.presentation.services.IPermanentStorage;
 import com.activity_sync.presentation.views.IEventsFragmentView;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -34,6 +36,7 @@ public class AllEventsPresenter extends EventsFragmentBasePresenter
         if (areLastCordsSaved())
         {
             super.start();
+            prepareFilterLayout();
         }
         else
         {
@@ -72,6 +75,7 @@ public class AllEventsPresenter extends EventsFragmentBasePresenter
                     if (!alreadyLoaded)
                     {
                         super.start();
+                        prepareFilterLayout();
                     }
                 })
         );
@@ -184,5 +188,11 @@ public class AllEventsPresenter extends EventsFragmentBasePresenter
     private boolean areLastCordsSaved()
     {
         return permanentStorage.retrieveFloat(IPermanentStorage.LAST_LONGITUDE, IPermanentStorage.LAST_LONGITUDE_DEFAULT) != IPermanentStorage.LAST_LONGITUDE_DEFAULT;
+    }
+
+    private void prepareFilterLayout()
+    {
+        view.filterLayoutVisible(true);
+        view.prepareDisciplineSpinner(Arrays.asList(new Discipline(1, "Koszykówka"), new Discipline(2, "Piłka nożna")));
     }
 }
