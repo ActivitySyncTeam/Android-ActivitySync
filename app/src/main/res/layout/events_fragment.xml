@@ -1,45 +1,144 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.SwipeRefreshLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/events_refresh"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:background="@color/backgroundColor"
+    android:orientation="vertical">
 
-    <FrameLayout
+    <LinearLayout
+        android:id="@+id/filter_events_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/backgroundColor">
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/events_list"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:paddingTop="@dimen/screen_margin_half"
-            android:clipToPadding="false" />
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimaryLight"
+        android:orientation="horizontal">
 
         <LinearLayout
-            android:id="@+id/empty_view"
-            android:layout_width="match_parent"
+            android:id="@+id/filter_date_layout"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:gravity="center">
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:background="@drawable/selector_toolbar_filter"
+            android:clickable="true"
+            android:gravity="center"
+            android:orientation="horizontal">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Yo have to enable location permission in order to load events near you"
-                android:gravity="center"
-                android:padding="@dimen/screen_margin_twice"/>
-
-            <Button
-                android:id="@+id/events_enable_btn"
-                style="@style/DefaultButton.EventsFragment"
+            <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="ENABLE NOW" />
+                android:layout_marginRight="@dimen/screen_margin_half"
+                android:src="@drawable/ic_date_start"
+                android:tint="@color/white" />
+
+            <TextView
+                android:id="@+id/day_filter_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white" />
 
         </LinearLayout>
 
-    </FrameLayout>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:background="@drawable/selector_toolbar_filter"
+            android:clickable="true"
+            android:gravity="center"
+            android:orientation="horizontal">
 
-</android.support.v4.widget.SwipeRefreshLayout>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/screen_margin_half"
+                android:src="@drawable/ic_whistle"
+                android:tint="@color/white" />
+
+            <Spinner
+                android:id="@+id/disciplines_toolbar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:textColor="@color/white" />
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/refresh_filter"
+            android:layout_width="@dimen/default_filter_refresh_width"
+            android:layout_height="@dimen/default_filter_refresh_height"
+            android:padding="@dimen/screen_margin_half"
+            android:clickable="true"
+            android:background="@drawable/selector_toolbar_filter"
+            android:src="@drawable/ic_refresh" />
+
+    </LinearLayout>
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/events_refresh"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/events_list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clipToPadding="false"
+                android:paddingTop="@dimen/screen_margin_half" />
+
+            <LinearLayout
+                android:id="@+id/no_permission_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:padding="@dimen/screen_margin_twice"
+                    android:text="@string/txt_pls_enable_locations" />
+
+                <Button
+                    android:id="@+id/events_enable_btn"
+                    style="@style/DefaultButton.EventsFragment"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/btn_enable_now" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/looking_for_cords"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:paddingLeft="@dimen/screen_margin_biggest"
+                    android:paddingRight="@dimen/screen_margin_biggest"
+                    android:text="@string/txt_wait_for_location" />
+
+                <ProgressBar
+                    android:layout_width="@dimen/default_filter_refresh_width"
+                    android:layout_height="@dimen/default_progressbar_height"
+                    android:layout_margin="@dimen/screen_margin" />
+
+            </LinearLayout>
+
+        </FrameLayout>
+
+    </android.support.v4.widget.SwipeRefreshLayout>
+
+</LinearLayout>

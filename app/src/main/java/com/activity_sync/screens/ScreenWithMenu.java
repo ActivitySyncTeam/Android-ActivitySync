@@ -104,6 +104,7 @@ public abstract class ScreenWithMenu extends Screen
 
         menuNavigator.addAction(R.id.menu_logout, navigator -> {
             currentUser.logout();
+            navigator.stopBackgroundService();
             navigator.openLoginScreen();
         });
 
