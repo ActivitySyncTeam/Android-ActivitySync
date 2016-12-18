@@ -27,7 +27,7 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.android.view.ViewObservable;
 import rx.subjects.PublishSubject;
 
-public class SettingsScreen extends ScreenWithMenu implements ISettingsView
+public class SettingsScreen extends Screen implements ISettingsView
 {
     @Inject
     INavigator navigator;
@@ -229,12 +229,6 @@ public class SettingsScreen extends ScreenWithMenu implements ISettingsView
     public Observable<Integer> searchRangeChange()
     {
         return searchRangeChange;
-    }
-
-    @Override
-    protected int getMenuId()
-    {
-        return R.id.menu_settings;
     }
 
     @Override

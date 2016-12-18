@@ -100,9 +100,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/txt_pls_enable_locations"
                 android:gravity="center"
-                android:padding="@dimen/screen_margin_twice"
-                android:drawableLeft="@drawable/ic_date_start"
-                android:backgroundTint="@color/white"/>
+                android:padding="@dimen/screen_margin_twice" />
 
             <Button
                 android:id="@+id/events_enable_btn"

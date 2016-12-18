@@ -12,7 +12,6 @@ import com.activity_sync.presentation.services.IPermanentStorage;
 import com.activity_sync.presentation.views.IEventsFragmentView;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -193,6 +192,11 @@ public class AllEventsPresenter extends EventsFragmentBasePresenter
     private void prepareFilterLayout()
     {
         view.filterLayoutVisible(true);
-        view.prepareDisciplineSpinner(Arrays.asList(new Discipline(1, "Koszykówka"), new Discipline(2, "Piłka nożna")));
+
+        ArrayList<Discipline> list = new ArrayList<>();
+        list.add(new Discipline(0, "Piłka nożna"));
+        list.add(new Discipline(1, "Koszykówka"));
+
+        view.prepareDisciplineSpinner(list);
     }
 }
