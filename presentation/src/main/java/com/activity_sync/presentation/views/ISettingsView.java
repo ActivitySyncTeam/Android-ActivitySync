@@ -12,8 +12,6 @@ public interface ISettingsView
 
     Observable<Boolean> enableNotificationsChange();
 
-    Observable<Boolean> enableLocationChange();
-
     Observable<Boolean> enableNotificationsSoundChange();
 
     Observable<Boolean> enableNotificationsVibrateChange();

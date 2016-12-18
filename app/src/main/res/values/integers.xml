@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer
+        name="search_days_ahead_max">100
+    </integer>
+
+    <integer
+        name="search_range_max">100
+    </integer>
+</resources>

@@ -34,34 +34,6 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/screen_margin"
                         android:layout_marginRight="@dimen/screen_margin"
-                        android:text="@string/pref_cat_location"
-                        android:textColor="@color/settings_accent"
-                        android:textSize="@dimen/text_default_size"/>
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:layout_marginBottom="@dimen/screen_margin_half"
-                        android:layout_marginTop="@dimen/screen_margin_half"
-                        android:background="@color/settings_primary"/>
-
-
-                    <android.support.v7.widget.SwitchCompat
-                        android:id="@+id/location_switch"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/screen_margin"
-                        android:layout_marginRight="@dimen/screen_margin"
-                        android:text="@string/pref_location_switch"
-                        android:textSize="@dimen/text_big_size"
-                        android:theme="@style/SettingsTheme"/>
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/screen_margin"
-                        android:layout_marginRight="@dimen/screen_margin"
-                        android:layout_marginTop="@dimen/screen_margin_big"
                         android:text="@string/pref_cat_notification"
                         android:textColor="@color/settings_accent"
                         android:textSize="@dimen/text_default_size"/>
@@ -187,7 +159,7 @@
                         android:layout_marginLeft="@dimen/screen_margin"
                         android:layout_marginRight="@dimen/screen_margin"
                         android:layout_marginTop="@dimen/screen_margin_half"
-                        android:max="150"
+                        android:max="@integer/search_days_ahead_max"
                         android:theme="@style/SettingsTheme"/>
 
                     <LinearLayout
@@ -224,7 +196,7 @@
                         android:layout_marginLeft="@dimen/screen_margin"
                         android:layout_marginRight="@dimen/screen_margin"
                         android:layout_marginTop="@dimen/screen_margin_half"
-                        android:max="50"
+                        android:max="@integer/search_range_max"
                         android:theme="@style/SettingsTheme"/>
 
                     <TextView
@@ -390,17 +362,10 @@
                         style="?attr/borderlessButtonStyle"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/default_button_height"
-                        android:layout_marginBottom="0dp"
+                        android:layout_marginBottom="@dimen/screen_margin_half"
                         android:layout_marginTop="@dimen/screen_margin_half"
                         android:text="@string/pref_edit_account_btn"
                         android:textColor="@color/settings_accent"/>
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:layout_marginBottom="@dimen/screen_margin_half"
-                        android:layout_marginTop="@dimen/screen_margin_half"
-                        android:background="@color/settings_primary"/>
 
                     <Button
                         android:id="@+id/change_password_button"
