@@ -25,16 +25,18 @@ public class AllEventsPresenter extends EventsFragmentBasePresenter
     @Override
     public void start()
     {
-        if (view.checkLocationPermissions() == false)
+        if (isCurrentlyShown())
         {
-            view.eventsListVisible(false);
-            view.refreshingVisible(false);
+            if (view.checkLocationPermissions() == false)
+            {
+                view.eventsListVisible(false);
+                view.refreshingVisible(false);
 
-            view.askForPermission();
-        }
-        else
-        {
-            super.start();
+                view.askForPermission();
+            } else
+            {
+                super.start();
+            }
         }
 
         subscriptions.add(view.locationEnabled()
@@ -153,5 +155,10 @@ public class AllEventsPresenter extends EventsFragmentBasePresenter
                 .createEvent());
 
         view.addEventsList(events);
+    }
+
+    private boolean isCurrentlyShown()
+    {
+        return view.getViewPagerCurrentFragmentIndex() == view.getIndex();
     }
 }
