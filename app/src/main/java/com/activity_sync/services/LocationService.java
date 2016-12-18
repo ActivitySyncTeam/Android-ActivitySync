@@ -23,7 +23,7 @@ import timber.log.Timber;
 public class LocationService implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, com.google.android.gms.location.LocationListener
 {
     private static final long UPDATE_INTERVAL_IN_MILLISECONDS = 5 * 60 * 1000;       //5 minutes
-    private static final long FASTEST_UPDATE_INTERVAL_IN_MILLISECONDS = 3000;       //1 second
+    private static final long FASTEST_UPDATE_INTERVAL_IN_MILLISECONDS = 3 * 1000;       //3 seconds
 
     private GoogleApiClient googleApiClient;
     private LocationRequest locationRequest;
