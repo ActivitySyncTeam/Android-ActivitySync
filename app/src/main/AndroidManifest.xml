@@ -95,6 +95,9 @@
             android:name=".screens.MyProfileScreen"
             android:screenOrientation="portrait"/>
 
+        <service
+            android:name=".services.BackgroundService" />
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyBeiPRuuv-i15I6eJQDtW-irGPer2E1ZJs"/>

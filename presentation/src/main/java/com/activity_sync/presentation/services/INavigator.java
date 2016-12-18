@@ -35,4 +35,8 @@ public interface INavigator
     void openFriendsScreen();
 
     void openMyProfileScreen();
+
+    void startBackgroundService();
+
+    void stopBackgroundService();
 }

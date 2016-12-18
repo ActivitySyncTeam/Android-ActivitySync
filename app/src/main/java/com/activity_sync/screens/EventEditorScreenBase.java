@@ -297,7 +297,7 @@ abstract public class EventEditorScreenBase extends Screen implements IEventCrea
         {
             TimePickerDialog timePickerDialog = new TimePickerDialog(this, R.style.DatePickerStyle, (view1, selectedHour, selectedMinute) ->
             {
-                newDateOccurred.onNext(String.format(getString(R.string.date_format), selectedYear, selectedMonth, selectedDay, selectedHour, selectedMinute));
+                newDateOccurred.onNext(String.format(getString(R.string.date_format), selectedYear, selectedMonth + 1, selectedDay, selectedHour, selectedMinute));
 
             }, hour, minute, false);
 

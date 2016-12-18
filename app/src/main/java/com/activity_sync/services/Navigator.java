@@ -147,6 +147,18 @@ public class Navigator implements INavigator
         startActivity(getIntent(MyProfileScreen.class));
     }
 
+    @Override
+    public void startBackgroundService()
+    {
+        context.startService(new Intent(context, BackgroundService.class));
+    }
+
+    @Override
+    public void stopBackgroundService()
+    {
+        context.stopService(new Intent(context, BackgroundService.class));
+    }
+
     private Intent getIntent(Class<? extends Activity> type)
     {
         return new Intent(context, type);

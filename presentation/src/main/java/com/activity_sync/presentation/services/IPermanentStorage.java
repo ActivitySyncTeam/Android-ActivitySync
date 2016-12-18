@@ -6,22 +6,36 @@ public interface IPermanentStorage
 {
     String IS_APP_OPENED_BEFORE = "is_app_opened_before";
     boolean IS_APP_OPENED_BEFORE_DEFAULT = false;
+
     String IS_LOCATION_ENABLED = "is_location_enabled";
     boolean IS_LOCATION_ENABLED_DEFAULT = false;
+
     String IS_NOTIFICATION_ENABLED = "is_notification_enabled";
     boolean IS_NOTIFICATION_ENABLED_DEFAULT = true;
+
     String IS_NOTIFICATION_SOUND_ENABLED = "is_notification_sound_enabled";
     boolean IS_NOTIFICATION_SOUND_ENABLED_DEFAULT = true;
+
     String IS_NOTIFICATION_VIBRATION_ENABLED = "is_notification_vibration_enabled";
     boolean IS_NOTIFICATION_VIBRATION_ENABLED_DEFAULT = true;
+
     String SEARCH_DAYS_AHEAD = "search_days_ahead";
     int SEARCH_DAYS_AHEAD_DEFAULT = 21;
+
     String SEARCH_RANGE = "search_range";
     int SEARCH_RANGE_DEFAULT = 5;
+
     String AUTH_TOKEN = "auth_token";
     String AUTH_TOKEN_DEFAULT = StringUtils.EMPTY;
+
     String CURRENT_USER_ID = "current_user_id";
     int CURRENT_USER_ID_DEFAULT = 0;
+
+    String LAST_LATITUDE = "last_latitude";
+    float LAST_LATITUDE_DEFAULT = (float) -1000.00;
+
+    String LAST_LONGITUDE = "last_longitude";
+    float LAST_LONGITUDE_DEFAULT = (float) -1000.00;
 
     void saveBoolean(String key, boolean value);
 
@@ -29,11 +43,15 @@ public interface IPermanentStorage
 
     void saveString(String key, String value);
 
+    void saveFloat(String key, float value);
+
     boolean retrieveBoolean(String key, boolean defaultValue);
 
     int retrieveInteger(String key, int defaultValue);
 
     String retrieveString(String key, String defaultValue);
+
+    float retrieveFloat(String key, float defaultValue);
 
     void clear();
 }
