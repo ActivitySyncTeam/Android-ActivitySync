@@ -11,6 +11,8 @@ import com.activity_sync.presentation.services.INavigator;
 import com.activity_sync.presentation.services.IPermanentStorage;
 import com.activity_sync.presentation.views.IEventsFragmentView;
 
+import org.joda.time.DateTime;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -28,6 +30,7 @@ public class AllEventsPresenter extends EventsFragmentBasePresenter
     }
 
     private boolean alreadyLoaded = false;
+    private DateTime dateTimeSelected;
 
     @Override
     public void start()
@@ -36,6 +39,8 @@ public class AllEventsPresenter extends EventsFragmentBasePresenter
         {
             super.start();
             prepareFilterLayout();
+            dateTimeSelected = new DateTime();
+            view.setDate(dateTimeSelected);
         }
         else
         {
@@ -84,6 +89,20 @@ public class AllEventsPresenter extends EventsFragmentBasePresenter
                 .subscribe(isEnabled -> {
 
                     view.askForPermission();
+                })
+        );
+
+        subscriptions.add(view.dateLayoutClicked()
+                .observeOn(uiThread)
+                .subscribe(o -> {
+                    view.openDatePicker(dateTimeSelected);
+                })
+        );
+
+        subscriptions.add(view.newDateEvent()
+                .observeOn(uiThread)
+                .subscribe(date -> {
+                    view.setDate(date);
                 })
         );
     }
@@ -198,5 +217,10 @@ public class AllEventsPresenter extends EventsFragmentBasePresenter
         list.add(new Discipline(1, "Koszykówka"));
 
         view.prepareDisciplineSpinner(list);
+    }
+
+    public DateTime getDateTimeSelected()
+    {
+        return dateTimeSelected;
     }
 }

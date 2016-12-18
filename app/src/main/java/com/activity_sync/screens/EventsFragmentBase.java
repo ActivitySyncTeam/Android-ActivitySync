@@ -1,6 +1,7 @@
 package com.activity_sync.screens;
 
 import android.Manifest;
+import android.app.DatePickerDialog;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -13,6 +14,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.activity_sync.App;
 import com.activity_sync.R;
@@ -34,6 +36,7 @@ import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 
 import org.greenrobot.eventbus.EventBus;
+import org.joda.time.DateTime;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -78,9 +81,16 @@ abstract public class EventsFragmentBase extends FragmentScreen implements IEven
     @Bind(R.id.disciplines_toolbar)
     Spinner disciplineSpinner;
 
+    @Bind(R.id.day_filter_tv)
+    TextView dayFilter;
+
+    @Bind(R.id.filter_date_layout)
+    LinearLayout filterDateLayout;
+
     private PublishSubject refreshEvents = PublishSubject.create();
     private PublishSubject<Boolean> locationsEnabled = PublishSubject.create();
     protected PublishSubject<Location> locationFound = PublishSubject.create();
+    protected PublishSubject<DateTime> newDateOccurred = PublishSubject.create();
     private RVRendererAdapter<Event> adapter;
     private List<Event> events = new ArrayList<>();
 
@@ -253,5 +263,55 @@ abstract public class EventsFragmentBase extends FragmentScreen implements IEven
         ArrayAdapter<Discipline> adapter = new ArrayAdapter<>(getContext(), R.layout.spinner_filter_toolbar_main_item, disciplines);
         adapter.setDropDownViewResource(R.layout.spinner_default_dropdown_item);
         disciplineSpinner.setAdapter(adapter);
+    }
+
+    @Override
+    public void openDatePicker(DateTime dateTime)
+    {
+        if (dateTime == null)
+        {
+            dateTime = new DateTime();
+        }
+
+        DatePickerDialog datePickerDialog = new DatePickerDialog(getContext(), R.style.DatePickerStyle, (view, selectedYear, selectedMonth, selectedDay) ->
+        {
+            newDateOccurred.onNext(new DateTime(selectedYear, selectedMonth + 1, selectedDay, 0, 0));
+
+        }, dateTime.getYear(), dateTime.getMonthOfYear(), dateTime.getDayOfMonth());
+
+        datePickerDialog.show();
+    }
+
+    @Override
+    public Observable newDateEvent()
+    {
+        return newDateOccurred;
+    }
+
+    @Override
+    public void setDate(DateTime dateTime)
+    {
+        if (dateTime == null || isDateToday(dateTime))
+        {
+            dayFilter.setText(R.string.txt_from_today);
+        }
+        else
+        {
+            dayFilter.setText(String.format("From %02d-%02d-%d", dateTime.getDayOfMonth(), dateTime.getMonthOfYear(), dateTime.getYear()));
+        }
+    }
+
+    @Override
+    public Observable dateLayoutClicked()
+    {
+        return ViewObservable.clicks(filterDateLayout);
+    }
+
+    private boolean isDateToday(DateTime dateTime)
+    {
+        DateTime todayDate = new DateTime();
+        return ((dateTime.getYear() == todayDate.getYear())
+                && (dateTime.getMonthOfYear() == todayDate.getMonthOfYear())
+                && (dateTime.getDayOfMonth() == todayDate.getDayOfMonth()));
     }
 }

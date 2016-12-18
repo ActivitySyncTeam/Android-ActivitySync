@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/backgroundColor"
@@ -10,131 +9,135 @@
         android:id="@+id/filter_events_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:background="@color/colorPrimaryLight">
+        android:background="@color/colorPrimaryLight"
+        android:orientation="horizontal">
 
         <LinearLayout
-            android:layout_weight="1"
+            android:id="@+id/filter_date_layout"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
+            android:layout_height="match_parent"
             android:layout_gravity="center"
-            android:gravity="center">
+            android:layout_weight="1"
+            android:background="@drawable/selector_toolbar_filter"
+            android:clickable="true"
+            android:gravity="center"
+            android:orientation="horizontal">
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/screen_margin_half"
                 android:src="@drawable/ic_date_start"
-                android:tint="@color/white"
-                android:layout_marginRight="@dimen/screen_margin_half"/>
+                android:tint="@color/white" />
 
             <TextView
+                android:id="@+id/day_filter_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Today"
                 android:textColor="@color/white" />
 
         </LinearLayout>
 
         <LinearLayout
-            android:layout_weight="1"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
+            android:layout_height="match_parent"
             android:layout_gravity="center"
-            android:gravity="center">
+            android:layout_weight="1"
+            android:background="@drawable/selector_toolbar_filter"
+            android:clickable="true"
+            android:gravity="center"
+            android:orientation="horizontal">
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/screen_margin_half"
                 android:src="@drawable/ic_whistle"
-                android:tint="@color/white"
-                android:layout_marginRight="@dimen/screen_margin_half"/>
+                android:tint="@color/white" />
 
             <Spinner
                 android:id="@+id/disciplines_toolbar"
-                android:background="@null"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="From today"
+                android:background="@null"
                 android:textColor="@color/white" />
 
         </LinearLayout>
 
         <ImageView
-            android:src="@drawable/ic_refresh"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:text="Refresh"
-            android:layout_margin="@dimen/screen_margin_half" />
+            android:layout_width="@dimen/default_filter_refresh_width"
+            android:layout_height="@dimen/default_filter_refresh_height"
+            android:padding="@dimen/screen_margin_half"
+            android:clickable="true"
+            android:background="@drawable/selector_toolbar_filter"
+            android:src="@drawable/ic_refresh" />
 
     </LinearLayout>
 
-
-<android.support.v4.widget.SwipeRefreshLayout
-    android:id="@+id/events_refresh"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-
-    <FrameLayout
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/events_refresh"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/events_list"
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:paddingTop="@dimen/screen_margin_half"
-            android:clipToPadding="false" />
+            android:layout_height="match_parent">
 
-        <LinearLayout
-            android:id="@+id/no_permission_view"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:gravity="center"
-            android:visibility="gone">
-
-            <TextView
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/events_list"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/txt_pls_enable_locations"
-                android:gravity="center"
-                android:padding="@dimen/screen_margin_twice" />
+                android:layout_height="match_parent"
+                android:clipToPadding="false"
+                android:paddingTop="@dimen/screen_margin_half" />
 
-            <Button
-                android:id="@+id/events_enable_btn"
-                style="@style/DefaultButton.EventsFragment"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/btn_enable_now" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/looking_for_cords"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:gravity="center">
-
-            <TextView
+            <LinearLayout
+                android:id="@+id/no_permission_view"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/txt_wait_for_location"
+                android:layout_height="match_parent"
                 android:gravity="center"
-                android:paddingLeft="@dimen/screen_margin_biggest"
-                android:paddingRight="@dimen/screen_margin_biggest"/>
+                android:orientation="vertical"
+                android:visibility="gone">
 
-            <ProgressBar
-                android:layout_width="@dimen/default_progressbar_width"
-                android:layout_height="@dimen/default_progressbar_height"
-                android:layout_margin="@dimen/screen_margin"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:padding="@dimen/screen_margin_twice"
+                    android:text="@string/txt_pls_enable_locations" />
 
-        </LinearLayout>
+                <Button
+                    android:id="@+id/events_enable_btn"
+                    style="@style/DefaultButton.EventsFragment"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/btn_enable_now" />
 
-    </FrameLayout>
+            </LinearLayout>
 
-</android.support.v4.widget.SwipeRefreshLayout>
+            <LinearLayout
+                android:id="@+id/looking_for_cords"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical">
 
-    </LinearLayout>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:paddingLeft="@dimen/screen_margin_biggest"
+                    android:paddingRight="@dimen/screen_margin_biggest"
+                    android:text="@string/txt_wait_for_location" />
+
+                <ProgressBar
+                    android:layout_width="@dimen/default_filter_refresh_width"
+                    android:layout_height="@dimen/default_progressbar_height"
+                    android:layout_margin="@dimen/screen_margin" />
+
+            </LinearLayout>
+
+        </FrameLayout>
+
+    </android.support.v4.widget.SwipeRefreshLayout>
+
+</LinearLayout>

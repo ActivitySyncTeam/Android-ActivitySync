@@ -12,6 +12,7 @@ import com.activity_sync.presentation.services.INavigator;
 import com.activity_sync.presentation.services.IPermanentStorage;
 import com.activity_sync.presentation.views.IEventsFragmentView;
 
+import org.joda.time.DateTime;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -47,6 +48,8 @@ public class AllEventsPresenterTests
     PublishSubject enableLocationClickEvent = PublishSubject.create();
     PublishSubject<Boolean> locationEnabledEvent = PublishSubject.create();
     PublishSubject<Location> locationFoundedEvent = PublishSubject.create();
+    PublishSubject dateLayoutClickEvent = PublishSubject.create();
+    PublishSubject<DateTime> dateSelectedEvent = PublishSubject.create();
 
     Event testedEvent;
 
@@ -76,6 +79,8 @@ public class AllEventsPresenterTests
         Mockito.when(view.enableLocationButtonClick()).thenReturn(enableLocationClickEvent);
         Mockito.when(view.locationEnabled()).thenReturn(locationEnabledEvent);
         Mockito.when(view.locationFound()).thenReturn(locationFoundedEvent);
+        Mockito.when(view.newDateEvent()).thenReturn(dateSelectedEvent);
+        Mockito.when(view.dateLayoutClicked()).thenReturn(dateLayoutClickEvent);
     }
 
     @Test
@@ -180,6 +185,28 @@ public class AllEventsPresenterTests
 
         Mockito.verify(view).filterLayoutVisible(true);
         Mockito.verify(view).prepareDisciplineSpinner(any());
+    }
+
+    @Test
+    public void allEventsPresenter_dateLayoutClicked_openDatePicker()
+    {
+        AllEventsPresenter presenter = createPresenter();
+        presenter.start();
+
+        dateLayoutClickEvent.onNext(null);
+        Mockito.verify(view).openDatePicker(presenter.getDateTimeSelected());
+    }
+
+    @Test
+    public void allEventsPresenter_dateSelected_setDate()
+    {
+        AllEventsPresenter presenter = createPresenter();
+        presenter.start();
+
+        DateTime dateTime = new DateTime();
+
+        dateSelectedEvent.onNext(dateTime);
+        Mockito.verify(view).setDate(dateTime);
     }
 
     private AllEventsPresenter createPresenter()

@@ -4,6 +4,8 @@ import com.activity_sync.presentation.models.Discipline;
 import com.activity_sync.presentation.models.Event;
 import com.activity_sync.presentation.models.Location;
 
+import org.joda.time.DateTime;
+
 import java.util.Collection;
 import java.util.List;
 
@@ -32,4 +34,9 @@ public interface IEventsFragmentView
     Observable<Location> locationFound();
 
     void prepareDisciplineSpinner(List<Discipline> disciplines);
+
+    Observable dateLayoutClicked();
+    void openDatePicker(DateTime dateTime);
+    Observable<DateTime> newDateEvent();
+    void setDate(DateTime dateTime);
 }
