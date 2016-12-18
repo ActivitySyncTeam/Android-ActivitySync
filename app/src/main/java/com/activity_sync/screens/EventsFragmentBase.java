@@ -304,7 +304,7 @@ abstract public class EventsFragmentBase extends FragmentScreen implements IEven
         }
         else
         {
-            dayFilter.setText(String.format("From %02d-%02d-%d", dateTime.getDayOfMonth(), dateTime.getMonthOfYear(), dateTime.getYear()));
+            dayFilter.setText(String.format(getString(R.string.txt_filter_from), dateTime.getDayOfMonth(), dateTime.getMonthOfYear(), dateTime.getYear()));
         }
     }
 

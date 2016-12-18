@@ -143,5 +143,7 @@
     <string name="btn_enable_now">ZEZWÓL TERAZ</string>
     <string name="txt_pls_enable_locations">Musisz zezwolić na dostęp do lokalizacji aby pobrać wydarzenia w Twojej okolicy.</string>
     <string name="txt_wait_for_location">Prosimy o chwilę cierpliwości. Szukanie lokazlizacji w toku...</string>
+    <string name="txt_all">Wszystko</string>
+    <string name="txt_from_today">Od dzisiaj</string>
 
 </resources>
