@@ -65,6 +65,7 @@
         </LinearLayout>
 
         <ImageView
+            android:id="@+id/refresh_filter"
             android:layout_width="@dimen/default_filter_refresh_width"
             android:layout_height="@dimen/default_filter_refresh_height"
             android:padding="@dimen/screen_margin_half"

@@ -12,6 +12,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -22,6 +23,7 @@ import com.activity_sync.presentation.events.LocationPermissionGranted;
 import com.activity_sync.presentation.models.Discipline;
 import com.activity_sync.presentation.models.Event;
 import com.activity_sync.presentation.models.Location;
+import com.activity_sync.presentation.presenters.AllEventsPresenter;
 import com.activity_sync.presentation.services.IApiService;
 import com.activity_sync.presentation.services.INavigator;
 import com.activity_sync.presentation.services.IPermanentStorage;
@@ -86,6 +88,9 @@ abstract public class EventsFragmentBase extends FragmentScreen implements IEven
 
     @Bind(R.id.filter_date_layout)
     LinearLayout filterDateLayout;
+
+    @Bind(R.id.refresh_filter)
+    ImageView refreshFilter;
 
     private PublishSubject refreshEvents = PublishSubject.create();
     private PublishSubject<Boolean> locationsEnabled = PublishSubject.create();
@@ -260,7 +265,9 @@ abstract public class EventsFragmentBase extends FragmentScreen implements IEven
         this.disciplines.clear();
         this.disciplines = disciplines;
 
-        ArrayAdapter<Discipline> adapter = new ArrayAdapter<>(getContext(), R.layout.spinner_filter_toolbar_main_item, disciplines);
+        this.disciplines.add(0, new Discipline(AllEventsPresenter.ALL_EVENTS_ID, getString(R.string.txt_all)));
+
+        ArrayAdapter<Discipline> adapter = new ArrayAdapter<>(getContext(), R.layout.spinner_filter_toolbar_main_item, this.disciplines);
         adapter.setDropDownViewResource(R.layout.spinner_default_dropdown_item);
         disciplineSpinner.setAdapter(adapter);
     }
@@ -307,11 +314,23 @@ abstract public class EventsFragmentBase extends FragmentScreen implements IEven
         return ViewObservable.clicks(filterDateLayout);
     }
 
+    @Override
+    public Observable refreshWithFilterClick()
+    {
+        return ViewObservable.clicks(refreshFilter);
+    }
+
     private boolean isDateToday(DateTime dateTime)
     {
         DateTime todayDate = new DateTime();
         return ((dateTime.getYear() == todayDate.getYear())
                 && (dateTime.getMonthOfYear() == todayDate.getMonthOfYear())
                 && (dateTime.getDayOfMonth() == todayDate.getDayOfMonth()));
+    }
+
+    @Override
+    public Discipline disciplineFilter()
+    {
+        return (Discipline) disciplineSpinner.getSelectedItem();
     }
 }

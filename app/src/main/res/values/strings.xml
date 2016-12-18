@@ -178,5 +178,6 @@
     <string name="btn_enable_now">ENABLE NOW</string>
     <string name="txt_wait_for_location">Please wait a moment. We are checking your localization.</string>
     <string name="txt_from_today">From today</string>
+    <string name="txt_all">All</string>
 
 </resources>

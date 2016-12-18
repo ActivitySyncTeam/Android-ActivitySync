@@ -21,6 +21,8 @@ import rx.Scheduler;
 
 public class AllEventsPresenter extends EventsFragmentBasePresenter
 {
+    public static int ALL_EVENTS_ID = 0;
+
     private final IPermanentStorage permanentStorage;
 
     public AllEventsPresenter(IEventsFragmentView view, INavigator navigator, Scheduler uiThread, IApiService apiService, IPermanentStorage permanentStorage)
@@ -103,6 +105,13 @@ public class AllEventsPresenter extends EventsFragmentBasePresenter
                 .observeOn(uiThread)
                 .subscribe(date -> {
                     view.setDate(date);
+                })
+        );
+
+        subscriptions.add(view.refreshWithFilterClick()
+                .observeOn(uiThread)
+                .subscribe(date -> {
+                    resolveFilterRefresh();
                 })
         );
     }
@@ -198,9 +207,15 @@ public class AllEventsPresenter extends EventsFragmentBasePresenter
                 .setMaxPlaces(8)
                 .createEvent());
 
+        view.refreshingVisible(false);
         view.addEventsList(events);
 
         alreadyLoaded = true;
+    }
+
+    public DateTime getDateTimeSelected()
+    {
+        return dateTimeSelected;
     }
 
     private boolean areLastCordsSaved()
@@ -219,8 +234,17 @@ public class AllEventsPresenter extends EventsFragmentBasePresenter
         view.prepareDisciplineSpinner(list);
     }
 
-    public DateTime getDateTimeSelected()
+    private void resolveFilterRefresh()
     {
-        return dateTimeSelected;
+        view.refreshingVisible(true);
+
+        if (view.disciplineFilter().getId() == ALL_EVENTS_ID)
+        {
+            loadEvents();
+        }
+        else
+        {
+            loadEvents();   //api call with filtering
+        }
     }
 }

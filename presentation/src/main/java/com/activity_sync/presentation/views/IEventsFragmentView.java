@@ -39,4 +39,7 @@ public interface IEventsFragmentView
     void openDatePicker(DateTime dateTime);
     Observable<DateTime> newDateEvent();
     void setDate(DateTime dateTime);
+
+    Observable refreshWithFilterClick();
+    Discipline disciplineFilter();
 }

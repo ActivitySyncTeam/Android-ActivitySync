@@ -1,5 +1,6 @@
 package com.activity_sync.tests;
 
+import com.activity_sync.presentation.models.Discipline;
 import com.activity_sync.presentation.models.Event;
 import com.activity_sync.presentation.models.Location;
 import com.activity_sync.presentation.models.builders.DisciplineBuilder;
@@ -27,6 +28,7 @@ import rx.subjects.PublishSubject;
 
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.times;
 
 @RunWith(MockitoJUnitRunner.class)
 public class AllEventsPresenterTests
@@ -50,6 +52,7 @@ public class AllEventsPresenterTests
     PublishSubject<Location> locationFoundedEvent = PublishSubject.create();
     PublishSubject dateLayoutClickEvent = PublishSubject.create();
     PublishSubject<DateTime> dateSelectedEvent = PublishSubject.create();
+    PublishSubject refreshFilterClickEvent = PublishSubject.create();
 
     Event testedEvent;
 
@@ -81,6 +84,7 @@ public class AllEventsPresenterTests
         Mockito.when(view.locationFound()).thenReturn(locationFoundedEvent);
         Mockito.when(view.newDateEvent()).thenReturn(dateSelectedEvent);
         Mockito.when(view.dateLayoutClicked()).thenReturn(dateLayoutClickEvent);
+        Mockito.when(view.refreshWithFilterClick()).thenReturn(refreshFilterClickEvent);
     }
 
     @Test
@@ -136,9 +140,11 @@ public class AllEventsPresenterTests
         AllEventsPresenter presenter = createPresenter();
         presenter.start();
 
+        Mockito.reset(view);
+
         refreshEventsEvent.onNext(this);
         //Mockito.verify(view).apiCallWhichWillBeHere();
-        Mockito.verify(view).refreshingVisible(false);
+        Mockito.verify(view, times(2)).refreshingVisible(false);
     }
 
     @Test
@@ -207,6 +213,19 @@ public class AllEventsPresenterTests
 
         dateSelectedEvent.onNext(dateTime);
         Mockito.verify(view).setDate(dateTime);
+    }
+
+    @Test
+    public void allEventsPresenter_refreshClick_reloadData()
+    {
+        Mockito.when(view.disciplineFilter()).thenReturn(new Discipline(123, "discipline"));
+
+        AllEventsPresenter presenter = createPresenter();
+        presenter.start();
+
+        refreshFilterClickEvent.onNext(null);
+        Mockito.verify(view).refreshingVisible(true);
+        Mockito.verify(view, times(2)).addEventsList(any());
     }
 
     private AllEventsPresenter createPresenter()
