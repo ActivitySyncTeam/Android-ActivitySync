@@ -11,7 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.activity_sync.R;
-import com.activity_sync.presentation.models.UserUpdate;
+import com.activity_sync.presentation.models.User;
 import com.activity_sync.presentation.presenters.EditAccountPresenter;
 import com.activity_sync.presentation.presenters.IPresenter;
 import com.activity_sync.presentation.views.IEditAccountView;
@@ -56,13 +56,13 @@ public class EditAccountScreen extends Screen implements IEditAccountView
     @Bind(R.id.ea_password_layout)
     TextInputLayout passwordLayout;
 
-    public static final String USER_UPDATE_DETAILS = "user_update_details";
-    private UserUpdate userUpdateDetails;
+    public static final String USER_DETAILS = "user_details";
+    private User user;
 
     @Override
     protected IPresenter createPresenter(Screen screen, Bundle savedInstanceState)
     {
-        this.userUpdateDetails = (UserUpdate) getIntent().getSerializableExtra(USER_UPDATE_DETAILS);
+        this.user = (User) getIntent().getSerializableExtra(USER_DETAILS);
         return new EditAccountPresenter(this, AndroidSchedulers.mainThread());
     }
 
@@ -86,11 +86,11 @@ public class EditAccountScreen extends Screen implements IEditAccountView
 
     private void setUserUpdateDetails()
     {
-        firstNameEditText.setText(userUpdateDetails.getFirstName());
-        lastNameEditText.setText(userUpdateDetails.getLastName());
-        userNameTextView.setText(userUpdateDetails.getUserName());
-        emailEditText.setText(userUpdateDetails.getEmail());
-        signatureEditText.setText(userUpdateDetails.getSignature());
+        firstNameEditText.setText(user.getName());
+        lastNameEditText.setText(user.getSurname());
+        userNameTextView.setText(user.getUsername());
+        emailEditText.setText(user.getEmail());
+        signatureEditText.setText(user.getSignature());
     }
 
     private void prepareEditTexts()
