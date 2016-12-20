@@ -9,15 +9,17 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.activity_sync.R;
 import com.activity_sync.presentation.presenters.IPresenter;
+import com.activity_sync.presentation.views.IScreenView;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import rx.subjects.PublishSubject;
 
-public abstract class Screen extends BaseActivity
+public abstract class Screen extends BaseActivity implements IScreenView
 {
     @Nullable
     @Bind(R.id.toolbar)
@@ -124,6 +126,11 @@ public abstract class Screen extends BaseActivity
         dialog.show();
     }
 
+    @Override
+    public void displayDefaultError()
+    {
+        Toast.makeText(this, "Something went wrong. Please try again later.", Toast.LENGTH_LONG).show();
+    }
 
     public void showProgressBar()
     {

@@ -1,10 +1,10 @@
 package com.activity_sync.presentation.presenters;
 
-import rx.functions.Action1;
-import rx.subscriptions.CompositeSubscription;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import rx.functions.Action1;
+import rx.subscriptions.CompositeSubscription;
 
 public class Presenter<TView> implements IPresenter
 {
