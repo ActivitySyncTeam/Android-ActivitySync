@@ -35,7 +35,7 @@ public class UtilsModule
     @Singleton
     public IApiService provideApiRestService()
     {
-        return new ApiService("https://secret-gorge-99838.herokuapp.com");
+        return new ApiService("http://activitysync-staging.cloud.plgrid.pl");
     }
 
     @Provides

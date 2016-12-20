@@ -1,15 +1,12 @@
 package com.activity_sync.presentation.presenters;
 
 
-import com.activity_sync.presentation.models.Discipline;
-import com.activity_sync.presentation.models.Level;
 import com.activity_sync.presentation.services.IApiService;
 import com.activity_sync.presentation.services.INavigator;
 import com.activity_sync.presentation.views.IEventCreatorView;
 
-import java.util.Arrays;
-
 import rx.Scheduler;
+import timber.log.Timber;
 
 public class EventEditorPresenterBase extends Presenter<IEventCreatorView>
 {
@@ -31,8 +28,18 @@ public class EventEditorPresenterBase extends Presenter<IEventCreatorView>
         super.start();
 
         view.preparePlayersSpinner();
-        view.prepareDisciplineSpinner(Arrays.asList(new Discipline(1, "Koszykówka"), new Discipline(2, "Piłka nożna")));
-        view.prepareLevelSpinner(Arrays.asList(new Level(1, "Niski"), new Level(2, "Średni"), new Level(3, "Wysoki")));
+
+        apiService.getAvailableDisciplines()
+                .observeOn(uiThread)
+                .subscribe((disciplines) -> {
+                    view.prepareDisciplineSpinner(disciplines.getDisciplinesList());
+                }, this::handleError);
+
+        apiService.getAvailableLevels()
+                .observeOn(uiThread)
+                .subscribe((levels) -> {
+                    view.prepareLevelSpinner(levels.getLevelsList());
+                }, this::handleError);
 
         subscriptions.add(view.openDatePickerClick()
                 .observeOn(uiThread)
@@ -68,5 +75,11 @@ public class EventEditorPresenterBase extends Presenter<IEventCreatorView>
                     view.date(date);
                 })
         );
+    }
+
+    private void handleError(Throwable error)
+    {
+        Timber.d(error.getMessage());
+        view.displayDefaultError();
     }
 }

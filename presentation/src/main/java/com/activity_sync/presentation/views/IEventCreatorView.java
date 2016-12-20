@@ -8,7 +8,7 @@ import java.util.List;
 
 import rx.Observable;
 
-public interface IEventCreatorView
+public interface IEventCreatorView extends IScreenView
 {
     void prepareDisciplineSpinner(List<Discipline> disciplines);
 

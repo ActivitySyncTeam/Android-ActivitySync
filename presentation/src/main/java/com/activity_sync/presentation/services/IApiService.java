@@ -1,12 +1,13 @@
 package com.activity_sync.presentation.services;
 
-import com.activity_sync.presentation.models.Event;
-import java.util.List;
+import com.activity_sync.presentation.models.AvailableDisciplines;
+import com.activity_sync.presentation.models.AvailableLevels;
+
 import rx.Observable;
 
 public interface IApiService
 {
-    Observable<List<Event>> getEvents();
+    Observable<AvailableDisciplines> getAvailableDisciplines();
 
-    Observable<Event> getEvent(int eventID);
+    Observable<AvailableLevels> getAvailableLevels();
 }
