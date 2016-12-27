@@ -55,7 +55,7 @@ public class UserDetailsPresenterTests
     @Test
     public void userDetailsPresenter_myProfile_hideThumbs()
     {
-        Mockito.when(currentUser.userID()).thenReturn(123);
+        Mockito.when(currentUser.clientId()).thenReturn(123);
 
         UserDetailsPresenter presenter = createPresenter();
         presenter.start();
@@ -66,7 +66,7 @@ public class UserDetailsPresenterTests
     @Test
     public void userDetailsPresenter_notMyProfile_prepareThumbs()
     {
-        Mockito.when(currentUser.userID()).thenReturn(12345);
+        Mockito.when(currentUser.clientId()).thenReturn(12345);
 
         UserDetailsPresenter presenter = createPresenter();
         presenter.start();

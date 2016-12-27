@@ -102,7 +102,7 @@ public class AllEventsPresenterTests
     public void allEventsPresenterInit_permissionsNotGranted_ask()
     {
         Mockito.when(view.checkLocationPermissions()).thenReturn(false);
-        Mockito.when(permanentStorage.retrieveFloat(IPermanentStorage.LAST_LONGITUDE, IPermanentStorage.LAST_LONGITUDE_DEFAULT)).thenReturn(IPermanentStorage.LAST_LONGITUDE_DEFAULT);
+        Mockito.when(permanentStorage.retrieveFloat(IPermanentStorage.LAST_LONGITUDE, IPermanentStorage.LAST_COORDINATION_DEFAULT)).thenReturn(IPermanentStorage.LAST_COORDINATION_DEFAULT);
 
         AllEventsPresenter presenter = createPresenter();
         presenter.start();
@@ -116,7 +116,7 @@ public class AllEventsPresenterTests
     public void allEventsPresenterInit_permissionsNotGranted_waitForLocation()
     {
         Mockito.when(view.checkLocationPermissions()).thenReturn(true);
-        Mockito.when(permanentStorage.retrieveFloat(IPermanentStorage.LAST_LONGITUDE, IPermanentStorage.LAST_LONGITUDE_DEFAULT)).thenReturn(IPermanentStorage.LAST_LONGITUDE_DEFAULT);
+        Mockito.when(permanentStorage.retrieveFloat(IPermanentStorage.LAST_LONGITUDE, IPermanentStorage.LAST_COORDINATION_DEFAULT)).thenReturn(IPermanentStorage.LAST_COORDINATION_DEFAULT);
 
         AllEventsPresenter presenter = createPresenter();
         presenter.start();

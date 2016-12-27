@@ -18,12 +18,20 @@ public class Location implements Serializable
     @SerializedName("lng")
     private double longitude;
 
-    public Location(int id, String name, double latitude, double longitude)
+    @SerializedName("city")
+    private String city;
+
+    @SerializedName("desc")
+    private String description;
+
+    public Location(int id, String name, double latitude, double longitude, String city, String description)
     {
         this.id = id;
         this.name = name;
         this.latitude = latitude;
         this.longitude = longitude;
+        this.city = city;
+        this.description = description;
     }
 
     public Location()
@@ -69,5 +77,25 @@ public class Location implements Serializable
     public void setLongitude(double longitude)
     {
         this.longitude = longitude;
+    }
+
+    public String getCity()
+    {
+        return city;
+    }
+
+    public void setCity(String city)
+    {
+        this.city = city;
+    }
+
+    public String getDescription()
+    {
+        return description;
+    }
+
+    public void setDescription(String description)
+    {
+        this.description = description;
     }
 }
