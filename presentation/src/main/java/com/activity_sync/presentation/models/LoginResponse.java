@@ -8,10 +8,13 @@ public class LoginResponse
     @SerializedName("responseType")
     private String responseType;
 
-    @SerializedName("responseMessage")
-    private LoginResponseDetails loginResponseDetails;
+//    @SerializedName("responseMessage")
+//    private LoginResponseDetails loginResponseDetails;
 
-    public LoginResponse(String responseType, LoginResponseDetails loginResponseDetails)
+    @SerializedName("responseMessage")
+    private String loginResponseDetails;
+
+    public LoginResponse(String responseType, String loginResponseDetails)
     {
         this.responseType = responseType;
         this.loginResponseDetails = loginResponseDetails;
@@ -27,7 +30,7 @@ public class LoginResponse
         return responseType;
     }
 
-    public LoginResponseDetails getLoginResponseDetails()
+    public String getLoginResponseDetails()
     {
         return loginResponseDetails;
     }

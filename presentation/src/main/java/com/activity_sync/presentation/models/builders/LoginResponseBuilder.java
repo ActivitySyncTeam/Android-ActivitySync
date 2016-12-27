@@ -1,12 +1,11 @@
 package com.activity_sync.presentation.models.builders;
 
 import com.activity_sync.presentation.models.LoginResponse;
-import com.activity_sync.presentation.models.LoginResponseDetails;
 
 public class LoginResponseBuilder
 {
     private String responseType;
-    private LoginResponseDetails loginResponseDetails;
+    private String loginResponseDetails;
 
     public LoginResponseBuilder setResponseType(String responseType)
     {
@@ -14,7 +13,7 @@ public class LoginResponseBuilder
         return this;
     }
 
-    public LoginResponseBuilder setLoginResponseDetails(LoginResponseDetails loginResponseDetails)
+    public LoginResponseBuilder setLoginResponseDetails(String loginResponseDetails)
     {
         this.loginResponseDetails = loginResponseDetails;
         return this;
