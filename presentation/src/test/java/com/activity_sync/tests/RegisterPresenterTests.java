@@ -1,5 +1,9 @@
 package com.activity_sync.tests;
 
+import com.activity_sync.presentation.models.ClientDetails;
+import com.activity_sync.presentation.models.RegisterResponse;
+import com.activity_sync.presentation.models.builders.ClientDetailsBuilder;
+import com.activity_sync.presentation.models.builders.RegisterResponseBuilder;
 import com.activity_sync.presentation.presenters.RegisterPresenter;
 import com.activity_sync.presentation.services.IApiService;
 import com.activity_sync.presentation.services.INavigator;
@@ -13,6 +17,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import rx.Observable;
 import rx.schedulers.Schedulers;
 import rx.subjects.PublishSubject;
 
@@ -41,9 +46,18 @@ public class RegisterPresenterTests
     String password = "Password";
     String emptyFieldError = "Error";
 
+    RegisterResponse registerResponse;
+    ClientDetails clientDetails;
+
     @Before
     public void setup()
     {
+        registerResponse = new RegisterResponseBuilder()
+                .setResponseType(IApiService.RESPONSE_SUCCESS)
+                .create();
+
+        clientDetails = new ClientDetailsBuilder().create();
+
         Mockito.when(view.registerBtnClick()).thenReturn(registerBtnClickEvent);
         Mockito.when(view.alreadyRegisteredClick()).thenReturn(alreadyRegisteredClickEvent);
         Mockito.when(view.emptyFieldErrorText()).thenReturn(emptyFieldError);
@@ -52,10 +66,12 @@ public class RegisterPresenterTests
         Mockito.when(view.email()).thenReturn(email);
         Mockito.when(view.nickName()).thenReturn(nickName);
         Mockito.when(view.password()).thenReturn(password);
+        Mockito.when(apiService.registerUser(view.nickName(), view.password(), view.firstName(), view.lastName(), view.email())).thenReturn(Observable.just(registerResponse));
+        Mockito.when(apiService.getClientDetails()).thenReturn(Observable.just(clientDetails));
     }
 
     @Test
-    public void registerPresenter_clickLoginBtn_openEventsScreen()
+    public void registerPresenter_clickRegisterBtn_openEventsScreen()
     {
         RegisterPresenter registerPresenter = createPresenter();
         registerPresenter.start();
