@@ -2,6 +2,7 @@ package com.activity_sync.presentation.presenters;
 
 import com.activity_sync.presentation.models.ClientDetails;
 import com.activity_sync.presentation.models.RegisterResponse;
+import com.activity_sync.presentation.services.CurrentUser;
 import com.activity_sync.presentation.services.IApiService;
 import com.activity_sync.presentation.services.INavigator;
 import com.activity_sync.presentation.utils.StringUtils;
@@ -17,13 +18,15 @@ public class RegisterPresenter extends Presenter<IRegisterView>
     private final Scheduler uiThread;
     private final INavigator navigator;
     private final IApiService apiService;
+    private final CurrentUser currentUser;
 
-    public RegisterPresenter(Scheduler uiThread, IRegisterView view, INavigator navigator, IApiService apiService)
+    public RegisterPresenter(Scheduler uiThread, IRegisterView view, INavigator navigator, IApiService apiService, CurrentUser currentUser)
     {
         super(view);
         this.navigator = navigator;
         this.uiThread = uiThread;
         this.apiService = apiService;
+        this.currentUser = currentUser;
     }
 
     @Override
@@ -58,10 +61,10 @@ public class RegisterPresenter extends Presenter<IRegisterView>
                         canContinue = false;
                     }
 
-                    if (StringUtils.isNullOrEmpty(view.nickName()))
+                    if (StringUtils.isNullOrEmpty(view.userName()))
                     {
-                        view.nickNameErrorEnabled(true);
-                        view.nickNameErrorText(view.emptyFieldErrorText());
+                        view.userNameErrorEnabled(true);
+                        view.userNameErrorText(view.emptyFieldErrorText());
                         canContinue = false;
                     }
 
@@ -74,14 +77,23 @@ public class RegisterPresenter extends Presenter<IRegisterView>
 
                     if (canContinue)
                     {
-
                         Observable.zip(getRegisterQuery(), getClientDetailsQuery(), (registerQuery, clientDetailsQuery) -> new Tuple2<>(registerQuery, clientDetailsQuery))
                                 .observeOn(uiThread)
                                 .subscribe(tuple -> {
 
-                                    Timber.i("Client username: %s, Client id: %s", tuple.val0.getRegisterResponseDetails().getUsername(), tuple.val1.getClientId());
+                                    currentUser.clientId(tuple.val1.getClientId());
+                                    currentUser.clientSecret(tuple.val1.getClientSecret());
+                                    Timber.i("Client secret: %s, Client id: %s", tuple.val1.getClientSecret(), tuple.val1.getClientId());
 
-                                    navigator.openEventsScreen();
+                                    apiService.login(view.userName(), view.password())
+                                            .observeOn(uiThread)
+                                            .subscribe((result) -> {
+
+                                                navigator.startBackgroundService();
+                                                navigator.openEventsScreen();
+
+                                            }, this::handleError);
+
 
                                 }, this::handleError);
                     }
@@ -99,7 +111,7 @@ public class RegisterPresenter extends Presenter<IRegisterView>
 
     private Observable<RegisterResponse> getRegisterQuery()
     {
-        return apiService.registerUser(view.nickName(), view.password(), view.firstName(), view.lastName(), view.email());
+        return apiService.register(view.userName(), view.password(), view.firstName(), view.lastName(), view.email());
     }
 
     private Observable<ClientDetails> getClientDetailsQuery()
@@ -109,6 +121,7 @@ public class RegisterPresenter extends Presenter<IRegisterView>
 
     private void handleError(Throwable error)
     {
+        error.printStackTrace();
         Timber.d(error.getMessage());
         view.displayDefaultError();
     }

@@ -51,9 +51,6 @@ public class CommentsPresenter extends Presenter<ICommentsView>
                     }
                     else
                     {
-                        //current user test, will be important when api is implemented
-                        int userId = currentUser.userID();
-
                         Comment comment = new CommentBuilder()
                                 .setComment(view.comment())
                                 .setName("Marcin Zielinski")

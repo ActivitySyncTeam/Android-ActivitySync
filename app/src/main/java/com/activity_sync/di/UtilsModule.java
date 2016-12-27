@@ -33,9 +33,9 @@ public class UtilsModule
 
     @Provides
     @Singleton
-    public IApiService provideApiRestService()
+    public IApiService provideApiRestService(IPermanentStorage permanentStorage)
     {
-        return new ApiService("http://activitysync-staging.cloud.plgrid.pl");
+        return new ApiService("http://activitysync-staging.cloud.plgrid.pl", permanentStorage);
     }
 
     @Provides

@@ -13,6 +13,7 @@ import com.activity_sync.App;
 import com.activity_sync.R;
 import com.activity_sync.presentation.presenters.IPresenter;
 import com.activity_sync.presentation.presenters.RegisterPresenter;
+import com.activity_sync.presentation.services.CurrentUser;
 import com.activity_sync.presentation.services.IApiService;
 import com.activity_sync.presentation.services.INavigator;
 import com.activity_sync.presentation.views.IRegisterView;
@@ -32,6 +33,9 @@ public class RegisterScreen extends Screen implements IRegisterView
     @Inject
     IApiService apiService;
 
+    @Inject
+    CurrentUser currentUser;
+
     @Bind(R.id.register_btn)
     Button registerBtn;
 
@@ -47,8 +51,8 @@ public class RegisterScreen extends Screen implements IRegisterView
     @Bind(R.id.text_input_layout_email)
     TextInputLayout inputLoginLayout;
 
-    @Bind(R.id.text_input_layout_nickname)
-    TextInputLayout inputNickNameLayout;
+    @Bind(R.id.text_input_layout_username)
+    TextInputLayout inputUserNameLayout;
 
     @Bind(R.id.text_input_layout_password)
     TextInputLayout inputPasswordLayout;
@@ -62,8 +66,8 @@ public class RegisterScreen extends Screen implements IRegisterView
     @Bind(R.id.email)
     AppCompatEditText emailEditText;
 
-    @Bind(R.id.nickname)
-    AppCompatEditText nickNameEditText;
+    @Bind(R.id.username)
+    AppCompatEditText userNameEditText;
 
     @Bind(R.id.password)
     AppCompatEditText passwordEditText;
@@ -76,7 +80,7 @@ public class RegisterScreen extends Screen implements IRegisterView
     @Override
     protected IPresenter createPresenter(Screen screen, Bundle savedInstanceState)
     {
-        return new RegisterPresenter(AndroidSchedulers.mainThread(), this, navigator, apiService);
+        return new RegisterPresenter(AndroidSchedulers.mainThread(), this, navigator, apiService, currentUser);
     }
 
     @Override
@@ -118,9 +122,9 @@ public class RegisterScreen extends Screen implements IRegisterView
     }
 
     @Override
-    public String nickName()
+    public String userName()
     {
-        return nickNameEditText.getText().toString();
+        return userNameEditText.getText().toString();
     }
 
     @Override
@@ -148,9 +152,9 @@ public class RegisterScreen extends Screen implements IRegisterView
     }
 
     @Override
-    public void nickNameErrorText(String error)
+    public void userNameErrorText(String error)
     {
-        inputNickNameLayout.setError(error);
+        inputUserNameLayout.setError(error);
     }
 
     @Override
@@ -178,9 +182,9 @@ public class RegisterScreen extends Screen implements IRegisterView
     }
 
     @Override
-    public void nickNameErrorEnabled(boolean enabled)
+    public void userNameErrorEnabled(boolean enabled)
     {
-        inputNickNameLayout.setErrorEnabled(enabled);
+        inputUserNameLayout.setErrorEnabled(enabled);
     }
 
     @Override
@@ -260,12 +264,12 @@ public class RegisterScreen extends Screen implements IRegisterView
             }
         });
 
-        nickNameEditText.addTextChangedListener(new TextWatcher()
+        userNameEditText.addTextChangedListener(new TextWatcher()
         {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after)
             {
-                nickNameErrorEnabled(false);
+                userNameErrorEnabled(false);
             }
 
             @Override

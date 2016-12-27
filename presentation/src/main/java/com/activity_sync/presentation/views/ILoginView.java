@@ -2,7 +2,7 @@ package com.activity_sync.presentation.views;
 
 import rx.Observable;
 
-public interface ILoginView
+public interface ILoginView extends IScreenView
 {
     Observable loginBtnClick();
 

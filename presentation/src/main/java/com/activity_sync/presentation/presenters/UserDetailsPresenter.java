@@ -33,7 +33,7 @@ public class UserDetailsPresenter extends Presenter<IUserDetailsView>
         createUser(0, false, false);
         view.setData(user);
 
-        if (currentUser.userID() == user.getUserId())
+        if (currentUser.clientId().equals(user.getUserId()))        //TODO correct after login api configuration
         {
             view.thumbsAndFollowBtnVisible(false);
         }

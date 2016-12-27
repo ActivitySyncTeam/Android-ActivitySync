@@ -12,7 +12,7 @@ public interface IRegisterView extends IScreenView
 
     String lastName();
 
-    String nickName();
+    String userName();
 
     String email();
 
@@ -22,7 +22,7 @@ public interface IRegisterView extends IScreenView
 
     void lastNameErrorText(String error);
 
-    void nickNameErrorText(String error);
+    void userNameErrorText(String error);
 
     void emailErrorText(String error);
 
@@ -32,7 +32,7 @@ public interface IRegisterView extends IScreenView
 
     void lastNameErrorEnabled(boolean enabled);
 
-    void nickNameErrorEnabled(boolean enabled);
+    void userNameErrorEnabled(boolean enabled);
 
     void emailErrorEnabled(boolean enabled);
 

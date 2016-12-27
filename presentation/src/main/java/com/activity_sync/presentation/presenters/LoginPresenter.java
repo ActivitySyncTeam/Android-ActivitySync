@@ -7,6 +7,7 @@ import com.activity_sync.presentation.utils.StringUtils;
 import com.activity_sync.presentation.views.ILoginView;
 
 import rx.Scheduler;
+import timber.log.Timber;
 
 public class LoginPresenter extends Presenter<ILoginView>
 {
@@ -51,14 +52,25 @@ public class LoginPresenter extends Presenter<ILoginView>
 
                     if (canContinue)
                     {
-                        //apiCall here
-                        //if success:
-                        currentUser.authToken("auth_token response");
-                        currentUser.userID(1234);
+                        apiService.getClientDetails()
+                                .observeOn(uiThread)
+                                .subscribe(clientDetails -> {
 
-                        navigator.startBackgroundService();
+                                    currentUser.clientId(clientDetails.getClientId());
+                                    currentUser.clientSecret(clientDetails.getClientSecret());
+                                    Timber.i("Client secret: %s, Client id: %s", clientDetails.getClientSecret(), clientDetails.getClientId());
 
-                        navigator.openEventsScreen();
+                                    apiService.login(view.login(), view.password())
+                                            .observeOn(uiThread)
+                                            .subscribe((result) -> {
+
+                                                navigator.startBackgroundService();
+                                                navigator.openEventsScreen();
+
+                                            }, this::handleError);
+
+
+                                }, this::handleError);
                     }
                 })
         );
@@ -69,5 +81,12 @@ public class LoginPresenter extends Presenter<ILoginView>
                     navigator.openRegisterScreen();
                 })
         );
+    }
+
+    private void handleError(Throwable error)
+    {
+        error.printStackTrace();
+        Timber.d(error.getMessage());
+        view.displayDefaultError();
     }
 }

@@ -220,7 +220,7 @@ public class AllEventsPresenter extends EventsFragmentBasePresenter
 
     private boolean areLastCordsSaved()
     {
-        return permanentStorage.retrieveFloat(IPermanentStorage.LAST_LONGITUDE, IPermanentStorage.LAST_LONGITUDE_DEFAULT) != IPermanentStorage.LAST_LONGITUDE_DEFAULT;
+        return permanentStorage.retrieveFloat(IPermanentStorage.LAST_LONGITUDE, IPermanentStorage.LAST_COORDINATION_DEFAULT) != IPermanentStorage.LAST_COORDINATION_DEFAULT;
     }
 
     private void prepareFilterLayout()

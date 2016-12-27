@@ -16,29 +16,40 @@ public class CurrentUser
         this.navigator = navigator;
     }
 
-    public String authToken()
+    public String accessToken()
     {
-        return permanentStorage.retrieveString(IPermanentStorage.AUTH_TOKEN, IPermanentStorage.AUTH_TOKEN_DEFAULT);
+        return permanentStorage.retrieveString(IPermanentStorage.ACCESS_TOKEN, StringUtils.EMPTY);
     }
 
-    public void authToken(String authToken)
+    public void accessToken(String authToken)
     {
-        permanentStorage.saveString(IPermanentStorage.AUTH_TOKEN, authToken);
+        permanentStorage.saveString(IPermanentStorage.ACCESS_TOKEN, authToken);
     }
 
-    public int userID()
+    public String clientId()
     {
-        return permanentStorage.retrieveInteger(IPermanentStorage.CURRENT_USER_ID, IPermanentStorage.CURRENT_USER_ID_DEFAULT);
+        return permanentStorage.retrieveString(IPermanentStorage.CLIENT_ID, StringUtils.EMPTY);
     }
 
-    public void userID(int userID)
+    public void clientId(String clientId)
     {
-        permanentStorage.saveInteger(IPermanentStorage.CURRENT_USER_ID, userID);
+        permanentStorage.saveString(IPermanentStorage.CLIENT_ID, clientId);
+    }
+
+    public String clientSecret()
+    {
+        return permanentStorage.retrieveString(IPermanentStorage.CLIENT_SECRET, StringUtils.EMPTY);
+    }
+
+    public void clientSecret(String clientSecret)
+    {
+        permanentStorage.saveString(IPermanentStorage.CLIENT_SECRET, clientSecret);
     }
 
     public void logout()
     {
-        authToken(StringUtils.EMPTY);
-        userID(0);
+        accessToken(StringUtils.EMPTY);
+        clientId(StringUtils.EMPTY);
+        clientSecret(StringUtils.EMPTY);
     }
 }

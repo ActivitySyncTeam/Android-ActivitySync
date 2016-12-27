@@ -64,9 +64,9 @@ public class RegisterPresenterTests
         Mockito.when(view.firstName()).thenReturn(firstName);
         Mockito.when(view.lastName()).thenReturn(lastName);
         Mockito.when(view.email()).thenReturn(email);
-        Mockito.when(view.nickName()).thenReturn(nickName);
+        Mockito.when(view.userName()).thenReturn(nickName);
         Mockito.when(view.password()).thenReturn(password);
-        Mockito.when(apiService.registerUser(view.nickName(), view.password(), view.firstName(), view.lastName(), view.email())).thenReturn(Observable.just(registerResponse));
+        Mockito.when(apiService.register(view.userName(), view.password(), view.firstName(), view.lastName(), view.email())).thenReturn(Observable.just(registerResponse));
         Mockito.when(apiService.getClientDetails()).thenReturn(Observable.just(clientDetails));
     }
 
@@ -135,15 +135,15 @@ public class RegisterPresenterTests
     @Test
     public void registerPresenter_clickRegisterBtn_nickNameEmptyError()
     {
-        Mockito.when(view.nickName()).thenReturn(StringUtils.EMPTY);
+        Mockito.when(view.userName()).thenReturn(StringUtils.EMPTY);
 
         RegisterPresenter registerPresenter = createPresenter();
         registerPresenter.start();
 
         registerBtnClickEvent.onNext(this);
         Mockito.verify(navigator, never()).openEventsScreen();
-        Mockito.verify(view).nickNameErrorEnabled(true);
-        Mockito.verify(view).nickNameErrorText(anyString());
+        Mockito.verify(view).userNameErrorEnabled(true);
+        Mockito.verify(view).userNameErrorText(anyString());
     }
 
     @Test
@@ -162,6 +162,6 @@ public class RegisterPresenterTests
 
     private RegisterPresenter createPresenter()
     {
-        return new RegisterPresenter(Schedulers.immediate(), view, navigator, apiService);
+        return new RegisterPresenter(Schedulers.immediate(), view, navigator, apiService, currentUser);
     }
 }
