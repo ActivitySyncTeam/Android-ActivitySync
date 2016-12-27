@@ -1,10 +1,13 @@
 package com.activity_sync.tests;
 
 import com.activity_sync.presentation.models.ClientDetails;
+import com.activity_sync.presentation.models.LoginResponse;
 import com.activity_sync.presentation.models.RegisterResponse;
 import com.activity_sync.presentation.models.builders.ClientDetailsBuilder;
+import com.activity_sync.presentation.models.builders.LoginResponseBuilder;
 import com.activity_sync.presentation.models.builders.RegisterResponseBuilder;
 import com.activity_sync.presentation.presenters.RegisterPresenter;
+import com.activity_sync.presentation.services.CurrentUser;
 import com.activity_sync.presentation.services.IApiService;
 import com.activity_sync.presentation.services.INavigator;
 import com.activity_sync.presentation.utils.StringUtils;
@@ -36,6 +39,9 @@ public class RegisterPresenterTests
     @Mock
     IApiService apiService;
 
+    @Mock
+    CurrentUser currentUser;
+
     PublishSubject registerBtnClickEvent = PublishSubject.create();
     PublishSubject alreadyRegisteredClickEvent = PublishSubject.create();
 
@@ -48,6 +54,7 @@ public class RegisterPresenterTests
 
     RegisterResponse registerResponse;
     ClientDetails clientDetails;
+    LoginResponse loginResponse;
 
     @Before
     public void setup()
@@ -57,6 +64,10 @@ public class RegisterPresenterTests
                 .create();
 
         clientDetails = new ClientDetailsBuilder().create();
+
+        loginResponse = new LoginResponseBuilder()
+                .setResponseType(IApiService.RESPONSE_SUCCESS)
+                .create();
 
         Mockito.when(view.registerBtnClick()).thenReturn(registerBtnClickEvent);
         Mockito.when(view.alreadyRegisteredClick()).thenReturn(alreadyRegisteredClickEvent);
@@ -68,6 +79,7 @@ public class RegisterPresenterTests
         Mockito.when(view.password()).thenReturn(password);
         Mockito.when(apiService.register(view.userName(), view.password(), view.firstName(), view.lastName(), view.email())).thenReturn(Observable.just(registerResponse));
         Mockito.when(apiService.getClientDetails()).thenReturn(Observable.just(clientDetails));
+        Mockito.when(apiService.login(view.userName(), view.password())).thenReturn(Observable.just(loginResponse));
     }
 
     @Test
@@ -78,6 +90,7 @@ public class RegisterPresenterTests
 
         registerBtnClickEvent.onNext(this);
         Mockito.verify(navigator).openEventsScreen();
+        Mockito.verify(navigator).startBackgroundService();
     }
 
     @Test

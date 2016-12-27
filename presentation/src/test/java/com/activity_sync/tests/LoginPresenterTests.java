@@ -1,5 +1,9 @@
 package com.activity_sync.tests;
 
+import com.activity_sync.presentation.models.ClientDetails;
+import com.activity_sync.presentation.models.LoginResponse;
+import com.activity_sync.presentation.models.builders.ClientDetailsBuilder;
+import com.activity_sync.presentation.models.builders.LoginResponseBuilder;
 import com.activity_sync.presentation.presenters.LoginPresenter;
 import com.activity_sync.presentation.services.CurrentUser;
 import com.activity_sync.presentation.services.IApiService;
@@ -14,6 +18,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import rx.Observable;
 import rx.schedulers.Schedulers;
 import rx.subjects.PublishSubject;
 
@@ -41,13 +46,25 @@ public class LoginPresenterTests
     String login = "email";
     String password = "password";
 
+    ClientDetails clientDetails;
+    LoginResponse loginResponse;
+
     @Before
     public void setup()
     {
+        clientDetails = new ClientDetailsBuilder().create();
+
+        loginResponse = new LoginResponseBuilder()
+                .setResponseType(IApiService.RESPONSE_SUCCESS)
+                .create();
+
         Mockito.when(view.loginBtnClick()).thenReturn(loginBtnClickEvent);
         Mockito.when(view.createAccountClick()).thenReturn(createAccountClickEvent);
         Mockito.when(view.login()).thenReturn(login);
         Mockito.when(view.password()).thenReturn(password);
+
+        Mockito.when(apiService.getClientDetails()).thenReturn(Observable.just(clientDetails));
+        Mockito.when(apiService.login(view.login(), view.password())).thenReturn(Observable.just(loginResponse));
     }
 
     @Test
