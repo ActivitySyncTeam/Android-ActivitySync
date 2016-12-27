@@ -58,7 +58,6 @@ public class LoginPresenter extends Presenter<ILoginView>
 
                                     currentUser.clientId(clientDetails.getClientId());
                                     currentUser.clientSecret(clientDetails.getClientSecret());
-                                    Timber.i("Client secret: %s, Client id: %s", clientDetails.getClientSecret(), clientDetails.getClientId());
 
                                     apiService.login(view.login(), view.password())
                                             .observeOn(uiThread)
@@ -68,8 +67,6 @@ public class LoginPresenter extends Presenter<ILoginView>
                                                 navigator.openEventsScreen();
 
                                             }, this::handleError);
-
-
                                 }, this::handleError);
                     }
                 })

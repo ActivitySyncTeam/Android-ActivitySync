@@ -77,13 +77,12 @@ public class RegisterPresenter extends Presenter<IRegisterView>
 
                     if (canContinue)
                     {
-                        Observable.zip(getRegisterQuery(), getClientDetailsQuery(), (registerQuery, clientDetailsQuery) -> new Tuple2<>(registerQuery, clientDetailsQuery))
+                        Observable.zip(getRegisterQuery(), getClientDetailsQuery(), Tuple2::new)
                                 .observeOn(uiThread)
                                 .subscribe(tuple -> {
 
                                     currentUser.clientId(tuple.val1.getClientId());
                                     currentUser.clientSecret(tuple.val1.getClientSecret());
-                                    Timber.i("Client secret: %s, Client id: %s", tuple.val1.getClientSecret(), tuple.val1.getClientId());
 
                                     apiService.login(view.userName(), view.password())
                                             .observeOn(uiThread)
@@ -93,8 +92,6 @@ public class RegisterPresenter extends Presenter<IRegisterView>
                                                 navigator.openEventsScreen();
 
                                             }, this::handleError);
-
-
                                 }, this::handleError);
                     }
                 })

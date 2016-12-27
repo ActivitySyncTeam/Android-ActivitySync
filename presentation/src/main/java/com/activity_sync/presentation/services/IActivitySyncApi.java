@@ -4,6 +4,7 @@ import com.activity_sync.presentation.models.AvailableDisciplines;
 import com.activity_sync.presentation.models.AvailableLevels;
 import com.activity_sync.presentation.models.ClientDetails;
 import com.activity_sync.presentation.models.Location;
+import com.activity_sync.presentation.models.LoginResponse;
 import com.activity_sync.presentation.models.RegisterResponse;
 
 import retrofit2.http.Field;
@@ -24,7 +25,7 @@ public interface IActivitySyncApi
     Observable<ClientDetails> getClientDetails();
 
     @POST("/api/auth/token/get")
-    Observable<Void> login(@Header("Authorization") String authToken, @Query("grant_type") String grantType, @Query("username") String username, @Query("password") String password);
+    Observable<LoginResponse> login(@Header("Authorization") String authToken, @Query("grant_type") String grantType, @Query("username") String username, @Query("password") String password);
 
     @FormUrlEncoded
     @POST("/api/event/create")

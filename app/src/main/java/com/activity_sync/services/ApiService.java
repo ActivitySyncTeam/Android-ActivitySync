@@ -6,6 +6,7 @@ import com.activity_sync.presentation.models.AvailableDisciplines;
 import com.activity_sync.presentation.models.AvailableLevels;
 import com.activity_sync.presentation.models.ClientDetails;
 import com.activity_sync.presentation.models.Location;
+import com.activity_sync.presentation.models.LoginResponse;
 import com.activity_sync.presentation.models.RegisterResponse;
 import com.activity_sync.presentation.services.IActivitySyncApi;
 import com.activity_sync.presentation.services.IApiService;
@@ -45,7 +46,7 @@ public class ApiService implements IApiService
     }
 
     @Override
-    public Observable<Void> login(String username, String password)
+    public Observable<LoginResponse> login(String username, String password)
     {
         return api.login(authToken(), "password", username, password);
     }

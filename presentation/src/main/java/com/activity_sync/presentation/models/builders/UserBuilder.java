@@ -5,7 +5,7 @@ import com.activity_sync.presentation.models.User;
 
 public class UserBuilder
 {
-    private int userId;
+    private String userId;
     private String name;
     private String surname;
     private String username;
@@ -16,7 +16,7 @@ public class UserBuilder
     private AdditionalInfo additionalInfo;
     private int credibility;
 
-    public UserBuilder setUserId(int userId)
+    public UserBuilder setUserId(String userId)
     {
         this.userId = userId;
         return this;
