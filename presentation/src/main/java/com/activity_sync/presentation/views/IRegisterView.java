@@ -2,7 +2,7 @@ package com.activity_sync.presentation.views;
 
 import rx.Observable;
 
-public interface IRegisterView
+public interface IRegisterView extends IScreenView
 {
     Observable registerBtnClick();
 

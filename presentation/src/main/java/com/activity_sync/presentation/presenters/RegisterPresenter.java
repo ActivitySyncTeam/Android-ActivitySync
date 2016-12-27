@@ -6,6 +6,7 @@ import com.activity_sync.presentation.utils.StringUtils;
 import com.activity_sync.presentation.views.IRegisterView;
 
 import rx.Scheduler;
+import timber.log.Timber;
 
 public class RegisterPresenter extends Presenter<IRegisterView>
 {
@@ -69,7 +70,16 @@ public class RegisterPresenter extends Presenter<IRegisterView>
 
                     if (canContinue)
                     {
-                        navigator.openEventsScreen();
+                        apiService.registerUser(view.nickName(), view.password(), view.firstName(), view.lastName(), view.email())
+                                .observeOn(uiThread)
+                                .subscribe((response) -> {
+
+                                    if (response.getResponseType().equals(IApiService.RESPONSE_SUCCESS))
+                                    {
+                                        navigator.openEventsScreen();
+                                    }
+
+                                }, this::handleError);
                     }
                 })
         );
@@ -81,5 +91,11 @@ public class RegisterPresenter extends Presenter<IRegisterView>
                 })
         );
 
+    }
+
+    private void handleError(Throwable error)
+    {
+        Timber.d(error.getMessage());
+        view.displayDefaultError();
     }
 }
