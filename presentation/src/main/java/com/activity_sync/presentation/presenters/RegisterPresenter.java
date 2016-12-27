@@ -1,10 +1,14 @@
 package com.activity_sync.presentation.presenters;
 
+import com.activity_sync.presentation.models.ClientDetails;
+import com.activity_sync.presentation.models.RegisterResponse;
 import com.activity_sync.presentation.services.IApiService;
 import com.activity_sync.presentation.services.INavigator;
 import com.activity_sync.presentation.utils.StringUtils;
 import com.activity_sync.presentation.views.IRegisterView;
+import com.innahema.tuples.Tuple2;
 
+import rx.Observable;
 import rx.Scheduler;
 import timber.log.Timber;
 
@@ -70,14 +74,14 @@ public class RegisterPresenter extends Presenter<IRegisterView>
 
                     if (canContinue)
                     {
-                        apiService.registerUser(view.nickName(), view.password(), view.firstName(), view.lastName(), view.email())
-                                .observeOn(uiThread)
-                                .subscribe((response) -> {
 
-                                    if (response.getResponseType().equals(IApiService.RESPONSE_SUCCESS))
-                                    {
-                                        navigator.openEventsScreen();
-                                    }
+                        Observable.zip(getRegisterQuery(), getClientDetailsQuery(), (registerQuery, clientDetailsQuery) -> new Tuple2<>(registerQuery, clientDetailsQuery))
+                                .observeOn(uiThread)
+                                .subscribe(tuple -> {
+
+                                    Timber.i("Client username: %s, Client id: %s", tuple.val0.getRegisterResponseDetails().getUsername(), tuple.val1.getClientId());
+
+                                    navigator.openEventsScreen();
 
                                 }, this::handleError);
                     }
@@ -91,6 +95,16 @@ public class RegisterPresenter extends Presenter<IRegisterView>
                 })
         );
 
+    }
+
+    private Observable<RegisterResponse> getRegisterQuery()
+    {
+        return apiService.registerUser(view.nickName(), view.password(), view.firstName(), view.lastName(), view.email());
+    }
+
+    private Observable<ClientDetails> getClientDetailsQuery()
+    {
+        return apiService.getClientDetails();
     }
 
     private void handleError(Throwable error)
