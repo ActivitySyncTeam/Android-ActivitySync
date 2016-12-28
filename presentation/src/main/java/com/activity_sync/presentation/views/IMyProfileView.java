@@ -1,13 +1,9 @@
 package com.activity_sync.presentation.views;
 
-import com.activity_sync.presentation.models.User;
-
 import rx.Observable;
 
-public interface IMyProfileView
+public interface IMyProfileView extends IUserBaseView
 {
-    void setData(User user);
-
     Observable editUserAccount();
 
     Observable changeUserPassword();
