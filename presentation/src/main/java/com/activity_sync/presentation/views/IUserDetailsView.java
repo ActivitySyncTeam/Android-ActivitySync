@@ -4,10 +4,8 @@ import com.activity_sync.presentation.models.User;
 
 import rx.Observable;
 
-public interface IUserDetailsView
+public interface IUserDetailsView extends  IUserBaseView
 {
-    void setData(User user);
-
     void thumbsAndFollowBtnVisible(boolean areVisible);
     Observable thumbUpClick();
     Observable thumbDownClick();

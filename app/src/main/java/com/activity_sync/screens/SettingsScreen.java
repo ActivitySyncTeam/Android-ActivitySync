@@ -5,14 +5,12 @@ import android.os.Bundle;
 import android.support.v7.widget.AppCompatCheckBox;
 import android.support.v7.widget.AppCompatSeekBar;
 import android.support.v7.widget.SwitchCompat;
-import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.activity_sync.App;
 import com.activity_sync.R;
-import com.activity_sync.presentation.models.UserUpdate;
 import com.activity_sync.presentation.presenters.IPresenter;
 import com.activity_sync.presentation.presenters.SettingsPresenter;
 import com.activity_sync.presentation.services.INavigator;
@@ -24,10 +22,9 @@ import javax.inject.Inject;
 import butterknife.Bind;
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
-import rx.android.view.ViewObservable;
 import rx.subjects.PublishSubject;
 
-public class SettingsScreen extends Screen implements ISettingsView
+public class SettingsScreen extends ScreenWithMenu implements ISettingsView
 {
     @Inject
     INavigator navigator;
@@ -58,27 +55,6 @@ public class SettingsScreen extends Screen implements ISettingsView
 
     @Bind(R.id.search_range_label)
     TextView searchRangeLabel;
-
-    @Bind(R.id.edit_account_button)
-    Button editAccountButton;
-
-    @Bind(R.id.change_password_button)
-    Button changePasswordButton;
-
-    @Bind(R.id.pref_email_text)
-    TextView emailTextView;
-
-    @Bind(R.id.pref_name_text)
-    TextView nameTextView;
-
-    @Bind(R.id.pref_signature_text)
-    TextView signatureTextView;
-
-    @Bind(R.id.pref_last_name_text)
-    TextView surnameTextView;
-
-    @Bind(R.id.pref_username_text)
-    TextView usernameTextView;
 
     private PublishSubject<Boolean> enableNotificationsChange = PublishSubject.create();
     private PublishSubject<Boolean> enableLocationChange = PublishSubject.create();
@@ -165,16 +141,6 @@ public class SettingsScreen extends Screen implements ISettingsView
         searchRangeLabel.setText(String.valueOf(rangeSeekbar.getProgress()));
     }
 
-    @Override
-    public void setAccountData(UserUpdate userUpdateDetails)
-    {
-        nameTextView.setText(userUpdateDetails.getFirstName());
-        surnameTextView.setText(userUpdateDetails.getLastName());
-        usernameTextView.setText(userUpdateDetails.getUserName());
-        emailTextView.setText(userUpdateDetails.getEmail());
-        signatureTextView.setText(userUpdateDetails.getSignature());
-    }
-
     private void notificationSwitchChanged(CompoundButton c, Boolean value)
     {
         setNotificationCheckBoxesEnabled(value);
@@ -232,15 +198,9 @@ public class SettingsScreen extends Screen implements ISettingsView
     }
 
     @Override
-    public Observable editUserAccount()
+    protected int getMenuId()
     {
-        return ViewObservable.clicks(editAccountButton);
-    }
-
-    @Override
-    public Observable changeUserPassword()
-    {
-        return ViewObservable.clicks(changePasswordButton);
+        return R.id.menu_settings;
     }
 
     @Override

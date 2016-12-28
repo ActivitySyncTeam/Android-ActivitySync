@@ -9,13 +9,11 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
 import rx.schedulers.Schedulers;
 import rx.subjects.PublishSubject;
 
-import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -58,8 +56,6 @@ public class SettingsPresenterTest
         when(view.searchDaysStopTracking()).thenReturn(searchDaysStopTracking);
         when(view.searchRangeChange()).thenReturn(searchRangeChange);
         when(view.searchRangeStopTracking()).thenReturn(searchRangeStopTracking);
-        when(view.editUserAccount()).thenReturn(openEditAccountScreenEvent);
-        when(view.changeUserPassword()).thenReturn(openChangePasswordScreenEvent);
 
         settingsPresenter.start();
     }
@@ -148,20 +144,6 @@ public class SettingsPresenterTest
         int changeValue = 100;
         searchRangeStopTracking.onNext(changeValue);
         verify(permanentStorage).saveInteger(IPermanentStorage.SEARCH_RANGE, changeValue);
-    }
-
-    @Test
-    public void settingsPresenter_clickEditAccountBtn_openEditAccountScreen()
-    {
-        openEditAccountScreenEvent.onNext(this);
-        Mockito.verify(navigator).openEditAccountScreen(any());
-    }
-
-    @Test
-    public void settingsPresenter_clickChangePasswordBtn_openChangePasswordScreen()
-    {
-        openChangePasswordScreenEvent.onNext(this);
-        Mockito.verify(navigator).openChangePasswordScreen();
     }
 
     @After
