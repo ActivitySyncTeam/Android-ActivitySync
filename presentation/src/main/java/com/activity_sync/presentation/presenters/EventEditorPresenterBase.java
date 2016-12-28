@@ -32,13 +32,13 @@ public class EventEditorPresenterBase extends Presenter<IEventCreatorView>
         apiService.getAvailableDisciplines()
                 .observeOn(uiThread)
                 .subscribe((disciplines) -> {
-                    view.prepareDisciplineSpinner(disciplines.getDisciplinesList());
+                    view.prepareDisciplineSpinner(disciplines);
                 }, this::handleError);
 
         apiService.getAvailableLevels()
                 .observeOn(uiThread)
                 .subscribe((levels) -> {
-                    view.prepareLevelSpinner(levels.getLevelsList());
+                    view.prepareLevelSpinner(levels);
                 }, this::handleError);
 
         subscriptions.add(view.openDatePickerClick()

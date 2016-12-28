@@ -1,11 +1,13 @@
 package com.activity_sync.presentation.services;
 
-import com.activity_sync.presentation.models.AvailableDisciplines;
-import com.activity_sync.presentation.models.AvailableLevels;
 import com.activity_sync.presentation.models.ClientDetails;
+import com.activity_sync.presentation.models.Discipline;
+import com.activity_sync.presentation.models.Level;
 import com.activity_sync.presentation.models.Location;
 import com.activity_sync.presentation.models.LoginResponse;
 import com.activity_sync.presentation.models.RegisterResponse;
+
+import java.util.List;
 
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
@@ -35,8 +37,8 @@ public interface IActivitySyncApi
     Observable<Void> createEvent(@Header("Authorization") String accessToken, @Query("description") String description, @Field("disciplineID") int disciplineID, @Field("levelID") int levelID, @Field("numberOfPlayers") int playersNumber, @Field("address") Location location, @Field("date") String date, @Field("addMe") boolean addMe);
 
     @GET("/api/disciplines")
-    Observable<AvailableDisciplines> getAvailableDisciplines();
+    Observable<List<Discipline>> getAvailableDisciplines();
 
     @GET("/api/levels")
-    Observable<AvailableLevels> getAvailableLevels();
+    Observable<List<Level>> getAvailableLevels();
 }

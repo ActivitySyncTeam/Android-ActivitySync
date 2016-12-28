@@ -5,6 +5,8 @@ import android.util.Base64;
 import com.activity_sync.presentation.models.AvailableDisciplines;
 import com.activity_sync.presentation.models.AvailableLevels;
 import com.activity_sync.presentation.models.ClientDetails;
+import com.activity_sync.presentation.models.Discipline;
+import com.activity_sync.presentation.models.Level;
 import com.activity_sync.presentation.models.Location;
 import com.activity_sync.presentation.models.LoginResponse;
 import com.activity_sync.presentation.models.RegisterResponse;
@@ -14,6 +16,7 @@ import com.activity_sync.presentation.services.IPermanentStorage;
 import com.activity_sync.presentation.utils.StringUtils;
 
 import java.io.UnsupportedEncodingException;
+import java.util.List;
 
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
@@ -70,13 +73,13 @@ public class ApiService implements IApiService
     }
 
     @Override
-    public Observable<AvailableDisciplines> getAvailableDisciplines()
+    public Observable<List<Discipline>> getAvailableDisciplines()
     {
         return api.getAvailableDisciplines();
     }
 
     @Override
-    public Observable<AvailableLevels> getAvailableLevels()
+    public Observable<List<Level>> getAvailableLevels()
     {
         return api.getAvailableLevels();
     }

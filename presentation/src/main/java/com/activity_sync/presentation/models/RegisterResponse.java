@@ -7,16 +7,32 @@ import java.io.Serializable;
 
 public class RegisterResponse implements Serializable
 {
-    @SerializedName("responseType")
-    private String responseType;
+    @SerializedName("id")
+    private int id;
 
-    @SerializedName("responseMessage")
-    private RegisterResponseDetails registerResponseDetails;
+    @SerializedName("username")
+    private String username;
 
-    public RegisterResponse(String responseType, RegisterResponseDetails registerResponseDetails)
+    @SerializedName("password")
+    private String password;
+
+    @SerializedName("email")
+    private String email;
+
+    @SerializedName("first_name")
+    private String firstName;
+
+    @SerializedName("last_name")
+    private String lastName;
+
+    public RegisterResponse(int id, String username, String password, String email, String firstName, String lastName)
     {
-        this.responseType = responseType;
-        this.registerResponseDetails = registerResponseDetails;
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.firstName = firstName;
+        this.lastName = lastName;
     }
 
     public RegisterResponse()
@@ -24,13 +40,33 @@ public class RegisterResponse implements Serializable
 
     }
 
-    public String getResponseType()
+    public int getId()
     {
-        return responseType;
+        return id;
     }
 
-    public RegisterResponseDetails getRegisterResponseDetails()
+    public String getUsername()
     {
-        return registerResponseDetails;
+        return username;
+    }
+
+    public String getPassword()
+    {
+        return password;
+    }
+
+    public String getEmail()
+    {
+        return email;
+    }
+
+    public String getFirstName()
+    {
+        return firstName;
+    }
+
+    public String getLastName()
+    {
+        return lastName;
     }
 }

@@ -1,5 +1,7 @@
 package com.activity_sync.tests;
 
+import com.activity_sync.presentation.models.Discipline;
+import com.activity_sync.presentation.models.Level;
 import com.activity_sync.presentation.models.Location;
 import com.activity_sync.presentation.models.builders.LocationBuilder;
 import com.activity_sync.presentation.presenters.EventCreatorPresenter;
@@ -14,10 +16,12 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import rx.Observable;
 import rx.schedulers.Schedulers;
 import rx.subjects.PublishSubject;
-
-import static org.mockito.Matchers.any;
 
 @RunWith(MockitoJUnitRunner.class)
 public class EventCreatorPresenterTests
@@ -43,9 +47,15 @@ public class EventCreatorPresenterTests
     private String testDate = "29/02/2020";
     private String locationName = "Hala VLO";
 
+    private List<Discipline> disciplines = new ArrayList<>();
+    private List<Level> levels = new ArrayList<>();
+
     @Before
     public void setup()
     {
+        disciplines.add(new Discipline(1, "test"));
+        levels.add(new Level(1, "test"));
+
         Mockito.when(view.createEventClick()).thenReturn(createEventClickEvent);
         Mockito.when(view.newLocationEvent()).thenReturn(newLocationOccurredEvent);
         Mockito.when(view.locationErrorEvent()).thenReturn(locationErrorEvent);
@@ -53,6 +63,9 @@ public class EventCreatorPresenterTests
         Mockito.when(view.openLocationPickerScreenClick()).thenReturn(openLocationPickerClickEvent);
         Mockito.when(view.openDatePickerClick()).thenReturn(openDatePickerClickEvent);
         Mockito.when(view.confirmActionClickEvent()).thenReturn(confirmActionEvent);
+
+        Mockito.when(apiService.getAvailableDisciplines()).thenReturn(Observable.just(disciplines));
+        Mockito.when(apiService.getAvailableLevels()).thenReturn(Observable.just(levels));
 
         testLocation = new LocationBuilder()
                 .setId(1)
@@ -69,8 +82,8 @@ public class EventCreatorPresenterTests
         presenter.start();
 
         Mockito.verify(view).preparePlayersSpinner();
-        Mockito.verify(view).prepareDisciplineSpinner(any());
-        Mockito.verify(view).prepareDisciplineSpinner(any());
+        Mockito.verify(view).prepareDisciplineSpinner(disciplines);
+        Mockito.verify(view).prepareLevelSpinner(levels);
     }
 
     @Test
