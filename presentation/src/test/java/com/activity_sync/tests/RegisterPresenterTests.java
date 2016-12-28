@@ -65,9 +65,7 @@ public class RegisterPresenterTests
 
         clientDetails = new ClientDetailsBuilder().create();
 
-        loginResponse = new LoginResponseBuilder()
-                .setResponseType(IApiService.RESPONSE_SUCCESS)
-                .create();
+        loginResponse = new LoginResponseBuilder().create();
 
         Mockito.when(view.registerBtnClick()).thenReturn(registerBtnClickEvent);
         Mockito.when(view.alreadyRegisteredClick()).thenReturn(alreadyRegisteredClickEvent);

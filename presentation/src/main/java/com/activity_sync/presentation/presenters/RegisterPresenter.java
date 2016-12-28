@@ -88,6 +88,8 @@ public class RegisterPresenter extends Presenter<IRegisterView>
                                             .observeOn(uiThread)
                                             .subscribe((result) -> {
 
+                                                currentUser.accessToken(result.getAccessToken());
+
                                                 navigator.startBackgroundService();
                                                 navigator.openEventsScreen();
 

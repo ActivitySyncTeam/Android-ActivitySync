@@ -5,19 +5,28 @@ import com.google.gson.annotations.SerializedName;
 
 public class LoginResponse
 {
-    @SerializedName("responseType")
-    private String responseType;
+    @SerializedName("access_token")
+    private String accessToken;
 
-//    @SerializedName("responseMessage")
-//    private LoginResponseDetails loginResponseDetails;
+    @SerializedName("token_type")
+    private String tokenType;
 
-    @SerializedName("responseMessage")
-    private String loginResponseDetails;
+    @SerializedName("expires_in")
+    private String expiresIn;
 
-    public LoginResponse(String responseType, String loginResponseDetails)
+    @SerializedName("refresh_token")
+    private String refreshToken;
+
+    @SerializedName("scope")
+    private String scope;
+
+    public LoginResponse(String accessToken, String tokenType, String expiresIn, String refreshToken, String scope)
     {
-        this.responseType = responseType;
-        this.loginResponseDetails = loginResponseDetails;
+        this.accessToken = accessToken;
+        this.tokenType = tokenType;
+        this.expiresIn = expiresIn;
+        this.refreshToken = refreshToken;
+        this.scope = scope;
     }
 
     public LoginResponse()
@@ -25,13 +34,28 @@ public class LoginResponse
 
     }
 
-    public String getResponseType()
+    public String getAccessToken()
     {
-        return responseType;
+        return accessToken;
     }
 
-    public String getLoginResponseDetails()
+    public String getTokenType()
     {
-        return loginResponseDetails;
+        return tokenType;
+    }
+
+    public String getExpiresIn()
+    {
+        return expiresIn;
+    }
+
+    public String getRefreshToken()
+    {
+        return refreshToken;
+    }
+
+    public String getScope()
+    {
+        return scope;
     }
 }

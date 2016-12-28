@@ -54,9 +54,7 @@ public class LoginPresenterTests
     {
         clientDetails = new ClientDetailsBuilder().create();
 
-        loginResponse = new LoginResponseBuilder()
-                .setResponseType(IApiService.RESPONSE_SUCCESS)
-                .create();
+        loginResponse = new LoginResponseBuilder().create();
 
         Mockito.when(view.loginBtnClick()).thenReturn(loginBtnClickEvent);
         Mockito.when(view.createAccountClick()).thenReturn(createAccountClickEvent);

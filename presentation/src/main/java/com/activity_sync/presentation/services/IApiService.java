@@ -18,9 +18,11 @@ public interface IApiService
 
     Observable<LoginResponse> login(String username, String password);
 
-    Observable<Void> createEvent(String description, int disciplineID, int levelID, int playersNumber, Location location, String date, boolean addMe);
+    Observable<Void> logout();
 
     Observable<ClientDetails> getClientDetails();
+
+    Observable<Void> createEvent(String description, int disciplineID, int levelID, int playersNumber, Location location, String date, boolean addMe);
 
     Observable<AvailableDisciplines> getAvailableDisciplines();
 

@@ -63,6 +63,8 @@ public class LoginPresenter extends Presenter<ILoginView>
                                             .observeOn(uiThread)
                                             .subscribe((result) -> {
 
+                                                currentUser.accessToken(result.getAccessToken());
+
                                                 navigator.startBackgroundService();
                                                 navigator.openEventsScreen();
 

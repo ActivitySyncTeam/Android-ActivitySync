@@ -27,6 +27,9 @@ public interface IActivitySyncApi
     @POST("/api/auth/token/get")
     Observable<LoginResponse> login(@Header("Authorization") String authToken, @Query("grant_type") String grantType, @Query("username") String username, @Query("password") String password);
 
+    @POST("/api/auth/token/revoke")
+    Observable<Void> logout(@Header("Authorization") String authToken, @Query("client_id") String clientId, @Query("client_secret") String clientSecret, @Query("token") String token);
+
     @FormUrlEncoded
     @POST("/api/event/create")
     Observable<Void> createEvent(@Header("Authorization") String accessToken, @Query("description") String description, @Field("disciplineID") int disciplineID, @Field("levelID") int levelID, @Field("numberOfPlayers") int playersNumber, @Field("address") Location location, @Field("date") String date, @Field("addMe") boolean addMe);

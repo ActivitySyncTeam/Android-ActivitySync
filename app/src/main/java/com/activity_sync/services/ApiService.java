@@ -48,13 +48,19 @@ public class ApiService implements IApiService
     @Override
     public Observable<LoginResponse> login(String username, String password)
     {
-        return api.login(authToken(), "password", username, password);
+        return api.login(authTokenHeader(), "password", username, password);
+    }
+
+    @Override
+    public Observable<Void> logout()
+    {
+        return api.logout(accessTokenHeader(), clientId(), clientSecret(), accessToken());
     }
 
     @Override
     public Observable<Void> createEvent(String description, int disciplineID, int levelID, int playersNumber, Location location, String date, boolean addMe)
     {
-        return api.createEvent(accessToken(), description, disciplineID, levelID, playersNumber, location, date, addMe);
+        return api.createEvent(accessTokenHeader(), description, disciplineID, levelID, playersNumber, location, date, addMe);
     }
 
     @Override
@@ -75,12 +81,12 @@ public class ApiService implements IApiService
         return api.getAvailableLevels();
     }
 
-    private String accessToken()
+    private String accessTokenHeader()
     {
         return String.format("Bearer %s", permanentStorage.retrieveString(IPermanentStorage.ACCESS_TOKEN, StringUtils.EMPTY));
     }
 
-    private String authToken()
+    private String authTokenHeader()
     {
         String text = String.format("%s:%s",
                 permanentStorage.retrieveString(IPermanentStorage.CLIENT_ID, StringUtils.EMPTY),
@@ -99,5 +105,20 @@ public class ApiService implements IApiService
             Timber.i("Base64 token conversion error");
             return StringUtils.EMPTY;
         }
+    }
+
+    private String clientId()
+    {
+        return permanentStorage.retrieveString(IPermanentStorage.CLIENT_ID, StringUtils.EMPTY);
+    }
+
+    private String clientSecret()
+    {
+        return permanentStorage.retrieveString(IPermanentStorage.CLIENT_SECRET, StringUtils.EMPTY);
+    }
+
+    private String accessToken()
+    {
+        return permanentStorage.retrieveString(IPermanentStorage.ACCESS_TOKEN, StringUtils.EMPTY);
     }
 }

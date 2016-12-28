@@ -4,16 +4,20 @@ import com.activity_sync.presentation.utils.StringUtils;
 
 import javax.inject.Inject;
 
+import rx.android.schedulers.AndroidSchedulers;
+
 public class CurrentUser
 {
     private final IPermanentStorage permanentStorage;
     private final INavigator navigator;
+    private final IApiService apiService;
 
     @Inject
-    public CurrentUser(IPermanentStorage permanentStorage, INavigator navigator)
+    public CurrentUser(IPermanentStorage permanentStorage, INavigator navigator, IApiService apiService)
     {
         this.permanentStorage = permanentStorage;
         this.navigator = navigator;
+        this.apiService = apiService;
     }
 
     public String accessToken()
@@ -48,8 +52,16 @@ public class CurrentUser
 
     public void logout()
     {
-        accessToken(StringUtils.EMPTY);
-        clientId(StringUtils.EMPTY);
-        clientSecret(StringUtils.EMPTY);
+        apiService.logout()
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(result -> {
+
+                    accessToken(StringUtils.EMPTY);
+                    clientId(StringUtils.EMPTY);
+                    clientSecret(StringUtils.EMPTY);
+
+                    navigator.stopBackgroundService();
+                    navigator.openLoginScreen();
+        });
     }
 }

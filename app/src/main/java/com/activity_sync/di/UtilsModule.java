@@ -40,8 +40,8 @@ public class UtilsModule
 
     @Provides
     @Singleton
-    CurrentUser provideCurrentUser(IPermanentStorage permanentStorage, INavigator navigator)
+    CurrentUser provideCurrentUser(IPermanentStorage permanentStorage, INavigator navigator, IApiService apiService)
     {
-        return new CurrentUser(permanentStorage, navigator);
+        return new CurrentUser(permanentStorage, navigator, apiService);
     }
 }
