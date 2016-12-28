@@ -2,8 +2,6 @@ package com.activity_sync.services;
 
 import android.util.Base64;
 
-import com.activity_sync.presentation.models.AvailableDisciplines;
-import com.activity_sync.presentation.models.AvailableLevels;
 import com.activity_sync.presentation.models.ClientDetails;
 import com.activity_sync.presentation.models.Discipline;
 import com.activity_sync.presentation.models.Level;
