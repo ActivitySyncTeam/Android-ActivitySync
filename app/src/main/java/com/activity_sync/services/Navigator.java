@@ -4,7 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 
-import com.activity_sync.presentation.models.UserUpdate;
+import com.activity_sync.presentation.models.User;
 import com.activity_sync.presentation.services.INavigator;
 import com.activity_sync.screens.ChangePasswordScreen;
 import com.activity_sync.screens.CommentsScreen;
@@ -17,6 +17,7 @@ import com.activity_sync.screens.EventsScreen;
 import com.activity_sync.screens.FriendsScreen;
 import com.activity_sync.screens.IntroScreen;
 import com.activity_sync.screens.LoginScreen;
+import com.activity_sync.screens.MyProfileScreen;
 import com.activity_sync.screens.ParticipantsScreen;
 import com.activity_sync.screens.RegisterScreen;
 import com.activity_sync.screens.SettingsScreen;
@@ -133,11 +134,17 @@ public class Navigator implements INavigator
     }
 
     @Override
-    public void openEditAccountScreen(UserUpdate userUpdateDetails)
+    public void openEditAccountScreen(User user)
     {
         Intent intent = new Intent(context, EditAccountScreen.class);
-        intent.putExtra(EditAccountScreen.USER_UPDATE_DETAILS, userUpdateDetails);
+        intent.putExtra(EditAccountScreen.USER_DETAILS, user);
         startActivity(intent);
+    }
+
+    @Override
+    public void openMyProfileScreen()
+    {
+        startActivity(getIntent(MyProfileScreen.class));
     }
 
     @Override

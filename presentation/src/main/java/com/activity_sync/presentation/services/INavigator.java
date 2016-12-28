@@ -1,6 +1,6 @@
 package com.activity_sync.presentation.services;
 
-import com.activity_sync.presentation.models.UserUpdate;
+import com.activity_sync.presentation.models.User;
 
 public interface INavigator
 {
@@ -22,7 +22,7 @@ public interface INavigator
 
     void openChangePasswordScreen();
 
-    void openEditAccountScreen(UserUpdate userUpdateDetails);
+    void openEditAccountScreen(User user);
 
     void openParticipantsScreen(boolean isOrganizer);
 
@@ -33,6 +33,8 @@ public interface INavigator
     void openCommentsScreen(int eventId);
 
     void openFriendsScreen();
+
+    void openMyProfileScreen();
 
     void startBackgroundService();
 
