@@ -72,6 +72,9 @@ public class LoginPresenterTests
         loginPresenter.start();
 
         loginBtnClickEvent.onNext(this);
+        Mockito.verify(currentUser).clientId(anyString());
+        Mockito.verify(currentUser).clientSecret(anyString());
+        Mockito.verify(currentUser).accessToken(anyString());
         Mockito.verify(navigator).startBackgroundService();
         Mockito.verify(navigator).openEventsScreen();
     }

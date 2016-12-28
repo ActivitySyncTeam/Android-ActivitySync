@@ -87,6 +87,9 @@ public class RegisterPresenterTests
         registerPresenter.start();
 
         registerBtnClickEvent.onNext(this);
+        Mockito.verify(currentUser).clientId(anyString());
+        Mockito.verify(currentUser).clientSecret(anyString());
+        Mockito.verify(currentUser).accessToken(anyString());
         Mockito.verify(navigator).openEventsScreen();
         Mockito.verify(navigator).startBackgroundService();
     }
