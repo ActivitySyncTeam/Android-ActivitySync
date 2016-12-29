@@ -1,12 +1,10 @@
 package com.activity_sync.presentation.presenters;
 
-import com.activity_sync.presentation.models.AdditionalInfo;
 import com.activity_sync.presentation.models.Event;
 import com.activity_sync.presentation.models.builders.DisciplineBuilder;
-import com.activity_sync.presentation.models.builders.AdditionalInfoBuilder;
 import com.activity_sync.presentation.models.builders.EventBuilder;
-import com.activity_sync.presentation.models.builders.LocationBuilder;
 import com.activity_sync.presentation.models.builders.LevelBuilder;
+import com.activity_sync.presentation.models.builders.LocationBuilder;
 import com.activity_sync.presentation.models.builders.UserBuilder;
 import com.activity_sync.presentation.services.IApiService;
 import com.activity_sync.presentation.services.INavigator;
@@ -51,7 +49,7 @@ public class EventDetailsPresenter extends Presenter<IEventDetailsView>
         subscriptions.add(view.joinLeaveEventClick()
                 .observeOn(uiThread)
                 .subscribe(o -> {
-                    if (event.getAdditionalInfo().isParticipant())
+                    if (event.isParticipant())
                     {
                         view.showLeaveConfirmationDialog();
                     }
@@ -80,15 +78,12 @@ public class EventDetailsPresenter extends Presenter<IEventDetailsView>
                 .observeOn(uiThread)
                 .subscribe(o -> {
 
-                    AdditionalInfo additionalInfo = new AdditionalInfoBuilder()
-                            .setOrganizer(true)
-                            .setParticipant(true)
-                            .setCandidate(false)
-                            .createAdditionalInfo();
-
                     view.showEnrollMessage();
-                    view.setOrganizerParticipantView(new EventBuilder().setAdditionalInfo(additionalInfo).setIsActive(true).createEvent());
-                    event.setAdditionalInfo(additionalInfo); // delete when api provided
+                    event.setCandidate(false); // delete when api provided
+                    event.setParticipant(true);
+                    event.setOrganizer(true);
+
+                    view.setOrganizerParticipantView(event);
                 })
         );
 
@@ -96,15 +91,12 @@ public class EventDetailsPresenter extends Presenter<IEventDetailsView>
                 .observeOn(uiThread)
                 .subscribe(o -> {
 
-                    AdditionalInfo additionalInfo = new AdditionalInfoBuilder()
-                            .setOrganizer(true)
-                            .setParticipant(false)
-                            .setCandidate(false)
-                            .createAdditionalInfo();
-
                     view.showLeaveEventMessage();
-                    view.setOrganizerParticipantView(new EventBuilder().setAdditionalInfo(additionalInfo).setIsActive(true).createEvent());
-                    event.setAdditionalInfo(additionalInfo); // delete when api provided
+                    event.setCandidate(false); // delete when api provided
+                    event.setParticipant(false);
+                    event.setOrganizer(true);
+
+                    view.setOrganizerParticipantView(event);
                 })
         );
 
@@ -128,7 +120,7 @@ public class EventDetailsPresenter extends Presenter<IEventDetailsView>
 
                     if (event != null)
                     {
-                        navigator.openParticipantsScreen(event.getAdditionalInfo().isOrganizer());
+                        navigator.openParticipantsScreen(event.isOrganizer());
                     }
                 })
         );
@@ -166,11 +158,8 @@ public class EventDetailsPresenter extends Presenter<IEventDetailsView>
                         .setName("medium")
                         .createLevel())
                 .setDescription("Very long text written in order to check if two lines of text here are displaying correctly. Yeah!")
-                .setAdditionalInfo(new AdditionalInfoBuilder()
-                        .setParticipant(isParticipant)
-                        .setOrganizer(isOrganizer)
-                        .createAdditionalInfo())
-                .setIsActive(isActive)
+                .setParticipant(isParticipant)
+                .setOrganizer(isOrganizer)
                 .createEvent();
     }
 }

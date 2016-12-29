@@ -1,6 +1,5 @@
 package com.activity_sync.presentation.models.builders;
 
-import com.activity_sync.presentation.models.AdditionalInfo;
 import com.activity_sync.presentation.models.Discipline;
 import com.activity_sync.presentation.models.Event;
 import com.activity_sync.presentation.models.Level;
@@ -21,8 +20,10 @@ public class EventBuilder
     private Location location;
     private Discipline discipline;
     private Level level;
-    private AdditionalInfo additionalInfo;
-    private boolean isActive;
+    private boolean isOrganizer;
+    private boolean isParticipant;
+    private boolean isCandidate;
+    private int rate;
 
     public EventBuilder setId(int id)
     {
@@ -84,20 +85,32 @@ public class EventBuilder
         return this;
     }
 
-    public EventBuilder setAdditionalInfo(AdditionalInfo additionalInfo)
+    public EventBuilder setOrganizer(boolean organizer)
     {
-        this.additionalInfo = additionalInfo;
+        isOrganizer = organizer;
         return this;
     }
 
-    public EventBuilder setIsActive(boolean isActive)
+    public EventBuilder setParticipant(boolean participant)
     {
-        this.isActive = isActive;
+        isParticipant = participant;
+        return this;
+    }
+
+    public EventBuilder setCandidate(boolean candidate)
+    {
+        isCandidate = candidate;
+        return this;
+    }
+
+    public EventBuilder setRate(int rate)
+    {
+        this.rate = rate;
         return this;
     }
 
     public Event createEvent()
     {
-        return new Event(id, organizer, description, date, numberOfPlayers, freePlaces, like, location, discipline, level, additionalInfo, isActive);
+        return new Event(id, organizer, description, date, numberOfPlayers, freePlaces, like, location, discipline, level, isOrganizer, isParticipant, isCandidate, rate);
     }
 }

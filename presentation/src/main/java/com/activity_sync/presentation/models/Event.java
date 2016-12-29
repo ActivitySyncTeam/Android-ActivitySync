@@ -12,7 +12,7 @@ public class Event implements Serializable
     @SerializedName("eventID")
     private int eventID;
 
-    @SerializedName("organizer")
+    @SerializedName("admin")
     private User organizer;
 
     @SerializedName("description")
@@ -39,13 +39,19 @@ public class Event implements Serializable
     @SerializedName("level")
     private Level level;
 
-    @SerializedName("user")
-    private AdditionalInfo additionalInfo;
+    @SerializedName("isAdmin")
+    private boolean isOrganizer;
 
-    @SerializedName("is_active")
-    private boolean isActive;
+    @SerializedName("isParticipant")
+    private boolean isParticipant;
 
-    public Event(int eventID, User organizer, String description, Date date, int numberOfPlayers, int freePlaces, int like, Location location, Discipline discipline, Level level, AdditionalInfo additionalInfo, boolean isActive)
+    @SerializedName("isCandidate")
+    private boolean isCandidate;
+
+    @SerializedName("rate")
+    private int rate;
+
+    public Event(int eventID, User organizer, String description, Date date, int numberOfPlayers, int freePlaces, int like, Location location, Discipline discipline, Level level, boolean isOrganizer, boolean isParticipant, boolean isCandidate,  int rate)
     {
         this.eventID = eventID;
         this.organizer = organizer;
@@ -57,8 +63,10 @@ public class Event implements Serializable
         this.location = location;
         this.discipline = discipline;
         this.level = level;
-        this.additionalInfo = additionalInfo;
-        this.isActive = isActive;
+        this.isOrganizer = isOrganizer;
+        this.isParticipant = isParticipant;
+        this.isCandidate = isCandidate;
+        this.rate = rate;
     }
 
     public Event()
@@ -106,11 +114,6 @@ public class Event implements Serializable
         return level;
     }
 
-    public boolean isActive()
-    {
-        return isActive;
-    }
-
     public int getFreePlaces()
     {
         return freePlaces;
@@ -121,14 +124,39 @@ public class Event implements Serializable
         return like;
     }
 
-    public AdditionalInfo getAdditionalInfo()
+    public boolean isOrganizer()
     {
-        return additionalInfo;
+        return isOrganizer;
     }
 
-    public void setAdditionalInfo(AdditionalInfo additionalInfo)
+    public boolean isParticipant()
     {
-        this.additionalInfo = additionalInfo;
+        return isParticipant;
+    }
+
+    public boolean isCandidate()
+    {
+        return isCandidate;
+    }
+
+    public int getRate()
+    {
+        return rate;
+    }
+
+    public void setOrganizer(boolean organizer)
+    {
+        isOrganizer = organizer;
+    }
+
+    public void setParticipant(boolean participant)
+    {
+        isParticipant = participant;
+    }
+
+    public void setCandidate(boolean candidate)
+    {
+        isCandidate = candidate;
     }
 
     public String getReadableDate()
