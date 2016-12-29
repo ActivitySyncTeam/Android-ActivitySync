@@ -2,9 +2,11 @@ package com.activity_sync.tests;
 
 import com.activity_sync.presentation.models.Discipline;
 import com.activity_sync.presentation.models.Event;
+import com.activity_sync.presentation.models.EventsCollection;
 import com.activity_sync.presentation.models.Location;
 import com.activity_sync.presentation.models.builders.DisciplineBuilder;
 import com.activity_sync.presentation.models.builders.EventBuilder;
+import com.activity_sync.presentation.models.builders.EventsCollectionBuilder;
 import com.activity_sync.presentation.models.builders.LocationBuilder;
 import com.activity_sync.presentation.models.builders.UserBuilder;
 import com.activity_sync.presentation.presenters.AllEventsPresenter;
@@ -21,8 +23,11 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
+import rx.Observable;
 import rx.schedulers.Schedulers;
 import rx.subjects.PublishSubject;
 
@@ -55,10 +60,22 @@ public class AllEventsPresenterTests
     PublishSubject refreshFilterClickEvent = PublishSubject.create();
 
     Event testedEvent;
+    List<Event> events = new ArrayList<>();
+    EventsCollection eventsCollection;
 
     @Before
     public void setup()
     {
+        Mockito.when(view.selectedEvent()).thenReturn(eventSelectedEvent);
+        Mockito.when(view.refreshEvents()).thenReturn(refreshEventsEvent);
+        Mockito.when(view.checkLocationPermissions()).thenReturn(true);
+        Mockito.when(view.enableLocationButtonClick()).thenReturn(enableLocationClickEvent);
+        Mockito.when(view.locationEnabled()).thenReturn(locationEnabledEvent);
+        Mockito.when(view.locationFound()).thenReturn(locationFoundedEvent);
+        Mockito.when(view.newDateEvent()).thenReturn(dateSelectedEvent);
+        Mockito.when(view.dateLayoutClicked()).thenReturn(dateLayoutClickEvent);
+        Mockito.when(view.refreshWithFilterClick()).thenReturn(refreshFilterClickEvent);
+
         testedEvent = new EventBuilder()
                 .setOrganizer(new UserBuilder()
                         .setUserId("12")
@@ -76,15 +93,10 @@ public class AllEventsPresenterTests
                 .setId(123)
                 .createEvent();
 
-        Mockito.when(view.selectedEvent()).thenReturn(eventSelectedEvent);
-        Mockito.when(view.refreshEvents()).thenReturn(refreshEventsEvent);
-        Mockito.when(view.checkLocationPermissions()).thenReturn(true);
-        Mockito.when(view.enableLocationButtonClick()).thenReturn(enableLocationClickEvent);
-        Mockito.when(view.locationEnabled()).thenReturn(locationEnabledEvent);
-        Mockito.when(view.locationFound()).thenReturn(locationFoundedEvent);
-        Mockito.when(view.newDateEvent()).thenReturn(dateSelectedEvent);
-        Mockito.when(view.dateLayoutClicked()).thenReturn(dateLayoutClickEvent);
-        Mockito.when(view.refreshWithFilterClick()).thenReturn(refreshFilterClickEvent);
+        events.add(testedEvent);
+        eventsCollection = new EventsCollectionBuilder().setEvents(events).create();
+
+        Mockito.when(apiService.getAllEvents()).thenReturn(Observable.just(eventsCollection));
     }
 
     @Test

@@ -2,6 +2,7 @@ package com.activity_sync.presentation.services;
 
 import com.activity_sync.presentation.models.ClientDetails;
 import com.activity_sync.presentation.models.Discipline;
+import com.activity_sync.presentation.models.Event;
 import com.activity_sync.presentation.models.EventsCollection;
 import com.activity_sync.presentation.models.Level;
 import com.activity_sync.presentation.models.Location;
@@ -26,6 +27,8 @@ public interface IApiService
     Observable<NewEvent> createEvent(String description, int disciplineID, int levelID, int playersNumber, Location location, String date, boolean addMe);
 
     Observable<EventsCollection> getAllEvents();
+
+    Observable<Event> getEventDetails(int eventId);
 
     Observable<List<Discipline>> getAvailableDisciplines();
 

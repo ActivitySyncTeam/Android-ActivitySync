@@ -31,6 +31,9 @@ public class MyProfilePresenterTest
     @Mock
     IPermanentStorage storage;
 
+    @Mock
+    CurrentUser currentUser;
+
     private MyProfilePresenter myProfilePresenter;
     private PublishSubject openEditAccountScreenEvent = PublishSubject.create();
     private PublishSubject openChangePasswordScreenEvent = PublishSubject.create();
@@ -39,8 +42,7 @@ public class MyProfilePresenterTest
     public void setUp() throws Exception
     {
         MockitoAnnotations.initMocks(this);
-        CurrentUser currentUser = new CurrentUser(storage, navigator);
-        myProfilePresenter = new MyProfilePresenter(view, navigator, Schedulers.immediate(), currentUser);
+        myProfilePresenter = createPresenter();
 
         when(view.editUserAccount()).thenReturn(openEditAccountScreenEvent);
         when(view.changeUserPassword()).thenReturn(openChangePasswordScreenEvent);
@@ -68,4 +70,8 @@ public class MyProfilePresenterTest
         myProfilePresenter = null;
     }
 
+    private MyProfilePresenter createPresenter()
+    {
+        return new MyProfilePresenter(view, navigator, Schedulers.immediate(), currentUser);
+    }
 }

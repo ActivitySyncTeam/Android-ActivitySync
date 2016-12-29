@@ -149,7 +149,7 @@ public class EventCreatorPresenterTests
 
         newLocationOccurredEvent.onNext(testLocation);
 
-        Mockito.verify(view).location(testLocation.getName());
+        Mockito.verify(view).location(testLocation);
     }
 
     @Test

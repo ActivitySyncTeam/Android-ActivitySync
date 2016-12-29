@@ -1,5 +1,11 @@
 package com.activity_sync.tests;
 
+import com.activity_sync.presentation.models.Event;
+import com.activity_sync.presentation.models.builders.DisciplineBuilder;
+import com.activity_sync.presentation.models.builders.EventBuilder;
+import com.activity_sync.presentation.models.builders.LevelBuilder;
+import com.activity_sync.presentation.models.builders.LocationBuilder;
+import com.activity_sync.presentation.models.builders.UserBuilder;
 import com.activity_sync.presentation.presenters.EventDetailsPresenter;
 import com.activity_sync.presentation.services.IApiService;
 import com.activity_sync.presentation.services.INavigator;
@@ -12,6 +18,9 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import java.util.Date;
+
+import rx.Observable;
 import rx.schedulers.Schedulers;
 import rx.subjects.PublishSubject;
 
@@ -58,6 +67,9 @@ public class EventDetailsPresenterTests
         Mockito.when(view.participantsDetailsClick()).thenReturn(participantsClickEvent);
 
         Mockito.when(view.googleMapAsyncCompleted()).thenReturn(googleMapAsyncEvent);
+
+        Event event = create(false, false);
+        Mockito.when(apiService.getEventDetails(eventId)).thenReturn(Observable.just(event));
     }
 
     @Test
@@ -65,7 +77,6 @@ public class EventDetailsPresenterTests
     {
         EventDetailsPresenter presenter = createPresenter();
         presenter.start();
-        presenter.createEvent(false, false, false); //will be deleted when api
 
         joinLeaveEventClickEvent.onNext(this);
         Mockito.verify(view).showEnrollConfirmationDialog();
@@ -84,9 +95,11 @@ public class EventDetailsPresenterTests
     @Test
     public void eventDetailsPresenter_clickLeaveEvent_displayLeaveConfirmationDialog()
     {
+        Event event = create(false, true);
+        Mockito.when(apiService.getEventDetails(eventId)).thenReturn(Observable.just(event));
+
         EventDetailsPresenter presenter = createPresenter();
         presenter.start();
-        presenter.createEvent(false, true, false);  //will be deleted when api
 
         joinLeaveEventClickEvent.onNext(this);
         Mockito.verify(view).showLeaveConfirmationDialog();
@@ -95,9 +108,11 @@ public class EventDetailsPresenterTests
     @Test
     public void eventDetailsPresenter_clickEditEvent_openEditEditor()
     {
+        Event event = create(false, true);
+        Mockito.when(apiService.getEventDetails(eventId)).thenReturn(Observable.just(event));
+
         EventDetailsPresenter presenter = createPresenter();
         presenter.start();
-        presenter.createEvent(false, true, false);  //will be deleted when api
 
         ediEventClickEvent.onNext(this);
         Mockito.verify(navigator).openEventUpdateScreen(1);
@@ -106,9 +121,11 @@ public class EventDetailsPresenterTests
     @Test
     public void eventDetailsPresenter_clickConfirmJoinEvent_showJoinMessage()
     {
+        Event event = create(false, false);
+        Mockito.when(apiService.getEventDetails(eventId)).thenReturn(Observable.just(event));
+
         EventDetailsPresenter presenter = createPresenter();
         presenter.start();
-        presenter.createEvent(false, false, false); //will be deleted when api
 
         joinEventConfirmEvent.onNext(this);
         Mockito.verify(view).setOrganizerParticipantView(any());
@@ -118,9 +135,11 @@ public class EventDetailsPresenterTests
     @Test
     public void eventDetailsPresenter_clickConfirmLeaveEvent_showLeaveMessage()
     {
+        Event event = create(false, false);
+        Mockito.when(apiService.getEventDetails(eventId)).thenReturn(Observable.just(event));
+
         EventDetailsPresenter presenter = createPresenter();
         presenter.start();
-        presenter.createEvent(false, false, false); //will be deleted when api
 
         leaveEventConfirmEvent.onNext(this);
         Mockito.verify(view).setOrganizerParticipantView(any());
@@ -130,9 +149,11 @@ public class EventDetailsPresenterTests
     @Test
     public void eventDetailsPresenter_clickConfirmCancelEvent_openEventsScreen()
     {
+        Event event = create(false, false);
+        Mockito.when(apiService.getEventDetails(eventId)).thenReturn(Observable.just(event));
+
         EventDetailsPresenter presenter = createPresenter();
         presenter.start();
-        presenter.createEvent(false, false, false); //will be deleted when api
 
         cancelEventConfirmEvent.onNext(this);
         Mockito.verify(navigator).openEventsScreen();
@@ -171,5 +192,32 @@ public class EventDetailsPresenterTests
     private EventDetailsPresenter createPresenter()
     {
         return new EventDetailsPresenter(Schedulers.immediate(), view, navigator, eventId, apiService);
+    }
+
+    private Event create(boolean isParticipant, boolean isOrganizer)
+    {
+        return new EventBuilder()
+                .setId(eventId)
+                .setOrganizer(new UserBuilder()
+                        .setUsername("mzielu")
+                        .createUser())
+                .setDiscipline(new DisciplineBuilder()
+                        .setName("Basketball")
+                        .createDiscipline())
+                .setLocation(new LocationBuilder()
+                        .setName("Park Jordana")
+                        .setLatitude(50.061124)
+                        .setLongitude(19.914123)
+                        .createLocation())
+                .setNumberOfPlayers(12)
+                .setFreePlaces(7)
+                .setDate(new Date("2016/11/01"))
+                .setLevel(new LevelBuilder()
+                        .setName("medium")
+                        .createLevel())
+                .setDescription("Very long text written in order to check if two lines of text here are displaying correctly. Yeah!")
+                .setParticipant(isParticipant)
+                .setOrganizer(isOrganizer)
+                .createEvent();
     }
 }

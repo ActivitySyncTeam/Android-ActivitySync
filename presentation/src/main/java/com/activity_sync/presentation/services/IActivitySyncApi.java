@@ -2,6 +2,7 @@ package com.activity_sync.presentation.services;
 
 import com.activity_sync.presentation.models.ClientDetails;
 import com.activity_sync.presentation.models.Discipline;
+import com.activity_sync.presentation.models.Event;
 import com.activity_sync.presentation.models.EventsCollection;
 import com.activity_sync.presentation.models.Level;
 import com.activity_sync.presentation.models.Location;
@@ -16,6 +17,7 @@ import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 import rx.Observable;
 
@@ -40,6 +42,9 @@ public interface IActivitySyncApi
 
     @GET("/api/events")
     Observable<EventsCollection> getAllEvents();
+
+    @GET("api/event/{event_id}")
+    Observable<Event> getEventDetails(@Header("Authorization") String accessToken, @Path("event_id") int eventId);
 
     @GET("/api/disciplines")
     Observable<List<Discipline>> getAvailableDisciplines();

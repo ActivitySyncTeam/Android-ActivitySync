@@ -4,7 +4,7 @@ import com.activity_sync.presentation.models.Event;
 
 import rx.Observable;
 
-public interface IEventDetailsView
+public interface IEventDetailsView extends IScreenView
 {
     Observable joinLeaveEventClick();
 

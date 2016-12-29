@@ -4,6 +4,7 @@ import android.util.Base64;
 
 import com.activity_sync.presentation.models.ClientDetails;
 import com.activity_sync.presentation.models.Discipline;
+import com.activity_sync.presentation.models.Event;
 import com.activity_sync.presentation.models.EventsCollection;
 import com.activity_sync.presentation.models.Level;
 import com.activity_sync.presentation.models.Location;
@@ -70,6 +71,12 @@ public class ApiService implements IApiService
     public Observable<EventsCollection> getAllEvents()
     {
         return api.getAllEvents();
+    }
+
+    @Override
+    public Observable<Event> getEventDetails(int eventId)
+    {
+        return api.getEventDetails(accessToken(), eventId);
     }
 
     @Override

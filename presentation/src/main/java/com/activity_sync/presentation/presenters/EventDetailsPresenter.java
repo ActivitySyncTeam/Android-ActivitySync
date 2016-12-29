@@ -1,18 +1,12 @@
 package com.activity_sync.presentation.presenters;
 
 import com.activity_sync.presentation.models.Event;
-import com.activity_sync.presentation.models.builders.DisciplineBuilder;
-import com.activity_sync.presentation.models.builders.EventBuilder;
-import com.activity_sync.presentation.models.builders.LevelBuilder;
-import com.activity_sync.presentation.models.builders.LocationBuilder;
-import com.activity_sync.presentation.models.builders.UserBuilder;
 import com.activity_sync.presentation.services.IApiService;
 import com.activity_sync.presentation.services.INavigator;
 import com.activity_sync.presentation.views.IEventDetailsView;
 
-import java.util.Date;
-
 import rx.Scheduler;
+import timber.log.Timber;
 
 public class EventDetailsPresenter extends Presenter<IEventDetailsView>
 {
@@ -21,7 +15,7 @@ public class EventDetailsPresenter extends Presenter<IEventDetailsView>
     private final int eventId;
     private final IApiService apiService;
 
-    private Event event;
+    private Event currentEvent;
 
     public EventDetailsPresenter(Scheduler uiThread, IEventDetailsView view, INavigator navigator, int eventId, IApiService apiService)
     {
@@ -37,19 +31,26 @@ public class EventDetailsPresenter extends Presenter<IEventDetailsView>
     {
         super.start();
 
-        createEvent(true, false, true);
-
         subscriptions.add(view.googleMapAsyncCompleted()
                 .observeOn(uiThread)
                 .subscribe(o -> {
-                    view.setEventData(event);
+
+                    apiService.getEventDetails(eventId)
+                            .observeOn(uiThread)
+                            .subscribe(event -> {
+
+                                view.setEventData(event);
+                                currentEvent = event;
+
+                            }, this::handleError);
+
                 })
         );
 
         subscriptions.add(view.joinLeaveEventClick()
                 .observeOn(uiThread)
                 .subscribe(o -> {
-                    if (event.isParticipant())
+                    if (currentEvent.isParticipant())
                     {
                         view.showLeaveConfirmationDialog();
                     }
@@ -79,11 +80,11 @@ public class EventDetailsPresenter extends Presenter<IEventDetailsView>
                 .subscribe(o -> {
 
                     view.showEnrollMessage();
-                    event.setCandidate(false); // delete when api provided
-                    event.setParticipant(true);
-                    event.setOrganizer(true);
+                    currentEvent.setCandidate(false); // delete when api provided
+                    currentEvent.setParticipant(true);
+                    currentEvent.setOrganizer(true);
 
-                    view.setOrganizerParticipantView(event);
+                    view.setOrganizerParticipantView(currentEvent);
                 })
         );
 
@@ -92,11 +93,11 @@ public class EventDetailsPresenter extends Presenter<IEventDetailsView>
                 .subscribe(o -> {
 
                     view.showLeaveEventMessage();
-                    event.setCandidate(false); // delete when api provided
-                    event.setParticipant(false);
-                    event.setOrganizer(true);
+                    currentEvent.setCandidate(false); // delete when api provided
+                    currentEvent.setParticipant(false);
+                    currentEvent.setOrganizer(true);
 
-                    view.setOrganizerParticipantView(event);
+                    view.setOrganizerParticipantView(currentEvent);
                 })
         );
 
@@ -118,9 +119,9 @@ public class EventDetailsPresenter extends Presenter<IEventDetailsView>
                 .observeOn(uiThread)
                 .subscribe(o -> {
 
-                    if (event != null)
+                    if (currentEvent != null)
                     {
-                        navigator.openParticipantsScreen(event.isOrganizer());
+                        navigator.openParticipantsScreen(currentEvent.isOrganizer());
                     }
                 })
         );
@@ -128,38 +129,18 @@ public class EventDetailsPresenter extends Presenter<IEventDetailsView>
         subscriptions.add(view.commentsClick()
                 .observeOn(uiThread)
                 .subscribe(o -> {
-                    if (event != null)
+                    if (currentEvent != null)
                     {
-                        navigator.openCommentsScreen(event.getEventId());
+                        navigator.openCommentsScreen(currentEvent.getEventId());
                     }
                 })
         );
     }
 
-    public void createEvent(boolean isActive, boolean isParticipant, boolean isOrganizer)      //for tests purposes, delete when api provided
+    private void handleError(Throwable error)
     {
-        event = new EventBuilder()
-                .setId(eventId)
-                .setOrganizer(new UserBuilder()
-                        .setUsername("mzielu")
-                        .createUser())
-                .setDiscipline(new DisciplineBuilder()
-                        .setName("Basketball")
-                        .createDiscipline())
-                .setLocation(new LocationBuilder()
-                        .setName("Park Jordana")
-                        .setLatitude(50.061124)
-                        .setLongitude(19.914123)
-                        .createLocation())
-                .setNumberOfPlayers(12)
-                .setFreePlaces(7)
-                .setDate(new Date("2016/11/01"))
-                .setLevel(new LevelBuilder()
-                        .setName("medium")
-                        .createLevel())
-                .setDescription("Very long text written in order to check if two lines of text here are displaying correctly. Yeah!")
-                .setParticipant(isParticipant)
-                .setOrganizer(isOrganizer)
-                .createEvent();
+        error.printStackTrace();
+        Timber.d(error.getMessage());
+        view.displayDefaultError();
     }
 }
