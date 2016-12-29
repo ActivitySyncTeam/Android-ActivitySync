@@ -138,7 +138,7 @@ public class EventDetailsPresenter extends Presenter<IEventDetailsView>
                 .subscribe(o -> {
                     if (event != null)
                     {
-                        navigator.openCommentsScreen(event.getId());
+                        navigator.openCommentsScreen(event.getEventId());
                     }
                 })
         );
@@ -159,8 +159,8 @@ public class EventDetailsPresenter extends Presenter<IEventDetailsView>
                         .setLatitude(50.061124)
                         .setLongitude(19.914123)
                         .createLocation())
-                .setMaxPlaces(12)
-                .setOccupiedPlaces(7)
+                .setNumberOfPlayers(12)
+                .setFreePlaces(7)
                 .setDate(new Date("2016/11/01"))
                 .setLevel(new LevelBuilder()
                         .setName("medium")

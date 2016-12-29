@@ -4,9 +4,11 @@ import android.util.Base64;
 
 import com.activity_sync.presentation.models.ClientDetails;
 import com.activity_sync.presentation.models.Discipline;
+import com.activity_sync.presentation.models.EventsCollection;
 import com.activity_sync.presentation.models.Level;
 import com.activity_sync.presentation.models.Location;
 import com.activity_sync.presentation.models.LoginResponse;
+import com.activity_sync.presentation.models.NewEvent;
 import com.activity_sync.presentation.models.RegisterResponse;
 import com.activity_sync.presentation.services.IActivitySyncApi;
 import com.activity_sync.presentation.services.IApiService;
@@ -59,9 +61,15 @@ public class ApiService implements IApiService
     }
 
     @Override
-    public Observable<Void> createEvent(String description, int disciplineID, int levelID, int playersNumber, Location location, String date, boolean addMe)
+    public Observable<NewEvent> createEvent(String description, int disciplineID, int levelID, int playersNumber, Location location, String date, boolean addMe)
     {
         return api.createEvent(accessTokenHeader(), description, disciplineID, levelID, playersNumber, location, date, addMe);
+    }
+
+    @Override
+    public Observable<EventsCollection> getAllEvents()
+    {
+        return api.getAllEvents();
     }
 
     @Override

@@ -5,6 +5,7 @@ import com.activity_sync.presentation.services.INavigator;
 import com.activity_sync.presentation.views.IEventsFragmentView;
 
 import rx.Scheduler;
+import timber.log.Timber;
 
 abstract public class EventsFragmentBasePresenter extends Presenter<IEventsFragmentView>
 {
@@ -39,10 +40,17 @@ abstract public class EventsFragmentBasePresenter extends Presenter<IEventsFragm
 
         subscriptions.add(view.selectedEvent()
                 .subscribe(event -> {
-                    navigator.openEventDetailsScreen(event.getId());
+                    navigator.openEventDetailsScreen(event.getEventId());
                 })
         );
     }
 
     abstract void loadEvents();
+
+    protected void handleError(Throwable error)
+    {
+        error.printStackTrace();
+        Timber.d(error.getMessage());
+        view.refreshingVisible(false);
+    }
 }

@@ -9,8 +9,8 @@ import java.util.Date;
 
 public class Event implements Serializable
 {
-    @SerializedName("id")
-    private int id;
+    @SerializedName("eventID")
+    private int eventID;
 
     @SerializedName("organizer")
     private User organizer;
@@ -21,13 +21,16 @@ public class Event implements Serializable
     @SerializedName("date")
     private Date date;
 
-    @SerializedName("max_places")
-    private int maxPlaces;
+    @SerializedName("numberOfPlayers")
+    private int numberOfPlayers;
 
-    @SerializedName("occupied_places")
-    private int occupiedPlaces;
+    @SerializedName("freePlaces")
+    private int freePlaces;
 
-    @SerializedName("location")
+    @SerializedName("like")
+    private int like;
+
+    @SerializedName("address")
     private Location location;
 
     @SerializedName("discipline")
@@ -42,14 +45,15 @@ public class Event implements Serializable
     @SerializedName("is_active")
     private boolean isActive;
 
-    public Event(int id, User organizer, String description, Date date, int maxPlaces, int occupiedPlaces, Location location, Discipline discipline, Level level, AdditionalInfo additionalInfo, boolean isActive)
+    public Event(int eventID, User organizer, String description, Date date, int numberOfPlayers, int freePlaces, int like, Location location, Discipline discipline, Level level, AdditionalInfo additionalInfo, boolean isActive)
     {
-        this.id = id;
+        this.eventID = eventID;
         this.organizer = organizer;
         this.description = description;
         this.date = date;
-        this.maxPlaces = maxPlaces;
-        this.occupiedPlaces = occupiedPlaces;
+        this.numberOfPlayers = numberOfPlayers;
+        this.freePlaces = freePlaces;
+        this.like = like;
         this.location = location;
         this.discipline = discipline;
         this.level = level;
@@ -62,14 +66,9 @@ public class Event implements Serializable
 
     }
 
-    public int getId()
+    public int getEventId()
     {
-        return id;
-    }
-
-    public void setId(int id)
-    {
-        this.id = id;
+        return eventID;
     }
 
     public User getOrganizer()
@@ -77,19 +76,9 @@ public class Event implements Serializable
         return organizer;
     }
 
-    public void setOrganizer(User organizer)
-    {
-        this.organizer = organizer;
-    }
-
     public String getDescription()
     {
         return description;
-    }
-
-    public void setDescription(String description)
-    {
-        this.description = description;
     }
 
     public Date getDate()
@@ -97,19 +86,9 @@ public class Event implements Serializable
         return date;
     }
 
-    public void setDate(Date date)
+    public int getNumberOfPlayers()
     {
-        this.date = date;
-    }
-
-    public int getMaxPlaces()
-    {
-        return maxPlaces;
-    }
-
-    public void setMaxPlaces(int maxPlaces)
-    {
-        this.maxPlaces = maxPlaces;
+        return numberOfPlayers;
     }
 
     public Location getLocation()
@@ -117,19 +96,9 @@ public class Event implements Serializable
         return location;
     }
 
-    public void setLocation(Location location)
-    {
-        this.location = location;
-    }
-
     public Discipline getDiscipline()
     {
         return discipline;
-    }
-
-    public void setDiscipline(Discipline discipline)
-    {
-        this.discipline = discipline;
     }
 
     public Level getLevel()
@@ -137,29 +106,19 @@ public class Event implements Serializable
         return level;
     }
 
-    public void setLevel(Level level)
-    {
-        this.level = level;
-    }
-
     public boolean isActive()
     {
         return isActive;
     }
 
-    public void setActive(boolean active)
+    public int getFreePlaces()
     {
-        isActive = active;
+        return freePlaces;
     }
 
-    public int getOccupiedPlaces()
+    public int getLike()
     {
-        return occupiedPlaces;
-    }
-
-    public void setOccupiedPlaces(int occupiedPlaces)
-    {
-        this.occupiedPlaces = occupiedPlaces;
+        return like;
     }
 
     public AdditionalInfo getAdditionalInfo()

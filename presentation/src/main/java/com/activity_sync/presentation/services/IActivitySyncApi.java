@@ -2,9 +2,11 @@ package com.activity_sync.presentation.services;
 
 import com.activity_sync.presentation.models.ClientDetails;
 import com.activity_sync.presentation.models.Discipline;
+import com.activity_sync.presentation.models.EventsCollection;
 import com.activity_sync.presentation.models.Level;
 import com.activity_sync.presentation.models.Location;
 import com.activity_sync.presentation.models.LoginResponse;
+import com.activity_sync.presentation.models.NewEvent;
 import com.activity_sync.presentation.models.RegisterResponse;
 
 import java.util.List;
@@ -32,9 +34,12 @@ public interface IActivitySyncApi
     @POST("/api/auth/token/revoke")
     Observable<Void> logout(@Header("Authorization") String authToken, @Query("client_id") String clientId, @Query("client_secret") String clientSecret, @Query("token") String token);
 
-    @FormUrlEncoded
+    @FormUrlEncoded                         //TODO DO POPRAWY
     @POST("/api/event/create")
-    Observable<Void> createEvent(@Header("Authorization") String accessToken, @Query("description") String description, @Field("disciplineID") int disciplineID, @Field("levelID") int levelID, @Field("numberOfPlayers") int playersNumber, @Field("address") Location location, @Field("date") String date, @Field("addMe") boolean addMe);
+    Observable<NewEvent> createEvent(@Header("Authorization") String accessToken, @Field("description") String description, @Field("disciplineID") int disciplineID, @Field("levelID") int levelID, @Field("numberOfPlayers") int playersNumber, @Field("address") Location location, @Field("date") String date, @Field("addMe") boolean addMe);
+
+    @GET("/api/events")
+    Observable<EventsCollection> getAllEvents();
 
     @GET("/api/disciplines")
     Observable<List<Discipline>> getAvailableDisciplines();

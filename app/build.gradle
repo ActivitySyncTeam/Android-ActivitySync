@@ -43,6 +43,7 @@ android {
     buildTypes
             {
                 release {
+                    debuggable true
                     minifyEnabled false
                     proguardFile getDefaultProguardFile('proguard-android.txt')
                     proguardFile 'proguard-rules.pro'

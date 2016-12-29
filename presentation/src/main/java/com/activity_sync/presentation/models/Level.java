@@ -21,7 +21,7 @@ public class Level
 
     }
 
-    public double getId()
+    public int getId()
     {
         return id;
     }

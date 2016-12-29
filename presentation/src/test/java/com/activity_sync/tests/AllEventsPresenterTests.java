@@ -72,7 +72,7 @@ public class AllEventsPresenterTests
                 .setDiscipline(new DisciplineBuilder()
                         .setName("Basketball")
                         .createDiscipline())
-                .setMaxPlaces(12)
+                .setNumberOfPlayers(12)
                 .setId(123)
                 .createEvent();
 
@@ -131,7 +131,7 @@ public class AllEventsPresenterTests
         presenter.start();
 
         eventSelectedEvent.onNext(testedEvent);
-        Mockito.verify(navigator).openEventDetailsScreen(testedEvent.getId());
+        Mockito.verify(navigator).openEventDetailsScreen(testedEvent.getEventId());
     }
 
     @Test

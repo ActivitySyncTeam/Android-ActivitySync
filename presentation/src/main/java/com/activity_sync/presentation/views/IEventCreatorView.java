@@ -18,13 +18,13 @@ public interface IEventCreatorView extends IScreenView
 
     String date();
 
-    String location();
+    Location location();
 
     Discipline discipline();
 
     Level level();
 
-    String players();
+    int players();
 
     String description();
 
@@ -32,7 +32,7 @@ public interface IEventCreatorView extends IScreenView
 
     void date(String date);
 
-    void location(String location);
+    void location(Location location);
 
     void level(Level level);
 

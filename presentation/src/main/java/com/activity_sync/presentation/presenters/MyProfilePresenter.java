@@ -55,7 +55,7 @@ public class MyProfilePresenter extends Presenter<IMyProfileView>
                 .setRegisterDate("2015-12-12")
                 .setSignature("Randomly written text")
                 .setEvents(23)
-                .setUserId(123)
+                .setUserId("123")
                 .setCredibility(85)
                 .createUser();
     }

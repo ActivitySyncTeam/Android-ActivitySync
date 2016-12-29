@@ -1,7 +1,7 @@
 package com.activity_sync.presentation.models.builders;
 
-import com.activity_sync.presentation.models.Discipline;
 import com.activity_sync.presentation.models.AdditionalInfo;
+import com.activity_sync.presentation.models.Discipline;
 import com.activity_sync.presentation.models.Event;
 import com.activity_sync.presentation.models.Level;
 import com.activity_sync.presentation.models.Location;
@@ -15,8 +15,9 @@ public class EventBuilder
     private User organizer;
     private String description;
     private Date date;
-    private int maxPlaces;
-    private int occupiedPlaces;
+    private int numberOfPlayers;
+    private int freePlaces;
+    private int like;
     private Location location;
     private Discipline discipline;
     private Level level;
@@ -47,15 +48,21 @@ public class EventBuilder
         return this;
     }
 
-    public EventBuilder setMaxPlaces(int maxPlaces)
+    public EventBuilder setNumberOfPlayers(int numberOfPlayers)
     {
-        this.maxPlaces = maxPlaces;
+        this.numberOfPlayers = numberOfPlayers;
         return this;
     }
 
-    public EventBuilder setOccupiedPlaces(int occupiedPlaces)
+    public EventBuilder setFreePlaces(int freePlaces)
     {
-        this.occupiedPlaces = occupiedPlaces;
+        this.freePlaces = freePlaces;
+        return this;
+    }
+
+    public EventBuilder setLike(int like)
+    {
+        this.like = like;
         return this;
     }
 
@@ -91,6 +98,6 @@ public class EventBuilder
 
     public Event createEvent()
     {
-        return new Event(id, organizer, description, date, maxPlaces, occupiedPlaces, location, discipline, level, additionalInfo, isActive);
+        return new Event(id, organizer, description, date, numberOfPlayers, freePlaces, like, location, discipline, level, additionalInfo, isActive);
     }
 }

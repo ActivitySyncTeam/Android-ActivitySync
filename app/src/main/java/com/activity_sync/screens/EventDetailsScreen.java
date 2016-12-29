@@ -181,7 +181,7 @@ public class EventDetailsScreen extends Screen implements IEventDetailsView, OnM
         eventDescription.setText(event.getDescription());
         eventLocation.setText(event.getLocation().getName());
         eventOrganizer.setText(event.getOrganizer().getUsername());
-        eventParticipants.setText(String.format("%d/%d", event.getOccupiedPlaces(), event.getMaxPlaces()));
+        eventParticipants.setText(String.format("%d/%d", event.getNumberOfPlayers() - event.getFreePlaces(), event.getNumberOfPlayers()));
         eventLevel.setText(event.getLevel().getName());
         eventDiscipline.setText(event.getDiscipline().getName());
 
