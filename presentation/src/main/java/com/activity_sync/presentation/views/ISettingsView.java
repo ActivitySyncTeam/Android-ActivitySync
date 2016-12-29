@@ -1,14 +1,10 @@
 package com.activity_sync.presentation.views;
 
-import com.activity_sync.presentation.models.UserUpdate;
-
 import rx.Observable;
 
 public interface ISettingsView
 {
     void loadSavedValues();
-
-    void setAccountData(UserUpdate userUpdateDetails);
 
     Observable<Boolean> enableNotificationsChange();
 
@@ -23,10 +19,6 @@ public interface ISettingsView
     Observable<Integer> searchRangeChange();
 
     Observable<Integer> searchRangeStopTracking();
-
-    Observable editUserAccount();
-
-    Observable changeUserPassword();
 
     void setSearchDaysAhead(int progress);
 

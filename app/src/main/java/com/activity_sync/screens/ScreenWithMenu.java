@@ -98,6 +98,8 @@ public abstract class ScreenWithMenu extends Screen
 
         menuNavigator.addAction(R.id.menu_friends, INavigator::openFriendsScreen);
 
+        menuNavigator.addAction(R.id.menu_my_profile, INavigator::openMyProfileScreen);
+
         menuNavigator.addAction(R.id.menu_settings, INavigator::openSettingsScreen);
 
         menuNavigator.addAction(R.id.menu_create_event, INavigator::openEventCreatorScreen);
