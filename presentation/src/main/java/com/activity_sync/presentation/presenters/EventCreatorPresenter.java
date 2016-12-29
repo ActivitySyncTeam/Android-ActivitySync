@@ -28,7 +28,18 @@ public class EventCreatorPresenter extends EventEditorPresenterBase
         subscriptions.add(view.confirmActionClickEvent()
                 .observeOn(uiThread)
                 .subscribe(o -> {
-                    navigator.openEventsScreen();
+
+                    apiService.createEvent(view.description(), view.discipline().getId(),
+                            view.level().getId(), view.players(),
+                            view.location(), view.date(),
+                            view.isOrganizerEnrolled())
+                            .observeOn(uiThread)
+                            .subscribe(event -> {
+
+                                navigator.openEventsScreen();
+
+                            }, this::handleError);
+
                 })
         );
     }

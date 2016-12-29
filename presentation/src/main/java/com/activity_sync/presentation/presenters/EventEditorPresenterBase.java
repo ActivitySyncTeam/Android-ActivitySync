@@ -58,7 +58,7 @@ public class EventEditorPresenterBase extends Presenter<IEventCreatorView>
         subscriptions.add(view.newLocationEvent()
                 .observeOn(uiThread)
                 .subscribe(location -> {
-                    view.location(location.getName());
+                    view.location(location);
                 })
         );
 
@@ -77,8 +77,9 @@ public class EventEditorPresenterBase extends Presenter<IEventCreatorView>
         );
     }
 
-    private void handleError(Throwable error)
+    protected void handleError(Throwable error)
     {
+        error.printStackTrace();
         Timber.d(error.getMessage());
         view.displayDefaultError();
     }
