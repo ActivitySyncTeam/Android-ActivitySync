@@ -61,6 +61,9 @@ abstract public class EventsFragmentBase extends FragmentScreen implements IEven
     @Bind(R.id.events_enable_btn)
     Button enablePermissionBtn;
 
+    protected static int MY_EVENTS_INDEX = 1;
+    protected static int ALL_EVENTS_INDEX = 0;
+
     private PublishSubject refreshEvents = PublishSubject.create();
     private PublishSubject<Boolean> locationsEnabled = PublishSubject.create();
     private RVRendererAdapter<Event> adapter;

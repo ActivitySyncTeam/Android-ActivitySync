@@ -18,7 +18,7 @@ public interface IEventsFragmentView
 
     int getViewPagerCurrentFragmentIndex();
 
-    int getIndex();
+    int getCurrentFragmentIndex();
 
     Observable enableLocationButtonClick();
 

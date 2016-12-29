@@ -25,18 +25,15 @@ public class AllEventsPresenter extends EventsFragmentBasePresenter
     @Override
     public void start()
     {
-        if (isCurrentlyShown())
+        if (displayedAndNoPermissionGranted())
         {
-            if (view.checkLocationPermissions() == false)
-            {
-                view.eventsListVisible(false);
-                view.refreshingVisible(false);
+            view.eventsListVisible(false);
+            view.refreshingVisible(false);
 
-                view.askForPermission();
-            } else
-            {
-                super.start();
-            }
+            view.askForPermission();
+        } else
+        {
+            super.start();
         }
 
         subscriptions.add(view.locationEnabled()
@@ -46,8 +43,7 @@ public class AllEventsPresenter extends EventsFragmentBasePresenter
                     if (isEnabled)
                     {
                         super.start();
-                    }
-                    else
+                    } else
                     {
                         view.eventsListVisible(false);
                     }
@@ -61,6 +57,11 @@ public class AllEventsPresenter extends EventsFragmentBasePresenter
                     view.askForPermission();
                 })
         );
+    }
+
+    private boolean displayedAndNoPermissionGranted()
+    {
+        return isCurrentlyShown() && view.checkLocationPermissions() == false;
     }
 
     @Override
@@ -159,6 +160,6 @@ public class AllEventsPresenter extends EventsFragmentBasePresenter
 
     private boolean isCurrentlyShown()
     {
-        return view.getViewPagerCurrentFragmentIndex() == view.getIndex();
+        return view.getViewPagerCurrentFragmentIndex() == view.getCurrentFragmentIndex();
     }
 }

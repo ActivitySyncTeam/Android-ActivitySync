@@ -11,13 +11,14 @@ import rx.android.schedulers.AndroidSchedulers;
 public class MyEventsFragment extends EventsFragmentBase implements IEventsFragmentView
 {
     @Override
-    protected IPresenter createPresenter(FragmentScreen screen, Bundle savedInstanceState) {
+    protected IPresenter createPresenter(FragmentScreen screen, Bundle savedInstanceState)
+    {
         return new MyEventsPresenter(this, navigator, AndroidSchedulers.mainThread(), apiService);
     }
 
     @Override
-    public int getIndex()
+    public int getCurrentFragmentIndex()
     {
-        return 1;
+        return MY_EVENTS_INDEX;
     }
 }

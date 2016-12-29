@@ -17,8 +17,8 @@ public class AllEventsFragment extends EventsFragmentBase implements IEventsFrag
     }
 
     @Override
-    public int getIndex()
+    public int getCurrentFragmentIndex()
     {
-        return 0;
+        return ALL_EVENTS_INDEX;
     }
 }
