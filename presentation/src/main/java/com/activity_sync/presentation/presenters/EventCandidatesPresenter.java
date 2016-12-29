@@ -50,6 +50,7 @@ public class EventCandidatesPresenter extends UsersFragmentBasePresenter
                 .subscribe(participants -> {
 
                     view.addUsersList(participants.getCandidates());
+                    view.refreshingVisible(false);
 
                 }, this::handleError);
     }

@@ -78,6 +78,8 @@ public class EventDetailsPresenterTests
         EventDetailsPresenter presenter = createPresenter();
         presenter.start();
 
+        googleMapAsyncEvent.onNext(this);
+
         joinLeaveEventClickEvent.onNext(this);
         Mockito.verify(view).showEnrollConfirmationDialog();
     }
@@ -95,11 +97,13 @@ public class EventDetailsPresenterTests
     @Test
     public void eventDetailsPresenter_clickLeaveEvent_displayLeaveConfirmationDialog()
     {
-        Event event = create(false, true);
+        Event event = create(true, true);
         Mockito.when(apiService.getEventDetails(eventId)).thenReturn(Observable.just(event));
 
         EventDetailsPresenter presenter = createPresenter();
         presenter.start();
+
+        googleMapAsyncEvent.onNext(this);
 
         joinLeaveEventClickEvent.onNext(this);
         Mockito.verify(view).showLeaveConfirmationDialog();
@@ -127,6 +131,8 @@ public class EventDetailsPresenterTests
         EventDetailsPresenter presenter = createPresenter();
         presenter.start();
 
+        googleMapAsyncEvent.onNext(this);
+
         joinEventConfirmEvent.onNext(this);
         Mockito.verify(view).setOrganizerParticipantView(any());
         Mockito.verify(view).showEnrollMessage();
@@ -140,6 +146,8 @@ public class EventDetailsPresenterTests
 
         EventDetailsPresenter presenter = createPresenter();
         presenter.start();
+
+        googleMapAsyncEvent.onNext(this);
 
         leaveEventConfirmEvent.onNext(this);
         Mockito.verify(view).setOrganizerParticipantView(any());
@@ -172,8 +180,13 @@ public class EventDetailsPresenterTests
     @Test
     public void eventDetailsPresenter_clickParticipantsEvent_openParticipantsScreen()
     {
+        Event event = create(true, true);
+        Mockito.when(apiService.getEventDetails(eventId)).thenReturn(Observable.just(event));
+
         EventDetailsPresenter presenter = createPresenter();
         presenter.start();
+
+        googleMapAsyncEvent.onNext(this);
 
         participantsClickEvent.onNext(this);
         Mockito.verify(navigator).openParticipantsScreen(true, eventId);
@@ -182,8 +195,13 @@ public class EventDetailsPresenterTests
     @Test
     public void eventDetailsPresenter_clickComments_openCommentsScreen()
     {
+        Event event = create(true, true);
+        Mockito.when(apiService.getEventDetails(eventId)).thenReturn(Observable.just(event));
+
         EventDetailsPresenter presenter = createPresenter();
         presenter.start();
+
+        googleMapAsyncEvent.onNext(this);
 
         commentsClickEvent.onNext(this);
         Mockito.verify(navigator).openCommentsScreen(eventId);

@@ -83,6 +83,11 @@ public class RegisterPresenterTests
         registerPresenter.start();
 
         registerBtnClickEvent.onNext(this);
+
+        Mockito.verify(apiService).register(view.userName(), view.password(), view.firstName(), view.lastName(), view.email());
+        Mockito.verify(apiService).getClientDetails();
+        Mockito.verify(apiService).login(view.userName(), view.password());
+
         Mockito.verify(currentUser).clientId(anyString());
         Mockito.verify(currentUser).clientSecret(anyString());
         Mockito.verify(currentUser).accessToken(anyString());

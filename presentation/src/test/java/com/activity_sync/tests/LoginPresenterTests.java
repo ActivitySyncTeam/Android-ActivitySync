@@ -72,6 +72,8 @@ public class LoginPresenterTests
         loginPresenter.start();
 
         loginBtnClickEvent.onNext(this);
+
+        Mockito.verify(apiService).login(view.login(), view.password());
         Mockito.verify(currentUser).clientId(anyString());
         Mockito.verify(currentUser).clientSecret(anyString());
         Mockito.verify(currentUser).accessToken(anyString());

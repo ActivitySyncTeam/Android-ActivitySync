@@ -46,6 +46,16 @@ public class EventCandidatesPresenterTests extends ParticipantsBasePresenterTest
     }
 
     @Test
+    public void candidatesPresenter_init_loadCandidates()
+    {
+        EventCandidatesPresenter presenter = createPresenter();
+        presenter.start();
+
+        Mockito.verify(apiService).getEventParticipants(eventId);
+        Mockito.verify(view).refreshingVisible(false);
+    }
+
+    @Test
     public void candidatesPresenter_acceptClick_openAcceptConfDialog()
     {
         EventCandidatesPresenter presenter = createPresenter();
