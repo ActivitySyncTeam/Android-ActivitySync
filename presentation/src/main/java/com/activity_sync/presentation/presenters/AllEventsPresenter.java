@@ -46,7 +46,7 @@ public class AllEventsPresenter extends EventsFragmentBasePresenter
         }
         else
         {
-            if (displayedAndNoPermissionGranted())
+            if (view.checkLocationPermissions() == false)
             {
                 view.noPermissionLayoutVisible();
                 view.refreshingVisible(false);
@@ -114,11 +114,6 @@ public class AllEventsPresenter extends EventsFragmentBasePresenter
                     resolveFilterRefresh();
                 })
         );
-    }
-
-    private boolean displayedAndNoPermissionGranted()
-    {
-        return isCurrentlyShown() && view.checkLocationPermissions() == false;
     }
 
     @Override
@@ -251,10 +246,5 @@ public class AllEventsPresenter extends EventsFragmentBasePresenter
         {
             loadEvents();   //api call with filtering
         }
-    }
-
-    private boolean isCurrentlyShown()
-    {
-        return view.getViewPagerCurrentFragmentIndex() == view.getCurrentFragmentIndex();
     }
 }

@@ -46,10 +46,4 @@ public class AllEventsFragment extends EventsFragmentBase implements IEventsFrag
 
         locationFound.onNext(event.getLocation());
     }
-
-    @Override
-    public int getCurrentFragmentIndex()
-    {
-        return ALL_EVENTS_INDEX;
-    }
 }

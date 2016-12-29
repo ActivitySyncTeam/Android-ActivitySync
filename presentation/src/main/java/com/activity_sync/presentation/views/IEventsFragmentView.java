@@ -31,10 +31,6 @@ public interface IEventsFragmentView
 
     void filterLayoutVisible(boolean isVisible);
 
-    int getViewPagerCurrentFragmentIndex();
-
-    int getCurrentFragmentIndex();
-
     Observable enableLocationButtonClick();
 
     void postLocationPermissionsMessage();

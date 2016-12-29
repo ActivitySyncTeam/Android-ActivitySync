@@ -15,10 +15,4 @@ public class MyEventsFragment extends EventsFragmentBase implements IEventsFragm
     {
         return new MyEventsPresenter(this, navigator, AndroidSchedulers.mainThread(), apiService);
     }
-
-    @Override
-    public int getCurrentFragmentIndex()
-    {
-        return MY_EVENTS_INDEX;
-    }
 }
