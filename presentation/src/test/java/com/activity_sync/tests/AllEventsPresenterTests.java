@@ -24,6 +24,8 @@ import rx.subjects.PublishSubject;
 
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class AllEventsPresenterTests
@@ -77,7 +79,7 @@ public class AllEventsPresenterTests
         AllEventsPresenter presenter = createPresenter();
         presenter.start();
 
-        Mockito.verify(view, never()).askForPermission();
+        verify(view, never()).askForPermission();
     }
 
     @Test
@@ -88,9 +90,9 @@ public class AllEventsPresenterTests
         AllEventsPresenter presenter = createPresenter();
         presenter.start();
 
-        Mockito.verify(view).askForPermission();
-        Mockito.verify(view).eventsListVisible(false);
-        Mockito.verify(view).refreshingVisible(false);
+        verify(view).askForPermission();
+        verify(view).eventsListVisible(false);
+        verify(view).refreshingVisible(false);
     }
 
     @Test
@@ -100,7 +102,7 @@ public class AllEventsPresenterTests
         presenter.start();
 
         eventSelectedEvent.onNext(testedEvent);
-        Mockito.verify(navigator).openEventDetailsScreen(testedEvent.getId());
+        verify(navigator).openEventDetailsScreen(testedEvent.getId());
     }
 
     @Test
@@ -111,7 +113,7 @@ public class AllEventsPresenterTests
 
         refreshEventsEvent.onNext(this);
         //Mockito.verify(view).apiCallWhichWillBeHere();
-        Mockito.verify(view).refreshingVisible(false);
+        verify(view).refreshingVisible(false);
     }
 
     @Test
@@ -121,7 +123,7 @@ public class AllEventsPresenterTests
         presenter.start();
 
         enableLocationClickEvent.onNext(this);
-        Mockito.verify(view).askForPermission();
+        verify(view).askForPermission();
     }
 
     @Test
@@ -131,7 +133,7 @@ public class AllEventsPresenterTests
         presenter.start();
 
         locationEnabledEvent.onNext(true);
-        Mockito.verify(view, times(2)).eventsListVisible(true);
+        verify(view, times(2)).eventsListVisible(true);
     }
 
     @Test
@@ -141,7 +143,35 @@ public class AllEventsPresenterTests
         presenter.start();
 
         locationEnabledEvent.onNext(false);
-        Mockito.verify(view).eventsListVisible(false);
+        verify(view).eventsListVisible(false);
+    }
+
+    @Test
+    public void allEventsPresenter_fragmentNotDisplayed_permissionNotChecked() throws Exception
+    {
+        final int index = 0;
+        when(view.checkLocationPermissions()).thenReturn(false);
+        when(view.getViewPagerCurrentFragmentIndex()).thenReturn(index + 1);
+        when(view.getCurrentFragmentIndex()).thenReturn(index);
+        AllEventsPresenter presenter = createPresenter();
+        presenter.start();
+
+        verify(view, never()).askForPermission();
+    }
+
+    @Test
+    public void allEventsPresenter_fragmentDisplayed_permissionChecked() throws Exception
+    {
+        final int index = 0;
+        when(view.checkLocationPermissions()).thenReturn(false);
+        when(view.getViewPagerCurrentFragmentIndex()).thenReturn(index);
+        when(view.getCurrentFragmentIndex()).thenReturn(index);
+        AllEventsPresenter presenter = createPresenter();
+        presenter.start();
+
+        verify(view).askForPermission();
+        verify(view).eventsListVisible(false);
+        verify(view).refreshingVisible(false);
     }
 
     private AllEventsPresenter createPresenter()
