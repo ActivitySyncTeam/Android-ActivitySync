@@ -1,6 +1,9 @@
 package com.activity_sync.tests;
 
+import com.activity_sync.presentation.models.Participants;
 import com.activity_sync.presentation.models.User;
+import com.activity_sync.presentation.models.builders.ParticpantsBuilder;
+import com.activity_sync.presentation.models.builders.UserBuilder;
 import com.activity_sync.presentation.presenters.EventCandidatesPresenter;
 
 import org.junit.Test;
@@ -8,6 +11,10 @@ import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import rx.Observable;
 import rx.schedulers.Schedulers;
 import rx.subjects.PublishSubject;
 
@@ -19,6 +26,9 @@ public class EventCandidatesPresenterTests extends ParticipantsBasePresenterTest
     private PublishSubject<User> acceptConfirmEvent = PublishSubject.create();
     private PublishSubject<User> removeConfirmEvent = PublishSubject.create();
 
+    private Participants participants;
+    private List<User> candidates = new ArrayList<>();
+
     @Override
     public void setup()
     {
@@ -28,6 +38,11 @@ public class EventCandidatesPresenterTests extends ParticipantsBasePresenterTest
         Mockito.when(view.removeConfirmClick()).thenReturn(removeConfirmEvent);
         Mockito.when(view.acceptEventClick()).thenReturn(acceptEventClick);
         Mockito.when(view.removeEventClick()).thenReturn(removeEventClick);
+
+        candidates.add(new UserBuilder().createUser());
+        participants = new ParticpantsBuilder().setCandidates(candidates).create();
+
+        Mockito.when(apiService.getEventParticipants(eventId)).thenReturn(Observable.just(participants));
     }
 
     @Test
@@ -74,6 +89,6 @@ public class EventCandidatesPresenterTests extends ParticipantsBasePresenterTest
 
     private EventCandidatesPresenter createPresenter()
     {
-        return new EventCandidatesPresenter(view, navigator, Schedulers.immediate(), apiService);
+        return new EventCandidatesPresenter(view, navigator, Schedulers.immediate(), apiService, eventId);
     }
 }

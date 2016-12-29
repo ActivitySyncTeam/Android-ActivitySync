@@ -57,7 +57,7 @@ public class UserDetailsPresenterTests
     @Test
     public void userDetailsPresenter_myProfile_hideThumbs()
     {
-        Mockito.when(currentUser.clientId()).thenReturn("123");
+        Mockito.when(currentUser.userId()).thenReturn(123);
 
         UserDetailsPresenter presenter = createPresenter();
         presenter.start();

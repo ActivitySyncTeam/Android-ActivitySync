@@ -49,6 +49,6 @@ public class RegisteredParticipantsPresenterTests extends ParticipantsBasePresen
 
     private RegisteredUsersPresenter createPresenter()
     {
-        return new RegisteredUsersPresenter(view, navigator, Schedulers.immediate(), apiService);
+        return new RegisteredUsersPresenter(view, navigator, Schedulers.immediate(), apiService, eventId);
     }
 }

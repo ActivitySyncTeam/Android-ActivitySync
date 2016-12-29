@@ -78,7 +78,7 @@ public class AllEventsPresenterTests
 
         testedEvent = new EventBuilder()
                 .setOrganizer(new UserBuilder()
-                        .setUserId("12")
+                        .setUserId(12)
                         .setName("Marcin")
                         .setSurname("Zielinski")
                         .createUser())

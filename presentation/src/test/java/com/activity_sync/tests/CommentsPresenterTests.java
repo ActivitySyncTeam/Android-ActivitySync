@@ -1,5 +1,9 @@
 package com.activity_sync.tests;
 
+import com.activity_sync.presentation.models.Comment;
+import com.activity_sync.presentation.models.CommentsCollection;
+import com.activity_sync.presentation.models.builders.CommentBuilder;
+import com.activity_sync.presentation.models.builders.CommentsCollectionBuilder;
 import com.activity_sync.presentation.presenters.CommentsPresenter;
 import com.activity_sync.presentation.services.CurrentUser;
 import com.activity_sync.presentation.services.IApiService;
@@ -13,6 +17,10 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import rx.Observable;
 import rx.schedulers.Schedulers;
 import rx.subjects.PublishSubject;
 
@@ -36,6 +44,8 @@ public class CommentsPresenterTests
 
     private int eventId = 1;
     private String testComment = "Test comment";
+    private List<Comment> comments = new ArrayList<>();
+    private CommentsCollection commentsCollection;
 
     @Before
     public void setup()
@@ -43,6 +53,12 @@ public class CommentsPresenterTests
         Mockito.when(view.sendCommentClick()).thenReturn(sendCommentEvent);
         Mockito.when(view.refreshComments()).thenReturn(refreshCommentsEvent);
         Mockito.when(view.comment()).thenReturn(testComment);
+
+        comments.add(new CommentBuilder().setComment(testComment).createComment());
+        commentsCollection = new CommentsCollectionBuilder().setComments(comments).create();
+
+        Mockito.when(apiService.getEventComments(eventId)).thenReturn(Observable.just(commentsCollection));
+        Mockito.when(apiService.addComment(eventId, testComment)).thenReturn(Observable.just(null));
     }
 
     @Test
@@ -78,6 +94,8 @@ public class CommentsPresenterTests
     {
         CommentsPresenter presenter = createPresenter();
         presenter.start();
+
+        Mockito.reset(view);
 
         refreshCommentsEvent.onNext(this);
         //Mockito.verify(view).apiCallWhichWillBeHere();

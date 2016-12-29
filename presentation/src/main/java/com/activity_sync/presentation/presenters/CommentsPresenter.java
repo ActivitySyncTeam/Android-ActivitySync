@@ -36,7 +36,6 @@ public class CommentsPresenter extends Presenter<ICommentsView>
         subscriptions.add(view.refreshComments()
                 .subscribe(event -> {
                     loadComments();
-                    view.refreshingVisible(false);
                 })
         );
 

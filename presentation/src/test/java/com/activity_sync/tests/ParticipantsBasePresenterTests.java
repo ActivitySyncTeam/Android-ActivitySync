@@ -34,12 +34,13 @@ public class ParticipantsBasePresenterTests
     protected PublishSubject refreshParticipantsEvent = PublishSubject.create();
 
     protected User testedParticipant;
+    protected int eventId = 1;
 
     @Before
     public void setup()
     {
         testedParticipant = new UserBuilder()
-                .setUserId("12")
+                .setUserId(12)
                 .setName("Marcin")
                 .setSurname("Zielinski")
                 .setCredibility(85)

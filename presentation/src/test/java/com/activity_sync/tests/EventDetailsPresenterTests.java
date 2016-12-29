@@ -176,7 +176,7 @@ public class EventDetailsPresenterTests
         presenter.start();
 
         participantsClickEvent.onNext(this);
-        Mockito.verify(navigator).openParticipantsScreen(true);
+        Mockito.verify(navigator).openParticipantsScreen(true, eventId);
     }
 
     @Test
