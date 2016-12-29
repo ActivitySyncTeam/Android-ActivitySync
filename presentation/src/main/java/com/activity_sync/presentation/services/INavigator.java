@@ -16,7 +16,7 @@ public interface INavigator
 
     void openEventDetailsScreen(int eventId);
 
-    void openUserDetailsScreen(String userId);
+    void openUserDetailsScreen(int userId);
 
     void openSettingsScreen();
 

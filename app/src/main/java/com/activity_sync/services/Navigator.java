@@ -71,7 +71,7 @@ public class Navigator implements INavigator
     }
 
     @Override
-    public void openUserDetailsScreen(String userId)
+    public void openUserDetailsScreen(int userId)
     {
         startActivity(getIntent(UserDetailsScreen.class));
     }

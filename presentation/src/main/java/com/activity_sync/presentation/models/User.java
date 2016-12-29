@@ -6,8 +6,8 @@ import java.io.Serializable;
 
 public class User implements Serializable
 {
-    @SerializedName("id")
-    private String userId;
+    @SerializedName("userID")
+    private int userId;
 
     @SerializedName("name")
     private String name;
@@ -36,7 +36,7 @@ public class User implements Serializable
     @SerializedName("credibility")          //please add credibility in api call
     private int credibility;
 
-    public User(String userId, String name, String surname, String username, String email, String registerDate, String signature, int events, AdditionalInfo additionalInfo, int credibility)
+    public User(int userId, String name, String surname, String username, String email, String registerDate, String signature, int events, AdditionalInfo additionalInfo, int credibility)
     {
         this.userId = userId;
         this.name = name;
@@ -55,12 +55,12 @@ public class User implements Serializable
 
     }
 
-    public String getUserId()
+    public int getUserId()
     {
         return userId;
     }
 
-    public void setUserId(String userId)
+    public void setUserId(int userId)
     {
         this.userId = userId;
     }

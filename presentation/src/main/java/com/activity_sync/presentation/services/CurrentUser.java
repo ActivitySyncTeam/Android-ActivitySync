@@ -30,6 +30,36 @@ public class CurrentUser
         permanentStorage.saveString(IPermanentStorage.ACCESS_TOKEN, authToken);
     }
 
+    public int userId()
+    {
+        return permanentStorage.retrieveInteger(IPermanentStorage.CURRENT_USER_ID, IPermanentStorage.CURRENT_USER_ID_DEFAULT);
+    }
+
+    public void userId(int userId)
+    {
+        permanentStorage.saveInteger(IPermanentStorage.CURRENT_USER_ID, userId);
+    }
+
+    public String name()
+    {
+        return permanentStorage.retrieveString(IPermanentStorage.CURRENT_USER_NAME, StringUtils.EMPTY);
+    }
+
+    public void name(String name)
+    {
+        permanentStorage.saveString(IPermanentStorage.CURRENT_USER_NAME, name);
+    }
+
+    public String lastName()
+    {
+        return permanentStorage.retrieveString(IPermanentStorage.CURRENT_USER_LAST_NAME, StringUtils.EMPTY);
+    }
+
+    public void lastName(String lastName)
+    {
+        permanentStorage.saveString(IPermanentStorage.CURRENT_USER_LAST_NAME, lastName);
+    }
+
     public String clientId()
     {
         return permanentStorage.retrieveString(IPermanentStorage.CLIENT_ID, StringUtils.EMPTY);

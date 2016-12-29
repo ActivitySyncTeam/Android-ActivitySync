@@ -3,6 +3,9 @@ package com.activity_sync.presentation.services;
 public interface IPermanentStorage
 {
     String ACCESS_TOKEN = "access_token";
+    String CURRENT_USER_ID = "current_user_id";
+    String CURRENT_USER_NAME = "current_user_name";
+    String CURRENT_USER_LAST_NAME = "current_user_lastName";
     String CLIENT_SECRET = "client_secret";
     String CLIENT_ID = "client_id";
     String IS_APP_OPENED_BEFORE = "is_app_opened_before";
@@ -20,6 +23,7 @@ public interface IPermanentStorage
     boolean IS_NOTIFICATION_ENABLED_DEFAULT = true;
     boolean IS_NOTIFICATION_SOUND_ENABLED_DEFAULT = true;
     boolean IS_NOTIFICATION_VIBRATION_ENABLED_DEFAULT = true;
+    int CURRENT_USER_ID_DEFAULT = -1;
     int SEARCH_DAYS_AHEAD_DEFAULT = 21;
     int SEARCH_RANGE_DEFAULT = 5;
     float LAST_COORDINATION_DEFAULT = (float) -1000.00;

@@ -56,7 +56,7 @@ public class ParticipantsBasePresenterTests
         presenter.start();
 
         participantSelectedEvent.onNext(testedParticipant);
-        Mockito.verify(navigator).openUserDetailsScreen("12");
+        Mockito.verify(navigator).openUserDetailsScreen(12);
     }
 
     @Test

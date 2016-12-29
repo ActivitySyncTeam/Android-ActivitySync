@@ -49,15 +49,21 @@ public class CommentsPresenter extends Presenter<ICommentsView>
                     }
                     else
                     {
-                        Comment comment = new CommentBuilder()
-                                .setComment(view.comment())
-                                .setName("Marcin Zielinski")
-                                .createComment();
+                        apiService.addComment(eventId, view.comment())
+                                .observeOn(uiThread)
+                                .subscribe(result -> {
 
-                        view.addSingleComment(comment);
-                        view.clearComment();
-                        view.hideKeyboard();
-                        view.scrollToBottom();
+                                    Comment comment = new CommentBuilder()
+                                            .setComment(view.comment())
+                                            .setName("name not returned from server")
+                                            .createComment();
+
+                                    view.addSingleComment(comment);
+                                    view.clearComment();
+                                    view.hideKeyboard();
+                                    view.scrollToBottom();
+
+                                }, this::handleError);
                     }
                 })
         );

@@ -10,6 +10,7 @@ import com.activity_sync.presentation.models.Location;
 import com.activity_sync.presentation.models.LoginResponse;
 import com.activity_sync.presentation.models.NewEvent;
 import com.activity_sync.presentation.models.RegisterResponse;
+import com.activity_sync.presentation.models.User;
 
 import java.util.List;
 
@@ -36,6 +37,9 @@ public interface IActivitySyncApi
 
     @POST("/api/auth/token/revoke")
     Observable<Void> logout(@Header("Authorization") String authToken, @Query("client_id") String clientId, @Query("client_secret") String clientSecret, @Query("token") String token);
+
+    @GET("/api/user/id")
+    Observable<User> getUserID();
 
     @FormUrlEncoded                         //TODO DO POPRAWY
     @POST("/api/event/create")

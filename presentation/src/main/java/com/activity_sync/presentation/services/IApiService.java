@@ -10,6 +10,7 @@ import com.activity_sync.presentation.models.Location;
 import com.activity_sync.presentation.models.LoginResponse;
 import com.activity_sync.presentation.models.NewEvent;
 import com.activity_sync.presentation.models.RegisterResponse;
+import com.activity_sync.presentation.models.User;
 
 import java.util.List;
 
@@ -25,6 +26,8 @@ public interface IApiService
 
     Observable<ClientDetails> getClientDetails();
 
+    Observable<User> getUserID();
+
     Observable<NewEvent> createEvent(String description, int disciplineID, int levelID, int playersNumber, Location location, String date, boolean addMe);
 
     Observable<EventsCollection> getAllEvents();
@@ -32,6 +35,8 @@ public interface IApiService
     Observable<Event> getEventDetails(int eventId);
 
     Observable<CommentsCollection> getEventComments(int eventId);
+
+    Observable<Void> addComment(int eventId, String comment);
 
     Observable<List<Discipline>> getAvailableDisciplines();
 

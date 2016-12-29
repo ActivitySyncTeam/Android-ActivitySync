@@ -12,6 +12,7 @@ import com.activity_sync.presentation.models.Location;
 import com.activity_sync.presentation.models.LoginResponse;
 import com.activity_sync.presentation.models.NewEvent;
 import com.activity_sync.presentation.models.RegisterResponse;
+import com.activity_sync.presentation.models.User;
 import com.activity_sync.presentation.services.IActivitySyncApi;
 import com.activity_sync.presentation.services.IApiService;
 import com.activity_sync.presentation.services.IPermanentStorage;
@@ -77,19 +78,31 @@ public class ApiService implements IApiService
     @Override
     public Observable<Event> getEventDetails(int eventId)
     {
-        return api.getEventDetails(accessToken(), eventId);
+        return api.getEventDetails(accessTokenHeader(), eventId);
     }
 
     @Override
     public Observable<CommentsCollection> getEventComments(int eventId)
     {
-        return api.getEventComments(accessToken(), eventId);
+        return api.getEventComments(accessTokenHeader(), eventId);
+    }
+
+    @Override
+    public Observable<Void> addComment(int eventId, String comment)
+    {
+        return api.addComment(accessTokenHeader(), eventId, comment);
     }
 
     @Override
     public Observable<ClientDetails> getClientDetails()
     {
         return api.getClientDetails();
+    }
+
+    @Override
+    public Observable<User> getUserID()
+    {
+        return api.getUserID();
     }
 
     @Override
