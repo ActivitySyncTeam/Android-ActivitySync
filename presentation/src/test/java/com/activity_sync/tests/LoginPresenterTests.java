@@ -57,6 +57,7 @@ public class LoginPresenterTests
         loginPresenter.start();
 
         loginBtnClickEvent.onNext(this);
+        Mockito.verify(navigator).startBackgroundService();
         Mockito.verify(navigator).openEventsScreen();
     }
 

@@ -64,6 +64,16 @@ public class MyEventsPresenterTests
     }
 
     @Test
+    public void myEventsPresenter_init_hideFilterView()
+    {
+        MyEventsPresenter presenter = createPresenter();
+        presenter.start();
+
+        eventSelectedEvent.onNext(testedEvent);
+        Mockito.verify(view).filterLayoutVisible(false);
+    }
+
+    @Test
     public void myEventsPresenter_selectEvent_openEventDetails()
     {
         MyEventsPresenter presenter = createPresenter();

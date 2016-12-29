@@ -1,6 +1,7 @@
 package com.activity_sync.screens;
 
 import android.Manifest;
+import android.app.DatePickerDialog;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -11,15 +12,24 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.activity_sync.App;
 import com.activity_sync.R;
+import com.activity_sync.presentation.events.LocationPermissionGranted;
+import com.activity_sync.presentation.models.Discipline;
 import com.activity_sync.presentation.models.Event;
+import com.activity_sync.presentation.models.Location;
+import com.activity_sync.presentation.presenters.AllEventsPresenter;
 import com.activity_sync.presentation.services.IApiService;
 import com.activity_sync.presentation.services.INavigator;
+import com.activity_sync.presentation.services.IPermanentStorage;
 import com.activity_sync.presentation.views.IEventsFragmentView;
 import com.activity_sync.renderers.EventsRenderer;
 import com.activity_sync.renderers.base.DividerItemDecoration;
@@ -29,6 +39,9 @@ import com.karumi.dexter.MultiplePermissionsReport;
 import com.karumi.dexter.PermissionToken;
 import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
+
+import org.greenrobot.eventbus.EventBus;
+import org.joda.time.DateTime;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -49,26 +62,48 @@ abstract public class EventsFragmentBase extends FragmentScreen implements IEven
     @Inject
     IApiService apiService;
 
+    @Inject
+    IPermanentStorage permanentStorage;
+
     @Bind(R.id.events_refresh)
     SwipeRefreshLayout eventsRefreshLayout;
 
     @Bind(R.id.events_list)
     RecyclerView eventsList;
 
-    @Bind(R.id.empty_view)
-    LinearLayout emptyView;
+    @Bind(R.id.no_permission_view)
+    LinearLayout noPermissionView;
+
+    @Bind(R.id.looking_for_cords)
+    LinearLayout lookingForCordsView;
+
+    @Bind(R.id.filter_events_layout)
+    LinearLayout filterEventsView;
 
     @Bind(R.id.events_enable_btn)
     Button enablePermissionBtn;
 
-    protected static int MY_EVENTS_INDEX = 1;
-    protected static int ALL_EVENTS_INDEX = 0;
+    @Bind(R.id.disciplines_toolbar)
+    Spinner disciplineSpinner;
+
+    @Bind(R.id.day_filter_tv)
+    TextView dayFilter;
+
+    @Bind(R.id.filter_date_layout)
+    LinearLayout filterDateLayout;
+
+    @Bind(R.id.refresh_filter)
+    ImageView refreshFilter;
 
     private PublishSubject refreshEvents = PublishSubject.create();
     private PublishSubject<Boolean> locationsEnabled = PublishSubject.create();
+    protected PublishSubject<Location> locationFound = PublishSubject.create();
+    protected PublishSubject<DateTime> newDateOccurred = PublishSubject.create();
     private RVRendererAdapter<Event> adapter;
     private List<Event> events = new ArrayList<>();
     private ViewPager viewPager;
+
+    private List<Discipline> disciplines = new ArrayList<>();
 
     public EventsFragmentBase()
     {
@@ -126,9 +161,7 @@ abstract public class EventsFragmentBase extends FragmentScreen implements IEven
     @Override
     public void refreshingVisible(boolean isRefreshing)
     {
-        eventsRefreshLayout.post(() -> {
-            eventsRefreshLayout.setRefreshing(isRefreshing);
-        });
+        eventsRefreshLayout.post(() -> eventsRefreshLayout.setRefreshing(isRefreshing));
     }
 
     @Override
@@ -178,22 +211,46 @@ abstract public class EventsFragmentBase extends FragmentScreen implements IEven
     }
 
     @Override
-    public void eventsListVisible(boolean isVisible)
+    public void eventsListVisible()
+    {
+        eventsList.setVisibility(View.VISIBLE);
+        noPermissionView.setVisibility(View.GONE);
+        lookingForCordsView.setVisibility(View.GONE);
+
+        eventsRefreshLayout.setEnabled(true);
+    }
+
+    @Override
+    public void filterLayoutVisible(boolean isVisible)
     {
         if (isVisible)
         {
-            eventsList.setVisibility(View.VISIBLE);
-            emptyView.setVisibility(View.GONE);
-
-            eventsRefreshLayout.setEnabled(true);
+            filterEventsView.setVisibility(View.VISIBLE);
         }
         else
         {
-            eventsList.setVisibility(View.GONE);
-            emptyView.setVisibility(View.VISIBLE);
-
-            eventsRefreshLayout.setEnabled(false);
+            filterEventsView.setVisibility(View.GONE);
         }
+    }
+
+    @Override
+    public void noPermissionLayoutVisible()
+    {
+        eventsList.setVisibility(View.GONE);
+        lookingForCordsView.setVisibility(View.GONE);
+        noPermissionView.setVisibility(View.VISIBLE);
+
+        eventsRefreshLayout.setEnabled(false);
+    }
+
+    @Override
+    public void searchingForCordsVisible()
+    {
+        eventsList.setVisibility(View.GONE);
+        lookingForCordsView.setVisibility(View.VISIBLE);
+        noPermissionView.setVisibility(View.GONE);
+
+        eventsRefreshLayout.setEnabled(false);
     }
 
     @Override
@@ -206,5 +263,92 @@ abstract public class EventsFragmentBase extends FragmentScreen implements IEven
     public int getViewPagerCurrentFragmentIndex()
     {
         return viewPager.getCurrentItem();
+    }
+
+    @Override
+    public void postLocationPermissionsMessage()
+    {
+        EventBus.getDefault().post(new LocationPermissionGranted());
+    }
+
+    @Override
+    public Observable<Location> locationFound()
+    {
+        return locationFound;
+    }
+
+    @Override
+    public void prepareDisciplineSpinner(List<Discipline> disciplines)
+    {
+        this.disciplines.clear();
+        this.disciplines = disciplines;
+
+        this.disciplines.add(0, new Discipline(AllEventsPresenter.ALL_EVENTS_ID, getString(R.string.txt_all)));
+
+        ArrayAdapter<Discipline> adapter = new ArrayAdapter<>(getContext(), R.layout.spinner_filter_toolbar_main_item, this.disciplines);
+        adapter.setDropDownViewResource(R.layout.spinner_default_dropdown_item);
+        disciplineSpinner.setAdapter(adapter);
+    }
+
+    @Override
+    public void openDatePicker(DateTime dateTime)
+    {
+        if (dateTime == null)
+        {
+            dateTime = new DateTime();
+        }
+
+        DatePickerDialog datePickerDialog = new DatePickerDialog(getContext(), R.style.DatePickerStyle, (view, selectedYear, selectedMonth, selectedDay) ->
+        {
+            newDateOccurred.onNext(new DateTime(selectedYear, selectedMonth + 1, selectedDay, 0, 0));
+
+        }, dateTime.getYear(), dateTime.getMonthOfYear(), dateTime.getDayOfMonth());
+
+        datePickerDialog.show();
+    }
+
+    @Override
+    public Observable newDateEvent()
+    {
+        return newDateOccurred;
+    }
+
+    @Override
+    public void setDate(DateTime dateTime)
+    {
+        if (dateTime == null || isDateToday(dateTime))
+        {
+            dayFilter.setText(R.string.txt_from_today);
+        }
+        else
+        {
+            dayFilter.setText(String.format(getString(R.string.txt_filter_from), dateTime.getDayOfMonth(), dateTime.getMonthOfYear(), dateTime.getYear()));
+        }
+    }
+
+    @Override
+    public Observable dateLayoutClicked()
+    {
+        return ViewObservable.clicks(filterDateLayout);
+    }
+
+    @Override
+    public Observable refreshWithFilterClick()
+    {
+        return ViewObservable.clicks(refreshFilter);
+    }
+
+    private boolean isDateToday(DateTime dateTime)
+    {
+        DateTime todayDate = new DateTime();
+        return ((dateTime.getYear() == todayDate.getYear())
+                && (dateTime.getMonthOfYear() == todayDate.getMonthOfYear())
+                && (dateTime.getDayOfMonth() == todayDate.getDayOfMonth()));
+    }
+
+    @Override
+    public Discipline disciplineFilter()
+    {
+        return (Discipline) disciplineSpinner.getSelectedItem();
     }
 }
