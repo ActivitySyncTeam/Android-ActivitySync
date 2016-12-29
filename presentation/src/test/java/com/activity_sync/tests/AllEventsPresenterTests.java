@@ -30,7 +30,6 @@ import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class AllEventsPresenterTests
@@ -228,37 +227,6 @@ public class AllEventsPresenterTests
         refreshFilterClickEvent.onNext(null);
         Mockito.verify(view).refreshingVisible(true);
         Mockito.verify(view, times(2)).addEventsList(any());
-    }
-
-    @Test
-    public void allEventsPresenter_fragmentNotDisplayed_permissionNotChecked() throws Exception
-    {
-        final int index = 0;
-        when(permanentStorage.retrieveFloat(IPermanentStorage.LAST_LONGITUDE, IPermanentStorage.LAST_LONGITUDE_DEFAULT)).thenReturn(IPermanentStorage.LAST_LONGITUDE_DEFAULT);
-        when(view.checkLocationPermissions()).thenReturn(false);
-        when(view.getViewPagerCurrentFragmentIndex()).thenReturn(index + 1);
-        when(view.getCurrentFragmentIndex()).thenReturn(index);
-        AllEventsPresenter presenter = createPresenter();
-        presenter.start();
-
-        verify(view, never()).askForPermission();
-        verify(view).searchingForCordsVisible();
-    }
-
-    @Test
-    public void allEventsPresenter_fragmentDisplayed_permissionChecked() throws Exception
-    {
-        final int index = 0;
-        when(permanentStorage.retrieveFloat(IPermanentStorage.LAST_LONGITUDE, IPermanentStorage.LAST_LONGITUDE_DEFAULT)).thenReturn(IPermanentStorage.LAST_LONGITUDE_DEFAULT);
-        when(view.checkLocationPermissions()).thenReturn(false);
-        when(view.getViewPagerCurrentFragmentIndex()).thenReturn(index);
-        when(view.getCurrentFragmentIndex()).thenReturn(index);
-        AllEventsPresenter presenter = createPresenter();
-        presenter.start();
-
-        verify(view).askForPermission();
-        verify(view).noPermissionLayoutVisible();
-        verify(view).refreshingVisible(false);
     }
 
     private AllEventsPresenter createPresenter()
