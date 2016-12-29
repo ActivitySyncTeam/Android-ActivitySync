@@ -1,6 +1,7 @@
 package com.activity_sync.presentation.services;
 
 import com.activity_sync.presentation.models.ClientDetails;
+import com.activity_sync.presentation.models.CommentsCollection;
 import com.activity_sync.presentation.models.Discipline;
 import com.activity_sync.presentation.models.Event;
 import com.activity_sync.presentation.models.EventsCollection;
@@ -29,6 +30,8 @@ public interface IApiService
     Observable<EventsCollection> getAllEvents();
 
     Observable<Event> getEventDetails(int eventId);
+
+    Observable<CommentsCollection> getEventComments(int eventId);
 
     Observable<List<Discipline>> getAvailableDisciplines();
 

@@ -1,6 +1,7 @@
 package com.activity_sync.presentation.services;
 
 import com.activity_sync.presentation.models.ClientDetails;
+import com.activity_sync.presentation.models.CommentsCollection;
 import com.activity_sync.presentation.models.Discipline;
 import com.activity_sync.presentation.models.Event;
 import com.activity_sync.presentation.models.EventsCollection;
@@ -45,6 +46,13 @@ public interface IActivitySyncApi
 
     @GET("api/event/{event_id}")
     Observable<Event> getEventDetails(@Header("Authorization") String accessToken, @Path("event_id") int eventId);
+
+    @GET("api/event/comments/{event_id}")
+    Observable<CommentsCollection> getEventComments(@Header("Authorization") String accessToken, @Path("event_id") int eventId);
+
+    @FormUrlEncoded
+    @POST("api/event/comments/add/")
+    Observable<Void> addComment(@Header("Authorization") String accessToken, @Field("eventID") int eventId, @Field("comment") String comment);
 
     @GET("/api/disciplines")
     Observable<List<Discipline>> getAvailableDisciplines();

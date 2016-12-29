@@ -7,10 +7,8 @@ import com.activity_sync.presentation.services.IApiService;
 import com.activity_sync.presentation.utils.StringUtils;
 import com.activity_sync.presentation.views.ICommentsView;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import rx.Scheduler;
+import timber.log.Timber;
 
 public class CommentsPresenter extends Presenter<ICommentsView>
 {
@@ -67,29 +65,23 @@ public class CommentsPresenter extends Presenter<ICommentsView>
 
     private void loadComments()
     {
-        //API CALL WILL BE HERE
-        List<Comment> comments = new ArrayList<>();
+        view.refreshingVisible(true);
 
-        comments.add(new CommentBuilder()
-                .setName("Marcin Zielinski")
-                .setComment("Polecam organizatora")
-                .createComment());
+        apiService.getEventComments(eventId)
+                .observeOn(uiThread)
+                .subscribe(commentsCollection -> {
 
-        comments.add(new CommentBuilder()
-                .setName("Michal Wolny")
-                .setComment("Ja tez")
-                .createComment());
+                    view.addCommentsList(commentsCollection.getComments());
+                    view.refreshingVisible(false);
 
-        comments.add(new CommentBuilder()
-                .setName("Łukasz Petka")
-                .setComment("Juz nie moge sei doczekac")
-                .createComment());
+                }, this::handleError);
+    }
 
-        comments.add(new CommentBuilder()
-                .setName("Kasia Solecka")
-                .setComment("Lubię narty. A w sumie to wydarzenie odnośnie kosza. Sorka za spam")
-                .createComment());
-
-        view.addCommentsList(comments);
+    private void handleError(Throwable error)
+    {
+        error.printStackTrace();
+        Timber.d(error.getMessage());
+        view.refreshingVisible(false);
+        view.displayDefaultError();
     }
 }

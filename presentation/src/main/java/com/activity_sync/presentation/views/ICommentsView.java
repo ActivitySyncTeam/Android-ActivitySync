@@ -6,7 +6,7 @@ import java.util.Collection;
 
 import rx.Observable;
 
-public interface ICommentsView
+public interface ICommentsView extends IScreenView
 {
     Observable refreshComments();
     void addCommentsList(Collection<Comment> comments);

@@ -3,6 +3,7 @@ package com.activity_sync.services;
 import android.util.Base64;
 
 import com.activity_sync.presentation.models.ClientDetails;
+import com.activity_sync.presentation.models.CommentsCollection;
 import com.activity_sync.presentation.models.Discipline;
 import com.activity_sync.presentation.models.Event;
 import com.activity_sync.presentation.models.EventsCollection;
@@ -77,6 +78,12 @@ public class ApiService implements IApiService
     public Observable<Event> getEventDetails(int eventId)
     {
         return api.getEventDetails(accessToken(), eventId);
+    }
+
+    @Override
+    public Observable<CommentsCollection> getEventComments(int eventId)
+    {
+        return api.getEventComments(accessToken(), eventId);
     }
 
     @Override
