@@ -26,6 +26,7 @@ import rx.subjects.PublishSubject;
 
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.times;
 
 @RunWith(MockitoJUnitRunner.class)
 public class CommentsPresenterTests
@@ -43,7 +44,8 @@ public class CommentsPresenterTests
     protected PublishSubject refreshCommentsEvent = PublishSubject.create();
 
     private int eventId = 1;
-    private String testComment = "Test comment";
+    private Comment testComment;
+    private String commentContent = "comment";
     private List<Comment> comments = new ArrayList<>();
     private CommentsCollection commentsCollection;
 
@@ -52,13 +54,24 @@ public class CommentsPresenterTests
     {
         Mockito.when(view.sendCommentClick()).thenReturn(sendCommentEvent);
         Mockito.when(view.refreshComments()).thenReturn(refreshCommentsEvent);
-        Mockito.when(view.comment()).thenReturn(testComment);
+        Mockito.when(view.comment()).thenReturn(commentContent);
 
-        comments.add(new CommentBuilder().setComment(testComment).createComment());
+        testComment = new CommentBuilder().createComment();
+        comments.add(testComment);
         commentsCollection = new CommentsCollectionBuilder().setComments(comments).create();
 
         Mockito.when(apiService.getEventComments(eventId)).thenReturn(Observable.just(commentsCollection));
-        Mockito.when(apiService.addComment(eventId, testComment)).thenReturn(Observable.just(null));
+        Mockito.when(apiService.addComment(eventId, commentContent)).thenReturn(Observable.just(null));
+    }
+
+    @Test
+    public void commentsPresenter_init_loadData()
+    {
+        CommentsPresenter presenter = createPresenter();
+        presenter.start();
+
+        Mockito.verify(apiService).getEventComments(eventId);
+        Mockito.verify(view).refreshingVisible(false);
     }
 
     @Test
@@ -69,6 +82,7 @@ public class CommentsPresenterTests
 
         sendCommentEvent.onNext(this);
 
+        Mockito.verify(apiService).addComment(eventId, commentContent);
         Mockito.verify(view).addSingleComment(any());
         Mockito.verify(view).scrollToBottom();
         Mockito.verify(view).hideKeyboard();
@@ -98,7 +112,7 @@ public class CommentsPresenterTests
         Mockito.reset(view);
 
         refreshCommentsEvent.onNext(this);
-        //Mockito.verify(view).apiCallWhichWillBeHere();
+        Mockito.verify(apiService, times(2)).getEventComments(eventId);
         Mockito.verify(view).refreshingVisible(false);
     }
 

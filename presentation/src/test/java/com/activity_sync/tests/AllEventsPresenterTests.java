@@ -236,8 +236,9 @@ public class AllEventsPresenterTests
         presenter.start();
 
         refreshFilterClickEvent.onNext(null);
+        Mockito.verify(apiService, times(2)).getAllEvents();
+        Mockito.verify(view, times(2)).addEventsList(events);
         Mockito.verify(view).refreshingVisible(true);
-        Mockito.verify(view, times(2)).addEventsList(any());
     }
 
     private AllEventsPresenter createPresenter()

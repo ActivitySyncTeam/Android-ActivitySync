@@ -5,6 +5,7 @@ import com.activity_sync.presentation.utils.StringUtils;
 import javax.inject.Inject;
 
 import rx.android.schedulers.AndroidSchedulers;
+import timber.log.Timber;
 
 public class CurrentUser
 {
@@ -92,6 +93,13 @@ public class CurrentUser
 
                     navigator.stopBackgroundService();
                     navigator.openLoginScreen();
-        });
+
+        }, this::handleError);
+    }
+
+    private void handleError(Throwable error)
+    {
+        error.printStackTrace();
+        Timber.d(error.getMessage());
     }
 }

@@ -3,6 +3,9 @@ package com.activity_sync.tests;
 import com.activity_sync.presentation.models.Discipline;
 import com.activity_sync.presentation.models.Level;
 import com.activity_sync.presentation.models.Location;
+import com.activity_sync.presentation.models.NewEvent;
+import com.activity_sync.presentation.models.builders.DisciplineBuilder;
+import com.activity_sync.presentation.models.builders.LevelBuilder;
 import com.activity_sync.presentation.models.builders.LocationBuilder;
 import com.activity_sync.presentation.presenters.EventCreatorPresenter;
 import com.activity_sync.presentation.services.IApiService;
@@ -50,6 +53,14 @@ public class EventCreatorPresenterTests
     private List<Discipline> disciplines = new ArrayList<>();
     private List<Level> levels = new ArrayList<>();
 
+    private NewEvent testedEvent;
+    private String description = "description";
+    private Discipline discipline;
+    private Level level;
+    private int players = 12;
+    private String date = "2016-12-29 23:23:00";
+    private boolean isOrganizerEnrolled = true;
+
     @Before
     public void setup()
     {
@@ -67,12 +78,28 @@ public class EventCreatorPresenterTests
         Mockito.when(apiService.getAvailableDisciplines()).thenReturn(Observable.just(disciplines));
         Mockito.when(apiService.getAvailableLevels()).thenReturn(Observable.just(levels));
 
+        discipline = new DisciplineBuilder().setId(1).createDiscipline();
+        level = new LevelBuilder().setId(1).createLevel();
         testLocation = new LocationBuilder()
                 .setId(1)
                 .setLatitude(23.32)
                 .setLongitude(23.23)
                 .setName(locationName)
                 .createLocation();
+
+        Mockito.when(view.description()).thenReturn(description);
+        Mockito.when(view.discipline()).thenReturn(discipline);
+        Mockito.when(view.level()).thenReturn(level);
+        Mockito.when(view.date()).thenReturn(date);
+        Mockito.when(view.location()).thenReturn(testLocation);
+        Mockito.when(view.players()).thenReturn(players);
+        Mockito.when(view.isOrganizerEnrolled()).thenReturn(isOrganizerEnrolled);
+
+        Mockito.when(apiService.createEvent(
+                view.description(), view.discipline().getId(),
+                view.level().getId(), view.players(),
+                view.location(), view.date(),
+                view.isOrganizerEnrolled())).thenReturn(Observable.just(testedEvent));
     }
 
     @Test
@@ -138,6 +165,7 @@ public class EventCreatorPresenterTests
 
         confirmActionEvent.onNext(this);
 
+        Mockito.verify(apiService).createEvent(description, discipline.getId(), level.getId(), players, testLocation, date, isOrganizerEnrolled);
         Mockito.verify(navigator).openEventsScreen();
     }
 
