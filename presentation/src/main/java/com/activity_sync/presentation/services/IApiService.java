@@ -9,6 +9,7 @@ import com.activity_sync.presentation.models.Level;
 import com.activity_sync.presentation.models.Location;
 import com.activity_sync.presentation.models.LoginResponse;
 import com.activity_sync.presentation.models.NewEvent;
+import com.activity_sync.presentation.models.Participants;
 import com.activity_sync.presentation.models.RegisterResponse;
 import com.activity_sync.presentation.models.User;
 
@@ -37,6 +38,8 @@ public interface IApiService
     Observable<CommentsCollection> getEventComments(int eventId);
 
     Observable<Void> addComment(int eventId, String comment);
+
+    Observable<Participants> getEventParticipants(int eventId);
 
     Observable<List<Discipline>> getAvailableDisciplines();
 

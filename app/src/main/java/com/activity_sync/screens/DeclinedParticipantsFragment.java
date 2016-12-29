@@ -13,9 +13,9 @@ import rx.android.schedulers.AndroidSchedulers;
 
 public class DeclinedParticipantsFragment extends UsersFragmentBase implements IUserActionListener
 {
-    public DeclinedParticipantsFragment(boolean shouldDisplayAllOptions)
+    public DeclinedParticipantsFragment(boolean shouldDisplayAllOptions, int eventId)
     {
-        super(shouldDisplayAllOptions);
+        super(shouldDisplayAllOptions, eventId);
     }
 
     @Override

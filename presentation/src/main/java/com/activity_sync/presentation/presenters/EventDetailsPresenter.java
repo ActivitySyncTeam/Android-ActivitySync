@@ -121,7 +121,7 @@ public class EventDetailsPresenter extends Presenter<IEventDetailsView>
 
                     if (currentEvent != null)
                     {
-                        navigator.openParticipantsScreen(currentEvent.isOrganizer());
+                        navigator.openParticipantsScreen(currentEvent.isOrganizer(), currentEvent.getEventId());
                     }
                 })
         );

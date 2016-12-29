@@ -55,11 +55,20 @@ abstract public class UsersFragmentBase extends FragmentScreen implements IUsers
     private List<User> participants = new ArrayList<>();
 
     protected final boolean shouldDisplayAllOptions;
+    protected final int eventId;
+
+    public UsersFragmentBase(boolean shouldDisplayAllOptions, int eventId)
+    {
+        super(R.layout.participants_fragment);
+        this.shouldDisplayAllOptions = shouldDisplayAllOptions;
+        this.eventId = eventId;
+    }
 
     public UsersFragmentBase(boolean shouldDisplayAllOptions)
     {
         super(R.layout.participants_fragment);
         this.shouldDisplayAllOptions = shouldDisplayAllOptions;
+        this.eventId = 0;
     }
 
     @Override

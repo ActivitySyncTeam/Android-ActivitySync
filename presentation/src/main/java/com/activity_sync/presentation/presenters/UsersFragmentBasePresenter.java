@@ -10,9 +10,19 @@ abstract public class UsersFragmentBasePresenter extends Presenter<IUsersFragmen
 {
     public static final String EVENT_CHOSEN = "EVENT_CHOSEN";
 
-    private final INavigator navigator;
-    private final Scheduler uiThread;
-    private final IApiService apiService;
+    protected final INavigator navigator;
+    protected final Scheduler uiThread;
+    protected final IApiService apiService;
+    protected final int eventId;
+
+    public UsersFragmentBasePresenter(IUsersFragmentView view, INavigator navigator, Scheduler uiThread, IApiService apiService, int eventId)
+    {
+        super(view);
+        this.navigator = navigator;
+        this.uiThread = uiThread;
+        this.apiService = apiService;
+        this.eventId = eventId;
+    }
 
     public UsersFragmentBasePresenter(IUsersFragmentView view, INavigator navigator, Scheduler uiThread, IApiService apiService)
     {
@@ -20,6 +30,7 @@ abstract public class UsersFragmentBasePresenter extends Presenter<IUsersFragmen
         this.navigator = navigator;
         this.uiThread = uiThread;
         this.apiService = apiService;
+        this.eventId = 0;
     }
 
     @Override

@@ -24,7 +24,7 @@ public interface INavigator
 
     void openEditAccountScreen(User user);
 
-    void openParticipantsScreen(boolean isOrganizer);
+    void openParticipantsScreen(boolean isOrganizer, int eventId);
 
     void openEventCreatorScreen();
 

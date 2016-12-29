@@ -11,6 +11,7 @@ import com.activity_sync.presentation.models.Level;
 import com.activity_sync.presentation.models.Location;
 import com.activity_sync.presentation.models.LoginResponse;
 import com.activity_sync.presentation.models.NewEvent;
+import com.activity_sync.presentation.models.Participants;
 import com.activity_sync.presentation.models.RegisterResponse;
 import com.activity_sync.presentation.models.User;
 import com.activity_sync.presentation.services.IActivitySyncApi;
@@ -91,6 +92,12 @@ public class ApiService implements IApiService
     public Observable<Void> addComment(int eventId, String comment)
     {
         return api.addComment(accessTokenHeader(), eventId, comment);
+    }
+
+    @Override
+    public Observable<Participants> getEventParticipants(int eventId)
+    {
+        return api.getEventParticipants(accessTokenHeader(), eventId);
     }
 
     @Override

@@ -13,9 +13,9 @@ import rx.Scheduler;
 
 public class RegisteredUsersPresenter extends UsersFragmentBasePresenter
 {
-    public RegisteredUsersPresenter(IUsersFragmentView view, INavigator navigator, Scheduler uiThread, IApiService apiService)
+    public RegisteredUsersPresenter(IUsersFragmentView view, INavigator navigator, Scheduler uiThread, IApiService apiService, int eventId)
     {
-        super(view, navigator, uiThread, apiService);
+        super(view, navigator, uiThread, apiService, eventId);
     }
 
     @Override

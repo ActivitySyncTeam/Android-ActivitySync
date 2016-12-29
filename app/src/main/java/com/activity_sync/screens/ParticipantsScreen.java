@@ -15,6 +15,7 @@ import butterknife.Bind;
 public class ParticipantsScreen extends Screen
 {
     public static final String IS_ORGANIZER = "is_organizer";
+    public static final String EVENT_ID = "event_id";
 
     @Bind(R.id.tabLayout)
     TabLayout tabLayout;
@@ -35,11 +36,11 @@ public class ParticipantsScreen extends Screen
         super.onCreate(savedInstanceState);
 
         boolean isOrganizer = getIntent().getBooleanExtra(ParticipantsScreen.IS_ORGANIZER, false);
+        int eventId = getIntent().getIntExtra(ParticipantsScreen.EVENT_ID, 0);
 
         adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new RegisteredParticipantsFragment(isOrganizer), getString(R.string.txt_registered));
-        adapter.addFragment(new EventCandidatesFragment(isOrganizer), getString(R.string.txt_candidates));
-        adapter.addFragment(new DeclinedParticipantsFragment(isOrganizer), getString(R.string.txt_declined));
+        adapter.addFragment(new RegisteredParticipantsFragment(isOrganizer, eventId), getString(R.string.txt_registered));
+        adapter.addFragment(new EventCandidatesFragment(isOrganizer, eventId), getString(R.string.txt_candidates));
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
 

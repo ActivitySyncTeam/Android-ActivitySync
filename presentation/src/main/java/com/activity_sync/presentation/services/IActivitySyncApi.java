@@ -9,6 +9,7 @@ import com.activity_sync.presentation.models.Level;
 import com.activity_sync.presentation.models.Location;
 import com.activity_sync.presentation.models.LoginResponse;
 import com.activity_sync.presentation.models.NewEvent;
+import com.activity_sync.presentation.models.Participants;
 import com.activity_sync.presentation.models.RegisterResponse;
 import com.activity_sync.presentation.models.User;
 
@@ -57,6 +58,9 @@ public interface IActivitySyncApi
     @FormUrlEncoded
     @POST("api/event/comments/add/")
     Observable<Void> addComment(@Header("Authorization") String accessToken, @Field("eventID") int eventId, @Field("comment") String comment);
+
+    @GET("api/event/persons/{event_id}")
+    Observable<Participants> getEventParticipants(@Header("Authorization") String accessToken, @Path("event_id") int eventId);
 
     @GET("/api/disciplines")
     Observable<List<Discipline>> getAvailableDisciplines();
