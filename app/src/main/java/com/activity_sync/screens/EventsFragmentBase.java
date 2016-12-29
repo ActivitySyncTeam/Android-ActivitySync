@@ -12,8 +12,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -105,6 +105,9 @@ abstract public class EventsFragmentBase extends FragmentScreen implements IEven
 
     private List<Discipline> disciplines = new ArrayList<>();
 
+    protected static final int ALL_EVENTS_INDEX = 0;
+    protected static final int MY_EVENTS_INDEX = 1;
+
     public EventsFragmentBase()
     {
         super(R.layout.events_fragment);
@@ -189,8 +192,7 @@ abstract public class EventsFragmentBase extends FragmentScreen implements IEven
                 if (report.getDeniedPermissionResponses().size() > 0)
                 {
                     locationsEnabled.onNext(false);
-                }
-                else
+                } else
                 {
                     locationsEnabled.onNext(true);
                 }
@@ -226,8 +228,7 @@ abstract public class EventsFragmentBase extends FragmentScreen implements IEven
         if (isVisible)
         {
             filterEventsView.setVisibility(View.VISIBLE);
-        }
-        else
+        } else
         {
             filterEventsView.setVisibility(View.GONE);
         }
@@ -319,8 +320,7 @@ abstract public class EventsFragmentBase extends FragmentScreen implements IEven
         if (dateTime == null || isDateToday(dateTime))
         {
             dayFilter.setText(R.string.txt_from_today);
-        }
-        else
+        } else
         {
             dayFilter.setText(String.format(getString(R.string.txt_filter_from), dateTime.getDayOfMonth(), dateTime.getMonthOfYear(), dateTime.getYear()));
         }

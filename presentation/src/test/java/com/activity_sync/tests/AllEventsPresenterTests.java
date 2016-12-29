@@ -234,6 +234,7 @@ public class AllEventsPresenterTests
     public void allEventsPresenter_fragmentNotDisplayed_permissionNotChecked() throws Exception
     {
         final int index = 0;
+        when(permanentStorage.retrieveFloat(IPermanentStorage.LAST_LONGITUDE, IPermanentStorage.LAST_LONGITUDE_DEFAULT)).thenReturn(IPermanentStorage.LAST_LONGITUDE_DEFAULT);
         when(view.checkLocationPermissions()).thenReturn(false);
         when(view.getViewPagerCurrentFragmentIndex()).thenReturn(index + 1);
         when(view.getCurrentFragmentIndex()).thenReturn(index);
@@ -241,12 +242,14 @@ public class AllEventsPresenterTests
         presenter.start();
 
         verify(view, never()).askForPermission();
+        verify(view).searchingForCordsVisible();
     }
 
     @Test
     public void allEventsPresenter_fragmentDisplayed_permissionChecked() throws Exception
     {
         final int index = 0;
+        when(permanentStorage.retrieveFloat(IPermanentStorage.LAST_LONGITUDE, IPermanentStorage.LAST_LONGITUDE_DEFAULT)).thenReturn(IPermanentStorage.LAST_LONGITUDE_DEFAULT);
         when(view.checkLocationPermissions()).thenReturn(false);
         when(view.getViewPagerCurrentFragmentIndex()).thenReturn(index);
         when(view.getCurrentFragmentIndex()).thenReturn(index);
@@ -254,7 +257,7 @@ public class AllEventsPresenterTests
         presenter.start();
 
         verify(view).askForPermission();
-        verify(view).eventsListVisible(false);
+        verify(view).noPermissionLayoutVisible();
         verify(view).refreshingVisible(false);
     }
 

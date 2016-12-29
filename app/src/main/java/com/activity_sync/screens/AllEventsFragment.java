@@ -22,7 +22,6 @@ public class AllEventsFragment extends EventsFragmentBase implements IEventsFrag
         return new AllEventsPresenter(this, navigator, AndroidSchedulers.mainThread(), apiService, permanentStorage);
     }
 
-
     @Override
     public void onStart()
     {
