@@ -24,7 +24,6 @@ import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import rx.Observable;
@@ -82,9 +81,9 @@ public class AllEventsPresenterTests
                         .setName("Marcin")
                         .setSurname("Zielinski")
                         .createUser())
-                .setDate(new Date("2016/10/15"))
+                .setDate("2017-12-12 23:23:00")
                 .setLocation(new LocationBuilder()
-                        .setName("Park Jordana")
+                        .setDescription("Park Jordana")
                         .createLocation())
                 .setDiscipline(new DisciplineBuilder()
                         .setName("Basketball")

@@ -44,7 +44,6 @@ public class UserDetailsPresenterTests
         Mockito.when(currentUser.clientId()).thenReturn("123");
     }
 
-
     @Test
     public void userDetailsPresenter_initTest_loadData()
     {

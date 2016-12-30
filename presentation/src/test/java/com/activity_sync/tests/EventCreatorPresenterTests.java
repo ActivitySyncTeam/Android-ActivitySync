@@ -1,9 +1,9 @@
 package com.activity_sync.tests;
 
 import com.activity_sync.presentation.models.Discipline;
+import com.activity_sync.presentation.models.EventID;
 import com.activity_sync.presentation.models.Level;
 import com.activity_sync.presentation.models.Location;
-import com.activity_sync.presentation.models.NewEvent;
 import com.activity_sync.presentation.models.builders.DisciplineBuilder;
 import com.activity_sync.presentation.models.builders.LevelBuilder;
 import com.activity_sync.presentation.models.builders.LocationBuilder;
@@ -25,6 +25,8 @@ import java.util.List;
 import rx.Observable;
 import rx.schedulers.Schedulers;
 import rx.subjects.PublishSubject;
+
+import static org.mockito.Matchers.any;
 
 @RunWith(MockitoJUnitRunner.class)
 public class EventCreatorPresenterTests
@@ -53,7 +55,7 @@ public class EventCreatorPresenterTests
     private List<Discipline> disciplines = new ArrayList<>();
     private List<Level> levels = new ArrayList<>();
 
-    private NewEvent testedEvent;
+    private EventID eventID;
     private String description = "description";
     private Discipline discipline;
     private Level level;
@@ -84,7 +86,7 @@ public class EventCreatorPresenterTests
                 .setId(1)
                 .setLatitude(23.32)
                 .setLongitude(23.23)
-                .setName(locationName)
+                .setDescription(locationName)
                 .createLocation();
 
         Mockito.when(view.description()).thenReturn(description);
@@ -95,11 +97,9 @@ public class EventCreatorPresenterTests
         Mockito.when(view.players()).thenReturn(players);
         Mockito.when(view.isOrganizerEnrolled()).thenReturn(isOrganizerEnrolled);
 
-        Mockito.when(apiService.createEvent(
-                view.description(), view.discipline().getId(),
-                view.level().getId(), view.players(),
-                view.location(), view.date(),
-                view.isOrganizerEnrolled())).thenReturn(Observable.just(testedEvent));
+        eventID = new EventID(1);
+
+        Mockito.when(apiService.createEvent(any())).thenReturn(Observable.just(eventID));
     }
 
     @Test
@@ -158,15 +158,15 @@ public class EventCreatorPresenterTests
     }
 
     @Test
-    public void eventCreatorPresenter_confirmCreation_openEventsScreen()
+    public void eventCreatorPresenter_confirmCreation_openEventsDetailsScreen()
     {
         EventCreatorPresenter presenter = createPresenter();
         presenter.start();
 
         confirmActionEvent.onNext(this);
 
-        Mockito.verify(apiService).createEvent(description, discipline.getId(), level.getId(), players, testLocation, date, isOrganizerEnrolled);
-        Mockito.verify(navigator).openEventsScreen();
+        Mockito.verify(apiService).createEvent(any());
+        Mockito.verify(navigator).openEventDetailsScreen(eventID.getEventID());
     }
 
     @Test

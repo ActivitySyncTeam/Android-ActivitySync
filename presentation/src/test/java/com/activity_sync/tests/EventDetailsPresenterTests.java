@@ -18,8 +18,6 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import java.util.Date;
-
 import rx.Observable;
 import rx.schedulers.Schedulers;
 import rx.subjects.PublishSubject;
@@ -118,8 +116,10 @@ public class EventDetailsPresenterTests
         EventDetailsPresenter presenter = createPresenter();
         presenter.start();
 
+        googleMapAsyncEvent.onNext(this);
+
         ediEventClickEvent.onNext(this);
-        Mockito.verify(navigator).openEventUpdateScreen(1);
+        Mockito.verify(navigator).openEventUpdateScreen(event);
     }
 
     @Test
@@ -223,13 +223,13 @@ public class EventDetailsPresenterTests
                         .setName("Basketball")
                         .createDiscipline())
                 .setLocation(new LocationBuilder()
-                        .setName("Park Jordana")
+                        .setDescription("Park Jordana")
                         .setLatitude(50.061124)
                         .setLongitude(19.914123)
                         .createLocation())
                 .setNumberOfPlayers(12)
                 .setFreePlaces(7)
-                .setDate(new Date("2016/11/01"))
+                .setDate("2017-12-12 23:23:00")
                 .setLevel(new LevelBuilder()
                         .setName("medium")
                         .createLevel())

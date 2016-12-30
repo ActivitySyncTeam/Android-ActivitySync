@@ -51,7 +51,7 @@ public class EventUpdatePresenter extends EventEditorPresenterBase
 
     private void loadEditedEvent()
     {
-        view.date(event.getDate().toString());
+        view.date(event.getDate());
         view.location(event.getLocation());
         view.level(event.getLevel());
         view.discipline(event.getDiscipline());
