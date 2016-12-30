@@ -41,9 +41,6 @@ public class SettingsScreen extends ScreenWithMenu implements ISettingsView
     @Bind(R.id.notification_vibrate_checkbox)
     AppCompatCheckBox notificationVibrateCheckBox;
 
-    @Bind(R.id.location_switch)
-    SwitchCompat locationSwitch;
-
     @Bind(R.id.days_seekbar)
     AppCompatSeekBar daysSeekbar;
 
@@ -57,7 +54,6 @@ public class SettingsScreen extends ScreenWithMenu implements ISettingsView
     TextView searchRangeLabel;
 
     private PublishSubject<Boolean> enableNotificationsChange = PublishSubject.create();
-    private PublishSubject<Boolean> enableLocationChange = PublishSubject.create();
     private PublishSubject<Boolean> enableNotificationsSoundChange = PublishSubject.create();
     private PublishSubject<Boolean> enableNotificationsVibrateChange = PublishSubject.create();
     private PublishSubject<Integer> searchDaysChange = PublishSubject.create();
@@ -84,7 +80,6 @@ public class SettingsScreen extends ScreenWithMenu implements ISettingsView
         notificationSwitch.setOnCheckedChangeListener(this::notificationSwitchChanged);
         notificationSoundCheckBox.setOnCheckedChangeListener((compoundButton, b) -> enableNotificationsSoundChange.onNext(b));
         notificationVibrateCheckBox.setOnCheckedChangeListener((compoundButton, b) -> enableNotificationsVibrateChange.onNext(b));
-        locationSwitch.setOnCheckedChangeListener((compoundButton, b) -> enableLocationChange.onNext(b));
         daysSeekbar.setOnSeekBarChangeListener(new AppCompatSeekBar.OnSeekBarChangeListener()
         {
             @Override
@@ -132,7 +127,6 @@ public class SettingsScreen extends ScreenWithMenu implements ISettingsView
     {
         notificationSwitch.setChecked(permanentStorage.retrieveBoolean(IPermanentStorage.IS_NOTIFICATION_ENABLED, IPermanentStorage.IS_NOTIFICATION_ENABLED_DEFAULT));
         setNotificationCheckBoxesEnabled(notificationSwitch.isChecked());
-        locationSwitch.setChecked(permanentStorage.retrieveBoolean(IPermanentStorage.IS_LOCATION_ENABLED, IPermanentStorage.IS_LOCATION_ENABLED_DEFAULT));
         notificationVibrateCheckBox.setChecked(permanentStorage.retrieveBoolean(IPermanentStorage.IS_NOTIFICATION_VIBRATION_ENABLED, IPermanentStorage.IS_NOTIFICATION_VIBRATION_ENABLED_DEFAULT));
         notificationSoundCheckBox.setChecked(permanentStorage.retrieveBoolean(IPermanentStorage.IS_NOTIFICATION_SOUND_ENABLED, IPermanentStorage.IS_NOTIFICATION_SOUND_ENABLED_DEFAULT));
         daysSeekbar.setProgress(permanentStorage.retrieveInteger(IPermanentStorage.SEARCH_DAYS_AHEAD, IPermanentStorage.SEARCH_DAYS_AHEAD_DEFAULT));
@@ -168,11 +162,6 @@ public class SettingsScreen extends ScreenWithMenu implements ISettingsView
     public Observable<Boolean> enableNotificationsChange()
     {
         return enableNotificationsChange;
-    }
-
-    public Observable<Boolean> enableLocationChange()
-    {
-        return enableLocationChange;
     }
 
     public Observable<Boolean> enableNotificationsSoundChange()
