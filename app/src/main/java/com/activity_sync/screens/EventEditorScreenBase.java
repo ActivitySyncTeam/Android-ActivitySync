@@ -22,7 +22,7 @@ import com.activity_sync.presentation.models.Location;
 import com.activity_sync.presentation.models.builders.LocationBuilder;
 import com.activity_sync.presentation.services.IApiService;
 import com.activity_sync.presentation.services.INavigator;
-import com.activity_sync.presentation.utils.StringUtils;
+import com.activity_sync.presentation.utils.DoubleUtils;
 import com.activity_sync.presentation.views.IEventCreatorView;
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.common.GooglePlayServicesRepairableException;
@@ -148,7 +148,7 @@ abstract public class EventEditorScreenBase extends Screen implements IEventCrea
     @Override
     public String date()
     {
-        return eventDate.toString();
+        return eventDate.getText().toString();
     }
 
     @Override
@@ -173,7 +173,7 @@ abstract public class EventEditorScreenBase extends Screen implements IEventCrea
     public void location(Location location)
     {
         selectedLocation = location;
-        eventLocation.setText(location.getName());
+        eventLocation.setText(location.getDescription());
     }
 
     @Override
@@ -350,11 +350,10 @@ abstract public class EventEditorScreenBase extends Screen implements IEventCrea
                 Place place = PlaceAutocomplete.getPlace(this, data);
 
                 Location location = new LocationBuilder()
-                        .setName(place.getAddress().toString())
-                        .setLatitude(place.getLatLng().latitude)
-                        .setLongitude(place.getLatLng().longitude)
-                        .setCity(StringUtils.EMPTY)
-                        .setDescription(StringUtils.EMPTY)
+                        .setLatitude(DoubleUtils.round(place.getLatLng().latitude, 6))
+                        .setLongitude(DoubleUtils.round(place.getLatLng().longitude, 6))
+                        .setCity("Berlin")
+                        .setDescription(place.getName().toString())
                         .createLocation();
 
                 newLocationOccurred.onNext(location);
@@ -365,5 +364,11 @@ abstract public class EventEditorScreenBase extends Screen implements IEventCrea
             }
         }
         super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
+    public void prepareUpdateButtonString()
+    {
+        editorActionButton.setText(R.string.btn_update_event);
     }
 }

@@ -29,17 +29,13 @@ public class EventCreatorPresenter extends EventEditorPresenterBase
                 .observeOn(uiThread)
                 .subscribe(o -> {
 
-                    apiService.createEvent(view.description(), view.discipline().getId(),
-                            view.level().getId(), view.players(),
-                            view.location(), view.date(),
-                            view.isOrganizerEnrolled())
+                    apiService.createEvent(createEventBody())
                             .observeOn(uiThread)
-                            .subscribe(event -> {
+                            .subscribe(result -> {
 
-                                navigator.openEventsScreen();
+                                navigator.openEventDetailsScreen(result.getEventID());
 
                             }, this::handleError);
-
                 })
         );
     }

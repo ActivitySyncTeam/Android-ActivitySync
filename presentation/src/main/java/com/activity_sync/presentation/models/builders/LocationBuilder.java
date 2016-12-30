@@ -5,7 +5,6 @@ import com.activity_sync.presentation.models.Location;
 public class LocationBuilder
 {
     private int id;
-    private String name;
     private double latitude;
     private double longitude;
     private String city;
@@ -14,12 +13,6 @@ public class LocationBuilder
     public LocationBuilder setId(int id)
     {
         this.id = id;
-        return this;
-    }
-
-    public LocationBuilder setName(String name)
-    {
-        this.name = name;
         return this;
     }
 
@@ -49,6 +42,6 @@ public class LocationBuilder
 
     public Location createLocation()
     {
-        return new Location(id, name, latitude, longitude, city, description);
+        return new Location(id, latitude, longitude, city, description);
     }
 }

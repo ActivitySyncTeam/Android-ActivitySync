@@ -4,11 +4,11 @@ import com.activity_sync.presentation.models.ClientDetails;
 import com.activity_sync.presentation.models.CommentsCollection;
 import com.activity_sync.presentation.models.Discipline;
 import com.activity_sync.presentation.models.Event;
+import com.activity_sync.presentation.models.EventBody;
+import com.activity_sync.presentation.models.EventID;
 import com.activity_sync.presentation.models.EventsCollection;
 import com.activity_sync.presentation.models.Level;
-import com.activity_sync.presentation.models.Location;
 import com.activity_sync.presentation.models.LoginResponse;
-import com.activity_sync.presentation.models.NewEvent;
 import com.activity_sync.presentation.models.Participants;
 import com.activity_sync.presentation.models.RegisterResponse;
 import com.activity_sync.presentation.models.User;
@@ -29,7 +29,9 @@ public interface IApiService
 
     Observable<User> getUserID();
 
-    Observable<NewEvent> createEvent(String description, int disciplineID, int levelID, int playersNumber, Location location, String date, boolean addMe);
+    Observable<EventID> createEvent(EventBody eventBody);
+
+    Observable<EventID> updateEvent(int eventId, EventBody eventBody);
 
     Observable<EventsCollection> getAllEvents();
 

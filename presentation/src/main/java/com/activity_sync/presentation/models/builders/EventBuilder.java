@@ -6,14 +6,12 @@ import com.activity_sync.presentation.models.Level;
 import com.activity_sync.presentation.models.Location;
 import com.activity_sync.presentation.models.User;
 
-import java.util.Date;
-
 public class EventBuilder
 {
     private int id;
     private User organizer;
     private String description;
-    private Date date;
+    private String date;
     private int numberOfPlayers;
     private int freePlaces;
     private int like;
@@ -43,7 +41,7 @@ public class EventBuilder
         return this;
     }
 
-    public EventBuilder setDate(Date date)
+    public EventBuilder setDate(String date)
     {
         this.date = date;
         return this;

@@ -1,6 +1,8 @@
 package com.activity_sync.presentation.presenters;
 
 
+import com.activity_sync.presentation.models.AddressBody;
+import com.activity_sync.presentation.models.EventBody;
 import com.activity_sync.presentation.services.IApiService;
 import com.activity_sync.presentation.services.INavigator;
 import com.activity_sync.presentation.views.IEventCreatorView;
@@ -75,6 +77,17 @@ public class EventEditorPresenterBase extends Presenter<IEventCreatorView>
                     view.date(date);
                 })
         );
+    }
+
+    protected EventBody createEventBody()
+    {
+        return new EventBody(view.description(),
+                view.date(),
+                view.players(),
+                new AddressBody(view.location()),
+                view.discipline().getId(),
+                view.level().getId(),
+                view.isOrganizerEnrolled());
     }
 
     protected void handleError(Throwable error)

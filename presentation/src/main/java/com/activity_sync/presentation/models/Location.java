@@ -9,9 +9,6 @@ public class Location implements Serializable
     @SerializedName("id")
     private int id;
 
-    @SerializedName("name")
-    private String name;
-
     @SerializedName("lat")
     private double latitude;
 
@@ -24,10 +21,9 @@ public class Location implements Serializable
     @SerializedName("desc")
     private String description;
 
-    public Location(int id, String name, double latitude, double longitude, String city, String description)
+    public Location(int id, double latitude, double longitude, String city, String description)
     {
         this.id = id;
-        this.name = name;
         this.latitude = latitude;
         this.longitude = longitude;
         this.city = city;
@@ -47,16 +43,6 @@ public class Location implements Serializable
     public void setId(int id)
     {
         this.id = id;
-    }
-
-    public String getName()
-    {
-        return name;
-    }
-
-    public void setName(String name)
-    {
-        this.name = name;
     }
 
     public double getLatitude()

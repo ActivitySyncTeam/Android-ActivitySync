@@ -180,5 +180,6 @@
     <string name="txt_pls_enable_locations">Yo have to enable location permission in order to load events near you.</string>
     <string name="btn_enable_now">ENABLE NOW</string>
     <string name="txt_wait_for_location">Please wait a moment. We are checking your localization.</string>
+    <string name="btn_update_event">Update event</string>
 
 </resources>

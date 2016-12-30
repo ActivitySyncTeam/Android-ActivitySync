@@ -6,11 +6,11 @@ import com.activity_sync.presentation.models.ClientDetails;
 import com.activity_sync.presentation.models.CommentsCollection;
 import com.activity_sync.presentation.models.Discipline;
 import com.activity_sync.presentation.models.Event;
+import com.activity_sync.presentation.models.EventBody;
+import com.activity_sync.presentation.models.EventID;
 import com.activity_sync.presentation.models.EventsCollection;
 import com.activity_sync.presentation.models.Level;
-import com.activity_sync.presentation.models.Location;
 import com.activity_sync.presentation.models.LoginResponse;
-import com.activity_sync.presentation.models.NewEvent;
 import com.activity_sync.presentation.models.Participants;
 import com.activity_sync.presentation.models.RegisterResponse;
 import com.activity_sync.presentation.models.User;
@@ -22,6 +22,8 @@ import com.activity_sync.presentation.utils.StringUtils;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
 
+import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -36,7 +38,12 @@ public class ApiService implements IApiService
 
     public ApiService(String baseUrl, IPermanentStorage permanentStorage)
     {
+        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
+        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+        OkHttpClient client = new OkHttpClient.Builder().addInterceptor(interceptor).build();
+
         Retrofit retrofit = new Retrofit.Builder()
+                .client(client)
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.createWithScheduler(Schedulers.io()))
                 .addConverterFactory(GsonConverterFactory.create())
                 .baseUrl(baseUrl)
@@ -65,9 +72,15 @@ public class ApiService implements IApiService
     }
 
     @Override
-    public Observable<NewEvent> createEvent(String description, int disciplineID, int levelID, int playersNumber, Location location, String date, boolean addMe)
+    public Observable<EventID> createEvent(EventBody eventBody)
     {
-        return api.createEvent(accessTokenHeader(), description, disciplineID, levelID, playersNumber, location, date, addMe);
+        return api.createEvent(accessTokenHeader(), eventBody);
+    }
+
+    @Override
+    public Observable<EventID> updateEvent(int eventId, EventBody eventBody)
+    {
+        return api.updateEvent(accessTokenHeader(), eventId, eventBody);
     }
 
     @Override

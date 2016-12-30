@@ -1,5 +1,6 @@
 package com.activity_sync.presentation.services;
 
+import com.activity_sync.presentation.models.Event;
 import com.activity_sync.presentation.models.User;
 
 public interface INavigator
@@ -28,7 +29,7 @@ public interface INavigator
 
     void openEventCreatorScreen();
 
-    void openEventUpdateScreen(int eventId);
+    void openEventUpdateScreen(Event event);
 
     void openCommentsScreen(int eventId);
 

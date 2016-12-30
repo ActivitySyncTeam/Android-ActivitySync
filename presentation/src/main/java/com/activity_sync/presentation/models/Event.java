@@ -2,10 +2,13 @@ package com.activity_sync.presentation.models;
 
 import com.google.gson.annotations.SerializedName;
 
+import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
+
 import java.io.Serializable;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+
+import timber.log.Timber;
 
 public class Event implements Serializable
 {
@@ -19,7 +22,7 @@ public class Event implements Serializable
     private String description;
 
     @SerializedName("date")
-    private Date date;
+    private String date;
 
     @SerializedName("numberOfPlayers")
     private int numberOfPlayers;
@@ -51,7 +54,7 @@ public class Event implements Serializable
     @SerializedName("rate")
     private int rate;
 
-    public Event(int eventID, User organizer, String description, Date date, int numberOfPlayers, int freePlaces, int like, Location location, Discipline discipline, Level level, boolean isOrganizer, boolean isParticipant, boolean isCandidate,  int rate)
+    public Event(int eventID, User organizer, String description, String date, int numberOfPlayers, int freePlaces, int like, Location location, Discipline discipline, Level level, boolean isOrganizer, boolean isParticipant, boolean isCandidate,  int rate)
     {
         this.eventID = eventID;
         this.organizer = organizer;
@@ -89,7 +92,7 @@ public class Event implements Serializable
         return description;
     }
 
-    public Date getDate()
+    public String getDate()
     {
         return date;
     }
@@ -161,14 +164,18 @@ public class Event implements Serializable
 
     public String getReadableDate()
     {
-        if (date != null)
+        try
         {
-            DateFormat df = new SimpleDateFormat("MM/dd HH:mm");
-            return df.format(date);
+            DateTimeFormatter dtf = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss");
+            DateTime jodatime = dtf.parseDateTime(date);
+            DateTimeFormatter dtfOut = DateTimeFormat.forPattern("MM/dd HH:mm");
+
+            return dtfOut.print(jodatime);
         }
-        else
+        catch (Exception e)
         {
-            return "";
+            Timber.i("Error during joda date formatting");
+            return date;
         }
     }
 }

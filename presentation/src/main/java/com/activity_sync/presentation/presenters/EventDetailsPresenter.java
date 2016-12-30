@@ -71,7 +71,7 @@ public class EventDetailsPresenter extends Presenter<IEventDetailsView>
         subscriptions.add(view.editEventClick()
                 .observeOn(uiThread)
                 .subscribe(o -> {
-                    navigator.openEventUpdateScreen(eventId);
+                    navigator.openEventUpdateScreen(currentEvent);
                 })
         );
 

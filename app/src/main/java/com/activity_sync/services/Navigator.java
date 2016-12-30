@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 
+import com.activity_sync.presentation.models.Event;
 import com.activity_sync.presentation.models.User;
 import com.activity_sync.presentation.services.INavigator;
 import com.activity_sync.screens.ChangePasswordScreen;
@@ -92,10 +93,10 @@ public class Navigator implements INavigator
     }
 
     @Override
-    public void openEventUpdateScreen(int eventId)
+    public void openEventUpdateScreen(Event event)
     {
         Intent intent = new Intent(context, EventUpdateScreen.class);
-        intent.putExtra(EventUpdateScreen.EVENT_ID, eventId);
+        intent.putExtra(EventUpdateScreen.EVENT, event);
         startActivity(intent);
     }
 

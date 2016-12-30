@@ -4,17 +4,18 @@ import com.activity_sync.presentation.models.ClientDetails;
 import com.activity_sync.presentation.models.CommentsCollection;
 import com.activity_sync.presentation.models.Discipline;
 import com.activity_sync.presentation.models.Event;
+import com.activity_sync.presentation.models.EventBody;
+import com.activity_sync.presentation.models.EventID;
 import com.activity_sync.presentation.models.EventsCollection;
 import com.activity_sync.presentation.models.Level;
-import com.activity_sync.presentation.models.Location;
 import com.activity_sync.presentation.models.LoginResponse;
-import com.activity_sync.presentation.models.NewEvent;
 import com.activity_sync.presentation.models.Participants;
 import com.activity_sync.presentation.models.RegisterResponse;
 import com.activity_sync.presentation.models.User;
 
 import java.util.List;
 
+import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -42,9 +43,11 @@ public interface IActivitySyncApi
     @GET("/api/user/id")
     Observable<User> getUserID();
 
-    @FormUrlEncoded                         //TODO DO POPRAWY
     @POST("/api/event/create")
-    Observable<NewEvent> createEvent(@Header("Authorization") String accessToken, @Field("description") String description, @Field("disciplineID") int disciplineID, @Field("levelID") int levelID, @Field("numberOfPlayers") int playersNumber, @Field("address") Location location, @Field("date") String date, @Field("addMe") boolean addMe);
+    Observable<EventID> createEvent(@Header("Authorization") String accessToken, @Body EventBody eventBody);
+
+    @POST("/api/event/update/{event_id}")
+    Observable<EventID> updateEvent(@Header("Authorization") String accessToken, @Path("event_id") int eventId, @Body EventBody eventBody);
 
     @GET("/api/events")
     Observable<EventsCollection> getAllEvents();

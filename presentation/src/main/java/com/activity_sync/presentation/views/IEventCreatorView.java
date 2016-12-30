@@ -65,4 +65,6 @@ public interface IEventCreatorView extends IScreenView
     void showUpdateConfirmationDialog();
 
     Observable confirmActionClickEvent();
+
+    void prepareUpdateButtonString();
 }
