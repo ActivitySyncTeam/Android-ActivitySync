@@ -31,7 +31,6 @@ public class SettingsPresenterTest
     private SettingsPresenter settingsPresenter;
 
     private PublishSubject<Boolean> enableNotificationsChange = PublishSubject.create();
-    private PublishSubject<Boolean> enableLocationChange = PublishSubject.create();
     private PublishSubject<Boolean> enableNotificationsSoundChange = PublishSubject.create();
     private PublishSubject<Boolean> enableNotificationsVibrateChange = PublishSubject.create();
     private PublishSubject<Integer> searchDaysChange = PublishSubject.create();
@@ -49,7 +48,6 @@ public class SettingsPresenterTest
         settingsPresenter = new SettingsPresenter(view, navigator, Schedulers.immediate(), permanentStorage);
 
         when(view.enableNotificationsChange()).thenReturn(enableNotificationsChange);
-        when(view.enableLocationChange()).thenReturn(enableLocationChange);
         when(view.enableNotificationsSoundChange()).thenReturn(enableNotificationsSoundChange);
         when(view.enableNotificationsVibrateChange()).thenReturn(enableNotificationsVibrateChange);
         when(view.searchDaysChange()).thenReturn(searchDaysChange);
@@ -66,14 +64,6 @@ public class SettingsPresenterTest
         boolean toogleValue = true;
         enableNotificationsChange.onNext(toogleValue);
         verify(permanentStorage).saveBoolean(IPermanentStorage.IS_NOTIFICATION_ENABLED, toogleValue);
-    }
-
-    @Test
-    public void settingsPresenter_toggleEnableLocation_persistInPermanentStorage() throws Exception
-    {
-        boolean toogleValue = true;
-        enableLocationChange.onNext(toogleValue);
-        verify(permanentStorage).saveBoolean(IPermanentStorage.IS_LOCATION_ENABLED, toogleValue);
     }
 
     @Test

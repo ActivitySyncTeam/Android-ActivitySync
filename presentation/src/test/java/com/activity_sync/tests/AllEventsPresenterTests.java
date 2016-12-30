@@ -29,6 +29,7 @@ import rx.subjects.PublishSubject;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 
 @RunWith(MockitoJUnitRunner.class)
 public class AllEventsPresenterTests
@@ -131,7 +132,7 @@ public class AllEventsPresenterTests
         presenter.start();
 
         eventSelectedEvent.onNext(testedEvent);
-        Mockito.verify(navigator).openEventDetailsScreen(testedEvent.getId());
+        verify(navigator).openEventDetailsScreen(testedEvent.getId());
     }
 
     @Test
@@ -154,7 +155,7 @@ public class AllEventsPresenterTests
         presenter.start();
 
         enableLocationClickEvent.onNext(this);
-        Mockito.verify(view).askForPermission();
+        verify(view).askForPermission();
     }
 
     @Test

@@ -177,8 +177,7 @@ abstract public class EventsFragmentBase extends FragmentScreen implements IEven
                 if (report.getDeniedPermissionResponses().size() > 0)
                 {
                     locationsEnabled.onNext(false);
-                }
-                else
+                } else
                 {
                     locationsEnabled.onNext(true);
                 }
@@ -214,8 +213,7 @@ abstract public class EventsFragmentBase extends FragmentScreen implements IEven
         if (isVisible)
         {
             filterEventsView.setVisibility(View.VISIBLE);
-        }
-        else
+        } else
         {
             filterEventsView.setVisibility(View.GONE);
         }
@@ -301,8 +299,7 @@ abstract public class EventsFragmentBase extends FragmentScreen implements IEven
         if (dateTime == null || isDateToday(dateTime))
         {
             dayFilter.setText(R.string.txt_from_today);
-        }
-        else
+        } else
         {
             dayFilter.setText(String.format(getString(R.string.txt_filter_from), dateTime.getDayOfMonth(), dateTime.getMonthOfYear(), dateTime.getYear()));
         }
