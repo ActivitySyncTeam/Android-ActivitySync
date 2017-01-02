@@ -1,5 +1,7 @@
 package com.activity_sync.tests;
 
+import com.activity_sync.presentation.models.User;
+import com.activity_sync.presentation.models.builders.UserBuilder;
 import com.activity_sync.presentation.presenters.UserDetailsPresenter;
 import com.activity_sync.presentation.services.CurrentUser;
 import com.activity_sync.presentation.services.IApiService;
@@ -33,6 +35,8 @@ public class UserDetailsPresenterTests
     PublishSubject thumbUpClickEvent = PublishSubject.create();
     PublishSubject thumbDownClickEvent = PublishSubject.create();
     PublishSubject friendsClickEvent = PublishSubject.create();
+
+    int userId = 1;
 
     @Before
     public void setup()
@@ -164,6 +168,24 @@ public class UserDetailsPresenterTests
 
     private UserDetailsPresenter createPresenter()
     {
-        return new UserDetailsPresenter(view, apiService, Schedulers.immediate(), currentUser);
+        return new UserDetailsPresenter(view, apiService, Schedulers.immediate(), currentUser, userId);
+    }
+
+    public User createUser(int rate, boolean isFriend, boolean isCandidate)
+    {
+        return new UserBuilder()
+                .setName("Marcin")
+                .setSurname("Zielinski")
+                .setUsername("mzielu")
+                .setEmail("kmarcinzielnski@gmail.com")
+                .setRegisterDate("2015-12-12")
+                .setSignature("Randomly written text")
+                .setEvents(23)
+                .setUserId(123)
+                .setCredibility(85)
+                .setRate(rate)
+                .setFriend(isFriend)
+                .setCandidate(isCandidate)
+                .createUser();
     }
 }

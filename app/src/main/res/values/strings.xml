@@ -35,6 +35,9 @@
     <string name="txt_from_today">From today</string>
     <string name="txt_all">All</string>
     <string name="txt_filter_from" translatable="false">From %02d-%02d-%d</string>
+    <string name="txt_pls_enable_locations">Yo have to enable location permission in order to load events near you.</string>
+    <string name="btn_enable_now">ENABLE NOW</string>
+    <string name="txt_wait_for_location">Please wait a moment. We are checking your localization.</string>
 
     <!-- EventDetailsScreen strings -->
     <string name="btn_join_event">Join</string>
@@ -80,6 +83,7 @@
     <string name="txt_friends_request_sent">Friends request has been sent</string>
     <string name="txt_friends_request_turned_down">Friends request has been canceled</string>
     <string name="txt_friend_removed">User deleted from your friends</string>
+    <string name="txt_register_date">Register Date</string>
 
     <!-- ParticipantsScreen strings -->
     <string name="title_participants">Participants list</string>
@@ -170,6 +174,8 @@
     <string name="txt_create_event_confirmation_text">Are you sure you want to create this event?</string>
     <string name="txt_update_event_confirmation_title">Update event confirmation</string>
     <string name="txt_update_event_confirmation_text">Are you sure you want to update this event?</string>
+    <string name="btn_update_event">Update event</string>
+    <string name="err_choose_address">Address has not been selected</string>
 
     <!-- CommentsScreen strings -->
     <string name="title_comments">Comments</string>
@@ -177,9 +183,5 @@
     <string name="err_comment_empty">Your comment cannot be empty</string>
     <string name="txt_comment_hint">Write your comment here</string>
     <string name="btn_send">Send</string>
-    <string name="txt_pls_enable_locations">Yo have to enable location permission in order to load events near you.</string>
-    <string name="btn_enable_now">ENABLE NOW</string>
-    <string name="txt_wait_for_location">Please wait a moment. We are checking your localization.</string>
-    <string name="btn_update_event">Update event</string>
 
 </resources>

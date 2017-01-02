@@ -1,28 +1,33 @@
 package com.activity_sync.presentation.presenters;
 
 import com.activity_sync.presentation.models.User;
-import com.activity_sync.presentation.models.builders.AdditionalInfoBuilder;
-import com.activity_sync.presentation.models.builders.UserBuilder;
 import com.activity_sync.presentation.services.CurrentUser;
 import com.activity_sync.presentation.services.IApiService;
 import com.activity_sync.presentation.views.IUserDetailsView;
 
 import rx.Scheduler;
+import timber.log.Timber;
 
 public class UserDetailsPresenter extends Presenter<IUserDetailsView>
 {
+    private final static int LIKE = 1;
+    private final static int DISLIKE = -1;
+    private final static int NO_ASSESMENT = 0;
+
     private final IApiService apiService;
     private final Scheduler uiThread;
     private final CurrentUser currentUser;
+    private final int userId;
 
     private User user;
 
-    public UserDetailsPresenter(IUserDetailsView view, IApiService apiService, Scheduler uiThread, CurrentUser currentUser)
+    public UserDetailsPresenter(IUserDetailsView view, IApiService apiService, Scheduler uiThread, CurrentUser currentUser, int userId)
     {
         super(view);
         this.apiService = apiService;
         this.uiThread = uiThread;
         this.currentUser = currentUser;
+        this.userId = userId;
     }
 
     @Override
@@ -30,35 +35,40 @@ public class UserDetailsPresenter extends Presenter<IUserDetailsView>
     {
         super.start();
 
-        createUser(0, false, false);
-        view.setData(user);
-
-        if (currentUser.userId() == user.getUserId())       //TODO correct after login api configuration
-        {
-            view.thumbsAndFollowBtnVisible(false);
-        }
-        else
-        {
-            view.thumbsAndFollowBtnVisible(true);
-            view.setThumbsColor(user.getAdditionalInfo().getRate());
-            view.setFriendBtnAppearance(user);
-        }
+        apiService.getUserData(userId)
+                .observeOn(uiThread)
+                .subscribe(result -> {
+                    user = result;
+                    view.setData(result);
+                    view.thumbsAndFollowBtnVisible(true);
+                    view.setThumbsColor(user.getRate());
+                    view.setFriendBtnAppearance(user);
+                }, this::handleError);
 
         subscriptions.add(view.thumbUpClick()
                 .observeOn(uiThread)
                 .subscribe(o -> {
 
-                    if (user.getAdditionalInfo().getRate() == 1)
+                    if (user.getRate() == 1)
                     {
-                        view.setThumbsColor(0);
-                        //apicall
-                        user.setAdditionalInfo(new AdditionalInfoBuilder().setRate(0).createAdditionalInfo());
+                        apiService.rateUser(userId, NO_ASSESMENT)
+                                .observeOn(uiThread)
+                                .subscribe(result -> {
+
+                                    view.setThumbsColor(NO_ASSESMENT);
+                                    user.setRate(NO_ASSESMENT);
+
+                                }, this::handleError);
                     }
                     else
                     {
-                        view.setThumbsColor(1);
-                        //apicall
-                        user.setAdditionalInfo(new AdditionalInfoBuilder().setRate(1).createAdditionalInfo());
+                        apiService.rateUser(userId, LIKE)
+                                .observeOn(uiThread)
+                                .subscribe(result -> {
+
+                                    view.setThumbsColor(LIKE);
+                                    user.setRate(LIKE);
+                                }, this::handleError);
                     }
                 })
         );
@@ -67,17 +77,25 @@ public class UserDetailsPresenter extends Presenter<IUserDetailsView>
                 .observeOn(uiThread)
                 .subscribe(o -> {
 
-                    if (user.getAdditionalInfo().getRate() == -1)
+                    if (user.getRate() == -1)
                     {
-                        view.setThumbsColor(0);
-                        //apicall
-                        user.setAdditionalInfo(new AdditionalInfoBuilder().setRate(0).createAdditionalInfo());
+                        apiService.rateUser(userId, NO_ASSESMENT)
+                                .observeOn(uiThread)
+                                .subscribe(result -> {
+
+                                    view.setThumbsColor(NO_ASSESMENT);
+                                    user.setRate(NO_ASSESMENT);
+                                }, this::handleError);
                     }
                     else
                     {
-                        view.setThumbsColor(-1);
-                        //apicall
-                        user.setAdditionalInfo(new AdditionalInfoBuilder().setRate(-1).createAdditionalInfo());
+                        apiService.rateUser(userId, DISLIKE)
+                                .observeOn(uiThread)
+                                .subscribe(result -> {
+
+                                    view.setThumbsColor(DISLIKE);
+                                    user.setRate(DISLIKE);
+                                }, this::handleError);
                     }
                 })
         );
@@ -85,46 +103,36 @@ public class UserDetailsPresenter extends Presenter<IUserDetailsView>
         subscriptions.add(view.friendsBtnClick()
                 .observeOn(uiThread)
                 .subscribe(o -> {
-                    if (user.getAdditionalInfo().isCandidate())
+                    if (user.isCandidate())
                     {
                         view.displayFriendRequestCanceledMessage();
-                        user.setAdditionalInfo(new AdditionalInfoBuilder().setFriend(false).setCandidate(false).createAdditionalInfo());
+                        user.setCandidate(false);
+                        user.setFriend(false);
                         view.setFriendBtnAppearance(user);
 
                     }
-                    else if (user.getAdditionalInfo().isFriend())
+                    else if (user.isFriend())
                     {
                         view.displayFriendRemovedMessage();
-                        user.setAdditionalInfo(new AdditionalInfoBuilder().setFriend(false).setCandidate(false).createAdditionalInfo());
+                        user.setCandidate(false);
+                        user.setFriend(false);
                         view.setFriendBtnAppearance(user);
                     }
                     else
                     {
                         view.displayFriendRequestSentMessage();
-                        user.setAdditionalInfo(new AdditionalInfoBuilder().setFriend(false).setCandidate(true).createAdditionalInfo());
+                        user.setCandidate(true);
+                        user.setFriend(false);
                         view.setFriendBtnAppearance(user);
                     }
                 })
         );
     }
 
-    public void createUser(int rate, boolean isFriend, boolean isCandidate)
+    private void handleError(Throwable error)
     {
-        user = new UserBuilder()
-                .setName("Marcin")
-                .setSurname("Zielinski")
-                .setUsername("mzielu")
-                .setEmail("kmarcinzielnski@gmail.com")
-                .setRegisterDate("2015-12-12")
-                .setSignature("Randomly written text")
-                .setEvents(23)
-                .setUserId(123)
-                .setCredibility(85)
-                .setAdditionalInfo(new AdditionalInfoBuilder()
-                        .setRate(rate)
-                        .setFriend(isFriend)
-                        .setCandidate(isCandidate)
-                        .createAdditionalInfo())
-                .createUser();
+        error.printStackTrace();
+        Timber.d(error.getMessage());
+        view.displayDefaultError();
     }
 }

@@ -32,6 +32,10 @@ public interface IApiService
 
     Observable<User> getMyProfile();
 
+    Observable<User> getUserData(int userId);
+
+    Observable<User> rateUser(int userId, int rate);
+
     Observable<EventID> createEvent(EventBody eventBody);
 
     Observable<EventID> updateEvent(int eventId, EventBody eventBody);

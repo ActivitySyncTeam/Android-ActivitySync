@@ -171,6 +171,18 @@ public class ApiService implements IApiService
     }
 
     @Override
+    public Observable<User> getUserData(int userId)
+    {
+        return api.getUserData(accessTokenHeader(), userId);
+    }
+
+    @Override
+    public Observable<User> rateUser(int userId, int rate)
+    {
+        return api.rateUser(accessTokenHeader(), userId, rate);
+    }
+
+    @Override
     public Observable<List<Discipline>> getAvailableDisciplines()
     {
         return api.getAvailableDisciplines();

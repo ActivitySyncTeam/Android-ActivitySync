@@ -23,7 +23,7 @@ public class EventUpdatePresenter extends EventEditorPresenterBase
     {
         super.start();
 
-        view.prepareUpdateButtonString();
+        view.prepareUpdateLayout();
 
         loadEditedEvent();
 

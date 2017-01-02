@@ -33,13 +33,25 @@ public class User implements Serializable
     @SerializedName("events")
     private int events;
 
-    @SerializedName("user")
-    private AdditionalInfo additionalInfo;
+    @SerializedName("isAdmin")
+    private boolean isAdmin;
 
-    @SerializedName("credibility")          //please add credibility in api call
+    @SerializedName("isCandidate")
+    private boolean isCandidate;
+
+    @SerializedName("isFriend")
+    private boolean isFriend;
+
+    @SerializedName("rate")
+    private int rate;
+
+    @SerializedName("credibility")
     private int credibility;
 
-    public User(int userId, int id, String name, String surname, String username, String email, String registerDate, String signature, int events, AdditionalInfo additionalInfo, int credibility)
+    @SerializedName("ratesNumber")
+    private int ratesNumber;
+
+    public User(int userId, int id, String name, String surname, String username, String email, String registerDate, String signature, int events, boolean isAdmin, boolean isCandidate, boolean isFriend, int rate, int credibility, int ratesNumber)
     {
         this.userId = userId;
         this.id = id;
@@ -50,8 +62,12 @@ public class User implements Serializable
         this.registerDate = registerDate;
         this.signature = signature;
         this.events = events;
-        this.additionalInfo = additionalInfo;
+        this.isAdmin = isAdmin;
+        this.isCandidate = isCandidate;
+        this.isFriend = isFriend;
+        this.rate = rate;
         this.credibility = credibility;
+        this.ratesNumber = ratesNumber;
     }
 
     public User()
@@ -71,19 +87,9 @@ public class User implements Serializable
         }
     }
 
-    public void setUserId(int userId)
-    {
-        this.userId = userId;
-    }
-
     public String getName()
     {
         return name;
-    }
-
-    public void setName(String name)
-    {
-        this.name = name;
     }
 
     public String getSurname()
@@ -91,19 +97,9 @@ public class User implements Serializable
         return surname;
     }
 
-    public void setSurname(String surname)
-    {
-        this.surname = surname;
-    }
-
     public String getUsername()
     {
         return username;
-    }
-
-    public void setUsername(String username)
-    {
-        this.username = username;
     }
 
     public String getEmail()
@@ -111,19 +107,9 @@ public class User implements Serializable
         return email;
     }
 
-    public void setEmail(String email)
-    {
-        this.email = email;
-    }
-
     public String getRegisterDate()
     {
         return registerDate;
-    }
-
-    public void setRegisterDate(String registerDate)
-    {
-        this.registerDate = registerDate;
     }
 
     public String getSignature()
@@ -131,29 +117,29 @@ public class User implements Serializable
         return signature;
     }
 
-    public void setSignature(String signature)
-    {
-        this.signature = signature;
-    }
-
     public int getEvents()
     {
         return events;
     }
 
-    public void setEvents(int events)
+    public boolean isAdmin()
     {
-        this.events = events;
+        return isAdmin;
     }
 
-    public AdditionalInfo getAdditionalInfo()
+    public boolean isCandidate()
     {
-        return additionalInfo;
+        return isCandidate;
     }
 
-    public void setAdditionalInfo(AdditionalInfo additionalInfo)
+    public boolean isFriend()
     {
-        this.additionalInfo = additionalInfo;
+        return isFriend;
+    }
+
+    public int getRate()
+    {
+        return rate;
     }
 
     public int getCredibility()
@@ -161,8 +147,23 @@ public class User implements Serializable
         return credibility;
     }
 
-    public void setCredibility(int credibility)
+    public int getRatesNumber()
     {
-        this.credibility = credibility;
+        return ratesNumber;
+    }
+
+    public void setCandidate(boolean candidate)
+    {
+        isCandidate = candidate;
+    }
+
+    public void setFriend(boolean friend)
+    {
+        isFriend = friend;
+    }
+
+    public void setRate(int rate)
+    {
+        this.rate = rate;
     }
 }

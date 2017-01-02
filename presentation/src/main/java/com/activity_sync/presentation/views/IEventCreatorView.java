@@ -66,5 +66,7 @@ public interface IEventCreatorView extends IScreenView
 
     Observable confirmActionClickEvent();
 
-    void prepareUpdateButtonString();
+    void prepareUpdateLayout();
+
+    void showNoLocationChosenError();
 }

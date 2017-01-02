@@ -163,7 +163,7 @@ public class EventDetailsPresenter extends Presenter<IEventDetailsView>
                     }
                     else
                     {
-                        navigator.openEventDetailsScreen(currentEvent.getOrganizer().getUserId());
+                        navigator.openUserDetailsScreen(currentEvent.getOrganizer().getUserId());
                     }
                 })
         );

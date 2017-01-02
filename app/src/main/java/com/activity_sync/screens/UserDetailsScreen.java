@@ -21,6 +21,8 @@ import rx.android.view.ViewObservable;
 
 public class UserDetailsScreen extends UserBaseScreen implements IUserDetailsView
 {
+    public static final String USER_ID = "user_id";
+
     @Bind(R.id.follow_btn)
     Button followBtn;
 
@@ -40,7 +42,8 @@ public class UserDetailsScreen extends UserBaseScreen implements IUserDetailsVie
     @Override
     protected IPresenter createPresenter(Screen screen, Bundle savedInstanceState)
     {
-        return new UserDetailsPresenter(this, apiService, AndroidSchedulers.mainThread(), currentUser);
+        int userId = getIntent().getIntExtra(UserDetailsScreen.USER_ID, 0);
+        return new UserDetailsPresenter(this, apiService, AndroidSchedulers.mainThread(), currentUser, userId);
     }
 
     @Override
@@ -101,12 +104,12 @@ public class UserDetailsScreen extends UserBaseScreen implements IUserDetailsVie
     @Override
     public void setFriendBtnAppearance(User user)
     {
-        if (user.getAdditionalInfo().isFriend())
+        if (user.isFriend())
         {
             followBtn.setText(getString(R.string.btn_remove_from_friends));
             followBtn.setBackground(ContextCompat.getDrawable(this, R.drawable.selector_default_negative));
         }
-        else if (user.getAdditionalInfo().isCandidate())
+        else if (user.isCandidate())
         {
             followBtn.setText(getString(R.string.btn_cancel_friend_request));
             followBtn.setBackground(ContextCompat.getDrawable(this, R.drawable.selector_default_negative));

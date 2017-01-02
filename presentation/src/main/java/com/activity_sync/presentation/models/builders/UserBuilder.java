@@ -1,6 +1,5 @@
 package com.activity_sync.presentation.models.builders;
 
-import com.activity_sync.presentation.models.AdditionalInfo;
 import com.activity_sync.presentation.models.User;
 
 public class UserBuilder
@@ -14,8 +13,12 @@ public class UserBuilder
     private String registerDate;
     private String signature;
     private int events;
-    private AdditionalInfo additionalInfo;
+    private boolean isOrganizer;
+    private boolean isCandidate;
+    private boolean isFriend;
+    private int rate;
     private int credibility;
+    private int ratesNumber;
 
     public UserBuilder setUserId(int userId)
     {
@@ -66,20 +69,44 @@ public class UserBuilder
         return this;
     }
 
-    public UserBuilder setAdditionalInfo(AdditionalInfo additionalInfo)
-    {
-        this.additionalInfo = additionalInfo;
-        return this;
-    }
-
     public UserBuilder setCredibility(int credibility)
     {
         this.credibility = credibility;
         return this;
     }
 
+    public UserBuilder setOrganizer(boolean organizer)
+    {
+        isOrganizer = organizer;
+        return this;
+    }
+
+    public UserBuilder setCandidate(boolean candidate)
+    {
+        isCandidate = candidate;
+        return this;
+    }
+
+    public UserBuilder setFriend(boolean friend)
+    {
+        isFriend = friend;
+        return this;
+    }
+
+    public UserBuilder setRate(int rate)
+    {
+        this.rate = rate;
+        return this;
+    }
+
+    public UserBuilder setRatesNumber(int ratesNumber)
+    {
+        this.ratesNumber = ratesNumber;
+        return this;
+    }
+
     public User createUser()
     {
-        return new User(userId, id, name, surname, username, email, registerDate, signature, events, additionalInfo, credibility);
+        return new User(userId, id, name, surname, username, email, registerDate, signature, events, isOrganizer, isCandidate, isFriend, rate, credibility, ratesNumber);
     }
 }

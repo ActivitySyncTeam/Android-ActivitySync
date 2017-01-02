@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -367,8 +368,15 @@ abstract public class EventEditorScreenBase extends Screen implements IEventCrea
     }
 
     @Override
-    public void prepareUpdateButtonString()
+    public void prepareUpdateLayout()
     {
         editorActionButton.setText(R.string.btn_update_event);
+        eventCheckbox.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void showNoLocationChosenError()
+    {
+        Toast.makeText(this, R.string.err_choose_address, Toast.LENGTH_LONG).show();
     }
 }

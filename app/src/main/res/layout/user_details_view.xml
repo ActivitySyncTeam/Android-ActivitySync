@@ -216,7 +216,7 @@
                                     style="@style/EventDetailsScreenItemUpRow"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="@string/txt_registered"/>
+                                    android:text="@string/txt_register_date"/>
 
                                 <TextView
                                     android:id="@+id/tv_register_date"

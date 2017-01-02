@@ -47,6 +47,13 @@ public interface IActivitySyncApi
     @GET("/api/user/me")
     Observable<User> getMyProfile(@Header("Authorization") String accessToken);
 
+    @GET("/api/user/{user_id}")
+    Observable<User> getUserData(@Header("Authorization") String accessToken, @Path("user_id") int userId);
+
+    @FormUrlEncoded
+    @POST("/api/user/rates/update/")
+    Observable<User> rateUser(@Header("Authorization") String accessToken, @Field("userID") int userId, @Field("rate") int rate);
+
     @POST("/api/event/create")
     Observable<EventID> createEvent(@Header("Authorization") String accessToken, @Body EventBody eventBody);
 
