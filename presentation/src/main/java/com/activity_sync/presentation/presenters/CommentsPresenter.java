@@ -1,7 +1,5 @@
 package com.activity_sync.presentation.presenters;
 
-import com.activity_sync.presentation.models.Comment;
-import com.activity_sync.presentation.models.builders.CommentBuilder;
 import com.activity_sync.presentation.services.CurrentUser;
 import com.activity_sync.presentation.services.IApiService;
 import com.activity_sync.presentation.utils.StringUtils;
@@ -50,12 +48,7 @@ public class CommentsPresenter extends Presenter<ICommentsView>
                     {
                         apiService.addComment(eventId, view.comment())
                                 .observeOn(uiThread)
-                                .subscribe(result -> {
-
-                                    Comment comment = new CommentBuilder()
-                                            .setComment(view.comment())
-                                            .setName("name not returned from server")
-                                            .createComment();
+                                .subscribe(comment -> {
 
                                     view.addSingleComment(comment);
                                     view.clearComment();
