@@ -14,6 +14,7 @@ import com.activity_sync.presentation.models.RegisterResponse;
 import com.activity_sync.presentation.models.User;
 import com.activity_sync.presentation.models.body_models.EventBody;
 import com.activity_sync.presentation.models.body_models.EventIDBody;
+import com.activity_sync.presentation.models.body_models.OrganizerApprovalBody;
 
 import java.util.List;
 
@@ -71,6 +72,16 @@ public interface IActivitySyncApi
 
     @HTTP(method = "DELETE", path = "api/event/user/resign", hasBody = true)
     Observable<Participants> leaveEvent(@Header("Authorization") String accessToken, @Body EventIDBody eventID);
+
+    @HTTP(method = "DELETE", path = "api/event/user/remove", hasBody = true)
+    Observable<Participants> removeParticipant(@Header("Authorization") String accessToken, @Body OrganizerApprovalBody eventID);
+
+    @HTTP(method = "DELETE", path = "api/event/user/reject", hasBody = true)
+    Observable<Participants> rejectCandidate(@Header("Authorization") String accessToken, @Body OrganizerApprovalBody eventID);
+
+    @FormUrlEncoded
+    @POST("api/event/user/accept")
+    Observable<Participants> acceptCandidate(@Header("Authorization") String accessToken, @Field("eventID") int eventID, @Field("personID") int personID);
 
     @GET("api/event/comments/{event_id}")
     Observable<CommentsCollection> getEventComments(@Header("Authorization") String accessToken, @Path("event_id") int eventId);

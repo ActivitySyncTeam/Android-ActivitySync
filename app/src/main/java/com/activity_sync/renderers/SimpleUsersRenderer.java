@@ -38,10 +38,12 @@ public class SimpleUsersRenderer extends Renderer<User>
     @Override
     public void render()
     {
-        username.setText(String.format("%s %s", getContent().getName(), getContent().getSurname()));
+        username.setText(String.format("%s", getContent().getName()));
 
-        TextDrawable drawable = TextDrawable.builder().buildRound(String.format("%s", getContent().getName().toUpperCase().charAt(0)),
-                Color.parseColor(StringBasedColorGenerator.convertStringToColor(String.format("%s %s", getContent().getName(), getContent().getSurname()))));
+        TextDrawable drawable = TextDrawable.builder().buildRound(
+                String.format("%s", getContent().getName().toUpperCase().charAt(0)),
+                convertNameToColor(getContent().getName()));
+
         usernameImage.setImageDrawable(drawable);
     }
 
@@ -57,5 +59,10 @@ public class SimpleUsersRenderer extends Renderer<User>
         {
             return SimpleUsersRenderer.class;
         }
+    }
+
+    private int convertNameToColor(String name)
+    {
+        return Color.parseColor(StringBasedColorGenerator.convertStringToColor(String.format("%s", getContent().getName())));
     }
 }

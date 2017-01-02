@@ -1,5 +1,6 @@
 package com.activity_sync.presentation.presenters;
 
+import com.activity_sync.presentation.models.body_models.OrganizerApprovalBody;
 import com.activity_sync.presentation.services.IApiService;
 import com.activity_sync.presentation.services.INavigator;
 import com.activity_sync.presentation.views.IUsersFragmentView;
@@ -27,16 +28,31 @@ public class EventCandidatesPresenter extends UsersFragmentBasePresenter
         );
 
         subscriptions.add(view.acceptConfirmClick()
+                .observeOn(uiThread)
                 .subscribe(user -> {
-                    view.acceptSuccessMessage(user);
-                    view.removeUser(user);
+
+                    apiService.acceptCandidate(eventId, user.getUserId())
+                            .observeOn(uiThread)
+                            .subscribe(participants -> {
+
+                                view.acceptSuccessMessage(user);
+                                view.removeUser(user);
+
+                            }, this::handleError);
                 })
         );
 
         subscriptions.add(view.removeConfirmClick()
                 .subscribe(user -> {
-                    view.removeSuccessMessage(user);
-                    view.removeUser(user);
+
+                    apiService.rejectCandidate(new OrganizerApprovalBody(eventId, user.getUserId()))
+                            .observeOn(uiThread)
+                            .subscribe(participants -> {
+
+                                view.removeSuccessMessage(user);
+                                view.removeUser(user);
+
+                            }, this::handleError);
                 })
         );
     }

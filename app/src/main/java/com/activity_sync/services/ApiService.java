@@ -16,6 +16,7 @@ import com.activity_sync.presentation.models.Participants;
 import com.activity_sync.presentation.models.RegisterResponse;
 import com.activity_sync.presentation.models.User;
 import com.activity_sync.presentation.models.body_models.EventIDBody;
+import com.activity_sync.presentation.models.body_models.OrganizerApprovalBody;
 import com.activity_sync.presentation.services.IActivitySyncApi;
 import com.activity_sync.presentation.services.IApiService;
 import com.activity_sync.presentation.services.IPermanentStorage;
@@ -137,6 +138,24 @@ public class ApiService implements IApiService
     public Observable<Participants> leaveEvent(EventIDBody eventID)
     {
         return api.leaveEvent(accessTokenHeader(), eventID);
+    }
+
+    @Override
+    public Observable<Participants> acceptCandidate(int eventID, int personID)
+    {
+        return api.acceptCandidate(accessTokenHeader(), eventID, personID);
+    }
+
+    @Override
+    public Observable<Participants> removeParticipant(OrganizerApprovalBody organizerApprovalBody)
+    {
+        return api.removeParticipant(accessTokenHeader(), organizerApprovalBody);
+    }
+
+    @Override
+    public Observable<Participants> rejectCandidate(OrganizerApprovalBody organizerApprovalBody)
+    {
+        return api.rejectCandidate(accessTokenHeader(), organizerApprovalBody);
     }
 
     @Override

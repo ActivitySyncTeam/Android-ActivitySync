@@ -165,16 +165,14 @@ abstract public class UsersFragmentBase extends FragmentScreen implements IUsers
     public void removeSuccessMessage(User user)
     {
         Toast.makeText(getContext(), String.format(getContext().getString(R.string.txt_remove_success),
-                user.getName(),
-                user.getSurname()), Toast.LENGTH_LONG).show();
+                user.getName()), Toast.LENGTH_LONG).show();
     }
 
     @Override
     public void acceptSuccessMessage(User user)
     {
         Toast.makeText(getContext(), String.format(getContext().getString(R.string.txt_accept_success),
-                user.getName(),
-                user.getSurname()), Toast.LENGTH_LONG).show();
+                user.getName()), Toast.LENGTH_LONG).show();
     }
 
     @Override
@@ -210,15 +208,11 @@ abstract public class UsersFragmentBase extends FragmentScreen implements IUsers
 
         String positiveText = getString(android.R.string.ok);
         builder.setPositiveButton(positiveText, (dialog, which) ->
-        {
-            confirmClicked.onNext(user);
-        });
+                confirmClicked.onNext(user));
 
         String negativeText = getString(android.R.string.cancel);
         builder.setNegativeButton(negativeText, (dialog, which) ->
-        {
-            dialog.dismiss();
-        });
+                dialog.dismiss());
 
         AlertDialog dialog = builder.create();
         dialog.show();

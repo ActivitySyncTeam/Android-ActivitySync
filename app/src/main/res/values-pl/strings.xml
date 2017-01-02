@@ -98,10 +98,10 @@
     <string name="txt_registered">Zapisani</string>
     <string name="txt_accept_user_confirmation_text">Jesteś pewien, że chcesz zaakceptować tego użytkownika?</string>
     <string name="txt_accept_user_confirmation_title">Potwierdzenie akceptacji użytkownika</string>
-    <string name="txt_accept_success" formatted="false">%s %s został zaakceptowany</string>
+    <string name="txt_accept_success" formatted="false">%s został zaakceptowany</string>
     <string name="txt_remove_user_confirmation_text">Czy jesteś pewien, że chcesz usunąć tego użytkownika? Tej operacji nie będzie można cofnąć.</string>
     <string name="txt_remove_user_confirmation_title">Potwierdzenie usunięcia uczestnika</string>
-    <string name="txt_remove_success" formatted="false">%s %s został usunięty</string>
+    <string name="txt_remove_success" formatted="false">%s został usunięty</string>
     <string name="btn_send">Prześlij</string>
     <string name="err_comment_empty">Komentarz nie może być pusty</string>
     <string name="txt_comment_author" formatted="false">%s napisał:</string>

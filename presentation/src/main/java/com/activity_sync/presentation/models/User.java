@@ -9,6 +9,9 @@ public class User implements Serializable
     @SerializedName("userID")
     private int userId;
 
+    @SerializedName("id")
+    private int id;
+
     @SerializedName("name")
     private String name;
 
@@ -36,9 +39,10 @@ public class User implements Serializable
     @SerializedName("credibility")          //please add credibility in api call
     private int credibility;
 
-    public User(int userId, String name, String surname, String username, String email, String registerDate, String signature, int events, AdditionalInfo additionalInfo, int credibility)
+    public User(int userId, int id, String name, String surname, String username, String email, String registerDate, String signature, int events, AdditionalInfo additionalInfo, int credibility)
     {
         this.userId = userId;
+        this.id = id;
         this.name = name;
         this.surname = surname;
         this.username = username;
@@ -57,7 +61,14 @@ public class User implements Serializable
 
     public int getUserId()
     {
-        return userId;
+        if (userId == 0)
+        {
+            return id;
+        }
+        else
+        {
+            return userId;
+        }
     }
 
     public void setUserId(int userId)

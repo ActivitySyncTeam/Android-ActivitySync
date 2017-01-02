@@ -6,6 +6,7 @@ import com.activity_sync.presentation.models.User;
 public class UserBuilder
 {
     private int userId;
+    private int id;
     private String name;
     private String surname;
     private String username;
@@ -19,6 +20,7 @@ public class UserBuilder
     public UserBuilder setUserId(int userId)
     {
         this.userId = userId;
+        this.id = userId;
         return this;
     }
 
@@ -78,6 +80,6 @@ public class UserBuilder
 
     public User createUser()
     {
-        return new User(userId, name, surname, username, email, registerDate, signature, events, additionalInfo, credibility);
+        return new User(userId, id, name, surname, username, email, registerDate, signature, events, additionalInfo, credibility);
     }
 }

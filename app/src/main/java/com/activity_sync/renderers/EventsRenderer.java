@@ -46,14 +46,7 @@ public class EventsRenderer extends Renderer<Event>
                     getContent().getOrganizer().getSurname()));
         }
 
-        if (getContent().getLocation().getDescription() == null)
-        {
-            eventLocation.setText("not returned");
-        }
-        else
-        {
-            eventLocation.setText(getContent().getLocation().getDescription());
-        }
+        eventLocation.setText(getContent().getLocation().getDescription());
 
         eventDate.setText(getContent().getReadableDate());
         eventDiscipline.setText(getContent().getDiscipline().getName());

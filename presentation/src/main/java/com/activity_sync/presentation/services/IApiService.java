@@ -5,7 +5,6 @@ import com.activity_sync.presentation.models.Comment;
 import com.activity_sync.presentation.models.CommentsCollection;
 import com.activity_sync.presentation.models.Discipline;
 import com.activity_sync.presentation.models.Event;
-import com.activity_sync.presentation.models.body_models.EventBody;
 import com.activity_sync.presentation.models.EventID;
 import com.activity_sync.presentation.models.EventsCollection;
 import com.activity_sync.presentation.models.Level;
@@ -13,7 +12,9 @@ import com.activity_sync.presentation.models.LoginResponse;
 import com.activity_sync.presentation.models.Participants;
 import com.activity_sync.presentation.models.RegisterResponse;
 import com.activity_sync.presentation.models.User;
+import com.activity_sync.presentation.models.body_models.EventBody;
 import com.activity_sync.presentation.models.body_models.EventIDBody;
+import com.activity_sync.presentation.models.body_models.OrganizerApprovalBody;
 
 import java.util.List;
 
@@ -52,6 +53,12 @@ public interface IApiService
     Observable<Participants> cancelEventJoinRequest(EventIDBody eventID);
 
     Observable<Participants> leaveEvent(EventIDBody eventID);
+
+    Observable<Participants> acceptCandidate(int eventID, int personID);
+
+    Observable<Participants> removeParticipant(OrganizerApprovalBody organizerApprovalBody);
+
+    Observable<Participants> rejectCandidate(OrganizerApprovalBody organizerApprovalBody);
 
     Observable<List<Discipline>> getAvailableDisciplines();
 

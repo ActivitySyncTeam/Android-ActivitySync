@@ -90,8 +90,8 @@
     <string name="txt_remove_user_confirmation_title">Remove user confirmation</string>
     <string name="txt_accept_user_confirmation_text">Are you sure you want to add this user?</string>
     <string name="txt_accept_user_confirmation_title">Accept request confirmation</string>
-    <string name="txt_remove_success" formatted="false">%s %s has been removed from this list</string>
-    <string name="txt_accept_success" formatted="false">%s %s request has been accepted</string>
+    <string name="txt_remove_success" formatted="false">%s has been removed from this list</string>
+    <string name="txt_accept_success" formatted="false">%s request has been accepted</string>
 
     <!-- FriendsScreen strings -->
     <string name="title_friends">Friends list</string>
