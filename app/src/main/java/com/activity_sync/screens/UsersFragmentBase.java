@@ -12,6 +12,7 @@ import com.activity_sync.App;
 import com.activity_sync.R;
 import com.activity_sync.presentation.action_listeners.IUserActionListener;
 import com.activity_sync.presentation.models.User;
+import com.activity_sync.presentation.services.CurrentUser;
 import com.activity_sync.presentation.services.IApiService;
 import com.activity_sync.presentation.services.INavigator;
 import com.activity_sync.presentation.views.IUsersFragmentView;
@@ -37,6 +38,9 @@ abstract public class UsersFragmentBase extends FragmentScreen implements IUsers
 
     @Inject
     IApiService apiService;
+
+    @Inject
+    CurrentUser currentUser;
 
     @Bind(R.id.participants_refresh)
     SwipeRefreshLayout participantsRefreshLayout;

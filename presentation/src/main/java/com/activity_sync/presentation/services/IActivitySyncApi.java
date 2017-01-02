@@ -7,6 +7,7 @@ import com.activity_sync.presentation.models.Discipline;
 import com.activity_sync.presentation.models.Event;
 import com.activity_sync.presentation.models.EventID;
 import com.activity_sync.presentation.models.EventsCollection;
+import com.activity_sync.presentation.models.Friends;
 import com.activity_sync.presentation.models.Level;
 import com.activity_sync.presentation.models.LoginResponse;
 import com.activity_sync.presentation.models.Participants;
@@ -15,6 +16,7 @@ import com.activity_sync.presentation.models.User;
 import com.activity_sync.presentation.models.body_models.EventBody;
 import com.activity_sync.presentation.models.body_models.EventIDBody;
 import com.activity_sync.presentation.models.body_models.OrganizerApprovalBody;
+import com.activity_sync.presentation.models.body_models.UserIDBody;
 
 import java.util.List;
 
@@ -63,6 +65,9 @@ public interface IActivitySyncApi
     @GET("/api/events")
     Observable<EventsCollection> getAllEvents();
 
+    @GET("/api/myEvents")
+    Observable<EventsCollection> getMyEvents(@Header("Authorization") String accessToken);
+
     @GET("api/event/{event_id}")
     Observable<Event> getEventDetails(@Header("Authorization") String accessToken, @Path("event_id") int eventId);
 
@@ -83,6 +88,9 @@ public interface IActivitySyncApi
     @HTTP(method = "DELETE", path = "api/event/user/remove", hasBody = true)
     Observable<Participants> removeParticipant(@Header("Authorization") String accessToken, @Body OrganizerApprovalBody eventID);
 
+    @HTTP(method = "DELETE", path = "api/event/delete/{event_id}", hasBody = true)
+    Observable<Void> deleteEvent(@Header("Authorization") String accessToken, @Path("event_id") int eventId);
+
     @HTTP(method = "DELETE", path = "api/event/user/reject", hasBody = true)
     Observable<Participants> rejectCandidate(@Header("Authorization") String accessToken, @Body OrganizerApprovalBody eventID);
 
@@ -99,6 +107,27 @@ public interface IActivitySyncApi
 
     @GET("api/event/persons/{event_id}")
     Observable<Participants> getEventParticipants(@Header("Authorization") String accessToken, @Path("event_id") int eventId);
+
+    @GET("api/user/persons/{user_id}")
+    Observable<Friends> getFriends(@Header("Authorization") String accessToken, @Path("user_id") int userId);
+
+    @HTTP(method = "DELETE", path = "api/user/user/remove", hasBody = true)
+    Observable<Void> deleteFriend(@Header("Authorization") String accessToken, @Body UserIDBody userIDBody);
+
+    @HTTP(method = "DELETE", path = "api/user/user/reject", hasBody = true)
+    Observable<Void> rejectFriendRequest(@Header("Authorization") String accessToken, @Body UserIDBody userIDBody);
+
+    @FormUrlEncoded
+    @POST("api/user/user/accept")
+    Observable<Friends> acceptFriendInvitation(@Header("Authorization") String accessToken, @Field("userID") int userID);
+
+    @FormUrlEncoded
+    @POST("api/user/user/join")
+    Observable<Friends> sendFriendRequest(@Header("Authorization") String accessToken, @Field("userID") int userID);
+
+    @FormUrlEncoded
+    @POST("api/user/user/cancel")
+    Observable<Friends> cancelFriendInvitation(@Header("Authorization") String accessToken, @Field("userID") int userID);
 
     @GET("/api/disciplines")
     Observable<List<Discipline>> getAvailableDisciplines();

@@ -7,6 +7,7 @@ import com.activity_sync.presentation.models.Comment;
 import com.activity_sync.presentation.models.CommentsCollection;
 import com.activity_sync.presentation.models.Discipline;
 import com.activity_sync.presentation.models.Event;
+import com.activity_sync.presentation.models.Friends;
 import com.activity_sync.presentation.models.body_models.EventBody;
 import com.activity_sync.presentation.models.EventID;
 import com.activity_sync.presentation.models.EventsCollection;
@@ -17,6 +18,7 @@ import com.activity_sync.presentation.models.RegisterResponse;
 import com.activity_sync.presentation.models.User;
 import com.activity_sync.presentation.models.body_models.EventIDBody;
 import com.activity_sync.presentation.models.body_models.OrganizerApprovalBody;
+import com.activity_sync.presentation.models.body_models.UserIDBody;
 import com.activity_sync.presentation.services.IActivitySyncApi;
 import com.activity_sync.presentation.services.IApiService;
 import com.activity_sync.presentation.services.IPermanentStorage;
@@ -93,6 +95,12 @@ public class ApiService implements IApiService
     }
 
     @Override
+    public Observable<EventsCollection> getMyEvents()
+    {
+        return api.getMyEvents(accessTokenHeader());
+    }
+
+    @Override
     public Observable<Event> getEventDetails(int eventId)
     {
         return api.getEventDetails(accessTokenHeader(), eventId);
@@ -114,6 +122,12 @@ public class ApiService implements IApiService
     public Observable<Participants> getEventParticipants(int eventId)
     {
         return api.getEventParticipants(accessTokenHeader(), eventId);
+    }
+
+    @Override
+    public Observable<Friends> getFriends(int userId)
+    {
+        return api.getFriends(accessTokenHeader(), userId);
     }
 
     @Override
@@ -141,6 +155,12 @@ public class ApiService implements IApiService
     }
 
     @Override
+    public Observable<Void> deleteEvent(int eventId)
+    {
+        return api.deleteEvent(accessTokenHeader(), eventId);
+    }
+
+    @Override
     public Observable<Participants> acceptCandidate(int eventID, int personID)
     {
         return api.acceptCandidate(accessTokenHeader(), eventID, personID);
@@ -156,6 +176,36 @@ public class ApiService implements IApiService
     public Observable<Participants> rejectCandidate(OrganizerApprovalBody organizerApprovalBody)
     {
         return api.rejectCandidate(accessTokenHeader(), organizerApprovalBody);
+    }
+
+    @Override
+    public Observable<Void> deleteFriend(UserIDBody userIDBody)
+    {
+        return api.deleteFriend(accessTokenHeader(), userIDBody);
+    }
+
+    @Override
+    public Observable<Void> rejectFriendRequest(UserIDBody userIDBody)
+    {
+        return api.rejectFriendRequest(accessTokenHeader(), userIDBody);
+    }
+
+    @Override
+    public Observable<Friends> acceptFriendInvitation(int userID)
+    {
+        return api.acceptFriendInvitation(accessTokenHeader(), userID);
+    }
+
+    @Override
+    public Observable<Friends> sendFriendRequest(int userID)
+    {
+        return api.sendFriendRequest(accessTokenHeader(), userID);
+    }
+
+    @Override
+    public Observable<Friends> cancelFriendInvitation(int userID)
+    {
+        return api.cancelFriendInvitation(accessTokenHeader(), userID);
     }
 
     @Override

@@ -19,7 +19,7 @@ public class DeclinedUsersPresenter extends UsersFragmentBasePresenter
     }
 
     @Override
-    void loadParticipants()
+    void loadUsers()
     {
         List<User> users = new ArrayList<>();
 

@@ -27,6 +27,6 @@ public class AddedFriendsFragment extends UsersFragmentBase implements IUserActi
     @Override
     protected IPresenter createPresenter(FragmentScreen screen, Bundle savedInstanceState)
     {
-        return new AddedFriendsPresenter(this, navigator, AndroidSchedulers.mainThread(), apiService);
+        return new AddedFriendsPresenter(this, navigator, AndroidSchedulers.mainThread(), apiService, currentUser);
     }
 }

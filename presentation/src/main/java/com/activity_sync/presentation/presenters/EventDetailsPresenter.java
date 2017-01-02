@@ -149,6 +149,15 @@ public class EventDetailsPresenter extends Presenter<IEventDetailsView>
         subscriptions.add(view.cancelEventConfirmClick()
                 .observeOn(uiThread)
                 .subscribe(o -> {
+
+                    apiService.deleteEvent(eventId)
+                            .observeOn(uiThread)
+                            .subscribe(result -> {
+
+                                navigator.openEventsScreen();
+
+                            }, this::handleError);
+
                     navigator.openEventsScreen();
                 })
         );

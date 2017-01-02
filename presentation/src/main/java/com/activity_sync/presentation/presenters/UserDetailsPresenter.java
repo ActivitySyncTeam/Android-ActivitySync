@@ -1,6 +1,7 @@
 package com.activity_sync.presentation.presenters;
 
 import com.activity_sync.presentation.models.User;
+import com.activity_sync.presentation.models.body_models.UserIDBody;
 import com.activity_sync.presentation.services.CurrentUser;
 import com.activity_sync.presentation.services.IApiService;
 import com.activity_sync.presentation.views.IUserDetailsView;
@@ -105,25 +106,42 @@ public class UserDetailsPresenter extends Presenter<IUserDetailsView>
                 .subscribe(o -> {
                     if (user.isCandidate())
                     {
-                        view.displayFriendRequestCanceledMessage();
-                        user.setCandidate(false);
-                        user.setFriend(false);
-                        view.setFriendBtnAppearance(user);
+                        apiService.cancelFriendInvitation(user.getUserId())
+                                .observeOn(uiThread)
+                                .subscribe(friends -> {
 
+                                    view.displayFriendRequestCanceledMessage();
+                                    user.setCandidate(false);
+                                    user.setFriend(false);
+                                    view.setFriendBtnAppearance(user);
+
+                                }, this::handleError);
                     }
                     else if (user.isFriend())
                     {
-                        view.displayFriendRemovedMessage();
-                        user.setCandidate(false);
-                        user.setFriend(false);
-                        view.setFriendBtnAppearance(user);
+                        apiService.deleteFriend(new UserIDBody(user.getUserId()))
+                                .observeOn(uiThread)
+                                .subscribe(friends -> {
+
+                                    view.displayFriendRemovedMessage();
+                                    user.setCandidate(false);
+                                    user.setFriend(false);
+                                    view.setFriendBtnAppearance(user);
+
+                                }, this::handleError);
                     }
                     else
                     {
-                        view.displayFriendRequestSentMessage();
-                        user.setCandidate(true);
-                        user.setFriend(false);
-                        view.setFriendBtnAppearance(user);
+                        apiService.sendFriendRequest(user.getUserId())
+                                .observeOn(uiThread)
+                                .subscribe(friends -> {
+
+                                    view.displayFriendRequestSentMessage();
+                                    user.setCandidate(true);
+                                    user.setFriend(false);
+                                    view.setFriendBtnAppearance(user);
+
+                                }, this::handleError);
                     }
                 })
         );

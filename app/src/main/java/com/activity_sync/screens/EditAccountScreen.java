@@ -57,13 +57,12 @@ public class EditAccountScreen extends Screen implements IEditAccountView
     TextInputLayout passwordLayout;
 
     public static final String USER_DETAILS = "user_details";
-    private User user;
 
     @Override
     protected IPresenter createPresenter(Screen screen, Bundle savedInstanceState)
     {
-        this.user = (User) getIntent().getSerializableExtra(USER_DETAILS);
-        return new EditAccountPresenter(this, AndroidSchedulers.mainThread());
+        User user = (User) getIntent().getSerializableExtra(USER_DETAILS);
+        return new EditAccountPresenter(this, AndroidSchedulers.mainThread(), user);
     }
 
     @Override
@@ -80,17 +79,7 @@ public class EditAccountScreen extends Screen implements IEditAccountView
         super.onCreate(savedInstanceState);
 
         prepareEditTexts();
-        setUserUpdateDetails();
         setTitle(R.string.title_edit_account);
-    }
-
-    private void setUserUpdateDetails()
-    {
-        firstNameEditText.setText(user.getName());
-        lastNameEditText.setText(user.getSurname());
-        userNameTextView.setText(user.getUsername());
-        emailEditText.setText(user.getEmail());
-        signatureEditText.setText(user.getSignature());
     }
 
     private void prepareEditTexts()
@@ -242,6 +231,16 @@ public class EditAccountScreen extends Screen implements IEditAccountView
     public void close()
     {
         this.finish();
+    }
+
+    @Override
+    public void setUserUpdateDetails(User user)
+    {
+        firstNameEditText.setText(user.getName());
+        lastNameEditText.setText(user.getSurname());
+        userNameTextView.setText(user.getUsername());
+        emailEditText.setText(user.getEmail());
+        signatureEditText.setText(user.getSignature());
     }
 
     @Override

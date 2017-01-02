@@ -39,7 +39,7 @@ public class RegisteredUsersPresenter extends UsersFragmentBasePresenter
     }
 
     @Override
-    void loadParticipants()
+    void loadUsers()
     {
         apiService.getEventParticipants(eventId)
                 .observeOn(uiThread)
