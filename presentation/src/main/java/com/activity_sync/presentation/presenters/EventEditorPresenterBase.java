@@ -1,8 +1,8 @@
 package com.activity_sync.presentation.presenters;
 
 
-import com.activity_sync.presentation.models.AddressBody;
-import com.activity_sync.presentation.models.EventBody;
+import com.activity_sync.presentation.models.body_models.AddressBody;
+import com.activity_sync.presentation.models.body_models.EventBody;
 import com.activity_sync.presentation.services.IApiService;
 import com.activity_sync.presentation.services.INavigator;
 import com.activity_sync.presentation.views.IEventCreatorView;

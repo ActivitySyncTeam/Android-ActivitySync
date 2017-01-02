@@ -105,7 +105,6 @@ public class EventDetailsScreen extends Screen implements IEventDetailsView, OnM
 
     private PublishSubject joinEventConfirmed = PublishSubject.create();
     private PublishSubject leaveEventConfirmed = PublishSubject.create();
-    private PublishSubject editEventConfirmed = PublishSubject.create();
     private PublishSubject cancelEventConfirmed = PublishSubject.create();
     private PublishSubject googleMapReadyEvent = PublishSubject.create();
 

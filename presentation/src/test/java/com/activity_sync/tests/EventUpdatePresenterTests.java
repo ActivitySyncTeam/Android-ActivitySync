@@ -1,8 +1,8 @@
 package com.activity_sync.tests;
 
-import com.activity_sync.presentation.models.AddressBody;
+import com.activity_sync.presentation.models.body_models.AddressBody;
 import com.activity_sync.presentation.models.Event;
-import com.activity_sync.presentation.models.EventBody;
+import com.activity_sync.presentation.models.body_models.EventBody;
 import com.activity_sync.presentation.models.EventID;
 import com.activity_sync.presentation.models.builders.EventBuilder;
 import com.activity_sync.presentation.presenters.EventUpdatePresenter;

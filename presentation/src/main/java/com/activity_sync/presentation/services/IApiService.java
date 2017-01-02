@@ -1,6 +1,7 @@
 package com.activity_sync.presentation.services;
 
 import com.activity_sync.presentation.models.ClientDetails;
+import com.activity_sync.presentation.models.Comment;
 import com.activity_sync.presentation.models.CommentsCollection;
 import com.activity_sync.presentation.models.Discipline;
 import com.activity_sync.presentation.models.Event;
@@ -40,7 +41,7 @@ public interface IApiService
 
     Observable<CommentsCollection> getEventComments(int eventId);
 
-    Observable<Void> addComment(int eventId, String comment);
+    Observable<Comment> addComment(int eventId, String comment);
 
     Observable<Participants> getEventParticipants(int eventId);
 

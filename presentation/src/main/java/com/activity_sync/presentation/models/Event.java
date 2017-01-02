@@ -122,6 +122,11 @@ public class Event implements Serializable
         return freePlaces;
     }
 
+    public void setFreePlaces(int freePlaces)
+    {
+        this.freePlaces = freePlaces;
+    }
+
     public int getLike()
     {
         return like;
@@ -145,11 +150,6 @@ public class Event implements Serializable
     public int getRate()
     {
         return rate;
-    }
-
-    public void setOrganizer(boolean organizer)
-    {
-        isOrganizer = organizer;
     }
 
     public void setParticipant(boolean participant)

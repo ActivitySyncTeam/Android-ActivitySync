@@ -1,6 +1,7 @@
 package com.activity_sync.presentation.presenters;
 
 import com.activity_sync.presentation.models.Event;
+import com.activity_sync.presentation.models.body_models.EventIDBody;
 import com.activity_sync.presentation.services.IApiService;
 import com.activity_sync.presentation.services.INavigator;
 import com.activity_sync.presentation.views.IEventDetailsView;
@@ -43,14 +44,13 @@ public class EventDetailsPresenter extends Presenter<IEventDetailsView>
                                 currentEvent = event;
 
                             }, this::handleError);
-
                 })
         );
 
         subscriptions.add(view.joinLeaveEventClick()
                 .observeOn(uiThread)
                 .subscribe(o -> {
-                    if (currentEvent.isParticipant())
+                    if (isCandidateOrParticpant())
                     {
                         view.showLeaveConfirmationDialog();
                     }
@@ -87,6 +87,8 @@ public class EventDetailsPresenter extends Presenter<IEventDetailsView>
 
                                     view.showEnrollMessage();
                                     currentEvent.setParticipant(true);
+                                    currentEvent.setFreePlaces(currentEvent.getFreePlaces() - 1);
+                                    view.setEventData(currentEvent);
                                     view.setOrganizerParticipantView(currentEvent);
 
                                 }, this::handleError);
@@ -112,20 +114,22 @@ public class EventDetailsPresenter extends Presenter<IEventDetailsView>
 
                     if (currentEvent.isParticipant())
                     {
-                        apiService.leaveEvent(eventId)
+                        apiService.leaveEvent(new EventIDBody(eventId))
                                 .observeOn(uiThread)
                                 .subscribe(participants -> {
 
                                     view.showLeaveEventMessage();
                                     currentEvent.setCandidate(false);
                                     currentEvent.setParticipant(false);
+                                    currentEvent.setFreePlaces(currentEvent.getFreePlaces() + 1);
+                                    view.setEventData(currentEvent);
                                     view.setOrganizerParticipantView(currentEvent);
 
                                 }, this::handleError);
                     }
                     else
                     {
-                        apiService.cancelEventJoinRequest(eventId)
+                        apiService.cancelEventJoinRequest(new EventIDBody(eventId))
                                 .observeOn(uiThread)
                                 .subscribe(participants -> {
 
@@ -173,6 +177,26 @@ public class EventDetailsPresenter extends Presenter<IEventDetailsView>
                     }
                 })
         );
+    }
+
+    @Override
+    public void resume()
+    {
+        super.resume();
+
+        apiService.getEventDetails(eventId)
+                .observeOn(uiThread)
+                .subscribe(event -> {
+
+                    view.setEventData(event);
+                    currentEvent = event;
+
+                }, this::handleError);
+    }
+
+    private boolean isCandidateOrParticpant()
+    {
+        return currentEvent.isParticipant() || currentEvent.isCandidate();
     }
 
     private void handleError(Throwable error)

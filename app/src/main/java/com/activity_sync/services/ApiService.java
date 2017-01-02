@@ -3,6 +3,7 @@ package com.activity_sync.services;
 import android.util.Base64;
 
 import com.activity_sync.presentation.models.ClientDetails;
+import com.activity_sync.presentation.models.Comment;
 import com.activity_sync.presentation.models.CommentsCollection;
 import com.activity_sync.presentation.models.Discipline;
 import com.activity_sync.presentation.models.Event;
@@ -103,7 +104,7 @@ public class ApiService implements IApiService
     }
 
     @Override
-    public Observable<Void> addComment(int eventId, String comment)
+    public Observable<Comment> addComment(int eventId, String comment)
     {
         return api.addComment(accessTokenHeader(), eventId, comment);
     }

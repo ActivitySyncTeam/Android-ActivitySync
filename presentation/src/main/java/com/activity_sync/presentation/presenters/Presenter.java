@@ -48,6 +48,15 @@ public class Presenter<TView> implements IPresenter
         this.subscriptions.clear();
     }
 
+    @Override
+    public void resume()
+    {
+        if (this.childPresenter != null)
+        {
+            this.childPresenter.resume();
+        }
+    }
+
     protected void runOnStartup(Action1 action)
     {
         if (this.started)

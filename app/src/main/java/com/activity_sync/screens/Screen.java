@@ -73,6 +73,16 @@ public abstract class Screen extends BaseActivity implements IScreenView
     }
 
     @Override
+    protected void onResume()
+    {
+        super.onResume();
+        if (presenter != null)
+        {
+            this.presenter.resume();
+        }
+    }
+
+    @Override
     protected void onStop()
     {
         super.onStop();
