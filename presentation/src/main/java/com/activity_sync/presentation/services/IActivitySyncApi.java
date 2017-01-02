@@ -16,6 +16,7 @@ import com.activity_sync.presentation.models.User;
 import java.util.List;
 
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -54,6 +55,22 @@ public interface IActivitySyncApi
 
     @GET("api/event/{event_id}")
     Observable<Event> getEventDetails(@Header("Authorization") String accessToken, @Path("event_id") int eventId);
+
+    @FormUrlEncoded
+    @POST("api/event/user/join")
+    Observable<Participants> joinEvent(@Header("Authorization") String accessToken, @Field("eventID") int eventID);
+
+    @FormUrlEncoded
+    @POST("api/event/user/joinAdmin")
+    Observable<Participants> joinEventAsAdmin(@Header("Authorization") String accessToken, @Field("eventID") int eventID);
+
+    @FormUrlEncoded
+    @DELETE("api/event/user/cancel")
+    Observable<Participants> cancelEventJoinRequest(@Header("Authorization") String accessToken, @Field("eventID") int eventID);
+
+    @FormUrlEncoded
+    @DELETE("api/event/user/resign")
+    Observable<Participants> leaveEvent(@Header("Authorization") String accessToken, @Field("eventID") int eventID);
 
     @GET("api/event/comments/{event_id}")
     Observable<CommentsCollection> getEventComments(@Header("Authorization") String accessToken, @Path("event_id") int eventId);

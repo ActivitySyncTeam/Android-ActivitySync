@@ -43,6 +43,14 @@ public interface IApiService
 
     Observable<Participants> getEventParticipants(int eventId);
 
+    Observable<Participants> joinEvent(int eventID);
+
+    Observable<Participants> joinEventAsAdmin(int eventID);
+
+    Observable<Participants> cancelEventJoinRequest(int eventID);
+
+    Observable<Participants> leaveEvent(int eventID);
+
     Observable<List<Discipline>> getAvailableDisciplines();
 
     Observable<List<Level>> getAvailableLevels();

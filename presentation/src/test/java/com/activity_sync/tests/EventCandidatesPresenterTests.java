@@ -2,7 +2,7 @@ package com.activity_sync.tests;
 
 import com.activity_sync.presentation.models.Participants;
 import com.activity_sync.presentation.models.User;
-import com.activity_sync.presentation.models.builders.ParticpantsBuilder;
+import com.activity_sync.presentation.models.builders.ParticipantsBuilder;
 import com.activity_sync.presentation.models.builders.UserBuilder;
 import com.activity_sync.presentation.presenters.EventCandidatesPresenter;
 
@@ -40,7 +40,7 @@ public class EventCandidatesPresenterTests extends ParticipantsBasePresenterTest
         Mockito.when(view.removeEventClick()).thenReturn(removeEventClick);
 
         candidates.add(new UserBuilder().createUser());
-        participants = new ParticpantsBuilder().setCandidates(candidates).create();
+        participants = new ParticipantsBuilder().setCandidates(candidates).create();
 
         Mockito.when(apiService.getEventParticipants(eventId)).thenReturn(Observable.just(participants));
     }

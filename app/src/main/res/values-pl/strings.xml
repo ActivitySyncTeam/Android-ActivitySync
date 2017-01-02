@@ -143,9 +143,6 @@
     <string name="txt_wait_for_location">Prosimy o chwilę cierpliwości. Szukanie lokazlizacji w toku...</string>
     <string name="txt_all">Wszystko</string>
     <string name="txt_from_today">Od dzisiaj</string>
-    <string name="title_change_password">Zmień hasło</string>
-    <string name="title_edit_account">Edytuj konto</string>
-    <string name="title_my_profile">Mój profil</string>
     <string name="pref_cat_account">Konto użytkownika</string>
     <string name="btn_event_details_screen_comments">KOMENTARZE</string>
 

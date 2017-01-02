@@ -5,6 +5,7 @@ import com.activity_sync.presentation.services.INavigator;
 import com.activity_sync.presentation.views.IUsersFragmentView;
 
 import rx.Scheduler;
+import timber.log.Timber;
 
 abstract public class UsersFragmentBasePresenter extends Presenter<IUsersFragmentView>
 {
@@ -54,4 +55,11 @@ abstract public class UsersFragmentBasePresenter extends Presenter<IUsersFragmen
     }
 
     abstract void loadParticipants();
+
+    protected void handleError(Throwable error)
+    {
+        error.printStackTrace();
+        Timber.d(error.getMessage());
+        view.refreshingVisible(false);
+    }
 }

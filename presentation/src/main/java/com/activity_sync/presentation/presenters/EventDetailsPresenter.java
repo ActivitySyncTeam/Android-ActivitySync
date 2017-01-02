@@ -79,12 +79,30 @@ public class EventDetailsPresenter extends Presenter<IEventDetailsView>
                 .observeOn(uiThread)
                 .subscribe(o -> {
 
-                    view.showEnrollMessage();
-                    currentEvent.setCandidate(false); // delete when api provided
-                    currentEvent.setParticipant(true);
-                    currentEvent.setOrganizer(true);
+                    if (currentEvent.isOrganizer())
+                    {
+                        apiService.joinEventAsAdmin(eventId)
+                                .observeOn(uiThread)
+                                .subscribe(participants -> {
 
-                    view.setOrganizerParticipantView(currentEvent);
+                                    view.showEnrollMessage();
+                                    currentEvent.setParticipant(true);
+                                    view.setOrganizerParticipantView(currentEvent);
+
+                                }, this::handleError);
+                    }
+                    else
+                    {
+                        apiService.joinEvent(eventId)
+                                .observeOn(uiThread)
+                                .subscribe(participants -> {
+
+                                    view.showEnrollMessage();
+                                    currentEvent.setCandidate(true);
+                                    view.setOrganizerParticipantView(currentEvent);
+
+                                }, this::handleError);
+                    }
                 })
         );
 
@@ -92,12 +110,32 @@ public class EventDetailsPresenter extends Presenter<IEventDetailsView>
                 .observeOn(uiThread)
                 .subscribe(o -> {
 
-                    view.showLeaveEventMessage();
-                    currentEvent.setCandidate(false); // delete when api provided
-                    currentEvent.setParticipant(false);
-                    currentEvent.setOrganizer(true);
+                    if (currentEvent.isParticipant())
+                    {
+                        apiService.leaveEvent(eventId)
+                                .observeOn(uiThread)
+                                .subscribe(participants -> {
 
-                    view.setOrganizerParticipantView(currentEvent);
+                                    view.showLeaveEventMessage();
+                                    currentEvent.setCandidate(false);
+                                    currentEvent.setParticipant(false);
+                                    view.setOrganizerParticipantView(currentEvent);
+
+                                }, this::handleError);
+                    }
+                    else
+                    {
+                        apiService.cancelEventJoinRequest(eventId)
+                                .observeOn(uiThread)
+                                .subscribe(participants -> {
+
+                                    view.showLeaveEventMessage();
+                                    currentEvent.setCandidate(false);
+                                    currentEvent.setParticipant(false);
+                                    view.setOrganizerParticipantView(currentEvent);
+
+                                }, this::handleError);
+                    }
                 })
         );
 

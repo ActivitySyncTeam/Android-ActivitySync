@@ -114,6 +114,30 @@ public class ApiService implements IApiService
     }
 
     @Override
+    public Observable<Participants> joinEvent(int eventID)
+    {
+        return api.joinEvent(accessTokenHeader(), eventID);
+    }
+
+    @Override
+    public Observable<Participants> joinEventAsAdmin(int eventID)
+    {
+        return api.joinEventAsAdmin(accessTokenHeader(), eventID);
+    }
+
+    @Override
+    public Observable<Participants> cancelEventJoinRequest(int eventID)
+    {
+        return api.cancelEventJoinRequest(accessTokenHeader(), eventID);
+    }
+
+    @Override
+    public Observable<Participants> leaveEvent(int eventID)
+    {
+        return api.leaveEvent(accessTokenHeader(), eventID);
+    }
+
+    @Override
     public Observable<ClientDetails> getClientDetails()
     {
         return api.getClientDetails();
