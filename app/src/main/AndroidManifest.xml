@@ -95,6 +95,10 @@
             android:name=".screens.MyProfileScreen"
             android:screenOrientation="portrait"/>
 
+        <activity
+            android:name=".screens.AllUsersScreen"
+            android:screenOrientation="portrait"/>
+
         <service
             android:name=".services.BackgroundService" />
 

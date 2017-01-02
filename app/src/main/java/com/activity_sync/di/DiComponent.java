@@ -1,6 +1,7 @@
 package com.activity_sync.di;
 
 import com.activity_sync.App;
+import com.activity_sync.screens.AllUsersScreen;
 import com.activity_sync.screens.CommentsScreen;
 import com.activity_sync.screens.DummyScreen;
 import com.activity_sync.screens.EventDetailsScreen;
@@ -15,8 +16,8 @@ import com.activity_sync.screens.RegisterScreen;
 import com.activity_sync.screens.SettingsScreen;
 import com.activity_sync.screens.SplashScreen;
 import com.activity_sync.screens.UserDetailsScreen;
-import com.activity_sync.services.BackgroundService;
 import com.activity_sync.screens.UsersFragmentBase;
+import com.activity_sync.services.BackgroundService;
 
 import javax.inject.Singleton;
 
@@ -73,4 +74,6 @@ public interface DiComponent
     void inject(MyProfileScreen myProfileScreen);
 
     void inject(BackgroundService backgroundService);
+
+    void inject(AllUsersScreen allUsersScreen);
 }

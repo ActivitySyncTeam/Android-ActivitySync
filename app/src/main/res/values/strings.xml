@@ -22,6 +22,7 @@
     <!-- Menu strings -->
     <string name="menu_dummy_screen">Dummy Screen</string>
     <string name="menu_events">Events</string>
+    <string name="menu_users_screen">Users</string>
     <string name="menu_friends">Friends</string>
     <string name="menu_create_event">New event</string>
     <string name="log_out">Log out</string>
@@ -183,5 +184,8 @@
     <string name="err_comment_empty">Your comment cannot be empty</string>
     <string name="txt_comment_hint">Write your comment here</string>
     <string name="btn_send">Send</string>
+
+    <!-- AllUsersScreen strings -->
+    <string name="title_all_users">Users</string>
 
 </resources>

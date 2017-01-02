@@ -147,5 +147,7 @@
     <string name="btn_event_details_screen_comments">KOMENTARZE</string>
     <string name="btn_update_event">Aktualizuj</string>
     <string name="txt_register_date">Rejestracja</string>
+    <string name="menu_users_screen">Użytkownicy</string>
+    <string name="title_all_users">Użytkownicy</string>
 
 </resources>
