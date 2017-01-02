@@ -6,7 +6,7 @@ import com.activity_sync.presentation.models.ClientDetails;
 import com.activity_sync.presentation.models.CommentsCollection;
 import com.activity_sync.presentation.models.Discipline;
 import com.activity_sync.presentation.models.Event;
-import com.activity_sync.presentation.models.EventBody;
+import com.activity_sync.presentation.models.body_models.EventBody;
 import com.activity_sync.presentation.models.EventID;
 import com.activity_sync.presentation.models.EventsCollection;
 import com.activity_sync.presentation.models.Level;
@@ -14,6 +14,7 @@ import com.activity_sync.presentation.models.LoginResponse;
 import com.activity_sync.presentation.models.Participants;
 import com.activity_sync.presentation.models.RegisterResponse;
 import com.activity_sync.presentation.models.User;
+import com.activity_sync.presentation.models.body_models.EventIDBody;
 import com.activity_sync.presentation.services.IActivitySyncApi;
 import com.activity_sync.presentation.services.IApiService;
 import com.activity_sync.presentation.services.IPermanentStorage;
@@ -126,13 +127,13 @@ public class ApiService implements IApiService
     }
 
     @Override
-    public Observable<Participants> cancelEventJoinRequest(int eventID)
+    public Observable<Participants> cancelEventJoinRequest(EventIDBody eventID)
     {
         return api.cancelEventJoinRequest(accessTokenHeader(), eventID);
     }
 
     @Override
-    public Observable<Participants> leaveEvent(int eventID)
+    public Observable<Participants> leaveEvent(EventIDBody eventID)
     {
         return api.leaveEvent(accessTokenHeader(), eventID);
     }

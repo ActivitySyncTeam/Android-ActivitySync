@@ -1,4 +1,4 @@
-package com.activity_sync.presentation.models;
+package com.activity_sync.presentation.models.body_models;
 
 public class EventBody
 {

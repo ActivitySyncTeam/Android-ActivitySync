@@ -4,7 +4,7 @@ import com.activity_sync.presentation.models.ClientDetails;
 import com.activity_sync.presentation.models.CommentsCollection;
 import com.activity_sync.presentation.models.Discipline;
 import com.activity_sync.presentation.models.Event;
-import com.activity_sync.presentation.models.EventBody;
+import com.activity_sync.presentation.models.body_models.EventBody;
 import com.activity_sync.presentation.models.EventID;
 import com.activity_sync.presentation.models.EventsCollection;
 import com.activity_sync.presentation.models.Level;
@@ -12,6 +12,7 @@ import com.activity_sync.presentation.models.LoginResponse;
 import com.activity_sync.presentation.models.Participants;
 import com.activity_sync.presentation.models.RegisterResponse;
 import com.activity_sync.presentation.models.User;
+import com.activity_sync.presentation.models.body_models.EventIDBody;
 
 import java.util.List;
 
@@ -47,9 +48,9 @@ public interface IApiService
 
     Observable<Participants> joinEventAsAdmin(int eventID);
 
-    Observable<Participants> cancelEventJoinRequest(int eventID);
+    Observable<Participants> cancelEventJoinRequest(EventIDBody eventID);
 
-    Observable<Participants> leaveEvent(int eventID);
+    Observable<Participants> leaveEvent(EventIDBody eventID);
 
     Observable<List<Discipline>> getAvailableDisciplines();
 

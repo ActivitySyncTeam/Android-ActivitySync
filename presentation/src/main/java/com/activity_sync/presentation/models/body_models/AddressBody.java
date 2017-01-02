@@ -1,5 +1,7 @@
-package com.activity_sync.presentation.models;
+package com.activity_sync.presentation.models.body_models;
 
+
+import com.activity_sync.presentation.models.Location;
 
 public class AddressBody
 {

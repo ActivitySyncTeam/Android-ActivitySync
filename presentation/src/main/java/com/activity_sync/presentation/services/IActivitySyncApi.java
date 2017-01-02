@@ -4,7 +4,6 @@ import com.activity_sync.presentation.models.ClientDetails;
 import com.activity_sync.presentation.models.CommentsCollection;
 import com.activity_sync.presentation.models.Discipline;
 import com.activity_sync.presentation.models.Event;
-import com.activity_sync.presentation.models.EventBody;
 import com.activity_sync.presentation.models.EventID;
 import com.activity_sync.presentation.models.EventsCollection;
 import com.activity_sync.presentation.models.Level;
@@ -12,14 +11,16 @@ import com.activity_sync.presentation.models.LoginResponse;
 import com.activity_sync.presentation.models.Participants;
 import com.activity_sync.presentation.models.RegisterResponse;
 import com.activity_sync.presentation.models.User;
+import com.activity_sync.presentation.models.body_models.EventBody;
+import com.activity_sync.presentation.models.body_models.EventIDBody;
 
 import java.util.List;
 
 import retrofit2.http.Body;
-import retrofit2.http.DELETE;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.HTTP;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
@@ -64,13 +65,11 @@ public interface IActivitySyncApi
     @POST("api/event/user/joinAdmin")
     Observable<Participants> joinEventAsAdmin(@Header("Authorization") String accessToken, @Field("eventID") int eventID);
 
-    @FormUrlEncoded
-    @DELETE("api/event/user/cancel")
-    Observable<Participants> cancelEventJoinRequest(@Header("Authorization") String accessToken, @Field("eventID") int eventID);
+    @HTTP(method = "DELETE", path = "api/event/user/cancel", hasBody = true)
+    Observable<Participants> cancelEventJoinRequest(@Header("Authorization") String accessToken, @Body EventIDBody eventID);
 
-    @FormUrlEncoded
-    @DELETE("api/event/user/resign")
-    Observable<Participants> leaveEvent(@Header("Authorization") String accessToken, @Field("eventID") int eventID);
+    @HTTP(method = "DELETE", path = "api/event/user/resign", hasBody = true)
+    Observable<Participants> leaveEvent(@Header("Authorization") String accessToken, @Body EventIDBody eventID);
 
     @GET("api/event/comments/{event_id}")
     Observable<CommentsCollection> getEventComments(@Header("Authorization") String accessToken, @Path("event_id") int eventId);
