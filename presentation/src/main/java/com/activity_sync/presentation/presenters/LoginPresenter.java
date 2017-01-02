@@ -65,8 +65,19 @@ public class LoginPresenter extends Presenter<ILoginView>
 
                                                 currentUser.accessToken(result.getAccessToken());
 
-                                                navigator.startBackgroundService();
-                                                navigator.openEventsScreen();
+                                                apiService.getMyProfile()
+                                                        .observeOn(uiThread)
+                                                        .subscribe((user) -> {
+
+                                                            currentUser.userId(user.getUserId());
+                                                            currentUser.login(user.getUsername());
+
+                                                            navigator.startBackgroundService();
+                                                            navigator.openEventsScreen();
+
+                                                        }, this::handleError);
+
+
 
                                             }, this::handleError);
                                 }, this::handleError);

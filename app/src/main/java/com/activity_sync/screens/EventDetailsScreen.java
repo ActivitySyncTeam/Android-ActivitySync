@@ -16,6 +16,7 @@ import com.activity_sync.R;
 import com.activity_sync.presentation.models.Event;
 import com.activity_sync.presentation.presenters.EventDetailsPresenter;
 import com.activity_sync.presentation.presenters.IPresenter;
+import com.activity_sync.presentation.services.CurrentUser;
 import com.activity_sync.presentation.services.IApiService;
 import com.activity_sync.presentation.services.INavigator;
 import com.activity_sync.presentation.views.IEventDetailsView;
@@ -43,6 +44,9 @@ public class EventDetailsScreen extends Screen implements IEventDetailsView, OnM
 
     @Inject
     INavigator navigator;
+
+    @Inject
+    CurrentUser currentUser;
 
     @Bind(R.id.coordinator_layout)
     CoordinatorLayout coordinatorLayout;
@@ -133,7 +137,7 @@ public class EventDetailsScreen extends Screen implements IEventDetailsView, OnM
     protected IPresenter createPresenter(Screen screen, Bundle savedInstanceState)
     {
         int eventID = getIntent().getIntExtra(EventDetailsScreen.EVENT_ID, 1);
-        return new EventDetailsPresenter(AndroidSchedulers.mainThread(), this, navigator, eventID, apiService);
+        return new EventDetailsPresenter(AndroidSchedulers.mainThread(), this, navigator, eventID, apiService, currentUser);
     }
 
     @Override

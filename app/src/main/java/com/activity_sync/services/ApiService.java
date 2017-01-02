@@ -165,9 +165,9 @@ public class ApiService implements IApiService
     }
 
     @Override
-    public Observable<User> getUserID()
+    public Observable<User> getMyProfile()
     {
-        return api.getUserID();
+        return api.getMyProfile(accessTokenHeader());
     }
 
     @Override

@@ -30,7 +30,7 @@ public interface IApiService
 
     Observable<ClientDetails> getClientDetails();
 
-    Observable<User> getUserID();
+    Observable<User> getMyProfile();
 
     Observable<EventID> createEvent(EventBody eventBody);
 

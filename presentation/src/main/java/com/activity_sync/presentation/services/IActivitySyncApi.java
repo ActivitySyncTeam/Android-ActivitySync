@@ -44,8 +44,8 @@ public interface IActivitySyncApi
     @POST("/api/auth/token/revoke")
     Observable<Void> logout(@Header("Authorization") String authToken, @Query("client_id") String clientId, @Query("client_secret") String clientSecret, @Query("token") String token);
 
-    @GET("/api/user/id")
-    Observable<User> getUserID();
+    @GET("/api/user/me")
+    Observable<User> getMyProfile(@Header("Authorization") String accessToken);
 
     @POST("/api/event/create")
     Observable<EventID> createEvent(@Header("Authorization") String accessToken, @Body EventBody eventBody);

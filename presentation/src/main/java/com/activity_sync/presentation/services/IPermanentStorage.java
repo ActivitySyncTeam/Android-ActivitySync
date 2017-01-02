@@ -5,6 +5,7 @@ public interface IPermanentStorage
     String ACCESS_TOKEN = "access_token";
     String CURRENT_USER_ID = "current_user_id";
     String CURRENT_USER_NAME = "current_user_name";
+    String CURRENT_USER_LOGIN = "current_user_login";
     String CURRENT_USER_LAST_NAME = "current_user_lastName";
     String CLIENT_SECRET = "client_secret";
     String CLIENT_ID = "client_id";

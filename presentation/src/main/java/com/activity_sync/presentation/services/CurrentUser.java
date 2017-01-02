@@ -41,6 +41,16 @@ public class CurrentUser
         permanentStorage.saveInteger(IPermanentStorage.CURRENT_USER_ID, userId);
     }
 
+    public String login()
+    {
+        return permanentStorage.retrieveString(IPermanentStorage.CURRENT_USER_LOGIN, StringUtils.EMPTY);
+    }
+
+    public void login(String login)
+    {
+        permanentStorage.saveString(IPermanentStorage.CURRENT_USER_LOGIN, login);
+    }
+
     public String name()
     {
         return permanentStorage.retrieveString(IPermanentStorage.CURRENT_USER_NAME, StringUtils.EMPTY);

@@ -2,6 +2,7 @@ package com.activity_sync.presentation.presenters;
 
 import com.activity_sync.presentation.models.Event;
 import com.activity_sync.presentation.models.body_models.EventIDBody;
+import com.activity_sync.presentation.services.CurrentUser;
 import com.activity_sync.presentation.services.IApiService;
 import com.activity_sync.presentation.services.INavigator;
 import com.activity_sync.presentation.views.IEventDetailsView;
@@ -15,16 +16,18 @@ public class EventDetailsPresenter extends Presenter<IEventDetailsView>
     private final INavigator navigator;
     private final int eventId;
     private final IApiService apiService;
+    private final CurrentUser currentUser;
 
     private Event currentEvent;
 
-    public EventDetailsPresenter(Scheduler uiThread, IEventDetailsView view, INavigator navigator, int eventId, IApiService apiService)
+    public EventDetailsPresenter(Scheduler uiThread, IEventDetailsView view, INavigator navigator, int eventId, IApiService apiService, CurrentUser currentUser)
     {
         super(view);
         this.uiThread = uiThread;
         this.navigator = navigator;
         this.eventId = eventId;
         this.apiService = apiService;
+        this.currentUser = currentUser;
     }
 
     @Override
@@ -153,7 +156,15 @@ public class EventDetailsPresenter extends Presenter<IEventDetailsView>
         subscriptions.add(view.organizerDetailsClick()
                 .observeOn(uiThread)
                 .subscribe(o -> {
-                    navigator.openUserDetailsScreen(1);
+
+                    if (currentEvent.getOrganizer().getUserId() == currentUser.userId())
+                    {
+                        navigator.openMyProfileScreen();
+                    }
+                    else
+                    {
+                        navigator.openEventDetailsScreen(currentEvent.getOrganizer().getUserId());
+                    }
                 })
         );
 
