@@ -157,8 +157,6 @@ public class EventDetailsPresenter extends Presenter<IEventDetailsView>
                                 navigator.openEventsScreen();
 
                             }, this::handleError);
-
-                    navigator.openEventsScreen();
                 })
         );
 

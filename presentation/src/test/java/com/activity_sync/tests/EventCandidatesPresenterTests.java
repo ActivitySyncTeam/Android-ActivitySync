@@ -18,6 +18,8 @@ import rx.Observable;
 import rx.schedulers.Schedulers;
 import rx.subjects.PublishSubject;
 
+import static org.mockito.Matchers.any;
+
 @RunWith(MockitoJUnitRunner.class)
 public class EventCandidatesPresenterTests extends ParticipantsBasePresenterTests
 {
@@ -42,7 +44,8 @@ public class EventCandidatesPresenterTests extends ParticipantsBasePresenterTest
         candidates.add(new UserBuilder().createUser());
         participants = new ParticipantsBuilder().setCandidates(candidates).create();
 
-        Mockito.when(apiService.getEventParticipants(eventId)).thenReturn(Observable.just(participants));
+        Mockito.when(apiService.acceptCandidate(eventId, testedUser.getUserId())).thenReturn(Observable.just(participants));
+        Mockito.when(apiService.rejectCandidate(any())).thenReturn(Observable.just(participants));
     }
 
     @Test
@@ -61,8 +64,8 @@ public class EventCandidatesPresenterTests extends ParticipantsBasePresenterTest
         EventCandidatesPresenter presenter = createPresenter();
         presenter.start();
 
-        acceptEventClick.onNext(testedParticipant);
-        Mockito.verify(view).openAcceptConfirmationDialog(testedParticipant);
+        acceptEventClick.onNext(testedUser);
+        Mockito.verify(view).openAcceptConfirmationDialog(testedUser);
     }
 
     @Test
@@ -71,8 +74,8 @@ public class EventCandidatesPresenterTests extends ParticipantsBasePresenterTest
         EventCandidatesPresenter presenter = createPresenter();
         presenter.start();
 
-        removeEventClick.onNext(testedParticipant);
-        Mockito.verify(view).openRemoveConfirmationDialog(testedParticipant);
+        removeEventClick.onNext(testedUser);
+        Mockito.verify(view).openRemoveConfirmationDialog(testedUser);
     }
 
     @Test
@@ -81,9 +84,10 @@ public class EventCandidatesPresenterTests extends ParticipantsBasePresenterTest
         EventCandidatesPresenter presenter = createPresenter();
         presenter.start();
 
-        acceptConfirmEvent.onNext(testedParticipant);
-        Mockito.verify(view).acceptSuccessMessage(testedParticipant);
-        Mockito.verify(view).removeUser(testedParticipant);
+        acceptConfirmEvent.onNext(testedUser);
+        Mockito.verify(apiService).acceptCandidate(eventId, testedUser.getUserId());
+        Mockito.verify(view).acceptSuccessMessage(testedUser);
+        Mockito.verify(view).removeUser(testedUser);
     }
 
     @Test
@@ -92,9 +96,10 @@ public class EventCandidatesPresenterTests extends ParticipantsBasePresenterTest
         EventCandidatesPresenter presenter = createPresenter();
         presenter.start();
 
-        removeConfirmEvent.onNext(testedParticipant);
-        Mockito.verify(view).removeSuccessMessage(testedParticipant);
-        Mockito.verify(view).removeUser(testedParticipant);
+        removeConfirmEvent.onNext(testedUser);
+        Mockito.verify(apiService).rejectCandidate(any());
+        Mockito.verify(view).removeSuccessMessage(testedUser);
+        Mockito.verify(view).removeUser(testedUser);
     }
 
     private EventCandidatesPresenter createPresenter()

@@ -1,5 +1,7 @@
 package com.activity_sync.tests;
 
+import com.activity_sync.presentation.models.User;
+import com.activity_sync.presentation.models.builders.UserBuilder;
 import com.activity_sync.presentation.presenters.EditAccountPresenter;
 import com.activity_sync.presentation.utils.StringUtils;
 import com.activity_sync.presentation.views.IEditAccountView;
@@ -33,12 +35,15 @@ public class EditAccountPresenterTest
     private String password = "Password";
     private String emptyFieldError = "Error";
 
+    User user;
 
     @Before
     public void setUp() throws Exception
     {
+         user = new UserBuilder().createUser();
+
         MockitoAnnotations.initMocks(this);
-        editAccountPresenter = new EditAccountPresenter(view, Schedulers.immediate());
+        editAccountPresenter = new EditAccountPresenter(view, Schedulers.immediate(), user);
 
         when(view.onSaveClick()).thenReturn(saveBtnClickEvent);
         when(view.getFirstName()).thenReturn(firstName);

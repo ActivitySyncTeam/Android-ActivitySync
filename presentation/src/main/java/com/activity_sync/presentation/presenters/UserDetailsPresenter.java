@@ -9,12 +9,12 @@ import com.activity_sync.presentation.views.IUserDetailsView;
 import rx.Scheduler;
 import timber.log.Timber;
 
+import static com.activity_sync.presentation.views.IUserDetailsView.DISLIKE;
+import static com.activity_sync.presentation.views.IUserDetailsView.LIKE;
+import static com.activity_sync.presentation.views.IUserDetailsView.NO_ASSESSMENT;
+
 public class UserDetailsPresenter extends Presenter<IUserDetailsView>
 {
-    private final static int LIKE = 1;
-    private final static int DISLIKE = -1;
-    private final static int NO_ASSESMENT = 0;
-
     private final IApiService apiService;
     private final Scheduler uiThread;
     private final CurrentUser currentUser;
@@ -52,12 +52,12 @@ public class UserDetailsPresenter extends Presenter<IUserDetailsView>
 
                     if (user.getRate() == 1)
                     {
-                        apiService.rateUser(userId, NO_ASSESMENT)
+                        apiService.rateUser(userId, NO_ASSESSMENT)
                                 .observeOn(uiThread)
                                 .subscribe(result -> {
 
-                                    view.setThumbsColor(NO_ASSESMENT);
-                                    user.setRate(NO_ASSESMENT);
+                                    view.setThumbsColor(NO_ASSESSMENT);
+                                    user.setRate(NO_ASSESSMENT);
 
                                 }, this::handleError);
                     }
@@ -80,12 +80,12 @@ public class UserDetailsPresenter extends Presenter<IUserDetailsView>
 
                     if (user.getRate() == -1)
                     {
-                        apiService.rateUser(userId, NO_ASSESMENT)
+                        apiService.rateUser(userId, NO_ASSESSMENT)
                                 .observeOn(uiThread)
                                 .subscribe(result -> {
 
-                                    view.setThumbsColor(NO_ASSESMENT);
-                                    user.setRate(NO_ASSESMENT);
+                                    view.setThumbsColor(NO_ASSESSMENT);
+                                    user.setRate(NO_ASSESSMENT);
                                 }, this::handleError);
                     }
                     else

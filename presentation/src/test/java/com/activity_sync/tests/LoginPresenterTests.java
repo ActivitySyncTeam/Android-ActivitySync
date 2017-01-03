@@ -2,8 +2,10 @@ package com.activity_sync.tests;
 
 import com.activity_sync.presentation.models.ClientDetails;
 import com.activity_sync.presentation.models.LoginResponse;
+import com.activity_sync.presentation.models.User;
 import com.activity_sync.presentation.models.builders.ClientDetailsBuilder;
 import com.activity_sync.presentation.models.builders.LoginResponseBuilder;
+import com.activity_sync.presentation.models.builders.UserBuilder;
 import com.activity_sync.presentation.presenters.LoginPresenter;
 import com.activity_sync.presentation.services.CurrentUser;
 import com.activity_sync.presentation.services.IApiService;
@@ -49,12 +51,14 @@ public class LoginPresenterTests
     ClientDetails clientDetails;
     LoginResponse loginResponse;
 
+    User user;
+
     @Before
     public void setup()
     {
         clientDetails = new ClientDetailsBuilder().create();
-
         loginResponse = new LoginResponseBuilder().create();
+        user = new UserBuilder().setUserId(23).setUsername("test").createUser();
 
         Mockito.when(view.loginBtnClick()).thenReturn(loginBtnClickEvent);
         Mockito.when(view.createAccountClick()).thenReturn(createAccountClickEvent);
@@ -63,6 +67,7 @@ public class LoginPresenterTests
 
         Mockito.when(apiService.getClientDetails()).thenReturn(Observable.just(clientDetails));
         Mockito.when(apiService.login(view.login(), view.password())).thenReturn(Observable.just(loginResponse));
+        Mockito.when(apiService.getMyProfile()).thenReturn(Observable.just(user));
     }
 
     @Test
@@ -74,6 +79,7 @@ public class LoginPresenterTests
         loginBtnClickEvent.onNext(this);
 
         Mockito.verify(apiService).login(view.login(), view.password());
+        Mockito.verify(apiService).getMyProfile();
         Mockito.verify(currentUser).clientId(anyString());
         Mockito.verify(currentUser).clientSecret(anyString());
         Mockito.verify(currentUser).accessToken(anyString());
