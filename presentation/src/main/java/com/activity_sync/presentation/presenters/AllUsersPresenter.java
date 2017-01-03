@@ -27,6 +27,22 @@ public class AllUsersPresenter extends Presenter<IAllUsersScreen>
             add(new FoundUserBuilder().setEvents(11).setFriends(123).setLikes(1234)
                     .setName("Marcin").setSurname("Ziel").setRegisterDate("never")
                     .setUserId(2).setUsername("runnigga").build());
+            add(new FoundUserBuilder().setEvents(11).setFriends(123).setLikes(1234)
+                    .setName("Marcin").setSurname("Ziel").setRegisterDate("never")
+                    .setUserId(2).setUsername("runnigga").build());
+            add(new FoundUserBuilder().setEvents(11).setFriends(123).setLikes(1234)
+                    .setName("Marcin").setSurname("Ziel").setRegisterDate("never")
+                    .setUserId(2).setUsername("runnigga").build());
+            add(new FoundUserBuilder().setEvents(11).setFriends(123).setLikes(1234)
+                    .setName("Marcin").setSurname("Ziel").setRegisterDate("never")
+                    .setUserId(2).setUsername("runnigga").build());
+            add(new FoundUserBuilder().setEvents(11).setFriends(123).setLikes(1234)
+                    .setName("Marcin").setSurname("Ziel").setRegisterDate("never")
+                    .setUserId(2).setUsername("runnigga").build());
+            add(new FoundUserBuilder().setEvents(11).setFriends(123).setLikes(1234)
+                    .setName("Marcin").setSurname("Ziel").setRegisterDate("never")
+                    .setUserId(2).setUsername("runnigga").build());
+
         }};
         data = new FoundUsersCollection(0, "temp", "temp", users);
     }

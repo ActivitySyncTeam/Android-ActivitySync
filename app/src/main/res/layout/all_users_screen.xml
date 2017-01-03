@@ -3,7 +3,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/navigation_drawer_layout"
-    android:fitsSystemWindows="true"
+    android:descendantFocusability="beforeDescendants"
+    android:focusableInTouchMode="true"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -16,14 +17,33 @@
 
         <android.support.v4.widget.SwipeRefreshLayout
             android:id="@+id/users_refresh"
-            android:background="@color/backgroundColor"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-            <FrameLayout
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:background="@color/backgroundColor">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorPrimaryLight">
+
+                    <EditText
+                        android:id="@+id/user_filter"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="text"
+                        android:layout_marginLeft="@dimen/screen_margin_half"
+                        android:layout_marginRight="@dimen/screen_margin_half"
+                        android:hint="Search by nickname..."
+                        android:maxLines="1"
+                        android:imeOptions="actionDone"/>
+
+                </LinearLayout>
 
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/users_list"
@@ -32,7 +52,7 @@
                     android:clipToPadding="false"
                     android:paddingTop="@dimen/screen_margin_half"/>
 
-            </FrameLayout>
+            </LinearLayout>
 
         </android.support.v4.widget.SwipeRefreshLayout>
 
