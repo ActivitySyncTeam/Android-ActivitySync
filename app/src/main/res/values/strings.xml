@@ -139,6 +139,7 @@
     <string name="cp_hint_confirm_new_password">Confirm new password</string>
     <string name="cp_save_btn">SAVE</string>
     <string name="cp_save_succ">Password changed!</string>
+    <string name="cp_save_fail">Password was not changed!</string>
     <string name="err_confirmed_not_matching">Confirm password does not math the password</string>
     <string name="err_same_passwords">New password must be different from old password</string>
 

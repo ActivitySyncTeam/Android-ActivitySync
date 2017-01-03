@@ -1,5 +1,6 @@
 package com.activity_sync.presentation.services;
 
+import com.activity_sync.presentation.models.ChangePasswordResponse;
 import com.activity_sync.presentation.models.ClientDetails;
 import com.activity_sync.presentation.models.Comment;
 import com.activity_sync.presentation.models.CommentsCollection;
@@ -134,4 +135,8 @@ public interface IActivitySyncApi
 
     @GET("/api/levels")
     Observable<List<Level>> getAvailableLevels();
+
+    @FormUrlEncoded
+    @POST("/api/user/changepassword")
+    Observable<ChangePasswordResponse> changePassword(@Header("Authorization") String accessToken, @Field("current_password") String currentPassword, @Field("new_password") String newPassword);
 }

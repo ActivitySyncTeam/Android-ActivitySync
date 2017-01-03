@@ -1,5 +1,6 @@
 package com.activity_sync.presentation.services;
 
+import com.activity_sync.presentation.models.ChangePasswordResponse;
 import com.activity_sync.presentation.models.ClientDetails;
 import com.activity_sync.presentation.models.Comment;
 import com.activity_sync.presentation.models.CommentsCollection;
@@ -85,4 +86,6 @@ public interface IApiService
     Observable<List<Discipline>> getAvailableDisciplines();
 
     Observable<List<Level>> getAvailableLevels();
+
+    Observable<ChangePasswordResponse> changePassword(String currentPassword, String newPassword);
 }

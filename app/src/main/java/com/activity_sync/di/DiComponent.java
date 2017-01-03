@@ -2,6 +2,7 @@ package com.activity_sync.di;
 
 import com.activity_sync.App;
 import com.activity_sync.screens.AllUsersScreen;
+import com.activity_sync.screens.ChangePasswordScreen;
 import com.activity_sync.screens.CommentsScreen;
 import com.activity_sync.screens.DummyScreen;
 import com.activity_sync.screens.EventDetailsScreen;
@@ -76,4 +77,6 @@ public interface DiComponent
     void inject(BackgroundService backgroundService);
 
     void inject(AllUsersScreen allUsersScreen);
+
+    void inject(ChangePasswordScreen changePasswordScreen);
 }
