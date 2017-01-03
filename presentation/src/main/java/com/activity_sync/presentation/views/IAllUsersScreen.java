@@ -10,6 +10,8 @@ public interface IAllUsersScreen
 {
     Observable refreshUsers();
 
+    Observable<FindUsersResponse> selectedUser();
+
     void refreshingVisible(boolean isRefreshing);
 
     void addUsersList(Collection<FindUsersResponse> users);

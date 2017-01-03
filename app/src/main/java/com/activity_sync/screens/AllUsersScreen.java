@@ -95,4 +95,10 @@ public class AllUsersScreen extends Screen implements IAllUsersScreen
         adapter.addAll(users);
         adapter.notifyDataSetChanged();
     }
+
+    @Override
+    public Observable<FindUsersResponse> selectedUser()
+    {
+        return adapter.itemSelected();
+    }
 }
