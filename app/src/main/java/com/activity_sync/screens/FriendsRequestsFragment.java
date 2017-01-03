@@ -7,8 +7,11 @@ import com.activity_sync.presentation.action_listeners.IUserActionListener;
 import com.activity_sync.presentation.models.User;
 import com.activity_sync.presentation.presenters.FriendsRequestPresenter;
 import com.activity_sync.presentation.presenters.IPresenter;
+import com.activity_sync.presentation.services.CurrentUser;
 import com.activity_sync.renderers.UsersTwoOptionsRenderer;
 import com.activity_sync.renderers.base.RendererBuilder;
+
+import javax.inject.Inject;
 
 import rx.android.schedulers.AndroidSchedulers;
 
@@ -28,6 +31,6 @@ public class FriendsRequestsFragment extends UsersFragmentBase implements IUserA
     @Override
     protected IPresenter createPresenter(FragmentScreen screen, Bundle savedInstanceState)
     {
-        return new FriendsRequestPresenter(this, navigator, AndroidSchedulers.mainThread(), apiService);
+        return new FriendsRequestPresenter(this, navigator, AndroidSchedulers.mainThread(), apiService, currentUser);
     }
 }

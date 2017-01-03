@@ -76,9 +76,6 @@ public class LoginPresenter extends Presenter<ILoginView>
                                                             navigator.openEventsScreen();
 
                                                         }, this::handleError);
-
-
-
                                             }, this::handleError);
                                 }, this::handleError);
                     }

@@ -7,6 +7,7 @@ import com.activity_sync.presentation.models.Discipline;
 import com.activity_sync.presentation.models.Event;
 import com.activity_sync.presentation.models.EventID;
 import com.activity_sync.presentation.models.EventsCollection;
+import com.activity_sync.presentation.models.Friends;
 import com.activity_sync.presentation.models.Level;
 import com.activity_sync.presentation.models.LoginResponse;
 import com.activity_sync.presentation.models.Participants;
@@ -15,6 +16,7 @@ import com.activity_sync.presentation.models.User;
 import com.activity_sync.presentation.models.body_models.EventBody;
 import com.activity_sync.presentation.models.body_models.EventIDBody;
 import com.activity_sync.presentation.models.body_models.OrganizerApprovalBody;
+import com.activity_sync.presentation.models.body_models.UserIDBody;
 
 import java.util.List;
 
@@ -42,6 +44,8 @@ public interface IApiService
 
     Observable<EventsCollection> getAllEvents();
 
+    Observable<EventsCollection> getMyEvents();
+
     Observable<Event> getEventDetails(int eventId);
 
     Observable<CommentsCollection> getEventComments(int eventId);
@@ -49,6 +53,8 @@ public interface IApiService
     Observable<Comment> addComment(int eventId, String comment);
 
     Observable<Participants> getEventParticipants(int eventId);
+
+    Observable<Friends> getFriends(int userId);
 
     Observable<Participants> joinEvent(int eventID);
 
@@ -58,11 +64,23 @@ public interface IApiService
 
     Observable<Participants> leaveEvent(EventIDBody eventID);
 
+    Observable<Void> deleteEvent(int eventId);
+
     Observable<Participants> acceptCandidate(int eventID, int personID);
 
     Observable<Participants> removeParticipant(OrganizerApprovalBody organizerApprovalBody);
 
     Observable<Participants> rejectCandidate(OrganizerApprovalBody organizerApprovalBody);
+
+    Observable<Void> deleteFriend(UserIDBody userIDBody);
+
+    Observable<Void> rejectFriendRequest(UserIDBody userIDBody);
+
+    Observable<Friends> acceptFriendInvitation(int userID);
+
+    Observable<Friends> sendFriendRequest(int userID);
+
+    Observable<Friends> cancelFriendInvitation(int userID);
 
     Observable<List<Discipline>> getAvailableDisciplines();
 

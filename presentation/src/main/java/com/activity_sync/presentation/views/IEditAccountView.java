@@ -1,5 +1,7 @@
 package com.activity_sync.presentation.views;
 
+import com.activity_sync.presentation.models.User;
+
 import rx.Observable;
 
 public interface IEditAccountView
@@ -39,4 +41,6 @@ public interface IEditAccountView
     Observable onSaveClick();
 
     void close();
+
+    void setUserUpdateDetails(User user);
 }

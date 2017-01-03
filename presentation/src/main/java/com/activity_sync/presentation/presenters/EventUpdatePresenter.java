@@ -38,13 +38,20 @@ public class EventUpdatePresenter extends EventEditorPresenterBase
                 .observeOn(uiThread)
                 .subscribe(o -> {
 
-                    apiService.updateEvent(event.getEventId(), createEventBody())
-                            .observeOn(uiThread)
-                            .subscribe(result -> {
+                    if (view.location() != null)
+                    {
+                        apiService.updateEvent(event.getEventId(), createEventBody())
+                                .observeOn(uiThread)
+                                .subscribe(result -> {
 
-                                navigator.openEventDetailsScreen(result.getEventID());
+                                    navigator.openEventDetailsScreen(result.getEventID());
 
-                            }, this::handleError);
+                                }, this::handleError);
+                    }
+                    else
+                    {
+                        view.showNoLocationChosenError();
+                    }
                 })
         );
     }

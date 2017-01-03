@@ -3,9 +3,11 @@ package com.activity_sync.tests;
 import com.activity_sync.presentation.models.ClientDetails;
 import com.activity_sync.presentation.models.LoginResponse;
 import com.activity_sync.presentation.models.RegisterResponse;
+import com.activity_sync.presentation.models.User;
 import com.activity_sync.presentation.models.builders.ClientDetailsBuilder;
 import com.activity_sync.presentation.models.builders.LoginResponseBuilder;
 import com.activity_sync.presentation.models.builders.RegisterResponseBuilder;
+import com.activity_sync.presentation.models.builders.UserBuilder;
 import com.activity_sync.presentation.presenters.RegisterPresenter;
 import com.activity_sync.presentation.services.CurrentUser;
 import com.activity_sync.presentation.services.IApiService;
@@ -56,6 +58,8 @@ public class RegisterPresenterTests
     ClientDetails clientDetails;
     LoginResponse loginResponse;
 
+    User user;
+
     @Before
     public void setup()
     {
@@ -74,6 +78,9 @@ public class RegisterPresenterTests
         Mockito.when(apiService.register(view.userName(), view.password(), view.firstName(), view.lastName(), view.email())).thenReturn(Observable.just(registerResponse));
         Mockito.when(apiService.getClientDetails()).thenReturn(Observable.just(clientDetails));
         Mockito.when(apiService.login(view.userName(), view.password())).thenReturn(Observable.just(loginResponse));
+
+        user = new UserBuilder().setUserId(23).setUsername("test").createUser();
+        Mockito.when(apiService.getMyProfile()).thenReturn(Observable.just(user));
     }
 
     @Test
@@ -87,7 +94,7 @@ public class RegisterPresenterTests
         Mockito.verify(apiService).register(view.userName(), view.password(), view.firstName(), view.lastName(), view.email());
         Mockito.verify(apiService).getClientDetails();
         Mockito.verify(apiService).login(view.userName(), view.password());
-
+        Mockito.verify(apiService).getMyProfile();
         Mockito.verify(currentUser).clientId(anyString());
         Mockito.verify(currentUser).clientSecret(anyString());
         Mockito.verify(currentUser).accessToken(anyString());

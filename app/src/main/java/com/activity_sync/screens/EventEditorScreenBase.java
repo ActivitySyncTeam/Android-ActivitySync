@@ -4,6 +4,8 @@ import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.view.View;
@@ -30,9 +32,11 @@ import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlaceAutocomplete;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
@@ -91,6 +95,8 @@ abstract public class EventEditorScreenBase extends Screen implements IEventCrea
     private List<Level> levels = new ArrayList<>();
     private List<String> playersNumbers = new ArrayList<>();
     private Location selectedLocation;
+
+    List<Address> suggestedAddresses = new ArrayList<>();
 
     public EventEditorScreenBase()
     {
@@ -350,10 +356,20 @@ abstract public class EventEditorScreenBase extends Screen implements IEventCrea
             {
                 Place place = PlaceAutocomplete.getPlace(this, data);
 
+                try
+                {
+                    Geocoder geocoder = new Geocoder(this, Locale.getDefault());
+                    suggestedAddresses = geocoder.getFromLocation(place.getLatLng().latitude, place.getLatLng().longitude, 1);
+                }
+                catch (IOException e)
+                {
+                    e.printStackTrace();
+                }
+
                 Location location = new LocationBuilder()
                         .setLatitude(DoubleUtils.round(place.getLatLng().latitude, 6))
                         .setLongitude(DoubleUtils.round(place.getLatLng().longitude, 6))
-                        .setCity("Berlin")
+                        .setCity(suggestedAddresses.get(0).getAddressLine(1))
                         .setDescription(place.getName().toString())
                         .createLocation();
 

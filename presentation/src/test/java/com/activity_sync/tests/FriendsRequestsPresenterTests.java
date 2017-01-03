@@ -8,8 +8,11 @@ import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import rx.Observable;
 import rx.schedulers.Schedulers;
 import rx.subjects.PublishSubject;
+
+import static org.mockito.Matchers.any;
 
 @RunWith(MockitoJUnitRunner.class)
 public class FriendsRequestsPresenterTests extends ParticipantsBasePresenterTests
@@ -28,6 +31,9 @@ public class FriendsRequestsPresenterTests extends ParticipantsBasePresenterTest
         Mockito.when(view.removeConfirmClick()).thenReturn(removeConfirmEvent);
         Mockito.when(view.acceptEventClick()).thenReturn(acceptEventClick);
         Mockito.when(view.removeEventClick()).thenReturn(removeEventClick);
+
+        Mockito.when(apiService.acceptFriendInvitation(testedUser.getUserId())).thenReturn(Observable.just(friends));
+        Mockito.when(apiService.rejectFriendRequest(any())).thenReturn(Observable.just(null));
     }
 
     @Test
@@ -36,8 +42,8 @@ public class FriendsRequestsPresenterTests extends ParticipantsBasePresenterTest
         FriendsRequestPresenter presenter = createPresenter();
         presenter.start();
 
-        acceptEventClick.onNext(testedParticipant);
-        Mockito.verify(view).openAcceptConfirmationDialog(testedParticipant);
+        acceptEventClick.onNext(testedUser);
+        Mockito.verify(view).openAcceptConfirmationDialog(testedUser);
     }
 
     @Test
@@ -46,8 +52,8 @@ public class FriendsRequestsPresenterTests extends ParticipantsBasePresenterTest
         FriendsRequestPresenter presenter = createPresenter();
         presenter.start();
 
-        removeEventClick.onNext(testedParticipant);
-        Mockito.verify(view).openRemoveConfirmationDialog(testedParticipant);
+        removeEventClick.onNext(testedUser);
+        Mockito.verify(view).openRemoveConfirmationDialog(testedUser);
     }
 
     @Test
@@ -56,9 +62,10 @@ public class FriendsRequestsPresenterTests extends ParticipantsBasePresenterTest
         FriendsRequestPresenter presenter = createPresenter();
         presenter.start();
 
-        acceptConfirmEvent.onNext(testedParticipant);
-        Mockito.verify(view).acceptSuccessMessage(testedParticipant);
-        Mockito.verify(view).removeUser(testedParticipant);
+        acceptConfirmEvent.onNext(testedUser);
+        Mockito.verify(apiService).acceptFriendInvitation(testedUser.getUserId());
+        Mockito.verify(view).acceptSuccessMessage(testedUser);
+        Mockito.verify(view).removeUser(testedUser);
     }
 
     @Test
@@ -67,13 +74,14 @@ public class FriendsRequestsPresenterTests extends ParticipantsBasePresenterTest
         FriendsRequestPresenter presenter = createPresenter();
         presenter.start();
 
-        removeConfirmEvent.onNext(testedParticipant);
-        Mockito.verify(view).removeSuccessMessage(testedParticipant);
-        Mockito.verify(view).removeUser(testedParticipant);
+        removeConfirmEvent.onNext(testedUser);
+        Mockito.verify(apiService).rejectFriendRequest(any());
+        Mockito.verify(view).removeSuccessMessage(testedUser);
+        Mockito.verify(view).removeUser(testedUser);
     }
 
     private FriendsRequestPresenter createPresenter()
     {
-        return new FriendsRequestPresenter(view, navigator, Schedulers.immediate(), apiService);
+        return new FriendsRequestPresenter(view, navigator, Schedulers.immediate(), apiService, currentUser);
     }
 }

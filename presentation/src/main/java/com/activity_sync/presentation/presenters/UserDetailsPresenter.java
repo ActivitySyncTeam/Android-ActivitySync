@@ -1,6 +1,7 @@
 package com.activity_sync.presentation.presenters;
 
 import com.activity_sync.presentation.models.User;
+import com.activity_sync.presentation.models.body_models.UserIDBody;
 import com.activity_sync.presentation.services.CurrentUser;
 import com.activity_sync.presentation.services.IApiService;
 import com.activity_sync.presentation.views.IUserDetailsView;
@@ -8,12 +9,12 @@ import com.activity_sync.presentation.views.IUserDetailsView;
 import rx.Scheduler;
 import timber.log.Timber;
 
+import static com.activity_sync.presentation.views.IUserDetailsView.DISLIKE;
+import static com.activity_sync.presentation.views.IUserDetailsView.LIKE;
+import static com.activity_sync.presentation.views.IUserDetailsView.NO_ASSESSMENT;
+
 public class UserDetailsPresenter extends Presenter<IUserDetailsView>
 {
-    private final static int LIKE = 1;
-    private final static int DISLIKE = -1;
-    private final static int NO_ASSESMENT = 0;
-
     private final IApiService apiService;
     private final Scheduler uiThread;
     private final CurrentUser currentUser;
@@ -51,12 +52,12 @@ public class UserDetailsPresenter extends Presenter<IUserDetailsView>
 
                     if (user.getRate() == 1)
                     {
-                        apiService.rateUser(userId, NO_ASSESMENT)
+                        apiService.rateUser(userId, NO_ASSESSMENT)
                                 .observeOn(uiThread)
                                 .subscribe(result -> {
 
-                                    view.setThumbsColor(NO_ASSESMENT);
-                                    user.setRate(NO_ASSESMENT);
+                                    view.setThumbsColor(NO_ASSESSMENT);
+                                    user.setRate(NO_ASSESSMENT);
 
                                 }, this::handleError);
                     }
@@ -79,12 +80,12 @@ public class UserDetailsPresenter extends Presenter<IUserDetailsView>
 
                     if (user.getRate() == -1)
                     {
-                        apiService.rateUser(userId, NO_ASSESMENT)
+                        apiService.rateUser(userId, NO_ASSESSMENT)
                                 .observeOn(uiThread)
                                 .subscribe(result -> {
 
-                                    view.setThumbsColor(NO_ASSESMENT);
-                                    user.setRate(NO_ASSESMENT);
+                                    view.setThumbsColor(NO_ASSESSMENT);
+                                    user.setRate(NO_ASSESSMENT);
                                 }, this::handleError);
                     }
                     else
@@ -105,25 +106,42 @@ public class UserDetailsPresenter extends Presenter<IUserDetailsView>
                 .subscribe(o -> {
                     if (user.isCandidate())
                     {
-                        view.displayFriendRequestCanceledMessage();
-                        user.setCandidate(false);
-                        user.setFriend(false);
-                        view.setFriendBtnAppearance(user);
+                        apiService.cancelFriendInvitation(user.getUserId())
+                                .observeOn(uiThread)
+                                .subscribe(friends -> {
 
+                                    view.displayFriendRequestCanceledMessage();
+                                    user.setCandidate(false);
+                                    user.setFriend(false);
+                                    view.setFriendBtnAppearance(user);
+
+                                }, this::handleError);
                     }
                     else if (user.isFriend())
                     {
-                        view.displayFriendRemovedMessage();
-                        user.setCandidate(false);
-                        user.setFriend(false);
-                        view.setFriendBtnAppearance(user);
+                        apiService.deleteFriend(new UserIDBody(user.getUserId()))
+                                .observeOn(uiThread)
+                                .subscribe(friends -> {
+
+                                    view.displayFriendRemovedMessage();
+                                    user.setCandidate(false);
+                                    user.setFriend(false);
+                                    view.setFriendBtnAppearance(user);
+
+                                }, this::handleError);
                     }
                     else
                     {
-                        view.displayFriendRequestSentMessage();
-                        user.setCandidate(true);
-                        user.setFriend(false);
-                        view.setFriendBtnAppearance(user);
+                        apiService.sendFriendRequest(user.getUserId())
+                                .observeOn(uiThread)
+                                .subscribe(friends -> {
+
+                                    view.displayFriendRequestSentMessage();
+                                    user.setCandidate(true);
+                                    user.setFriend(false);
+                                    view.setFriendBtnAppearance(user);
+
+                                }, this::handleError);
                     }
                 })
         );

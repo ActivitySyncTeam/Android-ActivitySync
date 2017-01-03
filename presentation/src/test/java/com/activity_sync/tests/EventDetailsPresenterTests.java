@@ -1,12 +1,15 @@
 package com.activity_sync.tests;
 
 import com.activity_sync.presentation.models.Event;
+import com.activity_sync.presentation.models.Participants;
 import com.activity_sync.presentation.models.builders.DisciplineBuilder;
 import com.activity_sync.presentation.models.builders.EventBuilder;
 import com.activity_sync.presentation.models.builders.LevelBuilder;
 import com.activity_sync.presentation.models.builders.LocationBuilder;
+import com.activity_sync.presentation.models.builders.ParticipantsBuilder;
 import com.activity_sync.presentation.models.builders.UserBuilder;
 import com.activity_sync.presentation.presenters.EventDetailsPresenter;
+import com.activity_sync.presentation.services.CurrentUser;
 import com.activity_sync.presentation.services.IApiService;
 import com.activity_sync.presentation.services.INavigator;
 import com.activity_sync.presentation.views.IEventDetailsView;
@@ -23,6 +26,7 @@ import rx.schedulers.Schedulers;
 import rx.subjects.PublishSubject;
 
 import static org.mockito.Matchers.any;
+import static org.mockito.Mockito.never;
 
 @RunWith(MockitoJUnitRunner.class)
 public class EventDetailsPresenterTests
@@ -36,6 +40,9 @@ public class EventDetailsPresenterTests
     @Mock
     IEventDetailsView view;
 
+    @Mock
+    CurrentUser currentUser;
+
     PublishSubject joinLeaveEventClickEvent = PublishSubject.create();
     PublishSubject cancelEventClickEvent = PublishSubject.create();
     PublishSubject joinEventConfirmEvent = PublishSubject.create();
@@ -48,6 +55,9 @@ public class EventDetailsPresenterTests
     PublishSubject commentsClickEvent = PublishSubject.create();
 
     private int eventId = 1;
+    private int organizerId = 1;
+
+    private Participants participants;
 
     @Before
     public void setup()
@@ -68,6 +78,14 @@ public class EventDetailsPresenterTests
 
         Event event = create(false, false);
         Mockito.when(apiService.getEventDetails(eventId)).thenReturn(Observable.just(event));
+
+        participants = new ParticipantsBuilder().create();
+
+        Mockito.when(apiService.cancelEventJoinRequest(any())).thenReturn(Observable.just(participants));
+        Mockito.when(apiService.leaveEvent(any())).thenReturn(Observable.just(participants));
+        Mockito.when(apiService.joinEvent(eventId)).thenReturn(Observable.just(participants));
+        Mockito.when(apiService.joinEventAsAdmin(eventId)).thenReturn(Observable.just(participants));
+        Mockito.when(apiService.deleteEvent(eventId)).thenReturn(Observable.just(null));
     }
 
     @Test
@@ -134,6 +152,24 @@ public class EventDetailsPresenterTests
         googleMapAsyncEvent.onNext(this);
 
         joinEventConfirmEvent.onNext(this);
+        Mockito.verify(apiService).joinEvent(eventId);
+        Mockito.verify(view).setOrganizerParticipantView(any());
+        Mockito.verify(view).showEnrollMessage();
+    }
+
+    @Test
+    public void eventDetailsPresenter_clickConfirmJoinEvent_showJoinMessageAsAdmin()
+    {
+        Event event = create(false, true);
+        Mockito.when(apiService.getEventDetails(eventId)).thenReturn(Observable.just(event));
+
+        EventDetailsPresenter presenter = createPresenter();
+        presenter.start();
+
+        googleMapAsyncEvent.onNext(this);
+
+        joinEventConfirmEvent.onNext(this);
+        Mockito.verify(apiService).joinEventAsAdmin(eventId);
         Mockito.verify(view).setOrganizerParticipantView(any());
         Mockito.verify(view).showEnrollMessage();
     }
@@ -150,6 +186,24 @@ public class EventDetailsPresenterTests
         googleMapAsyncEvent.onNext(this);
 
         leaveEventConfirmEvent.onNext(this);
+        Mockito.verify(apiService).cancelEventJoinRequest(any());
+        Mockito.verify(view).setOrganizerParticipantView(any());
+        Mockito.verify(view).showLeaveEventMessage();
+    }
+
+    @Test
+    public void eventDetailsPresenter_clickConfirmLeaveEvent_showLeaveMessageAsParticipant()
+    {
+        Event event = create(true, false);
+        Mockito.when(apiService.getEventDetails(eventId)).thenReturn(Observable.just(event));
+
+        EventDetailsPresenter presenter = createPresenter();
+        presenter.start();
+
+        googleMapAsyncEvent.onNext(this);
+
+        leaveEventConfirmEvent.onNext(this);
+        Mockito.verify(apiService).leaveEvent(any());
         Mockito.verify(view).setOrganizerParticipantView(any());
         Mockito.verify(view).showLeaveEventMessage();
     }
@@ -164,17 +218,37 @@ public class EventDetailsPresenterTests
         presenter.start();
 
         cancelEventConfirmEvent.onNext(this);
+        Mockito.verify(apiService).deleteEvent(eventId);
         Mockito.verify(navigator).openEventsScreen();
+    }
+
+    @Test
+    public void eventDetailsPresenter_clickOrganizerDetailsEvent_openMyProfileScreen()
+    {
+        Mockito.when(currentUser.userId()).thenReturn(organizerId);
+
+        EventDetailsPresenter presenter = createPresenter();
+        presenter.start();
+
+        googleMapAsyncEvent.onNext(this);
+
+        organizerDetailsClickEvent.onNext(this);
+        Mockito.verify(navigator).openMyProfileScreen();
     }
 
     @Test
     public void eventDetailsPresenter_clickOrganizerDetailsEvent_openDetailsScreen()
     {
+        Mockito.when(currentUser.userId()).thenReturn(23423);
+
         EventDetailsPresenter presenter = createPresenter();
         presenter.start();
 
+        googleMapAsyncEvent.onNext(this);
+
         organizerDetailsClickEvent.onNext(this);
-        Mockito.verify(navigator).openUserDetailsScreen(1);
+        Mockito.verify(navigator, never()).openMyProfileScreen();
+        Mockito.verify(navigator).openUserDetailsScreen(organizerId);
     }
 
     @Test
@@ -217,6 +291,7 @@ public class EventDetailsPresenterTests
         return new EventBuilder()
                 .setId(eventId)
                 .setOrganizer(new UserBuilder()
+                        .setUserId(organizerId)
                         .setUsername("mzielu")
                         .createUser())
                 .setDiscipline(new DisciplineBuilder()
