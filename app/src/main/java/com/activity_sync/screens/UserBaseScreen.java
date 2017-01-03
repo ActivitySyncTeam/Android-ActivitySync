@@ -57,6 +57,9 @@ abstract public class UserBaseScreen extends Screen implements IUserBaseView
     @Bind(R.id.thumb_down)
     ImageView thumbDown;
 
+    @Bind(R.id.tv_votes_number)
+    TextView votesNumber;
+
 
     protected UserBaseScreen(int layoutResId)
     {
@@ -73,6 +76,7 @@ abstract public class UserBaseScreen extends Screen implements IUserBaseView
         registerDate.setText(user.getRegisterDate());
         eventsNumber.setText(String.valueOf(user.getEvents()));
         signature.setText(user.getSignature());
+        votesNumber.setText(String.valueOf(user.getRatesNumber()));
 
         CredibilityService credibilityService = new CredibilityService(this, user.getCredibility());
 

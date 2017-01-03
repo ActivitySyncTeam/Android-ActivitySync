@@ -11,6 +11,7 @@ import com.activity_sync.R;
 import com.activity_sync.presentation.models.FindUsersResponse;
 import com.activity_sync.presentation.presenters.AllUsersPresenter;
 import com.activity_sync.presentation.presenters.IPresenter;
+import com.activity_sync.presentation.services.CurrentUser;
 import com.activity_sync.presentation.services.IApiService;
 import com.activity_sync.presentation.views.IAllUsersScreen;
 import com.activity_sync.renderers.UsersRenderer;
@@ -34,6 +35,9 @@ public class AllUsersScreen extends Screen implements IAllUsersScreen
     @Inject
     IApiService apiService;
 
+    @Inject
+    CurrentUser currentUser;
+
     @Bind(R.id.users_list)
     RecyclerView usersList;
 
@@ -47,7 +51,7 @@ public class AllUsersScreen extends Screen implements IAllUsersScreen
     @Override
     protected IPresenter createPresenter(Screen screen, Bundle savedInstanceState)
     {
-        return new AllUsersPresenter(this, new Navigator(this), AndroidSchedulers.mainThread(), apiService);
+        return new AllUsersPresenter(this, new Navigator(this), AndroidSchedulers.mainThread(), apiService, currentUser);
     }
 
     @Override

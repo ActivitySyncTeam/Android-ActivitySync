@@ -70,6 +70,7 @@
     <string name="txt_last_name">Last name</string>
     <string name="txt_email">E-mail</string>
     <string name="txt_credibility">Credibility</string>
+    <string name="txt_votes_number">Votes</string>
     <string name="txt_very_good">Very good</string>
     <string name="txt_good">good</string>
     <string name="txt_ok">OK</string>

@@ -1,5 +1,6 @@
 package com.activity_sync.presentation.presenters;
 
+import com.activity_sync.presentation.services.CurrentUser;
 import com.activity_sync.presentation.services.IApiService;
 import com.activity_sync.presentation.services.INavigator;
 import com.activity_sync.presentation.views.IAllUsersScreen;
@@ -12,13 +13,15 @@ public class AllUsersPresenter extends Presenter<IAllUsersScreen>
     private final INavigator navigator;
     private final Scheduler uiThread;
     private final IApiService apiService;
+    private final CurrentUser currentUser;
 
-    public AllUsersPresenter(IAllUsersScreen view, INavigator navigator, Scheduler uiThread, IApiService apiService)
+    public AllUsersPresenter(IAllUsersScreen view, INavigator navigator, Scheduler uiThread, IApiService apiService, CurrentUser currentUser)
     {
         super(view);
         this.navigator = navigator;
         this.uiThread = uiThread;
         this.apiService = apiService;
+        this.currentUser = currentUser;
     }
 
     @Override
@@ -38,7 +41,14 @@ public class AllUsersPresenter extends Presenter<IAllUsersScreen>
 
         subscriptions.add(view.selectedUser()
                 .subscribe(findUsersResponse -> {
-                    navigator.openUserDetailsScreen(findUsersResponse.getUserId());
+                    int userID = findUsersResponse.getUserId();
+                    if (userID == currentUser.userId())
+                    {
+                        navigator.openMyProfileScreen();
+                    } else
+                    {
+                        navigator.openUserDetailsScreen(userID);
+                    }
                 })
         );
     }

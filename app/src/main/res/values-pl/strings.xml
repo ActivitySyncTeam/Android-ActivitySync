@@ -151,5 +151,6 @@
     <string name="txt_register_date">Rejestracja</string>
     <string name="menu_users_screen">Użytkownicy</string>
     <string name="title_all_users">Użytkownicy</string>
+    <string name="txt_votes_number">Głosy</string>
 
 </resources>
