@@ -14,6 +14,7 @@ import com.activity_sync.presentation.models.LoginResponse;
 import com.activity_sync.presentation.models.Participants;
 import com.activity_sync.presentation.models.RegisterResponse;
 import com.activity_sync.presentation.models.User;
+import com.activity_sync.presentation.models.UserID;
 import com.activity_sync.presentation.models.body_models.EventBody;
 import com.activity_sync.presentation.models.body_models.EventIDBody;
 import com.activity_sync.presentation.models.body_models.OrganizerApprovalBody;
@@ -88,4 +89,6 @@ public interface IApiService
     Observable<List<Level>> getAvailableLevels();
 
     Observable<ChangePasswordResponse> changePassword(String currentPassword, String newPassword);
+
+    Observable<UserID> updateUser(String name, String surname, String signature, String email);
 }

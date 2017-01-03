@@ -73,8 +73,9 @@
     <string name="ea_hint_last_name">Nazwisko</string>
     <string name="ea_hint_signature">Sygnatura</string>
     <string name="ea_hint_password">Wprowadź hasło by potwierdzić</string>
-    <string name="ea_save_btn">ZAPISZ</string>
+    <string name="ea_save_btn">Zapisz</string>
     <string name="ea_save_succ">Profil zapisany!</string>
+    <string name="ea_save_fail">Profil nie został zapisany!</string>
     <string name="cp_hint_confirm_new_password">Potwierdź nowe hasło</string>
     <string name="cp_hint_new_password">Nowe hasło</string>
     <string name="cp_hint_old_password">Stare hasło</string>

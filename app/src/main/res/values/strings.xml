@@ -129,8 +129,9 @@
     <string name="ea_hint_signature">Signature</string>
     <string name="ea_hint_password">Type password to confirm</string>
     <string name="ea_err_empty_field">This field cannot be empty</string>
-    <string name="ea_save_btn">SAVE</string>
+    <string name="ea_save_btn">Save</string>
     <string name="ea_save_succ">Profile saved!</string>
+    <string name="ea_save_fail">Profile was not saved!</string>
 
     <!-- ChangePasswordScreen strings -->
     <string name="title_change_password">Change Password</string>

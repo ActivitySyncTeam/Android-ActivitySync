@@ -16,6 +16,7 @@ import com.activity_sync.presentation.models.LoginResponse;
 import com.activity_sync.presentation.models.Participants;
 import com.activity_sync.presentation.models.RegisterResponse;
 import com.activity_sync.presentation.models.User;
+import com.activity_sync.presentation.models.UserID;
 import com.activity_sync.presentation.models.body_models.EventBody;
 import com.activity_sync.presentation.models.body_models.EventIDBody;
 import com.activity_sync.presentation.models.body_models.OrganizerApprovalBody;
@@ -249,6 +250,12 @@ public class ApiService implements IApiService
     public Observable<ChangePasswordResponse> changePassword(String currentPassword, String newPassword)
     {
         return api.changePassword(accessTokenHeader(), currentPassword, newPassword);
+    }
+
+    @Override
+    public Observable<UserID> updateUser(String name, String surname, String signature, String email)
+    {
+        return api.updateUser(accessTokenHeader(), name, surname, signature, email);
     }
 
     private String accessTokenHeader()

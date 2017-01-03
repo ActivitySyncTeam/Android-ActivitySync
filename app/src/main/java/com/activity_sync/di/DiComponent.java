@@ -5,6 +5,7 @@ import com.activity_sync.screens.AllUsersScreen;
 import com.activity_sync.screens.ChangePasswordScreen;
 import com.activity_sync.screens.CommentsScreen;
 import com.activity_sync.screens.DummyScreen;
+import com.activity_sync.screens.EditAccountScreen;
 import com.activity_sync.screens.EventDetailsScreen;
 import com.activity_sync.screens.EventEditorScreenBase;
 import com.activity_sync.screens.EventsFragmentBase;
@@ -79,4 +80,6 @@ public interface DiComponent
     void inject(AllUsersScreen allUsersScreen);
 
     void inject(ChangePasswordScreen changePasswordScreen);
+
+    void inject(EditAccountScreen editAccountScreen);
 }
