@@ -11,6 +11,7 @@ import com.activity_sync.R;
 import com.activity_sync.presentation.models.FindUsersResponse;
 import com.activity_sync.presentation.presenters.AllUsersPresenter;
 import com.activity_sync.presentation.presenters.IPresenter;
+import com.activity_sync.presentation.services.IApiService;
 import com.activity_sync.presentation.views.IAllUsersScreen;
 import com.activity_sync.renderers.UsersRenderer;
 import com.activity_sync.renderers.base.DividerItemDecoration;
@@ -21,6 +22,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import javax.inject.Inject;
+
 import butterknife.Bind;
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
@@ -28,6 +31,9 @@ import rx.subjects.PublishSubject;
 
 public class AllUsersScreen extends Screen implements IAllUsersScreen
 {
+    @Inject
+    IApiService apiService;
+
     @Bind(R.id.users_list)
     RecyclerView usersList;
 
@@ -41,7 +47,7 @@ public class AllUsersScreen extends Screen implements IAllUsersScreen
     @Override
     protected IPresenter createPresenter(Screen screen, Bundle savedInstanceState)
     {
-        return new AllUsersPresenter(this, new Navigator(this), AndroidSchedulers.mainThread());
+        return new AllUsersPresenter(this, new Navigator(this), AndroidSchedulers.mainThread(), apiService);
     }
 
     @Override

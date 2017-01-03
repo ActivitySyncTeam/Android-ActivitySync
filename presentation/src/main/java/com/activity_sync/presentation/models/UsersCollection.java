@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName;
 import java.io.Serializable;
 import java.util.List;
 
-public class FoundUsersCollection implements Serializable
+public class UsersCollection implements Serializable
 {
     @SerializedName("count")
     private int count;
@@ -19,7 +19,7 @@ public class FoundUsersCollection implements Serializable
     @SerializedName("results")
     private List<FindUsersResponse> users;
 
-    public FoundUsersCollection(int count, String next, String previous, List<FindUsersResponse> users)
+    public UsersCollection(int count, String next, String previous, List<FindUsersResponse> users)
     {
         this.count = count;
         this.next = next;

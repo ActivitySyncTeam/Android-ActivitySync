@@ -17,6 +17,7 @@ import com.activity_sync.presentation.models.Participants;
 import com.activity_sync.presentation.models.RegisterResponse;
 import com.activity_sync.presentation.models.User;
 import com.activity_sync.presentation.models.UserID;
+import com.activity_sync.presentation.models.UsersCollection;
 import com.activity_sync.presentation.models.body_models.EventBody;
 import com.activity_sync.presentation.models.body_models.EventIDBody;
 import com.activity_sync.presentation.models.body_models.OrganizerApprovalBody;
@@ -256,6 +257,12 @@ public class ApiService implements IApiService
     public Observable<UserID> updateUser(String name, String surname, String signature, String email)
     {
         return api.updateUser(accessTokenHeader(), name, surname, signature, email);
+    }
+
+    @Override
+    public Observable<UsersCollection> getAllUsers()
+    {
+        return api.getAllUsers();
     }
 
     private String accessTokenHeader()

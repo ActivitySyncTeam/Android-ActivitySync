@@ -15,6 +15,7 @@ import com.activity_sync.presentation.models.Participants;
 import com.activity_sync.presentation.models.RegisterResponse;
 import com.activity_sync.presentation.models.User;
 import com.activity_sync.presentation.models.UserID;
+import com.activity_sync.presentation.models.UsersCollection;
 import com.activity_sync.presentation.models.body_models.EventBody;
 import com.activity_sync.presentation.models.body_models.EventIDBody;
 import com.activity_sync.presentation.models.body_models.OrganizerApprovalBody;
@@ -144,4 +145,7 @@ public interface IActivitySyncApi
     @FormUrlEncoded
     @POST("/api/user/update")
     Observable<UserID> updateUser(@Header("Authorization") String accessToken, @Field("name") String name, @Field("surname") String surname, @Field("signature") String signature, @Field("email") String email);
+
+    @GET("/api/users")
+    Observable<UsersCollection> getAllUsers();
 }
