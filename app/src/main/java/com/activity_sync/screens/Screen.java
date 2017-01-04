@@ -144,12 +144,18 @@ public abstract class Screen extends BaseActivity implements IScreenView
 
     public void showProgressBar()
     {
-        actionProgress.setVisible(true);
+        if (actionProgress != null)
+        {
+            actionProgress.setVisible(true);
+        }
     }
 
     public void hideProgressBar()
     {
-        actionProgress.setVisible(false);
+        if (actionProgress != null)
+        {
+            actionProgress.setVisible(false);
+        }
     }
 
     protected abstract IPresenter createPresenter(Screen screen, Bundle savedInstanceState);

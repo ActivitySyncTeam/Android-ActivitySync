@@ -3,8 +3,6 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/navigation_drawer_layout"
-    android:descendantFocusability="beforeDescendants"
-    android:focusableInTouchMode="true"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -25,6 +23,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
+                android:descendantFocusability="beforeDescendants"
+                android:focusableInTouchMode="true"
                 android:background="@color/backgroundColor">
 
                 <LinearLayout
@@ -32,15 +32,15 @@
                     android:layout_height="wrap_content"
                     android:background="@color/colorPrimaryLight">
 
-                    <EditText
+                    <android.support.v7.widget.AppCompatEditText
+                        style="@style/DefaultEditText"
                         android:id="@+id/user_filter"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="text"
                         android:layout_marginLeft="@dimen/screen_margin_half"
                         android:layout_marginRight="@dimen/screen_margin_half"
-                        android:hint="Search by nickname..."
-                        android:maxLines="1"
+                        android:textColor="@color/white"
+                        android:hint="@string/hint_filter"
                         android:imeOptions="actionDone"/>
 
                 </LinearLayout>

@@ -93,5 +93,5 @@ public interface IApiService
 
     Observable<UserID> updateUser(String name, String surname, String signature, String email);
 
-    Observable<UsersCollection> getAllUsers();
+    Observable<UsersCollection> getUsers(boolean isFiltered, int page, String nickname);
 }

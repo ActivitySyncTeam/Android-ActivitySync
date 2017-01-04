@@ -97,7 +97,8 @@
 
         <activity
             android:name=".screens.AllUsersScreen"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.Users"/>
 
         <service
             android:name=".services.BackgroundService" />

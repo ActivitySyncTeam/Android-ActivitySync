@@ -190,5 +190,6 @@
 
     <!-- AllUsersScreen strings -->
     <string name="title_all_users">Users</string>
+    <string name="hint_filter">Search by nickname...</string>
 
 </resources>

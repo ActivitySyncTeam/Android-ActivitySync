@@ -260,9 +260,9 @@ public class ApiService implements IApiService
     }
 
     @Override
-    public Observable<UsersCollection> getAllUsers()
+    public Observable<UsersCollection> getUsers(boolean isFiltered, int page, String nickname)
     {
-        return api.getAllUsers();
+        return api.getUsers(page, isFiltered, nickname, null, null, null, null);
     }
 
     private String accessTokenHeader()

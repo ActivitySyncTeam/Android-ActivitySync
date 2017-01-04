@@ -147,5 +147,5 @@ public interface IActivitySyncApi
     Observable<UserID> updateUser(@Header("Authorization") String accessToken, @Field("name") String name, @Field("surname") String surname, @Field("signature") String signature, @Field("email") String email);
 
     @GET("/api/users")
-    Observable<UsersCollection> getAllUsers();
+    Observable<UsersCollection> getUsers(@Query("page") int page, @Query("isFiltered") boolean isFiltered, @Query("username") String username, @Query("name") String name, @Query("surname") String surname, @Query("events") Integer events, @Query("registerDate") String registerDate);
 }

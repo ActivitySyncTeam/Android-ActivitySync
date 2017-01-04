@@ -10,9 +10,17 @@ public interface IAllUsersScreen
 {
     Observable refreshUsers();
 
+    Observable filterUsers();
+
     Observable<User> selectedUser();
+
+    String getUserFilterText();
 
     void refreshingVisible(boolean isRefreshing);
 
     void addUsersList(Collection<User> users);
+
+    void showProgress();
+
+    void hideProgress();
 }

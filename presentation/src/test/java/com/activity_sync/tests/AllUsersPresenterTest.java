@@ -25,8 +25,11 @@ import rx.schedulers.Schedulers;
 import rx.subjects.PublishSubject;
 
 import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyBoolean;
+import static org.mockito.Matchers.anyInt;
+import static org.mockito.Matchers.anyString;
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -52,6 +55,7 @@ public class AllUsersPresenterTest
 
     PublishSubject refreshUsersEvent = PublishSubject.create();
     PublishSubject userSelectedEvent = PublishSubject.create();
+    PublishSubject filterUsersEvent = PublishSubject.create();
 
     @Before
     public void setUp() throws Exception
@@ -67,8 +71,11 @@ public class AllUsersPresenterTest
 
         when(view.refreshUsers()).thenReturn(refreshUsersEvent);
         when(view.selectedUser()).thenReturn(userSelectedEvent);
-        when(apiService.getAllUsers()).thenReturn(Observable.just(usersCollection));
+        when(view.filterUsers()).thenReturn(filterUsersEvent);
+        when(apiService.getUsers(anyBoolean(), anyInt(), anyString())).thenReturn(Observable.just(usersCollection));
         when(currentUser.userId()).thenReturn(userID + 1);
+        doNothing().when(view).showProgress();
+        doNothing().when(view).hideProgress();
 
         presenter.start();
     }
@@ -83,7 +90,7 @@ public class AllUsersPresenterTest
     public void allUsersPresenter_loadUsers_loadFailed() throws Exception
     {
         Mockito.reset(view);
-        when(apiService.getAllUsers()).thenReturn(Observable.error(new Throwable()));
+        when(apiService.getUsers(anyBoolean(), anyInt(), anyString())).thenReturn(Observable.error(new Throwable()));
         verify(view, never()).addUsersList(any());
     }
 
@@ -93,7 +100,7 @@ public class AllUsersPresenterTest
         Mockito.reset(view);
 
         refreshUsersEvent.onNext(this);
-        Mockito.verify(view, times(2)).refreshingVisible(false);
+        Mockito.verify(view).refreshingVisible(false);
     }
 
     @Test
