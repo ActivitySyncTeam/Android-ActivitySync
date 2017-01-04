@@ -10,6 +10,10 @@
             android:title="@string/menu_events"/>
 
         <item
+            android:id="@+id/menu_users"
+            android:title="@string/menu_users_screen"/>
+
+        <item
             android:id="@+id/menu_friends"
             android:title="@string/menu_friends"/>
 

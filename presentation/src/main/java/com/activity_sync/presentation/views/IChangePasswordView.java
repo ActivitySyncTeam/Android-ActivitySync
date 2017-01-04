@@ -32,7 +32,7 @@ public interface IChangePasswordView
 
     void saveSucceded();
 
-    void saveFailed(String message);
+    void saveFailed();
 
     void close();
 }

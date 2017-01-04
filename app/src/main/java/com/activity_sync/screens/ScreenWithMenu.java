@@ -106,6 +106,8 @@ public abstract class ScreenWithMenu extends Screen
 
         menuNavigator.addAction(R.id.menu_logout, navigator -> currentUser.logout());
 
+        menuNavigator.addAction(R.id.menu_users, INavigator::openAllUsersScreen);
+
         navigationView.setNavigationItemSelectedListener(menuItem -> {
             if (getMenuId() == menuItem.getItemId())
             {

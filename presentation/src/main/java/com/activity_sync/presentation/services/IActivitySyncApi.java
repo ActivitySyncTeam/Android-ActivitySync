@@ -1,5 +1,6 @@
 package com.activity_sync.presentation.services;
 
+import com.activity_sync.presentation.models.ChangePasswordResponse;
 import com.activity_sync.presentation.models.ClientDetails;
 import com.activity_sync.presentation.models.Comment;
 import com.activity_sync.presentation.models.CommentsCollection;
@@ -13,6 +14,8 @@ import com.activity_sync.presentation.models.LoginResponse;
 import com.activity_sync.presentation.models.Participants;
 import com.activity_sync.presentation.models.RegisterResponse;
 import com.activity_sync.presentation.models.User;
+import com.activity_sync.presentation.models.UserID;
+import com.activity_sync.presentation.models.UsersCollection;
 import com.activity_sync.presentation.models.body_models.EventBody;
 import com.activity_sync.presentation.models.body_models.EventIDBody;
 import com.activity_sync.presentation.models.body_models.OrganizerApprovalBody;
@@ -134,4 +137,15 @@ public interface IActivitySyncApi
 
     @GET("/api/levels")
     Observable<List<Level>> getAvailableLevels();
+
+    @FormUrlEncoded
+    @POST("/api/user/changepassword")
+    Observable<ChangePasswordResponse> changePassword(@Header("Authorization") String accessToken, @Field("current_password") String currentPassword, @Field("new_password") String newPassword);
+
+    @FormUrlEncoded
+    @POST("/api/user/update")
+    Observable<UserID> updateUser(@Header("Authorization") String accessToken, @Field("name") String name, @Field("surname") String surname, @Field("signature") String signature, @Field("email") String email);
+
+    @GET("/api/users")
+    Observable<UsersCollection> getAllUsers();
 }

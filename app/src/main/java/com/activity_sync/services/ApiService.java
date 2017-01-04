@@ -2,20 +2,23 @@ package com.activity_sync.services;
 
 import android.util.Base64;
 
+import com.activity_sync.presentation.models.ChangePasswordResponse;
 import com.activity_sync.presentation.models.ClientDetails;
 import com.activity_sync.presentation.models.Comment;
 import com.activity_sync.presentation.models.CommentsCollection;
 import com.activity_sync.presentation.models.Discipline;
 import com.activity_sync.presentation.models.Event;
-import com.activity_sync.presentation.models.Friends;
-import com.activity_sync.presentation.models.body_models.EventBody;
 import com.activity_sync.presentation.models.EventID;
 import com.activity_sync.presentation.models.EventsCollection;
+import com.activity_sync.presentation.models.Friends;
 import com.activity_sync.presentation.models.Level;
 import com.activity_sync.presentation.models.LoginResponse;
 import com.activity_sync.presentation.models.Participants;
 import com.activity_sync.presentation.models.RegisterResponse;
 import com.activity_sync.presentation.models.User;
+import com.activity_sync.presentation.models.UserID;
+import com.activity_sync.presentation.models.UsersCollection;
+import com.activity_sync.presentation.models.body_models.EventBody;
 import com.activity_sync.presentation.models.body_models.EventIDBody;
 import com.activity_sync.presentation.models.body_models.OrganizerApprovalBody;
 import com.activity_sync.presentation.models.body_models.UserIDBody;
@@ -242,6 +245,24 @@ public class ApiService implements IApiService
     public Observable<List<Level>> getAvailableLevels()
     {
         return api.getAvailableLevels();
+    }
+
+    @Override
+    public Observable<ChangePasswordResponse> changePassword(String currentPassword, String newPassword)
+    {
+        return api.changePassword(accessTokenHeader(), currentPassword, newPassword);
+    }
+
+    @Override
+    public Observable<UserID> updateUser(String name, String surname, String signature, String email)
+    {
+        return api.updateUser(accessTokenHeader(), name, surname, signature, email);
+    }
+
+    @Override
+    public Observable<UsersCollection> getAllUsers()
+    {
+        return api.getAllUsers();
     }
 
     private String accessTokenHeader()

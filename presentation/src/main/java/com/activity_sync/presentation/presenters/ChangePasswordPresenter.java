@@ -1,5 +1,6 @@
 package com.activity_sync.presentation.presenters;
 
+import com.activity_sync.presentation.services.IApiService;
 import com.activity_sync.presentation.utils.StringUtils;
 import com.activity_sync.presentation.views.IChangePasswordView;
 
@@ -7,12 +8,14 @@ import rx.Scheduler;
 
 public class ChangePasswordPresenter extends Presenter<IChangePasswordView>
 {
-    private Scheduler uiThread;
+    private final Scheduler uiThread;
+    private final IApiService apiService;
 
-    public ChangePasswordPresenter(IChangePasswordView view, Scheduler uiThread)
+    public ChangePasswordPresenter(IChangePasswordView view, Scheduler uiThread, IApiService apiService)
     {
         super(view);
         this.uiThread = uiThread;
+        this.apiService = apiService;
     }
 
     @Override
@@ -62,15 +65,12 @@ public class ChangePasswordPresenter extends Presenter<IChangePasswordView>
 
                     if (canContinue)
                     {
-                        boolean callSucceded = true;
-                        if (callSucceded)
-                        {
-                            view.saveSucceded();
-                            view.close();
-                        } else
-                        {
-                            view.saveFailed("Wrong password.");
-                        }
+                        apiService.changePassword(view.getOldPassword(), view.getNewPassword())
+                                .observeOn(uiThread)
+                                .subscribe(response -> {
+                                    view.saveSucceded();
+                                    view.close();
+                                }, this::handleError);
                     }
                 }));
     }
@@ -85,5 +85,11 @@ public class ChangePasswordPresenter extends Presenter<IChangePasswordView>
     {
         return !(StringUtils.isNullOrEmpty(view.getNewPassword()) || StringUtils.isNullOrEmpty(view.getOldPassword()))
                 && view.getNewPassword().equals(view.getOldPassword());
+    }
+
+    private void handleError(Throwable error)
+    {
+        error.printStackTrace();
+        view.saveFailed();
     }
 }

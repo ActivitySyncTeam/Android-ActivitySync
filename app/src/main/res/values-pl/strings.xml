@@ -73,8 +73,9 @@
     <string name="ea_hint_last_name">Nazwisko</string>
     <string name="ea_hint_signature">Sygnatura</string>
     <string name="ea_hint_password">Wprowadź hasło by potwierdzić</string>
-    <string name="ea_save_btn">ZAPISZ</string>
+    <string name="ea_save_btn">Zapisz</string>
     <string name="ea_save_succ">Profil zapisany!</string>
+    <string name="ea_save_fail">Profil nie został zapisany!</string>
     <string name="cp_hint_confirm_new_password">Potwierdź nowe hasło</string>
     <string name="cp_hint_new_password">Nowe hasło</string>
     <string name="cp_hint_old_password">Stare hasło</string>
@@ -110,6 +111,7 @@
     <string name="menu_create_event">Nowe wydarzenie</string>
     <string name="log_out">Wyloguj się</string>
     <string name="cp_save_succ">Hasło zmienione!</string>
+    <string name="cp_save_fail">Hasło nie zostało zmienione!</string>
     <string name="err_confirmed_not_matching">Potwierdzone hasło różni się od nowego hasła</string>
     <string name="err_same_passwords">Nowe hasło nie może być takie samo jak stare hasło</string>
     <string name="txt_permission_granted">Zezwolenie zostało udzielone</string>
@@ -147,5 +149,8 @@
     <string name="btn_event_details_screen_comments">KOMENTARZE</string>
     <string name="btn_update_event">Aktualizuj</string>
     <string name="txt_register_date">Rejestracja</string>
+    <string name="menu_users_screen">Użytkownicy</string>
+    <string name="title_all_users">Użytkownicy</string>
+    <string name="txt_votes_number">Głosy</string>
 
 </resources>

@@ -23,6 +23,8 @@ public interface INavigator
 
     void openChangePasswordScreen();
 
+    void openAllUsersScreen();
+
     void openEditAccountScreen(User user);
 
     void openParticipantsScreen(boolean isOrganizer, int eventId);

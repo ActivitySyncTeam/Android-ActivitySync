@@ -10,11 +10,15 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.activity_sync.App;
 import com.activity_sync.R;
 import com.activity_sync.presentation.models.User;
 import com.activity_sync.presentation.presenters.EditAccountPresenter;
 import com.activity_sync.presentation.presenters.IPresenter;
+import com.activity_sync.presentation.services.IApiService;
 import com.activity_sync.presentation.views.IEditAccountView;
+
+import javax.inject.Inject;
 
 import butterknife.Bind;
 import rx.Observable;
@@ -23,6 +27,9 @@ import rx.android.view.ViewObservable;
 
 public class EditAccountScreen extends Screen implements IEditAccountView
 {
+    @Inject
+    IApiService apiService;
+
     @Bind(R.id.ea_first_name)
     AppCompatEditText firstNameEditText;
 
@@ -34,9 +41,6 @@ public class EditAccountScreen extends Screen implements IEditAccountView
 
     @Bind(R.id.ea_email)
     AppCompatEditText emailEditText;
-
-    @Bind(R.id.ea_password)
-    AppCompatEditText passwordEditText;
 
     @Bind(R.id.ea_signature)
     AppCompatEditText signatureEditText;
@@ -53,20 +57,20 @@ public class EditAccountScreen extends Screen implements IEditAccountView
     @Bind(R.id.ea_email_layout)
     TextInputLayout emailLayout;
 
-    @Bind(R.id.ea_password_layout)
-    TextInputLayout passwordLayout;
-
     public static final String USER_DETAILS = "user_details";
 
     @Override
     protected IPresenter createPresenter(Screen screen, Bundle savedInstanceState)
     {
         User user = (User) getIntent().getSerializableExtra(USER_DETAILS);
-        return new EditAccountPresenter(this, AndroidSchedulers.mainThread(), user);
+        return new EditAccountPresenter(this, AndroidSchedulers.mainThread(), apiService, user);
     }
 
     @Override
-    protected void inject(Context screen) {}
+    protected void inject(Context screen)
+    {
+        App.component(this).inject(this);
+    }
 
     public EditAccountScreen()
     {
@@ -122,25 +126,6 @@ public class EditAccountScreen extends Screen implements IEditAccountView
             }
         });
 
-        passwordEditText.addTextChangedListener(new TextWatcher()
-        {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after)
-            {
-                passwordErrorEnabled(false);
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count)
-            {
-            }
-
-            @Override
-            public void afterTextChanged(Editable s)
-            {
-            }
-        });
-
         emailEditText.addTextChangedListener(new TextWatcher()
         {
             @Override
@@ -180,12 +165,6 @@ public class EditAccountScreen extends Screen implements IEditAccountView
     }
 
     @Override
-    public void passwordErrorEnabled(boolean enabled)
-    {
-        passwordLayout.setErrorEnabled(enabled);
-    }
-
-    @Override
     public void firstNameErrorText(String error)
     {
         firstNameLayout.setError(error);
@@ -204,12 +183,6 @@ public class EditAccountScreen extends Screen implements IEditAccountView
     }
 
     @Override
-    public void passwordErrorText(String error)
-    {
-        passwordLayout.setError(error);
-    }
-
-    @Override
     public Observable onSaveClick()
     {
         return ViewObservable.clicks(saveButton);
@@ -222,9 +195,9 @@ public class EditAccountScreen extends Screen implements IEditAccountView
     }
 
     @Override
-    public void saveFailed(String message)
+    public void saveFailed()
     {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, R.string.ea_save_fail, Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -247,12 +220,6 @@ public class EditAccountScreen extends Screen implements IEditAccountView
     public String emptyFieldErrorText()
     {
         return getString(R.string.err_empty_field);
-    }
-
-    @Override
-    public String getPassword()
-    {
-        return passwordEditText.getText().toString();
     }
 
     @Override

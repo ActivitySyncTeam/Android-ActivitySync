@@ -22,6 +22,7 @@
     <!-- Menu strings -->
     <string name="menu_dummy_screen">Dummy Screen</string>
     <string name="menu_events">Events</string>
+    <string name="menu_users_screen">Users</string>
     <string name="menu_friends">Friends</string>
     <string name="menu_create_event">New event</string>
     <string name="log_out">Log out</string>
@@ -69,6 +70,7 @@
     <string name="txt_last_name">Last name</string>
     <string name="txt_email">E-mail</string>
     <string name="txt_credibility">Credibility</string>
+    <string name="txt_votes_number">Votes</string>
     <string name="txt_very_good">Very good</string>
     <string name="txt_good">good</string>
     <string name="txt_ok">OK</string>
@@ -128,8 +130,9 @@
     <string name="ea_hint_signature">Signature</string>
     <string name="ea_hint_password">Type password to confirm</string>
     <string name="ea_err_empty_field">This field cannot be empty</string>
-    <string name="ea_save_btn">SAVE</string>
+    <string name="ea_save_btn">Save</string>
     <string name="ea_save_succ">Profile saved!</string>
+    <string name="ea_save_fail">Profile was not saved!</string>
 
     <!-- ChangePasswordScreen strings -->
     <string name="title_change_password">Change Password</string>
@@ -138,6 +141,7 @@
     <string name="cp_hint_confirm_new_password">Confirm new password</string>
     <string name="cp_save_btn">SAVE</string>
     <string name="cp_save_succ">Password changed!</string>
+    <string name="cp_save_fail">Password was not changed!</string>
     <string name="err_confirmed_not_matching">Confirm password does not math the password</string>
     <string name="err_same_passwords">New password must be different from old password</string>
 
@@ -183,5 +187,8 @@
     <string name="err_comment_empty">Your comment cannot be empty</string>
     <string name="txt_comment_hint">Write your comment here</string>
     <string name="btn_send">Send</string>
+
+    <!-- AllUsersScreen strings -->
+    <string name="title_all_users">Users</string>
 
 </resources>

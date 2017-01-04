@@ -9,10 +9,14 @@ import android.text.TextWatcher;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.activity_sync.App;
 import com.activity_sync.R;
 import com.activity_sync.presentation.presenters.ChangePasswordPresenter;
 import com.activity_sync.presentation.presenters.IPresenter;
+import com.activity_sync.presentation.services.IApiService;
 import com.activity_sync.presentation.views.IChangePasswordView;
+
+import javax.inject.Inject;
 
 import butterknife.Bind;
 import rx.Observable;
@@ -21,6 +25,9 @@ import rx.android.view.ViewObservable;
 
 public class ChangePasswordScreen extends Screen implements IChangePasswordView
 {
+    @Inject
+    IApiService apiService;
+
     @Bind(R.id.cp_old_password)
     AppCompatEditText oldPasswordEditText;
 
@@ -45,11 +52,14 @@ public class ChangePasswordScreen extends Screen implements IChangePasswordView
     @Override
     protected IPresenter createPresenter(Screen screen, Bundle savedInstanceState)
     {
-        return new ChangePasswordPresenter(this, AndroidSchedulers.mainThread());
+        return new ChangePasswordPresenter(this, AndroidSchedulers.mainThread(), apiService);
     }
 
     @Override
-    protected void inject(Context screen) {}
+    protected void inject(Context screen)
+    {
+        App.component(this).inject(this);
+    }
 
     public ChangePasswordScreen()
     {
@@ -210,9 +220,9 @@ public class ChangePasswordScreen extends Screen implements IChangePasswordView
     }
 
     @Override
-    public void saveFailed(String message)
+    public void saveFailed()
     {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, R.string.cp_save_fail, Toast.LENGTH_SHORT).show();
     }
 
     @Override

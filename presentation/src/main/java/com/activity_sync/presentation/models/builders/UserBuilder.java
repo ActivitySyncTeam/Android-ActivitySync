@@ -19,6 +19,8 @@ public class UserBuilder
     private int rate;
     private int credibility;
     private int ratesNumber;
+    private int likes;
+    private int friends;
 
     public UserBuilder setUserId(int userId)
     {
@@ -105,8 +107,20 @@ public class UserBuilder
         return this;
     }
 
+    public UserBuilder setLikes(int likes)
+    {
+        this.likes = likes;
+        return this;
+    }
+
+    public UserBuilder setFriends(int friends)
+    {
+        this.friends = friends;
+        return this;
+    }
+
     public User createUser()
     {
-        return new User(userId, id, name, surname, username, email, registerDate, signature, events, isOrganizer, isCandidate, isFriend, rate, credibility, ratesNumber);
+        return new User(userId, id, name, surname, username, email, registerDate, signature, events, isOrganizer, isCandidate, isFriend, rate, credibility, ratesNumber, friends, likes);
     }
 }

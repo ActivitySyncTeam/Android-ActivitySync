@@ -7,6 +7,7 @@ import android.content.Intent;
 import com.activity_sync.presentation.models.Event;
 import com.activity_sync.presentation.models.User;
 import com.activity_sync.presentation.services.INavigator;
+import com.activity_sync.screens.AllUsersScreen;
 import com.activity_sync.screens.ChangePasswordScreen;
 import com.activity_sync.screens.CommentsScreen;
 import com.activity_sync.screens.CreateNewEventScreen;
@@ -135,6 +136,12 @@ public class Navigator implements INavigator
     public void openChangePasswordScreen()
     {
         startActivity(getIntent(ChangePasswordScreen.class));
+    }
+
+    @Override
+    public void openAllUsersScreen()
+    {
+        startActivity(getIntent(AllUsersScreen.class));
     }
 
     @Override
