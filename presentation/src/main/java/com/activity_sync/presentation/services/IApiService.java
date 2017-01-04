@@ -49,6 +49,14 @@ public interface IApiService
 
     Observable<EventsCollection> getMyEvents();
 
+    Observable<EventsCollection> getFilteredEvents(int page, int range, float lat, float lng);
+
+    Observable<EventsCollection> getFilteredEvents(int page, int range, float lat, float lng, int disciplineID);
+
+    Observable<EventsCollection> getFilteredEvents(int page, int range, float lat, float lng, String since);
+
+    Observable<EventsCollection> getFilteredEvents(int page, int range, float lat, float lng, int disciplineID, String since);
+
     Observable<Event> getEventDetails(int eventId);
 
     Observable<CommentsCollection> getEventComments(int eventId);

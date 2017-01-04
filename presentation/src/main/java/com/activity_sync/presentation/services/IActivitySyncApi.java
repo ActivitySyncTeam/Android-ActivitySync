@@ -71,6 +71,18 @@ public interface IActivitySyncApi
     @GET("/api/myEvents")
     Observable<EventsCollection> getMyEvents(@Header("Authorization") String accessToken);
 
+    @GET("/api/events")
+    Observable<EventsCollection> getFilteredEvents(@Header("Authorization") String accessToken, @Query("page") int page, @Query("isFiltered") boolean isFiltered, @Query("range") int range, @Query("lat") float lat, @Query("lng") float lng);
+
+    @GET("/api/events")
+    Observable<EventsCollection> getFilteredEvents(@Header("Authorization") String accessToken, @Query("page") int page, @Query("isFiltered") boolean isFiltered, @Query("range") int range, @Query("lat") float lat, @Query("lng") float lng, @Query("disciplineID") int disciplineID);
+
+    @GET("/api/events")
+    Observable<EventsCollection> getFilteredEvents(@Header("Authorization") String accessToken, @Query("page") int page, @Query("isFiltered") boolean isFiltered, @Query("range") int range, @Query("lat") float lat, @Query("lng") float lng, @Query("since") String since);
+
+    @GET("/api/events")
+    Observable<EventsCollection> getFilteredEvents(@Header("Authorization") String accessToken, @Query("page") int page, @Query("isFiltered") boolean isFiltered, @Query("range") int range, @Query("lat") float lat, @Query("lng") float lng, @Query("disciplineID") int disciplineID, @Query("since") String since);
+
     @GET("api/event/{event_id}")
     Observable<Event> getEventDetails(@Header("Authorization") String accessToken, @Path("event_id") int eventId);
 

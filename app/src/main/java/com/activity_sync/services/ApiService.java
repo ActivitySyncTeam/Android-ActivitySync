@@ -104,6 +104,30 @@ public class ApiService implements IApiService
     }
 
     @Override
+    public Observable<EventsCollection> getFilteredEvents(int page, int range, float lat, float lng)
+    {
+        return api.getFilteredEvents(accessTokenHeader(), page, true, range, lat, lng);
+    }
+
+    @Override
+    public Observable<EventsCollection> getFilteredEvents(int page, int range, float lat, float lng, int disciplineID)
+    {
+        return api.getFilteredEvents(accessTokenHeader(), page, true, range, lat, lng, disciplineID);
+    }
+
+    @Override
+    public Observable<EventsCollection> getFilteredEvents(int page, int range, float lat, float lng, String since)
+    {
+        return api.getFilteredEvents(accessTokenHeader(), page, true, range, lat, lng, since);
+    }
+
+    @Override
+    public Observable<EventsCollection> getFilteredEvents(int page, int range, float lat, float lng, int disciplineID, String since)
+    {
+        return api.getFilteredEvents(accessTokenHeader(), page, true, range, lat, lng, disciplineID, since);
+    }
+
+    @Override
     public Observable<Event> getEventDetails(int eventId)
     {
         return api.getEventDetails(accessTokenHeader(), eventId);
