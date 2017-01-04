@@ -120,6 +120,9 @@ public interface IActivitySyncApi
     @HTTP(method = "DELETE", path = "api/user/user/reject", hasBody = true)
     Observable<Void> rejectFriendRequest(@Header("Authorization") String accessToken, @Body UserIDBody userIDBody);
 
+    @HTTP(method = "DELETE", path = "api/user/user/cancel", hasBody = true)
+    Observable<Friends> cancelFriendInvitation(@Header("Authorization") String accessToken, @Body UserIDBody userIDBody);
+
     @FormUrlEncoded
     @POST("api/user/user/accept")
     Observable<Friends> acceptFriendInvitation(@Header("Authorization") String accessToken, @Field("userID") int userID);
@@ -127,10 +130,6 @@ public interface IActivitySyncApi
     @FormUrlEncoded
     @POST("api/user/user/join")
     Observable<Friends> sendFriendRequest(@Header("Authorization") String accessToken, @Field("userID") int userID);
-
-    @FormUrlEncoded
-    @POST("api/user/user/cancel")
-    Observable<Friends> cancelFriendInvitation(@Header("Authorization") String accessToken, @Field("userID") int userID);
 
     @GET("/api/disciplines")
     Observable<List<Discipline>> getAvailableDisciplines();

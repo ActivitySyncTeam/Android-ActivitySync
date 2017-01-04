@@ -38,6 +38,7 @@ public class UserDetailsPresenterTests
     PublishSubject thumbUpClickEvent = PublishSubject.create();
     PublishSubject thumbDownClickEvent = PublishSubject.create();
     PublishSubject friendsClickEvent = PublishSubject.create();
+    PublishSubject rejectClickEvent = PublishSubject.create();
 
     int userId = 1;
     User user;
@@ -48,7 +49,7 @@ public class UserDetailsPresenterTests
     {
         friends = new FriendsBuilder().create();
 
-        user = createUser(3, false, false);
+        user = createUser(3, false, false, false);
         Mockito.when(apiService.getUserData(userId)).thenReturn(Observable.just(user));
 
         Mockito.when(apiService.rateUser(userId, view.LIKE)).thenReturn(Observable.just(user));
@@ -56,12 +57,15 @@ public class UserDetailsPresenterTests
         Mockito.when(apiService.rateUser(userId, view.NO_ASSESSMENT)).thenReturn(Observable.just(user));
 
         Mockito.when(apiService.sendFriendRequest(userId)).thenReturn(Observable.just(friends));
-        Mockito.when(apiService.cancelFriendInvitation(userId)).thenReturn(Observable.just(friends));
+        Mockito.when(apiService.cancelFriendInvitation(any())).thenReturn(Observable.just(friends));
+        Mockito.when(apiService.acceptFriendInvitation(userId)).thenReturn(Observable.just(null));
         Mockito.when(apiService.deleteFriend(any())).thenReturn(Observable.just(null));
+        Mockito.when(apiService.rejectFriendRequest(any())).thenReturn(Observable.just(null));
 
         Mockito.when(view.thumbDownClick()).thenReturn(thumbDownClickEvent);
         Mockito.when(view.thumbUpClick()).thenReturn(thumbUpClickEvent);
         Mockito.when(view.friendsBtnClick()).thenReturn(friendsClickEvent);
+        Mockito.when(view.rejectInvitationClick()).thenReturn(rejectClickEvent);
     }
 
     @Test
@@ -112,7 +116,7 @@ public class UserDetailsPresenterTests
     @Test
     public void userDetailsPresenter_thumbDownWhenMatched_colorGray()
     {
-        user = createUser(-1, false, false);
+        user = createUser(-1, false, false, false);
         Mockito.when(apiService.getUserData(userId)).thenReturn(Observable.just(user));
 
         UserDetailsPresenter presenter = createPresenter();
@@ -126,7 +130,7 @@ public class UserDetailsPresenterTests
     @Test
     public void userDetailsPresenter_thumbUpWhenMatched_colorGray()
     {
-        user = createUser(1, false, false);
+        user = createUser(1, false, false, false);
         Mockito.when(apiService.getUserData(userId)).thenReturn(Observable.just(user));
 
         UserDetailsPresenter presenter = createPresenter();
@@ -142,7 +146,7 @@ public class UserDetailsPresenterTests
     @Test
     public void userDetailsPresenter_friendAlready_deleteFriend()
     {
-        user = createUser(1, true, false);
+        user = createUser(1, true, false, false);
         Mockito.when(apiService.getUserData(userId)).thenReturn(Observable.just(user));
 
         UserDetailsPresenter presenter = createPresenter();
@@ -158,7 +162,7 @@ public class UserDetailsPresenterTests
     @Test
     public void userDetailsPresenter_candidateAlready_cancelFriendRequest()
     {
-        user = createUser(-1, false, true);
+        user = createUser(-1, false, true, false);
         Mockito.when(apiService.getUserData(userId)).thenReturn(Observable.just(user));
 
         UserDetailsPresenter presenter = createPresenter();
@@ -167,14 +171,14 @@ public class UserDetailsPresenterTests
         Mockito.reset(view);
 
         friendsClickEvent.onNext(this);
-        Mockito.verify(apiService).cancelFriendInvitation(userId);
+        Mockito.verify(apiService).cancelFriendInvitation(any());
         Mockito.verify(view).displayFriendRequestCanceledMessage();
     }
 
     @Test
     public void userDetailsPresenter_stranger_sendFriendRequest()
     {
-        user = createUser(1, false, false);
+        user = createUser(1, false, false, false);
         Mockito.when(apiService.getUserData(userId)).thenReturn(Observable.just(user));
 
         UserDetailsPresenter presenter = createPresenter();
@@ -187,12 +191,37 @@ public class UserDetailsPresenterTests
         Mockito.verify(view).displayFriendRequestSentMessage();
     }
 
+    @Test
+    public void userDetailsPresenter_userInvitedMe_acceptFriendRequest()
+    {
+        user = createUser(1, false, false, true);
+        Mockito.when(apiService.getUserData(userId)).thenReturn(Observable.just(user));
+
+        UserDetailsPresenter presenter = createPresenter();
+        presenter.start();
+
+        friendsClickEvent.onNext(this);
+        Mockito.verify(apiService).acceptFriendInvitation(userId);
+        Mockito.verify(view).displayFriendRequestAcceptedMessage();
+    }
+
+    @Test
+    public void userDetailsPresenter_userInvitedMe_rejectRequest()
+    {
+        UserDetailsPresenter presenter = createPresenter();
+        presenter.start();
+
+        rejectClickEvent.onNext(this);
+        Mockito.verify(apiService).rejectFriendRequest(any());
+        Mockito.verify(view).displayFriendRequestRejectedMessage();
+    }
+
     private UserDetailsPresenter createPresenter()
     {
         return new UserDetailsPresenter(view, apiService, Schedulers.immediate(), currentUser, userId);
     }
 
-    public User createUser(int rate, boolean isFriend, boolean isCandidate)
+    public User createUser(int rate, boolean isFriend, boolean isCandidate, boolean isInvited)
     {
         return new UserBuilder()
                 .setName("Marcin")
@@ -207,6 +236,7 @@ public class UserDetailsPresenterTests
                 .setRate(rate)
                 .setFriend(isFriend)
                 .setCandidate(isCandidate)
+                .setInvited(isInvited)
                 .createUser();
     }
 }

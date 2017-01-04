@@ -23,8 +23,11 @@ public class UserDetailsScreen extends UserBaseScreen implements IUserDetailsVie
 {
     public static final String USER_ID = "user_id";
 
-    @Bind(R.id.follow_btn)
-    Button followBtn;
+    @Bind(R.id.action_btn)
+    Button actionBtn;
+
+    @Bind(R.id.reject_btn)
+    Button rejectBtn;
 
     public UserDetailsScreen()
     {
@@ -59,13 +62,13 @@ public class UserDetailsScreen extends UserBaseScreen implements IUserDetailsVie
         {
             thumbDown.setVisibility(View.VISIBLE);
             thumbUp.setVisibility(View.VISIBLE);
-            followBtn.setVisibility(View.VISIBLE);
+            actionBtn.setVisibility(View.VISIBLE);
         }
         else
         {
             thumbDown.setVisibility(View.INVISIBLE);
             thumbUp.setVisibility(View.INVISIBLE);
-            followBtn.setVisibility(View.GONE);
+            actionBtn.setVisibility(View.GONE);
         }
     }
 
@@ -106,18 +109,27 @@ public class UserDetailsScreen extends UserBaseScreen implements IUserDetailsVie
     {
         if (user.isFriend())
         {
-            followBtn.setText(getString(R.string.btn_remove_from_friends));
-            followBtn.setBackground(ContextCompat.getDrawable(this, R.drawable.selector_default_negative));
+            actionBtn.setText(getString(R.string.btn_remove_from_friends));
+            rejectBtn.setVisibility(View.GONE);
+            actionBtn.setBackground(ContextCompat.getDrawable(this, R.drawable.selector_default_negative));
         }
         else if (user.isCandidate())
         {
-            followBtn.setText(getString(R.string.btn_cancel_friend_request));
-            followBtn.setBackground(ContextCompat.getDrawable(this, R.drawable.selector_default_negative));
+            actionBtn.setText(getString(R.string.btn_cancel_friend_request));
+            rejectBtn.setVisibility(View.GONE);
+            actionBtn.setBackground(ContextCompat.getDrawable(this, R.drawable.selector_default_negative));
+        }
+        else if (user.isInvited())
+        {
+            actionBtn.setText(getString(R.string.btn_cancel_friend_request));
+            rejectBtn.setVisibility(View.VISIBLE);
+            actionBtn.setBackground(ContextCompat.getDrawable(this, R.drawable.selector_default_negative));
         }
         else
         {
-            followBtn.setText(getString(R.string.btn_add_to_friends));
-            followBtn.setBackground(ContextCompat.getDrawable(this, R.drawable.selector_default_positive));
+            actionBtn.setText(getString(R.string.btn_add_to_friends));
+            rejectBtn.setVisibility(View.GONE);
+            actionBtn.setBackground(ContextCompat.getDrawable(this, R.drawable.selector_default_positive));
         }
     }
 
@@ -125,6 +137,12 @@ public class UserDetailsScreen extends UserBaseScreen implements IUserDetailsVie
     public void displayFriendRequestSentMessage()
     {
         Toast.makeText(this, getString(R.string.txt_friends_request_sent), Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void displayFriendRequestAcceptedMessage()
+    {
+        Toast.makeText(this, getString(R.string.txt_friend_request_accepted), Toast.LENGTH_LONG).show();
     }
 
     @Override
@@ -140,8 +158,20 @@ public class UserDetailsScreen extends UserBaseScreen implements IUserDetailsVie
     }
 
     @Override
+    public void displayFriendRequestRejectedMessage()
+    {
+        Toast.makeText(this, getString(R.string.txt_friend_request_rejected), Toast.LENGTH_LONG).show();
+    }
+
+    @Override
     public Observable friendsBtnClick()
     {
-        return ViewObservable.clicks(followBtn);
+        return ViewObservable.clicks(actionBtn);
+    }
+
+    @Override
+    public Observable rejectInvitationClick()
+    {
+        return ViewObservable.clicks(rejectBtn);
     }
 }

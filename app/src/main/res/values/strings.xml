@@ -83,8 +83,11 @@
     <string name="btn_cancel_friend_request">Cancel friends request</string>
     <string name="btn_remove_from_friends">Remove from your friends list</string>
     <string name="txt_friends_request_sent">Friends request has been sent</string>
+    <string name="txt_reject_friends_request">Reject invitation</string>
     <string name="txt_friends_request_turned_down">Friends request has been canceled</string>
     <string name="txt_friend_removed">User deleted from your friends</string>
+    <string name="txt_friend_request_rejected">You have rejected friend request</string>
+    <string name="txt_friend_request_accepted">You have accepted friend request</string>
     <string name="txt_register_date">Register Date</string>
 
     <!-- ParticipantsScreen strings -->

@@ -206,9 +206,9 @@ public class ApiService implements IApiService
     }
 
     @Override
-    public Observable<Friends> cancelFriendInvitation(int userID)
+    public Observable<Friends> cancelFriendInvitation(UserIDBody userIDBody)
     {
-        return api.cancelFriendInvitation(accessTokenHeader(), userID);
+        return api.cancelFriendInvitation(accessTokenHeader(), userIDBody);
     }
 
     @Override

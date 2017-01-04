@@ -106,7 +106,7 @@ public class UserDetailsPresenter extends Presenter<IUserDetailsView>
                 .subscribe(o -> {
                     if (user.isCandidate())
                     {
-                        apiService.cancelFriendInvitation(user.getUserId())
+                        apiService.cancelFriendInvitation(new UserIDBody(user.getUserId()))
                                 .observeOn(uiThread)
                                 .subscribe(friends -> {
 
@@ -130,6 +130,19 @@ public class UserDetailsPresenter extends Presenter<IUserDetailsView>
 
                                 }, this::handleError);
                     }
+                    else if (user.isInvited())
+                    {
+                        apiService.acceptFriendInvitation(user.getUserId())
+                                .observeOn(uiThread)
+                                .subscribe(friends -> {
+
+                                    view.displayFriendRequestAcceptedMessage();
+                                    user.setCandidate(false);
+                                    user.setFriend(true);
+                                    view.setFriendBtnAppearance(user);
+
+                                }, this::handleError);
+                    }
                     else
                     {
                         apiService.sendFriendRequest(user.getUserId())
@@ -143,6 +156,23 @@ public class UserDetailsPresenter extends Presenter<IUserDetailsView>
 
                                 }, this::handleError);
                     }
+                })
+        );
+
+        subscriptions.add(view.rejectInvitationClick()
+                .observeOn(uiThread)
+                .subscribe(o -> {
+
+                    apiService.rejectFriendRequest(new UserIDBody(user.getUserId()))
+                            .observeOn(uiThread)
+                            .subscribe(result -> {
+
+                                view.displayFriendRequestRejectedMessage();
+                                user.setCandidate(false);
+                                user.setFriend(false);
+                                view.setFriendBtnAppearance(user);
+
+                            }, this::handleError);
                 })
         );
     }

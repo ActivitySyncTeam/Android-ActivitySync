@@ -19,13 +19,32 @@
 
             <include layout="@layout/user_details_view"/>
 
-            <Button
-                android:id="@+id/follow_btn"
-                style="@style/DefaultButton.Positive"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/screen_margin_half"
-                android:text="@string/btn_add_to_friends" />
+                android:orientation="horizontal"
+                android:baselineAligned="false">
+
+                <Button
+                    android:id="@+id/action_btn"
+                    style="@style/DefaultButton.Positive"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/screen_margin_half"
+                    android:text="@string/btn_add_to_friends" />
+
+                <Button
+                    android:id="@+id/reject_btn"
+                    style="@style/DefaultButton.Negative"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/screen_margin_half"
+                    android:text="@string/txt_reject_friends_request"
+                    android:visibility="visible"/>
+
+            </LinearLayout>
 
         </com.activity_sync.custom.MoveUpwardAwareLinearLayout>
 

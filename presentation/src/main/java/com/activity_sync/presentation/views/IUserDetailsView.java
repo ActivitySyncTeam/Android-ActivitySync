@@ -16,9 +16,12 @@ public interface IUserDetailsView extends IUserBaseView
     void setThumbsColor(int rating);
 
     Observable friendsBtnClick();
+    Observable rejectInvitationClick();
     void setFriendBtnAppearance(User user);
 
     void displayFriendRequestSentMessage();
+    void displayFriendRequestAcceptedMessage();
     void displayFriendRequestCanceledMessage();
     void displayFriendRemovedMessage();
+    void displayFriendRequestRejectedMessage();
 }

@@ -83,7 +83,7 @@ public interface IApiService
 
     Observable<Friends> sendFriendRequest(int userID);
 
-    Observable<Friends> cancelFriendInvitation(int userID);
+    Observable<Friends> cancelFriendInvitation(UserIDBody userIDBody);
 
     Observable<List<Discipline>> getAvailableDisciplines();
 
