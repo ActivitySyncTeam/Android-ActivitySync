@@ -4,7 +4,7 @@ package com.activity_sync.renderers;
 import android.widget.TextView;
 
 import com.activity_sync.R;
-import com.activity_sync.presentation.models.FindUsersResponse;
+import com.activity_sync.presentation.models.User;
 import com.activity_sync.renderers.base.Renderer;
 import com.activity_sync.renderers.base.RendererBuilder;
 
@@ -12,7 +12,7 @@ import java.util.Arrays;
 
 import butterknife.Bind;
 
-public class UsersRenderer extends Renderer<FindUsersResponse>
+public class UsersRenderer extends Renderer<User>
 {
     @Bind(R.id.user_name)
     TextView userName;
@@ -44,7 +44,7 @@ public class UsersRenderer extends Renderer<FindUsersResponse>
         super(layoutRes);
     }
 
-    public static class Builder extends RendererBuilder<FindUsersResponse>
+    public static class Builder extends RendererBuilder<User>
     {
         public Builder()
         {
@@ -52,7 +52,7 @@ public class UsersRenderer extends Renderer<FindUsersResponse>
         }
 
         @Override
-        protected Class getPrototypeClass(FindUsersResponse content)
+        protected Class getPrototypeClass(User content)
         {
             return UsersRenderer.class;
         }

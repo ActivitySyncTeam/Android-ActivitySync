@@ -40,8 +40,8 @@ public class AllUsersPresenter extends Presenter<IAllUsersScreen>
         );
 
         subscriptions.add(view.selectedUser()
-                .subscribe(findUsersResponse -> {
-                    int userID = findUsersResponse.getUserId();
+                .subscribe(user -> {
+                    int userID = user.getUserId();
                     if (userID == currentUser.userId())
                     {
                         navigator.openMyProfileScreen();

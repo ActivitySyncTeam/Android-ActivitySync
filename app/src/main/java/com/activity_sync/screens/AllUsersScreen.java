@@ -8,7 +8,7 @@ import android.support.v7.widget.RecyclerView;
 
 import com.activity_sync.App;
 import com.activity_sync.R;
-import com.activity_sync.presentation.models.FindUsersResponse;
+import com.activity_sync.presentation.models.User;
 import com.activity_sync.presentation.presenters.AllUsersPresenter;
 import com.activity_sync.presentation.presenters.IPresenter;
 import com.activity_sync.presentation.services.CurrentUser;
@@ -45,8 +45,8 @@ public class AllUsersScreen extends Screen implements IAllUsersScreen
     SwipeRefreshLayout usersRefresh;
 
     private PublishSubject refreshUsers = PublishSubject.create();
-    private RVRendererAdapter<FindUsersResponse> adapter;
-    private List<FindUsersResponse> users = new ArrayList<>();
+    private RVRendererAdapter<User> adapter;
+    private List<User> users = new ArrayList<>();
 
     @Override
     protected IPresenter createPresenter(Screen screen, Bundle savedInstanceState)
@@ -92,7 +92,7 @@ public class AllUsersScreen extends Screen implements IAllUsersScreen
     }
 
     @Override
-    public void addUsersList(Collection<FindUsersResponse> users)
+    public void addUsersList(Collection<User> users)
     {
         adapter.clear();
         this.users.addAll(users);
@@ -101,7 +101,7 @@ public class AllUsersScreen extends Screen implements IAllUsersScreen
     }
 
     @Override
-    public Observable<FindUsersResponse> selectedUser()
+    public Observable<User> selectedUser()
     {
         return adapter.itemSelected();
     }

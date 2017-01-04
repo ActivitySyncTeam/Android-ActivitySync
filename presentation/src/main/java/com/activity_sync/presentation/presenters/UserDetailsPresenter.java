@@ -50,7 +50,7 @@ public class UserDetailsPresenter extends Presenter<IUserDetailsView>
                 .observeOn(uiThread)
                 .subscribe(o -> {
 
-                    if (user.getRate() == 1)
+                    if (user.getRate() == LIKE)
                     {
                         apiService.rateUser(userId, NO_ASSESSMENT)
                                 .observeOn(uiThread)
@@ -78,7 +78,7 @@ public class UserDetailsPresenter extends Presenter<IUserDetailsView>
                 .observeOn(uiThread)
                 .subscribe(o -> {
 
-                    if (user.getRate() == -1)
+                    if (user.getRate() == DISLIKE)
                     {
                         apiService.rateUser(userId, NO_ASSESSMENT)
                                 .observeOn(uiThread)

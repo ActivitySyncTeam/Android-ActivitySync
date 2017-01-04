@@ -51,7 +51,13 @@ public class User implements Serializable
     @SerializedName("ratesNumber")
     private int ratesNumber;
 
-    public User(int userId, int id, String name, String surname, String username, String email, String registerDate, String signature, int events, boolean isAdmin, boolean isCandidate, boolean isFriend, int rate, int credibility, int ratesNumber)
+    @SerializedName("friends")
+    private int friends;
+
+    @SerializedName("likes")
+    private int likes;
+
+    public User(int userId, int id, String name, String surname, String username, String email, String registerDate, String signature, int events, boolean isAdmin, boolean isCandidate, boolean isFriend, int rate, int credibility, int ratesNumber, int friends, int likes)
     {
         this.userId = userId;
         this.id = id;
@@ -68,6 +74,8 @@ public class User implements Serializable
         this.rate = rate;
         this.credibility = credibility;
         this.ratesNumber = ratesNumber;
+        this.friends = friends;
+        this.likes = likes;
     }
 
     public User()
@@ -165,5 +173,15 @@ public class User implements Serializable
     public void setRate(int rate)
     {
         this.rate = rate;
+    }
+
+    public int getFriends()
+    {
+        return friends;
+    }
+
+    public int getLikes()
+    {
+        return likes;
     }
 }

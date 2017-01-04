@@ -1,8 +1,8 @@
 package com.activity_sync.tests;
 
-import com.activity_sync.presentation.models.FindUsersResponse;
+import com.activity_sync.presentation.models.User;
 import com.activity_sync.presentation.models.UsersCollection;
-import com.activity_sync.presentation.models.builders.FoundUserBuilder;
+import com.activity_sync.presentation.models.builders.UserBuilder;
 import com.activity_sync.presentation.models.builders.UsersCollectionBuilder;
 import com.activity_sync.presentation.presenters.AllUsersPresenter;
 import com.activity_sync.presentation.services.CurrentUser;
@@ -46,8 +46,8 @@ public class AllUsersPresenterTest
 
     private AllUsersPresenter presenter;
     private UsersCollection usersCollection;
-    private FindUsersResponse findUsersResponse;
-    private List<FindUsersResponse> usersResponses = new ArrayList<>();
+    private User user;
+    private List<User> usersResponses = new ArrayList<>();
     private final int userID = 1;
 
     PublishSubject refreshUsersEvent = PublishSubject.create();
@@ -59,9 +59,10 @@ public class AllUsersPresenterTest
         MockitoAnnotations.initMocks(this);
         presenter = new AllUsersPresenter(view, navigator, Schedulers.immediate(), apiService, currentUser);
 
-        findUsersResponse = new FoundUserBuilder().setEvents(1).setFriends(1).setLikes(1)
-                .setName("Name").setSurname("Surname").setUserId(userID).setRegisterDate("date").build();
-        usersResponses.add(findUsersResponse);
+        user = new UserBuilder().setEvents(1).setFriends(1).setLikes(1)
+                .setName("Name").setSurname("Surname").setUserId(userID).setRegisterDate("date").createUser();
+
+        usersResponses.add(user);
         usersCollection = new UsersCollectionBuilder().setUsers(usersResponses).build();
 
         when(view.refreshUsers()).thenReturn(refreshUsersEvent);
@@ -98,15 +99,15 @@ public class AllUsersPresenterTest
     @Test
     public void allUsersPresenter_selectUser_openUserDetails()
     {
-        userSelectedEvent.onNext(findUsersResponse);
-        Mockito.verify(navigator).openUserDetailsScreen(findUsersResponse.getUserId());
+        userSelectedEvent.onNext(user);
+        Mockito.verify(navigator).openUserDetailsScreen(user.getUserId());
     }
 
     @Test
     public void allUsersPresenter_selectUser_openMyProfileScreen()
     {
         when(currentUser.userId()).thenReturn(userID);
-        userSelectedEvent.onNext(findUsersResponse);
+        userSelectedEvent.onNext(user);
         Mockito.verify(navigator).openMyProfileScreen();
     }
 

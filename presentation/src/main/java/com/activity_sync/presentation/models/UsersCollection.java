@@ -17,9 +17,9 @@ public class UsersCollection implements Serializable
     private String previous;
 
     @SerializedName("results")
-    private List<FindUsersResponse> users;
+    private List<User> users;
 
-    public UsersCollection(int count, String next, String previous, List<FindUsersResponse> users)
+    public UsersCollection(int count, String next, String previous, List<User> users)
     {
         this.count = count;
         this.next = next;
@@ -42,7 +42,7 @@ public class UsersCollection implements Serializable
         return previous;
     }
 
-    public List<FindUsersResponse> getUsers()
+    public List<User> getUsers()
     {
         return users;
     }

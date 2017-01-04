@@ -1,6 +1,6 @@
 package com.activity_sync.presentation.models.builders;
 
-import com.activity_sync.presentation.models.FindUsersResponse;
+import com.activity_sync.presentation.models.User;
 import com.activity_sync.presentation.models.UsersCollection;
 
 import java.util.List;
@@ -10,7 +10,7 @@ public class UsersCollectionBuilder
     private int count;
     private String next;
     private String previous;
-    private List<FindUsersResponse> users;
+    private List<User> users;
 
     public UsersCollectionBuilder setCount(int count)
     {
@@ -30,7 +30,7 @@ public class UsersCollectionBuilder
         return this;
     }
 
-    public UsersCollectionBuilder setUsers(List<FindUsersResponse> users)
+    public UsersCollectionBuilder setUsers(List<User> users)
     {
         this.users = users;
         return this;

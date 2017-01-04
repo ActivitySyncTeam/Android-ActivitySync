@@ -1,6 +1,6 @@
 package com.activity_sync.presentation.views;
 
-import com.activity_sync.presentation.models.FindUsersResponse;
+import com.activity_sync.presentation.models.User;
 
 import java.util.Collection;
 
@@ -10,9 +10,9 @@ public interface IAllUsersScreen
 {
     Observable refreshUsers();
 
-    Observable<FindUsersResponse> selectedUser();
+    Observable<User> selectedUser();
 
     void refreshingVisible(boolean isRefreshing);
 
-    void addUsersList(Collection<FindUsersResponse> users);
+    void addUsersList(Collection<User> users);
 }
