@@ -104,6 +104,30 @@ public class ApiService implements IApiService
     }
 
     @Override
+    public Observable<EventsCollection> getFilteredEvents(int page, int range, float lat, float lng)
+    {
+        return api.getFilteredEvents(accessTokenHeader(), page, true, range, lat, lng);
+    }
+
+    @Override
+    public Observable<EventsCollection> getFilteredEvents(int page, int range, float lat, float lng, int disciplineID)
+    {
+        return api.getFilteredEvents(accessTokenHeader(), page, true, range, lat, lng, disciplineID);
+    }
+
+    @Override
+    public Observable<EventsCollection> getFilteredEvents(int page, int range, float lat, float lng, String since)
+    {
+        return api.getFilteredEvents(accessTokenHeader(), page, true, range, lat, lng, since);
+    }
+
+    @Override
+    public Observable<EventsCollection> getFilteredEvents(int page, int range, float lat, float lng, int disciplineID, String since)
+    {
+        return api.getFilteredEvents(accessTokenHeader(), page, true, range, lat, lng, disciplineID, since);
+    }
+
+    @Override
     public Observable<Event> getEventDetails(int eventId)
     {
         return api.getEventDetails(accessTokenHeader(), eventId);
@@ -146,13 +170,13 @@ public class ApiService implements IApiService
     }
 
     @Override
-    public Observable<Participants> cancelEventJoinRequest(EventIDBody eventID)
+    public Observable<Void> cancelEventJoinRequest(EventIDBody eventID)
     {
         return api.cancelEventJoinRequest(accessTokenHeader(), eventID);
     }
 
     @Override
-    public Observable<Participants> leaveEvent(EventIDBody eventID)
+    public Observable<Void> leaveEvent(EventIDBody eventID)
     {
         return api.leaveEvent(accessTokenHeader(), eventID);
     }
@@ -206,9 +230,9 @@ public class ApiService implements IApiService
     }
 
     @Override
-    public Observable<Friends> cancelFriendInvitation(int userID)
+    public Observable<Friends> cancelFriendInvitation(UserIDBody userIDBody)
     {
-        return api.cancelFriendInvitation(accessTokenHeader(), userID);
+        return api.cancelFriendInvitation(accessTokenHeader(), userIDBody);
     }
 
     @Override

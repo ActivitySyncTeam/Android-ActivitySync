@@ -18,6 +18,11 @@ public class AddedFriendsFragment extends UsersFragmentBase implements IUserActi
         super(shouldDisplayAllOptions);
     }
 
+    public AddedFriendsFragment()
+    {
+        super();
+    }
+
     @Override
     RendererBuilder<User> getRendererBuilder()
     {

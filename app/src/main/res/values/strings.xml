@@ -36,6 +36,7 @@
     <string name="txt_from_today">From today</string>
     <string name="txt_all">All</string>
     <string name="txt_filter_from" translatable="false">From %02d-%02d-%d</string>
+    <string name="txt_date_server_format" translatable="false">%d-%02d-%02d 00:00:00</string>
     <string name="txt_pls_enable_locations">Yo have to enable location permission in order to load events near you.</string>
     <string name="btn_enable_now">ENABLE NOW</string>
     <string name="txt_wait_for_location">Please wait a moment. We are checking your localization.</string>
@@ -83,8 +84,12 @@
     <string name="btn_cancel_friend_request">Cancel friends request</string>
     <string name="btn_remove_from_friends">Remove from your friends list</string>
     <string name="txt_friends_request_sent">Friends request has been sent</string>
+    <string name="btn_reject_friends_request">Reject friend</string>
+    <string name="btn_accept_friends_request">Accept friend</string>
     <string name="txt_friends_request_turned_down">Friends request has been canceled</string>
     <string name="txt_friend_removed">User deleted from your friends</string>
+    <string name="txt_friend_request_rejected">You have rejected friend request</string>
+    <string name="txt_friend_request_accepted">You have accepted friend request</string>
     <string name="txt_register_date">Register Date</string>
 
     <!-- ParticipantsScreen strings -->
@@ -180,6 +185,7 @@
     <string name="txt_update_event_confirmation_text">Are you sure you want to update this event?</string>
     <string name="btn_update_event">Update event</string>
     <string name="err_choose_address">Address has not been selected</string>
+    <string name="txt_city_default">Unknown</string>
 
     <!-- CommentsScreen strings -->
     <string name="title_comments">Comments</string>

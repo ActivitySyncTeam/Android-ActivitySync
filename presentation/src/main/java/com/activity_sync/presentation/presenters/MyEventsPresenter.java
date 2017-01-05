@@ -28,7 +28,7 @@ public class MyEventsPresenter extends EventsFragmentBasePresenter
                 .subscribe(eventsCollection -> {
 
                     view.refreshingVisible(false);
-                    view.addEventsList(eventsCollection.getEvents());
+                    view.addEventsListAndClear(eventsCollection.getEvents());
 
                 }, this::handleError);
     }

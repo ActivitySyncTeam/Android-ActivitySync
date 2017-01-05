@@ -75,6 +75,13 @@ abstract public class UsersFragmentBase extends FragmentScreen implements IUsers
         this.eventId = 0;
     }
 
+    public UsersFragmentBase()
+    {
+        super(R.layout.participants_fragment);
+        this.shouldDisplayAllOptions = false;
+        this.eventId = 0;
+    }
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState)
     {

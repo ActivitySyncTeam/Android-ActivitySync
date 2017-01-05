@@ -71,6 +71,18 @@ public interface IActivitySyncApi
     @GET("/api/myEvents")
     Observable<EventsCollection> getMyEvents(@Header("Authorization") String accessToken);
 
+    @GET("/api/events")
+    Observable<EventsCollection> getFilteredEvents(@Header("Authorization") String accessToken, @Query("page") int page, @Query("isFiltered") boolean isFiltered, @Query("range") int range, @Query("lat") float lat, @Query("lng") float lng);
+
+    @GET("/api/events")
+    Observable<EventsCollection> getFilteredEvents(@Header("Authorization") String accessToken, @Query("page") int page, @Query("isFiltered") boolean isFiltered, @Query("range") int range, @Query("lat") float lat, @Query("lng") float lng, @Query("disciplineID") int disciplineID);
+
+    @GET("/api/events")
+    Observable<EventsCollection> getFilteredEvents(@Header("Authorization") String accessToken, @Query("page") int page, @Query("isFiltered") boolean isFiltered, @Query("range") int range, @Query("lat") float lat, @Query("lng") float lng, @Query("since") String since);
+
+    @GET("/api/events")
+    Observable<EventsCollection> getFilteredEvents(@Header("Authorization") String accessToken, @Query("page") int page, @Query("isFiltered") boolean isFiltered, @Query("range") int range, @Query("lat") float lat, @Query("lng") float lng, @Query("disciplineID") int disciplineID, @Query("since") String since);
+
     @GET("api/event/{event_id}")
     Observable<Event> getEventDetails(@Header("Authorization") String accessToken, @Path("event_id") int eventId);
 
@@ -83,10 +95,10 @@ public interface IActivitySyncApi
     Observable<Participants> joinEventAsAdmin(@Header("Authorization") String accessToken, @Field("eventID") int eventID);
 
     @HTTP(method = "DELETE", path = "api/event/user/cancel", hasBody = true)
-    Observable<Participants> cancelEventJoinRequest(@Header("Authorization") String accessToken, @Body EventIDBody eventID);
+    Observable<Void> cancelEventJoinRequest(@Header("Authorization") String accessToken, @Body EventIDBody eventID);
 
     @HTTP(method = "DELETE", path = "api/event/user/resign", hasBody = true)
-    Observable<Participants> leaveEvent(@Header("Authorization") String accessToken, @Body EventIDBody eventID);
+    Observable<Void> leaveEvent(@Header("Authorization") String accessToken, @Body EventIDBody eventID);
 
     @HTTP(method = "DELETE", path = "api/event/user/remove", hasBody = true)
     Observable<Participants> removeParticipant(@Header("Authorization") String accessToken, @Body OrganizerApprovalBody eventID);
@@ -120,6 +132,9 @@ public interface IActivitySyncApi
     @HTTP(method = "DELETE", path = "api/user/user/reject", hasBody = true)
     Observable<Void> rejectFriendRequest(@Header("Authorization") String accessToken, @Body UserIDBody userIDBody);
 
+    @HTTP(method = "DELETE", path = "api/user/user/cancel", hasBody = true)
+    Observable<Friends> cancelFriendInvitation(@Header("Authorization") String accessToken, @Body UserIDBody userIDBody);
+
     @FormUrlEncoded
     @POST("api/user/user/accept")
     Observable<Friends> acceptFriendInvitation(@Header("Authorization") String accessToken, @Field("userID") int userID);
@@ -127,10 +142,6 @@ public interface IActivitySyncApi
     @FormUrlEncoded
     @POST("api/user/user/join")
     Observable<Friends> sendFriendRequest(@Header("Authorization") String accessToken, @Field("userID") int userID);
-
-    @FormUrlEncoded
-    @POST("api/user/user/cancel")
-    Observable<Friends> cancelFriendInvitation(@Header("Authorization") String accessToken, @Field("userID") int userID);
 
     @GET("/api/disciplines")
     Observable<List<Discipline>> getAvailableDisciplines();

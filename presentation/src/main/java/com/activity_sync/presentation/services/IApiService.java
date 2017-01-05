@@ -49,6 +49,14 @@ public interface IApiService
 
     Observable<EventsCollection> getMyEvents();
 
+    Observable<EventsCollection> getFilteredEvents(int page, int range, float lat, float lng);
+
+    Observable<EventsCollection> getFilteredEvents(int page, int range, float lat, float lng, int disciplineID);
+
+    Observable<EventsCollection> getFilteredEvents(int page, int range, float lat, float lng, String since);
+
+    Observable<EventsCollection> getFilteredEvents(int page, int range, float lat, float lng, int disciplineID, String since);
+
     Observable<Event> getEventDetails(int eventId);
 
     Observable<CommentsCollection> getEventComments(int eventId);
@@ -63,9 +71,9 @@ public interface IApiService
 
     Observable<Participants> joinEventAsAdmin(int eventID);
 
-    Observable<Participants> cancelEventJoinRequest(EventIDBody eventID);
+    Observable<Void> cancelEventJoinRequest(EventIDBody eventID);
 
-    Observable<Participants> leaveEvent(EventIDBody eventID);
+    Observable<Void> leaveEvent(EventIDBody eventID);
 
     Observable<Void> deleteEvent(int eventId);
 
@@ -83,7 +91,7 @@ public interface IApiService
 
     Observable<Friends> sendFriendRequest(int userID);
 
-    Observable<Friends> cancelFriendInvitation(int userID);
+    Observable<Friends> cancelFriendInvitation(UserIDBody userIDBody);
 
     Observable<List<Discipline>> getAvailableDisciplines();
 

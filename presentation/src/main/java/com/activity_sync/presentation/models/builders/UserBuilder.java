@@ -16,6 +16,7 @@ public class UserBuilder
     private boolean isOrganizer;
     private boolean isCandidate;
     private boolean isFriend;
+    private boolean isInvited;
     private int rate;
     private int credibility;
     private int ratesNumber;
@@ -119,8 +120,14 @@ public class UserBuilder
         return this;
     }
 
+    public UserBuilder setInvited(boolean isInvited)
+    {
+        this.isInvited = isInvited;
+        return this;
+    }
+
     public User createUser()
     {
-        return new User(userId, id, name, surname, username, email, registerDate, signature, events, isOrganizer, isCandidate, isFriend, rate, credibility, ratesNumber, friends, likes);
+        return new User(userId, id, name, surname, username, email, registerDate, signature, events, isOrganizer, isCandidate, isInvited, isFriend, rate, credibility, ratesNumber, friends, likes);
     }
 }

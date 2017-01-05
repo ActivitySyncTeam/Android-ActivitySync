@@ -28,6 +28,8 @@ public interface IEventCreatorView extends IScreenView
 
     String description();
 
+    String status();
+
     boolean isOrganizerEnrolled();
 
     void date(String date);
@@ -41,6 +43,8 @@ public interface IEventCreatorView extends IScreenView
     void playersNumber(String players);
 
     void description(String description);
+
+    void status(String status);
 
     Observable createEventClick();
 

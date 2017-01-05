@@ -1,14 +1,15 @@
 package com.activity_sync.presentation.presenters;
 
-import com.activity_sync.presentation.models.Discipline;
+import com.activity_sync.presentation.models.Event;
 import com.activity_sync.presentation.services.IApiService;
 import com.activity_sync.presentation.services.INavigator;
 import com.activity_sync.presentation.services.IPermanentStorage;
+import com.activity_sync.presentation.utils.StringUtils;
 import com.activity_sync.presentation.views.IEventsFragmentView;
 
 import org.joda.time.DateTime;
 
-import java.util.ArrayList;
+import java.util.Collection;
 
 import rx.Scheduler;
 
@@ -30,12 +31,13 @@ public class AllEventsPresenter extends EventsFragmentBasePresenter
     @Override
     public void start()
     {
+        dateTimeSelected = new DateTime();
+        view.setDate(dateTimeSelected);
+
         if (areLastCordsSaved())
         {
-            super.start();
             prepareFilterLayout();
-            dateTimeSelected = new DateTime();
-            view.setDate(dateTimeSelected);
+            super.start();
         }
         else
         {
@@ -73,8 +75,8 @@ public class AllEventsPresenter extends EventsFragmentBasePresenter
 
                     if (!alreadyLoaded)
                     {
-                        super.start();
                         prepareFilterLayout();
+                        super.start();
                     }
                 })
         );
@@ -104,7 +106,8 @@ public class AllEventsPresenter extends EventsFragmentBasePresenter
         subscriptions.add(view.refreshWithFilterClick()
                 .observeOn(uiThread)
                 .subscribe(date -> {
-                    resolveFilterRefresh();
+
+                    resolveFilter();
                 })
         );
     }
@@ -112,16 +115,21 @@ public class AllEventsPresenter extends EventsFragmentBasePresenter
     @Override
     void loadEvents()
     {
-        apiService.getAllEvents()
-                .observeOn(uiThread)
-                .subscribe(eventsCollection -> {
+        view.refreshingVisible(true);
 
-                    view.refreshingVisible(false);
-                    view.addEventsList(eventsCollection.getEvents());
+        int range = permanentStorage.retrieveInteger(IPermanentStorage.SEARCH_RANGE, IPermanentStorage.SEARCH_RANGE_DEFAULT);
+        float lat = permanentStorage.retrieveFloat(IPermanentStorage.LAST_LATITUDE, IPermanentStorage.LAST_COORDINATION_DEFAULT);
+        float lng = permanentStorage.retrieveFloat(IPermanentStorage.LAST_LONGITUDE, IPermanentStorage.LAST_COORDINATION_DEFAULT);
 
-                    alreadyLoaded = true;
+                apiService.getFilteredEvents(1, range, lat, lng)
+                        .observeOn(uiThread)
+                        .subscribe(eventsCollection -> {
 
-                }, this::handleError);
+                            view.refreshingVisible(false);
+                            view.addEventsListAndClear(eventsCollection.getEvents());
+                            alreadyLoaded = true;
+
+                        }, this::handleError);
     }
 
     public DateTime getDateTimeSelected()
@@ -138,24 +146,75 @@ public class AllEventsPresenter extends EventsFragmentBasePresenter
     {
         view.filterLayoutVisible(true);
 
-        ArrayList<Discipline> list = new ArrayList<>();
-        list.add(new Discipline(0, "Piłka nożna"));
-        list.add(new Discipline(1, "Koszykówka"));
+        apiService.getAvailableDisciplines()
+                .observeOn(uiThread)
+                .subscribe(disciplines -> {
 
-        view.prepareDisciplineSpinner(list);
+                    view.prepareDisciplineSpinner(disciplines);
+
+                }, this::handleError);
     }
 
-    private void resolveFilterRefresh()
+    private void filterFinished(Collection<Event> events)
+    {
+        view.refreshingVisible(false);
+        view.addEventsListAndClear(events);
+        alreadyLoaded = true;
+    }
+
+    private void resolveFilter()
     {
         view.refreshingVisible(true);
 
-        if (view.disciplineFilter().getId() == ALL_EVENTS_ID)
+        int range = permanentStorage.retrieveInteger(IPermanentStorage.SEARCH_RANGE, IPermanentStorage.SEARCH_RANGE_DEFAULT);
+        float lat = permanentStorage.retrieveFloat(IPermanentStorage.LAST_LATITUDE, IPermanentStorage.LAST_COORDINATION_DEFAULT);
+        float lng = permanentStorage.retrieveFloat(IPermanentStorage.LAST_LONGITUDE, IPermanentStorage.LAST_COORDINATION_DEFAULT);
+
+        if (view.getSelectedDate().equals(StringUtils.EMPTY))
         {
-            loadEvents();
+            if (view.disciplineFilter().getId() == ALL_EVENTS_ID)
+            {
+                apiService.getFilteredEvents(1, range, lat, lng)
+                        .observeOn(uiThread)
+                        .subscribe(eventsCollection -> {
+
+                            filterFinished(eventsCollection.getEvents());
+
+                        }, this::handleError);
+            }
+            else
+            {
+                apiService.getFilteredEvents(1, range, lat, lng, view.disciplineFilter().getId())
+                        .observeOn(uiThread)
+                        .subscribe(eventsCollection -> {
+
+                            filterFinished(eventsCollection.getEvents());
+
+                        }, this::handleError);
+            }
         }
         else
         {
-            loadEvents();   //api call with filtering
+            if (view.disciplineFilter().getId() == ALL_EVENTS_ID)
+            {
+                apiService.getFilteredEvents(1, range, lat, lng, view.getSelectedDate())
+                        .observeOn(uiThread)
+                        .subscribe(eventsCollection -> {
+
+                            filterFinished(eventsCollection.getEvents());
+
+                        }, this::handleError);
+            }
+            else
+            {
+                apiService.getFilteredEvents(1, range, lat, lng, view.disciplineFilter().getId(), view.getSelectedDate())
+                        .observeOn(uiThread)
+                        .subscribe(eventsCollection -> {
+
+                            filterFinished(eventsCollection.getEvents());
+
+                        }, this::handleError);
+            }
         }
     }
 }

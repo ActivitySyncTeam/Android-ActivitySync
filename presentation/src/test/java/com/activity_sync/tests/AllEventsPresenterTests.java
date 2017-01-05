@@ -13,6 +13,7 @@ import com.activity_sync.presentation.presenters.AllEventsPresenter;
 import com.activity_sync.presentation.services.IApiService;
 import com.activity_sync.presentation.services.INavigator;
 import com.activity_sync.presentation.services.IPermanentStorage;
+import com.activity_sync.presentation.utils.StringUtils;
 import com.activity_sync.presentation.views.IEventsFragmentView;
 
 import org.joda.time.DateTime;
@@ -31,6 +32,9 @@ import rx.schedulers.Schedulers;
 import rx.subjects.PublishSubject;
 
 import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyFloat;
+import static org.mockito.Matchers.anyInt;
+import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
 
@@ -60,7 +64,12 @@ public class AllEventsPresenterTests
 
     Event testedEvent;
     List<Event> events = new ArrayList<>();
+    List<Discipline> disciplines = new ArrayList<>();
     EventsCollection eventsCollection;
+    Discipline discipline;
+
+    int standardRange = 1;
+    float standardCoordinations = 10.0f;
 
     @Before
     public void setup()
@@ -92,10 +101,23 @@ public class AllEventsPresenterTests
                 .setId(123)
                 .createEvent();
 
+        discipline = new DisciplineBuilder().setId(1).createDiscipline();
+
         events.add(testedEvent);
         eventsCollection = new EventsCollectionBuilder().setEvents(events).create();
 
         Mockito.when(apiService.getAllEvents()).thenReturn(Observable.just(eventsCollection));
+        Mockito.when(apiService.getAvailableDisciplines()).thenReturn(Observable.just(disciplines));
+        Mockito.when(apiService.getFilteredEvents(anyInt(), anyInt(), anyFloat(), anyFloat())).thenReturn(Observable.just(eventsCollection));
+        Mockito.when(apiService.getFilteredEvents(anyInt(), anyInt(), anyFloat(), anyFloat(), anyInt())).thenReturn(Observable.just(eventsCollection));
+        Mockito.when(apiService.getFilteredEvents(anyInt(), anyInt(), anyFloat(), anyFloat(), anyString())).thenReturn(Observable.just(eventsCollection));
+        Mockito.when(apiService.getFilteredEvents(anyInt(), anyInt(), anyFloat(), anyFloat(), anyInt(), anyString())).thenReturn(Observable.just(eventsCollection));
+
+        Mockito.when(view.getSelectedDate()).thenReturn(StringUtils.EMPTY);
+
+        Mockito.when(permanentStorage.retrieveInteger(IPermanentStorage.SEARCH_RANGE, IPermanentStorage.SEARCH_RANGE_DEFAULT)).thenReturn(standardRange);
+        Mockito.when(permanentStorage.retrieveFloat(IPermanentStorage.LAST_LATITUDE, IPermanentStorage.LAST_COORDINATION_DEFAULT)).thenReturn(standardCoordinations);
+        Mockito.when(permanentStorage.retrieveFloat(IPermanentStorage.LAST_LONGITUDE, IPermanentStorage.LAST_COORDINATION_DEFAULT)).thenReturn(standardCoordinations);
     }
 
     @Test
@@ -107,6 +129,7 @@ public class AllEventsPresenterTests
         Mockito.verify(view, never()).askForPermission();
         Mockito.verify(view).filterLayoutVisible(true);
         Mockito.verify(view).prepareDisciplineSpinner(any());
+        Mockito.verify(apiService).getAvailableDisciplines();
     }
 
     @Test
@@ -202,6 +225,7 @@ public class AllEventsPresenterTests
 
         Mockito.verify(view).filterLayoutVisible(true);
         Mockito.verify(view).prepareDisciplineSpinner(any());
+        Mockito.verify(apiService).getAvailableDisciplines();
     }
 
     @Test
@@ -227,7 +251,7 @@ public class AllEventsPresenterTests
     }
 
     @Test
-    public void allEventsPresenter_refreshClick_reloadData()
+    public void allEventsPresenter_refreshClick_reloadDataWithDisciplineFilter()
     {
         Mockito.when(view.disciplineFilter()).thenReturn(new Discipline(123, "discipline"));
 
@@ -235,9 +259,57 @@ public class AllEventsPresenterTests
         presenter.start();
 
         refreshFilterClickEvent.onNext(null);
-        Mockito.verify(apiService, times(2)).getAllEvents();
-        Mockito.verify(view, times(2)).addEventsList(events);
-        Mockito.verify(view).refreshingVisible(true);
+        Mockito.verify(apiService).getFilteredEvents(1, standardRange, standardCoordinations, standardCoordinations, view.disciplineFilter().getId());
+        Mockito.verify(view, times(2)).addEventsListAndClear(events);
+        Mockito.verify(view, times(2)).refreshingVisible(true);
+    }
+
+    @Test
+    public void allEventsPresenter_refreshClick_reloadDataNoFilter()
+    {
+        Mockito.when(view.disciplineFilter()).thenReturn(new Discipline(AllEventsPresenter.ALL_EVENTS_ID, "discipline"));
+
+        AllEventsPresenter presenter = createPresenter();
+        presenter.start();
+
+        refreshFilterClickEvent.onNext(null);
+        Mockito.verify(apiService, times(2)).getFilteredEvents(1, standardRange, standardCoordinations, standardCoordinations);
+        Mockito.verify(view, times(2)).addEventsListAndClear(events);
+        Mockito.verify(view, times(2)).refreshingVisible(true);
+    }
+
+    @Test
+    public void allEventsPresenter_refreshClick_reloadDataWithDisciplineFilterAndDate()
+    {
+        String date = "2017-01-05 23:23:23";
+
+        Mockito.when(view.disciplineFilter()).thenReturn(new Discipline(123, "discipline"));
+        Mockito.when(view.getSelectedDate()).thenReturn(date);
+
+        AllEventsPresenter presenter = createPresenter();
+        presenter.start();
+
+        refreshFilterClickEvent.onNext(null);
+        Mockito.verify(apiService).getFilteredEvents(1, standardRange, standardCoordinations, standardCoordinations, view.disciplineFilter().getId(), date);
+        Mockito.verify(view, times(2)).addEventsListAndClear(events);
+        Mockito.verify(view, times(2)).refreshingVisible(true);
+    }
+
+    @Test
+    public void allEventsPresenter_refreshClick_reloadDataWithDateFilter()
+    {
+        String date = "2017-01-05 23:23:23";
+
+        Mockito.when(view.disciplineFilter()).thenReturn(new Discipline(AllEventsPresenter.ALL_EVENTS_ID, "discipline"));
+        Mockito.when(view.getSelectedDate()).thenReturn(date);
+
+        AllEventsPresenter presenter = createPresenter();
+        presenter.start();
+
+        refreshFilterClickEvent.onNext(null);
+        Mockito.verify(apiService).getFilteredEvents(1, standardRange, standardCoordinations, standardCoordinations, date);
+        Mockito.verify(view, times(2)).addEventsListAndClear(events);
+        Mockito.verify(view, times(2)).refreshingVisible(true);
     }
 
     private AllEventsPresenter createPresenter()
