@@ -164,5 +164,6 @@
     <string name="err_servers_cannot_be_reached">Serwey są w tym momencie nieosiągalne.</string>
     <string name="err_something_went_wrong">Coś poszło nie tak. Spróbuj ponownie.</string>
     <string name="txt_logged_as">Zalogowany jako: %s</string>
+    <string name="txt_filter_from" formatted="false">Od %02d-%02d-%d</string>
 
 </resources>

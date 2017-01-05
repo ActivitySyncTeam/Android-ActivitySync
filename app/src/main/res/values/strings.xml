@@ -35,9 +35,9 @@
     <string name="tab_my_events">My events</string>
     <string name="txt_from_today">From today</string>
     <string name="txt_all">All</string>
-    <string name="txt_filter_from" translatable="false">From %02d-%02d-%d</string>
+    <string name="txt_filter_from" formatted="false">From %02d-%02d-%d</string>
     <string name="txt_date_server_format" translatable="false">%d-%02d-%02d 00:00:00</string>
-    <string name="txt_pls_enable_locations">Yo have to enable location permission in order to load events near you.</string>
+    <string name="txt_pls_enable_locations" formatted="false">Yo have to enable location permission in order to load events near you.</string>
     <string name="btn_enable_now">ENABLE NOW</string>
     <string name="txt_wait_for_location">Please wait a moment. We are checking your localization.</string>
 
