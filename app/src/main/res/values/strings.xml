@@ -84,7 +84,8 @@
     <string name="btn_cancel_friend_request">Cancel friends request</string>
     <string name="btn_remove_from_friends">Remove from your friends list</string>
     <string name="txt_friends_request_sent">Friends request has been sent</string>
-    <string name="txt_reject_friends_request">Reject invitation</string>
+    <string name="btn_reject_friends_request">Reject friend</string>
+    <string name="btn_accept_friends_request">Accept friend</string>
     <string name="txt_friends_request_turned_down">Friends request has been canceled</string>
     <string name="txt_friend_removed">User deleted from your friends</string>
     <string name="txt_friend_request_rejected">You have rejected friend request</string>
@@ -194,5 +195,6 @@
 
     <!-- AllUsersScreen strings -->
     <string name="title_all_users">Users</string>
+    <string name="txt_city_default">Unknown</string>
 
 </resources>

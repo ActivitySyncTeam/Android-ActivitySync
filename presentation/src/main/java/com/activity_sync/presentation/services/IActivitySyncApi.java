@@ -95,10 +95,10 @@ public interface IActivitySyncApi
     Observable<Participants> joinEventAsAdmin(@Header("Authorization") String accessToken, @Field("eventID") int eventID);
 
     @HTTP(method = "DELETE", path = "api/event/user/cancel", hasBody = true)
-    Observable<Participants> cancelEventJoinRequest(@Header("Authorization") String accessToken, @Body EventIDBody eventID);
+    Observable<Void> cancelEventJoinRequest(@Header("Authorization") String accessToken, @Body EventIDBody eventID);
 
     @HTTP(method = "DELETE", path = "api/event/user/resign", hasBody = true)
-    Observable<Participants> leaveEvent(@Header("Authorization") String accessToken, @Body EventIDBody eventID);
+    Observable<Void> leaveEvent(@Header("Authorization") String accessToken, @Body EventIDBody eventID);
 
     @HTTP(method = "DELETE", path = "api/event/user/remove", hasBody = true)
     Observable<Participants> removeParticipant(@Header("Authorization") String accessToken, @Body OrganizerApprovalBody eventID);

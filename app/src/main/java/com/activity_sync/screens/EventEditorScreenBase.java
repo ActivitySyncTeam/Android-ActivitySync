@@ -26,6 +26,7 @@ import com.activity_sync.presentation.models.builders.LocationBuilder;
 import com.activity_sync.presentation.services.IApiService;
 import com.activity_sync.presentation.services.INavigator;
 import com.activity_sync.presentation.utils.DoubleUtils;
+import com.activity_sync.presentation.utils.StringUtils;
 import com.activity_sync.presentation.views.IEventCreatorView;
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.common.GooglePlayServicesRepairableException;
@@ -97,6 +98,7 @@ abstract public class EventEditorScreenBase extends Screen implements IEventCrea
     private Location selectedLocation;
 
     List<Address> suggestedAddresses = new ArrayList<>();
+    String eventStatus;
 
     public EventEditorScreenBase()
     {
@@ -193,6 +195,18 @@ abstract public class EventEditorScreenBase extends Screen implements IEventCrea
                 playersSpinner.setSelection(i);
             }
         }
+    }
+
+    @Override
+    public String status()
+    {
+        return eventStatus;
+    }
+
+    @Override
+    public void status(String status)
+    {
+        eventStatus = status;
     }
 
     @Override
@@ -355,11 +369,21 @@ abstract public class EventEditorScreenBase extends Screen implements IEventCrea
             if (resultCode == RESULT_OK)
             {
                 Place place = PlaceAutocomplete.getPlace(this, data);
+                String city = StringUtils.EMPTY;
 
                 try
                 {
                     Geocoder geocoder = new Geocoder(this, Locale.getDefault());
                     suggestedAddresses = geocoder.getFromLocation(place.getLatLng().latitude, place.getLatLng().longitude, 1);
+
+                    if (suggestedAddresses == null || suggestedAddresses.size() == 0 || suggestedAddresses.get(0).getMaxAddressLineIndex() == 0)
+                    {
+                        city = getString(R.string.txt_city_default);
+                    }
+                    else
+                    {
+                        city = suggestedAddresses.get(0).getAddressLine(1);
+                    }
                 }
                 catch (IOException e)
                 {
@@ -369,7 +393,7 @@ abstract public class EventEditorScreenBase extends Screen implements IEventCrea
                 Location location = new LocationBuilder()
                         .setLatitude(DoubleUtils.round(place.getLatLng().latitude, 6))
                         .setLongitude(DoubleUtils.round(place.getLatLng().longitude, 6))
-                        .setCity(suggestedAddresses.get(0).getAddressLine(1))
+                        .setCity(city)
                         .setDescription(place.getName().toString())
                         .createLocation();
 

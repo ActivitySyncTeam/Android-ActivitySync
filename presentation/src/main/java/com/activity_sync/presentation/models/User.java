@@ -193,4 +193,9 @@ public class User implements Serializable
     {
         return isInvited;
     }
+
+    public void setInvited(boolean invited)
+    {
+        isInvited = invited;
+    }
 }

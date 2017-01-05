@@ -71,9 +71,9 @@ public interface IApiService
 
     Observable<Participants> joinEventAsAdmin(int eventID);
 
-    Observable<Participants> cancelEventJoinRequest(EventIDBody eventID);
+    Observable<Void> cancelEventJoinRequest(EventIDBody eventID);
 
-    Observable<Participants> leaveEvent(EventIDBody eventID);
+    Observable<Void> leaveEvent(EventIDBody eventID);
 
     Observable<Void> deleteEvent(int eventId);
 

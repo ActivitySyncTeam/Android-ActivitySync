@@ -64,5 +64,6 @@ public class EventUpdatePresenter extends EventEditorPresenterBase
         view.discipline(event.getDiscipline());
         view.playersNumber(String.valueOf(event.getNumberOfPlayers()));
         view.description(event.getDescription());
+        view.status(event.getStatus());
     }
 }

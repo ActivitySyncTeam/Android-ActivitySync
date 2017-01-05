@@ -10,6 +10,7 @@ public class EventBuilder
 {
     private int id;
     private User organizer;
+    private User admin;
     private String description;
     private String date;
     private int numberOfPlayers;
@@ -22,6 +23,7 @@ public class EventBuilder
     private boolean isParticipant;
     private boolean isCandidate;
     private int rate;
+    private String status;
 
     public EventBuilder setId(int id)
     {
@@ -32,6 +34,7 @@ public class EventBuilder
     public EventBuilder setOrganizer(User organizer)
     {
         this.organizer = organizer;
+        this.admin = organizer;
         return this;
     }
 
@@ -107,8 +110,14 @@ public class EventBuilder
         return this;
     }
 
+    public EventBuilder setStatus(String status)
+    {
+        this.status = status;
+        return this;
+    }
+
     public Event createEvent()
     {
-        return new Event(id, organizer, description, date, numberOfPlayers, freePlaces, like, location, discipline, level, isOrganizer, isParticipant, isCandidate, rate);
+        return new Event(id, organizer, admin, description, date, numberOfPlayers, freePlaces, like, location, discipline, level, isOrganizer, isParticipant, isCandidate, rate, status);
     }
 }

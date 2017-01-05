@@ -113,6 +113,7 @@ public class UserDetailsPresenter extends Presenter<IUserDetailsView>
                                     view.displayFriendRequestCanceledMessage();
                                     user.setCandidate(false);
                                     user.setFriend(false);
+                                    user.setInvited(false);
                                     view.setFriendBtnAppearance(user);
 
                                 }, this::handleError);
@@ -126,6 +127,7 @@ public class UserDetailsPresenter extends Presenter<IUserDetailsView>
                                     view.displayFriendRemovedMessage();
                                     user.setCandidate(false);
                                     user.setFriend(false);
+                                    user.setInvited(false);
                                     view.setFriendBtnAppearance(user);
 
                                 }, this::handleError);
@@ -139,6 +141,7 @@ public class UserDetailsPresenter extends Presenter<IUserDetailsView>
                                     view.displayFriendRequestAcceptedMessage();
                                     user.setCandidate(false);
                                     user.setFriend(true);
+                                    user.setInvited(false);
                                     view.setFriendBtnAppearance(user);
 
                                 }, this::handleError);
@@ -152,6 +155,7 @@ public class UserDetailsPresenter extends Presenter<IUserDetailsView>
                                     view.displayFriendRequestSentMessage();
                                     user.setCandidate(true);
                                     user.setFriend(false);
+                                    user.setInvited(false);
                                     view.setFriendBtnAppearance(user);
 
                                 }, this::handleError);
@@ -170,6 +174,7 @@ public class UserDetailsPresenter extends Presenter<IUserDetailsView>
                                 view.displayFriendRequestRejectedMessage();
                                 user.setCandidate(false);
                                 user.setFriend(false);
+                                user.setInvited(false);
                                 view.setFriendBtnAppearance(user);
 
                             }, this::handleError);

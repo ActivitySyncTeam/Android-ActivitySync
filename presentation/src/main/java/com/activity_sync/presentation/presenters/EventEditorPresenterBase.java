@@ -87,7 +87,8 @@ public class EventEditorPresenterBase extends Presenter<IEventCreatorView>
                 new AddressBody(view.location()),
                 view.discipline().getId(),
                 view.level().getId(),
-                view.isOrganizerEnrolled());
+                view.isOrganizerEnrolled(),
+                view.status());
     }
 
     protected void handleError(Throwable error)

@@ -16,6 +16,9 @@ public class Event implements Serializable
     private int eventID;
 
     @SerializedName("admin")
+    private User admin;
+
+    @SerializedName("organizer")
     private User organizer;
 
     @SerializedName("description")
@@ -54,10 +57,14 @@ public class Event implements Serializable
     @SerializedName("rate")
     private int rate;
 
-    public Event(int eventID, User organizer, String description, String date, int numberOfPlayers, int freePlaces, int like, Location location, Discipline discipline, Level level, boolean isOrganizer, boolean isParticipant, boolean isCandidate,  int rate)
+    @SerializedName("status")
+    private String status;
+
+    public Event(int eventID, User organizer, User admin, String description, String date, int numberOfPlayers, int freePlaces, int like, Location location, Discipline discipline, Level level, boolean isOrganizer, boolean isParticipant, boolean isCandidate, int rate, String status)
     {
         this.eventID = eventID;
         this.organizer = organizer;
+        this.admin = admin;
         this.description = description;
         this.date = date;
         this.numberOfPlayers = numberOfPlayers;
@@ -70,6 +77,7 @@ public class Event implements Serializable
         this.isParticipant = isParticipant;
         this.isCandidate = isCandidate;
         this.rate = rate;
+        this.status = status;
     }
 
     public Event()
@@ -84,6 +92,10 @@ public class Event implements Serializable
 
     public User getOrganizer()
     {
+        if (organizer == null)
+        {
+            return admin;
+        }
         return organizer;
     }
 
@@ -160,6 +172,11 @@ public class Event implements Serializable
     public void setCandidate(boolean candidate)
     {
         isCandidate = candidate;
+    }
+
+    public String getStatus()
+    {
+        return status;
     }
 
     public String getReadableDate()

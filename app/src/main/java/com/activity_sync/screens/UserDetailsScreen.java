@@ -121,9 +121,9 @@ public class UserDetailsScreen extends UserBaseScreen implements IUserDetailsVie
         }
         else if (user.isInvited())
         {
-            actionBtn.setText(getString(R.string.btn_cancel_friend_request));
+            actionBtn.setText(getString(R.string.btn_accept_friends_request));
             rejectBtn.setVisibility(View.VISIBLE);
-            actionBtn.setBackground(ContextCompat.getDrawable(this, R.drawable.selector_default_negative));
+            actionBtn.setBackground(ContextCompat.getDrawable(this, R.drawable.selector_default_positive));
         }
         else
         {

@@ -11,6 +11,7 @@ import com.activity_sync.services.Navigator;
 import com.activity_sync.services.PermanentStorage;
 
 import javax.inject.Singleton;
+
 import dagger.Module;
 import dagger.Provides;
 
@@ -35,7 +36,7 @@ public class UtilsModule
     @Singleton
     public IApiService provideApiRestService(IPermanentStorage permanentStorage)
     {
-        return new ApiService("http://activitysync-staging.cloud.plgrid.pl", permanentStorage);
+        return new ApiService("http://149.156.11.4:10141", permanentStorage);
     }
 
     @Provides

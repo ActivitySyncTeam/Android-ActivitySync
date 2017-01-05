@@ -9,8 +9,9 @@ public class EventBody
     private int disciplineID;
     private int levelID;
     private boolean addMe;
+    private String status;
 
-    public EventBody(String description, String date, int numberOfPlayers, AddressBody address, int disciplineID, int levelID, boolean addMe)
+    public EventBody(String description, String date, int numberOfPlayers, AddressBody address, int disciplineID, int levelID, boolean addMe, String status)
     {
         this.description = description;
         this.date = date;
@@ -19,5 +20,6 @@ public class EventBody
         this.disciplineID = disciplineID;
         this.levelID = levelID;
         this.addMe = addMe;
+        this.status = status;
     }
 }

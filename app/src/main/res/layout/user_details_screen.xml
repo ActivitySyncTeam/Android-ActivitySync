@@ -41,7 +41,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/screen_margin_half"
-                    android:text="@string/txt_reject_friends_request"
+                    android:text="@string/btn_reject_friends_request"
                     android:visibility="visible"/>
 
             </LinearLayout>

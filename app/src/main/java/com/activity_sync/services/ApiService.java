@@ -170,13 +170,13 @@ public class ApiService implements IApiService
     }
 
     @Override
-    public Observable<Participants> cancelEventJoinRequest(EventIDBody eventID)
+    public Observable<Void> cancelEventJoinRequest(EventIDBody eventID)
     {
         return api.cancelEventJoinRequest(accessTokenHeader(), eventID);
     }
 
     @Override
-    public Observable<Participants> leaveEvent(EventIDBody eventID)
+    public Observable<Void> leaveEvent(EventIDBody eventID)
     {
         return api.leaveEvent(accessTokenHeader(), eventID);
     }
