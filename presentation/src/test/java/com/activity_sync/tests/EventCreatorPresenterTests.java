@@ -9,6 +9,7 @@ import com.activity_sync.presentation.models.builders.LevelBuilder;
 import com.activity_sync.presentation.models.builders.LocationBuilder;
 import com.activity_sync.presentation.presenters.EventCreatorPresenter;
 import com.activity_sync.presentation.services.IApiService;
+import com.activity_sync.presentation.services.IErrorHandler;
 import com.activity_sync.presentation.services.INavigator;
 import com.activity_sync.presentation.views.IEventCreatorView;
 
@@ -39,6 +40,9 @@ public class EventCreatorPresenterTests
 
     @Mock
     IEventCreatorView view;
+
+    @Mock
+    IErrorHandler errorHandler;
 
     PublishSubject createEventClickEvent = PublishSubject.create();
     PublishSubject<Location> newLocationOccurredEvent = PublishSubject.create();
@@ -193,6 +197,6 @@ public class EventCreatorPresenterTests
 
     private EventCreatorPresenter createPresenter()
     {
-        return new EventCreatorPresenter(Schedulers.immediate(), view, navigator, apiService);
+        return new EventCreatorPresenter(Schedulers.immediate(), view, navigator, apiService, errorHandler);
     }
 }

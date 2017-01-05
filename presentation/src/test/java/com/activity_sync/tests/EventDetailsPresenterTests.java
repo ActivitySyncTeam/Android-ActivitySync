@@ -11,6 +11,7 @@ import com.activity_sync.presentation.models.builders.UserBuilder;
 import com.activity_sync.presentation.presenters.EventDetailsPresenter;
 import com.activity_sync.presentation.services.CurrentUser;
 import com.activity_sync.presentation.services.IApiService;
+import com.activity_sync.presentation.services.IErrorHandler;
 import com.activity_sync.presentation.services.INavigator;
 import com.activity_sync.presentation.views.IEventDetailsView;
 
@@ -42,6 +43,9 @@ public class EventDetailsPresenterTests
 
     @Mock
     CurrentUser currentUser;
+
+    @Mock
+    IErrorHandler errorHandler;
 
     PublishSubject joinLeaveEventClickEvent = PublishSubject.create();
     PublishSubject cancelEventClickEvent = PublishSubject.create();

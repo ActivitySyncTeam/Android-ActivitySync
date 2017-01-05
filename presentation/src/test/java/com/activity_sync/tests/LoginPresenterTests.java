@@ -9,6 +9,7 @@ import com.activity_sync.presentation.models.builders.UserBuilder;
 import com.activity_sync.presentation.presenters.LoginPresenter;
 import com.activity_sync.presentation.services.CurrentUser;
 import com.activity_sync.presentation.services.IApiService;
+import com.activity_sync.presentation.services.IErrorHandler;
 import com.activity_sync.presentation.services.INavigator;
 import com.activity_sync.presentation.utils.StringUtils;
 import com.activity_sync.presentation.views.ILoginView;
@@ -41,6 +42,9 @@ public class LoginPresenterTests
 
     @Mock
     CurrentUser currentUser;
+
+    @Mock
+    IErrorHandler errorHandler;
 
     PublishSubject loginBtnClickEvent = PublishSubject.create();
     PublishSubject createAccountClickEvent = PublishSubject.create();
@@ -127,6 +131,6 @@ public class LoginPresenterTests
 
     private LoginPresenter createPresenter()
     {
-        return new LoginPresenter(Schedulers.immediate(), view, navigator, apiService, currentUser);
+        return new LoginPresenter(Schedulers.immediate(), view, navigator, apiService, currentUser, errorHandler);
     }
 }

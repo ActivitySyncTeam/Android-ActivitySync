@@ -7,6 +7,7 @@ import com.activity_sync.presentation.models.builders.CommentsCollectionBuilder;
 import com.activity_sync.presentation.presenters.CommentsPresenter;
 import com.activity_sync.presentation.services.CurrentUser;
 import com.activity_sync.presentation.services.IApiService;
+import com.activity_sync.presentation.services.IErrorHandler;
 import com.activity_sync.presentation.utils.StringUtils;
 import com.activity_sync.presentation.views.ICommentsView;
 
@@ -39,6 +40,9 @@ public class CommentsPresenterTests
 
     @Mock
     CurrentUser currentUser;
+
+    @Mock
+    IErrorHandler errorHandler;
 
     protected PublishSubject sendCommentEvent = PublishSubject.create();
     protected PublishSubject refreshCommentsEvent = PublishSubject.create();

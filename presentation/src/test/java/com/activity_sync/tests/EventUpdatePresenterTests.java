@@ -67,6 +67,6 @@ public class EventUpdatePresenterTests extends EventCreatorPresenterTests
 
     private EventUpdatePresenter createPresenter()
     {
-        return new EventUpdatePresenter(Schedulers.immediate(), view, navigator, apiService, event);
+        return new EventUpdatePresenter(Schedulers.immediate(), view, navigator, apiService, event, errorHandler);
     }
 }

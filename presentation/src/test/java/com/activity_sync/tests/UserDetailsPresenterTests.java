@@ -7,6 +7,7 @@ import com.activity_sync.presentation.models.builders.UserBuilder;
 import com.activity_sync.presentation.presenters.UserDetailsPresenter;
 import com.activity_sync.presentation.services.CurrentUser;
 import com.activity_sync.presentation.services.IApiService;
+import com.activity_sync.presentation.services.IErrorHandler;
 import com.activity_sync.presentation.views.IUserDetailsView;
 
 import org.junit.Before;
@@ -34,6 +35,9 @@ public class UserDetailsPresenterTests
 
     @Mock
     CurrentUser currentUser;
+
+    @Mock
+    IErrorHandler errorHandler;
 
     PublishSubject thumbUpClickEvent = PublishSubject.create();
     PublishSubject thumbDownClickEvent = PublishSubject.create();
@@ -220,7 +224,7 @@ public class UserDetailsPresenterTests
 
     private UserDetailsPresenter createPresenter()
     {
-        return new UserDetailsPresenter(view, apiService, Schedulers.immediate(), currentUser, userId);
+        return new UserDetailsPresenter(view, apiService, Schedulers.immediate(), currentUser, userId, errorHandler);
     }
 
     public User createUser(int rate, boolean isFriend, boolean isCandidate, boolean isInvited)
