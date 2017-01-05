@@ -2,11 +2,13 @@ package com.activity_sync.presentation.presenters;
 
 import com.activity_sync.presentation.services.CurrentUser;
 import com.activity_sync.presentation.services.IApiService;
+import com.activity_sync.presentation.services.IErrorHandler;
 import com.activity_sync.presentation.services.INavigator;
 import com.activity_sync.presentation.utils.StringUtils;
 import com.activity_sync.presentation.views.ILoginView;
 
 import rx.Scheduler;
+import timber.log.Timber;
 
 public class LoginPresenter extends Presenter<ILoginView>
 {
@@ -14,14 +16,16 @@ public class LoginPresenter extends Presenter<ILoginView>
     private final INavigator navigator;
     private final IApiService apiService;
     private final CurrentUser currentUser;
+    private final IErrorHandler errorHandler;
 
-    public LoginPresenter(Scheduler uiThread, ILoginView view, INavigator navigator, IApiService apiService, CurrentUser currentUser)
+    public LoginPresenter(Scheduler uiThread, ILoginView view, INavigator navigator, IApiService apiService, CurrentUser currentUser, IErrorHandler errorHandler)
     {
         super(view);
         this.navigator = navigator;
         this.uiThread = uiThread;
         this.apiService = apiService;
         this.currentUser = currentUser;
+        this.errorHandler = errorHandler;
     }
 
     @Override
@@ -51,14 +55,36 @@ public class LoginPresenter extends Presenter<ILoginView>
 
                     if (canContinue)
                     {
-                        //apiCall here
-                        //if success:
-                        currentUser.authToken("auth_token response");
-                        currentUser.userID(1234);
+                        view.progressBarVisible(true);
 
-                        navigator.startBackgroundService();
+                        apiService.getClientDetails()
+                                .observeOn(uiThread)
+                                .subscribe(clientDetails -> {
 
-                        navigator.openEventsScreen();
+                                    currentUser.clientId(clientDetails.getClientId());
+                                    currentUser.clientSecret(clientDetails.getClientSecret());
+
+                                    apiService.login(view.login(), view.password())
+                                            .observeOn(uiThread)
+                                            .subscribe((result) -> {
+
+                                                currentUser.accessToken(result.getAccessToken());
+
+                                                apiService.getMyProfile()
+                                                        .observeOn(uiThread)
+                                                        .subscribe((user) -> {
+
+                                                            currentUser.userId(user.getUserId());
+                                                            currentUser.login(user.getUsername());
+
+                                                            navigator.startBackgroundService();
+                                                            navigator.openEventsScreen();
+
+                                                            view.progressBarVisible(false);
+
+                                                        }, this::handleError);
+                                            }, this::handleError);
+                                }, this::handleError);
                     }
                 })
         );
@@ -69,5 +95,13 @@ public class LoginPresenter extends Presenter<ILoginView>
                     navigator.openRegisterScreen();
                 })
         );
+    }
+
+    private void handleError(Throwable error)
+    {
+        errorHandler.handleError(error);
+        error.printStackTrace();
+        Timber.d(error.getMessage());
+        view.progressBarVisible(false);
     }
 }

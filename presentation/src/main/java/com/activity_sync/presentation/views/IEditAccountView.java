@@ -1,12 +1,14 @@
 package com.activity_sync.presentation.views;
 
+import com.activity_sync.presentation.models.User;
+
 import rx.Observable;
 
-public interface IEditAccountView
+public interface IEditAccountView extends IScreenView
 {
     void saveSucceded();
 
-    void saveFailed(String message);
+    void saveFailed();
 
     void firstNameErrorEnabled(boolean enabled);
 
@@ -14,15 +16,11 @@ public interface IEditAccountView
 
     void emailErrorEnabled(boolean enabled);
 
-    void passwordErrorEnabled(boolean enabled);
-
     void firstNameErrorText(String error);
 
     void lastNameErrorText(String error);
 
     void emailErrorText(String error);
-
-    void passwordErrorText(String error);
 
     String emptyFieldErrorText();
 
@@ -34,9 +32,9 @@ public interface IEditAccountView
 
     String getSignature();
 
-    String getPassword();
-
     Observable onSaveClick();
 
     void close();
+
+    void setUserUpdateDetails(User user);
 }

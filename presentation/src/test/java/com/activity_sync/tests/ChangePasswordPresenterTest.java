@@ -1,6 +1,8 @@
 package com.activity_sync.tests;
 
+import com.activity_sync.presentation.models.ChangePasswordResponse;
 import com.activity_sync.presentation.presenters.ChangePasswordPresenter;
+import com.activity_sync.presentation.services.IApiService;
 import com.activity_sync.presentation.utils.StringUtils;
 import com.activity_sync.presentation.views.IChangePasswordView;
 
@@ -10,6 +12,7 @@ import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import rx.Observable;
 import rx.schedulers.Schedulers;
 import rx.subjects.PublishSubject;
 
@@ -23,9 +26,12 @@ public class ChangePasswordPresenterTest
     @Mock
     IChangePasswordView view;
 
-    private ChangePasswordPresenter changePasswordPresenter;
-    private PublishSubject saveBtnClickEvent = PublishSubject.create();
+    @Mock
+    IApiService apiService;
 
+    private ChangePasswordPresenter presenter;
+    private PublishSubject saveBtnClickEvent = PublishSubject.create();
+    private ChangePasswordResponse changePasswordResponse;
     private String oldPassword = "Old Password";
     private String newPassword = "New Password";
     private String confirmedNewPassword = "New Password";
@@ -37,7 +43,8 @@ public class ChangePasswordPresenterTest
     public void setUp() throws Exception
     {
         MockitoAnnotations.initMocks(this);
-        changePasswordPresenter = new ChangePasswordPresenter(view, Schedulers.immediate());
+        presenter = new ChangePasswordPresenter(view, Schedulers.immediate(), apiService);
+        changePasswordResponse = new ChangePasswordResponse("Password changed");
 
         when(view.onSaveClick()).thenReturn(saveBtnClickEvent);
         when(view.getOldPassword()).thenReturn(oldPassword);
@@ -47,14 +54,23 @@ public class ChangePasswordPresenterTest
         when(view.confirmedNotMatchingErrorText()).thenReturn(passwordsNotMatchingError);
         when(view.samePasswordsErrorText()).thenReturn(samePasswordsError);
 
-        changePasswordPresenter.start();
+        presenter.start();
     }
 
     @Test
-    public void editAccountPresenter_clickSaveBtn_closeChangePasswordScreen()
+    public void editAccountPresenter_clickSaveBtn_passwordChanged()
     {
+        when(apiService.changePassword(anyString(), anyString())).thenReturn(Observable.just(changePasswordResponse));
         saveBtnClickEvent.onNext(this);
         verify(view).close();
+    }
+
+    @Test
+    public void editAccountPresenter_clickSaveBtn_passwordNotChanged()
+    {
+        when(apiService.changePassword(anyString(), anyString())).thenReturn(Observable.error(new Throwable()));
+        saveBtnClickEvent.onNext(this);
+        verify(view, never()).close();
     }
 
     @Test
@@ -116,7 +132,7 @@ public class ChangePasswordPresenterTest
     @After
     public void tearDown() throws Exception
     {
-        changePasswordPresenter = null;
+        presenter = null;
     }
 
 }

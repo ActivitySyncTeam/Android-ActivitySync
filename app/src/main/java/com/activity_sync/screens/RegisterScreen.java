@@ -6,14 +6,18 @@ import android.support.design.widget.TextInputLayout;
 import android.support.v7.widget.AppCompatEditText;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.activity_sync.App;
 import com.activity_sync.R;
 import com.activity_sync.presentation.presenters.IPresenter;
 import com.activity_sync.presentation.presenters.RegisterPresenter;
+import com.activity_sync.presentation.services.CurrentUser;
 import com.activity_sync.presentation.services.IApiService;
+import com.activity_sync.presentation.services.IErrorHandler;
 import com.activity_sync.presentation.services.INavigator;
 import com.activity_sync.presentation.views.IRegisterView;
 
@@ -32,6 +36,12 @@ public class RegisterScreen extends Screen implements IRegisterView
     @Inject
     IApiService apiService;
 
+    @Inject
+    CurrentUser currentUser;
+
+    @Inject
+    IErrorHandler errorHandler;
+
     @Bind(R.id.register_btn)
     Button registerBtn;
 
@@ -47,8 +57,8 @@ public class RegisterScreen extends Screen implements IRegisterView
     @Bind(R.id.text_input_layout_email)
     TextInputLayout inputLoginLayout;
 
-    @Bind(R.id.text_input_layout_nickname)
-    TextInputLayout inputNickNameLayout;
+    @Bind(R.id.text_input_layout_username)
+    TextInputLayout inputUserNameLayout;
 
     @Bind(R.id.text_input_layout_password)
     TextInputLayout inputPasswordLayout;
@@ -62,11 +72,14 @@ public class RegisterScreen extends Screen implements IRegisterView
     @Bind(R.id.email)
     AppCompatEditText emailEditText;
 
-    @Bind(R.id.nickname)
-    AppCompatEditText nickNameEditText;
+    @Bind(R.id.username)
+    AppCompatEditText userNameEditText;
 
     @Bind(R.id.password)
     AppCompatEditText passwordEditText;
+
+    @Bind(R.id.register_progress_bar)
+    ProgressBar progressBar;
 
     public RegisterScreen()
     {
@@ -76,7 +89,7 @@ public class RegisterScreen extends Screen implements IRegisterView
     @Override
     protected IPresenter createPresenter(Screen screen, Bundle savedInstanceState)
     {
-        return new RegisterPresenter(AndroidSchedulers.mainThread(), this, navigator, apiService);
+        return new RegisterPresenter(AndroidSchedulers.mainThread(), this, navigator, apiService, currentUser, errorHandler);
     }
 
     @Override
@@ -118,9 +131,9 @@ public class RegisterScreen extends Screen implements IRegisterView
     }
 
     @Override
-    public String nickName()
+    public String userName()
     {
-        return nickNameEditText.getText().toString();
+        return userNameEditText.getText().toString();
     }
 
     @Override
@@ -148,9 +161,9 @@ public class RegisterScreen extends Screen implements IRegisterView
     }
 
     @Override
-    public void nickNameErrorText(String error)
+    public void userNameErrorText(String error)
     {
-        inputNickNameLayout.setError(error);
+        inputUserNameLayout.setError(error);
     }
 
     @Override
@@ -178,9 +191,9 @@ public class RegisterScreen extends Screen implements IRegisterView
     }
 
     @Override
-    public void nickNameErrorEnabled(boolean enabled)
+    public void userNameErrorEnabled(boolean enabled)
     {
-        inputNickNameLayout.setErrorEnabled(enabled);
+        inputUserNameLayout.setErrorEnabled(enabled);
     }
 
     @Override
@@ -193,6 +206,19 @@ public class RegisterScreen extends Screen implements IRegisterView
     public void passwordErrorEnabled(boolean enabled)
     {
         inputPasswordLayout.setErrorEnabled(enabled);
+    }
+
+    @Override
+    public void progressBarVisible(boolean isVisible)
+    {
+        if (isVisible)
+        {
+            progressBar.setVisibility(View.VISIBLE);
+        }
+        else
+        {
+            progressBar.setVisibility(View.INVISIBLE);
+        }
     }
 
     @Override
@@ -260,12 +286,12 @@ public class RegisterScreen extends Screen implements IRegisterView
             }
         });
 
-        nickNameEditText.addTextChangedListener(new TextWatcher()
+        userNameEditText.addTextChangedListener(new TextWatcher()
         {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after)
             {
-                nickNameErrorEnabled(false);
+                userNameErrorEnabled(false);
             }
 
             @Override

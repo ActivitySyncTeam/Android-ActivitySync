@@ -2,7 +2,7 @@ package com.activity_sync.presentation.views;
 
 import rx.Observable;
 
-public interface IRegisterView
+public interface IRegisterView extends IScreenView
 {
     Observable registerBtnClick();
 
@@ -12,7 +12,7 @@ public interface IRegisterView
 
     String lastName();
 
-    String nickName();
+    String userName();
 
     String email();
 
@@ -22,7 +22,7 @@ public interface IRegisterView
 
     void lastNameErrorText(String error);
 
-    void nickNameErrorText(String error);
+    void userNameErrorText(String error);
 
     void emailErrorText(String error);
 
@@ -32,11 +32,13 @@ public interface IRegisterView
 
     void lastNameErrorEnabled(boolean enabled);
 
-    void nickNameErrorEnabled(boolean enabled);
+    void userNameErrorEnabled(boolean enabled);
 
     void emailErrorEnabled(boolean enabled);
 
     void passwordErrorEnabled(boolean enabled);
 
     String emptyFieldErrorText();
+
+    void progressBarVisible(boolean isVisible);
 }

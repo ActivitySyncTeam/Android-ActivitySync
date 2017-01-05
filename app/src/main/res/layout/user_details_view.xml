@@ -216,7 +216,7 @@
                                     style="@style/EventDetailsScreenItemUpRow"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="@string/txt_registered"/>
+                                    android:text="@string/txt_register_date"/>
 
                                 <TextView
                                     android:id="@+id/tv_register_date"
@@ -277,37 +277,70 @@
 
                         <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
+                            android:layout_height="wrap_content"
                             android:layout_gravity="left"
                             android:layout_marginTop="@dimen/screen_margin"
-                            android:orientation="vertical">
-
-                            <TextView
-                                style="@style/EventDetailsScreenItemUpRow"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="@string/txt_credibility"/>
+                            android:orientation="horizontal">
 
                             <LinearLayout
-                                android:layout_width="match_parent"
+                                android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/screen_margin_small"
-                                android:orientation="horizontal">
-
-                                <ImageView
-                                    android:id="@+id/image_credibility"
-                                    android:layout_width="@dimen/text_drawable_default_width"
-                                    android:layout_height="@dimen/text_drawable_default_height"/>
+                                android:layout_gravity="left"
+                                android:layout_marginTop="@dimen/screen_margin"
+                                android:layout_weight="1"
+                                android:gravity="left"
+                                android:orientation="vertical">
 
                                 <TextView
-                                    android:id="@+id/tv_credibility"
+                                    style="@style/EventDetailsScreenItemUpRow"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/txt_credibility"/>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="@dimen/text_drawable_default_height"
+                                    android:orientation="horizontal">
+
+                                    <ImageView
+                                        android:id="@+id/image_credibility"
+                                        android:layout_width="@dimen/text_drawable_default_width"
+                                        android:layout_height="@dimen/text_drawable_default_height"/>
+
+                                    <TextView
+                                        android:id="@+id/tv_credibility"
+                                        style="@style/EventDetailsScreenItemDownRow"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center_vertical"
+                                        android:layout_marginLeft="@dimen/screen_margin_half"
+                                        android:textAllCaps="true"
+                                        tools:text="very good"/>
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="right"
+                                android:layout_weight="1"
+                                android:gravity="right"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    style="@style/EventDetailsScreenItemUpRow"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/txt_votes_number"/>
+
+                                <TextView
+                                    android:id="@+id/tv_votes_number"
                                     style="@style/EventDetailsScreenItemDownRow"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_gravity="center_vertical"
-                                    android:layout_marginLeft="@dimen/screen_margin_half"
-                                    android:textAllCaps="true"
-                                    tools:text="very good"/>
+                                    tools:text="mzielu"/>
 
                             </LinearLayout>
 

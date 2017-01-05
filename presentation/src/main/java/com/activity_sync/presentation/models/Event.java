@@ -2,15 +2,21 @@ package com.activity_sync.presentation.models;
 
 import com.google.gson.annotations.SerializedName;
 
+import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
+
 import java.io.Serializable;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+
+import timber.log.Timber;
 
 public class Event implements Serializable
 {
-    @SerializedName("id")
-    private int id;
+    @SerializedName("eventID")
+    private int eventID;
+
+    @SerializedName("admin")
+    private User admin;
 
     @SerializedName("organizer")
     private User organizer;
@@ -19,15 +25,18 @@ public class Event implements Serializable
     private String description;
 
     @SerializedName("date")
-    private Date date;
+    private String date;
 
-    @SerializedName("max_places")
-    private int maxPlaces;
+    @SerializedName("numberOfPlayers")
+    private int numberOfPlayers;
 
-    @SerializedName("occupied_places")
-    private int occupiedPlaces;
+    @SerializedName("freePlaces")
+    private int freePlaces;
 
-    @SerializedName("location")
+    @SerializedName("like")
+    private int like;
+
+    @SerializedName("address")
     private Location location;
 
     @SerializedName("discipline")
@@ -36,25 +45,39 @@ public class Event implements Serializable
     @SerializedName("level")
     private Level level;
 
-    @SerializedName("user")
-    private AdditionalInfo additionalInfo;
+    @SerializedName("isAdmin")
+    private boolean isOrganizer;
 
-    @SerializedName("is_active")
-    private boolean isActive;
+    @SerializedName("isParticipant")
+    private boolean isParticipant;
 
-    public Event(int id, User organizer, String description, Date date, int maxPlaces, int occupiedPlaces, Location location, Discipline discipline, Level level, AdditionalInfo additionalInfo, boolean isActive)
+    @SerializedName("isCandidate")
+    private boolean isCandidate;
+
+    @SerializedName("rate")
+    private int rate;
+
+    @SerializedName("status")
+    private String status;
+
+    public Event(int eventID, User organizer, User admin, String description, String date, int numberOfPlayers, int freePlaces, int like, Location location, Discipline discipline, Level level, boolean isOrganizer, boolean isParticipant, boolean isCandidate, int rate, String status)
     {
-        this.id = id;
+        this.eventID = eventID;
         this.organizer = organizer;
+        this.admin = admin;
         this.description = description;
         this.date = date;
-        this.maxPlaces = maxPlaces;
-        this.occupiedPlaces = occupiedPlaces;
+        this.numberOfPlayers = numberOfPlayers;
+        this.freePlaces = freePlaces;
+        this.like = like;
         this.location = location;
         this.discipline = discipline;
         this.level = level;
-        this.additionalInfo = additionalInfo;
-        this.isActive = isActive;
+        this.isOrganizer = isOrganizer;
+        this.isParticipant = isParticipant;
+        this.isCandidate = isCandidate;
+        this.rate = rate;
+        this.status = status;
     }
 
     public Event()
@@ -62,24 +85,18 @@ public class Event implements Serializable
 
     }
 
-    public int getId()
+    public int getEventId()
     {
-        return id;
-    }
-
-    public void setId(int id)
-    {
-        this.id = id;
+        return eventID;
     }
 
     public User getOrganizer()
     {
+        if (organizer == null)
+        {
+            return admin;
+        }
         return organizer;
-    }
-
-    public void setOrganizer(User organizer)
-    {
-        this.organizer = organizer;
     }
 
     public String getDescription()
@@ -87,29 +104,14 @@ public class Event implements Serializable
         return description;
     }
 
-    public void setDescription(String description)
-    {
-        this.description = description;
-    }
-
-    public Date getDate()
+    public String getDate()
     {
         return date;
     }
 
-    public void setDate(Date date)
+    public int getNumberOfPlayers()
     {
-        this.date = date;
-    }
-
-    public int getMaxPlaces()
-    {
-        return maxPlaces;
-    }
-
-    public void setMaxPlaces(int maxPlaces)
-    {
-        this.maxPlaces = maxPlaces;
+        return numberOfPlayers;
     }
 
     public Location getLocation()
@@ -117,19 +119,9 @@ public class Event implements Serializable
         return location;
     }
 
-    public void setLocation(Location location)
-    {
-        this.location = location;
-    }
-
     public Discipline getDiscipline()
     {
         return discipline;
-    }
-
-    public void setDiscipline(Discipline discipline)
-    {
-        this.discipline = discipline;
     }
 
     public Level getLevel()
@@ -137,51 +129,70 @@ public class Event implements Serializable
         return level;
     }
 
-    public void setLevel(Level level)
+    public int getFreePlaces()
     {
-        this.level = level;
+        return freePlaces;
     }
 
-    public boolean isActive()
+    public void setFreePlaces(int freePlaces)
     {
-        return isActive;
+        this.freePlaces = freePlaces;
     }
 
-    public void setActive(boolean active)
+    public int getLike()
     {
-        isActive = active;
+        return like;
     }
 
-    public int getOccupiedPlaces()
+    public boolean isOrganizer()
     {
-        return occupiedPlaces;
+        return isOrganizer;
     }
 
-    public void setOccupiedPlaces(int occupiedPlaces)
+    public boolean isParticipant()
     {
-        this.occupiedPlaces = occupiedPlaces;
+        return isParticipant;
     }
 
-    public AdditionalInfo getAdditionalInfo()
+    public boolean isCandidate()
     {
-        return additionalInfo;
+        return isCandidate;
     }
 
-    public void setAdditionalInfo(AdditionalInfo additionalInfo)
+    public int getRate()
     {
-        this.additionalInfo = additionalInfo;
+        return rate;
+    }
+
+    public void setParticipant(boolean participant)
+    {
+        isParticipant = participant;
+    }
+
+    public void setCandidate(boolean candidate)
+    {
+        isCandidate = candidate;
+    }
+
+    public String getStatus()
+    {
+        return status;
     }
 
     public String getReadableDate()
     {
-        if (date != null)
+        try
         {
-            DateFormat df = new SimpleDateFormat("MM/dd HH:mm");
-            return df.format(date);
+            DateTimeFormatter dtf = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss");
+            DateTime jodatime = dtf.parseDateTime(date);
+            DateTimeFormatter dtfOut = DateTimeFormat.forPattern("MM/dd HH:mm");
+
+            return dtfOut.print(jodatime);
         }
-        else
+        catch (Exception e)
         {
-            return "";
+            Timber.i("Error during joda date formatting");
+            return date;
         }
     }
 }

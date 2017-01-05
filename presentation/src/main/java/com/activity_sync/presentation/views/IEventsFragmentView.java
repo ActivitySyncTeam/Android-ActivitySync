@@ -15,7 +15,9 @@ public interface IEventsFragmentView
 {
     void askForPermission();
 
-    void addEventsList(Collection<Event> events);
+    void addEventsListAndClear(Collection<Event> events);
+
+    void addEventsListAtTheEnd(Collection<Event> events);
 
     void refreshingVisible(boolean isRefreshing);
 
@@ -54,4 +56,8 @@ public interface IEventsFragmentView
     Observable refreshEvents();
 
     Observable<Event> selectedEvent();
+
+    String getSelectedDate();
+
+    Observable pageDownReached();
 }

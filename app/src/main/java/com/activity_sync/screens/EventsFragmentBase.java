@@ -27,6 +27,7 @@ import com.activity_sync.presentation.presenters.AllEventsPresenter;
 import com.activity_sync.presentation.services.IApiService;
 import com.activity_sync.presentation.services.INavigator;
 import com.activity_sync.presentation.services.IPermanentStorage;
+import com.activity_sync.presentation.utils.StringUtils;
 import com.activity_sync.presentation.views.IEventsFragmentView;
 import com.activity_sync.renderers.EventsRenderer;
 import com.activity_sync.renderers.base.DividerItemDecoration;
@@ -96,10 +97,14 @@ abstract public class EventsFragmentBase extends FragmentScreen implements IEven
     private PublishSubject<Boolean> locationsEnabled = PublishSubject.create();
     protected PublishSubject<Location> locationFound = PublishSubject.create();
     protected PublishSubject<DateTime> newDateOccurred = PublishSubject.create();
+    protected LinearLayoutManager linearLayoutManager;
     private RVRendererAdapter<Event> adapter;
     private List<Event> events = new ArrayList<>();
 
     private List<Discipline> disciplines = new ArrayList<>();
+
+    private String selectedDate;
+    protected PublishSubject pageDownReached = PublishSubject.create();
 
     public EventsFragmentBase()
     {
@@ -119,7 +124,7 @@ abstract public class EventsFragmentBase extends FragmentScreen implements IEven
         super.onActivityCreated(savedInstanceState);
         eventsRefreshLayout.setOnRefreshListener(() -> refreshEvents.onNext(this));
         adapter = new RVRendererAdapter<>(getContext(), new EventsRenderer.Builder());
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+        linearLayoutManager = new LinearLayoutManager(getContext());
         eventsList.setLayoutManager(linearLayoutManager);
         eventsList.addItemDecoration(new DividerItemDecoration(getContext()));
         eventsList.setAdapter(adapter);
@@ -132,9 +137,17 @@ abstract public class EventsFragmentBase extends FragmentScreen implements IEven
     }
 
     @Override
-    public void addEventsList(Collection<Event> events)
+    public void addEventsListAndClear(Collection<Event> events)
     {
         adapter.clear();
+        this.events.addAll(events);
+        adapter.addAll(events);
+        adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void addEventsListAtTheEnd(Collection<Event> events)
+    {
         this.events.addAll(events);
         adapter.addAll(events);
         adapter.notifyDataSetChanged();
@@ -299,9 +312,15 @@ abstract public class EventsFragmentBase extends FragmentScreen implements IEven
         if (dateTime == null || isDateToday(dateTime))
         {
             dayFilter.setText(R.string.txt_from_today);
+            selectedDate = getString(R.string.txt_from_today);
         } else
         {
-            dayFilter.setText(String.format(getString(R.string.txt_filter_from), dateTime.getDayOfMonth(), dateTime.getMonthOfYear(), dateTime.getYear()));
+            int day = dateTime.getDayOfMonth();
+            int month = dateTime.getMonthOfYear();
+            int year = dateTime.getYear();
+
+            dayFilter.setText(String.format(getString(R.string.txt_filter_from), day, month, year));
+            selectedDate = String.format(getString(R.string.txt_date_server_format), year, month, day);
         }
     }
 
@@ -329,5 +348,24 @@ abstract public class EventsFragmentBase extends FragmentScreen implements IEven
     public Discipline disciplineFilter()
     {
         return (Discipline) disciplineSpinner.getSelectedItem();
+    }
+
+    @Override
+    public String getSelectedDate()
+    {
+        if (selectedDate.equals(getString(R.string.txt_from_today)))
+        {
+            return StringUtils.EMPTY;
+        }
+        else
+        {
+            return selectedDate;
+        }
+    }
+
+    @Override
+    public Observable pageDownReached()
+    {
+        return pageDownReached;
     }
 }

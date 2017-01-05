@@ -36,12 +36,21 @@ public class EventsRenderer extends Renderer<Event>
     @Override
     public void render()
     {
-        eventOrganizer.setText(String.format("%s %s", getContent().getOrganizer().getName(),
-                getContent().getOrganizer().getSurname()));
-        eventLocation.setText(getContent().getLocation().getName());
+        if (getContent().getOrganizer() == null)
+        {
+            eventOrganizer.setText("not returned");
+        }
+        else
+        {
+            eventOrganizer.setText(String.format("%s %s", getContent().getOrganizer().getName(),
+                    getContent().getOrganizer().getSurname()));
+        }
+
+        eventLocation.setText(getContent().getLocation().getDescription());
+
         eventDate.setText(getContent().getReadableDate());
         eventDiscipline.setText(getContent().getDiscipline().getName());
-        eventPlaces.setText(String.format("0/%d", getContent().getMaxPlaces()));
+        eventPlaces.setText(String.format("%d/%d", getContent().getNumberOfPlayers() - getContent().getFreePlaces(), getContent().getNumberOfPlayers()));
     }
 
     public static class Builder extends RendererBuilder<Event>

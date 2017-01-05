@@ -4,9 +4,16 @@ import com.activity_sync.presentation.models.Comment;
 
 public class CommentBuilder
 {
+    private int commentID;
     private String date;
     private String comment;
     private String name;
+
+    public CommentBuilder setId(int date)
+    {
+        this.commentID = commentID;
+        return this;
+    }
 
     public CommentBuilder setDate(String date)
     {
@@ -28,6 +35,6 @@ public class CommentBuilder
 
     public Comment createComment()
     {
-        return new Comment(name, date, comment);
+        return new Comment(commentID, name, date, comment);
     }
 }

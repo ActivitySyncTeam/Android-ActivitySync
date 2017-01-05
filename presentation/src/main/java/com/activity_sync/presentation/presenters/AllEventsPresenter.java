@@ -1,21 +1,15 @@
 package com.activity_sync.presentation.presenters;
 
-import com.activity_sync.presentation.models.Discipline;
 import com.activity_sync.presentation.models.Event;
-import com.activity_sync.presentation.models.builders.DisciplineBuilder;
-import com.activity_sync.presentation.models.builders.EventBuilder;
-import com.activity_sync.presentation.models.builders.LocationBuilder;
-import com.activity_sync.presentation.models.builders.UserBuilder;
 import com.activity_sync.presentation.services.IApiService;
 import com.activity_sync.presentation.services.INavigator;
 import com.activity_sync.presentation.services.IPermanentStorage;
+import com.activity_sync.presentation.utils.StringUtils;
 import com.activity_sync.presentation.views.IEventsFragmentView;
 
 import org.joda.time.DateTime;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.Collection;
 
 import rx.Scheduler;
 
@@ -37,12 +31,13 @@ public class AllEventsPresenter extends EventsFragmentBasePresenter
     @Override
     public void start()
     {
+        dateTimeSelected = new DateTime();
+        view.setDate(dateTimeSelected);
+
         if (areLastCordsSaved())
         {
-            super.start();
             prepareFilterLayout();
-            dateTimeSelected = new DateTime();
-            view.setDate(dateTimeSelected);
+            super.start();
         }
         else
         {
@@ -80,8 +75,8 @@ public class AllEventsPresenter extends EventsFragmentBasePresenter
 
                     if (!alreadyLoaded)
                     {
-                        super.start();
                         prepareFilterLayout();
+                        super.start();
                     }
                 })
         );
@@ -111,7 +106,9 @@ public class AllEventsPresenter extends EventsFragmentBasePresenter
         subscriptions.add(view.refreshWithFilterClick()
                 .observeOn(uiThread)
                 .subscribe(date -> {
-                    resolveFilterRefresh();
+
+                    currentPage = 1;
+                    resolveRefresh();
                 })
         );
     }
@@ -119,98 +116,30 @@ public class AllEventsPresenter extends EventsFragmentBasePresenter
     @Override
     void loadEvents()
     {
-        //API CALL WILL BE HERE
-        List<Event> events = new ArrayList<>();
+        view.refreshingVisible(true);
 
-        events.add(new EventBuilder()
-                .setOrganizer(new UserBuilder()
-                        .setUserId(12)
-                        .setName("Marcin")
-                        .setSurname("Zielinski")
-                        .createUser())
-                .setDate(new Date("2016/10/15"))
-                .setLocation(new LocationBuilder()
-                        .setName("Park Jordana")
-                        .createLocation())
-                .setDiscipline(new DisciplineBuilder()
-                        .setName("Basketball")
-                        .createDiscipline())
-                .setMaxPlaces(12)
-                .setId(123)
-                .createEvent());
+        int range = permanentStorage.retrieveInteger(IPermanentStorage.SEARCH_RANGE, IPermanentStorage.SEARCH_RANGE_DEFAULT);
+        float lat = permanentStorage.retrieveFloat(IPermanentStorage.LAST_LATITUDE, IPermanentStorage.LAST_COORDINATION_DEFAULT);
+        float lng = permanentStorage.retrieveFloat(IPermanentStorage.LAST_LONGITUDE, IPermanentStorage.LAST_COORDINATION_DEFAULT);
 
-        events.add(new EventBuilder()
-                .setOrganizer(new UserBuilder()
-                        .setUserId(12)
-                        .setName("Michał")
-                        .setSurname("Wolny")
-                        .createUser())
-                .setDate(new Date("2016/10/15"))
-                .setLocation(new LocationBuilder()
-                        .setName("Park Jordana")
-                        .createLocation())
-                .setDiscipline(new DisciplineBuilder()
-                        .setName("Football")
-                        .createDiscipline())
-                .setMaxPlaces(10)
-                .setId(123)
-                .createEvent());
+                apiService.getFilteredEvents(1, range, lat, lng)
+                        .observeOn(uiThread)
+                        .subscribe(eventsCollection -> {
 
-        events.add(new EventBuilder()
-                .setOrganizer(new UserBuilder()
-                        .setUserId(12)
-                        .setName("Marcin")
-                        .setSurname("Zielinski")
-                        .createUser())
-                .setDate(new Date("2016/10/15"))
-                .setLocation(new LocationBuilder()
-                        .setName("Pod blokiem")
-                        .createLocation())
-                .setDiscipline(new DisciplineBuilder()
-                        .setName("Wrestling")
-                        .createDiscipline())
-                .setMaxPlaces(1)
-                .setId(123)
-                .createEvent());
+                            if (eventsCollection.getNext() == null)
+                            {
+                                endAlreadyReached = true;
+                            }
+                            else
+                            {
+                                endAlreadyReached = false;
+                            }
 
-        events.add(new EventBuilder()
-                .setOrganizer(new UserBuilder()
-                        .setUserId(12)
-                        .setName("Luke")
-                        .setSurname("Petka")
-                        .createUser())
-                .setDate(new Date("2016/10/15"))
-                .setLocation(new LocationBuilder()
-                        .setName("Park Jordana")
-                        .createLocation())
-                .setDiscipline(new DisciplineBuilder()
-                        .setName("Horse riding")
-                        .createDiscipline())
-                .setMaxPlaces(2)
-                .setId(123)
-                .createEvent());
+                            view.refreshingVisible(false);
+                            view.addEventsListAndClear(eventsCollection.getEvents());
+                            alreadyLoaded = true;
 
-        events.add(new EventBuilder()
-                .setOrganizer(new UserBuilder()
-                        .setUserId(12)
-                        .setName("Michał")
-                        .setSurname("Dudzik")
-                        .createUser())
-                .setDate(new Date("2016/10/15"))
-                .setLocation(new LocationBuilder()
-                        .setName("Park Jordana")
-                        .createLocation())
-                .setDiscipline(new DisciplineBuilder()
-                        .setName("Football")
-                        .createDiscipline())
-                .setId(123)
-                .setMaxPlaces(8)
-                .createEvent());
-
-        view.refreshingVisible(false);
-        view.addEventsList(events);
-
-        alreadyLoaded = true;
+                        }, this::handleError);
     }
 
     public DateTime getDateTimeSelected()
@@ -220,31 +149,156 @@ public class AllEventsPresenter extends EventsFragmentBasePresenter
 
     private boolean areLastCordsSaved()
     {
-        return permanentStorage.retrieveFloat(IPermanentStorage.LAST_LONGITUDE, IPermanentStorage.LAST_LONGITUDE_DEFAULT) != IPermanentStorage.LAST_LONGITUDE_DEFAULT;
+        return permanentStorage.retrieveFloat(IPermanentStorage.LAST_LONGITUDE, IPermanentStorage.LAST_COORDINATION_DEFAULT) != IPermanentStorage.LAST_COORDINATION_DEFAULT;
     }
 
     private void prepareFilterLayout()
     {
         view.filterLayoutVisible(true);
 
-        ArrayList<Discipline> list = new ArrayList<>();
-        list.add(new Discipline(0, "Piłka nożna"));
-        list.add(new Discipline(1, "Koszykówka"));
+        apiService.getAvailableDisciplines()
+                .observeOn(uiThread)
+                .subscribe(disciplines -> {
 
-        view.prepareDisciplineSpinner(list);
+                    view.prepareDisciplineSpinner(disciplines);
+
+                }, this::handleError);
     }
 
-    private void resolveFilterRefresh()
+    private void filterFinishedAndReloadAllData(Collection<Event> events)
+    {
+        view.refreshingVisible(false);
+        view.addEventsListAndClear(events);
+        alreadyLoaded = true;
+    }
+
+    private void filterFinishedAndAddAtTheEnd(Collection<Event> events)
+    {
+        view.refreshingVisible(false);
+        view.addEventsListAtTheEnd(events);
+        alreadyLoaded = true;
+    }
+
+    @Override
+    void resolveRefresh()
     {
         view.refreshingVisible(true);
 
-        if (view.disciplineFilter().getId() == ALL_EVENTS_ID)
+        int range = permanentStorage.retrieveInteger(IPermanentStorage.SEARCH_RANGE, IPermanentStorage.SEARCH_RANGE_DEFAULT);
+        float lat = permanentStorage.retrieveFloat(IPermanentStorage.LAST_LATITUDE, IPermanentStorage.LAST_COORDINATION_DEFAULT);
+        float lng = permanentStorage.retrieveFloat(IPermanentStorage.LAST_LONGITUDE, IPermanentStorage.LAST_COORDINATION_DEFAULT);
+
+        if (view.getSelectedDate().equals(StringUtils.EMPTY))
         {
-            loadEvents();
+            if (view.disciplineFilter().getId() == ALL_EVENTS_ID)
+            {
+                apiService.getFilteredEvents(currentPage, range, lat, lng)
+                        .observeOn(uiThread)
+                        .subscribe(eventsCollection -> {
+
+                            if (eventsCollection.getNext() == null)
+                            {
+                                endAlreadyReached = true;
+                            }
+                            else
+                            {
+                                endAlreadyReached = false;
+                            }
+
+                            if (currentPage == 1)
+                            {
+                                filterFinishedAndReloadAllData(eventsCollection.getEvents());
+                            }
+                            else
+                            {
+                                filterFinishedAndAddAtTheEnd(eventsCollection.getEvents());
+                            }
+
+                        }, this::handleError);
+            }
+            else
+            {
+                apiService.getFilteredEvents(currentPage, range, lat, lng, view.disciplineFilter().getId())
+                        .observeOn(uiThread)
+                        .subscribe(eventsCollection -> {
+
+                            if (eventsCollection.getNext() == null)
+                            {
+                                endAlreadyReached = true;
+                            }
+                            else
+                            {
+                                endAlreadyReached = false;
+                            }
+
+                            if (currentPage == 1)
+                            {
+                                filterFinishedAndReloadAllData(eventsCollection.getEvents());
+                            }
+                            else
+                            {
+                                filterFinishedAndAddAtTheEnd(eventsCollection.getEvents());
+                            }
+
+                        }, this::handleError);
+            }
         }
         else
         {
-            loadEvents();   //api call with filtering
+            if (view.disciplineFilter().getId() == ALL_EVENTS_ID)
+            {
+                apiService.getFilteredEvents(currentPage, range, lat, lng, view.getSelectedDate())
+                        .observeOn(uiThread)
+                        .subscribe(eventsCollection -> {
+
+                            if (eventsCollection.getNext() == null)
+                            {
+                                endAlreadyReached = true;
+                            }
+                            else
+                            {
+                                endAlreadyReached = false;
+                            }
+
+
+                            if (currentPage == 1)
+                            {
+                                filterFinishedAndReloadAllData(eventsCollection.getEvents());
+                            }
+                            else
+                            {
+                                filterFinishedAndAddAtTheEnd(eventsCollection.getEvents());
+                            }
+
+                        }, this::handleError);
+            }
+            else
+            {
+                apiService.getFilteredEvents(currentPage, range, lat, lng, view.disciplineFilter().getId(), view.getSelectedDate())
+                        .observeOn(uiThread)
+                        .subscribe(eventsCollection -> {
+
+                            if (eventsCollection.getNext() == null)
+                            {
+                                endAlreadyReached = true;
+                            }
+                            else
+                            {
+                                endAlreadyReached = false;
+                            }
+
+
+                            if (currentPage == 1)
+                            {
+                                filterFinishedAndReloadAllData(eventsCollection.getEvents());
+                            }
+                            else
+                            {
+                                filterFinishedAndAddAtTheEnd(eventsCollection.getEvents());
+                            }
+
+                        }, this::handleError);
+            }
         }
     }
 }

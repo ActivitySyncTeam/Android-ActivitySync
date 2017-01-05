@@ -8,7 +8,7 @@ import java.util.List;
 
 import rx.Observable;
 
-public interface IEventCreatorView
+public interface IEventCreatorView extends IScreenView
 {
     void prepareDisciplineSpinner(List<Discipline> disciplines);
 
@@ -18,21 +18,23 @@ public interface IEventCreatorView
 
     String date();
 
-    String location();
+    Location location();
 
     Discipline discipline();
 
     Level level();
 
-    String players();
+    int players();
 
     String description();
+
+    String status();
 
     boolean isOrganizerEnrolled();
 
     void date(String date);
 
-    void location(String location);
+    void location(Location location);
 
     void level(Level level);
 
@@ -41,6 +43,8 @@ public interface IEventCreatorView
     void playersNumber(String players);
 
     void description(String description);
+
+    void status(String status);
 
     Observable createEventClick();
 
@@ -65,4 +69,8 @@ public interface IEventCreatorView
     void showUpdateConfirmationDialog();
 
     Observable confirmActionClickEvent();
+
+    void prepareUpdateLayout();
+
+    void showNoLocationChosenError();
 }

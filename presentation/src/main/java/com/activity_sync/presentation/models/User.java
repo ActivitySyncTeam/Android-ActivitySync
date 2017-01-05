@@ -6,8 +6,11 @@ import java.io.Serializable;
 
 public class User implements Serializable
 {
-    @SerializedName("userId")
+    @SerializedName("userID")
     private int userId;
+
+    @SerializedName("id")
+    private int id;
 
     @SerializedName("name")
     private String name;
@@ -30,15 +33,37 @@ public class User implements Serializable
     @SerializedName("events")
     private int events;
 
-    @SerializedName("user")
-    private AdditionalInfo additionalInfo;
+    @SerializedName("isAdmin")
+    private boolean isAdmin;
 
-    @SerializedName("credibility")          //please add credibility in api call
+    @SerializedName("isCandidate")
+    private boolean isCandidate;
+
+    @SerializedName("isInvited")
+    private boolean isInvited;
+
+    @SerializedName("isFriend")
+    private boolean isFriend;
+
+    @SerializedName("rate")
+    private int rate;
+
+    @SerializedName("credibility")
     private int credibility;
 
-    public User(int userId, String name, String surname, String username, String email, String registerDate, String signature, int events, AdditionalInfo additionalInfo, int credibility)
+    @SerializedName("ratesNumber")
+    private int ratesNumber;
+
+    @SerializedName("friends")
+    private int friends;
+
+    @SerializedName("likes")
+    private int likes;
+
+    public User(int userId, int id, String name, String surname, String username, String email, String registerDate, String signature, int events, boolean isAdmin, boolean isCandidate, boolean isInvited, boolean isFriend, int rate, int credibility, int ratesNumber, int friends, int likes)
     {
         this.userId = userId;
+        this.id = id;
         this.name = name;
         this.surname = surname;
         this.username = username;
@@ -46,8 +71,15 @@ public class User implements Serializable
         this.registerDate = registerDate;
         this.signature = signature;
         this.events = events;
-        this.additionalInfo = additionalInfo;
+        this.isAdmin = isAdmin;
+        this.isCandidate = isCandidate;
+        this.isFriend = isFriend;
+        this.rate = rate;
         this.credibility = credibility;
+        this.ratesNumber = ratesNumber;
+        this.friends = friends;
+        this.likes = likes;
+        this.isInvited = isInvited;
     }
 
     public User()
@@ -57,12 +89,14 @@ public class User implements Serializable
 
     public int getUserId()
     {
-        return userId;
-    }
-
-    public void setUserId(int userId)
-    {
-        this.userId = userId;
+        if (userId == 0)
+        {
+            return id;
+        }
+        else
+        {
+            return userId;
+        }
     }
 
     public String getName()
@@ -70,19 +104,9 @@ public class User implements Serializable
         return name;
     }
 
-    public void setName(String name)
-    {
-        this.name = name;
-    }
-
     public String getSurname()
     {
         return surname;
-    }
-
-    public void setSurname(String surname)
-    {
-        this.surname = surname;
     }
 
     public String getUsername()
@@ -90,19 +114,9 @@ public class User implements Serializable
         return username;
     }
 
-    public void setUsername(String username)
-    {
-        this.username = username;
-    }
-
     public String getEmail()
     {
         return email;
-    }
-
-    public void setEmail(String email)
-    {
-        this.email = email;
     }
 
     public String getRegisterDate()
@@ -110,19 +124,9 @@ public class User implements Serializable
         return registerDate;
     }
 
-    public void setRegisterDate(String registerDate)
-    {
-        this.registerDate = registerDate;
-    }
-
     public String getSignature()
     {
         return signature;
-    }
-
-    public void setSignature(String signature)
-    {
-        this.signature = signature;
     }
 
     public int getEvents()
@@ -130,19 +134,24 @@ public class User implements Serializable
         return events;
     }
 
-    public void setEvents(int events)
+    public boolean isAdmin()
     {
-        this.events = events;
+        return isAdmin;
     }
 
-    public AdditionalInfo getAdditionalInfo()
+    public boolean isCandidate()
     {
-        return additionalInfo;
+        return isCandidate;
     }
 
-    public void setAdditionalInfo(AdditionalInfo additionalInfo)
+    public boolean isFriend()
     {
-        this.additionalInfo = additionalInfo;
+        return isFriend;
+    }
+
+    public int getRate()
+    {
+        return rate;
     }
 
     public int getCredibility()
@@ -150,8 +159,43 @@ public class User implements Serializable
         return credibility;
     }
 
-    public void setCredibility(int credibility)
+    public int getRatesNumber()
     {
-        this.credibility = credibility;
+        return ratesNumber;
+    }
+
+    public void setCandidate(boolean candidate)
+    {
+        isCandidate = candidate;
+    }
+
+    public void setFriend(boolean friend)
+    {
+        isFriend = friend;
+    }
+
+    public void setRate(int rate)
+    {
+        this.rate = rate;
+    }
+
+    public int getFriends()
+    {
+        return friends;
+    }
+
+    public int getLikes()
+    {
+        return likes;
+    }
+
+    public boolean isInvited()
+    {
+        return isInvited;
+    }
+
+    public void setInvited(boolean invited)
+    {
+        isInvited = invited;
     }
 }

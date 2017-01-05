@@ -4,5 +4,7 @@ public interface IPresenter
 {
     void start();
     void stop();
+
+    void resume();
 }
 

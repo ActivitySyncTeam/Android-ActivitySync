@@ -1,8 +1,10 @@
 package com.activity_sync.tests;
 
 import com.activity_sync.presentation.models.Event;
+import com.activity_sync.presentation.models.EventsCollection;
 import com.activity_sync.presentation.models.builders.DisciplineBuilder;
 import com.activity_sync.presentation.models.builders.EventBuilder;
+import com.activity_sync.presentation.models.builders.EventsCollectionBuilder;
 import com.activity_sync.presentation.models.builders.LocationBuilder;
 import com.activity_sync.presentation.models.builders.UserBuilder;
 import com.activity_sync.presentation.presenters.MyEventsPresenter;
@@ -17,10 +19,15 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import java.util.Date;
+import java.util.ArrayList;
+import java.util.List;
 
+import rx.Observable;
 import rx.schedulers.Schedulers;
 import rx.subjects.PublishSubject;
+
+import static org.mockito.Matchers.anyInt;
+import static org.mockito.Mockito.times;
 
 @RunWith(MockitoJUnitRunner.class)
 public class MyEventsPresenterTests
@@ -36,8 +43,11 @@ public class MyEventsPresenterTests
 
     PublishSubject eventSelectedEvent = PublishSubject.create();
     PublishSubject refreshEventsEvent = PublishSubject.create();
+    PublishSubject endListReached = PublishSubject.create();
 
     Event testedEvent;
+    List<Event> events = new ArrayList<>();
+    EventsCollection eventsCollection;
 
     @Before
     public void setup()
@@ -48,16 +58,22 @@ public class MyEventsPresenterTests
                         .setName("Marcin")
                         .setSurname("Zielinski")
                         .createUser())
-                .setDate(new Date("2016/10/15"))
+                .setDate("2017-12-12 23:23:00")
                 .setLocation(new LocationBuilder()
-                        .setName("Park Jordana")
+                        .setDescription("Park Jordana")
                         .createLocation())
                 .setDiscipline(new DisciplineBuilder()
                         .setName("Basketball")
                         .createDiscipline())
-                .setMaxPlaces(12)
+                .setNumberOfPlayers(12)
                 .setId(123)
                 .createEvent();
+
+        events.add(testedEvent);
+        eventsCollection = new EventsCollectionBuilder().setEvents(events).create();
+
+        Mockito.when(view.pageDownReached()).thenReturn(endListReached);
+        Mockito.when(apiService.getMyEvents(anyInt())).thenReturn(Observable.just(eventsCollection));
 
         Mockito.when(view.selectedEvent()).thenReturn(eventSelectedEvent);
         Mockito.when(view.refreshEvents()).thenReturn(refreshEventsEvent);
@@ -70,6 +86,7 @@ public class MyEventsPresenterTests
         presenter.start();
 
         eventSelectedEvent.onNext(testedEvent);
+        Mockito.verify(apiService).getMyEvents(1);
         Mockito.verify(view).filterLayoutVisible(false);
     }
 
@@ -80,7 +97,7 @@ public class MyEventsPresenterTests
         presenter.start();
 
         eventSelectedEvent.onNext(testedEvent);
-        Mockito.verify(navigator).openEventDetailsScreen(testedEvent.getId());
+        Mockito.verify(navigator).openEventDetailsScreen(testedEvent.getEventId());
     }
 
     @Test
@@ -89,8 +106,24 @@ public class MyEventsPresenterTests
         MyEventsPresenter presenter = createPresenter();
         presenter.start();
 
+        Mockito.reset(view);
+
         refreshEventsEvent.onNext(this);
-        //Mockito.verify(view).apiCallWhichWillBeHere();
+        Mockito.verify(apiService, times(2)).getMyEvents(1);
+        Mockito.verify(view, times(2)).refreshingVisible(false);
+    }
+
+    @Test
+    public void myEventsPresenter_reachEnd_loadEvents()
+    {
+        MyEventsPresenter presenter = createPresenter();
+        presenter.start();
+
+        Mockito.reset(view);
+
+        endListReached.onNext(this);
+        Mockito.verify(apiService).getMyEvents(1);
+        Mockito.verify(apiService).getMyEvents(2);
         Mockito.verify(view).refreshingVisible(false);
     }
 

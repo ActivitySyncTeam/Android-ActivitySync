@@ -1,64 +1,92 @@
 package com.activity_sync.presentation.presenters;
 
 import com.activity_sync.presentation.models.User;
-import com.activity_sync.presentation.models.builders.AdditionalInfoBuilder;
-import com.activity_sync.presentation.models.builders.UserBuilder;
+import com.activity_sync.presentation.models.body_models.UserIDBody;
 import com.activity_sync.presentation.services.CurrentUser;
 import com.activity_sync.presentation.services.IApiService;
+import com.activity_sync.presentation.services.IErrorHandler;
 import com.activity_sync.presentation.views.IUserDetailsView;
 
 import rx.Scheduler;
+import timber.log.Timber;
+
+import static com.activity_sync.presentation.views.IUserDetailsView.DISLIKE;
+import static com.activity_sync.presentation.views.IUserDetailsView.LIKE;
+import static com.activity_sync.presentation.views.IUserDetailsView.NO_ASSESSMENT;
 
 public class UserDetailsPresenter extends Presenter<IUserDetailsView>
 {
     private final IApiService apiService;
     private final Scheduler uiThread;
     private final CurrentUser currentUser;
+    private final int userId;
+    private final IErrorHandler errorHandler;
 
     private User user;
 
-    public UserDetailsPresenter(IUserDetailsView view, IApiService apiService, Scheduler uiThread, CurrentUser currentUser)
+    public UserDetailsPresenter(IUserDetailsView view, IApiService apiService, Scheduler uiThread, CurrentUser currentUser, int userId, IErrorHandler errorHandler)
     {
         super(view);
         this.apiService = apiService;
         this.uiThread = uiThread;
         this.currentUser = currentUser;
+        this.userId = userId;
+        this.errorHandler = errorHandler;
     }
 
     @Override
     public void start()
     {
         super.start();
+        view.showProgressBar();
+        view.buttonsLayoutVisible(false);
 
-        createUser(0, false, false);
-        view.setData(user);
+        apiService.getUserData(userId)
+                .observeOn(uiThread)
+                .subscribe(result -> {
+                    user = result;
+                    view.setData(result);
+                    view.thumbsAndFollowBtnVisible(true);
+                    view.setThumbsColor(user.getRate());
+                    view.setFriendBtnAppearance(user);
 
-        if (currentUser.userID() == user.getUserId())
-        {
-            view.thumbsAndFollowBtnVisible(false);
-        }
-        else
-        {
-            view.thumbsAndFollowBtnVisible(true);
-            view.setThumbsColor(user.getAdditionalInfo().getRate());
-            view.setFriendBtnAppearance(user);
-        }
+                    view.buttonsLayoutVisible(true);
+                    view.hideProgressBar();
+                }, this::handleError);
 
         subscriptions.add(view.thumbUpClick()
                 .observeOn(uiThread)
                 .subscribe(o -> {
 
-                    if (user.getAdditionalInfo().getRate() == 1)
+                    if (user.getRate() == LIKE)
                     {
-                        view.setThumbsColor(0);
-                        //apicall
-                        user.setAdditionalInfo(new AdditionalInfoBuilder().setRate(0).createAdditionalInfo());
+                        view.showProgressBar();
+
+                        apiService.rateUser(userId, NO_ASSESSMENT)
+                                .observeOn(uiThread)
+                                .subscribe(result -> {
+
+                                    view.setThumbsColor(NO_ASSESSMENT);
+                                    user.setRate(NO_ASSESSMENT);
+
+                                    view.hideProgressBar();
+
+                                }, this::handleError);
                     }
                     else
                     {
-                        view.setThumbsColor(1);
-                        //apicall
-                        user.setAdditionalInfo(new AdditionalInfoBuilder().setRate(1).createAdditionalInfo());
+                        view.showProgressBar();
+
+                        apiService.rateUser(userId, LIKE)
+                                .observeOn(uiThread)
+                                .subscribe(result -> {
+
+                                    view.setThumbsColor(LIKE);
+                                    user.setRate(LIKE);
+
+                                    view.hideProgressBar();
+
+                                }, this::handleError);
                     }
                 })
         );
@@ -67,17 +95,35 @@ public class UserDetailsPresenter extends Presenter<IUserDetailsView>
                 .observeOn(uiThread)
                 .subscribe(o -> {
 
-                    if (user.getAdditionalInfo().getRate() == -1)
+                    if (user.getRate() == DISLIKE)
                     {
-                        view.setThumbsColor(0);
-                        //apicall
-                        user.setAdditionalInfo(new AdditionalInfoBuilder().setRate(0).createAdditionalInfo());
+                        view.showProgressBar();
+
+                        apiService.rateUser(userId, NO_ASSESSMENT)
+                                .observeOn(uiThread)
+                                .subscribe(result -> {
+
+                                    view.setThumbsColor(NO_ASSESSMENT);
+                                    user.setRate(NO_ASSESSMENT);
+
+                                    view.hideProgressBar();
+
+                                }, this::handleError);
                     }
                     else
                     {
-                        view.setThumbsColor(-1);
-                        //apicall
-                        user.setAdditionalInfo(new AdditionalInfoBuilder().setRate(-1).createAdditionalInfo());
+                        view.showProgressBar();
+
+                        apiService.rateUser(userId, DISLIKE)
+                                .observeOn(uiThread)
+                                .subscribe(result -> {
+
+                                    view.setThumbsColor(DISLIKE);
+                                    user.setRate(DISLIKE);
+
+                                    view.hideProgressBar();
+
+                                }, this::handleError);
                     }
                 })
         );
@@ -85,46 +131,109 @@ public class UserDetailsPresenter extends Presenter<IUserDetailsView>
         subscriptions.add(view.friendsBtnClick()
                 .observeOn(uiThread)
                 .subscribe(o -> {
-                    if (user.getAdditionalInfo().isCandidate())
+                    if (user.isCandidate())
                     {
-                        view.displayFriendRequestCanceledMessage();
-                        user.setAdditionalInfo(new AdditionalInfoBuilder().setFriend(false).setCandidate(false).createAdditionalInfo());
-                        view.setFriendBtnAppearance(user);
+                        view.showProgressBar();
 
+                        apiService.cancelFriendInvitation(new UserIDBody(user.getUserId()))
+                                .observeOn(uiThread)
+                                .subscribe(friends -> {
+
+                                    view.displayFriendRequestCanceledMessage();
+                                    user.setCandidate(false);
+                                    user.setFriend(false);
+                                    user.setInvited(false);
+                                    view.setFriendBtnAppearance(user);
+
+                                    view.hideProgressBar();
+
+                                }, this::handleError);
                     }
-                    else if (user.getAdditionalInfo().isFriend())
+                    else if (user.isFriend())
                     {
-                        view.displayFriendRemovedMessage();
-                        user.setAdditionalInfo(new AdditionalInfoBuilder().setFriend(false).setCandidate(false).createAdditionalInfo());
-                        view.setFriendBtnAppearance(user);
+                        view.showProgressBar();
+
+                        apiService.deleteFriend(new UserIDBody(user.getUserId()))
+                                .observeOn(uiThread)
+                                .subscribe(friends -> {
+
+                                    view.displayFriendRemovedMessage();
+                                    user.setCandidate(false);
+                                    user.setFriend(false);
+                                    user.setInvited(false);
+                                    view.setFriendBtnAppearance(user);
+
+                                    view.hideProgressBar();
+
+                                }, this::handleError);
+                    }
+                    else if (user.isInvited())
+                    {
+                        view.showProgressBar();
+
+                        apiService.acceptFriendInvitation(user.getUserId())
+                                .observeOn(uiThread)
+                                .subscribe(friends -> {
+
+                                    view.displayFriendRequestAcceptedMessage();
+                                    user.setCandidate(false);
+                                    user.setFriend(true);
+                                    user.setInvited(false);
+                                    view.setFriendBtnAppearance(user);
+
+                                    view.hideProgressBar();
+
+                                }, this::handleError);
                     }
                     else
                     {
-                        view.displayFriendRequestSentMessage();
-                        user.setAdditionalInfo(new AdditionalInfoBuilder().setFriend(false).setCandidate(true).createAdditionalInfo());
-                        view.setFriendBtnAppearance(user);
+                        view.showProgressBar();
+
+                        apiService.sendFriendRequest(user.getUserId())
+                                .observeOn(uiThread)
+                                .subscribe(friends -> {
+
+                                    view.displayFriendRequestSentMessage();
+                                    user.setCandidate(true);
+                                    user.setFriend(false);
+                                    user.setInvited(false);
+                                    view.setFriendBtnAppearance(user);
+
+                                    view.hideProgressBar();
+
+                                }, this::handleError);
                     }
+                })
+        );
+
+        subscriptions.add(view.rejectInvitationClick()
+                .observeOn(uiThread)
+                .subscribe(o -> {
+
+                    view.showProgressBar();
+
+                    apiService.rejectFriendRequest(new UserIDBody(user.getUserId()))
+                            .observeOn(uiThread)
+                            .subscribe(result -> {
+
+                                view.displayFriendRequestRejectedMessage();
+                                user.setCandidate(false);
+                                user.setFriend(false);
+                                user.setInvited(false);
+                                view.setFriendBtnAppearance(user);
+
+                                view.hideProgressBar();
+
+                            }, this::handleError);
                 })
         );
     }
 
-    public void createUser(int rate, boolean isFriend, boolean isCandidate)
+    private void handleError(Throwable error)
     {
-        user = new UserBuilder()
-                .setName("Marcin")
-                .setSurname("Zielinski")
-                .setUsername("mzielu")
-                .setEmail("kmarcinzielnski@gmail.com")
-                .setRegisterDate("2015-12-12")
-                .setSignature("Randomly written text")
-                .setEvents(23)
-                .setUserId(123)
-                .setCredibility(85)
-                .setAdditionalInfo(new AdditionalInfoBuilder()
-                        .setRate(rate)
-                        .setFriend(isFriend)
-                        .setCandidate(isCandidate)
-                        .createAdditionalInfo())
-                .createUser();
+        errorHandler.handleError(error);
+        error.printStackTrace();
+        Timber.d(error.getMessage());
+        view.hideProgressBar();
     }
 }

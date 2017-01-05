@@ -1,10 +1,10 @@
 package com.activity_sync.presentation.presenters;
 
-import rx.functions.Action1;
-import rx.subscriptions.CompositeSubscription;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import rx.functions.Action1;
+import rx.subscriptions.CompositeSubscription;
 
 public class Presenter<TView> implements IPresenter
 {
@@ -46,6 +46,15 @@ public class Presenter<TView> implements IPresenter
 
         this.started = false;
         this.subscriptions.clear();
+    }
+
+    @Override
+    public void resume()
+    {
+        if (this.childPresenter != null)
+        {
+            this.childPresenter.resume();
+        }
     }
 
     protected void runOnStartup(Action1 action)

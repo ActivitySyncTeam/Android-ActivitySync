@@ -1,8 +1,15 @@
 package com.activity_sync.tests;
 
+import com.activity_sync.presentation.models.ClientDetails;
+import com.activity_sync.presentation.models.LoginResponse;
+import com.activity_sync.presentation.models.User;
+import com.activity_sync.presentation.models.builders.ClientDetailsBuilder;
+import com.activity_sync.presentation.models.builders.LoginResponseBuilder;
+import com.activity_sync.presentation.models.builders.UserBuilder;
 import com.activity_sync.presentation.presenters.LoginPresenter;
 import com.activity_sync.presentation.services.CurrentUser;
 import com.activity_sync.presentation.services.IApiService;
+import com.activity_sync.presentation.services.IErrorHandler;
 import com.activity_sync.presentation.services.INavigator;
 import com.activity_sync.presentation.utils.StringUtils;
 import com.activity_sync.presentation.views.ILoginView;
@@ -14,6 +21,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import rx.Observable;
 import rx.schedulers.Schedulers;
 import rx.subjects.PublishSubject;
 
@@ -35,19 +43,35 @@ public class LoginPresenterTests
     @Mock
     CurrentUser currentUser;
 
+    @Mock
+    IErrorHandler errorHandler;
+
     PublishSubject loginBtnClickEvent = PublishSubject.create();
     PublishSubject createAccountClickEvent = PublishSubject.create();
 
     String login = "email";
     String password = "password";
 
+    ClientDetails clientDetails;
+    LoginResponse loginResponse;
+
+    User user;
+
     @Before
     public void setup()
     {
+        clientDetails = new ClientDetailsBuilder().create();
+        loginResponse = new LoginResponseBuilder().create();
+        user = new UserBuilder().setUserId(23).setUsername("test").createUser();
+
         Mockito.when(view.loginBtnClick()).thenReturn(loginBtnClickEvent);
         Mockito.when(view.createAccountClick()).thenReturn(createAccountClickEvent);
         Mockito.when(view.login()).thenReturn(login);
         Mockito.when(view.password()).thenReturn(password);
+
+        Mockito.when(apiService.getClientDetails()).thenReturn(Observable.just(clientDetails));
+        Mockito.when(apiService.login(view.login(), view.password())).thenReturn(Observable.just(loginResponse));
+        Mockito.when(apiService.getMyProfile()).thenReturn(Observable.just(user));
     }
 
     @Test
@@ -57,6 +81,12 @@ public class LoginPresenterTests
         loginPresenter.start();
 
         loginBtnClickEvent.onNext(this);
+
+        Mockito.verify(apiService).login(view.login(), view.password());
+        Mockito.verify(apiService).getMyProfile();
+        Mockito.verify(currentUser).clientId(anyString());
+        Mockito.verify(currentUser).clientSecret(anyString());
+        Mockito.verify(currentUser).accessToken(anyString());
         Mockito.verify(navigator).startBackgroundService();
         Mockito.verify(navigator).openEventsScreen();
     }
@@ -101,6 +131,6 @@ public class LoginPresenterTests
 
     private LoginPresenter createPresenter()
     {
-        return new LoginPresenter(Schedulers.immediate(), view, navigator, apiService, currentUser);
+        return new LoginPresenter(Schedulers.immediate(), view, navigator, apiService, currentUser, errorHandler);
     }
 }

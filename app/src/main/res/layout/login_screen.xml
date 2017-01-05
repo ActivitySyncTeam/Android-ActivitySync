@@ -91,6 +91,16 @@
                     android:gravity="center"
                     android:layout_marginTop="@dimen/screen_margin"/>
 
+                <ProgressBar
+                    android:id="@+id/login_progress_bar"
+                    android:layout_weight="1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/screen_margin"
+                    android:visibility="invisible"/>
+
             </LinearLayout>
 
     </LinearLayout>

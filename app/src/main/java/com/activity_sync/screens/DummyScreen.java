@@ -19,7 +19,7 @@ import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.android.view.ViewObservable;
 
-public class DummyScreen extends ScreenWithMenu implements IDummyView
+public class DummyScreen extends Screen implements IDummyView
 {
     @Inject
     INavigator navigator;
@@ -39,12 +39,6 @@ public class DummyScreen extends ScreenWithMenu implements IDummyView
     public DummyScreen()
     {
         super(R.layout.dummy_screen);
-    }
-
-    @Override
-    protected int getMenuId()
-    {
-        return R.id.menu_dummy;
     }
 
     @Override

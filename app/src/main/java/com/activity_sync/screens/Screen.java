@@ -12,12 +12,13 @@ import android.view.MenuItem;
 
 import com.activity_sync.R;
 import com.activity_sync.presentation.presenters.IPresenter;
+import com.activity_sync.presentation.views.IScreenView;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import rx.subjects.PublishSubject;
 
-public abstract class Screen extends BaseActivity
+public abstract class Screen extends BaseActivity implements IScreenView
 {
     @Nullable
     @Bind(R.id.toolbar)
@@ -67,6 +68,16 @@ public abstract class Screen extends BaseActivity
         if (presenter != null)
         {
             this.presenter.start();
+        }
+    }
+
+    @Override
+    protected void onResume()
+    {
+        super.onResume();
+        if (presenter != null)
+        {
+            this.presenter.resume();
         }
     }
 
@@ -124,15 +135,22 @@ public abstract class Screen extends BaseActivity
         dialog.show();
     }
 
-
+    @Override
     public void showProgressBar()
     {
-        actionProgress.setVisible(true);
+        if (actionProgress != null)
+        {
+            actionProgress.setVisible(true);
+        }
     }
 
+    @Override
     public void hideProgressBar()
     {
-        actionProgress.setVisible(false);
+        if (actionProgress != null)
+        {
+            actionProgress.setVisible(false);
+        }
     }
 
     protected abstract IPresenter createPresenter(Screen screen, Bundle savedInstanceState);

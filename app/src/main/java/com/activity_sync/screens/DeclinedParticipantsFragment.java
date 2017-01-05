@@ -13,9 +13,9 @@ import rx.android.schedulers.AndroidSchedulers;
 
 public class DeclinedParticipantsFragment extends UsersFragmentBase implements IUserActionListener
 {
-    public DeclinedParticipantsFragment(boolean shouldDisplayAllOptions)
+    public DeclinedParticipantsFragment(boolean shouldDisplayAllOptions, int eventId)
     {
-        super(shouldDisplayAllOptions);
+        super(shouldDisplayAllOptions, eventId);
     }
 
     @Override
@@ -27,6 +27,6 @@ public class DeclinedParticipantsFragment extends UsersFragmentBase implements I
     @Override
     protected IPresenter createPresenter(FragmentScreen screen, Bundle savedInstanceState)
     {
-        return new DeclinedUsersPresenter(this, navigator, AndroidSchedulers.mainThread(), apiService);
+        return new DeclinedUsersPresenter(this, navigator, AndroidSchedulers.mainThread(), apiService, eventId);
     }
 }

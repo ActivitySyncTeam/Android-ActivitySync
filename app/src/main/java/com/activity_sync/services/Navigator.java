@@ -4,8 +4,10 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 
+import com.activity_sync.presentation.models.Event;
 import com.activity_sync.presentation.models.User;
 import com.activity_sync.presentation.services.INavigator;
+import com.activity_sync.screens.AllUsersScreen;
 import com.activity_sync.screens.ChangePasswordScreen;
 import com.activity_sync.screens.CommentsScreen;
 import com.activity_sync.screens.CreateNewEventScreen;
@@ -73,14 +75,17 @@ public class Navigator implements INavigator
     @Override
     public void openUserDetailsScreen(int userId)
     {
-        startActivity(getIntent(UserDetailsScreen.class));
+        Intent intent = new Intent(context, UserDetailsScreen.class);
+        intent.putExtra(UserDetailsScreen.USER_ID, userId);
+        startActivity(intent);
     }
 
     @Override
-    public void openParticipantsScreen(boolean isOrganizer)
+    public void openParticipantsScreen(boolean isOrganizer, int eventId)
     {
         Intent intent = new Intent(context, ParticipantsScreen.class);
         intent.putExtra(ParticipantsScreen.IS_ORGANIZER, isOrganizer);
+        intent.putExtra(ParticipantsScreen.EVENT_ID, eventId);
         startActivity(intent);
     }
 
@@ -91,10 +96,10 @@ public class Navigator implements INavigator
     }
 
     @Override
-    public void openEventUpdateScreen(int eventId)
+    public void openEventUpdateScreen(Event event)
     {
         Intent intent = new Intent(context, EventUpdateScreen.class);
-        intent.putExtra(EventUpdateScreen.EVENT_ID, eventId);
+        intent.putExtra(EventUpdateScreen.EVENT, event);
         startActivity(intent);
     }
 
@@ -131,6 +136,12 @@ public class Navigator implements INavigator
     public void openChangePasswordScreen()
     {
         startActivity(getIntent(ChangePasswordScreen.class));
+    }
+
+    @Override
+    public void openAllUsersScreen()
+    {
+        startActivity(getIntent(AllUsersScreen.class));
     }
 
     @Override

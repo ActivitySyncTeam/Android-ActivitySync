@@ -8,6 +8,7 @@ import com.activity_sync.R;
 import com.activity_sync.presentation.models.User;
 import com.activity_sync.presentation.services.CurrentUser;
 import com.activity_sync.presentation.services.IApiService;
+import com.activity_sync.presentation.services.IErrorHandler;
 import com.activity_sync.presentation.views.IUserBaseView;
 import com.activity_sync.utils.CredibilityService;
 import com.amulyakhare.textdrawable.TextDrawable;
@@ -23,6 +24,9 @@ abstract public class UserBaseScreen extends Screen implements IUserBaseView
 
     @Inject
     CurrentUser currentUser;
+
+    @Inject
+    IErrorHandler errorHandler;
 
     @Bind(R.id.tv_username)
     TextView username;
@@ -57,6 +61,8 @@ abstract public class UserBaseScreen extends Screen implements IUserBaseView
     @Bind(R.id.thumb_down)
     ImageView thumbDown;
 
+    @Bind(R.id.tv_votes_number)
+    TextView votesNumber;
 
     protected UserBaseScreen(int layoutResId)
     {
@@ -73,6 +79,7 @@ abstract public class UserBaseScreen extends Screen implements IUserBaseView
         registerDate.setText(user.getRegisterDate());
         eventsNumber.setText(String.valueOf(user.getEvents()));
         signature.setText(user.getSignature());
+        votesNumber.setText(String.valueOf(user.getRatesNumber()));
 
         CredibilityService credibilityService = new CredibilityService(this, user.getCredibility());
 

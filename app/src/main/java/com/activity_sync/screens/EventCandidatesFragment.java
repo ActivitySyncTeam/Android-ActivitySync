@@ -13,9 +13,9 @@ import rx.android.schedulers.AndroidSchedulers;
 
 public class EventCandidatesFragment extends UsersFragmentBase implements IUserActionListener
 {
-    public EventCandidatesFragment(boolean shouldDisplayAllOptions)
+    public EventCandidatesFragment(boolean shouldDisplayAllOptions, int eventId)
     {
-        super(shouldDisplayAllOptions);
+        super(shouldDisplayAllOptions, eventId);
     }
 
     @Override
@@ -27,6 +27,6 @@ public class EventCandidatesFragment extends UsersFragmentBase implements IUserA
     @Override
     protected IPresenter createPresenter(FragmentScreen screen, Bundle savedInstanceState)
     {
-        return new EventCandidatesPresenter(this, navigator, AndroidSchedulers.mainThread(), apiService);
+        return new EventCandidatesPresenter(this, navigator, AndroidSchedulers.mainThread(), apiService, eventId);
     }
 }

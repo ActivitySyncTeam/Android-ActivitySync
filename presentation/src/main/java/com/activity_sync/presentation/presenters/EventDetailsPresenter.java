@@ -1,20 +1,15 @@
 package com.activity_sync.presentation.presenters;
 
-import com.activity_sync.presentation.models.AdditionalInfo;
 import com.activity_sync.presentation.models.Event;
-import com.activity_sync.presentation.models.builders.DisciplineBuilder;
-import com.activity_sync.presentation.models.builders.AdditionalInfoBuilder;
-import com.activity_sync.presentation.models.builders.EventBuilder;
-import com.activity_sync.presentation.models.builders.LocationBuilder;
-import com.activity_sync.presentation.models.builders.LevelBuilder;
-import com.activity_sync.presentation.models.builders.UserBuilder;
+import com.activity_sync.presentation.models.body_models.EventIDBody;
+import com.activity_sync.presentation.services.CurrentUser;
 import com.activity_sync.presentation.services.IApiService;
+import com.activity_sync.presentation.services.IErrorHandler;
 import com.activity_sync.presentation.services.INavigator;
 import com.activity_sync.presentation.views.IEventDetailsView;
 
-import java.util.Date;
-
 import rx.Scheduler;
+import timber.log.Timber;
 
 public class EventDetailsPresenter extends Presenter<IEventDetailsView>
 {
@@ -22,36 +17,50 @@ public class EventDetailsPresenter extends Presenter<IEventDetailsView>
     private final INavigator navigator;
     private final int eventId;
     private final IApiService apiService;
+    private final CurrentUser currentUser;
+    private final IErrorHandler errorHandler;
 
-    private Event event;
+    private Event currentEvent;
 
-    public EventDetailsPresenter(Scheduler uiThread, IEventDetailsView view, INavigator navigator, int eventId, IApiService apiService)
+    public EventDetailsPresenter(Scheduler uiThread, IEventDetailsView view, INavigator navigator, int eventId, IApiService apiService, CurrentUser currentUser, IErrorHandler errorHandler)
     {
         super(view);
         this.uiThread = uiThread;
         this.navigator = navigator;
         this.eventId = eventId;
         this.apiService = apiService;
+        this.currentUser = currentUser;
+        this.errorHandler = errorHandler;
     }
 
     @Override
     public void start()
     {
         super.start();
-
-        createEvent(true, false, true);
+        view.buttonsLayoutVisible(false);
+        view.showProgressBar();
 
         subscriptions.add(view.googleMapAsyncCompleted()
                 .observeOn(uiThread)
                 .subscribe(o -> {
-                    view.setEventData(event);
+
+                    apiService.getEventDetails(eventId)
+                            .observeOn(uiThread)
+                            .subscribe(event -> {
+
+                                view.setEventData(event);
+                                currentEvent = event;
+                                view.buttonsLayoutVisible(true);
+                                view.hideProgressBar();
+
+                            }, this::handleError);
                 })
         );
 
         subscriptions.add(view.joinLeaveEventClick()
                 .observeOn(uiThread)
                 .subscribe(o -> {
-                    if (event.getAdditionalInfo().isParticipant())
+                    if (isCandidateOrParticpant())
                     {
                         view.showLeaveConfirmationDialog();
                     }
@@ -72,7 +81,7 @@ public class EventDetailsPresenter extends Presenter<IEventDetailsView>
         subscriptions.add(view.editEventClick()
                 .observeOn(uiThread)
                 .subscribe(o -> {
-                    navigator.openEventUpdateScreen(eventId);
+                    navigator.openEventUpdateScreen(currentEvent);
                 })
         );
 
@@ -80,15 +89,40 @@ public class EventDetailsPresenter extends Presenter<IEventDetailsView>
                 .observeOn(uiThread)
                 .subscribe(o -> {
 
-                    AdditionalInfo additionalInfo = new AdditionalInfoBuilder()
-                            .setOrganizer(true)
-                            .setParticipant(true)
-                            .setCandidate(false)
-                            .createAdditionalInfo();
+                    if (currentEvent.isOrganizer())
+                    {
+                        view.showProgressBar();
 
-                    view.showEnrollMessage();
-                    view.setOrganizerParticipantView(new EventBuilder().setAdditionalInfo(additionalInfo).setIsActive(true).createEvent());
-                    event.setAdditionalInfo(additionalInfo); // delete when api provided
+                        apiService.joinEventAsAdmin(eventId)
+                                .observeOn(uiThread)
+                                .subscribe(participants -> {
+
+                                    view.showEnrollMessage();
+                                    currentEvent.setParticipant(true);
+                                    currentEvent.setFreePlaces(currentEvent.getFreePlaces() - 1);
+                                    view.setEventData(currentEvent);
+                                    view.setOrganizerParticipantView(currentEvent);
+
+                                    view.hideProgressBar();
+
+                                }, this::handleError);
+                    }
+                    else
+                    {
+                        view.showProgressBar();
+
+                        apiService.joinEvent(eventId)
+                                .observeOn(uiThread)
+                                .subscribe(participants -> {
+
+                                    view.showEnrollMessage();
+                                    currentEvent.setCandidate(true);
+                                    view.setOrganizerParticipantView(currentEvent);
+
+                                    view.hideProgressBar();
+
+                                }, this::handleError);
+                    }
                 })
         );
 
@@ -96,29 +130,72 @@ public class EventDetailsPresenter extends Presenter<IEventDetailsView>
                 .observeOn(uiThread)
                 .subscribe(o -> {
 
-                    AdditionalInfo additionalInfo = new AdditionalInfoBuilder()
-                            .setOrganizer(true)
-                            .setParticipant(false)
-                            .setCandidate(false)
-                            .createAdditionalInfo();
+                    if (currentEvent.isParticipant())
+                    {
+                        view.showProgressBar();
 
-                    view.showLeaveEventMessage();
-                    view.setOrganizerParticipantView(new EventBuilder().setAdditionalInfo(additionalInfo).setIsActive(true).createEvent());
-                    event.setAdditionalInfo(additionalInfo); // delete when api provided
+                        apiService.leaveEvent(new EventIDBody(eventId))
+                                .observeOn(uiThread)
+                                .subscribe(participants -> {
+
+                                    view.showLeaveEventMessage();
+                                    currentEvent.setCandidate(false);
+                                    currentEvent.setParticipant(false);
+                                    currentEvent.setFreePlaces(currentEvent.getFreePlaces() + 1);
+                                    view.setEventData(currentEvent);
+                                    view.setOrganizerParticipantView(currentEvent);
+                                    view.hideProgressBar();
+
+                                }, this::handleError);
+                    }
+                    else
+                    {
+                        view.showProgressBar();
+
+                        apiService.cancelEventJoinRequest(new EventIDBody(eventId))
+                                .observeOn(uiThread)
+                                .subscribe(participants -> {
+
+                                    view.showLeaveEventMessage();
+                                    currentEvent.setCandidate(false);
+                                    currentEvent.setParticipant(false);
+                                    view.setOrganizerParticipantView(currentEvent);
+                                    view.hideProgressBar();
+
+                                }, this::handleError);
+                    }
                 })
         );
 
         subscriptions.add(view.cancelEventConfirmClick()
                 .observeOn(uiThread)
                 .subscribe(o -> {
-                    navigator.openEventsScreen();
+
+                    view.showProgressBar();
+
+                    apiService.deleteEvent(eventId)
+                            .observeOn(uiThread)
+                            .subscribe(result -> {
+
+                                view.hideProgressBar();
+                                navigator.openEventsScreen();
+
+                            }, this::handleError);
                 })
         );
 
         subscriptions.add(view.organizerDetailsClick()
                 .observeOn(uiThread)
                 .subscribe(o -> {
-                    navigator.openUserDetailsScreen(1);
+
+                    if (currentEvent.getOrganizer().getUserId() == currentUser.userId())
+                    {
+                        navigator.openMyProfileScreen();
+                    }
+                    else
+                    {
+                        navigator.openUserDetailsScreen(currentEvent.getOrganizer().getUserId());
+                    }
                 })
         );
 
@@ -126,9 +203,9 @@ public class EventDetailsPresenter extends Presenter<IEventDetailsView>
                 .observeOn(uiThread)
                 .subscribe(o -> {
 
-                    if (event != null)
+                    if (currentEvent != null)
                     {
-                        navigator.openParticipantsScreen(event.getAdditionalInfo().isOrganizer());
+                        navigator.openParticipantsScreen(currentEvent.isOrganizer(), currentEvent.getEventId());
                     }
                 })
         );
@@ -136,41 +213,44 @@ public class EventDetailsPresenter extends Presenter<IEventDetailsView>
         subscriptions.add(view.commentsClick()
                 .observeOn(uiThread)
                 .subscribe(o -> {
-                    if (event != null)
+                    if (currentEvent != null)
                     {
-                        navigator.openCommentsScreen(event.getId());
+                        navigator.openCommentsScreen(currentEvent.getEventId());
                     }
                 })
         );
     }
 
-    public void createEvent(boolean isActive, boolean isParticipant, boolean isOrganizer)      //for tests purposes, delete when api provided
+    @Override
+    public void resume()
     {
-        event = new EventBuilder()
-                .setId(eventId)
-                .setOrganizer(new UserBuilder()
-                        .setUsername("mzielu")
-                        .createUser())
-                .setDiscipline(new DisciplineBuilder()
-                        .setName("Basketball")
-                        .createDiscipline())
-                .setLocation(new LocationBuilder()
-                        .setName("Park Jordana")
-                        .setLatitude(50.061124)
-                        .setLongitude(19.914123)
-                        .createLocation())
-                .setMaxPlaces(12)
-                .setOccupiedPlaces(7)
-                .setDate(new Date("2016/11/01"))
-                .setLevel(new LevelBuilder()
-                        .setName("medium")
-                        .createLevel())
-                .setDescription("Very long text written in order to check if two lines of text here are displaying correctly. Yeah!")
-                .setAdditionalInfo(new AdditionalInfoBuilder()
-                        .setParticipant(isParticipant)
-                        .setOrganizer(isOrganizer)
-                        .createAdditionalInfo())
-                .setIsActive(isActive)
-                .createEvent();
+        super.resume();
+
+        view.showProgressBar();
+
+        apiService.getEventDetails(eventId)
+                .observeOn(uiThread)
+                .subscribe(event -> {
+
+                    view.setEventData(event);
+                    currentEvent = event;
+
+                    view.hideProgressBar();
+                    view.buttonsLayoutVisible(true);
+
+                }, this::handleError);
+    }
+
+    private boolean isCandidateOrParticpant()
+    {
+        return currentEvent.isParticipant() || currentEvent.isCandidate();
+    }
+
+    private void handleError(Throwable error)
+    {
+        error.printStackTrace();
+        Timber.d(error.getMessage());
+        errorHandler.handleError(error);
+        view.hideProgressBar();
     }
 }

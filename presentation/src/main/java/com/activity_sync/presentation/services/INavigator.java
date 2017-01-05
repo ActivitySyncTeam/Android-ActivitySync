@@ -1,5 +1,6 @@
 package com.activity_sync.presentation.services;
 
+import com.activity_sync.presentation.models.Event;
 import com.activity_sync.presentation.models.User;
 
 public interface INavigator
@@ -22,13 +23,15 @@ public interface INavigator
 
     void openChangePasswordScreen();
 
+    void openAllUsersScreen();
+
     void openEditAccountScreen(User user);
 
-    void openParticipantsScreen(boolean isOrganizer);
+    void openParticipantsScreen(boolean isOrganizer, int eventId);
 
     void openEventCreatorScreen();
 
-    void openEventUpdateScreen(int eventId);
+    void openEventUpdateScreen(Event event);
 
     void openCommentsScreen(int eventId);
 

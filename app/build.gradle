@@ -43,6 +43,7 @@ android {
     buildTypes
             {
                 release {
+                    debuggable true
                     minifyEnabled false
                     proguardFile getDefaultProguardFile('proguard-android.txt')
                     proguardFile 'proguard-rules.pro'
@@ -95,4 +96,6 @@ dependencies {
     compile 'com.karumi:dexter:2.3.1'
 
     compile 'org.greenrobot:eventbus:3.0.0'
+
+    compile 'com.squareup.okhttp3:logging-interceptor:3.2.0'
 }

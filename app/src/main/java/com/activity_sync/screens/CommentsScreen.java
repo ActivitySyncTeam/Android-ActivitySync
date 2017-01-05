@@ -17,6 +17,7 @@ import com.activity_sync.presentation.presenters.CommentsPresenter;
 import com.activity_sync.presentation.presenters.IPresenter;
 import com.activity_sync.presentation.services.CurrentUser;
 import com.activity_sync.presentation.services.IApiService;
+import com.activity_sync.presentation.services.IErrorHandler;
 import com.activity_sync.presentation.utils.StringUtils;
 import com.activity_sync.presentation.views.ICommentsView;
 import com.activity_sync.renderers.CommentsRenderer;
@@ -45,6 +46,9 @@ public class CommentsScreen extends Screen implements ICommentsView
     @Inject
     CurrentUser currentUser;
 
+    @Inject
+    IErrorHandler errorHandler;
+
     @Bind(R.id.comments_refresh)
     SwipeRefreshLayout commentsRefreshLayout;
 
@@ -61,6 +65,8 @@ public class CommentsScreen extends Screen implements ICommentsView
     private RVRendererAdapter<Comment> adapter;
     private List<Comment> comments = new ArrayList<>();
 
+    private PublishSubject endListReached = PublishSubject.create();
+
     public CommentsScreen()
     {
         super(R.layout.comments_screen);
@@ -70,7 +76,7 @@ public class CommentsScreen extends Screen implements ICommentsView
     protected IPresenter createPresenter(Screen screen, Bundle savedInstanceState)
     {
         int eventId = getIntent().getIntExtra(CommentsScreen.EVENT_ID, 0);
-        return new CommentsPresenter(this, AndroidSchedulers.mainThread(), eventId, apiService, currentUser);
+        return new CommentsPresenter(this, AndroidSchedulers.mainThread(), eventId, apiService, currentUser, errorHandler);
     }
 
     @Override
@@ -92,6 +98,18 @@ public class CommentsScreen extends Screen implements ICommentsView
         commentsList.addItemDecoration(new DividerItemDecoration(this));
         commentsList.setAdapter(adapter);
 
+        commentsList.addOnScrollListener(new RecyclerView.OnScrollListener()
+        {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy)
+            {
+                if (!recyclerView.canScrollVertically(1))
+                {
+                    endListReached.onNext(this);
+                }
+            }
+        });
+
         setTitle(getString(R.string.title_comments));
     }
 
@@ -102,9 +120,17 @@ public class CommentsScreen extends Screen implements ICommentsView
     }
 
     @Override
-    public void addCommentsList(Collection<Comment> comments)
+    public void addCommentsListAndClear(Collection<Comment> comments)
     {
         adapter.clear();
+        this.comments.addAll(comments);
+        adapter.addAll(comments);
+        adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void addCommentsListAndAddAtTheEnd(Collection<Comment> comments)
+    {
         this.comments.addAll(comments);
         adapter.addAll(comments);
         adapter.notifyDataSetChanged();
@@ -159,5 +185,11 @@ public class CommentsScreen extends Screen implements ICommentsView
     public void showEmptyCommentError()
     {
         Toast.makeText(this, R.string.err_comment_empty, Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public Observable endListReached()
+    {
+        return endListReached;
     }
 }

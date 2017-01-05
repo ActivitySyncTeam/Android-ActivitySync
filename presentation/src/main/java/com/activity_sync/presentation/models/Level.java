@@ -2,7 +2,9 @@ package com.activity_sync.presentation.models;
 
 import com.google.gson.annotations.SerializedName;
 
-public class Level
+import java.io.Serializable;
+
+public class Level implements Serializable
 {
     @SerializedName("id")
     private int id;
@@ -21,7 +23,7 @@ public class Level
 
     }
 
-    public double getId()
+    public int getId()
     {
         return id;
     }

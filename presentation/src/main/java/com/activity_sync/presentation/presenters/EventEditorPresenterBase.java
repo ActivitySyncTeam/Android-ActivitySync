@@ -1,38 +1,70 @@
 package com.activity_sync.presentation.presenters;
 
 
-import com.activity_sync.presentation.models.Discipline;
-import com.activity_sync.presentation.models.Level;
+import com.activity_sync.presentation.models.body_models.AddressBody;
+import com.activity_sync.presentation.models.body_models.EventBody;
 import com.activity_sync.presentation.services.IApiService;
+import com.activity_sync.presentation.services.IErrorHandler;
 import com.activity_sync.presentation.services.INavigator;
 import com.activity_sync.presentation.views.IEventCreatorView;
 
-import java.util.Arrays;
-
 import rx.Scheduler;
+import timber.log.Timber;
 
 public class EventEditorPresenterBase extends Presenter<IEventCreatorView>
 {
     protected final Scheduler uiThread;
     protected final INavigator navigator;
     protected final IApiService apiService;
+    protected final IErrorHandler errorHandler;
 
-    public EventEditorPresenterBase(Scheduler uiThread, IEventCreatorView view, INavigator navigator, IApiService apiService)
+    public EventEditorPresenterBase(Scheduler uiThread, IEventCreatorView view, INavigator navigator, IApiService apiService, IErrorHandler errorHandler)
     {
         super(view);
         this.navigator = navigator;
         this.uiThread = uiThread;
         this.apiService = apiService;
+        this.errorHandler = errorHandler;
     }
+
+    boolean disciplinesLoaded = false;
+    boolean levelsLoaded = false;
 
     @Override
     public void start()
     {
         super.start();
 
+        view.showProgressBar();
         view.preparePlayersSpinner();
-        view.prepareDisciplineSpinner(Arrays.asList(new Discipline(1, "Koszykówka"), new Discipline(2, "Piłka nożna")));
-        view.prepareLevelSpinner(Arrays.asList(new Level(1, "Niski"), new Level(2, "Średni"), new Level(3, "Wysoki")));
+
+        apiService.getAvailableDisciplines()
+                .observeOn(uiThread)
+                .subscribe((disciplines) -> {
+
+                    view.prepareDisciplineSpinner(disciplines);
+                    disciplinesLoaded = true;
+
+                    if (levelsLoaded)
+                    {
+                        view.hideProgressBar();
+                    }
+
+                }, this::handleError);
+
+        apiService.getAvailableLevels()
+                .observeOn(uiThread)
+                .subscribe((levels) -> {
+
+                    view.prepareLevelSpinner(levels);
+                    levelsLoaded = true;
+
+                    if (disciplinesLoaded)
+                    {
+                        view.hideProgressBar();
+                    }
+
+                }, this::handleError);
 
         subscriptions.add(view.openDatePickerClick()
                 .observeOn(uiThread)
@@ -51,7 +83,7 @@ public class EventEditorPresenterBase extends Presenter<IEventCreatorView>
         subscriptions.add(view.newLocationEvent()
                 .observeOn(uiThread)
                 .subscribe(location -> {
-                    view.location(location.getName());
+                    view.location(location);
                 })
         );
 
@@ -68,5 +100,25 @@ public class EventEditorPresenterBase extends Presenter<IEventCreatorView>
                     view.date(date);
                 })
         );
+    }
+
+    protected EventBody createEventBody()
+    {
+        return new EventBody(view.description(),
+                view.date(),
+                view.players(),
+                new AddressBody(view.location()),
+                view.discipline().getId(),
+                view.level().getId(),
+                view.isOrganizerEnrolled(),
+                view.status());
+    }
+
+    protected void handleError(Throwable error)
+    {
+        error.printStackTrace();
+        Timber.d(error.getMessage());
+        errorHandler.handleError(error);
+        view.hideProgressBar();
     }
 }

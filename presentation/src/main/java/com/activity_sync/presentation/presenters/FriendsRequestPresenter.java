@@ -1,22 +1,18 @@
 package com.activity_sync.presentation.presenters;
 
-
-import com.activity_sync.presentation.models.User;
-import com.activity_sync.presentation.models.builders.UserBuilder;
+import com.activity_sync.presentation.models.body_models.UserIDBody;
+import com.activity_sync.presentation.services.CurrentUser;
 import com.activity_sync.presentation.services.IApiService;
 import com.activity_sync.presentation.services.INavigator;
 import com.activity_sync.presentation.views.IUsersFragmentView;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import rx.Scheduler;
 
 public class FriendsRequestPresenter extends UsersFragmentBasePresenter
 {
-    public FriendsRequestPresenter(IUsersFragmentView view, INavigator navigator, Scheduler uiThread, IApiService apiService)
+    public FriendsRequestPresenter(IUsersFragmentView view, INavigator navigator, Scheduler uiThread, IApiService apiService, CurrentUser currentUser)
     {
-        super(view, navigator, uiThread, apiService);
+        super(view, navigator, uiThread, apiService, currentUser);
     }
 
     @Override
@@ -34,48 +30,42 @@ public class FriendsRequestPresenter extends UsersFragmentBasePresenter
 
         subscriptions.add(view.acceptConfirmClick()
                 .subscribe(user -> {
-                    view.acceptSuccessMessage(user);
-                    view.removeUser(user);
+
+                    apiService.acceptFriendInvitation(user.getUserId())
+                            .observeOn(uiThread)
+                            .subscribe(friends -> {
+
+                                view.acceptSuccessMessage(user);
+                                view.removeUser(user);
+
+                            }, this::handleError);
                 })
         );
 
         subscriptions.add(view.removeConfirmClick()
                 .subscribe(user -> {
-                    view.removeSuccessMessage(user);
-                    view.removeUser(user);
+
+                    apiService.rejectFriendRequest(new UserIDBody(user.getUserId()))
+                            .observeOn(uiThread)
+                            .subscribe(friends -> {
+
+                                view.removeSuccessMessage(user);
+                                view.removeUser(user);
+
+                            }, this::handleError);
                 })
         );
     }
 
     @Override
-    void loadParticipants()
+    void loadUsers()
     {
-        List<User> users = new ArrayList<>();
+        apiService.getFriends(currentUser.userId())
+                .observeOn(uiThread)
+                .subscribe(friends -> {
 
-        users.add(new UserBuilder()
-                .setName("Marcin")
-                .setSurname("Zielinski")
-                .setCredibility(85)
-                .createUser());
+                    view.addUsersList(friends.getCandidates());
 
-        users.add(new UserBuilder()
-                .setName("Michał")
-                .setSurname("Wolny")
-                .setCredibility(67)
-                .createUser());
-
-        users.add(new UserBuilder()
-                .setName("Luke")
-                .setSurname("Petka")
-                .setCredibility(12)
-                .createUser());
-
-        users.add(new UserBuilder()
-                .setName("Michał")
-                .setSurname("Dudzik")
-                .setCredibility(92)
-                .createUser());
-
-        view.addUsersList(users);
+                }, this::handleError);
     }
 }

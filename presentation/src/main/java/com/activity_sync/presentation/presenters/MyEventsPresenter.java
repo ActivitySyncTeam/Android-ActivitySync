@@ -1,17 +1,8 @@
 package com.activity_sync.presentation.presenters;
 
-import com.activity_sync.presentation.models.Event;
-import com.activity_sync.presentation.models.builders.DisciplineBuilder;
-import com.activity_sync.presentation.models.builders.EventBuilder;
-import com.activity_sync.presentation.models.builders.LocationBuilder;
-import com.activity_sync.presentation.models.builders.UserBuilder;
 import com.activity_sync.presentation.services.IApiService;
 import com.activity_sync.presentation.services.INavigator;
 import com.activity_sync.presentation.views.IEventsFragmentView;
-
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 
 import rx.Scheduler;
 
@@ -32,44 +23,43 @@ public class MyEventsPresenter extends EventsFragmentBasePresenter
     @Override
     void loadEvents()
     {
-        //API CALL WILL BE HERE
+        apiService.getMyEvents(1)
+                .observeOn(uiThread)
+                .subscribe(eventsCollection -> {
 
-        List<Event> events = new ArrayList<>();
+                    view.refreshingVisible(false);
+                    view.addEventsListAndClear(eventsCollection.getEvents());
 
-        events.add(new EventBuilder()
-                .setOrganizer(new UserBuilder()
-                        .setUserId(12)
-                        .setName("Marcin")
-                        .setSurname("Zielinski")
-                        .createUser())
-                .setDate(new Date("2016/10/15"))
-                .setLocation(new LocationBuilder()
-                        .setName("Park Jordana")
-                        .createLocation())
-                .setDiscipline(new DisciplineBuilder()
-                        .setName("Basketball")
-                        .createDiscipline())
-                .setMaxPlaces(12)
-                .setId(123)
-                .createEvent());
+                }, this::handleError);
+    }
 
-        events.add(new EventBuilder()
-                .setOrganizer(new UserBuilder()
-                        .setUserId(12)
-                        .setName("Marcin")
-                        .setSurname("Zielinski")
-                        .createUser())
-                .setDate(new Date("2016/10/15"))
-                .setLocation(new LocationBuilder()
-                        .setName("Park Jordana")
-                        .createLocation())
-                .setDiscipline(new DisciplineBuilder()
-                        .setName("Football")
-                        .createDiscipline())
-                .setMaxPlaces(10)
-                .setId(123)
-                .createEvent());
+    @Override
+    void resolveRefresh()
+    {
+        apiService.getMyEvents(currentPage)
+                .observeOn(uiThread)
+                .subscribe(eventsCollection -> {
 
-        view.addEventsList(events);
+                    if (eventsCollection.getNext() == null)
+                    {
+                        endAlreadyReached = true;
+                    }
+                    else
+                    {
+                        endAlreadyReached = false;
+                    }
+
+                    view.refreshingVisible(false);
+
+                    if (currentPage == 1)
+                    {
+                        view.addEventsListAndClear(eventsCollection.getEvents());
+                    }
+                    else
+                    {
+                        view.addEventsListAtTheEnd(eventsCollection.getEvents());
+                    }
+
+                }, this::handleError);
     }
 }

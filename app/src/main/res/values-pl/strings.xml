@@ -73,8 +73,9 @@
     <string name="ea_hint_last_name">Nazwisko</string>
     <string name="ea_hint_signature">Sygnatura</string>
     <string name="ea_hint_password">Wprowadź hasło by potwierdzić</string>
-    <string name="ea_save_btn">ZAPISZ</string>
+    <string name="ea_save_btn">Zapisz</string>
     <string name="ea_save_succ">Profil zapisany!</string>
+    <string name="ea_save_fail">Profil nie został zapisany!</string>
     <string name="cp_hint_confirm_new_password">Potwierdź nowe hasło</string>
     <string name="cp_hint_new_password">Nowe hasło</string>
     <string name="cp_hint_old_password">Stare hasło</string>
@@ -98,10 +99,10 @@
     <string name="txt_registered">Zapisani</string>
     <string name="txt_accept_user_confirmation_text">Jesteś pewien, że chcesz zaakceptować tego użytkownika?</string>
     <string name="txt_accept_user_confirmation_title">Potwierdzenie akceptacji użytkownika</string>
-    <string name="txt_accept_success" formatted="false">%s %s został zaakceptowany</string>
+    <string name="txt_accept_success" formatted="false">%s został zaakceptowany</string>
     <string name="txt_remove_user_confirmation_text">Czy jesteś pewien, że chcesz usunąć tego użytkownika? Tej operacji nie będzie można cofnąć.</string>
-    <string name="txt_remove_user_confirmation_title">Potwierdzenie usunięcia uczestnika</string>
-    <string name="txt_remove_success" formatted="false">%s %s został usunięty</string>
+    <string name="txt_remove_user_confirmation_title">Potwierdzenie usunięcia użytkownika</string>
+    <string name="txt_remove_success" formatted="false">%s został usunięty</string>
     <string name="btn_send">Prześlij</string>
     <string name="err_comment_empty">Komentarz nie może być pusty</string>
     <string name="txt_comment_author" formatted="false">%s napisał:</string>
@@ -110,6 +111,7 @@
     <string name="menu_create_event">Nowe wydarzenie</string>
     <string name="log_out">Wyloguj się</string>
     <string name="cp_save_succ">Hasło zmienione!</string>
+    <string name="cp_save_fail">Hasło nie zostało zmienione!</string>
     <string name="err_confirmed_not_matching">Potwierdzone hasło różni się od nowego hasła</string>
     <string name="err_same_passwords">Nowe hasło nie może być takie samo jak stare hasło</string>
     <string name="txt_permission_granted">Zezwolenie zostało udzielone</string>
@@ -143,5 +145,24 @@
     <string name="txt_wait_for_location">Prosimy o chwilę cierpliwości. Szukanie lokazlizacji w toku...</string>
     <string name="txt_all">Wszystko</string>
     <string name="txt_from_today">Od dzisiaj</string>
+    <string name="pref_cat_account">Konto użytkownika</string>
+    <string name="btn_event_details_screen_comments">KOMENTARZE</string>
+    <string name="btn_update_event">Aktualizuj</string>
+    <string name="txt_register_date">Rejestracja</string>
+    <string name="menu_users_screen">Użytkownicy</string>
+    <string name="title_all_users">Użytkownicy</string>
+    <string name="txt_votes_number">Głosy</string>
+    <string name="btn_accept_friends_request">Zatwierdź znajomego</string>
+    <string name="btn_reject_friends_request">Odrzuć znajomego</string>
+    <string name="err_choose_address">Adres nie został wybrany</string>
+    <string name="txt_city_default">Nieznane</string>
+    <string name="txt_friend_request_accepted">Zatwierdziłeś prośbę o dołączenie do znajomych</string>
+    <string name="txt_friend_request_rejected">Odrzuciłeś prośbę o dołączenie do znajomych</string>
+    <string name="hint_filter">Szukaj po nicku...</string>
+    <string name="err_authorization">Błąd autoryzacji</string>
+    <string name="err_permission_denied">Błąd. Odmowa dostępu.</string>
+    <string name="err_servers_cannot_be_reached">Serwey są w tym momencie nieosiągalne.</string>
+    <string name="err_something_went_wrong">Coś poszło nie tak. Spróbuj ponownie.</string>
+    <string name="txt_logged_as">Zalogowany jako: %s</string>
 
 </resources>

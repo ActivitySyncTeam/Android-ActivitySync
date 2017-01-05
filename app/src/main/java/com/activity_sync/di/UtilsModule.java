@@ -2,8 +2,10 @@ package com.activity_sync.di;
 
 import android.content.Context;
 
+import com.activity_sync.custom.ErrorHandler;
 import com.activity_sync.presentation.services.CurrentUser;
 import com.activity_sync.presentation.services.IApiService;
+import com.activity_sync.presentation.services.IErrorHandler;
 import com.activity_sync.presentation.services.INavigator;
 import com.activity_sync.presentation.services.IPermanentStorage;
 import com.activity_sync.services.ApiService;
@@ -11,6 +13,7 @@ import com.activity_sync.services.Navigator;
 import com.activity_sync.services.PermanentStorage;
 
 import javax.inject.Singleton;
+
 import dagger.Module;
 import dagger.Provides;
 
@@ -33,15 +36,22 @@ public class UtilsModule
 
     @Provides
     @Singleton
-    public IApiService provideApiRestService()
+    public IApiService provideApiRestService(IPermanentStorage permanentStorage)
     {
-        return new ApiService("https://secret-gorge-99838.herokuapp.com");
+        return new ApiService("http://149.156.11.4:10141", permanentStorage);
     }
 
     @Provides
     @Singleton
-    CurrentUser provideCurrentUser(IPermanentStorage permanentStorage, INavigator navigator)
+    CurrentUser provideCurrentUser(IPermanentStorage permanentStorage, INavigator navigator, IApiService apiService)
     {
-        return new CurrentUser(permanentStorage, navigator);
+        return new CurrentUser(permanentStorage, navigator, apiService);
+    }
+
+    @Provides
+    @Singleton
+    IErrorHandler provideErrorHandler(Context context)
+    {
+        return new ErrorHandler(context);
     }
 }

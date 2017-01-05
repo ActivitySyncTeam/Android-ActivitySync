@@ -1,16 +1,13 @@
 package com.activity_sync.presentation.presenters;
 
-import com.activity_sync.presentation.models.Comment;
-import com.activity_sync.presentation.models.builders.CommentBuilder;
 import com.activity_sync.presentation.services.CurrentUser;
 import com.activity_sync.presentation.services.IApiService;
+import com.activity_sync.presentation.services.IErrorHandler;
 import com.activity_sync.presentation.utils.StringUtils;
 import com.activity_sync.presentation.views.ICommentsView;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import rx.Scheduler;
+import timber.log.Timber;
 
 public class CommentsPresenter extends Presenter<ICommentsView>
 {
@@ -18,14 +15,19 @@ public class CommentsPresenter extends Presenter<ICommentsView>
     private final int eventId;
     private final IApiService apiService;
     private final CurrentUser currentUser;
+    private final IErrorHandler errorHandler;
 
-    public CommentsPresenter(ICommentsView view, Scheduler uiThread, int eventId, IApiService apiService, CurrentUser currentUser)
+    private int currentPage = 1;
+    private boolean endAlreadyReached = false;
+
+    public CommentsPresenter(ICommentsView view, Scheduler uiThread, int eventId, IApiService apiService, CurrentUser currentUser, IErrorHandler errorHandler)
     {
         super(view);
         this.uiThread = uiThread;
         this.eventId = eventId;
         this.apiService = apiService;
         this.currentUser = currentUser;
+        this.errorHandler = errorHandler;
     }
 
     @Override
@@ -37,8 +39,22 @@ public class CommentsPresenter extends Presenter<ICommentsView>
 
         subscriptions.add(view.refreshComments()
                 .subscribe(event -> {
+
+                    currentPage = 1;
+                    endAlreadyReached = false;
+
                     loadComments();
-                    view.refreshingVisible(false);
+                })
+        );
+
+        subscriptions.add(view.endListReached()
+                .subscribe(event -> {
+
+                    if (!endAlreadyReached)
+                    {
+                        currentPage++;
+                        loadComments();
+                    }
                 })
         );
 
@@ -51,18 +67,20 @@ public class CommentsPresenter extends Presenter<ICommentsView>
                     }
                     else
                     {
-                        //current user test, will be important when api is implemented
-                        int userId = currentUser.userID();
+                        view.showProgressBar();
 
-                        Comment comment = new CommentBuilder()
-                                .setComment(view.comment())
-                                .setName("Marcin Zielinski")
-                                .createComment();
+                        apiService.addComment(eventId, view.comment())
+                                .observeOn(uiThread)
+                                .subscribe(comment -> {
 
-                        view.addSingleComment(comment);
-                        view.clearComment();
-                        view.hideKeyboard();
-                        view.scrollToBottom();
+                                    view.addSingleComment(comment);
+                                    view.clearComment();
+                                    view.hideKeyboard();
+                                    view.scrollToBottom();
+
+                                    view.hideProgressBar();
+
+                                }, this::handleError);
                     }
                 })
         );
@@ -70,29 +88,41 @@ public class CommentsPresenter extends Presenter<ICommentsView>
 
     private void loadComments()
     {
-        //API CALL WILL BE HERE
-        List<Comment> comments = new ArrayList<>();
+        view.refreshingVisible(true);
 
-        comments.add(new CommentBuilder()
-                .setName("Marcin Zielinski")
-                .setComment("Polecam organizatora")
-                .createComment());
+        apiService.getEventComments(eventId, currentPage)
+                .observeOn(uiThread)
+                .subscribe(commentsCollection -> {
 
-        comments.add(new CommentBuilder()
-                .setName("Michal Wolny")
-                .setComment("Ja tez")
-                .createComment());
+                    if (commentsCollection.getNext() == null)
+                    {
+                        endAlreadyReached = true;
+                    }
+                    else
+                    {
+                        endAlreadyReached = false;
+                    }
 
-        comments.add(new CommentBuilder()
-                .setName("Łukasz Petka")
-                .setComment("Juz nie moge sei doczekac")
-                .createComment());
+                    if (currentPage == 1)
+                    {
+                        view.addCommentsListAndClear(commentsCollection.getComments());
+                    }
+                    else
+                    {
+                        view.addCommentsListAndAddAtTheEnd(commentsCollection.getComments());
+                    }
 
-        comments.add(new CommentBuilder()
-                .setName("Kasia Solecka")
-                .setComment("Lubię narty. A w sumie to wydarzenie odnośnie kosza. Sorka za spam")
-                .createComment());
+                    view.refreshingVisible(false);
 
-        view.addCommentsList(comments);
+                }, this::handleError);
+    }
+
+    private void handleError(Throwable error)
+    {
+        error.printStackTrace();
+        Timber.d(error.getMessage());
+        view.refreshingVisible(false);
+        errorHandler.handleError(error);
+        view.hideProgressBar();
     }
 }

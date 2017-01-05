@@ -1,7 +1,17 @@
 package com.activity_sync.tests;
 
+import com.activity_sync.presentation.models.ClientDetails;
+import com.activity_sync.presentation.models.LoginResponse;
+import com.activity_sync.presentation.models.RegisterResponse;
+import com.activity_sync.presentation.models.User;
+import com.activity_sync.presentation.models.builders.ClientDetailsBuilder;
+import com.activity_sync.presentation.models.builders.LoginResponseBuilder;
+import com.activity_sync.presentation.models.builders.RegisterResponseBuilder;
+import com.activity_sync.presentation.models.builders.UserBuilder;
 import com.activity_sync.presentation.presenters.RegisterPresenter;
+import com.activity_sync.presentation.services.CurrentUser;
 import com.activity_sync.presentation.services.IApiService;
+import com.activity_sync.presentation.services.IErrorHandler;
 import com.activity_sync.presentation.services.INavigator;
 import com.activity_sync.presentation.utils.StringUtils;
 import com.activity_sync.presentation.views.IRegisterView;
@@ -13,6 +23,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import rx.Observable;
 import rx.schedulers.Schedulers;
 import rx.subjects.PublishSubject;
 
@@ -31,6 +42,12 @@ public class RegisterPresenterTests
     @Mock
     IApiService apiService;
 
+    @Mock
+    CurrentUser currentUser;
+
+    @Mock
+    IErrorHandler errorHandler;
+
     PublishSubject registerBtnClickEvent = PublishSubject.create();
     PublishSubject alreadyRegisteredClickEvent = PublishSubject.create();
 
@@ -41,27 +58,52 @@ public class RegisterPresenterTests
     String password = "Password";
     String emptyFieldError = "Error";
 
+    RegisterResponse registerResponse;
+    ClientDetails clientDetails;
+    LoginResponse loginResponse;
+
+    User user;
+
     @Before
     public void setup()
     {
+        registerResponse = new RegisterResponseBuilder().create();
+        clientDetails = new ClientDetailsBuilder().create();
+        loginResponse = new LoginResponseBuilder().create();
+
         Mockito.when(view.registerBtnClick()).thenReturn(registerBtnClickEvent);
         Mockito.when(view.alreadyRegisteredClick()).thenReturn(alreadyRegisteredClickEvent);
         Mockito.when(view.emptyFieldErrorText()).thenReturn(emptyFieldError);
         Mockito.when(view.firstName()).thenReturn(firstName);
         Mockito.when(view.lastName()).thenReturn(lastName);
         Mockito.when(view.email()).thenReturn(email);
-        Mockito.when(view.nickName()).thenReturn(nickName);
+        Mockito.when(view.userName()).thenReturn(nickName);
         Mockito.when(view.password()).thenReturn(password);
+        Mockito.when(apiService.register(view.userName(), view.password(), view.firstName(), view.lastName(), view.email())).thenReturn(Observable.just(registerResponse));
+        Mockito.when(apiService.getClientDetails()).thenReturn(Observable.just(clientDetails));
+        Mockito.when(apiService.login(view.userName(), view.password())).thenReturn(Observable.just(loginResponse));
+
+        user = new UserBuilder().setUserId(23).setUsername("test").createUser();
+        Mockito.when(apiService.getMyProfile()).thenReturn(Observable.just(user));
     }
 
     @Test
-    public void registerPresenter_clickLoginBtn_openEventsScreen()
+    public void registerPresenter_clickRegisterBtn_openEventsScreen()
     {
         RegisterPresenter registerPresenter = createPresenter();
         registerPresenter.start();
 
         registerBtnClickEvent.onNext(this);
+
+        Mockito.verify(apiService).register(view.userName(), view.password(), view.firstName(), view.lastName(), view.email());
+        Mockito.verify(apiService).getClientDetails();
+        Mockito.verify(apiService).login(view.userName(), view.password());
+        Mockito.verify(apiService).getMyProfile();
+        Mockito.verify(currentUser).clientId(anyString());
+        Mockito.verify(currentUser).clientSecret(anyString());
+        Mockito.verify(currentUser).accessToken(anyString());
         Mockito.verify(navigator).openEventsScreen();
+        Mockito.verify(navigator).startBackgroundService();
     }
 
     @Test
@@ -119,15 +161,15 @@ public class RegisterPresenterTests
     @Test
     public void registerPresenter_clickRegisterBtn_nickNameEmptyError()
     {
-        Mockito.when(view.nickName()).thenReturn(StringUtils.EMPTY);
+        Mockito.when(view.userName()).thenReturn(StringUtils.EMPTY);
 
         RegisterPresenter registerPresenter = createPresenter();
         registerPresenter.start();
 
         registerBtnClickEvent.onNext(this);
         Mockito.verify(navigator, never()).openEventsScreen();
-        Mockito.verify(view).nickNameErrorEnabled(true);
-        Mockito.verify(view).nickNameErrorText(anyString());
+        Mockito.verify(view).userNameErrorEnabled(true);
+        Mockito.verify(view).userNameErrorText(anyString());
     }
 
     @Test
@@ -146,6 +188,6 @@ public class RegisterPresenterTests
 
     private RegisterPresenter createPresenter()
     {
-        return new RegisterPresenter(Schedulers.immediate(), view, navigator, apiService);
+        return new RegisterPresenter(Schedulers.immediate(), view, navigator, apiService, currentUser, errorHandler);
     }
 }

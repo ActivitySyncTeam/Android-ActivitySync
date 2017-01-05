@@ -2,7 +2,7 @@ package com.activity_sync.presentation.views;
 
 import rx.Observable;
 
-public interface IChangePasswordView
+public interface IChangePasswordView extends IScreenView
 {
     void oldPasswordErrorEnabled(boolean enabled);
 
@@ -32,7 +32,7 @@ public interface IChangePasswordView
 
     void saveSucceded();
 
-    void saveFailed(String message);
+    void saveFailed();
 
     void close();
 }

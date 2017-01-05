@@ -1,27 +1,29 @@
 package com.activity_sync.presentation.models.builders;
 
 import com.activity_sync.presentation.models.Discipline;
-import com.activity_sync.presentation.models.AdditionalInfo;
 import com.activity_sync.presentation.models.Event;
 import com.activity_sync.presentation.models.Level;
 import com.activity_sync.presentation.models.Location;
 import com.activity_sync.presentation.models.User;
 
-import java.util.Date;
-
 public class EventBuilder
 {
     private int id;
     private User organizer;
+    private User admin;
     private String description;
-    private Date date;
-    private int maxPlaces;
-    private int occupiedPlaces;
+    private String date;
+    private int numberOfPlayers;
+    private int freePlaces;
+    private int like;
     private Location location;
     private Discipline discipline;
     private Level level;
-    private AdditionalInfo additionalInfo;
-    private boolean isActive;
+    private boolean isOrganizer;
+    private boolean isParticipant;
+    private boolean isCandidate;
+    private int rate;
+    private String status;
 
     public EventBuilder setId(int id)
     {
@@ -32,6 +34,7 @@ public class EventBuilder
     public EventBuilder setOrganizer(User organizer)
     {
         this.organizer = organizer;
+        this.admin = organizer;
         return this;
     }
 
@@ -41,21 +44,27 @@ public class EventBuilder
         return this;
     }
 
-    public EventBuilder setDate(Date date)
+    public EventBuilder setDate(String date)
     {
         this.date = date;
         return this;
     }
 
-    public EventBuilder setMaxPlaces(int maxPlaces)
+    public EventBuilder setNumberOfPlayers(int numberOfPlayers)
     {
-        this.maxPlaces = maxPlaces;
+        this.numberOfPlayers = numberOfPlayers;
         return this;
     }
 
-    public EventBuilder setOccupiedPlaces(int occupiedPlaces)
+    public EventBuilder setFreePlaces(int freePlaces)
     {
-        this.occupiedPlaces = occupiedPlaces;
+        this.freePlaces = freePlaces;
+        return this;
+    }
+
+    public EventBuilder setLike(int like)
+    {
+        this.like = like;
         return this;
     }
 
@@ -77,20 +86,38 @@ public class EventBuilder
         return this;
     }
 
-    public EventBuilder setAdditionalInfo(AdditionalInfo additionalInfo)
+    public EventBuilder setOrganizer(boolean organizer)
     {
-        this.additionalInfo = additionalInfo;
+        isOrganizer = organizer;
         return this;
     }
 
-    public EventBuilder setIsActive(boolean isActive)
+    public EventBuilder setParticipant(boolean participant)
     {
-        this.isActive = isActive;
+        isParticipant = participant;
+        return this;
+    }
+
+    public EventBuilder setCandidate(boolean candidate)
+    {
+        isCandidate = candidate;
+        return this;
+    }
+
+    public EventBuilder setRate(int rate)
+    {
+        this.rate = rate;
+        return this;
+    }
+
+    public EventBuilder setStatus(String status)
+    {
+        this.status = status;
         return this;
     }
 
     public Event createEvent()
     {
-        return new Event(id, organizer, description, date, maxPlaces, occupiedPlaces, location, discipline, level, additionalInfo, isActive);
+        return new Event(id, organizer, admin, description, date, numberOfPlayers, freePlaces, like, location, discipline, level, isOrganizer, isParticipant, isCandidate, rate, status);
     }
 }

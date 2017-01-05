@@ -36,7 +36,8 @@
         <activity
             android:name=".screens.LoginScreen"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.LoginScreen"/>
+            android:theme="@style/AppTheme.LoginScreen"
+            android:noHistory="true"/>
 
         <activity
             android:name=".screens.RegisterScreen"
@@ -49,7 +50,7 @@
 
         <activity
             android:name=".screens.EventDetailsScreen"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
 
         <activity
             android:name=".screens.UserDetailsScreen"
@@ -94,6 +95,11 @@
         <activity
             android:name=".screens.MyProfileScreen"
             android:screenOrientation="portrait"/>
+
+        <activity
+            android:name=".screens.AllUsersScreen"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.Users"/>
 
         <service
             android:name=".services.BackgroundService" />

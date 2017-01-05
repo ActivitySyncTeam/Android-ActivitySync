@@ -53,7 +53,7 @@ public class MyProfileScreen extends UserBaseScreen implements IMyProfileView
     @Override
     protected IPresenter createPresenter(Screen screen, Bundle savedInstanceState)
     {
-        return new MyProfilePresenter(this, navigator, AndroidSchedulers.mainThread(), currentUser);
+        return new MyProfilePresenter(this, navigator, AndroidSchedulers.mainThread(), currentUser, apiService);
     }
 
     @Override

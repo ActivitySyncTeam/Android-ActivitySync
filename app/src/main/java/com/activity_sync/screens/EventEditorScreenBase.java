@@ -4,8 +4,11 @@ import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -21,16 +24,21 @@ import com.activity_sync.presentation.models.Level;
 import com.activity_sync.presentation.models.Location;
 import com.activity_sync.presentation.models.builders.LocationBuilder;
 import com.activity_sync.presentation.services.IApiService;
+import com.activity_sync.presentation.services.IErrorHandler;
 import com.activity_sync.presentation.services.INavigator;
+import com.activity_sync.presentation.utils.DoubleUtils;
+import com.activity_sync.presentation.utils.StringUtils;
 import com.activity_sync.presentation.views.IEventCreatorView;
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlaceAutocomplete;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
@@ -49,6 +57,9 @@ abstract public class EventEditorScreenBase extends Screen implements IEventCrea
 
     @Inject
     INavigator navigator;
+
+    @Inject
+    IErrorHandler errorHandler;
 
     @Bind(R.id.event_date_layout)
     CardView eventDateLayout;
@@ -88,6 +99,10 @@ abstract public class EventEditorScreenBase extends Screen implements IEventCrea
     private List<Discipline> disciplines = new ArrayList<>();
     private List<Level> levels = new ArrayList<>();
     private List<String> playersNumbers = new ArrayList<>();
+    private Location selectedLocation;
+
+    List<Address> suggestedAddresses = new ArrayList<>();
+    String eventStatus;
 
     public EventEditorScreenBase()
     {
@@ -146,13 +161,13 @@ abstract public class EventEditorScreenBase extends Screen implements IEventCrea
     @Override
     public String date()
     {
-        return eventDate.toString();
+        return eventDate.getText().toString();
     }
 
     @Override
-    public String location()
+    public Location location()
     {
-        return eventLocation.toString();
+        return selectedLocation;
     }
 
     @Override
@@ -168,9 +183,10 @@ abstract public class EventEditorScreenBase extends Screen implements IEventCrea
     }
 
     @Override
-    public void location(String location)
+    public void location(Location location)
     {
-        eventLocation.setText(location);
+        selectedLocation = location;
+        eventLocation.setText(location.getDescription());
     }
 
     @Override
@@ -183,6 +199,18 @@ abstract public class EventEditorScreenBase extends Screen implements IEventCrea
                 playersSpinner.setSelection(i);
             }
         }
+    }
+
+    @Override
+    public String status()
+    {
+        return eventStatus;
+    }
+
+    @Override
+    public void status(String status)
+    {
+        eventStatus = status;
     }
 
     @Override
@@ -228,9 +256,9 @@ abstract public class EventEditorScreenBase extends Screen implements IEventCrea
     }
 
     @Override
-    public String players()
+    public int players()
     {
-        return playersSpinner.getSelectedItem().toString();
+        return Integer.parseInt(playersSpinner.getSelectedItem().toString());
     }
 
     @Override
@@ -345,11 +373,32 @@ abstract public class EventEditorScreenBase extends Screen implements IEventCrea
             if (resultCode == RESULT_OK)
             {
                 Place place = PlaceAutocomplete.getPlace(this, data);
+                String city = StringUtils.EMPTY;
+
+                try
+                {
+                    Geocoder geocoder = new Geocoder(this, Locale.getDefault());
+                    suggestedAddresses = geocoder.getFromLocation(place.getLatLng().latitude, place.getLatLng().longitude, 1);
+
+                    if (suggestedAddresses == null || suggestedAddresses.size() == 0 || suggestedAddresses.get(0).getMaxAddressLineIndex() == 0)
+                    {
+                        city = getString(R.string.txt_city_default);
+                    }
+                    else
+                    {
+                        city = suggestedAddresses.get(0).getAddressLine(1);
+                    }
+                }
+                catch (IOException e)
+                {
+                    e.printStackTrace();
+                }
 
                 Location location = new LocationBuilder()
-                        .setName(place.getAddress().toString())
-                        .setLatitude(place.getLatLng().latitude)
-                        .setLongitude(place.getLatLng().longitude)
+                        .setLatitude(DoubleUtils.round(place.getLatLng().latitude, 6))
+                        .setLongitude(DoubleUtils.round(place.getLatLng().longitude, 6))
+                        .setCity(city)
+                        .setDescription(place.getName().toString())
                         .createLocation();
 
                 newLocationOccurred.onNext(location);
@@ -360,5 +409,18 @@ abstract public class EventEditorScreenBase extends Screen implements IEventCrea
             }
         }
         super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
+    public void prepareUpdateLayout()
+    {
+        editorActionButton.setText(R.string.btn_update_event);
+        eventCheckbox.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void showNoLocationChosenError()
+    {
+        Toast.makeText(this, R.string.err_choose_address, Toast.LENGTH_LONG).show();
     }
 }

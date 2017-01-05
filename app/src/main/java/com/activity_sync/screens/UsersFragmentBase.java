@@ -12,6 +12,7 @@ import com.activity_sync.App;
 import com.activity_sync.R;
 import com.activity_sync.presentation.action_listeners.IUserActionListener;
 import com.activity_sync.presentation.models.User;
+import com.activity_sync.presentation.services.CurrentUser;
 import com.activity_sync.presentation.services.IApiService;
 import com.activity_sync.presentation.services.INavigator;
 import com.activity_sync.presentation.views.IUsersFragmentView;
@@ -38,6 +39,9 @@ abstract public class UsersFragmentBase extends FragmentScreen implements IUsers
     @Inject
     IApiService apiService;
 
+    @Inject
+    CurrentUser currentUser;
+
     @Bind(R.id.participants_refresh)
     SwipeRefreshLayout participantsRefreshLayout;
 
@@ -55,11 +59,27 @@ abstract public class UsersFragmentBase extends FragmentScreen implements IUsers
     private List<User> participants = new ArrayList<>();
 
     protected final boolean shouldDisplayAllOptions;
+    protected final int eventId;
+
+    public UsersFragmentBase(boolean shouldDisplayAllOptions, int eventId)
+    {
+        super(R.layout.participants_fragment);
+        this.shouldDisplayAllOptions = shouldDisplayAllOptions;
+        this.eventId = eventId;
+    }
 
     public UsersFragmentBase(boolean shouldDisplayAllOptions)
     {
         super(R.layout.participants_fragment);
         this.shouldDisplayAllOptions = shouldDisplayAllOptions;
+        this.eventId = 0;
+    }
+
+    public UsersFragmentBase()
+    {
+        super(R.layout.participants_fragment);
+        this.shouldDisplayAllOptions = false;
+        this.eventId = 0;
     }
 
     @Override
@@ -156,16 +176,14 @@ abstract public class UsersFragmentBase extends FragmentScreen implements IUsers
     public void removeSuccessMessage(User user)
     {
         Toast.makeText(getContext(), String.format(getContext().getString(R.string.txt_remove_success),
-                user.getName(),
-                user.getSurname()), Toast.LENGTH_LONG).show();
+                user.getName()), Toast.LENGTH_LONG).show();
     }
 
     @Override
     public void acceptSuccessMessage(User user)
     {
         Toast.makeText(getContext(), String.format(getContext().getString(R.string.txt_accept_success),
-                user.getName(),
-                user.getSurname()), Toast.LENGTH_LONG).show();
+                user.getName()), Toast.LENGTH_LONG).show();
     }
 
     @Override
@@ -201,15 +219,11 @@ abstract public class UsersFragmentBase extends FragmentScreen implements IUsers
 
         String positiveText = getString(android.R.string.ok);
         builder.setPositiveButton(positiveText, (dialog, which) ->
-        {
-            confirmClicked.onNext(user);
-        });
+                confirmClicked.onNext(user));
 
         String negativeText = getString(android.R.string.cancel);
         builder.setNegativeButton(negativeText, (dialog, which) ->
-        {
-            dialog.dismiss();
-        });
+                dialog.dismiss());
 
         AlertDialog dialog = builder.create();
         dialog.show();

@@ -8,8 +8,11 @@ import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import rx.Observable;
 import rx.schedulers.Schedulers;
 import rx.subjects.PublishSubject;
+
+import static org.mockito.Matchers.any;
 
 @RunWith(MockitoJUnitRunner.class)
 public class RegisteredParticipantsPresenterTests extends ParticipantsBasePresenterTests
@@ -24,6 +27,8 @@ public class RegisteredParticipantsPresenterTests extends ParticipantsBasePresen
 
         Mockito.when(view.removeConfirmClick()).thenReturn(removeConfirmEvent);
         Mockito.when(view.removeEventClick()).thenReturn(removeEventClick);
+
+        Mockito.when(apiService.removeParticipant(any())).thenReturn(Observable.just(participants));
     }
 
     @Test
@@ -32,8 +37,8 @@ public class RegisteredParticipantsPresenterTests extends ParticipantsBasePresen
         RegisteredUsersPresenter presenter = createPresenter();
         presenter.start();
 
-        removeEventClick.onNext(testedParticipant);
-        Mockito.verify(view).openRemoveConfirmationDialog(testedParticipant);
+        removeEventClick.onNext(testedUser);
+        Mockito.verify(view).openRemoveConfirmationDialog(testedUser);
     }
 
     @Test
@@ -42,13 +47,14 @@ public class RegisteredParticipantsPresenterTests extends ParticipantsBasePresen
         RegisteredUsersPresenter presenter = createPresenter();
         presenter.start();
 
-        removeConfirmEvent.onNext(testedParticipant);
-        Mockito.verify(view).removeSuccessMessage(testedParticipant);
-        Mockito.verify(view).removeUser(testedParticipant);
+        removeConfirmEvent.onNext(testedUser);
+        Mockito.verify(apiService).removeParticipant(any());
+        Mockito.verify(view).removeSuccessMessage(testedUser);
+        Mockito.verify(view).removeUser(testedUser);
     }
 
     private RegisteredUsersPresenter createPresenter()
     {
-        return new RegisteredUsersPresenter(view, navigator, Schedulers.immediate(), apiService);
+        return new RegisteredUsersPresenter(view, navigator, Schedulers.immediate(), apiService, eventId);
     }
 }

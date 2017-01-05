@@ -1,11 +1,11 @@
 package com.activity_sync.presentation.models.builders;
 
-import com.activity_sync.presentation.models.AdditionalInfo;
 import com.activity_sync.presentation.models.User;
 
 public class UserBuilder
 {
     private int userId;
+    private int id;
     private String name;
     private String surname;
     private String username;
@@ -13,12 +13,20 @@ public class UserBuilder
     private String registerDate;
     private String signature;
     private int events;
-    private AdditionalInfo additionalInfo;
+    private boolean isOrganizer;
+    private boolean isCandidate;
+    private boolean isFriend;
+    private boolean isInvited;
+    private int rate;
     private int credibility;
+    private int ratesNumber;
+    private int likes;
+    private int friends;
 
     public UserBuilder setUserId(int userId)
     {
         this.userId = userId;
+        this.id = userId;
         return this;
     }
 
@@ -64,20 +72,62 @@ public class UserBuilder
         return this;
     }
 
-    public UserBuilder setAdditionalInfo(AdditionalInfo additionalInfo)
-    {
-        this.additionalInfo = additionalInfo;
-        return this;
-    }
-
     public UserBuilder setCredibility(int credibility)
     {
         this.credibility = credibility;
         return this;
     }
 
+    public UserBuilder setOrganizer(boolean organizer)
+    {
+        isOrganizer = organizer;
+        return this;
+    }
+
+    public UserBuilder setCandidate(boolean candidate)
+    {
+        isCandidate = candidate;
+        return this;
+    }
+
+    public UserBuilder setFriend(boolean friend)
+    {
+        isFriend = friend;
+        return this;
+    }
+
+    public UserBuilder setRate(int rate)
+    {
+        this.rate = rate;
+        return this;
+    }
+
+    public UserBuilder setRatesNumber(int ratesNumber)
+    {
+        this.ratesNumber = ratesNumber;
+        return this;
+    }
+
+    public UserBuilder setLikes(int likes)
+    {
+        this.likes = likes;
+        return this;
+    }
+
+    public UserBuilder setFriends(int friends)
+    {
+        this.friends = friends;
+        return this;
+    }
+
+    public UserBuilder setInvited(boolean isInvited)
+    {
+        this.isInvited = isInvited;
+        return this;
+    }
+
     public User createUser()
     {
-        return new User(userId, name, surname, username, email, registerDate, signature, events, additionalInfo, credibility);
+        return new User(userId, id, name, surname, username, email, registerDate, signature, events, isOrganizer, isCandidate, isInvited, isFriend, rate, credibility, ratesNumber, friends, likes);
     }
 }

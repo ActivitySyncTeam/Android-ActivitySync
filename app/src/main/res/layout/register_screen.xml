@@ -103,7 +103,7 @@
                 android:orientation="horizontal">
 
                 <android.support.design.widget.TextInputLayout
-                    android:id="@+id/text_input_layout_nickname"
+                    android:id="@+id/text_input_layout_username"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="@dimen/screen_margin_half"
@@ -111,7 +111,7 @@
                     app:hintTextAppearance="@style/DefaultFloatingHint">
 
                     <android.support.v7.widget.AppCompatEditText
-                        android:id="@+id/nickname"
+                        android:id="@+id/username"
                         style="@style/DefaultEditText"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -159,6 +159,16 @@
                 android:gravity="center"
                 android:text="@string/txt_already_registered"
                 android:textSize="@dimen/text_big_size" />
+
+            <ProgressBar
+                android:id="@+id/register_progress_bar"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/screen_margin"
+                android:visibility="invisible"/>
 
         </LinearLayout>
 
