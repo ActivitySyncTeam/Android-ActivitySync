@@ -97,13 +97,14 @@ abstract public class EventsFragmentBase extends FragmentScreen implements IEven
     private PublishSubject<Boolean> locationsEnabled = PublishSubject.create();
     protected PublishSubject<Location> locationFound = PublishSubject.create();
     protected PublishSubject<DateTime> newDateOccurred = PublishSubject.create();
+    protected LinearLayoutManager linearLayoutManager;
     private RVRendererAdapter<Event> adapter;
     private List<Event> events = new ArrayList<>();
 
     private List<Discipline> disciplines = new ArrayList<>();
 
     private String selectedDate;
-
+    protected PublishSubject pageDownReached = PublishSubject.create();
 
     public EventsFragmentBase()
     {
@@ -123,7 +124,7 @@ abstract public class EventsFragmentBase extends FragmentScreen implements IEven
         super.onActivityCreated(savedInstanceState);
         eventsRefreshLayout.setOnRefreshListener(() -> refreshEvents.onNext(this));
         adapter = new RVRendererAdapter<>(getContext(), new EventsRenderer.Builder());
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+        linearLayoutManager = new LinearLayoutManager(getContext());
         eventsList.setLayoutManager(linearLayoutManager);
         eventsList.addItemDecoration(new DividerItemDecoration(getContext()));
         eventsList.setAdapter(adapter);
@@ -360,5 +361,11 @@ abstract public class EventsFragmentBase extends FragmentScreen implements IEven
         {
             return selectedDate;
         }
+    }
+
+    @Override
+    public Observable pageDownReached()
+    {
+        return pageDownReached;
     }
 }

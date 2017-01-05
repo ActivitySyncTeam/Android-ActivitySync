@@ -107,7 +107,20 @@ public class AllEventsPresenter extends EventsFragmentBasePresenter
                 .observeOn(uiThread)
                 .subscribe(date -> {
 
+                    currentPage = 1;
                     resolveFilter();
+                })
+        );
+
+        subscriptions.add(view.pageDownReached()
+                .observeOn(uiThread)
+                .subscribe(result -> {
+
+                    if (!endAlreadyReached)
+                    {
+                        currentPage++;
+                        resolveFilter();
+                    }
                 })
         );
     }
@@ -124,6 +137,15 @@ public class AllEventsPresenter extends EventsFragmentBasePresenter
                 apiService.getFilteredEvents(1, range, lat, lng)
                         .observeOn(uiThread)
                         .subscribe(eventsCollection -> {
+
+                            if (eventsCollection.getNext() == null)
+                            {
+                                endAlreadyReached = true;
+                            }
+                            else
+                            {
+                                endAlreadyReached = false;
+                            }
 
                             view.refreshingVisible(false);
                             view.addEventsListAndClear(eventsCollection.getEvents());
@@ -155,14 +177,22 @@ public class AllEventsPresenter extends EventsFragmentBasePresenter
                 }, this::handleError);
     }
 
-    private void filterFinished(Collection<Event> events)
+    private void filterFinishedAndReloadAllData(Collection<Event> events)
     {
         view.refreshingVisible(false);
         view.addEventsListAndClear(events);
         alreadyLoaded = true;
     }
 
-    private void resolveFilter()
+    private void filterFinishedAndAddAtTheEnd(Collection<Event> events)
+    {
+        view.refreshingVisible(false);
+        view.addEventsListAtTheEnd(events);
+        alreadyLoaded = true;
+    }
+
+    @Override
+    void resolveFilter()
     {
         view.refreshingVisible(true);
 
@@ -174,21 +204,53 @@ public class AllEventsPresenter extends EventsFragmentBasePresenter
         {
             if (view.disciplineFilter().getId() == ALL_EVENTS_ID)
             {
-                apiService.getFilteredEvents(1, range, lat, lng)
+                apiService.getFilteredEvents(currentPage, range, lat, lng)
                         .observeOn(uiThread)
                         .subscribe(eventsCollection -> {
 
-                            filterFinished(eventsCollection.getEvents());
+                            if (eventsCollection.getNext() == null)
+                            {
+                                endAlreadyReached = true;
+                            }
+                            else
+                            {
+                                endAlreadyReached = false;
+                            }
+
+                            if (currentPage == 1)
+                            {
+                                filterFinishedAndReloadAllData(eventsCollection.getEvents());
+                            }
+                            else
+                            {
+                                filterFinishedAndAddAtTheEnd(eventsCollection.getEvents());
+                            }
 
                         }, this::handleError);
             }
             else
             {
-                apiService.getFilteredEvents(1, range, lat, lng, view.disciplineFilter().getId())
+                apiService.getFilteredEvents(currentPage, range, lat, lng, view.disciplineFilter().getId())
                         .observeOn(uiThread)
                         .subscribe(eventsCollection -> {
 
-                            filterFinished(eventsCollection.getEvents());
+                            if (eventsCollection.getNext() == null)
+                            {
+                                endAlreadyReached = true;
+                            }
+                            else
+                            {
+                                endAlreadyReached = false;
+                            }
+
+                            if (currentPage == 1)
+                            {
+                                filterFinishedAndReloadAllData(eventsCollection.getEvents());
+                            }
+                            else
+                            {
+                                filterFinishedAndAddAtTheEnd(eventsCollection.getEvents());
+                            }
 
                         }, this::handleError);
             }
@@ -197,21 +259,55 @@ public class AllEventsPresenter extends EventsFragmentBasePresenter
         {
             if (view.disciplineFilter().getId() == ALL_EVENTS_ID)
             {
-                apiService.getFilteredEvents(1, range, lat, lng, view.getSelectedDate())
+                apiService.getFilteredEvents(currentPage, range, lat, lng, view.getSelectedDate())
                         .observeOn(uiThread)
                         .subscribe(eventsCollection -> {
 
-                            filterFinished(eventsCollection.getEvents());
+                            if (eventsCollection.getNext() == null)
+                            {
+                                endAlreadyReached = true;
+                            }
+                            else
+                            {
+                                endAlreadyReached = false;
+                            }
+
+
+                            if (currentPage == 1)
+                            {
+                                filterFinishedAndReloadAllData(eventsCollection.getEvents());
+                            }
+                            else
+                            {
+                                filterFinishedAndAddAtTheEnd(eventsCollection.getEvents());
+                            }
 
                         }, this::handleError);
             }
             else
             {
-                apiService.getFilteredEvents(1, range, lat, lng, view.disciplineFilter().getId(), view.getSelectedDate())
+                apiService.getFilteredEvents(currentPage, range, lat, lng, view.disciplineFilter().getId(), view.getSelectedDate())
                         .observeOn(uiThread)
                         .subscribe(eventsCollection -> {
 
-                            filterFinished(eventsCollection.getEvents());
+                            if (eventsCollection.getNext() == null)
+                            {
+                                endAlreadyReached = true;
+                            }
+                            else
+                            {
+                                endAlreadyReached = false;
+                            }
+
+
+                            if (currentPage == 1)
+                            {
+                                filterFinishedAndReloadAllData(eventsCollection.getEvents());
+                            }
+                            else
+                            {
+                                filterFinishedAndAddAtTheEnd(eventsCollection.getEvents());
+                            }
 
                         }, this::handleError);
             }

@@ -61,6 +61,7 @@ public class AllEventsPresenterTests
     PublishSubject dateLayoutClickEvent = PublishSubject.create();
     PublishSubject<DateTime> dateSelectedEvent = PublishSubject.create();
     PublishSubject refreshFilterClickEvent = PublishSubject.create();
+    PublishSubject endListReached = PublishSubject.create();
 
     Event testedEvent;
     List<Event> events = new ArrayList<>();
@@ -83,6 +84,7 @@ public class AllEventsPresenterTests
         Mockito.when(view.newDateEvent()).thenReturn(dateSelectedEvent);
         Mockito.when(view.dateLayoutClicked()).thenReturn(dateLayoutClickEvent);
         Mockito.when(view.refreshWithFilterClick()).thenReturn(refreshFilterClickEvent);
+        Mockito.when(view.pageDownReached()).thenReturn(endListReached);
 
         testedEvent = new EventBuilder()
                 .setOrganizer(new UserBuilder()
@@ -171,14 +173,16 @@ public class AllEventsPresenterTests
     @Test
     public void allEventsPresenter_refreshEvent_loadEvents()
     {
+        String date = "2017-01-05 23:23:23";
+        Mockito.when(view.getSelectedDate()).thenReturn(date);
+        Mockito.when(view.disciplineFilter()).thenReturn(new Discipline(123, "discipline"));
+
         AllEventsPresenter presenter = createPresenter();
         presenter.start();
 
-        Mockito.reset(view);
-
         refreshEventsEvent.onNext(this);
-        //Mockito.verify(view).apiCallWhichWillBeHere();
-        Mockito.verify(view, times(2)).refreshingVisible(false);
+        Mockito.verify(apiService).getFilteredEvents(1, standardRange, standardCoordinations, standardCoordinations, view.disciplineFilter().getId(), date);
+        Mockito.verify(view, times(3)).refreshingVisible(false);
     }
 
     @Test

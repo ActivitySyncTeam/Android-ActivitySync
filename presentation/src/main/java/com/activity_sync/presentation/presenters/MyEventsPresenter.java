@@ -32,4 +32,10 @@ public class MyEventsPresenter extends EventsFragmentBasePresenter
 
                 }, this::handleError);
     }
+
+    @Override
+    void resolveFilter()
+    {
+        loadEvents();
+    }
 }

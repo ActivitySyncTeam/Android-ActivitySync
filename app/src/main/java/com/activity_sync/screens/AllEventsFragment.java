@@ -1,6 +1,7 @@
 package com.activity_sync.screens;
 
 import android.os.Bundle;
+import android.support.v7.widget.RecyclerView;
 import android.widget.Toast;
 
 import com.activity_sync.presentation.events.LocationChangeEvent;
@@ -22,11 +23,26 @@ public class AllEventsFragment extends EventsFragmentBase implements IEventsFrag
         return new AllEventsPresenter(this, navigator, AndroidSchedulers.mainThread(), apiService, permanentStorage);
     }
 
+    private boolean loading = true;
+    int pastVisiblesItems, visibleItemCount, totalItemCount;
+
     @Override
     public void onStart()
     {
         super.onStart();
         EventBus.getDefault().register(this);
+
+        eventsList.addOnScrollListener(new RecyclerView.OnScrollListener()
+        {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy)
+            {
+                if (!recyclerView.canScrollVertically(1))
+                {
+                    pageDownReached.onNext(this);
+                }
+            }
+        });
     }
 
     @Override

@@ -15,6 +15,9 @@ abstract public class EventsFragmentBasePresenter extends Presenter<IEventsFragm
     protected final Scheduler uiThread;
     protected final IApiService apiService;
 
+    protected int currentPage = 1;
+    protected boolean endAlreadyReached = false;
+
     public EventsFragmentBasePresenter(IEventsFragmentView view, INavigator navigator, Scheduler uiThread, IApiService apiService)
     {
         super(view);
@@ -33,7 +36,11 @@ abstract public class EventsFragmentBasePresenter extends Presenter<IEventsFragm
 
         subscriptions.add(view.refreshEvents()
                 .subscribe(o -> {
-                    loadEvents();
+
+                    currentPage = 1;
+                    endAlreadyReached = false;
+
+                    resolveFilter();
                     view.refreshingVisible(false);
                 })
         );
@@ -46,6 +53,8 @@ abstract public class EventsFragmentBasePresenter extends Presenter<IEventsFragm
     }
 
     abstract void loadEvents();
+
+    abstract void resolveFilter();
 
     protected void handleError(Throwable error)
     {

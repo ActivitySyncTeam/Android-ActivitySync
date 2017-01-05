@@ -58,4 +58,6 @@ public interface IEventsFragmentView
     Observable<Event> selectedEvent();
 
     String getSelectedDate();
+
+    Observable pageDownReached();
 }
