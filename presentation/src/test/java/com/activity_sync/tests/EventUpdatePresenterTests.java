@@ -36,7 +36,8 @@ public class EventUpdatePresenterTests extends EventCreatorPresenterTests
                 new AddressBody(view.location()),
                 view.discipline().getId(),
                 view.level().getId(),
-                view.isOrganizerEnrolled());
+                view.isOrganizerEnrolled(),
+                view.status());
 
         Mockito.when(apiService.updateEvent(anyInt(), any())).thenReturn(Observable.just(eventID));
     }

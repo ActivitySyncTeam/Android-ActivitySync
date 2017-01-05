@@ -81,8 +81,8 @@ public class EventDetailsPresenterTests
 
         participants = new ParticipantsBuilder().create();
 
-        Mockito.when(apiService.cancelEventJoinRequest(any())).thenReturn(Observable.just(participants));
-        Mockito.when(apiService.leaveEvent(any())).thenReturn(Observable.just(participants));
+        Mockito.when(apiService.cancelEventJoinRequest(any())).thenReturn(Observable.just(null));
+        Mockito.when(apiService.leaveEvent(any())).thenReturn(Observable.just(null));
         Mockito.when(apiService.joinEvent(eventId)).thenReturn(Observable.just(participants));
         Mockito.when(apiService.joinEventAsAdmin(eventId)).thenReturn(Observable.just(participants));
         Mockito.when(apiService.deleteEvent(eventId)).thenReturn(Observable.just(null));

@@ -54,8 +54,8 @@ public class EventsScreen extends ScreenWithMenu implements IEventsView
         super.onCreate(savedInstanceState);
 
         adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new MyEventsFragment(), getString(R.string.tab_my_events));
         adapter.addFragment(new AllEventsFragment(), getString(R.string.tab_all_events));
+        adapter.addFragment(new MyEventsFragment(), getString(R.string.tab_my_events));
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
 
