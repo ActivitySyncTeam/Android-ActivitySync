@@ -148,6 +148,7 @@ public abstract class Screen extends BaseActivity implements IScreenView
         Toast.makeText(this, "Something went wrong with network. Please try again later.", Toast.LENGTH_LONG).show();
     }
 
+    @Override
     public void showProgressBar()
     {
         if (actionProgress != null)
@@ -156,6 +157,7 @@ public abstract class Screen extends BaseActivity implements IScreenView
         }
     }
 
+    @Override
     public void hideProgressBar()
     {
         if (actionProgress != null)

@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.activity_sync.App;
@@ -28,6 +29,9 @@ public class UserDetailsScreen extends UserBaseScreen implements IUserDetailsVie
 
     @Bind(R.id.reject_btn)
     Button rejectBtn;
+
+    @Bind(R.id.user_details_buttons_layout)
+    LinearLayout buttonsLayout;
 
     public UserDetailsScreen()
     {
@@ -161,6 +165,19 @@ public class UserDetailsScreen extends UserBaseScreen implements IUserDetailsVie
     public void displayFriendRequestRejectedMessage()
     {
         Toast.makeText(this, getString(R.string.txt_friend_request_rejected), Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void buttonsLayoutVisible(boolean isVisible)
+    {
+        if (isVisible)
+        {
+            buttonsLayout.setVisibility(View.VISIBLE);
+        }
+        else
+        {
+            buttonsLayout.setVisibility(View.INVISIBLE);
+        }
     }
 
     @Override

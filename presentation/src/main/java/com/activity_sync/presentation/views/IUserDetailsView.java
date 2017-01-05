@@ -24,4 +24,6 @@ public interface IUserDetailsView extends IUserBaseView
     void displayFriendRequestCanceledMessage();
     void displayFriendRemovedMessage();
     void displayFriendRequestRejectedMessage();
+
+    void buttonsLayoutVisible(boolean isVisible);
 }

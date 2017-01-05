@@ -20,10 +20,12 @@
             <include layout="@layout/user_details_view"/>
 
             <LinearLayout
+                android:id="@+id/user_details_buttons_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:baselineAligned="false">
+                android:baselineAligned="false"
+                android:visibility="invisible">
 
                 <Button
                     android:id="@+id/action_btn"

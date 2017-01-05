@@ -6,4 +6,8 @@ public interface IScreenView
     void displayDefaultError();
 
     void displayNetworkError();
+
+    void showProgressBar();
+
+    void hideProgressBar();
 }

@@ -60,7 +60,6 @@ abstract public class UserBaseScreen extends Screen implements IUserBaseView
     @Bind(R.id.tv_votes_number)
     TextView votesNumber;
 
-
     protected UserBaseScreen(int layoutResId)
     {
         super(layoutResId);
