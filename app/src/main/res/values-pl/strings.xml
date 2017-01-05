@@ -159,5 +159,9 @@
     <string name="txt_friend_request_accepted">Zatwierdziłeś prośbę o dołączenie do znajomych</string>
     <string name="txt_friend_request_rejected">Odrzuciłeś prośbę o dołączenie do znajomych</string>
     <string name="hint_filter">Szukaj po nicku...</string>
+    <string name="err_authorization">Błąd autoryzacji</string>
+    <string name="err_permission_denied">Błąd. Odmowa dostępu.</string>
+    <string name="err_servers_cannot_be_reached">Serwey są w tym momencie nieosiągalne.</string>
+    <string name="err_something_went_wrong">Coś poszło nie tak. Spróbuj ponownie.</string>
 
 </resources>
