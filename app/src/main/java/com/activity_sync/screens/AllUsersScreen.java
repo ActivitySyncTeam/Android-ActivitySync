@@ -52,11 +52,13 @@ public class AllUsersScreen extends Screen implements IAllUsersScreen
     @Bind(R.id.user_filter)
     AppCompatEditText userFilter;
 
+    private PublishSubject endListReached = PublishSubject.create();
+
     private PublishSubject refreshUsers = PublishSubject.create();
     private PublishSubject filterUsers = PublishSubject.create();
     private RVRendererAdapter<User> adapter;
     private List<User> users = new ArrayList<>();
-    private static final int TRIGGER_SERACH = 1;
+    private static final int TRIGGER_SEARCH = 1;
     private static final int SEARCH_TRIGGER_DELAY_IN_MS = 1000;
     private static Handler handler;
 
@@ -89,6 +91,18 @@ public class AllUsersScreen extends Screen implements IAllUsersScreen
         usersList.setLayoutManager(linearLayoutManager);
         usersList.addItemDecoration(new DividerItemDecoration(this));
         usersList.setAdapter(adapter);
+
+        usersList.addOnScrollListener(new RecyclerView.OnScrollListener()
+        {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy)
+            {
+                if (!recyclerView.canScrollVertically(1))
+                {
+                    endListReached.onNext(this);
+                }
+            }
+        });
     }
 
     private void initListeners()
@@ -99,7 +113,7 @@ public class AllUsersScreen extends Screen implements IAllUsersScreen
             @Override
             public void handleMessage(Message msg)
             {
-                if (msg.what == TRIGGER_SERACH)
+                if (msg.what == TRIGGER_SEARCH)
                 {
                     filterUsers.onNext(this);
                 }
@@ -122,8 +136,8 @@ public class AllUsersScreen extends Screen implements IAllUsersScreen
             @Override
             public void afterTextChanged(Editable editable)
             {
-                handler.removeMessages(TRIGGER_SERACH);
-                handler.sendEmptyMessageDelayed(TRIGGER_SERACH, SEARCH_TRIGGER_DELAY_IN_MS);
+                handler.removeMessages(TRIGGER_SEARCH);
+                handler.sendEmptyMessageDelayed(TRIGGER_SEARCH, SEARCH_TRIGGER_DELAY_IN_MS);
             }
         });
     }
@@ -147,9 +161,17 @@ public class AllUsersScreen extends Screen implements IAllUsersScreen
     }
 
     @Override
-    public void addUsersList(Collection<User> users)
+    public void addUsersListAndClear(Collection<User> users)
     {
         adapter.clear();
+        this.users.addAll(users);
+        adapter.addAll(users);
+        adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void addUsersListAtTheEnd(Collection<User> users)
+    {
         this.users.addAll(users);
         adapter.addAll(users);
         adapter.notifyDataSetChanged();
@@ -177,5 +199,11 @@ public class AllUsersScreen extends Screen implements IAllUsersScreen
     public void hideProgress()
     {
         hideProgressBar();
+    }
+
+    @Override
+    public Observable endListReached()
+    {
+        return endListReached;
     }
 }

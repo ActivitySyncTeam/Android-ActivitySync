@@ -56,6 +56,7 @@ public class AllUsersPresenterTest
     PublishSubject refreshUsersEvent = PublishSubject.create();
     PublishSubject userSelectedEvent = PublishSubject.create();
     PublishSubject filterUsersEvent = PublishSubject.create();
+    PublishSubject endListReached = PublishSubject.create();
 
     @Before
     public void setUp() throws Exception
@@ -77,13 +78,15 @@ public class AllUsersPresenterTest
         doNothing().when(view).showProgress();
         doNothing().when(view).hideProgress();
 
+        when(view.endListReached()).thenReturn(endListReached);
+
         presenter.start();
     }
 
     @Test
     public void allUsersPresenter_loadUsers_loadSucceded() throws Exception
     {
-        verify(view).addUsersList(usersResponses);
+        verify(view).addUsersListAndClear(usersResponses);
     }
 
     @Test
@@ -91,7 +94,7 @@ public class AllUsersPresenterTest
     {
         Mockito.reset(view);
         when(apiService.getUsers(anyBoolean(), anyInt(), anyString())).thenReturn(Observable.error(new Throwable()));
-        verify(view, never()).addUsersList(any());
+        verify(view, never()).addUsersListAndClear(any());
     }
 
     @Test
@@ -116,6 +119,14 @@ public class AllUsersPresenterTest
         when(currentUser.userId()).thenReturn(userID);
         userSelectedEvent.onNext(user);
         Mockito.verify(navigator).openMyProfileScreen();
+    }
+
+    @Test
+    public void allUsersPresenter_reachEndList_loadMoreData()
+    {
+        when(currentUser.userId()).thenReturn(userID);
+        endListReached.onNext(this);
+        verify(view).addUsersListAndClear(usersResponses);
     }
 
     @After

@@ -18,9 +18,13 @@ public interface IAllUsersScreen
 
     void refreshingVisible(boolean isRefreshing);
 
-    void addUsersList(Collection<User> users);
+    void addUsersListAndClear(Collection<User> users);
+
+    void addUsersListAtTheEnd(Collection<User> users);
 
     void showProgress();
 
     void hideProgress();
+
+    Observable endListReached();
 }

@@ -16,7 +16,9 @@ public class AllUsersPresenter extends Presenter<IAllUsersScreen>
     private final IApiService apiService;
     private final CurrentUser currentUser;
     private boolean isFiltered = false;
+
     private int currentPage = 1;
+    private boolean endAlreadyReached = false;
 
     public AllUsersPresenter(IAllUsersScreen view, INavigator navigator, Scheduler uiThread, IApiService apiService, CurrentUser currentUser)
     {
@@ -37,6 +39,10 @@ public class AllUsersPresenter extends Presenter<IAllUsersScreen>
         subscriptions.add(view.refreshUsers()
                 .observeOn(uiThread)
                 .subscribe(o -> {
+
+                    currentPage = 1;
+                    endAlreadyReached = false;
+
                     loadUsers(false);
                 })
         );
@@ -61,6 +67,17 @@ public class AllUsersPresenter extends Presenter<IAllUsersScreen>
                     loadUsers(true);
                 })
         );
+
+        subscriptions.add(view.endListReached()
+                .subscribe(event -> {
+
+                    if (!endAlreadyReached)
+                    {
+                        currentPage++;
+                        loadUsers(false);
+                    }
+                })
+        );
     }
 
     private void setFiltered()
@@ -77,7 +94,25 @@ public class AllUsersPresenter extends Presenter<IAllUsersScreen>
         apiService.getUsers(isFiltered, currentPage, view.getUserFilterText())
                 .observeOn(uiThread)
                 .subscribe(usersCollection -> {
-                    view.addUsersList(usersCollection.getUsers());
+
+                    if (usersCollection.getNext() == null)
+                    {
+                        endAlreadyReached = true;
+                    }
+                    else
+                    {
+                        endAlreadyReached = false;
+                    }
+
+                    if (currentPage == 1)
+                    {
+                        view.addUsersListAndClear(usersCollection.getUsers());
+                    }
+                    else
+                    {
+                        view.addUsersListAtTheEnd(usersCollection.getUsers());
+                    }
+
                     view.refreshingVisible(false);
                     view.hideProgress();
                 }, this::handleError);

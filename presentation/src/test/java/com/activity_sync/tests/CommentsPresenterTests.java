@@ -42,6 +42,7 @@ public class CommentsPresenterTests
 
     protected PublishSubject sendCommentEvent = PublishSubject.create();
     protected PublishSubject refreshCommentsEvent = PublishSubject.create();
+    protected PublishSubject endListReached = PublishSubject.create();
 
     private int eventId = 1;
     private Comment testComment;
@@ -55,12 +56,14 @@ public class CommentsPresenterTests
         Mockito.when(view.sendCommentClick()).thenReturn(sendCommentEvent);
         Mockito.when(view.refreshComments()).thenReturn(refreshCommentsEvent);
         Mockito.when(view.comment()).thenReturn(commentContent);
+        Mockito.when(view.endListReached()).thenReturn(endListReached);
 
         testComment = new CommentBuilder().createComment();
         comments.add(testComment);
         commentsCollection = new CommentsCollectionBuilder().setComments(comments).create();
 
-        Mockito.when(apiService.getEventComments(eventId)).thenReturn(Observable.just(commentsCollection));
+        Mockito.when(apiService.getEventComments(eventId, 1)).thenReturn(Observable.just(commentsCollection));
+        Mockito.when(apiService.getEventComments(eventId, 2)).thenReturn(Observable.just(commentsCollection));
         Mockito.when(apiService.addComment(eventId, commentContent)).thenReturn(Observable.just(null));
     }
 
@@ -70,7 +73,7 @@ public class CommentsPresenterTests
         CommentsPresenter presenter = createPresenter();
         presenter.start();
 
-        Mockito.verify(apiService).getEventComments(eventId);
+        Mockito.verify(apiService).getEventComments(eventId, 1);
         Mockito.verify(view).refreshingVisible(false);
     }
 
@@ -112,7 +115,18 @@ public class CommentsPresenterTests
         Mockito.reset(view);
 
         refreshCommentsEvent.onNext(this);
-        Mockito.verify(apiService, times(2)).getEventComments(eventId);
+        Mockito.verify(apiService, times(2)).getEventComments(eventId, 1);
+        Mockito.verify(view).refreshingVisible(false);
+    }
+
+    @Test
+    public void commentsPresenter_endReached_loadComments()
+    {
+        CommentsPresenter presenter = createPresenter();
+        presenter.start();
+
+        endListReached.onNext(this);
+        Mockito.verify(apiService).getEventComments(eventId, 1);
         Mockito.verify(view).refreshingVisible(false);
     }
 
