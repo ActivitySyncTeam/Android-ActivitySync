@@ -98,9 +98,9 @@ public class ApiService implements IApiService
     }
 
     @Override
-    public Observable<EventsCollection> getMyEvents()
+    public Observable<EventsCollection> getMyEvents(int page)
     {
-        return api.getMyEvents(accessTokenHeader());
+        return api.getMyEvents(accessTokenHeader(), page);
     }
 
     @Override

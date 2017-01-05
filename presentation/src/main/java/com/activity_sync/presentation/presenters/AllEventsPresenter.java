@@ -108,19 +108,7 @@ public class AllEventsPresenter extends EventsFragmentBasePresenter
                 .subscribe(date -> {
 
                     currentPage = 1;
-                    resolveFilter();
-                })
-        );
-
-        subscriptions.add(view.pageDownReached()
-                .observeOn(uiThread)
-                .subscribe(result -> {
-
-                    if (!endAlreadyReached)
-                    {
-                        currentPage++;
-                        resolveFilter();
-                    }
+                    resolveRefresh();
                 })
         );
     }
@@ -192,7 +180,7 @@ public class AllEventsPresenter extends EventsFragmentBasePresenter
     }
 
     @Override
-    void resolveFilter()
+    void resolveRefresh()
     {
         view.refreshingVisible(true);
 

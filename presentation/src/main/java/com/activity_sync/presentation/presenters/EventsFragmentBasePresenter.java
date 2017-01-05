@@ -40,7 +40,7 @@ abstract public class EventsFragmentBasePresenter extends Presenter<IEventsFragm
                     currentPage = 1;
                     endAlreadyReached = false;
 
-                    resolveFilter();
+                    resolveRefresh();
                     view.refreshingVisible(false);
                 })
         );
@@ -50,11 +50,23 @@ abstract public class EventsFragmentBasePresenter extends Presenter<IEventsFragm
                     navigator.openEventDetailsScreen(event.getEventId());
                 })
         );
+
+        subscriptions.add(view.pageDownReached()
+                .observeOn(uiThread)
+                .subscribe(result -> {
+
+                    if (!endAlreadyReached)
+                    {
+                        currentPage++;
+                        resolveRefresh();
+                    }
+                })
+        );
     }
 
     abstract void loadEvents();
 
-    abstract void resolveFilter();
+    abstract void resolveRefresh();
 
     protected void handleError(Throwable error)
     {

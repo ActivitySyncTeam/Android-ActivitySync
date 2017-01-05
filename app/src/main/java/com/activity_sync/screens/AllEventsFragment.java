@@ -23,9 +23,6 @@ public class AllEventsFragment extends EventsFragmentBase implements IEventsFrag
         return new AllEventsPresenter(this, navigator, AndroidSchedulers.mainThread(), apiService, permanentStorage);
     }
 
-    private boolean loading = true;
-    int pastVisiblesItems, visibleItemCount, totalItemCount;
-
     @Override
     public void onStart()
     {

@@ -69,7 +69,7 @@ public interface IActivitySyncApi
     Observable<EventsCollection> getAllEvents();
 
     @GET("/api/myEvents")
-    Observable<EventsCollection> getMyEvents(@Header("Authorization") String accessToken);
+    Observable<EventsCollection> getMyEvents(@Header("Authorization") String accessToken, @Query("page") int page);
 
     @GET("/api/events")
     Observable<EventsCollection> getFilteredEvents(@Header("Authorization") String accessToken, @Query("page") int page, @Query("isFiltered") boolean isFiltered, @Query("range") int range, @Query("lat") float lat, @Query("lng") float lng);

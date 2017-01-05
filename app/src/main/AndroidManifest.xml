@@ -36,7 +36,8 @@
         <activity
             android:name=".screens.LoginScreen"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.LoginScreen"/>
+            android:theme="@style/AppTheme.LoginScreen"
+            android:noHistory="true"/>
 
         <activity
             android:name=".screens.RegisterScreen"

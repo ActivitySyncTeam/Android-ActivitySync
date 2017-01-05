@@ -23,7 +23,7 @@ public class MyEventsPresenter extends EventsFragmentBasePresenter
     @Override
     void loadEvents()
     {
-        apiService.getMyEvents()
+        apiService.getMyEvents(1)
                 .observeOn(uiThread)
                 .subscribe(eventsCollection -> {
 
@@ -34,8 +34,24 @@ public class MyEventsPresenter extends EventsFragmentBasePresenter
     }
 
     @Override
-    void resolveFilter()
+    void resolveRefresh()
     {
-        loadEvents();
+        apiService.getMyEvents(currentPage)
+                .observeOn(uiThread)
+                .subscribe(eventsCollection -> {
+
+                    if (eventsCollection.getNext() == null)
+                    {
+                        endAlreadyReached = true;
+                    }
+                    else
+                    {
+                        endAlreadyReached = false;
+                    }
+
+                    view.refreshingVisible(false);
+                    view.addEventsListAtTheEnd(eventsCollection.getEvents());
+
+                }, this::handleError);
     }
 }
