@@ -74,8 +74,10 @@ public class UserDetailsPresenterTests
         UserDetailsPresenter presenter = createPresenter();
         presenter.start();
 
+        Mockito.verify(view).buttonsLayoutVisible(false);
         Mockito.verify(apiService).getUserData(userId);
         Mockito.verify(view).setData(user);
+        Mockito.verify(view).buttonsLayoutVisible(false);
     }
 
     @Test

@@ -4,6 +4,7 @@ import com.activity_sync.presentation.models.Event;
 import com.activity_sync.presentation.models.body_models.EventIDBody;
 import com.activity_sync.presentation.services.CurrentUser;
 import com.activity_sync.presentation.services.IApiService;
+import com.activity_sync.presentation.services.IErrorHandler;
 import com.activity_sync.presentation.services.INavigator;
 import com.activity_sync.presentation.views.IEventDetailsView;
 
@@ -17,10 +18,11 @@ public class EventDetailsPresenter extends Presenter<IEventDetailsView>
     private final int eventId;
     private final IApiService apiService;
     private final CurrentUser currentUser;
+    private final IErrorHandler errorHandler;
 
     private Event currentEvent;
 
-    public EventDetailsPresenter(Scheduler uiThread, IEventDetailsView view, INavigator navigator, int eventId, IApiService apiService, CurrentUser currentUser)
+    public EventDetailsPresenter(Scheduler uiThread, IEventDetailsView view, INavigator navigator, int eventId, IApiService apiService, CurrentUser currentUser, IErrorHandler errorHandler)
     {
         super(view);
         this.uiThread = uiThread;
@@ -28,12 +30,15 @@ public class EventDetailsPresenter extends Presenter<IEventDetailsView>
         this.eventId = eventId;
         this.apiService = apiService;
         this.currentUser = currentUser;
+        this.errorHandler = errorHandler;
     }
 
     @Override
     public void start()
     {
         super.start();
+        view.buttonsLayoutVisible(false);
+        view.showProgressBar();
 
         subscriptions.add(view.googleMapAsyncCompleted()
                 .observeOn(uiThread)
@@ -45,6 +50,8 @@ public class EventDetailsPresenter extends Presenter<IEventDetailsView>
 
                                 view.setEventData(event);
                                 currentEvent = event;
+                                view.buttonsLayoutVisible(true);
+                                view.hideProgressBar();
 
                             }, this::handleError);
                 })
@@ -84,6 +91,8 @@ public class EventDetailsPresenter extends Presenter<IEventDetailsView>
 
                     if (currentEvent.isOrganizer())
                     {
+                        view.showProgressBar();
+
                         apiService.joinEventAsAdmin(eventId)
                                 .observeOn(uiThread)
                                 .subscribe(participants -> {
@@ -94,10 +103,14 @@ public class EventDetailsPresenter extends Presenter<IEventDetailsView>
                                     view.setEventData(currentEvent);
                                     view.setOrganizerParticipantView(currentEvent);
 
+                                    view.hideProgressBar();
+
                                 }, this::handleError);
                     }
                     else
                     {
+                        view.showProgressBar();
+
                         apiService.joinEvent(eventId)
                                 .observeOn(uiThread)
                                 .subscribe(participants -> {
@@ -105,6 +118,8 @@ public class EventDetailsPresenter extends Presenter<IEventDetailsView>
                                     view.showEnrollMessage();
                                     currentEvent.setCandidate(true);
                                     view.setOrganizerParticipantView(currentEvent);
+
+                                    view.hideProgressBar();
 
                                 }, this::handleError);
                     }
@@ -117,6 +132,8 @@ public class EventDetailsPresenter extends Presenter<IEventDetailsView>
 
                     if (currentEvent.isParticipant())
                     {
+                        view.showProgressBar();
+
                         apiService.leaveEvent(new EventIDBody(eventId))
                                 .observeOn(uiThread)
                                 .subscribe(participants -> {
@@ -127,11 +144,14 @@ public class EventDetailsPresenter extends Presenter<IEventDetailsView>
                                     currentEvent.setFreePlaces(currentEvent.getFreePlaces() + 1);
                                     view.setEventData(currentEvent);
                                     view.setOrganizerParticipantView(currentEvent);
+                                    view.hideProgressBar();
 
                                 }, this::handleError);
                     }
                     else
                     {
+                        view.showProgressBar();
+
                         apiService.cancelEventJoinRequest(new EventIDBody(eventId))
                                 .observeOn(uiThread)
                                 .subscribe(participants -> {
@@ -140,6 +160,7 @@ public class EventDetailsPresenter extends Presenter<IEventDetailsView>
                                     currentEvent.setCandidate(false);
                                     currentEvent.setParticipant(false);
                                     view.setOrganizerParticipantView(currentEvent);
+                                    view.hideProgressBar();
 
                                 }, this::handleError);
                     }
@@ -150,10 +171,13 @@ public class EventDetailsPresenter extends Presenter<IEventDetailsView>
                 .observeOn(uiThread)
                 .subscribe(o -> {
 
+                    view.showProgressBar();
+
                     apiService.deleteEvent(eventId)
                             .observeOn(uiThread)
                             .subscribe(result -> {
 
+                                view.hideProgressBar();
                                 navigator.openEventsScreen();
 
                             }, this::handleError);
@@ -202,12 +226,17 @@ public class EventDetailsPresenter extends Presenter<IEventDetailsView>
     {
         super.resume();
 
+        view.showProgressBar();
+
         apiService.getEventDetails(eventId)
                 .observeOn(uiThread)
                 .subscribe(event -> {
 
                     view.setEventData(event);
                     currentEvent = event;
+
+                    view.hideProgressBar();
+                    view.buttonsLayoutVisible(true);
 
                 }, this::handleError);
     }
@@ -221,6 +250,7 @@ public class EventDetailsPresenter extends Presenter<IEventDetailsView>
     {
         error.printStackTrace();
         Timber.d(error.getMessage());
-        view.displayDefaultError();
+        errorHandler.handleError(error);
+        view.hideProgressBar();
     }
 }

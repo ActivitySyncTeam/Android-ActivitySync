@@ -198,4 +198,10 @@
     <string name="title_all_users">Users</string>
     <string name="hint_filter">Search by nickname...</string>
 
+    <!-- ErrorHandler strings -->
+    <string name="err_authorization">Authorization error</string>
+    <string name="err_permission_denied">Permission denied</string>
+    <string name="err_servers_cannot_be_reached">Servers cannot be reached at the moment.</string>
+    <string name="err_something_went_wrong">Something went wrong. Please try again</string>
+
 </resources>

@@ -132,6 +132,6 @@ public class CommentsPresenterTests
 
     private CommentsPresenter createPresenter()
     {
-        return new CommentsPresenter(view, Schedulers.immediate(), eventId, apiService, currentUser);
+        return new CommentsPresenter(view, Schedulers.immediate(), eventId, apiService, currentUser, errorHandler);
     }
 }

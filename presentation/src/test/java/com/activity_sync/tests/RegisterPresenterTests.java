@@ -184,6 +184,6 @@ public class RegisterPresenterTests
 
     private RegisterPresenter createPresenter()
     {
-        return new RegisterPresenter(Schedulers.immediate(), view, navigator, apiService, currentUser);
+        return new RegisterPresenter(Schedulers.immediate(), view, navigator, apiService, currentUser, errorHandler);
     }
 }

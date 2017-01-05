@@ -18,7 +18,7 @@ public class EventUpdateScreen extends EventEditorScreenBase
     protected IPresenter createPresenter(Screen screen, Bundle savedInstanceState)
     {
         Event event = (Event) getIntent().getSerializableExtra(EventUpdateScreen.EVENT);
-        return new EventUpdatePresenter(AndroidSchedulers.mainThread(), this, navigator, apiService, event);
+        return new EventUpdatePresenter(AndroidSchedulers.mainThread(), this, navigator, apiService, event, errorHandler);
     }
 
     @Override

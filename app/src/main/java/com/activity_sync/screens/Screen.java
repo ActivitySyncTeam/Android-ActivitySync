@@ -9,7 +9,6 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import com.activity_sync.R;
 import com.activity_sync.presentation.presenters.IPresenter;
@@ -134,18 +133,6 @@ public abstract class Screen extends BaseActivity implements IScreenView
 
         AlertDialog dialog = builder.create();
         dialog.show();
-    }
-
-    @Override
-    public void displayDefaultError()
-    {
-        Toast.makeText(this, "Something went wrong. Please try again later.", Toast.LENGTH_LONG).show();
-    }
-
-    @Override
-    public void displayNetworkError()
-    {
-        Toast.makeText(this, "Something went wrong with network. Please try again later.", Toast.LENGTH_LONG).show();
     }
 
     @Override

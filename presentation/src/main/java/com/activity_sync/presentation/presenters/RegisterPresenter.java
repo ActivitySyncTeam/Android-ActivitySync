@@ -4,6 +4,7 @@ import com.activity_sync.presentation.models.ClientDetails;
 import com.activity_sync.presentation.models.RegisterResponse;
 import com.activity_sync.presentation.services.CurrentUser;
 import com.activity_sync.presentation.services.IApiService;
+import com.activity_sync.presentation.services.IErrorHandler;
 import com.activity_sync.presentation.services.INavigator;
 import com.activity_sync.presentation.utils.StringUtils;
 import com.activity_sync.presentation.views.IRegisterView;
@@ -19,14 +20,16 @@ public class RegisterPresenter extends Presenter<IRegisterView>
     private final INavigator navigator;
     private final IApiService apiService;
     private final CurrentUser currentUser;
+    private final IErrorHandler errorHandler;
 
-    public RegisterPresenter(Scheduler uiThread, IRegisterView view, INavigator navigator, IApiService apiService, CurrentUser currentUser)
+    public RegisterPresenter(Scheduler uiThread, IRegisterView view, INavigator navigator, IApiService apiService, CurrentUser currentUser, IErrorHandler errorHandler)
     {
         super(view);
         this.navigator = navigator;
         this.uiThread = uiThread;
         this.apiService = apiService;
         this.currentUser = currentUser;
+        this.errorHandler = errorHandler;
     }
 
     @Override
@@ -77,6 +80,8 @@ public class RegisterPresenter extends Presenter<IRegisterView>
 
                     if (canContinue)
                     {
+                        view.showProgressBar();
+
                         Observable.zip(getRegisterQuery(), getClientDetailsQuery(), Tuple2::new)
                                 .observeOn(uiThread)
                                 .subscribe(tuple -> {
@@ -99,6 +104,8 @@ public class RegisterPresenter extends Presenter<IRegisterView>
 
                                                             navigator.startBackgroundService();
                                                             navigator.openEventsScreen();
+
+                                                            view.hideProgressBar();
 
                                                         }, this::handleError);
                                             }, this::handleError);
@@ -130,6 +137,7 @@ public class RegisterPresenter extends Presenter<IRegisterView>
     {
         error.printStackTrace();
         Timber.d(error.getMessage());
-        view.displayDefaultError();
+        errorHandler.handleError(error);
+        view.hideProgressBar();
     }
 }

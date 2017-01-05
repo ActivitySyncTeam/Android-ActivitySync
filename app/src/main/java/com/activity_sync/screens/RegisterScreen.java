@@ -15,6 +15,7 @@ import com.activity_sync.presentation.presenters.IPresenter;
 import com.activity_sync.presentation.presenters.RegisterPresenter;
 import com.activity_sync.presentation.services.CurrentUser;
 import com.activity_sync.presentation.services.IApiService;
+import com.activity_sync.presentation.services.IErrorHandler;
 import com.activity_sync.presentation.services.INavigator;
 import com.activity_sync.presentation.views.IRegisterView;
 
@@ -35,6 +36,9 @@ public class RegisterScreen extends Screen implements IRegisterView
 
     @Inject
     CurrentUser currentUser;
+
+    @Inject
+    IErrorHandler errorHandler;
 
     @Bind(R.id.register_btn)
     Button registerBtn;
@@ -80,7 +84,7 @@ public class RegisterScreen extends Screen implements IRegisterView
     @Override
     protected IPresenter createPresenter(Screen screen, Bundle savedInstanceState)
     {
-        return new RegisterPresenter(AndroidSchedulers.mainThread(), this, navigator, apiService, currentUser);
+        return new RegisterPresenter(AndroidSchedulers.mainThread(), this, navigator, apiService, currentUser, errorHandler);
     }
 
     @Override

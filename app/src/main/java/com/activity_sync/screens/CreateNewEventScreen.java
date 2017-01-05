@@ -13,7 +13,7 @@ public class CreateNewEventScreen extends EventEditorScreenBase
     @Override
     protected IPresenter createPresenter(Screen screen, Bundle savedInstanceState)
     {
-        return new EventCreatorPresenter(AndroidSchedulers.mainThread(), this, navigator, apiService);
+        return new EventCreatorPresenter(AndroidSchedulers.mainThread(), this, navigator, apiService, errorHandler);
     }
 
     @Override

@@ -50,7 +50,7 @@ public class UserDetailsScreen extends UserBaseScreen implements IUserDetailsVie
     protected IPresenter createPresenter(Screen screen, Bundle savedInstanceState)
     {
         int userId = getIntent().getIntExtra(UserDetailsScreen.USER_ID, 0);
-        return new UserDetailsPresenter(this, apiService, AndroidSchedulers.mainThread(), currentUser, userId);
+        return new UserDetailsPresenter(this, apiService, AndroidSchedulers.mainThread(), currentUser, userId, errorHandler);
     }
 
     @Override

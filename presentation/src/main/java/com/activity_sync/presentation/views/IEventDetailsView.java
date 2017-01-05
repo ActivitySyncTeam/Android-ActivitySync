@@ -39,4 +39,6 @@ public interface IEventDetailsView extends IScreenView
     Observable googleMapAsyncCompleted();
 
     Observable commentsClick();
+
+    void buttonsLayoutVisible(boolean isVisible);
 }

@@ -283,7 +283,7 @@ public class EventDetailsPresenterTests
 
     private EventDetailsPresenter createPresenter()
     {
-        return new EventDetailsPresenter(Schedulers.immediate(), view, navigator, eventId, apiService, currentUser);
+        return new EventDetailsPresenter(Schedulers.immediate(), view, navigator, eventId, apiService, currentUser, errorHandler);
     }
 
     private Event create(boolean isParticipant, boolean isOrganizer)

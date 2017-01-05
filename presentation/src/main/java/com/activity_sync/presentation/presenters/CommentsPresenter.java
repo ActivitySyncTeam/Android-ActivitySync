@@ -2,6 +2,7 @@ package com.activity_sync.presentation.presenters;
 
 import com.activity_sync.presentation.services.CurrentUser;
 import com.activity_sync.presentation.services.IApiService;
+import com.activity_sync.presentation.services.IErrorHandler;
 import com.activity_sync.presentation.utils.StringUtils;
 import com.activity_sync.presentation.views.ICommentsView;
 
@@ -14,17 +15,19 @@ public class CommentsPresenter extends Presenter<ICommentsView>
     private final int eventId;
     private final IApiService apiService;
     private final CurrentUser currentUser;
+    private final IErrorHandler errorHandler;
 
     private int currentPage = 1;
     private boolean endAlreadyReached = false;
 
-    public CommentsPresenter(ICommentsView view, Scheduler uiThread, int eventId, IApiService apiService, CurrentUser currentUser)
+    public CommentsPresenter(ICommentsView view, Scheduler uiThread, int eventId, IApiService apiService, CurrentUser currentUser, IErrorHandler errorHandler)
     {
         super(view);
         this.uiThread = uiThread;
         this.eventId = eventId;
         this.apiService = apiService;
         this.currentUser = currentUser;
+        this.errorHandler = errorHandler;
     }
 
     @Override
@@ -64,6 +67,8 @@ public class CommentsPresenter extends Presenter<ICommentsView>
                     }
                     else
                     {
+                        view.showProgressBar();
+
                         apiService.addComment(eventId, view.comment())
                                 .observeOn(uiThread)
                                 .subscribe(comment -> {
@@ -72,6 +77,8 @@ public class CommentsPresenter extends Presenter<ICommentsView>
                                     view.clearComment();
                                     view.hideKeyboard();
                                     view.scrollToBottom();
+
+                                    view.hideProgressBar();
 
                                 }, this::handleError);
                     }
@@ -115,6 +122,7 @@ public class CommentsPresenter extends Presenter<ICommentsView>
         error.printStackTrace();
         Timber.d(error.getMessage());
         view.refreshingVisible(false);
-        view.displayDefaultError();
+        errorHandler.handleError(error);
+        view.hideProgressBar();
     }
 }

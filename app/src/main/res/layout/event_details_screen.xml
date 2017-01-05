@@ -332,7 +332,8 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:layout_marginTop="@dimen/screen_margin_half"
-                android:layout_marginBottom="@dimen/screen_margin_half">
+                android:layout_marginBottom="@dimen/screen_margin_half"
+                android:visibility="invisible">
 
                 <Button
                     android:id="@+id/join_leave_event_btn"

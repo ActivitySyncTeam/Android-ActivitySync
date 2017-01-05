@@ -3,6 +3,7 @@ package com.activity_sync.presentation.presenters;
 
 import com.activity_sync.presentation.models.Event;
 import com.activity_sync.presentation.services.IApiService;
+import com.activity_sync.presentation.services.IErrorHandler;
 import com.activity_sync.presentation.services.INavigator;
 import com.activity_sync.presentation.views.IEventCreatorView;
 
@@ -12,9 +13,9 @@ public class EventUpdatePresenter extends EventEditorPresenterBase
 {
     private final Event event;
 
-    public EventUpdatePresenter(Scheduler uiThread, IEventCreatorView view, INavigator navigator, IApiService apiService, Event event)
+    public EventUpdatePresenter(Scheduler uiThread, IEventCreatorView view, INavigator navigator, IApiService apiService, Event event, IErrorHandler errorHandler)
     {
-        super(uiThread, view, navigator, apiService);
+        super(uiThread, view, navigator, apiService, errorHandler);
         this.event = event;
     }
 
@@ -40,10 +41,13 @@ public class EventUpdatePresenter extends EventEditorPresenterBase
 
                     if (view.location() != null)
                     {
+                        view.showProgressBar();
+
                         apiService.updateEvent(event.getEventId(), createEventBody())
                                 .observeOn(uiThread)
                                 .subscribe(result -> {
 
+                                    view.hideProgressBar();
                                     navigator.openEventDetailsScreen(result.getEventID());
 
                                 }, this::handleError);

@@ -8,6 +8,7 @@ import com.activity_sync.R;
 import com.activity_sync.presentation.models.User;
 import com.activity_sync.presentation.services.CurrentUser;
 import com.activity_sync.presentation.services.IApiService;
+import com.activity_sync.presentation.services.IErrorHandler;
 import com.activity_sync.presentation.views.IUserBaseView;
 import com.activity_sync.utils.CredibilityService;
 import com.amulyakhare.textdrawable.TextDrawable;
@@ -23,6 +24,9 @@ abstract public class UserBaseScreen extends Screen implements IUserBaseView
 
     @Inject
     CurrentUser currentUser;
+
+    @Inject
+    IErrorHandler errorHandler;
 
     @Bind(R.id.tv_username)
     TextView username;

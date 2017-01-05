@@ -2,11 +2,11 @@ package com.activity_sync.presentation.presenters;
 
 import com.activity_sync.presentation.services.CurrentUser;
 import com.activity_sync.presentation.services.IApiService;
+import com.activity_sync.presentation.services.IErrorHandler;
 import com.activity_sync.presentation.services.INavigator;
 import com.activity_sync.presentation.utils.StringUtils;
 import com.activity_sync.presentation.views.ILoginView;
 
-import retrofit.RetrofitError;
 import rx.Scheduler;
 import timber.log.Timber;
 
@@ -16,14 +16,16 @@ public class LoginPresenter extends Presenter<ILoginView>
     private final INavigator navigator;
     private final IApiService apiService;
     private final CurrentUser currentUser;
+    private final IErrorHandler errorHandler;
 
-    public LoginPresenter(Scheduler uiThread, ILoginView view, INavigator navigator, IApiService apiService, CurrentUser currentUser)
+    public LoginPresenter(Scheduler uiThread, ILoginView view, INavigator navigator, IApiService apiService, CurrentUser currentUser, IErrorHandler errorHandler)
     {
         super(view);
         this.navigator = navigator;
         this.uiThread = uiThread;
         this.apiService = apiService;
         this.currentUser = currentUser;
+        this.errorHandler = errorHandler;
     }
 
     @Override
@@ -53,6 +55,8 @@ public class LoginPresenter extends Presenter<ILoginView>
 
                     if (canContinue)
                     {
+                        view.showProgressBar();
+
                         apiService.getClientDetails()
                                 .observeOn(uiThread)
                                 .subscribe(clientDetails -> {
@@ -76,6 +80,8 @@ public class LoginPresenter extends Presenter<ILoginView>
                                                             navigator.startBackgroundService();
                                                             navigator.openEventsScreen();
 
+                                                            view.hideProgressBar();
+
                                                         }, this::handleError);
                                             }, this::handleError);
                                 }, this::handleError);
@@ -93,24 +99,9 @@ public class LoginPresenter extends Presenter<ILoginView>
 
     private void handleError(Throwable error)
     {
-        if (error instanceof RetrofitError)
-        {
-            RetrofitError retrofitError = (RetrofitError) error;
-
-            if (retrofitError.getKind() == RetrofitError.Kind.NETWORK)
-            {
-                Timber.d("problem z netem");
-            }
-            else
-            {
-                Timber.d("problem z retrofitem");
-            }
-        }
-        else
-        {
-            Timber.d("problem");
-        }
-
+        errorHandler.handleError(error);
         error.printStackTrace();
+        Timber.d(error.getMessage());
+        view.hideProgressBar();
     }
 }

@@ -24,6 +24,7 @@ import com.activity_sync.presentation.models.Level;
 import com.activity_sync.presentation.models.Location;
 import com.activity_sync.presentation.models.builders.LocationBuilder;
 import com.activity_sync.presentation.services.IApiService;
+import com.activity_sync.presentation.services.IErrorHandler;
 import com.activity_sync.presentation.services.INavigator;
 import com.activity_sync.presentation.utils.DoubleUtils;
 import com.activity_sync.presentation.utils.StringUtils;
@@ -56,6 +57,9 @@ abstract public class EventEditorScreenBase extends Screen implements IEventCrea
 
     @Inject
     INavigator navigator;
+
+    @Inject
+    IErrorHandler errorHandler;
 
     @Bind(R.id.event_date_layout)
     CardView eventDateLayout;

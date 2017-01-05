@@ -4,6 +4,7 @@ package com.activity_sync.presentation.presenters;
 import com.activity_sync.presentation.models.body_models.AddressBody;
 import com.activity_sync.presentation.models.body_models.EventBody;
 import com.activity_sync.presentation.services.IApiService;
+import com.activity_sync.presentation.services.IErrorHandler;
 import com.activity_sync.presentation.services.INavigator;
 import com.activity_sync.presentation.views.IEventCreatorView;
 
@@ -15,32 +16,54 @@ public class EventEditorPresenterBase extends Presenter<IEventCreatorView>
     protected final Scheduler uiThread;
     protected final INavigator navigator;
     protected final IApiService apiService;
+    protected final IErrorHandler errorHandler;
 
-    public EventEditorPresenterBase(Scheduler uiThread, IEventCreatorView view, INavigator navigator, IApiService apiService)
+    public EventEditorPresenterBase(Scheduler uiThread, IEventCreatorView view, INavigator navigator, IApiService apiService, IErrorHandler errorHandler)
     {
         super(view);
         this.navigator = navigator;
         this.uiThread = uiThread;
         this.apiService = apiService;
+        this.errorHandler = errorHandler;
     }
+
+    boolean disciplinesLoaded = false;
+    boolean levelsLoaded = false;
 
     @Override
     public void start()
     {
         super.start();
 
+        view.showProgressBar();
         view.preparePlayersSpinner();
 
         apiService.getAvailableDisciplines()
                 .observeOn(uiThread)
                 .subscribe((disciplines) -> {
+
                     view.prepareDisciplineSpinner(disciplines);
+                    disciplinesLoaded = true;
+
+                    if (levelsLoaded)
+                    {
+                        view.hideProgressBar();
+                    }
+
                 }, this::handleError);
 
         apiService.getAvailableLevels()
                 .observeOn(uiThread)
                 .subscribe((levels) -> {
+
                     view.prepareLevelSpinner(levels);
+                    levelsLoaded = true;
+
+                    if (disciplinesLoaded)
+                    {
+                        view.hideProgressBar();
+                    }
+
                 }, this::handleError);
 
         subscriptions.add(view.openDatePickerClick()
@@ -95,6 +118,7 @@ public class EventEditorPresenterBase extends Presenter<IEventCreatorView>
     {
         error.printStackTrace();
         Timber.d(error.getMessage());
-        view.displayDefaultError();
+        errorHandler.handleError(error);
+        view.hideProgressBar();
     }
 }

@@ -4,6 +4,7 @@ import com.activity_sync.presentation.models.User;
 import com.activity_sync.presentation.models.body_models.UserIDBody;
 import com.activity_sync.presentation.services.CurrentUser;
 import com.activity_sync.presentation.services.IApiService;
+import com.activity_sync.presentation.services.IErrorHandler;
 import com.activity_sync.presentation.views.IUserDetailsView;
 
 import rx.Scheduler;
@@ -19,16 +20,18 @@ public class UserDetailsPresenter extends Presenter<IUserDetailsView>
     private final Scheduler uiThread;
     private final CurrentUser currentUser;
     private final int userId;
+    private final IErrorHandler errorHandler;
 
     private User user;
 
-    public UserDetailsPresenter(IUserDetailsView view, IApiService apiService, Scheduler uiThread, CurrentUser currentUser, int userId)
+    public UserDetailsPresenter(IUserDetailsView view, IApiService apiService, Scheduler uiThread, CurrentUser currentUser, int userId, IErrorHandler errorHandler)
     {
         super(view);
         this.apiService = apiService;
         this.uiThread = uiThread;
         this.currentUser = currentUser;
         this.userId = userId;
+        this.errorHandler = errorHandler;
     }
 
     @Override
@@ -228,9 +231,9 @@ public class UserDetailsPresenter extends Presenter<IUserDetailsView>
 
     private void handleError(Throwable error)
     {
+        errorHandler.handleError(error);
         error.printStackTrace();
         Timber.d(error.getMessage());
-        view.displayDefaultError();
         view.hideProgressBar();
     }
 }
