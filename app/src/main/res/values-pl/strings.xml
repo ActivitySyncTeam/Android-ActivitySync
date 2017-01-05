@@ -152,5 +152,11 @@
     <string name="menu_users_screen">Użytkownicy</string>
     <string name="title_all_users">Użytkownicy</string>
     <string name="txt_votes_number">Głosy</string>
+    <string name="btn_accept_friends_request">Zatwierdź znajomego</string>
+    <string name="btn_reject_friends_request">Odrzuć znajomego</string>
+    <string name="err_choose_address">Adres nie został wybrany</string>
+    <string name="txt_city_default">Nieznane</string>
+    <string name="txt_friend_request_accepted">Zatwierdziłeś prośbę o dołączenie do znajomych</string>
+    <string name="txt_friend_request_rejected">Odrzuciłeś prośbę o dołączenie do znajomych</string>
 
 </resources>
