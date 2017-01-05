@@ -6,6 +6,7 @@ import com.activity_sync.presentation.services.INavigator;
 import com.activity_sync.presentation.utils.StringUtils;
 import com.activity_sync.presentation.views.ILoginView;
 
+import retrofit.RetrofitError;
 import rx.Scheduler;
 import timber.log.Timber;
 
@@ -92,8 +93,24 @@ public class LoginPresenter extends Presenter<ILoginView>
 
     private void handleError(Throwable error)
     {
+        if (error instanceof RetrofitError)
+        {
+            RetrofitError retrofitError = (RetrofitError) error;
+
+            if (retrofitError.getKind() == RetrofitError.Kind.NETWORK)
+            {
+                Timber.d("problem z netem");
+            }
+            else
+            {
+                Timber.d("problem z retrofitem");
+            }
+        }
+        else
+        {
+            Timber.d("problem");
+        }
+
         error.printStackTrace();
-        Timber.d(error.getMessage());
-        view.displayDefaultError();
     }
 }

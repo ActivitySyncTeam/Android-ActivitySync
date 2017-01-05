@@ -15,6 +15,9 @@ public class CommentsPresenter extends Presenter<ICommentsView>
     private final IApiService apiService;
     private final CurrentUser currentUser;
 
+    private int currentPage = 1;
+    private boolean endAlreadyReached = false;
+
     public CommentsPresenter(ICommentsView view, Scheduler uiThread, int eventId, IApiService apiService, CurrentUser currentUser)
     {
         super(view);
@@ -33,7 +36,22 @@ public class CommentsPresenter extends Presenter<ICommentsView>
 
         subscriptions.add(view.refreshComments()
                 .subscribe(event -> {
+
+                    currentPage = 1;
+                    endAlreadyReached = false;
+
                     loadComments();
+                })
+        );
+
+        subscriptions.add(view.endListReached()
+                .subscribe(event -> {
+
+                    if (!endAlreadyReached)
+                    {
+                        currentPage++;
+                        loadComments();
+                    }
                 })
         );
 
@@ -65,11 +83,28 @@ public class CommentsPresenter extends Presenter<ICommentsView>
     {
         view.refreshingVisible(true);
 
-        apiService.getEventComments(eventId)
+        apiService.getEventComments(eventId, currentPage)
                 .observeOn(uiThread)
                 .subscribe(commentsCollection -> {
 
-                    view.addCommentsList(commentsCollection.getComments());
+                    if (commentsCollection.getNext() == null)
+                    {
+                        endAlreadyReached = true;
+                    }
+                    else
+                    {
+                        endAlreadyReached = false;
+                    }
+
+                    if (currentPage == 1)
+                    {
+                        view.addCommentsListAndClear(commentsCollection.getComments());
+                    }
+                    else
+                    {
+                        view.addCommentsListAndAddAtTheEnd(commentsCollection.getComments());
+                    }
+
                     view.refreshingVisible(false);
 
                 }, this::handleError);

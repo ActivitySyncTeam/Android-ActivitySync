@@ -134,9 +134,9 @@ public class ApiService implements IApiService
     }
 
     @Override
-    public Observable<CommentsCollection> getEventComments(int eventId)
+    public Observable<CommentsCollection> getEventComments(int eventId, int page)
     {
-        return api.getEventComments(accessTokenHeader(), eventId);
+        return api.getEventComments(accessTokenHeader(), eventId, page);
     }
 
     @Override

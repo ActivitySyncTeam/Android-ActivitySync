@@ -114,7 +114,7 @@ public interface IActivitySyncApi
     Observable<Participants> acceptCandidate(@Header("Authorization") String accessToken, @Field("eventID") int eventID, @Field("personID") int personID);
 
     @GET("api/event/comments/{event_id}")
-    Observable<CommentsCollection> getEventComments(@Header("Authorization") String accessToken, @Path("event_id") int eventId);
+    Observable<CommentsCollection> getEventComments(@Header("Authorization") String accessToken, @Path("event_id") int eventId, @Query("page") int page);
 
     @FormUrlEncoded
     @POST("api/event/comments/add/")

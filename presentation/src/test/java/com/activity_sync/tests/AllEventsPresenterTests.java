@@ -316,6 +316,18 @@ public class AllEventsPresenterTests
         Mockito.verify(view, times(2)).refreshingVisible(true);
     }
 
+    @Test
+    public void allEventsPresenter_reachEnd_reloadData()
+    {
+        AllEventsPresenter presenter = createPresenter();
+        presenter.start();
+
+        endListReached.onNext(this);
+        Mockito.verify(apiService).getFilteredEvents(1, standardRange, standardCoordinations, standardCoordinations);
+        Mockito.verify(view).addEventsListAndClear(events);
+        Mockito.verify(view).refreshingVisible(true);
+    }
+
     private AllEventsPresenter createPresenter()
     {
         return new AllEventsPresenter(view, navigator, Schedulers.immediate(), apiService, permanentStorage);

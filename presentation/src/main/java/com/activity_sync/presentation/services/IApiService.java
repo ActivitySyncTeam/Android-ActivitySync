@@ -59,7 +59,7 @@ public interface IApiService
 
     Observable<Event> getEventDetails(int eventId);
 
-    Observable<CommentsCollection> getEventComments(int eventId);
+    Observable<CommentsCollection> getEventComments(int eventId, int page);
 
     Observable<Comment> addComment(int eventId, String comment);
 

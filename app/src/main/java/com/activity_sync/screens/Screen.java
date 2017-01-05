@@ -142,6 +142,12 @@ public abstract class Screen extends BaseActivity implements IScreenView
         Toast.makeText(this, "Something went wrong. Please try again later.", Toast.LENGTH_LONG).show();
     }
 
+    @Override
+    public void displayNetworkError()
+    {
+        Toast.makeText(this, "Something went wrong with network. Please try again later.", Toast.LENGTH_LONG).show();
+    }
+
     public void showProgressBar()
     {
         if (actionProgress != null)

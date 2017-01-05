@@ -50,7 +50,15 @@ public class MyEventsPresenter extends EventsFragmentBasePresenter
                     }
 
                     view.refreshingVisible(false);
-                    view.addEventsListAtTheEnd(eventsCollection.getEvents());
+
+                    if (currentPage == 1)
+                    {
+                        view.addEventsListAndClear(eventsCollection.getEvents());
+                    }
+                    else
+                    {
+                        view.addEventsListAtTheEnd(eventsCollection.getEvents());
+                    }
 
                 }, this::handleError);
     }

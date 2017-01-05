@@ -9,7 +9,8 @@ import rx.Observable;
 public interface ICommentsView extends IScreenView
 {
     Observable refreshComments();
-    void addCommentsList(Collection<Comment> comments);
+    void addCommentsListAndClear(Collection<Comment> comments);
+    void addCommentsListAndAddAtTheEnd(Collection<Comment> comments);
     void addSingleComment(Comment comment);
     void refreshingVisible(boolean isRefreshing);
 
@@ -21,4 +22,6 @@ public interface ICommentsView extends IScreenView
     void clearComment();
 
     void showEmptyCommentError();
+
+    Observable endListReached();
 }

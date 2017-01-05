@@ -26,6 +26,7 @@ import rx.Observable;
 import rx.schedulers.Schedulers;
 import rx.subjects.PublishSubject;
 
+import static org.mockito.Matchers.anyInt;
 import static org.mockito.Mockito.times;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -42,6 +43,7 @@ public class MyEventsPresenterTests
 
     PublishSubject eventSelectedEvent = PublishSubject.create();
     PublishSubject refreshEventsEvent = PublishSubject.create();
+    PublishSubject endListReached = PublishSubject.create();
 
     Event testedEvent;
     List<Event> events = new ArrayList<>();
@@ -70,7 +72,8 @@ public class MyEventsPresenterTests
         events.add(testedEvent);
         eventsCollection = new EventsCollectionBuilder().setEvents(events).create();
 
-        Mockito.when(apiService.getMyEvents()).thenReturn(Observable.just(eventsCollection));
+        Mockito.when(view.pageDownReached()).thenReturn(endListReached);
+        Mockito.when(apiService.getMyEvents(anyInt())).thenReturn(Observable.just(eventsCollection));
 
         Mockito.when(view.selectedEvent()).thenReturn(eventSelectedEvent);
         Mockito.when(view.refreshEvents()).thenReturn(refreshEventsEvent);
@@ -83,7 +86,7 @@ public class MyEventsPresenterTests
         presenter.start();
 
         eventSelectedEvent.onNext(testedEvent);
-        Mockito.verify(apiService).getMyEvents();
+        Mockito.verify(apiService).getMyEvents(1);
         Mockito.verify(view).filterLayoutVisible(false);
     }
 
@@ -106,8 +109,22 @@ public class MyEventsPresenterTests
         Mockito.reset(view);
 
         refreshEventsEvent.onNext(this);
-        Mockito.verify(apiService, times(2)).getMyEvents();
+        Mockito.verify(apiService, times(2)).getMyEvents(1);
         Mockito.verify(view, times(2)).refreshingVisible(false);
+    }
+
+    @Test
+    public void myEventsPresenter_reachEnd_loadEvents()
+    {
+        MyEventsPresenter presenter = createPresenter();
+        presenter.start();
+
+        Mockito.reset(view);
+
+        endListReached.onNext(this);
+        Mockito.verify(apiService).getMyEvents(1);
+        Mockito.verify(apiService).getMyEvents(2);
+        Mockito.verify(view).refreshingVisible(false);
     }
 
     private MyEventsPresenter createPresenter()
