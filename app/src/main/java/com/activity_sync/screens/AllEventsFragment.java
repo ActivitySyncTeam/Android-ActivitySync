@@ -2,7 +2,6 @@ package com.activity_sync.screens;
 
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
-import android.widget.Toast;
 
 import com.activity_sync.presentation.events.LocationChangeEvent;
 import com.activity_sync.presentation.presenters.AllEventsPresenter;
@@ -14,6 +13,7 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import rx.android.schedulers.AndroidSchedulers;
+import timber.log.Timber;
 
 public class AllEventsFragment extends EventsFragmentBase implements IEventsFragmentView
 {
@@ -52,10 +52,7 @@ public class AllEventsFragment extends EventsFragmentBase implements IEventsFrag
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onMessageEvent(LocationChangeEvent event)
     {
-        Toast.makeText(getContext(),
-                String.format("Location changed: %f %f", event.getLocation().getLatitude(), event.getLocation().getLongitude()),
-                Toast.LENGTH_LONG)
-                .show();
+        Timber.i(String.format("Location changed: %f %f", event.getLocation().getLatitude(), event.getLocation().getLongitude()));
 
         locationFound.onNext(event.getLocation());
     }

@@ -163,5 +163,6 @@
     <string name="err_permission_denied">Błąd. Odmowa dostępu.</string>
     <string name="err_servers_cannot_be_reached">Serwey są w tym momencie nieosiągalne.</string>
     <string name="err_something_went_wrong">Coś poszło nie tak. Spróbuj ponownie.</string>
+    <string name="txt_logged_as">Zalogowany jako: %s</string>
 
 </resources>

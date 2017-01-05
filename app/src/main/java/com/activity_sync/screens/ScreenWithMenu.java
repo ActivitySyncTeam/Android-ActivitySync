@@ -3,11 +3,14 @@ package com.activity_sync.screens;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
+import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
 import com.activity_sync.R;
 import com.activity_sync.presentation.services.CurrentUser;
@@ -28,6 +31,10 @@ public abstract class ScreenWithMenu extends Screen
 
     @Bind(R.id.navigation_drawer_layout)
     DrawerLayout drawerLayout;
+
+    @Nullable
+    @Bind(R.id.logged_as)
+    TextView loggedAs;
 
     @Inject
     CurrentUser currentUser;
@@ -121,6 +128,10 @@ public abstract class ScreenWithMenu extends Screen
     {
         navigationView.getMenu().clear();
         navigationView.inflateMenu(getMenuType());
+
+        View view = navigationView.getHeaderView(0);
+        loggedAs = (TextView) view.findViewById(R.id.logged_as);
+        loggedAs.setText(String.format(getString(R.string.txt_logged_as), currentUser.login()));
     }
 
     private int getMenuType()
