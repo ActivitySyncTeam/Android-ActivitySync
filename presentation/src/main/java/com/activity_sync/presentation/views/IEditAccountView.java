@@ -4,7 +4,7 @@ import com.activity_sync.presentation.models.User;
 
 import rx.Observable;
 
-public interface IEditAccountView
+public interface IEditAccountView extends IScreenView
 {
     void saveSucceded();
 

@@ -55,7 +55,7 @@ public class LoginPresenter extends Presenter<ILoginView>
 
                     if (canContinue)
                     {
-                        view.showProgressBar();
+                        view.progressBarVisible(true);
 
                         apiService.getClientDetails()
                                 .observeOn(uiThread)
@@ -80,7 +80,7 @@ public class LoginPresenter extends Presenter<ILoginView>
                                                             navigator.startBackgroundService();
                                                             navigator.openEventsScreen();
 
-                                                            view.hideProgressBar();
+                                                            view.progressBarVisible(false);
 
                                                         }, this::handleError);
                                             }, this::handleError);
@@ -102,6 +102,6 @@ public class LoginPresenter extends Presenter<ILoginView>
         errorHandler.handleError(error);
         error.printStackTrace();
         Timber.d(error.getMessage());
-        view.hideProgressBar();
+        view.progressBarVisible(false);
     }
 }

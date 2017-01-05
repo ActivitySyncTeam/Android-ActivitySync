@@ -6,7 +6,9 @@ import android.support.design.widget.TextInputLayout;
 import android.support.v7.widget.AppCompatEditText;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.activity_sync.App;
@@ -75,6 +77,9 @@ public class RegisterScreen extends Screen implements IRegisterView
 
     @Bind(R.id.password)
     AppCompatEditText passwordEditText;
+
+    @Bind(R.id.register_progress_bar)
+    ProgressBar progressBar;
 
     public RegisterScreen()
     {
@@ -201,6 +206,19 @@ public class RegisterScreen extends Screen implements IRegisterView
     public void passwordErrorEnabled(boolean enabled)
     {
         inputPasswordLayout.setErrorEnabled(enabled);
+    }
+
+    @Override
+    public void progressBarVisible(boolean isVisible)
+    {
+        if (isVisible)
+        {
+            progressBar.setVisibility(View.VISIBLE);
+        }
+        else
+        {
+            progressBar.setVisibility(View.INVISIBLE);
+        }
     }
 
     @Override

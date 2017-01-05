@@ -65,11 +65,15 @@ public class ChangePasswordPresenter extends Presenter<IChangePasswordView>
 
                     if (canContinue)
                     {
+                        view.showProgressBar();
+
                         apiService.changePassword(view.getOldPassword(), view.getNewPassword())
                                 .observeOn(uiThread)
                                 .subscribe(response -> {
                                     view.saveSucceded();
                                     view.close();
+
+                                    view.hideProgressBar();
                                 }, this::handleError);
                     }
                 }));

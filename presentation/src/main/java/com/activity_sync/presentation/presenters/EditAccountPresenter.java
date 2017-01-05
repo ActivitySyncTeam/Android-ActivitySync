@@ -57,11 +57,15 @@ public class EditAccountPresenter extends Presenter<IEditAccountView>
 
                     if (canContinue)
                     {
+                        view.showProgressBar();
+
                         apiService.updateUser(view.getFirstName(), view.getLastName(), view.getSignature(), view.getEmail())
                                 .observeOn(uiThread)
                                 .subscribe(response -> {
                                     view.saveSucceded();
                                     view.close();
+
+                                    view.hideProgressBar();
                                 }, this::handleError);
                     }
                 }));

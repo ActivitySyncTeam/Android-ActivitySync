@@ -18,10 +18,6 @@
             android:title="@string/menu_friends"/>
 
         <item
-            android:id="@+id/menu_dummy"
-            android:title="@string/menu_dummy_screen"/>
-
-        <item
             android:id="@+id/menu_my_profile"
             android:title="@string/menu_my_profile"/>
 

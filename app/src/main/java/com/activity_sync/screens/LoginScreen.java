@@ -6,7 +6,9 @@ import android.support.design.widget.TextInputLayout;
 import android.support.v7.widget.AppCompatEditText;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.activity_sync.App;
@@ -57,6 +59,9 @@ public class LoginScreen extends Screen implements ILoginView
 
     @Bind(R.id.password)
     AppCompatEditText passwordEditText;
+
+    @Bind(R.id.login_progress_bar)
+    ProgressBar progressBar;
 
     public LoginScreen()
     {
@@ -135,6 +140,19 @@ public class LoginScreen extends Screen implements ILoginView
     public String emptyFieldErrorText()
     {
         return getString(R.string.err_empty_field);
+    }
+
+    @Override
+    public void progressBarVisible(boolean isVisible)
+    {
+        if (isVisible)
+        {
+            progressBar.setVisibility(View.VISIBLE);
+        }
+        else
+        {
+            progressBar.setVisibility(View.INVISIBLE);
+        }
     }
 
     private void prepareEditTexts()

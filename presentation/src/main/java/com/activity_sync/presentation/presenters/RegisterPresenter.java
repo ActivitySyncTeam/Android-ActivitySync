@@ -80,7 +80,7 @@ public class RegisterPresenter extends Presenter<IRegisterView>
 
                     if (canContinue)
                     {
-                        view.showProgressBar();
+                        view.progressBarVisible(true);
 
                         Observable.zip(getRegisterQuery(), getClientDetailsQuery(), Tuple2::new)
                                 .observeOn(uiThread)
@@ -105,7 +105,7 @@ public class RegisterPresenter extends Presenter<IRegisterView>
                                                             navigator.startBackgroundService();
                                                             navigator.openEventsScreen();
 
-                                                            view.hideProgressBar();
+                                                            view.progressBarVisible(false);
 
                                                         }, this::handleError);
                                             }, this::handleError);
@@ -138,6 +138,6 @@ public class RegisterPresenter extends Presenter<IRegisterView>
         error.printStackTrace();
         Timber.d(error.getMessage());
         errorHandler.handleError(error);
-        view.hideProgressBar();
+        view.progressBarVisible(false);
     }
 }

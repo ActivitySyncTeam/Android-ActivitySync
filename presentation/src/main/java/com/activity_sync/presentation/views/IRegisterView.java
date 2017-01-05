@@ -39,4 +39,6 @@ public interface IRegisterView extends IScreenView
     void passwordErrorEnabled(boolean enabled);
 
     String emptyFieldErrorText();
+
+    void progressBarVisible(boolean isVisible);
 }
