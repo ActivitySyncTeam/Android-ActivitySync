@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:app="http://schemas.android.com/apk/res-auto"
-              xmlns:tools="http://schemas.android.com/tools"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:background="@color/transparent"
-              android:clickable="false"
-              android:minHeight="80dp"
-              android:orientation="horizontal">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/transparent"
+    android:clickable="false"
+    android:minHeight="80dp"
+    android:orientation="horizontal">
 
     <android.support.v7.widget.CardView
         style="@style/CardViewDefault.RecyclerView"
@@ -32,7 +32,7 @@
 
                 <ImageView
                     style="@style/EventItemImageView"
-                    android:src="@drawable/ic_organizer"/>
+                    android:src="@drawable/ic_organizer" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -42,13 +42,13 @@
                     <TextView
                         android:id="@+id/user_name"
                         style="@style/EventItemTextView"
-                        tools:text="Marcin Zielinski"/>
+                        tools:text="Marcin Zielinski" />
 
                     <TextView
                         android:id="@+id/user_nickname"
                         style="@style/EventItemTextView"
                         android:textSize="@dimen/text_big_size"
-                        tools:text="(marziel1994)"/>
+                        tools:text="(marziel1994)" />
 
                 </LinearLayout>
 
@@ -64,18 +64,19 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
+                    android:gravity="left"
                     android:layout_weight="1"
                     android:orientation="horizontal">
 
                     <ImageView
                         style="@style/EventItemImageView"
-                        android:src="@drawable/ic_people"/>
+                        android:src="@drawable/ic_people" />
 
                     <TextView
                         android:id="@+id/user_friends_nr"
                         style="@style/EventItemTextView"
                         android:textSize="@dimen/text_big_size"
-                        tools:text="150"/>
+                        tools:text="150" />
 
                 </LinearLayout>
 
@@ -83,37 +84,40 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
+                    android:gravity="center"
                     android:layout_weight="1"
                     android:orientation="horizontal">
 
                     <ImageView
                         style="@style/EventItemImageView"
-                        android:src="@drawable/ic_whistle"/>
+                        android:src="@drawable/ic_whistle" />
 
                     <TextView
                         android:id="@+id/user_events_nr"
                         style="@style/EventItemTextView"
                         android:textSize="@dimen/text_big_size"
-                        tools:text="150"/>
+                        tools:text="150" />
 
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
+                    android:layout_gravity="right"
+                    android:gravity="right"
                     android:layout_weight="1"
                     android:orientation="horizontal">
 
                     <ImageView
                         style="@style/EventItemImageView"
-                        android:src="@drawable/ic_thumb_up"/>
+                        android:src="@drawable/ic_thumb_up" />
 
                     <TextView
                         android:id="@+id/user_likes_nr"
                         style="@style/EventItemTextView"
                         android:textSize="@dimen/text_big_size"
-                        tools:text="150"/>
+                        tools:text="150"
+                        android:layout_marginRight="@dimen/screen_margin_half"/>
 
                 </LinearLayout>
 
