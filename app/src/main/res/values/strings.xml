@@ -210,5 +210,13 @@
     <!-- Notification strings -->
     <string name="txt_friends_notif_title">Someone sent you friends invitation!</string>
     <string name="txt_friends_notif_content">Click here and decide to accept or reject friends invitation</string>
+    <string name="txt_event_cancel_notifi_title">Event canceled :(</string>
+    <string name="txt_event_cancel_notifi_content">Organizer of the event has canceled the event.</string>
+    <string name="txt_event_approved_notifi_title">You have been approved!</string>
+    <string name="txt_event_approved_notifi_content">Organizer of the event approved you as a event participant. Check it right now!</string>
+    <string name="txt_event_edit_notifi_title">Event edited!</string>
+    <string name="txt_event_edit_notifi_content">One of your events has been edited. Check it out right now!</string>
+    <string name="txt_event_invite_notifi_title">Invitation for the event!</string>
+    <string name="txt_event_invite_notifi_content">You have been invited to participate in the event. Check it out right now!</string>
 
 </resources>

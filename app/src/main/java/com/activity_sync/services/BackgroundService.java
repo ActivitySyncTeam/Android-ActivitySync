@@ -48,16 +48,19 @@ public class BackgroundService extends Service
     private TimerTask timerTask;
     private Runnable backgroundOperation = () -> {
 
-        apiService.getNotifications()
-                .observeOn(Schedulers.newThread())
-                .subscribe(apiMessages -> {
+        if(permanentStorage.retrieveBoolean(IPermanentStorage.IS_NOTIFICATION_ENABLED, IPermanentStorage.IS_NOTIFICATION_ENABLED_DEFAULT))
+        {
+            apiService.getNotifications()
+                    .observeOn(Schedulers.newThread())
+                    .subscribe(apiMessages -> {
 
-                    if (apiMessages.size() > 0)
-                    {
-                        notificationService.handleMessage(apiMessages.get(0));
-                    }
+                        if (apiMessages.size() > 0)
+                        {
+                            notificationService.handleMessage(apiMessages.get(0));
+                        }
 
-                }, this::handleError);
+                    }, this::handleError);
+        }
     };
 
     @Override
@@ -70,7 +73,7 @@ public class BackgroundService extends Service
         EventBus.getDefault().register(this);
 
         locationService = new LocationService(getApplicationContext(), permanentStorage);
-        notificationService = new NotificationService(getApplicationContext(), (NotificationManager) getSystemService(NOTIFICATION_SERVICE));
+        notificationService = new NotificationService(getApplicationContext(), (NotificationManager) getSystemService(NOTIFICATION_SERVICE), permanentStorage);
 
         if (ContextCompat.checkSelfPermission(getApplicationContext(), android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED)
         {
