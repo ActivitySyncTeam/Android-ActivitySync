@@ -26,7 +26,8 @@
 
         <activity
             android:name=".screens.IntroScreen"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:noHistory="true">
         </activity>
 
         <activity
@@ -36,8 +37,7 @@
         <activity
             android:name=".screens.LoginScreen"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.LoginScreen"
-            android:noHistory="true"/>
+            android:theme="@style/AppTheme.LoginScreen" />
 
         <activity
             android:name=".screens.RegisterScreen"

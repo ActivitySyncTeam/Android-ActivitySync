@@ -203,6 +203,12 @@
     <string name="err_permission_denied">Permission denied</string>
     <string name="err_servers_cannot_be_reached">Servers cannot be reached at the moment.</string>
     <string name="err_something_went_wrong">Something went wrong. Please try again</string>
+
+    <!-- Other strings -->
     <string name="txt_logged_as">Logged as: %s</string>
+
+    <!-- Notification strings -->
+    <string name="txt_friends_notif_title">Someone sent you friends invitation!</string>
+    <string name="txt_friends_notif_content">Click here and decide to accept or reject friends invitation</string>
 
 </resources>

@@ -2,6 +2,7 @@ package com.activity_sync.services;
 
 import android.util.Base64;
 
+import com.activity_sync.presentation.models.ApiMessage;
 import com.activity_sync.presentation.models.ChangePasswordResponse;
 import com.activity_sync.presentation.models.ClientDetails;
 import com.activity_sync.presentation.models.Comment;
@@ -287,6 +288,12 @@ public class ApiService implements IApiService
     public Observable<UsersCollection> getUsers(boolean isFiltered, int page, String nickname)
     {
         return api.getUsers(page, isFiltered, nickname, null, null, null, null);
+    }
+
+    @Override
+    public Observable<List<ApiMessage>> getNotifications()
+    {
+        return api.getNotifications(accessTokenHeader());
     }
 
     private String accessTokenHeader()

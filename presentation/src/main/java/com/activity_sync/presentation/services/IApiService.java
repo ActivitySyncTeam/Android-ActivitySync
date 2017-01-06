@@ -1,5 +1,6 @@
 package com.activity_sync.presentation.services;
 
+import com.activity_sync.presentation.models.ApiMessage;
 import com.activity_sync.presentation.models.ChangePasswordResponse;
 import com.activity_sync.presentation.models.ClientDetails;
 import com.activity_sync.presentation.models.Comment;
@@ -102,4 +103,6 @@ public interface IApiService
     Observable<UserID> updateUser(String name, String surname, String signature, String email);
 
     Observable<UsersCollection> getUsers(boolean isFiltered, int page, String nickname);
+
+    Observable<List<ApiMessage>> getNotifications();
 }
