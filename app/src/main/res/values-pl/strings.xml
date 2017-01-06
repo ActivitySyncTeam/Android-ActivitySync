@@ -166,5 +166,13 @@
     <string name="txt_logged_as">Zalogowany jako: %s</string>
     <string name="txt_friends_notif_content">Kliknij tutaj i zaakaceptuj lub odrzuć zaproszenie do znajomych</string>
     <string name="txt_friends_notif_title">Ktoś wysłał Ci zaproszenie do znajomych!</string>
+    <string name="txt_event_approved_notifi_content">Organizator wydarzenia zatwierdził Cię jako uczestnika. Sprawdź teraz!</string>
+    <string name="txt_event_approved_notifi_title">Zostałeś zaakceptowany!</string>
+    <string name="txt_event_cancel_notifi_title">Wydarzenie odwołane :(</string>
+    <string name="txt_event_cancel_notifi_content">Organizator odwołał wydarzenie.</string>
+    <string name="txt_event_edit_notifi_content">Jedno z Twoich wydarzeń zostało zmienione. Sprawdź teraz!</string>
+    <string name="txt_event_edit_notifi_title">Wydarzenie edytowane!</string>
+    <string name="txt_event_invite_notifi_content">Zostałeś zaproszony na wydarzenie. Sprawdź już teraz!</string>
+    <string name="txt_event_invite_notifi_title">Zaproszenie na wydarzenie!</string>
 
 </resources>
