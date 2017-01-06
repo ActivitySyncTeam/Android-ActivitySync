@@ -295,7 +295,7 @@ abstract public class EventsFragmentBase extends FragmentScreen implements IEven
         {
             newDateOccurred.onNext(new DateTime(selectedYear, selectedMonth + 1, selectedDay, 0, 0));
 
-        }, dateTime.getYear(), dateTime.getMonthOfYear(), dateTime.getDayOfMonth());
+        }, dateTime.getYear(), dateTime.getMonthOfYear() - 1, dateTime.getDayOfMonth());
 
         datePickerDialog.show();
     }
