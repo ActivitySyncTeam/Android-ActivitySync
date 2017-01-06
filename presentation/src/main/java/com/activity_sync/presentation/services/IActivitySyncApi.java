@@ -1,5 +1,6 @@
 package com.activity_sync.presentation.services;
 
+import com.activity_sync.presentation.models.ApiMessage;
 import com.activity_sync.presentation.models.ChangePasswordResponse;
 import com.activity_sync.presentation.models.ClientDetails;
 import com.activity_sync.presentation.models.Comment;
@@ -159,4 +160,7 @@ public interface IActivitySyncApi
 
     @GET("/api/users")
     Observable<UsersCollection> getUsers(@Query("page") int page, @Query("isFiltered") boolean isFiltered, @Query("username") String username, @Query("name") String name, @Query("surname") String surname, @Query("events") Integer events, @Query("registerDate") String registerDate);
+
+    @GET("/api/notifications")
+    Observable<List<ApiMessage>> getNotifications(@Header("Authorization") String accessToken);
 }

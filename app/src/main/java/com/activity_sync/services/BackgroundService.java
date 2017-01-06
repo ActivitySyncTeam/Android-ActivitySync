@@ -1,5 +1,6 @@
 package com.activity_sync.services;
 
+import android.app.NotificationManager;
 import android.app.Service;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -10,6 +11,7 @@ import android.support.v4.content.ContextCompat;
 import com.activity_sync.App;
 import com.activity_sync.presentation.events.LocationPermissionGranted;
 import com.activity_sync.presentation.services.IApiService;
+import com.activity_sync.presentation.services.IErrorHandler;
 import com.activity_sync.presentation.services.IPermanentStorage;
 
 import org.greenrobot.eventbus.EventBus;
@@ -23,6 +25,7 @@ import java.util.concurrent.Executors;
 
 import javax.inject.Inject;
 
+import rx.schedulers.Schedulers;
 import timber.log.Timber;
 
 public class BackgroundService extends Service
@@ -33,16 +36,31 @@ public class BackgroundService extends Service
     @Inject
     IApiService apiService;
 
+    @Inject
+    IErrorHandler errorHandler;
+
     private long timerTime = 30 * 1000;     //30 seconds
 
     private LocationService locationService;
+    private NotificationService notificationService;
     private ExecutorService executor;
     private Timer timer;
     private TimerTask timerTask;
     private Runnable backgroundOperation = () -> {
 
-        Timber.d("Task which will be called every 30 seconds");
+        if(permanentStorage.retrieveBoolean(IPermanentStorage.IS_NOTIFICATION_ENABLED, IPermanentStorage.IS_NOTIFICATION_ENABLED_DEFAULT))
+        {
+            apiService.getNotifications()
+                    .observeOn(Schedulers.newThread())
+                    .subscribe(apiMessages -> {
 
+                        if (apiMessages.size() > 0)
+                        {
+                            notificationService.handleMessage(apiMessages.get(0));
+                        }
+
+                    }, this::handleError);
+        }
     };
 
     @Override
@@ -55,6 +73,7 @@ public class BackgroundService extends Service
         EventBus.getDefault().register(this);
 
         locationService = new LocationService(getApplicationContext(), permanentStorage);
+        notificationService = new NotificationService(getApplicationContext(), (NotificationManager) getSystemService(NOTIFICATION_SERVICE), permanentStorage);
 
         if (ContextCompat.checkSelfPermission(getApplicationContext(), android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED)
         {
@@ -115,5 +134,12 @@ public class BackgroundService extends Service
     {
         Timber.d("Location permission has been granted");
         locationService.start();
+    }
+
+    private void handleError(Throwable error)
+    {
+        errorHandler.handleError(error);
+        error.printStackTrace();
+        Timber.d(error.getMessage());
     }
 }
